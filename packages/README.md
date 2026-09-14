@@ -13,8 +13,12 @@ python3 -m genesis_arena evaluate genesis sentinel
 python3 -m genesis_suit roster
 python3 -m genesis_suit run "probe the wire"
 python3 -m genesis_suit serve --port 8802
-python3 -m genesis_mind think "remember the origin protocol is local-first"
-python3 -m genesis_mind think "what do you know about the origin protocol"
+python3 - <<'PY'
+from genesis_mind import AgentMind
+mind = AgentMind.in_memory()
+print(mind.think("remember the origin protocol is local-first").speech)
+print(mind.think("what do you know about the origin protocol").speech)
+PY
 ```
 
 - `python-infra` — `genesis.python-infra.v1`, control plane `127.0.0.1:8800/health`
