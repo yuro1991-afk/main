@@ -1,6 +1,7 @@
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { catalogPatchFor } from "./brief.js";
 import { assertNeverScope, jobScope } from "./kinds.js";
 import { siblingsForJob, describeRole } from "./siblings.js";
 import { defaultPatchesIndexPath, loadPatchIndex, patchForJob } from "./patches.js";
@@ -52,7 +53,54 @@ Do not implement a probe here or on Origin.
 - Do not copy PR #6 autofix
 `;
   }
+  const patch = catalogPatchFor(job);
   const target = relaunchFor(job);
+  if (patch) {
+    const after = (patch.afterApply ?? []).length
+      ? `\n- After apply: ${(patch.afterApply ?? []).join("; ")}`
+      : "";
+    return `# Apply ${job.id}
+
+Yuri: forget Origin for this card. Apply the catalog patch on a sibling write checkout.
+
+## Job
+
+- id: \`${job.id}\`
+- title: ${job.title}
+- kind: ${job.kind}
+- priority: ${job.priority}
+- repo: \`${job.repo}\`
+- Sibling: https://${job.repo}
+- Patch: \`${patch.file}\`
+- Prove: \`node src/cli.js patches --prove --job ${job.id}\`${after}
+- playbook: \`playbooks/${job.id}.md\`
+
+## Why apply
+
+${target.reason}
+
+## Notes
+
+${job.notes}
+
+## Collision
+
+${job.collision}
+
+## Verify
+
+${job.verify}
+
+## Do not
+
+- Do not reopen https://github.com/yuro1991-afk/main/pull/1
+- Do not copy PR #6 autofix
+- Do not invent a new leftover
+- Do not probe :45001 / :8791
+- Do not run node src/cli.js probe
+- This pad token cannot push ${job.repo} — apply there
+`;
+  }
   return `# Origin relaunch packet — ${job.id}
 
 This landing-pad token cannot authenticate to Origin. Yuri scoped this
@@ -134,21 +182,38 @@ export function buildHandoff(job, siblings) {
     packet: packetPathFor(job),
     relaunch: relaunchFor(job),
     related,
-    doNot:
-      job.id === "gub-superbrain-probe"
-        ? [
-            "Yuri: no more Superbrain. Do not probe :45001 / :8791.",
-            "Do not run node src/cli.js probe.",
-            "Do not reopen yuro1991-afk/main#1.",
-            "Do not copy PR #6 autofix onto this ops board.",
-          ]
-        : [
-            "Do not reopen yuro1991-afk/main#1.",
-            "Do not copy PR #6 autofix onto this ops board.",
-            "Do not open a fifth landing-pad queue.",
-            "Do not work dronehive / opensussy / bloom from this pad.",
-          ],
+    doNot: handoffDoNot(job),
   };
+}
+
+/**
+ * @param {import("./ledger.js").Job} job
+ * @returns {string[]}
+ */
+function handoffDoNot(job) {
+  if (job.id === "gub-superbrain-probe") {
+    return [
+      "Yuri: no more Superbrain. Do not probe :45001 / :8791.",
+      "Do not run node src/cli.js probe.",
+      "Do not reopen yuro1991-afk/main#1.",
+      "Do not copy PR #6 autofix onto this ops board.",
+    ];
+  }
+  if (catalogPatchFor(job)) {
+    return [
+      "Yuri: forget Origin for this card. Apply the catalog patch.",
+      "Do not reopen yuro1991-afk/main#1.",
+      "Do not copy PR #6 autofix onto this ops board.",
+      "Do not open a fifth landing-pad queue.",
+      "Do not invent a new leftover.",
+    ];
+  }
+  return [
+    "Do not reopen yuro1991-afk/main#1.",
+    "Do not copy PR #6 autofix onto this ops board.",
+    "Do not open a fifth landing-pad queue.",
+    "Do not work dronehive / opensussy / bloom from this pad.",
+  ];
 }
 
 /**

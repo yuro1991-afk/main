@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
-import { buildHandoff, buildRelaunch, packetPathFor, relaunchFor } from "../src/handoff.js";
+import { buildHandoff, buildRelaunch, packetPathFor, relaunchFor, renderHandoffPacket } from "../src/handoff.js";
 import { listJobs, loadLedger } from "../src/ledger.js";
 import { loadSiblings, describeRole, SIBLING_ROLES } from "../src/siblings.js";
 import { loadRoster } from "../src/dispatch.js";
@@ -31,6 +31,8 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
   assert.match(handoff.relaunch.url, /dronehive/);
   assert.ok(handoff.related.some((pr) => pr.number === 6));
   assert.ok(handoff.doNot.some((line) => line.includes("fifth")));
+  assert.ok(handoff.doNot.some((line) => line.includes("forget Origin")));
+  assert.ok(!handoff.doNot.some((line) => line.includes("Do not work dronehive")));
   assert.match(handoff.relaunch.reason, /dronehive-pro-chat-cp1252\.patch/);
   assert.doesNotMatch(handoff.relaunch.reason, /npm run autofix/);
   const paths = relaunchFor({ ...job, id: "dronehive-portable-paths" });
@@ -390,6 +392,34 @@ test("here jobs stay on this checkout", () => {
   assert.equal(pr10.url, "https://github.com/yuro1991-afk/main/pull/10");
   assert.match(pr10.reason, /main#10/);
   assert.doesNotMatch(pr10.reason, /#3–#6/);
+});
+
+test("cataloged sibling handoff is apply, not Origin relaunch", () => {
+  const siblings = loadSiblings(new URL("../ledger/siblings.json", import.meta.url));
+  const job = {
+    id: "dronehive-unicode-ci",
+    title: "Fix dronehive python-smoke UnicodeEncodeError",
+    repo: "github.com/yuro1991-afk/dronehive",
+    kind: "fix",
+    priority: 8,
+    status: "blocked",
+    claim: null,
+    notes: "cp1252",
+    verify: "python -m drone app pro",
+    files: [],
+    collision: "tool_agent.py",
+  };
+  const text = renderHandoffPacket(job);
+  assert.match(text, /Apply dronehive-unicode-ci/);
+  assert.match(text, /forget Origin/);
+  assert.match(text, /patches --prove --job dronehive-unicode-ci/);
+  assert.match(text, /dronehive-pro-chat-cp1252\.patch/);
+  assert.doesNotMatch(text, /Origin relaunch packet/);
+  assert.doesNotMatch(text, /Do not work dronehive/);
+  const packet = buildRelaunch(job, siblings);
+  assert.match(packet.action, /dronehive-pro-chat-cp1252\.patch/);
+  assert.ok(packet.doNot.some((line) => line.includes("forget Origin")));
+  assert.ok(!packet.doNot.some((line) => line.includes("Do not work dronehive")));
 });
 
 test("every open Genesis job has a reviews/handoff packet", () => {
