@@ -154,6 +154,18 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
   const seedDocLiveReg = relaunchFor({ ...job, id: "dronehive-seed-work-order-doc-live-registry" });
   assert.match(seedDocLiveReg.reason, /dronehive-seed-work-order-doc-live-registry\.patch/);
   assert.doesNotMatch(seedDocLiveReg.reason, /npm run autofix/);
+  const docCodex = relaunchFor({ ...job, id: "dronehive-work-order-doc-codex-paths" });
+  assert.match(docCodex.reason, /dronehive-work-order-doc-codex-paths\.patch/);
+  assert.doesNotMatch(docCodex.reason, /npm run autofix/);
+  const seedDocCodex = relaunchFor({ ...job, id: "dronehive-seed-work-order-doc-codex-paths" });
+  assert.match(seedDocCodex.reason, /dronehive-seed-work-order-doc-codex-paths\.patch/);
+  assert.doesNotMatch(seedDocCodex.reason, /npm run autofix/);
+  const docCodexCli = relaunchFor({ ...job, id: "dronehive-work-order-doc-codex-cli" });
+  assert.match(docCodexCli.reason, /dronehive-work-order-doc-codex-cli\.patch/);
+  assert.doesNotMatch(docCodexCli.reason, /npm run autofix/);
+  const seedDocCodexCli = relaunchFor({ ...job, id: "dronehive-seed-work-order-doc-codex-cli" });
+  assert.match(seedDocCodexCli.reason, /dronehive-seed-work-order-doc-codex-cli\.patch/);
+  assert.doesNotMatch(seedDocCodexCli.reason, /npm run autofix/);
 });
 
 test("origin jobs relaunch to the Origin codebase", () => {

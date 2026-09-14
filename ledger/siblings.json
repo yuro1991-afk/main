@@ -120,7 +120,11 @@
         "dronehive-seed-work-order-doc-fabric-root",
         "dronehive-work-order-doc-imprints",
         "dronehive-work-order-doc-live-registry",
-        "dronehive-seed-work-order-doc-live-registry"
+        "dronehive-seed-work-order-doc-live-registry",
+        "dronehive-work-order-doc-codex-paths",
+        "dronehive-seed-work-order-doc-codex-paths",
+        "dronehive-work-order-doc-codex-cli",
+        "dronehive-seed-work-order-doc-codex-cli"
       ]
     }
   ]
