@@ -1,0 +1,8 @@
+{
+  "id": "python-world-knowledge",
+  "title": "Genesis Python world knowledge",
+  "contract": "genesis.python-world-knowledge.v1",
+  "kind": "python",
+  "summary": "Queryable world knowledge.",
+  "path": "packages/python-world-knowledge"
+}

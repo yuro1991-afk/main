@@ -1,0 +1,11 @@
+{
+  "count": 9,
+  "byType": {
+    "playbook": 6,
+    "resource": 1,
+    "skill": 1,
+    "tool": 1
+  },
+  "source": "genesis",
+  "note": "Seed snapshot. Full inventory lives in catalog/entries.jsonl."
+}

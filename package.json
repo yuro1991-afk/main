@@ -1,0 +1,17 @@
+{
+  "name": "genesis",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Yuri's Genesis origin kernel — all sibling slices in one repo",
+  "scripts": {
+    "test": "node --test test/*.test.js packages/*/test.js",
+    "verify": "node scripts/verify-siblings.mjs",
+    "siblings": "node scripts/verify-siblings.mjs",
+    "dev": "node packages/hub/src/dev.js",
+    "genesis-repo": "node packages/local-repo/src/cli.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

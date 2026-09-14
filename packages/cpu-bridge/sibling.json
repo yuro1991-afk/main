@@ -1,0 +1,8 @@
+{
+  "id": "cpu-bridge",
+  "title": "Genesis CPU bridge",
+  "contract": "genesis.cpu-bridge.v1",
+  "kind": "node",
+  "summary": "Host CPU bridge. Port 8789.",
+  "path": "packages/cpu-bridge"
+}

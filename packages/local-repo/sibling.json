@@ -1,0 +1,8 @@
+{
+  "id": "local-repo",
+  "title": "Genesis local repository",
+  "contract": "genesis.local-repo.v1",
+  "kind": "node",
+  "summary": "Checkout identity, sibling layout, .genesis runtime, lane probes.",
+  "path": "packages/local-repo"
+}

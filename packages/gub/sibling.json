@@ -1,0 +1,8 @@
+{
+  "id": "gub",
+  "title": "GUB automation engine",
+  "contract": "genesis.gub.v1",
+  "kind": "node",
+  "summary": "Inventory tick, route intent, run playbook, superbrain probe.",
+  "path": "packages/gub"
+}

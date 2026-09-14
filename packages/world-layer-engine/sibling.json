@@ -1,0 +1,8 @@
+{
+  "id": "world-layer-engine",
+  "title": "Genesis world layer engine",
+  "contract": "genesis.world-layer-engine.v1",
+  "kind": "node",
+  "summary": "World layer engine.",
+  "path": "packages/world-layer-engine"
+}

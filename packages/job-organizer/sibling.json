@@ -1,0 +1,8 @@
+{
+  "id": "job-organizer",
+  "title": "Genesis job organizer",
+  "contract": "genesis.job-organizer.v1",
+  "kind": "node",
+  "summary": "Kanban for jobs whose mesh work is in-repo.",
+  "path": "packages/job-organizer"
+}

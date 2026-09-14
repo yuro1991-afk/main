@@ -1,0 +1,8 @@
+{
+  "id": "roster",
+  "title": "Genesis roster",
+  "contract": "genesis.roster.v1",
+  "kind": "node",
+  "summary": "Origin, Sentinel, Mnemosyne, Forge, Atlas, Lumen.",
+  "path": "packages/roster"
+}

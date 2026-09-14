@@ -1,0 +1,8 @@
+{
+  "id": "world-language",
+  "title": "Genesis Python world language",
+  "contract": "genesis.world-language.v1",
+  "kind": "python",
+  "summary": "World language surface.",
+  "path": "packages/world-language"
+}

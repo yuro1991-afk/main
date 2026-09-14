@@ -1,0 +1,8 @@
+{
+  "id": "mail",
+  "title": "Genesis mail",
+  "contract": "genesis.mail.v1",
+  "kind": "node",
+  "summary": "In-repo mail blobs for agent-to-agent notes.",
+  "path": "packages/mail"
+}

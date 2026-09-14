@@ -1,0 +1,8 @@
+{
+  "id": "bricks",
+  "title": "Genesis bricks",
+  "contract": "genesis.bricks.v1",
+  "kind": "node",
+  "summary": "Reusable world bricks.",
+  "path": "packages/bricks"
+}

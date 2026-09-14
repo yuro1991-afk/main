@@ -1,0 +1,8 @@
+{
+  "id": "sandbox",
+  "title": "Genesis local AI sandbox",
+  "contract": "genesis.sandbox.v1",
+  "kind": "node",
+  "summary": "Isolated eval surface. Port 8788 in the lattice.",
+  "path": "packages/sandbox"
+}

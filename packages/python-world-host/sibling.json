@@ -1,0 +1,8 @@
+{
+  "id": "python-world-host",
+  "title": "Genesis Python world host",
+  "contract": "genesis.python-world-host.v1",
+  "kind": "python",
+  "summary": "Binds an address and holds exclusive occupancy.",
+  "path": "packages/python-world-host"
+}

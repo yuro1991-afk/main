@@ -1,0 +1,8 @@
+{
+  "id": "data-logger",
+  "title": "Genesis data logger",
+  "contract": "genesis.data-logger.v1",
+  "kind": "node",
+  "summary": "Append-only event log.",
+  "path": "packages/data-logger"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "mcp",
+  "title": "Genesis MCP",
+  "contract": "genesis.mcp.v1",
+  "kind": "node",
+  "summary": "MCP tool surface over catalog + dispatch.",
+  "path": "packages/mcp"
+}

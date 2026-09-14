@@ -1,0 +1,8 @@
+{
+  "id": "dispatch",
+  "title": "Genesis dispatch",
+  "contract": "genesis.dispatch.v1",
+  "kind": "node",
+  "summary": "Enqueue and run jobs across siblings.",
+  "path": "packages/dispatch"
+}

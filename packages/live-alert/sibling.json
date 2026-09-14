@@ -1,0 +1,8 @@
+{
+  "id": "live-alert",
+  "title": "Genesis live alert",
+  "contract": "genesis.live-alert.v1",
+  "kind": "node",
+  "summary": "Alerts. Never report LIVE without a probe.",
+  "path": "packages/live-alert"
+}

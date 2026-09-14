@@ -1,0 +1,8 @@
+{
+  "id": "agent-support",
+  "title": "Genesis agent support",
+  "contract": "genesis.agent-support.v1",
+  "kind": "python",
+  "summary": "Occupy/demo support slice.",
+  "path": "packages/agent-support"
+}

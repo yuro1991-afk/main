@@ -1,0 +1,8 @@
+{
+  "id": "python-mind",
+  "title": "Genesis Python agent mind",
+  "contract": "genesis.python-mind.v1",
+  "kind": "python",
+  "summary": "Local mind. Default bind 8792.",
+  "path": "packages/python-mind"
+}

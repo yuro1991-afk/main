@@ -1,0 +1,8 @@
+{
+  "id": "online-portal",
+  "title": "Genesis online portal",
+  "contract": "genesis.online-portal.v1",
+  "kind": "node",
+  "summary": "Public gateway to the origin kernel.",
+  "path": "packages/online-portal"
+}

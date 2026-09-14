@@ -1,0 +1,8 @@
+{
+  "id": "python-head",
+  "title": "Genesis Python agent head",
+  "contract": "genesis.python-head.v1",
+  "kind": "python",
+  "summary": "Head/planning slice.",
+  "path": "packages/python-head"
+}

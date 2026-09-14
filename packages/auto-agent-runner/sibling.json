@@ -1,0 +1,8 @@
+{
+  "id": "auto-agent-runner",
+  "title": "Genesis auto agent runner",
+  "contract": "genesis.auto-agent-runner.v1",
+  "kind": "node",
+  "summary": "Repeatable agent loop runner.",
+  "path": "packages/auto-agent-runner"
+}

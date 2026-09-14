@@ -1,0 +1,8 @@
+{
+  "id": "python-bridge",
+  "title": "Genesis Python bridge server",
+  "contract": "genesis.python-bridge.v1",
+  "kind": "python",
+  "summary": "POST /genesis handshake genesis-python-bridge/1.",
+  "path": "packages/python-bridge"
+}

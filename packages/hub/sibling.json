@@ -1,0 +1,8 @@
+{
+  "id": "hub",
+  "title": "Genesis main agent hub",
+  "contract": "genesis.hub.v1",
+  "kind": "node",
+  "summary": "Origin kernel: hear operator, route specialists, speak last.",
+  "path": "packages/hub"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "comms-server",
+  "title": "Genesis communications server",
+  "contract": "genesis.comms.v1",
+  "kind": "node",
+  "summary": "POST /genesis handshake genesis-comms/1.",
+  "path": "packages/comms-server"
+}

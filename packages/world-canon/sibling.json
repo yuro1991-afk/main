@@ -1,0 +1,8 @@
+{
+  "id": "world-canon",
+  "title": "Genesis world canon",
+  "contract": "genesis.world-canon.v1",
+  "kind": "python",
+  "summary": "Canon validate/query/serve.",
+  "path": "packages/world-canon"
+}

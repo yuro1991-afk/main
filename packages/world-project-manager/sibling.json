@@ -1,0 +1,8 @@
+{
+  "id": "world-project-manager",
+  "title": "Genesis world project manager",
+  "contract": "genesis.world-project-manager.v1",
+  "kind": "node",
+  "summary": "Tracks planes, milestones, and risks. Does not spawn loops.",
+  "path": "packages/world-project-manager"
+}

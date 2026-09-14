@@ -1,0 +1,12 @@
+[project]
+name = "genesis-python-head"
+version = "0.1.0"
+description = "Genesis Python agent head"
+requires-python = ">=3.11"
+[project.scripts]
+genesis-python-head = "python_head:main"
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+[tool.setuptools.package-dir]
+"" = "python"

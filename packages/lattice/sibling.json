@@ -1,0 +1,8 @@
+{
+  "id": "lattice",
+  "title": "Genesis lattice",
+  "contract": "genesis.lattice.v1",
+  "kind": "node",
+  "summary": "Python/node lattice bus. Port 8790.",
+  "path": "packages/lattice"
+}

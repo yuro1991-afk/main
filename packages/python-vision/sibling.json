@@ -1,0 +1,8 @@
+{
+  "id": "python-vision",
+  "title": "Genesis Python vision",
+  "contract": "genesis.python-vision.v1",
+  "kind": "python",
+  "summary": "Synthetic seat/see vision.",
+  "path": "packages/python-vision"
+}

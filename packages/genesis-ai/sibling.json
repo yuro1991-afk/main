@@ -1,0 +1,8 @@
+{
+  "id": "genesis-ai",
+  "title": "Genesis AI",
+  "contract": "genesis.ai.v1",
+  "kind": "node",
+  "summary": "Local-first completion. No LIVE claim without a provider probe.",
+  "path": "packages/genesis-ai"
+}

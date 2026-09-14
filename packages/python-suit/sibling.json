@@ -1,0 +1,8 @@
+{
+  "id": "python-suit",
+  "title": "Genesis Python agent suit",
+  "contract": "genesis.python-suit.v1",
+  "kind": "python",
+  "summary": "Wearable roster/suit layer.",
+  "path": "packages/python-suit"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "catalog",
+  "title": "Genesis catalog",
+  "contract": "genesis.catalog.v1",
+  "kind": "node",
+  "summary": "Durable inventory of skills, tools, playbooks, and resources.",
+  "path": "packages/catalog"
+}

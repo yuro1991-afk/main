@@ -1,0 +1,8 @@
+{
+  "id": "world-3d-sound",
+  "title": "Genesis World 3D sound engine",
+  "contract": "genesis.world-3d-sound.v1",
+  "kind": "python",
+  "summary": "3D sound engine for the world.",
+  "path": "packages/world-3d-sound"
+}

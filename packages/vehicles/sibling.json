@@ -1,0 +1,8 @@
+{
+  "id": "vehicles",
+  "title": "Genesis vehicles",
+  "contract": "genesis.vehicles.v1",
+  "kind": "node",
+  "summary": "Movable worker vehicles on the floor mesh.",
+  "path": "packages/vehicles"
+}

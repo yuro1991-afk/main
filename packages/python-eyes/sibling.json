@@ -1,0 +1,8 @@
+{
+  "id": "python-eyes",
+  "title": "Genesis Python agent eyes",
+  "contract": "genesis.python-eyes.v1",
+  "kind": "python",
+  "summary": "Sight/list/see slice.",
+  "path": "packages/python-eyes"
+}

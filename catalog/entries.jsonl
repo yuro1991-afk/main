@@ -1,0 +1,9 @@
+{"id":"playbook/gub-route-intent","type":"playbook","name":"GUB Route Intent","description":"Route a free-text intent through the Genesis engine"}
+{"id":"playbook/gub-run-playbook","type":"playbook","name":"GUB Run Playbook","description":"Compile a Genesis playbook into an executable plan"}
+{"id":"playbook/gub-superbrain-probe","type":"playbook","name":"GUB Superbrain Probe","description":"Probe BOSS Superbrain without claiming LIVE on timeout"}
+{"id":"playbook/inventory-skills","type":"playbook","name":"Inventory Cursor Skills into Genesis","description":"Scan installed Cursor plugin skills into the catalog"}
+{"id":"playbook/inventory-mcp-tools","type":"playbook","name":"Inventory MCP Tools into Genesis","description":"Enumerate MCP tools into the catalog"}
+{"id":"playbook/agent-routing-matrix","type":"playbook","name":"Build Agent Routing Matrix","description":"Map intents to skill, tool, and subagent"}
+{"id":"resource/boss-superbrain","type":"resource","name":"BOSS Ethernet live Superbrain","description":"LANE-ETH-PEER peer knowledge/chat/health"}
+{"id":"skill/ce-work","type":"skill","name":"ce-work","description":"Execute implementation work"}
+{"id":"tool/builtin/Task","type":"tool","name":"Task","description":"Launch specialized subagents"}

@@ -1,0 +1,8 @@
+{
+  "id": "glasses",
+  "title": "Genesis glasses",
+  "contract": "genesis.glasses.v1",
+  "kind": "node",
+  "summary": "View layer. Port 8765 — do not reuse for the Python hub.",
+  "path": "packages/glasses"
+}

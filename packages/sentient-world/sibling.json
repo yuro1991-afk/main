@@ -1,0 +1,8 @@
+{
+  "id": "sentient-world",
+  "title": "Genesis sentient world layer",
+  "contract": "genesis.sentient-world.v1",
+  "kind": "python",
+  "summary": "Sentient world occupancy layer.",
+  "path": "packages/sentient-world"
+}

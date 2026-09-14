@@ -1,0 +1,8 @@
+{
+  "id": "python-infra",
+  "title": "Genesis Python infrastructure",
+  "contract": "genesis.python-infra.v1",
+  "kind": "python",
+  "summary": "Shared Python handshake. Control plane 8800.",
+  "path": "packages/python-infra"
+}

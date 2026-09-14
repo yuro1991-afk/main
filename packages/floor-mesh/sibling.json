@@ -1,0 +1,8 @@
+{
+  "id": "floor-mesh",
+  "title": "Genesis floor mesh",
+  "contract": "genesis.floor-mesh.v1",
+  "kind": "node",
+  "summary": "Occupancy seats for world/village slices.",
+  "path": "packages/floor-mesh"
+}

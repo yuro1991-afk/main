@@ -1,0 +1,8 @@
+{
+  "id": "python-ears",
+  "title": "Genesis Python agent ears",
+  "contract": "genesis.python-ears.v1",
+  "kind": "python",
+  "summary": "Listen slice.",
+  "path": "packages/python-ears"
+}
