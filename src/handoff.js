@@ -1,7 +1,11 @@
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { assertNeverScope, jobScope } from "./kinds.js";
 import { siblingsForJob, describeRole } from "./siblings.js";
+import { defaultPatchesIndexPath, loadPatchIndex, patchForJob } from "./patches.js";
+
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
 export const HANDOFF_CONTRACT = "agent-ops.handoff.v1";
 export const RELAUNCH_CONTRACT = "agent-ops.relaunch.v1";
@@ -137,6 +141,26 @@ export function buildRelaunch(job, siblings) {
         : target.reason,
     doNot: handoff.doNot,
   };
+}
+
+/**
+ * Non-dronehive GitHub cards share one reason that names the catalog file.
+ * @param {import("./ledger.js").Job} job
+ */
+function githubCatalogReason(job) {
+  const indexPath = defaultPatchesIndexPath(ROOT);
+  if (existsSync(indexPath)) {
+    try {
+      const patch = patchForJob(loadPatchIndex(indexPath), job.id);
+      if (patch) {
+        const name = job.repo.replace(/^github\.com\//, "");
+        return `This token cannot push ${name}. Apply ${patch.file} from main#9 (\`git apply --check\`). Do not copy PR #6 autofix.`;
+      }
+    } catch {
+      // fall through to the generic relaunch line
+    }
+  }
+  return "Relaunch against the named repo. This landing-pad token cannot push it.";
 }
 
 /**
@@ -442,7 +466,7 @@ export function relaunchFor(job) {
       return {
         kind: "github",
         url: `https://${job.repo}`,
-        reason: "Relaunch against the named repo. This landing-pad token cannot push it.",
+        reason: githubCatalogReason(job),
       };
     default:
       return assertNeverScope(scope);

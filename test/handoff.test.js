@@ -257,6 +257,39 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
   }
 });
 
+test("non-dronehive catalog cards name the patch file", () => {
+  const bloom = relaunchFor({
+    id: "bloom-grok-pwa-test-sync",
+    title: "sync",
+    repo: "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+    kind: "implement",
+    priority: 165,
+    status: "blocked",
+    claim: null,
+    notes: "",
+    verify: "true",
+    files: [],
+    collision: "",
+  });
+  assert.equal(bloom.kind, "github");
+  assert.match(bloom.reason, /bloom-grok-pwa-test-sync\.patch/);
+  assert.doesNotMatch(bloom.reason, /npm run autofix/);
+  const face = relaunchFor({
+    id: "faceswap-design-honesty",
+    title: "honesty",
+    repo: "github.com/yuro1991-afk/face-swap-ios",
+    kind: "implement",
+    priority: 26,
+    status: "blocked",
+    claim: null,
+    notes: "",
+    verify: "true",
+    files: [],
+    collision: "",
+  });
+  assert.match(face.reason, /faceswap-design-honesty\.patch/);
+});
+
 test("origin jobs relaunch to the Origin codebase", () => {
   const target = relaunchFor({
     id: "gub-superbrain-probe",
