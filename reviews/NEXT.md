@@ -6,14 +6,16 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-14T21:45Z**: 39 IDLE + this run RUNNING.
-No new agents. Fork `bc-84d93b47` woke, shipped
+Keep-busy tick **2026-09-14T22:00Z**: 39 IDLE + this run RUNNING.
+No new agents. Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
-(`cursor/python-arena-infra-dca0`), now IDLE. Do not steal head / ears /
-eyes / vision / bridge.
+(`cursor/python-arena-infra-dca0`). Do not steal head / ears / eyes /
+vision / bridge.
 **Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Pad probes stop.
 PR #3 merged; no real review comments (CodeRabbit skip, <10 stars).
 PR #9 catalog now 161 diffs (newest `dronehive-seed-work-order-ai-smarts-packs`).
+CI green on `07c0bf1`. 22:00Z leftover hunt found no new `-U1` pins —
+CHANNEL_META stays wrap-only; sandwiched JSON stays skipped.
 This Genesis-only tree still blocks GitHub cards — leftover `next` is the
 expired Origin claim `gub-superbrain-probe`. After #8, leftover unused
 review is `review-main-pr10`, then `review-landing-pad-prs`. First parked
