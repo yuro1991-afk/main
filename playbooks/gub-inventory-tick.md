@@ -9,7 +9,7 @@
 
 ## Notes
 
-Notion draft https://app.notion.com/p/3db735da33f38109a568ed3d589253b6 — Wave 4 rebuild/stats, .genesis/last-inventory.json, promote off draft. Related Origin PR genesis#22.
+Notion draft https://app.notion.com/p/3db735da33f38109a568ed3d589253b6 — Wave 4 rebuild/stats, .genesis/last-inventory.json. GUB engine https://app.notion.com/p/3db735da33f3819ba589fd969cefe4a3 — `python3 -m gub serve --port 8787`, POST /v1/schedule/tick. Related Origin PR genesis#22.
 
 ## Collision
 

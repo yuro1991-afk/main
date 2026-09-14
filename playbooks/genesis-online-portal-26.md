@@ -1,6 +1,6 @@
-# Implement Origin world-layer genesis#102
+# Land Origin online portal genesis#26
 
-- id: `genesis-world-layer-102`
+- id: `genesis-online-portal-26`
 - kind: origin-slice (Work on origin.cursor.com/git/yuri-afk/genesis only.)
 - scope: relaunch
 - repo: origin.cursor.com/git/yuri-afk/genesis
@@ -9,21 +9,21 @@
 
 ## Notes
 
-Notion https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a. Origin PR genesis#102, branch cursor/genesis-world-layer-engine-232b. Do not invent a GitHub world clone.
+Notion https://app.notion.com/p/3db735da33f38116b915ccfa7fb74bc1. Branch cursor/genesis-online-portal-0eeb. Origin PR genesis#26.
 
 ## Collision
 
-Relaunch Origin. Do not open another landing-pad queue.
+Public gateway work stays on Origin.
 
 ## First commands
 
 - Attach to origin.cursor.com/git/yuri-afk/genesis — not this GitHub repo.
 - Do not reopen yuro1991-afk/main#1.
-- Slice lands on origin.cursor.com/git/yuri-afk/genesis only.
+- Slice lands on Origin only.
 
 ## Verify
 
-Slice lands on origin.cursor.com/git/yuri-afk/genesis only.
+Slice lands on Origin only.
 
 Do not reopen https://github.com/yuro1991-afk/main/pull/1.
 Do not open another landing-pad queue.

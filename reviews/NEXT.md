@@ -8,7 +8,8 @@ node src/cli.js helpers
 ```
 
 **Now:** `gub-inventory-tick` — https://cursor.com/codebase/yuri-afk/genesis  
-Packet: `reviews/handoff-gub-inventory-tick.md`
+Packet: `reviews/handoff-gub-inventory-tick.md`  
+Full Origin list: `reviews/genesis-backlog.md`
 
 `gub-superbrain-probe` is claimed here for the pad-side probe only (unreachable, never LIVE). Origin still must implement that playbook.
 

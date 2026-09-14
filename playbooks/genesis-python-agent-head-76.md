@@ -1,6 +1,6 @@
-# Implement Origin world-layer genesis#102
+# Land Origin Python agent head genesis#76
 
-- id: `genesis-world-layer-102`
+- id: `genesis-python-agent-head-76`
 - kind: origin-slice (Work on origin.cursor.com/git/yuri-afk/genesis only.)
 - scope: relaunch
 - repo: origin.cursor.com/git/yuri-afk/genesis
@@ -9,21 +9,21 @@
 
 ## Notes
 
-Notion https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a. Origin PR genesis#102, branch cursor/genesis-world-layer-engine-232b. Do not invent a GitHub world clone.
+Notion https://app.notion.com/p/3db735da33f381f28c2adac761b26848. Branch cursor/python-agent-head-6ef5. Origin PR genesis#76.
 
 ## Collision
 
-Relaunch Origin. Do not open another landing-pad queue.
+Coordinate with suit/mind/ears.
 
 ## First commands
 
 - Attach to origin.cursor.com/git/yuri-afk/genesis — not this GitHub repo.
 - Do not reopen yuro1991-afk/main#1.
-- Slice lands on origin.cursor.com/git/yuri-afk/genesis only.
+- Slice lands on Origin only.
 
 ## Verify
 
-Slice lands on origin.cursor.com/git/yuri-afk/genesis only.
+Slice lands on Origin only.
 
 Do not reopen https://github.com/yuro1991-afk/main/pull/1.
 Do not open another landing-pad queue.

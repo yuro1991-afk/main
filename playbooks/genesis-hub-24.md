@@ -9,7 +9,7 @@
 
 ## Notes
 
-Hub roster Genesis/Sentinel/Mnemosyne/Forge/Atlas/Lumen. Notion https://app.notion.com/p/3db735da33f381f491eff11e350a62c1. Origin PR genesis#24.
+Hub roster Genesis/Sentinel/Mnemosyne/Forge/Atlas/Lumen. Notion https://app.notion.com/p/3db735da33f381f491eff11e350a62c1. Origin PR genesis#24, branch cursor/genesis-code-chatbox-5c13.
 
 ## Collision
 

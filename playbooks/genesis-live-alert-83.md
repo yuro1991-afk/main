@@ -1,6 +1,6 @@
-# Implement Origin world-layer genesis#102
+# Land Origin live-alert genesis#83
 
-- id: `genesis-world-layer-102`
+- id: `genesis-live-alert-83`
 - kind: origin-slice (Work on origin.cursor.com/git/yuri-afk/genesis only.)
 - scope: relaunch
 - repo: origin.cursor.com/git/yuri-afk/genesis
@@ -9,21 +9,21 @@
 
 ## Notes
 
-Notion https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a. Origin PR genesis#102, branch cursor/genesis-world-layer-engine-232b. Do not invent a GitHub world clone.
+Notion https://app.notion.com/p/3db735da33f381e2b503d62685fcede7. Branch cursor/genesis-live-alert-8b5c. Origin PR genesis#83. Timeouts stay unreachable, never live.
 
 ## Collision
 
-Relaunch Origin. Do not open another landing-pad queue.
+Coordinate with gub-superbrain-probe. Do not invent LIVE lanes.
 
 ## First commands
 
 - Attach to origin.cursor.com/git/yuri-afk/genesis — not this GitHub repo.
 - Do not reopen yuro1991-afk/main#1.
-- Slice lands on origin.cursor.com/git/yuri-afk/genesis only.
+- Failed probes stay unreachable. Do not mark Superbrain LIVE.
 
 ## Verify
 
-Slice lands on origin.cursor.com/git/yuri-afk/genesis only.
+Failed probes stay unreachable. Do not mark Superbrain LIVE.
 
 Do not reopen https://github.com/yuro1991-afk/main/pull/1.
 Do not open another landing-pad queue.

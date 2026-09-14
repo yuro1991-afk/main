@@ -1,6 +1,6 @@
-# Implement Origin world-layer genesis#102
+# Land Origin data-logger genesis#20
 
-- id: `genesis-world-layer-102`
+- id: `genesis-data-logger-20`
 - kind: origin-slice (Work on origin.cursor.com/git/yuri-afk/genesis only.)
 - scope: relaunch
 - repo: origin.cursor.com/git/yuri-afk/genesis
@@ -9,21 +9,21 @@
 
 ## Notes
 
-Notion https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a. Origin PR genesis#102, branch cursor/genesis-world-layer-engine-232b. Do not invent a GitHub world clone.
+Notion https://app.notion.com/p/3db735da33f381bbb3a7da19798da61e. Branch cursor/genesis-data-logger-9c7b. Origin PR genesis#20.
 
 ## Collision
 
-Relaunch Origin. Do not open another landing-pad queue.
+Relaunch Origin.
 
 ## First commands
 
 - Attach to origin.cursor.com/git/yuri-afk/genesis — not this GitHub repo.
 - Do not reopen yuro1991-afk/main#1.
-- Slice lands on origin.cursor.com/git/yuri-afk/genesis only.
+- Slice lands on Origin only.
 
 ## Verify
 
-Slice lands on origin.cursor.com/git/yuri-afk/genesis only.
+Slice lands on Origin only.
 
 Do not reopen https://github.com/yuro1991-afk/main/pull/1.
 Do not open another landing-pad queue.

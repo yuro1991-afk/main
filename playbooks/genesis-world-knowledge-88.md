@@ -1,6 +1,6 @@
-# Implement Origin world-layer genesis#102
+# Land Origin Python world knowledge genesis#88
 
-- id: `genesis-world-layer-102`
+- id: `genesis-world-knowledge-88`
 - kind: origin-slice (Work on origin.cursor.com/git/yuri-afk/genesis only.)
 - scope: relaunch
 - repo: origin.cursor.com/git/yuri-afk/genesis
@@ -9,21 +9,21 @@
 
 ## Notes
 
-Notion https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a. Origin PR genesis#102, branch cursor/genesis-world-layer-engine-232b. Do not invent a GitHub world clone.
+Notion https://app.notion.com/p/3db735da33f3810e91c5e587d54024e8. Origin PR genesis#88. Canon does not rewrite names.
 
 ## Collision
 
-Relaunch Origin. Do not open another landing-pad queue.
+World-canon #93 is the bible. Knowledge remembers ticks; canon does not.
 
 ## First commands
 
 - Attach to origin.cursor.com/git/yuri-afk/genesis — not this GitHub repo.
 - Do not reopen yuro1991-afk/main#1.
-- Slice lands on origin.cursor.com/git/yuri-afk/genesis only.
+- Slice lands on Origin only. Do not rewrite world-canon roster.
 
 ## Verify
 
-Slice lands on origin.cursor.com/git/yuri-afk/genesis only.
+Slice lands on Origin only. Do not rewrite world-canon roster.
 
 Do not reopen https://github.com/yuro1991-afk/main/pull/1.
 Do not open another landing-pad queue.

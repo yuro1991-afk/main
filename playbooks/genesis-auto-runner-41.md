@@ -9,7 +9,7 @@
 
 ## Notes
 
-Notion https://app.notion.com/p/3db735da33f3819ab863cf5f50af9b4f — listen HTTP :8788, UDP :8789. Port :8787 is inventory, not this runner.
+Notion https://app.notion.com/p/3db735da33f3819ab863cf5f50af9b4f — listen HTTP :8788, UDP :8789. Branch cursor/genesis-auto-agent-runner-7d7b. Port :8787 is inventory, not this runner.
 
 ## Collision
 

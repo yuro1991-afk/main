@@ -9,7 +9,7 @@
 
 ## Notes
 
-Origin branch cursor/genesis-local-repo-67b3. Clone or attach the Origin tree so later slices have a working copy. This GitHub pad is not that checkout.
+Notion https://app.notion.com/p/3db735da33f38180b0d0f36f30fc5dbd. Origin branch cursor/genesis-local-repo-67b3. npx genesis-repo init/status/layout/probe. This GitHub pad is not that checkout.
 
 ## Collision
 
