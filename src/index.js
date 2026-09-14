@@ -150,6 +150,7 @@ export {
   DEFAULT_SIBLINGS_ROOT,
   PATCH_CONTRACT,
   SIBLING_CHECKOUT_ALIASES,
+  applyNextFor,
   assertPatchFilesExist,
   buildPatchCatalog,
   defaultGitRunner,

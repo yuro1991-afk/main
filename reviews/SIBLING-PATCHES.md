@@ -199,8 +199,8 @@ applying these diffs on a sibling write checkout.
 ## Relaunch
 
 ```bash
-node src/cli.js patches --prove --siblings-root /tmp/siblings
-node src/cli.js patches --job "$JOB_ID"
+node src/cli.js patches --prove --job "$JOB_ID" --siblings-root /tmp/siblings
+# JSON applyNext is the write-checkout apply. --prove itself resets.
 git clone "https://github.com/yuro1991-afk/<sibling>.git" work && cd work
 git apply --check /path/to/main/<patch>
 git apply /path/to/main/<patch>

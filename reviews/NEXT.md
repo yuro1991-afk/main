@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-14T23:41Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-14T23:43Z**: 40 IDLE + this run RUNNING.
 No new agents. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Do not inventory the pad again.
-Shipped this tick: `list --all` / `next` / `status` drop the
-Genesis-only Blocked line on catalog cards. Catalog still 162.
-Sibling SHAs unchanged. PR #10 still `82161d8`.
+Shipped this tick: `patches --prove` JSON includes `applyNext`
+write-checkout steps. Catalog still 162. Sibling SHAs unchanged.
+PR #10 still `82161d8`.
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
 (`cursor/python-arena-infra-dca0`). Head and ears already landed.
@@ -25,6 +25,7 @@ Re-proof 2026-09-14T23:16Z: 162/162 vanilla + stacked `git apply --check`
 on sibling `main` (no `-U0`). Repeat with
 `node src/cli.js patches --prove --siblings-root /tmp/siblings`.
 Catalog leftover firstCommands now start with `--prove --job`.
+`patches --prove --job` JSON includes `applyNext` write-checkout steps.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
 Catalog `brief` hardRules say forget Origin — not “sibling cards stay blocked.”

@@ -82,6 +82,21 @@ function gitOutput(result) {
 }
 
 /**
+ * Write-checkout steps after a successful --prove. Prove itself resets.
+ * @param {PatchEntry} row
+ * @returns {string[]}
+ */
+export function applyNextFor(row) {
+  return [
+    `git clone https://${row.repo}.git work && cd work`,
+    `git checkout -b cursor/${row.id}-from-ops`,
+    `git apply --check /path/to/main/${row.file}`,
+    `git apply /path/to/main/${row.file}`,
+    ...(Array.isArray(row.afterApply) ? row.afterApply : []),
+  ];
+}
+
+/**
  * Vanilla + stacked `git apply --check` in catalog order. Applies priors
  * only to prove the next hunk, then `reset --hard` + `clean -fd`.
  * Does not leave diffs and does not push. Not PR #6 autofix.
@@ -120,6 +135,7 @@ export function provePatches(index, options) {
       id: row.id,
       repo: row.repo,
       file: row.file,
+      applyNext: applyNextFor(row),
       ...extra,
     });
   };
@@ -183,6 +199,7 @@ export function provePatches(index, options) {
         id: row.id,
         repo: row.repo,
         file: row.file,
+        applyNext: applyNextFor(row),
         status: "missing-checkout",
         checkout: null,
       }
@@ -197,8 +214,9 @@ export function provePatches(index, options) {
     prove: true,
     cannotPush: index.cannotPush,
     doNot:
-      "Do not copy PR #6 npm run autofix. --prove runs git apply --check only and resets the checkout.",
+      "Do not copy PR #6 npm run autofix. --prove runs git apply --check only and resets the checkout. applyNext is the write-checkout apply, not a leftover hunt.",
     siblingsRoot,
+    applyNext: results.length === 1 ? results[0].applyNext : undefined,
     count: results.length,
     ok,
     failed,

@@ -15,6 +15,7 @@ import {
   listPatches,
   loadPatchIndex,
   patchForJob,
+  applyNextFor,
   provePatches,
   resolveSiblingCheckout,
   validatePatchEntry,
@@ -359,6 +360,20 @@ test("defaultSiblingsRoot reads SIBLINGS_ROOT", () => {
   assert.equal(defaultSiblingsRoot({ SIBLINGS_ROOT: "/custom/siblings" }), "/custom/siblings");
 });
 
+test("applyNextFor is the write-checkout apply, not a leftover hunt", () => {
+  const lines = applyNextFor({
+    id: "bloom-gitignore-vercel",
+    repo: "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+    file: "patches/bloom-gitignore-vercel.patch",
+    afterApply: ["git rm -r --cached .vercel/output"],
+  });
+  assert.equal(lines[0], "git clone https://github.com/yuro1991-afk/bloom-fair-yellow-charm.git work && cd work");
+  assert.ok(lines.includes("git apply /path/to/main/patches/bloom-gitignore-vercel.patch"));
+  assert.ok(lines.includes("git rm -r --cached .vercel/output"));
+  assert.doesNotMatch(lines.join("\n"), /Origin/);
+  assert.doesNotMatch(lines.join("\n"), /autofix/);
+});
+
 test("provePatches reports missing checkout", () => {
   const pad = mkdtempSync(join(tmpdir(), "agent-ops-prove-miss-"));
   mkdirSync(join(pad, "patches"));
@@ -387,7 +402,15 @@ test("provePatches reports missing checkout", () => {
   assert.equal(proof.skipped, 1);
   assert.equal(proof.failed, 0);
   assert.equal(proof.results[0].status, "missing-checkout");
+  assert.deepEqual(proof.results[0].applyNext, [
+    "git clone https://github.com/yuro1991-afk/dronehive.git work && cd work",
+    "git checkout -b cursor/one-from-ops",
+    "git apply --check /path/to/main/patches/one.patch",
+    "git apply /path/to/main/patches/one.patch",
+  ]);
+  assert.deepEqual(proof.applyNext, proof.results[0].applyNext);
   assert.match(proof.doNot, /autofix/);
+  assert.match(proof.doNot, /applyNext/);
 });
 
 test("provePatches stacked apply-check then resets", () => {
@@ -461,6 +484,8 @@ test("provePatches stacked apply-check then resets", () => {
   assert.equal(onlyTwo.ok, 1);
   assert.equal(onlyTwo.results[0].id, "two");
   assert.equal(onlyTwo.results[0].stacked, true);
+  assert.ok(onlyTwo.results[0].applyNext.some((line) => line.includes("patches/two.patch")));
+  assert.deepEqual(onlyTwo.applyNext, onlyTwo.results[0].applyNext);
   assert.equal(readFileSync(join(checkout, "note.txt"), "utf8"), "line1\n");
   const status = spawnSync("git", ["status", "--porcelain"], {
     cwd: checkout,
