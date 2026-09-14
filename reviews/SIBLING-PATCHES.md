@@ -39,3 +39,4 @@ git apply /path/to/main/<patch>
 Do not steal a rostered card. A waking agent with write access to that
 sibling takes the matching job. Leftover unused on the GitHub-first
 board (#8) is still `review-landing-pad-prs`.
+This catalog is [main#9](https://github.com/yuro1991-afk/main/pull/9).

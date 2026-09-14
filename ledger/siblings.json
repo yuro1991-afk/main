@@ -47,8 +47,8 @@
       "owns": ["dronehive-unicode-ci"]
     },
     {
-      "number": 0,
-      "url": "https://github.com/yuro1991-afk/main/compare/main...cursor/sibling-patch-catalog-108b",
+      "number": 9,
+      "url": "https://github.com/yuro1991-afk/main/pull/9",
       "branch": "cursor/sibling-patch-catalog-108b",
       "title": "Add applyable sibling patches (catalog only, not autofix)",
       "role": "patch-catalog",
