@@ -1,4 +1,4 @@
-# Sibling patch catalog (verified 2026-09-14T20:03Z)
+# Sibling patch catalog (verified 2026-09-14T20:06Z)
 
 **Yuri: forget Origin.** This pad token cannot push the public GitHub
 siblings. These diffs apply clean (`git apply --check`) on current
@@ -42,6 +42,7 @@ This is **not** PR #6’s autofix runner. Do not copy `bin/autofix.js`.
 | `dronehive-work-order-doc-honesty` | dronehive `d538a89` | `patches/dronehive-work-order-doc-honesty.patch` | OK |
 | `dronehive-seed-work-order-doc-honesty` | dronehive `d538a89` | `patches/dronehive-seed-work-order-doc-honesty.patch` | OK |
 | `dronehive-bench-goal-honesty` | dronehive `d538a89` | `patches/dronehive-bench-goal-honesty.patch` | OK |
+| `faceswap-readme-requirements-honesty` | face-swap-ios `bba7188` | `patches/faceswap-readme-requirements-honesty.patch` | OK |
 
 ## After apply
 
@@ -55,6 +56,7 @@ This is **not** PR #6’s autofix runner. Do not copy `bin/autofix.js`.
 - bloom lint: new-file `.github/workflows/lint.yml`. Independent of `bloom-ci-typecheck` (`ci.yml`). `eslint .` is 0 errors / 2 warnings on `288a484`. Do not fold lint into typecheck.
 - OVA voice card: Voice Access / Start Menu phrases stay Windows-only. Linux `pwsh` is not a Voice Access install. Independent of `ova-readme-linux-honesty`.
 - face-swap `ios/README.md`: gateway URL comes from `START.cmd` or `START.sh` (`FACESWAP_ENGINE`). Independent of `faceswap-design-honesty`.
+- face-swap README Requirements: engine is `FACESWAP_ENGINE`. Independent of `faceswap-honesty-env-paths` (footer) and `faceswap-ios-readme-honesty`.
 
 ## Relaunch
 

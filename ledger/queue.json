@@ -1005,6 +1005,21 @@
       "collision": "Docs only. Different file from DESIGN.md and START.sh. Do not vendor InsightFace weights."
     },
     {
+      "id": "faceswap-readme-requirements-honesty",
+      "title": "Mark README Requirements Windows host as one example",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "kind": "implement",
+      "priority": 38,
+      "status": "blocked",
+      "claim": null,
+      "notes": "README Requirements still says Windows host with MultoModa. Applyable catalog patch is patches/faceswap-readme-requirements-honesty.patch on main#9. Independent of honesty-env-paths (footer only) and ios-readme-honesty. This token cannot push face-swap-ios.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "README Requirements names FACESWAP_ENGINE and says a Windows MultoModa host is one example.",
+      "files": [
+        "README.md"
+      ],
+      "collision": "README Requirements bullet only. Different hunk from honesty-env-paths footer. Do not rewrite START.cmd."
+    },
+    {
       "id": "ova-pwsh-syntax-ci",
       "title": "Add PowerShell syntax CI for ollama-voice-access",
       "repo": "github.com/yuro1991-afk/ollama-voice-access",
