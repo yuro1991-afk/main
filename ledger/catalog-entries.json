@@ -1,0 +1,197 @@
+{
+  "collection": "collection://87665364-29fe-4744-aac0-d776847d7542",
+  "minedAt": "2026-09-14T18:06:00.000Z",
+  "source": "Notion Genesis Entries (Yuri’s Space)",
+  "entries": [
+    {
+      "Name": "Add a Custom Genesis Entry",
+      "Entry ID": "playbook/add-custom-entry",
+      "Type": "playbook",
+      "Status": "active",
+      "Source": "genesis",
+      "Category": "agents-workflows",
+      "url": "https://app.notion.com/p/3db735da33f38189907ef132836d95bf",
+      "Description": "Hand-authored skill, tool, playbook, or resource with schema validation."
+    },
+    {
+      "Name": "Author a Notion Skill from a Workflow",
+      "Entry ID": "playbook/notion-skill-author",
+      "Type": "playbook",
+      "Status": "active",
+      "Source": "genesis",
+      "Category": "notion-productivity",
+      "url": "https://app.notion.com/p/3db735da33f381c1a42ccf030628e7dc",
+      "Description": "Write a Notion skill page from an Origin workflow and optionally catalog it."
+    },
+    {
+      "Name": "Build Agent Routing Matrix",
+      "Entry ID": "playbook/agent-routing-matrix",
+      "Type": "playbook",
+      "Status": "active",
+      "Source": "genesis",
+      "Category": "agents-workflows",
+      "url": "https://app.notion.com/p/3db735da33f381679966e19d177079ce",
+      "Description": "Skill, tool, and subagent combination using the Genesis catalog."
+    },
+    {
+      "Name": "Debug a Vercel Preview Deployment",
+      "Entry ID": "playbook/vercel-preview-debug",
+      "Type": "playbook",
+      "Status": "active",
+      "Source": "genesis",
+      "Category": "vercel",
+      "url": "https://app.notion.com/p/3db735da33f38144a8ade3f6b34e92a7",
+      "Description": "Debug a Vercel preview from the Genesis catalog playbook."
+    },
+    {
+      "Name": "Deep Web Research with Context.dev",
+      "Entry ID": "playbook/context-web-research",
+      "Type": "playbook",
+      "Status": "active",
+      "Source": "genesis",
+      "Category": "docs-research",
+      "url": "https://app.notion.com/p/3db735da33f3817190f9ffd1e8896624",
+      "Description": "Capture findings as Genesis resources or Notion pages."
+    },
+    {
+      "Name": "Expand Catalog by Domain",
+      "Entry ID": "playbook/expand-by-domain",
+      "Type": "playbook",
+      "Status": "active",
+      "Source": "genesis",
+      "Category": "docs-research",
+      "url": "https://app.notion.com/p/3db735da33f38155b7d9e11df17ddea4",
+      "Description": "Grow the Genesis database domain-by-domain with curated playbooks and resources."
+    },
+    {
+      "Name": "Explore Hugging Face Models and Spaces",
+      "Entry ID": "playbook/hf-model-explore",
+      "Type": "playbook",
+      "Status": "active",
+      "Source": "genesis",
+      "Category": "huggingface",
+      "url": "https://app.notion.com/p/3db735da33f38132bf44e28f87ef320d",
+      "Description": "Explore Hugging Face models and Spaces from the Genesis catalog playbook."
+    },
+    {
+      "Name": "Extract Structured Data with Apify",
+      "Entry ID": "playbook/apify-actor-extract",
+      "Type": "playbook",
+      "Status": "active",
+      "Source": "genesis",
+      "Category": "scraping",
+      "url": "https://app.notion.com/p/3db735da33f38110aafee4491b74569e",
+      "Description": "Extract structured data with Apify from the Genesis catalog playbook."
+    },
+    {
+      "Name": "GUB Continuous Inventory",
+      "Entry ID": "playbook/gub-inventory-tick",
+      "Type": "playbook",
+      "Status": "draft",
+      "Source": "genesis",
+      "Category": "agents-workflows",
+      "url": "https://app.notion.com/p/3db735da33f38109a568ed3d589253b6",
+      "Description": "Write .genesis/last-inventory.json from catalog stats and inventory scripts."
+    },
+    {
+      "Name": "GUB Route Intent",
+      "Entry ID": "playbook/gub-route-intent",
+      "Type": "playbook",
+      "Status": "active",
+      "Source": "genesis",
+      "Category": "agents-workflows",
+      "url": "https://app.notion.com/p/3db735da33f3819db32ecfc122a40c70",
+      "Description": "Route a free-text intent through the Genesis engine to a playbook, skill, tools, and optional subagent."
+    },
+    {
+      "Name": "GUB Run Playbook",
+      "Entry ID": "playbook/gub-run-playbook",
+      "Type": "playbook",
+      "Status": "active",
+      "Source": "genesis",
+      "Category": "agents-workflows",
+      "url": "https://app.notion.com/p/3db735da33f381edbc43e852d28dee37",
+      "Description": "Compile a Genesis playbook into an executable plan and record the run."
+    },
+    {
+      "Name": "GUB Superbrain Probe",
+      "Entry ID": "playbook/gub-superbrain-probe",
+      "Type": "playbook",
+      "Status": "draft",
+      "Source": "genesis",
+      "Category": "environment",
+      "url": "https://app.notion.com/p/3db735da33f381a58f19ceffc771ecdd",
+      "Description": "Short-timeout GET Superbrain /health. Write .genesis/last-superbrain.json. Never LIVE on timeout."
+    },
+    {
+      "Name": "Implement a Figma Frame in Code",
+      "Entry ID": "playbook/figma-design-to-code",
+      "Type": "playbook",
+      "Status": "active",
+      "Source": "genesis",
+      "Category": "design",
+      "url": "https://app.notion.com/p/3db735da33f38163bd33f9a970731438",
+      "Description": "Implement a Figma frame in code from the Genesis catalog playbook."
+    },
+    {
+      "Name": "Inventory Cursor Skills into Genesis",
+      "Entry ID": "playbook/inventory-skills",
+      "Type": "playbook",
+      "Status": "active",
+      "Source": "genesis",
+      "Category": "agents-workflows",
+      "url": "https://app.notion.com/p/3db735da33f381bb9bafca916c22169f",
+      "Description": "Enumerate Cursor skills into data/skills and update the master catalog."
+    },
+    {
+      "Name": "Inventory MCP Tools into Genesis",
+      "Entry ID": "playbook/inventory-mcp-tools",
+      "Type": "playbook",
+      "Status": "active",
+      "Source": "genesis",
+      "Category": "agents-workflows",
+      "url": "https://app.notion.com/p/3db735da33f381d9805fc1058440faf2",
+      "Description": "Enumerate dynamic MCP namespaces and tools, normalize into data/tools, and update the master catalog."
+    },
+    {
+      "Name": "Review and Ship a Pull Request",
+      "Entry ID": "playbook/pr-review-ship",
+      "Type": "playbook",
+      "Status": "active",
+      "Source": "genesis",
+      "Category": "code-quality-shipping",
+      "url": "https://app.notion.com/p/3db735da33f381d5b8a1db2df7570f2d",
+      "Description": "Review and ship a pull request from the Genesis catalog playbook."
+    },
+    {
+      "Name": "Ship a Feature with Compound Engineering",
+      "Entry ID": "playbook/compound-eng-feature",
+      "Type": "playbook",
+      "Status": "active",
+      "Source": "genesis",
+      "Category": "compound-engineering",
+      "url": "https://app.notion.com/p/3db735da33f381a292e9e8e09a48adce",
+      "Description": "Ship a feature with Compound Engineering from the Genesis catalog playbook."
+    },
+    {
+      "Name": "Sync Genesis Catalog Snapshot to Notion",
+      "Entry ID": "playbook/notion-companion-sync",
+      "Type": "playbook",
+      "Status": "active",
+      "Source": "genesis",
+      "Category": "notion-productivity",
+      "url": "https://app.notion.com/p/3db735da33f381a1b427d391daa071c5",
+      "Description": "Create or locate Genesis Catalog database rows from the Origin snapshot."
+    },
+    {
+      "Name": "BOSS Ethernet live Superbrain",
+      "Entry ID": "resource/boss-superbrain",
+      "Type": "resource",
+      "Status": "cataloged",
+      "Source": "genesis",
+      "Category": "environment",
+      "url": "https://app.notion.com/p/3db735da33f3810faa09de097a086e8e",
+      "Description": "Catalog resource for the BOSS Ethernet Superbrain lane. Not a playbook."
+    }
+  ]
+}

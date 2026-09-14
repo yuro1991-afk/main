@@ -1,6 +1,8 @@
-# main
+# Agent ops
 
-This GitHub repository is **not** Genesis.
+This GitHub repository is **not** Genesis. It is the **cloud-agent landing pad**.
+
+**Yuri scoped it to Genesis only.** Default commands return Origin cards. Other sibling repos stay blocked. Pass `--all` to inspect them.
 
 Genesis lives on Cursor Origin:
 
@@ -9,6 +11,47 @@ Genesis lives on Cursor Origin:
 - Hub: [Genesis main agent hub](https://app.notion.com/p/3db735da33f381f491eff11e350a62c1)
 - Catalog: [Genesis Catalog](https://app.notion.com/p/3db735da33f38170bab8c22bf71d6347)
 
-Do not reopen or rebuild [PR #1](https://github.com/yuro1991-afk/main/pull/1). That draft was a closed duplicate of the Origin tree.
+Do **not** reopen [PR #1](https://github.com/yuro1991-afk/main/pull/1). That draft was a closed duplicate of the Origin tree.
 
-Open GitHub work that still needs a landing belongs on [dronehive](https://github.com/yuro1991-afk/dronehive) (PRs #1 and #2), not here.
+## Run
+
+```bash
+npm test
+node src/cli.js status
+node src/cli.js next
+node src/cli.js slots
+node src/cli.js assign
+node src/cli.js sync --agents .genesis/last-agents.json --write
+node src/cli.js catalog --write
+node src/cli.js prompt --agent "$CURSOR_AGENT_ID"   # roster card, not leftover next
+node src/cli.js busy --agent "$CURSOR_AGENT_ID"
+node src/cli.js relaunch
+node src/cli.js helpers
+node src/cli.js brief
+node src/cli.js handoff
+node src/cli.js playbooks
+node src/cli.js siblings
+node src/cli.js claim <id> --agent "$CURSOR_AGENT_ID"
+node src/cli.js probe
+node src/cli.js origin [--login]
+node src/cli.js tick
+node src/cli.js route "keep my agents busy"                 # leftover Origin card
+node src/cli.js route "keep my agents busy" --agent "$CURSOR_AGENT_ID"  # your roster card
+```
+
+`assign` maps parked pad agents onto unique Genesis cards and writes
+paste-ready briefs under `reviews/launch/`. `busy --agent` claims
+**your roster card** first. Unassigned agents take leftover
+`gub-route-intent` (`reviews/launch/gub-route-intent.md`). `busy --world --agent` still stays on
+world planes. `slots --world` lists the rest. Peek `next` (no `--agent`)
+is leftover unused `gub-route-intent` — it does not steal the fork's
+`gub-inventory-tick`. Claim leases expire in 45 minutes.
+
+## Lanes
+
+Probe before LIVE claims.
+
+- BOSS Superbrain `http://169.254.124.8:45001` (LANE-ETH-PEER)
+- GOOSE-PC Core `:8791` is **not** the BOSS peer
+- Failed probes are `unreachable`, never `live`
+- Origin CLI `/exec-daemon/tools/origin` is present; `node src/cli.js origin` stays **logged-out** until `origin --login` has `CURSOR_API_KEY`

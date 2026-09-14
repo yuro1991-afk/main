@@ -1,0 +1,1159 @@
+{
+  "jobs": [
+    {
+      "id": "dronehive-unicode-ci",
+      "title": "Fix dronehive python-smoke UnicodeEncodeError",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "fix",
+      "priority": 1,
+      "status": "blocked",
+      "claim": null,
+      "notes": "windows-latest CI dies printing ✓ via _chat in drone/pro/tool_agent.py (~367, 424, 464–506) under cp1252. Blocks dronehive PR #1 and stacked #2. Patch is on landing-pad PR #5; verified apply runner is PR #6 (`npm run autofix -- apply <checkout>`). This token cannot push dronehive — relaunch there.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "python -m drone app pro --goal \"ci pro write ci_ok.txt\" --rounds 3 --no-ollama",
+      "files": [
+        "drone/pro/tool_agent.py",
+        ".github/workflows/ci.yml"
+      ],
+      "collision": "Do not rewrite the patch on this repo. Checkout dronehive, apply github.com/yuro1991-afk/main/pull/5 patch, push on cursor/setup-dev-environment-2e0b."
+    },
+    {
+      "id": "dronehive-rebase-packaging",
+      "title": "Rebase dronehive PR #2 after #1 is green",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "fix",
+      "priority": 2,
+      "status": "blocked",
+      "claim": null,
+      "notes": "Stacked on #1. Rebase cursor/package-install-cli-2e0b after Unicode CI is green. Do not re-edit drone/app/service.py.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "Confirm python-smoke on the rebased head.",
+      "files": [],
+      "collision": "Blocked until dronehive-unicode-ci is done."
+    },
+    {
+      "id": "dronehive-portable-paths",
+      "title": "Resolve dronehive host paths via env / app_root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 4,
+      "status": "blocked",
+      "claim": null,
+      "notes": "Hardcoded F:\\GrokSelfLibrary, D:\\GrokCoreMemory, G:\\AI-Home\\... leak onto Linux cwd. Not on PR #1 or #2.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "python -m drone work-order-show",
+      "files": [
+        "drone/ai_bus.py",
+        "drone/library_bridge.py",
+        "drone/knowledge_imprint.py",
+        "drone/work_order.py",
+        "drone/clean_slate.py",
+        "configs/work_order.json"
+      ],
+      "collision": "Avoid drone/pro/tool_agent.py while unicode-ci is claimed."
+    },
+    {
+      "id": "dronehive-ubuntu-smoke",
+      "title": "Add ubuntu-latest python-smoke to dronehive CI",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 5,
+      "status": "blocked",
+      "claim": null,
+      "notes": "Keep windows-latest. Do not add packaging steps that overlap scripts/package_release.sh on PR #2.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "Same four python-smoke commands on ubuntu-latest.",
+      "files": [
+        ".github/workflows/ci.yml"
+      ],
+      "collision": "After unicode-ci; do not fight PR #2 packaging."
+    },
+    {
+      "id": "gub-superbrain-probe",
+      "title": "Implement GUB Superbrain probe playbook",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 3,
+      "status": "claimed",
+      "claim": {
+        "agentId": "bc-01a0a0ce-1d96-7bb9-b7a7-aeaf5271108b",
+        "claimedAt": "2026-09-14T18:02:20.364Z",
+        "leaseUntil": "2026-09-14T18:47:20.364Z"
+      },
+      "notes": "Notion draft https://app.notion.com/p/3db735da33f381a58f19ceffc771ecdd — short-timeout GET http://169.254.124.8:45001/health, write .genesis/last-superbrain.json, never mark LIVE on timeout. Catalog resource https://app.notion.com/p/3db735da33f3810faa09de097a086e8e (Entry ID resource/boss-superbrain, Status cataloged). Pad probe 2026-09-14T18:16:45Z: boss-superbrain-health/live timeout=unreachable. GOOSE-PC :8791 fetch failed=unreachable. Origin CLI logged-out. Origin implement still required.",
+      "verify": "Failed probe stays unreachable. GOOSE-PC :8791 is not the BOSS peer.",
+      "files": [],
+      "collision": "Origin genesis only. Do not reopen github.com/yuro1991-afk/main/pull/1."
+    },
+    {
+      "id": "gub-inventory-tick",
+      "title": "Implement GUB continuous inventory tick",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 6,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion draft https://app.notion.com/p/3db735da33f38109a568ed3d589253b6 — Entry playbook/gub-inventory-tick. Steps: snapshot catalog stats; run scripts/build_catalog.py and scripts/inventory.py when present; write .genesis/last-inventory.json. GUB engine https://app.notion.com/p/3db735da33f3819ba589fd969cefe4a3 — gub/, workflows/, data/playbooks/playbook__gub-*.json. `python3 -m gub serve --port 8787`; GET /; POST /v1/route, /v1/runs, /v1/schedule/tick. Shell allowlist: scripts/inventory.py, scripts/build_catalog.py, scripts/query_catalog.py. Related Origin PR genesis#22.",
+      "verify": "Inventory tick writes last-inventory.json without claiming Superbrain LIVE.",
+      "files": [],
+      "collision": "Port :8787 is also auto-runner dispatch. Coordinate with genesis#41."
+    },
+    {
+      "id": "agent-routing-matrix",
+      "title": "Build agent routing matrix vs hub roster",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 7,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f381679966e19d177079ce — intent → skill/tool/subagent vs Genesis/Sentinel/Mnemosyne/Forge/Atlas/Lumen.",
+      "verify": "Matrix cites existing hub roster; no new false LIVE lanes.",
+      "files": [],
+      "collision": "This GitHub board already has a seed matrix in src/routing.js — extend Origin, do not fork it here."
+    },
+    {
+      "id": "catalog-notion-sync",
+      "title": "Sync Origin catalog snapshot URLs into Notion",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 8,
+      "status": "open",
+      "claim": null,
+      "notes": "https://app.notion.com/p/3db735da33f381a1b427d391daa071c5 — catalog/notion_map.json, fill empty Genesis Entries URLs.",
+      "verify": "Do not invent Notion URLs. Seeded-first catalog stays the map.",
+      "files": [
+        "catalog/notion_map.json"
+      ],
+      "collision": "Notion Entries DB is the workspace inventory; Origin repo is SoT for files."
+    },
+    {
+      "id": "genesis-local-repo",
+      "title": "Stand up the Genesis local-repo checkout",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 9,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f38180b0d0f36f30fc5dbd. Origin branch cursor/genesis-local-repo-67b3. npx genesis-repo init/status/layout/probe. This GitHub pad is not that checkout.",
+      "verify": "A local Origin clone exists; GitHub yuro1991-afk/main is still the ops pad, not a Genesis duplicate.",
+      "files": [],
+      "collision": "Do not reconstruct sibling stubs on this repo. Do not reopen main#1."
+    },
+    {
+      "id": "genesis-hub-24",
+      "title": "Land Origin hub roster PR genesis#24",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 10,
+      "status": "open",
+      "claim": null,
+      "notes": "Hub roster Genesis/Sentinel/Mnemosyne/Forge/Atlas/Lumen. Notion https://app.notion.com/p/3db735da33f381f491eff11e350a62c1. Origin PR genesis#24, branch cursor/genesis-code-chatbox-5c13.",
+      "verify": "Hub page cites the six roles; this GitHub board stays ops, not the hub.",
+      "files": [],
+      "collision": "Do not fork the hub onto yuro1991-afk/main. Extend Origin."
+    },
+    {
+      "id": "genesis-auto-runner-41",
+      "title": "Ship Origin auto-runner genesis#41 on :8788/:8789",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 11,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f3819ab863cf5f50af9b4f — listen HTTP :8788, UDP :8789. Branch cursor/genesis-auto-agent-runner-7d7b. Port :8787 is inventory, not this runner.",
+      "verify": "Runner binds :8788/:8789 and does not steal :8787 from gub-inventory-tick / genesis#22.",
+      "files": [],
+      "collision": "Coordinate with gub-inventory-tick. This pad is not the auto-runner."
+    },
+    {
+      "id": "genesis-world-layer-102",
+      "title": "Implement Origin world-layer genesis#102",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 12,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a. Origin PR genesis#102, branch cursor/genesis-world-layer-engine-232b. Path packages/world-layer-engine, import genesis_world_layer. Stack: terrain → occupancy → rigid → fluid → atmosphere → agents → sensors → memory. Sibling planes (do not steal): world-map, unifier :8792, spawner. HTTP 127.0.0.1:8793 — coordinate with world-PM. Do not invent a GitHub world clone.",
+      "verify": "cd packages/world-layer-engine && pip install -e \".[dev]\" && pytest && python -m genesis_world_layer demo --steps 48. GET /health stays live=dark.",
+      "files": [
+        "packages/world-layer-engine"
+      ],
+      "collision": "Does not generate map shards, merge unifier logs, or spawn subprocesses. Coordinate halls :8793 and unifier :8792."
+    },
+    {
+      "id": "genesis-world-canon-93",
+      "title": "Land Origin world-canon genesis#93",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 13,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f381eda042d4b0ff79bc6f. Branch cursor/genesis-world-canon-50ed. packages/world-canon, serve :8794, claimedLive stays false. Do not steal :8792/:8793 or UDP 2419.",
+      "verify": "genesis-world-canon validate; /health reports claimedLive false.",
+      "files": [
+        "packages/world-canon"
+      ],
+      "collision": "Canon is not a unifier shard. Coordinate halls :8793 and unifier :8792."
+    },
+    {
+      "id": "genesis-local-ai-sandbox-11",
+      "title": "Land Origin local AI sandbox genesis#11",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 14,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f381708d56f2abec3626d9. Branch cursor/local-ai-sandbox-3931. Origin PR genesis#11. Path packages/sandbox. Isolated Python jail + OpenAI-compatible chat on http://127.0.0.1:8788. Stub provider by default (no GPU). MCP HTTP :8787.",
+      "verify": "cd packages/sandbox && pytest && genesis-sandbox serve. Stub provider; no LIVE without a probe.",
+      "files": [
+        "packages/sandbox"
+      ],
+      "collision": "Port :8788 is also auto-runner #41 and python-bridge #57. :8787 is inventory. Do not steal those binds."
+    },
+    {
+      "id": "genesis-data-logger-20",
+      "title": "Land Origin data-logger genesis#20",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 15,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f381bbb3a7da19798da61e. Branch cursor/genesis-data-logger-9c7b. Origin PR genesis#20. Path packages/data-logger. Append-only JSONL event plane. UI http://127.0.0.1:7430. UDP ingest 2420. Mail pong stays on 2419.",
+      "verify": "cd packages/data-logger && npm test. POST /v1/events works. Do not bind UDP 2419.",
+      "files": [
+        "packages/data-logger"
+      ],
+      "collision": "UDP 2419 is pong only. Ingest is 2420. Do not steal organizer :7432."
+    },
+    {
+      "id": "genesis-online-portal-26",
+      "title": "Land Origin online portal genesis#26",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 16,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f38116b915ccfa7fb74bc1. Branch cursor/genesis-online-portal-0eeb. Origin PR genesis#26. Path apps/online-portal. Surfaces: / /status /roster /lanes /catalog /directory /shelf /operator. Local hub stays the operator console.",
+      "verify": "cd apps/online-portal && npm test && npm run dev. Probe Superbrain before LIVE.",
+      "files": [
+        "apps/online-portal"
+      ],
+      "collision": "Public gateway work stays on Origin. Do not fork the hub onto this pad."
+    },
+    {
+      "id": "genesis-python-infra-50",
+      "title": "Land Origin Python infrastructure genesis#50",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 17,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f381b5a411faa0d9317b81. Branch cursor/python-infrastructure-6871. Origin PR genesis#50. Path packages/python-infra, import genesis_infra, contract genesis.python-infra.v1. Control plane http://127.0.0.1:8800/health. Sibling attach for env/roster/mail/dispatch/ports/probes.",
+      "verify": "./scripts/install-python.sh && python3 -m pytest && genesis-infra wire. Never report Superbrain LIVE without a probe.",
+      "files": [
+        "packages/python-infra"
+      ],
+      "collision": "Do not steal :8787 inventory, :8788 sandbox/runner/bridge, :8789 CPU bridge, :8790 lattice, :8765 glasses, or planned hub :8801."
+    },
+    {
+      "id": "genesis-python-agent-suit-58",
+      "title": "Land Origin Python agent suit genesis#58",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 18,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f3817db115e136cb807fc8. Branch cursor/python-agent-suite-3ced. Origin PR genesis#58.",
+      "verify": "Slice lands on Origin only.",
+      "files": [],
+      "collision": "Coordinate with genesis-python-infra-50."
+    },
+    {
+      "id": "genesis-python-agent-mind-65",
+      "title": "Land Origin Python agent mind genesis#65",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 19,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f381ea9226db42b3ce7b7f. Branch cursor/python-agent-mind-3a47. Origin PR genesis#65.",
+      "verify": "Slice lands on Origin only.",
+      "files": [],
+      "collision": "Coordinate with suit/head/ears."
+    },
+    {
+      "id": "genesis-python-agent-head-76",
+      "title": "Land Origin Python agent head genesis#76",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 20,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f381f28c2adac761b26848. Branch cursor/python-agent-head-6ef5. Origin PR genesis#76.",
+      "verify": "Slice lands on Origin only.",
+      "files": [],
+      "collision": "Coordinate with suit/mind/ears."
+    },
+    {
+      "id": "genesis-python-agent-ears-78",
+      "title": "Land Origin Python agent ears genesis#78",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 21,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f3819bb831dcf820b66c2c. Branch cursor/python-agent-ears-261e. Origin PR genesis#78.",
+      "verify": "Slice lands on Origin only.",
+      "files": [],
+      "collision": "Coordinate with suit/head/mind."
+    },
+    {
+      "id": "genesis-live-alert-83",
+      "title": "Land Origin live-alert genesis#83",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 22,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f381e2b503d62685fcede7. Branch cursor/genesis-live-alert-8b5c. Origin PR genesis#83. Timeouts stay unreachable, never live.",
+      "verify": "Failed probes stay unreachable. Do not mark Superbrain LIVE.",
+      "files": [],
+      "collision": "Coordinate with gub-superbrain-probe. Do not invent LIVE lanes."
+    },
+    {
+      "id": "genesis-world-host-87",
+      "title": "Land Origin Python world host genesis#87",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 23,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f38166aebfc5ed8ace53a9. Branch cursor/genesis-world-host-1a8f. Origin PR genesis#87. Path packages/python-world-host, import genesis_world_host, contract genesis.python-world-host.v1. HTTP 127.0.0.1:8794. Binds occupancy and ticks the world clock. Does not merge shards, spawn brains, generate maps, or run physics.",
+      "verify": "cd packages/python-world-host && pytest && genesis-world-host serve. GET /health stays live=dark. Never bind UDP 2419.",
+      "files": [
+        "packages/python-world-host"
+      ],
+      "collision": "Port :8794 is also world-canon #93, sentient #96, and sound #104. Coordinate; do not steal :8792/:8793."
+    },
+    {
+      "id": "genesis-world-knowledge-88",
+      "title": "Land Origin Python world knowledge genesis#88",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 24,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f3810e91c5e587d54024e8. Origin PR genesis#88. Canon does not rewrite names.",
+      "verify": "Slice lands on Origin only. Do not rewrite world-canon roster.",
+      "files": [
+        "packages/python-world-knowledge"
+      ],
+      "collision": "World-canon #93 is the bible. Knowledge remembers ticks; canon does not."
+    },
+    {
+      "id": "genesis-comms-server-94",
+      "title": "Land Origin comms server genesis#94",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 25,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f3812bb007e61a2a432f0c. Branch cursor/genesis-comms-server-0e86. Origin PR genesis#94. POST /genesis handshake genesis-comms/1.",
+      "verify": "Slice lands on Origin only.",
+      "files": [],
+      "collision": "Do not bind UDP 2419 from this card."
+    },
+    {
+      "id": "genesis-world-language-95",
+      "title": "Land Origin world language genesis#95",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 26,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f3812da855e683016a0a13. Origin PR genesis#95. Import genesis_world_language.",
+      "verify": "Slice lands on Origin only.",
+      "files": [],
+      "collision": "Coordinate with world-canon and world-layer."
+    },
+    {
+      "id": "genesis-agent-support-99",
+      "title": "Land Origin agent-support genesis#99",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 27,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f381dea285fd9296079dbb. Branch cursor/genesis-agent-support-347f. Origin PR genesis#99.",
+      "verify": "Slice lands on Origin only.",
+      "files": [],
+      "collision": "Relaunch Origin. Do not open another landing-pad queue."
+    },
+    {
+      "id": "genesis-python-agent-eyes-74",
+      "title": "Land Origin Python agent eyes genesis#74",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 28,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f3810b8069d7f47940ccd6. Branch cursor/python-agent-eyes-9eb0. Origin PR genesis#74. Package genesis-eyes, lattice node vision, pin faces, protocol genesis-python-eyes/1. Gaze is exclusive (look / blink / pass_to).",
+      "verify": "pip install -e \".[dev]\" && pytest && python -m genesis_eyes list. Heuristic vision stays local; no LIVE without a probe.",
+      "files": [],
+      "collision": "Coordinate with genesis-python-vision-84 (vision chair). Do not claim Superbrain LIVE."
+    },
+    {
+      "id": "genesis-python-vision-84",
+      "title": "Land Origin Python vision genesis#84",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 29,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f38118a49ed9ef135bf5ad. Branch cursor/python-vision-e3c4. Origin PR genesis#84. packages/python-vision, import genesis_vision. HUD http://127.0.0.1:8792/ — not GOOSE-PC :8791. Health live: dark until Superbrain probed.",
+      "verify": "pip install -e \"packages/python-vision[dev]\" && genesis-vision seat. CPU color-blob only; no GPU.",
+      "files": [
+        "packages/python-vision"
+      ],
+      "collision": "Do not steal :8792 from world unifier or :8793 halls. Coordinate with eyes #74 and world-canon #93."
+    },
+    {
+      "id": "genesis-sentient-world-96",
+      "title": "Land Origin sentient world layer genesis#96",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 30,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f3810fa818ecbbe082f824. Branch cursor/sentient-world-layer-2726. Origin PR genesis#96. packages/python-sentient-world. HTTP 127.0.0.1:8794. GET /live is process liveness; claimed_live only when /live answers.",
+      "verify": "cd packages/python-sentient-world && pytest && genesis-sentient-world tick --steps 4. Never bind UDP 2419.",
+      "files": [
+        "packages/python-sentient-world"
+      ],
+      "collision": "Port :8794 is also world-canon #93 and sound #104. Coordinate; do not steal :8792/:8793."
+    },
+    {
+      "id": "genesis-job-organizer-37",
+      "title": "Land Origin job organizer genesis#37",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 31,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f381ef954fe2df21ad3027. Path job-organizer/. Origin PR genesis#37. mmap(MAP_SHARED) kanban; UDP 2419 notify/pong only. UI http://127.0.0.1:7432.",
+      "verify": "cd job-organizer && npm test && npm start. Bodies never ride UDP 2419.",
+      "files": [
+        "job-organizer"
+      ],
+      "collision": "This pad agent-ops is not the Origin organizer. Do not bind UDP 2419. Do not clone JSON as the mesh."
+    },
+    {
+      "id": "genesis-world-sound-104",
+      "title": "Land Origin world 3D sound genesis#104",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 32,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f381b58ce8eb310d0c6fa2. Branch cursor/world-3d-sound-engine-2c62. Origin PR genesis#104. src/genesis_sound beside genesis_spatial. HTTP 127.0.0.1:8794. Not NVIDIA physics. Not GOOSE-PC :8791.",
+      "verify": "python -m genesis_sound health stays live: dark until Superbrain probed. Never bind UDP 2419.",
+      "files": [
+        "src/genesis_sound"
+      ],
+      "collision": "Port :8794 is also world-canon #93 and sentient #96. Hearing pin ears — coordinate with python-agent-ears #78."
+    },
+    {
+      "id": "genesis-python-bridge-57",
+      "title": "Land Origin Python bridge server genesis#57",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 33,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f38161b4dbc856c5c46893. Branch cursor/python-bridge-server-629c. Origin PR genesis#57. packages/python-bridge. Default HTTP 127.0.0.1:8788. --loopback keeps /live dark. Sibling ports: any-app :8787, CPU bridge :8789, lattice :8790.",
+      "verify": "python -m genesis_bridge serve --loopback. GET /live is 200 only when Ethernet Superbrain /live succeeds.",
+      "files": [
+        "packages/python-bridge"
+      ],
+      "collision": "Port :8788 is also auto-runner #41. :8787 is inventory. Do not steal those binds. UDP 2419 is pong only."
+    },
+    {
+      "id": "genesis-world-pm",
+      "title": "Land Origin world project manager",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 34,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d. Path packages/world-project-manager/. HTTP 127.0.0.1:8793. Contract genesis.world-project-manager.v1. Env GENESIS_WORLD_PM_URL. Tracks planes/milestones/risks — does not spawn loops, merge shards, or occupy the village.",
+      "verify": "cd packages/world-project-manager && npm test && npm start. Probe Superbrain before LIVE. Never bind UDP 2419.",
+      "files": [
+        "packages/world-project-manager"
+      ],
+      "collision": "Do not steal :8793 halls, unifier :8792, task hub :8788, agent manager :8789, or organizer :7432."
+    },
+    {
+      "id": "genesis-world-unifier",
+      "title": "Land Origin world-unifier plane",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 35,
+      "status": "open",
+      "claim": null,
+      "notes": "World-PM plane `unifier` — canonical shard merge on HTTP 127.0.0.1:8792. World-layer #102 does not merge unifier logs. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d + layer https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a. No dedicated Origin PR yet — implement on Origin only.",
+      "verify": "Unifier stays on Origin. GET /health claimedLive false until Superbrain probed. Coordinate with python-vision #84 before binding :8792.",
+      "files": [],
+      "collision": "Port :8792 is also the vision HUD / unifier. Do not steal :8793 halls or :8794. UDP 2419 is pong only."
+    },
+    {
+      "id": "genesis-world-map",
+      "title": "Land Origin world-map plane",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 36,
+      "status": "open",
+      "claim": null,
+      "notes": "World-PM plane `map`. World-layer #102 does not generate map shards — those stay here. Atlas (Chart) holds language; this plane holds the atlas. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d + layer https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a.",
+      "verify": "Slice lands on Origin only. Do not rewrite world-canon roster or steal generator work.",
+      "files": [],
+      "collision": "Coordinate with world-generator, world-language #95, and world-canon #93."
+    },
+    {
+      "id": "genesis-world-spawner",
+      "title": "Land Origin world-spawner plane",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 37,
+      "status": "open",
+      "claim": null,
+      "notes": "World-PM plane `spawner` — occupancy inside the map. World-layer #102 does not spawn subprocesses. World-PM does not occupy the village. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d + layer https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a.",
+      "verify": "Spawner stays on Origin. Never bind UDP 2419. Do not steal host occupancy on :8794.",
+      "files": [],
+      "collision": "Coordinate with world-host #87 (binds occupancy) and world-map. Do not spawn from world-PM."
+    },
+    {
+      "id": "genesis-world-physics",
+      "title": "Land Origin world-physics plane",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 38,
+      "status": "open",
+      "claim": null,
+      "notes": "World-PM plane `physics`. Layer stack includes rigid + fluid. Not NVIDIA Genesis World. Not NVIDIA physics. Sound #104 is hearing, not this card. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d + layer https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a.",
+      "verify": "Slice lands on Origin only. CPU/local only; no GPU claim. GET /health stays live=dark until Superbrain probed.",
+      "files": [],
+      "collision": "World-host #87 does not run physics. Coordinate with layer #102 rigid/fluid ticks."
+    },
+    {
+      "id": "genesis-world-atmosphere",
+      "title": "Land Origin world-atmosphere plane",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 39,
+      "status": "open",
+      "claim": null,
+      "notes": "World-PM plane `atmosphere`. Layer stack: terrain → occupancy → rigid → fluid → atmosphere → agents → sensors → memory. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d + layer https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a.",
+      "verify": "Atmosphere plane lands on Origin. Do not steal layer #102 coupler ticks.",
+      "files": [],
+      "collision": "Coordinate with world-layer #102 and world-physics. Not NVIDIA weather."
+    },
+    {
+      "id": "genesis-world-generator",
+      "title": "Land Origin world-generator plane",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 40,
+      "status": "open",
+      "claim": null,
+      "notes": "World-PM plane `generator`. World-layer #102 does not generate map shards; this plane authors them. Map plane stores the atlas. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d + layer https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a.",
+      "verify": "Generator stays on Origin. Do not occupy the village or merge unifier logs.",
+      "files": [],
+      "collision": "Coordinate with world-map and world-layer #102. Host #87 does not generate maps."
+    },
+    {
+      "id": "genesis-world-lattice",
+      "title": "Land Origin world-lattice plane",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 41,
+      "status": "open",
+      "claim": null,
+      "notes": "World-PM plane `lattice`. Python-infra #50 sibling attach mentions lattice :8790. Eyes #74 is a lattice vision node, not this plane. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d.",
+      "verify": "Lattice stays on Origin. Do not steal :8790 from python-infra without coordinating.",
+      "files": [],
+      "collision": "Port :8790 is python-infra lattice. Do not steal :8787/:8788/:8789."
+    },
+    {
+      "id": "genesis-world-arena",
+      "title": "Land Origin world-arena plane",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 42,
+      "status": "open",
+      "claim": null,
+      "notes": "World-PM plane `arena`. Evaluation / arena work for the world program. Does not merge shards or occupy the village. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d.",
+      "verify": "Arena stays on Origin. Probe Superbrain before LIVE. Never bind UDP 2419.",
+      "files": [],
+      "collision": "Coordinate with world-PM :8793. Do not steal unifier :8792 or host :8794."
+    },
+    {
+      "id": "genesis-world-robotics",
+      "title": "Land Origin world-robotics plane",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 43,
+      "status": "open",
+      "claim": null,
+      "notes": "World-PM plane `robotics`. Body/suit/head/ears/eyes stay on python-agent cards; this is the world-side robotics stack. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d.",
+      "verify": "Robotics plane lands on Origin. Coordinate with suit #58 / head #76. No GPU claim.",
+      "files": [],
+      "collision": "Do not fork python-agent-suit onto this card. Do not steal :8792/:8793/:8794."
+    },
+    {
+      "id": "catalog-expand-domain",
+      "title": "Expand the Origin catalog domain-by-domain",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 50,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/expand-by-domain https://app.notion.com/p/3db735da33f38155b7d9e11df17ddea4 Status active. Pick a domain from catalog/stats.json, inventory existing skills/tools, author missing playbooks, add resource links, rebuild and commit on Origin.",
+      "verify": "catalog/stats.json grows for the chosen domain. Do not invent Notion URLs.",
+      "files": [
+        "catalog/stats.json",
+        "docs/EXPANSION.md"
+      ],
+      "collision": "Coordinate with catalog-notion-sync and catalog-inventory-skills. Origin catalog is SoT."
+    },
+    {
+      "id": "catalog-inventory-skills",
+      "title": "Inventory Cursor skills into the Origin catalog",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 51,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/inventory-skills https://app.notion.com/p/3db735da33f381bb9bafca916c22169f. Run scripts/inventory.py, review catalog/stats.json, commit catalog updates, optionally sync highlights to Notion.",
+      "verify": "scripts/inventory.py writes data/skills + catalog.jsonl. Do not invent Superbrain LIVE.",
+      "files": [
+        "scripts/inventory.py",
+        "catalog/stats.json"
+      ],
+      "collision": "Coordinate with gub-inventory-tick (same inventory.py allowlist) and catalog-expand-domain."
+    },
+    {
+      "id": "catalog-add-custom-entry",
+      "title": "Add a schema-valid custom Genesis catalog entry",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 52,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/add-custom-entry https://app.notion.com/p/3db735da33f38189907ef132836d95bf. Copy schema/entry.example.yaml, place under data/<type>s/, run scripts/build_catalog.py, validate schema/entry.schema.json.",
+      "verify": "New entry validates. Do not invent URLs or LIVE lanes.",
+      "files": [
+        "schema/entry.example.yaml",
+        "schema/entry.schema.json",
+        "scripts/build_catalog.py"
+      ],
+      "collision": "Coordinate with catalog-expand-domain. Seeded-first catalog stays the map."
+    },
+    {
+      "id": "catalog-notion-skill-author",
+      "title": "Author a Notion Skill from an Origin workflow",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 53,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/notion-skill-author https://app.notion.com/p/3db735da33f381c1a42ccf030628e7dc. Read notion://docs/skills, write outcome/when-to-use/inputs/steps/checks, create_pages is_skill=true, optionally catalog as a Genesis skill entry.",
+      "verify": "Skill page exists in Yuri’s Space and cites a real Origin playbook. Do not invent workflows.",
+      "files": [],
+      "collision": "Coordinate with catalog-add-custom-entry if both write a catalog row."
+    },
+    {
+      "id": "do-not-reopen-main-pr1",
+      "title": "Do not reopen GitHub PR #1 Genesis duplicate",
+      "repo": "github.com/yuro1991-afk/main",
+      "kind": "review",
+      "priority": 99,
+      "status": "done",
+      "claim": null,
+      "notes": "Yuri confirmed PR #1 was a duplicate of Origin genesis. Branch cursor/genesis-siblings-one-repo-8657 stays closed.",
+      "verify": "gh pr view 1 --repo yuro1991-afk/main stays CLOSED.",
+      "files": [],
+      "collision": "Closed on purpose. Work Origin slices instead."
+    },
+    {
+      "id": "agent-ops-board",
+      "title": "Ship the GitHub landing-pad dispatch board",
+      "repo": "github.com/yuro1991-afk/main",
+      "kind": "implement",
+      "priority": 0,
+      "status": "done",
+      "claim": {
+        "agentId": "bc-01a0a0ce-1d96-7bb9-b7a7-aeaf5271108b",
+        "claimedAt": "2026-09-14T16:46:00.000Z",
+        "leaseUntil": "2026-09-14T17:31:00.000Z"
+      },
+      "notes": "Shipped on PR #3. Keep agents from stacking on LICENSE-only main. Sibling workload manager bc-01a0a0cd-b78b-799a-afa7-cdbfda0065cc should claim a different card.",
+      "verify": "npm test && node src/cli.js next",
+      "files": [
+        "src/ledger.js",
+        "src/cli.js",
+        "ledger/queue.json",
+        "AGENTS.md"
+      ],
+      "collision": "Do not open a second dispatch-board PR. Extend this one or take a Genesis card."
+    },
+    {
+      "id": "opensussy-linux-syntax-ci",
+      "title": "Add non-nuclear Linux syntax CI for OpenSussy packs",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "kind": "implement",
+      "priority": 10,
+      "status": "blocked",
+      "claim": null,
+      "notes": "No open issues/PRs. Repo has no .github/workflows. Add ubuntu-latest bash -n (and optional shellcheck) on install/linux/OpenSussy-light.sh, OpenSussy-deep.sh, and leap/tumbleweed copies. Never apply AutoYaST, never run deep wipe, never touch /dev/nvme0n1. Residual R2: confirm=false + initialize=true is nuclear.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "Workflow parses the six shell wrappers; job must not execute autoinst-deep.xml or format disks.",
+      "files": [
+        ".github/workflows/linux-syntax.yml",
+        "install/linux/OpenSussy-light.sh",
+        "install/linux/OpenSussy-deep.sh",
+        "install/linux/leap/OpenSussy-light.sh",
+        "install/linux/tumbleweed/OpenSussy-light.sh"
+      ],
+      "collision": "Do not edit Windows WPF / LinuxPayload.cs wipe path. Do not collide dronehive CI files. Do not reopen yuro1991-afk/main#1."
+    },
+    {
+      "id": "opensussy-agama-honesty",
+      "title": "Fail-fast Agama vs AutoYaST honesty in OpenSussy HOW_TO",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "kind": "implement",
+      "priority": 11,
+      "status": "blocked",
+      "claim": null,
+      "notes": "SEC_REVIEW residual R4: AutoYaST 1.0 XML is not Agama JSON; Leap 16 / Agama-first media will not eat autoinst-*.xml silently. HOW_TO_RUN.txt already mentions classic AutoYaST vs Agama — add a one-screen warning in install/linux/HOW_TO_RUN.txt plus flavor HOW_TOs that Leap 15.6 XML is export-only. Do not invent Agama JSON profiles.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "HOW_TO files state Agama is unsupported; no new autoinst that claims Leap 16 GREEN.",
+      "files": [
+        "install/linux/HOW_TO_RUN.txt",
+        "docs/ENGINEER_PASS.md",
+        "reviews/SEC_REVIEW.md"
+      ],
+      "collision": "Docs/honesty only. Do not change default --linux-disk or unattended wipe flags."
+    },
+    {
+      "id": "opensussy-sec-residuals-catalog",
+      "title": "Catalog OpenSussy SEC_REVIEW residuals against 2.0.0 tree",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "kind": "catalog",
+      "priority": 12,
+      "status": "blocked",
+      "claim": null,
+      "notes": "reviews/SEC_REVIEW.md is labeled 1.1 PARTIAL (R1–R10). PRODUCT.json is 2.0.0 with Leap 15.6 + Tumbleweed packs. Inventory which residuals still apply to src/OpenSussy.Installer/Engine/LinuxPayload.cs and Sanitizer.cs. Write a short residuals table in-repo; do not invent CVEs or wipe procedures.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "Each residual cites a current path or is marked closed with a file pin. false_green stays 0.",
+      "files": [
+        "reviews/SEC_REVIEW.md",
+        "src/OpenSussy.Installer/Engine/LinuxPayload.cs",
+        "src/OpenSussy.Installer/Engine/Sanitizer.cs",
+        "PRODUCT.json"
+      ],
+      "collision": "Read-only review of wipe/sanitize behavior. Do not implement nuclear AutoYaST or LUKS in this card."
+    },
+    {
+      "id": "faceswap-mock-engine-ci",
+      "title": "CI for face-swap-ios gateway with a mock MultoModa engine",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "kind": "implement",
+      "priority": 13,
+      "status": "blocked",
+      "claim": null,
+      "notes": "No open issues/PRs, no .github. prove_swap.py requires live :8855 + :8860. Add a stdlib mock that serves GET /api/health and POST swap JSON, point FACESWAP_ENGINE at it, run gateway.py, curl GET /api/ios/health and a fixture POST /api/ios/swap. Do not start InsightFace, CUDA, or Jane.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "Workflow GREEN without MultoModa. prove_swap.py --gateway http://127.0.0.1:8860 against the mock writes out/PROVE.json with false_green 0.",
+      "files": [
+        "gateway.py",
+        "prove_swap.py",
+        "fixtures/portrait-a.jpg",
+        "fixtures/portrait-b.jpg",
+        ".github/workflows/gateway-smoke.yml"
+      ],
+      "collision": "Do not bind or rewrite MultoModa on :8855. Do not commit G:\\AI-Home host paths. Avoid dronehive CI."
+    },
+    {
+      "id": "faceswap-health-offline",
+      "title": "Make face-swap health fail closed when the engine is down",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "kind": "fix",
+      "priority": 14,
+      "status": "blocked",
+      "claim": null,
+      "notes": "gateway.py engine_json already returns 502 {detail: engine unreachable}. PWA chip and prove_swap treat status!=ok as RED. Ensure GET /api/ios/health never reports ok/GREEN when FACESWAP_ENGINE is closed, and keep the health call on the existing 5s timeout (do not use the 180s swap default).\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "With FACESWAP_ENGINE=http://127.0.0.1:9 gateway health JSON is not status ok; prove_swap exits 2.",
+      "files": [
+        "gateway.py",
+        "pwa/index.html",
+        "prove_swap.py"
+      ],
+      "collision": "Do not change POST /api/ios/swap payload shape. Coordinate with faceswap-mock-engine-ci if both claimed."
+    },
+    {
+      "id": "faceswap-honesty-env-paths",
+      "title": "Document face-swap engine via env, not G: host paths",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "kind": "catalog",
+      "priority": 15,
+      "status": "blocked",
+      "claim": null,
+      "notes": "HONESTY.md pins G:\\AI-Home\\projects\\multomoda-face-studio and G:\\AI-Home\\models\\insightface. Gateway already uses FACESWAP_ENGINE / FACESWAP_IOS_PORT / FACESWAP_IOS_HOST. Catalog those env vars in README + HONESTY so Linux agents do not treat G: as required. Weights stay off git.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "README lists the three env vars; HONESTY marks G: as one host example, not the contract.",
+      "files": [
+        "README.md",
+        "HONESTY.md",
+        "START.cmd",
+        "gateway.py"
+      ],
+      "collision": "Docs/env only. Do not vendor InsightFace weights. Same path-leak theme as dronehive-portable-paths but different repo."
+    },
+    {
+      "id": "ova-pwsh-syntax-ci",
+      "title": "Add PowerShell syntax CI for ollama-voice-access",
+      "repo": "github.com/yuro1991-afk/ollama-voice-access",
+      "kind": "implement",
+      "priority": 16,
+      "status": "blocked",
+      "claim": null,
+      "notes": "No open issues/PRs, no .github. Add a workflow that runs pwsh -NoProfile -Command parser/AST check (or -File -? ) on Install/Uninstall, Open/Start/Stop, Chat/Status, Invoke-OllamaVoiceQA.ps1, lib/OllamaVoice.Common.ps1. Do not hit http://127.0.0.1:11434 and do not stop a live Ollama.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "Syntax job passes on ubuntu-latest pwsh without a local ollama.exe.",
+      "files": [
+        ".github/workflows/pwsh-syntax.yml",
+        "lib/OllamaVoice.Common.ps1",
+        "Invoke-OllamaVoiceQA.ps1",
+        "Stop-Ollama.ps1"
+      ],
+      "collision": "Do not change Start Menu Bypass installers in the same PR as stop-guard unless one agent owns both."
+    },
+    {
+      "id": "ova-stop-noui-guard",
+      "title": "Keep Stop-Ollama -NoUI refusing without -Force",
+      "repo": "github.com/yuro1991-afk/ollama-voice-access",
+      "kind": "fix",
+      "priority": 17,
+      "status": "blocked",
+      "claim": null,
+      "notes": "SECURITY.md and Stop-Ollama.ps1 already refuse kill in -NoUI without -Force (exit 4) before Stop-OVServe. Add a no-network assertion (Pester or a tiny .ps1 under tests/) that mocks Show-OVMessage and proves exit 4 and zero Stop-Process. Do not add a default -Force.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "pwsh -File Stop-Ollama.ps1 -NoUI exits 4; no ollama processes signaled.",
+      "files": [
+        "Stop-Ollama.ps1",
+        "lib/OllamaVoice.Common.ps1",
+        "SECURITY.md"
+      ],
+      "collision": "Safety default stays refuse. Do not point api.baseUrl at untrusted hosts."
+    },
+    {
+      "id": "ova-api-host-override",
+      "title": "Allow trusted OLLAMA_HOST override in Voice Access config",
+      "repo": "github.com/yuro1991-afk/ollama-voice-access",
+      "kind": "implement",
+      "priority": 18,
+      "status": "blocked",
+      "claim": null,
+      "notes": "Get-OVApiBase reads config/product.json api.baseUrl (http://127.0.0.1:11434). SECURITY.md: do not point baseUrl at untrusted hosts. Accept OLLAMA_HOST / OV_API_BASE only when the URL is loopback (127.0.0.1 or localhost). Reject LAN/WAN silently falling back to config. Document in README.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "OV_API_BASE=http://127.0.0.1:11434 works; http://example.com is rejected. Existing launchers still resolve Voice Access names.",
+      "files": [
+        "lib/OllamaVoice.Common.ps1",
+        "config/product.json",
+        "README.md",
+        "SECURITY.md"
+      ],
+      "collision": "Local Ollama only. Do not add cloud inference. Do not collide ova-stop-noui-guard on Stop-Ollama.ps1."
+    },
+    {
+      "id": "bloom-readme-honest-export",
+      "title": "Add an honest README for bloom-fair-yellow-charm",
+      "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+      "kind": "implement",
+      "priority": 19,
+      "status": "blocked",
+      "claim": null,
+      "notes": "Single commit 'Export from Grok' (2026-08-19). No README, no open issues/PRs. Package is app-builder-workspace (Vite 8080, TanStack Start). UI is OMNI-FORGE (src/routes/docs.tsx HTTP API). README must say Grok Build export, npm run dev/typecheck/test, and this is not Origin genesis / not yuro1991-afk/main.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "README.md exists; does not claim Superbrain LIVE or duplicate sibling stubs.",
+      "files": [
+        "README.md",
+        "package.json",
+        "AGENTS.md",
+        "src/routes/docs.tsx"
+      ],
+      "collision": "Docs only. Do not copy Genesis onto this tree. Do not reopen main#1."
+    },
+    {
+      "id": "bloom-ci-typecheck",
+      "title": "Add typecheck/lint/test CI for bloom-fair-yellow-charm",
+      "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+      "kind": "implement",
+      "priority": 20,
+      "status": "blocked",
+      "claim": null,
+      "notes": "No .github/workflows. package.json already has typecheck, lint, and node --test scripts/**/*.test.mjs (brand-check, grok-pwa-plugin). Add npm ci && npm test && npm run typecheck. Fix only errors the workflow surfaces. Do not require a running :8080 preview for CI.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "GitHub Actions green on those three commands. Do not mark LIVE on a failed typecheck.",
+      "files": [
+        ".github/workflows/ci.yml",
+        "package.json",
+        "scripts/brand-check.test.mjs",
+        "scripts/grok-pwa-plugin.test.mjs"
+      ],
+      "collision": "Do not edit dronehive .github. Coordinate with bloom-readme-honest-export if both touch package.json scripts."
+    },
+    {
+      "id": "bloom-health-probe",
+      "title": "Probe OMNI-FORGE /api/v1/health without claiming LIVE",
+      "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+      "kind": "probe",
+      "priority": 21,
+      "status": "blocked",
+      "claim": null,
+      "notes": "src/routes/api/v1/health.ts plus docs: GET /api/v1/health (liveness, catalog size, agent flag). After npm run dev -- --host 0.0.0.0 --port 8080, GET health with a short timeout. Timeouts/connection errors are unreachable, never live. This is not BOSS Superbrain :45001 and not GOOSE-PC :8791.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "Write a small evidence JSON (status ok | unreachable). Never upgrade a timeout to LIVE. Optional: npm run preview if build already exists.",
+      "files": [
+        "src/routes/api/v1/health.ts",
+        "src/routes/docs.tsx",
+        "startup.sh"
+      ],
+      "collision": "Do not probe or relabel Superbrain from this card. Do not bind :8787/:8788 Origin auto-runner ports."
+    },
+    {
+      "id": "do-not-open-fourth-queue",
+      "title": "Do not open a fourth landing-pad dispatch board",
+      "repo": "github.com/yuro1991-afk/main",
+      "kind": "review",
+      "priority": 98,
+      "status": "done",
+      "claim": null,
+      "notes": "PR #3 is this ops board. PR #4 is keep-busy. PR #2 is pointers. PR #5 is attention + dronehive patch. A fifth queue is waste.",
+      "verify": "gh pr list --repo yuro1991-afk/main --state open shows no new queue PR after #5.",
+      "files": [
+        "ledger/siblings.json"
+      ],
+      "collision": "Extend PR #3 or claim a card. Do not copy packages/keep-busy onto this branch."
+    },
+    {
+      "id": "opensussy-ship-json-2-0-0",
+      "title": "Make leftover 1.3.0 ship/docs match released OpenSussy 2.0.0",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "kind": "fix",
+      "priority": 9,
+      "status": "blocked",
+      "claim": null,
+      "notes": "VERSION / PRODUCT.json / csproj are 2.0.0, but SHIP.json, USER_GUIDE.md, SETUP-DESKTOP.cmd, and INSTALL.cmd still say 1.3.0. Seeded from sibling PR #4 so both boards agree.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "SHIP.json and generated docs say 2.0.0; leftover 1.3.0 only in CHANGELOG.",
+      "files": [
+        "SHIP.json",
+        "docs/USER_GUIDE.md",
+        "SETUP-DESKTOP.cmd",
+        "INSTALL.cmd"
+      ],
+      "collision": "Same card as keep-busy sync-2-0-0-docs-and-ship-json. Claim one board, not both."
+    },
+    {
+      "id": "faceswap-commit-pwa-icons",
+      "title": "Commit the PWA icons face-swap already names",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "kind": "implement",
+      "priority": 13,
+      "status": "blocked",
+      "claim": null,
+      "notes": "manifest/index.html/sw.js require icon-192.png, icon-512.png, apple-touch-icon.png. make_icons.py exists; PNGs were never committed.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "Those three PNGs exist under pwa/ and return HTTP 200 when served.",
+      "files": [
+        "pwa/icon-192.png",
+        "pwa/icon-512.png",
+        "pwa/apple-touch-icon.png",
+        "make_icons.py"
+      ],
+      "collision": "Same as keep-busy commit-pwa-homescreen-icons. Do not fight faceswap-mock-engine-ci if both touch sw.js."
+    },
+    {
+      "id": "ova-pester-qa-math",
+      "title": "Pester tests for Ollama Voice percentile / stdev / tok-s math",
+      "repo": "github.com/yuro1991-afk/ollama-voice-access",
+      "kind": "implement",
+      "priority": 16,
+      "status": "blocked",
+      "claim": null,
+      "notes": "README math lives in lib/OllamaVoice.Common.ps1. No tests/ tree. Live QA needs Ollama; unit tests must not.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "Pester covers empty stats, n=1 stdev 0, n=5 p50/p95, tokens/s with no network.",
+      "files": [
+        "lib/OllamaVoice.Common.ps1",
+        "tests/"
+      ],
+      "collision": "Same as keep-busy pester-qa-math-unit-tests. Leave Invoke-OllamaVoiceQA.ps1 as the live SLO owner."
+    },
+    {
+      "id": "bloom-gitignore-vercel",
+      "title": "Stop shipping .vercel/output in Omni-Forge",
+      "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+      "kind": "fix",
+      "priority": 18,
+      "status": "blocked",
+      "claim": null,
+      "notes": ".gitignore is only node_modules and env crumbs; the tree includes Nitro/Vercel build output.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": ".gitignore includes .vercel/ and dist/; committed output is removed; npm run build still works.",
+      "files": [
+        ".gitignore",
+        ".vercel/"
+      ],
+      "collision": "Same as keep-busy gitignore-vercel-build-output. Keep package-lock.json tracked."
+    },
+    {
+      "id": "review-landing-pad-prs",
+      "title": "Review existing landing-pad PRs #3 #4 #5 #6",
+      "repo": "github.com/yuro1991-afk/main",
+      "kind": "review",
+      "priority": 22,
+      "status": "blocked",
+      "claim": null,
+      "notes": "Idle CodeRabbit / auto-review agents: review open PRs #3–#6. CodeRabbit skips this repo (<10 stars) unless someone checks Trigger review. Do not invent a new tree. Do not reopen #1.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "Leave a review on at least one of #3/#4/#5/#6. No new dispatch-board PR.",
+      "files": [
+        "ledger/siblings.json"
+      ],
+      "collision": "Review only. Merge decisions stay with Yuri."
+    },
+    {
+      "id": "gub-route-intent",
+      "title": "Implement GUB route-intent playbook",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 10,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/gub-route-intent https://app.notion.com/p/3db735da33f3819db32ecfc122a40c70 Status active. Route a free-text intent through the Genesis engine to a playbook, skill, tools, and optional subagent. Implement on origin.cursor.com/git/yuri-afk/genesis only.",
+      "verify": "POST /v1/route persists a Genesis run. Playbooks score above skills. Do not invent LIVE lanes.",
+      "files": [
+        "gub/",
+        "data/playbooks/"
+      ],
+      "collision": "Same GUB process as gub-inventory-tick and genesis-auto-runner-41 (:8787 / :8788)."
+    },
+    {
+      "id": "gub-run-playbook",
+      "title": "Implement GUB run-playbook playbook",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 11,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/gub-run-playbook https://app.notion.com/p/3db735da33f381edbc43e852d28dee37 Status active. Compile a Genesis playbook into an executable plan and record the run. Implement on origin.cursor.com/git/yuri-afk/genesis only.",
+      "verify": "Dry-run writes plan + step results under .genesis/. Allowlisted gub.* operators only.",
+      "files": [
+        "gub/",
+        "data/playbooks/",
+        ".genesis/"
+      ],
+      "collision": "Coordinate with gub-route-intent and gub-inventory-tick. Do not execute unallowlisted operators."
+    },
+    {
+      "id": "catalog-inventory-mcp",
+      "title": "Inventory MCP tools into the Origin catalog",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 54,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/inventory-mcp-tools https://app.notion.com/p/3db735da33f381d9805fc1058440faf2 Status active. Enumerate dynamic MCP namespaces and tools, normalize into data/tools, and update the master catalog. Implement on origin.cursor.com/git/yuri-afk/genesis only.",
+      "verify": "scripts/inventory.py writes data/tools + catalog/stats.json. Do not invent Superbrain LIVE.",
+      "files": [
+        "scripts/inventory.py",
+        "catalog/stats.json",
+        "data/tools/"
+      ],
+      "collision": "Coordinate with catalog-inventory-skills (same inventory.py) and gub-inventory-tick."
+    },
+    {
+      "id": "catalog-vercel-preview-debug",
+      "title": "Debug a Vercel Preview Deployment (Origin catalog playbook)",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 54,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/vercel-preview-debug https://app.notion.com/p/3db735da33f38144a8ade3f6b34e92a7 Status active. Debug a Vercel preview from the Genesis catalog playbook. Implement on origin.cursor.com/git/yuri-afk/genesis only.",
+      "verify": "Origin playbook playbook/vercel-preview-debug is implemented there. Do not invent LIVE lanes or package paths on this pad.",
+      "files": [],
+      "collision": "Origin genesis only. Coordinate with catalog-notion-sync. Do not reopen yuro1991-afk/main#1."
+    },
+    {
+      "id": "catalog-context-web-research",
+      "title": "Deep Web Research with Context.dev (Origin catalog playbook)",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 55,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/context-web-research https://app.notion.com/p/3db735da33f3817190f9ffd1e8896624 Status active. Capture findings as Genesis resources or Notion pages. Implement on origin.cursor.com/git/yuri-afk/genesis only.",
+      "verify": "Origin playbook playbook/context-web-research is implemented there. Do not invent LIVE lanes or package paths on this pad.",
+      "files": [],
+      "collision": "Origin genesis only. Coordinate with catalog-notion-sync. Do not reopen yuro1991-afk/main#1."
+    },
+    {
+      "id": "catalog-hf-model-explore",
+      "title": "Explore Hugging Face Models and Spaces (Origin catalog playbook)",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 56,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/hf-model-explore https://app.notion.com/p/3db735da33f38132bf44e28f87ef320d Status active. Explore Hugging Face models and Spaces from the Genesis catalog playbook. Implement on origin.cursor.com/git/yuri-afk/genesis only.",
+      "verify": "Origin playbook playbook/hf-model-explore is implemented there. Do not invent LIVE lanes or package paths on this pad.",
+      "files": [],
+      "collision": "Origin genesis only. Coordinate with catalog-notion-sync. Do not reopen yuro1991-afk/main#1."
+    },
+    {
+      "id": "catalog-apify-actor-extract",
+      "title": "Extract Structured Data with Apify (Origin catalog playbook)",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 57,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/apify-actor-extract https://app.notion.com/p/3db735da33f38110aafee4491b74569e Status active. Extract structured data with Apify from the Genesis catalog playbook. Implement on origin.cursor.com/git/yuri-afk/genesis only.",
+      "verify": "Origin playbook playbook/apify-actor-extract is implemented there. Do not invent LIVE lanes or package paths on this pad.",
+      "files": [],
+      "collision": "Origin genesis only. Coordinate with catalog-notion-sync. Do not reopen yuro1991-afk/main#1."
+    },
+    {
+      "id": "catalog-figma-design-to-code",
+      "title": "Implement a Figma Frame in Code (Origin catalog playbook)",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 58,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/figma-design-to-code https://app.notion.com/p/3db735da33f38163bd33f9a970731438 Status active. Implement a Figma frame in code from the Genesis catalog playbook. Implement on origin.cursor.com/git/yuri-afk/genesis only.",
+      "verify": "Origin playbook playbook/figma-design-to-code is implemented there. Do not invent LIVE lanes or package paths on this pad.",
+      "files": [],
+      "collision": "Origin genesis only. Coordinate with catalog-notion-sync. Do not reopen yuro1991-afk/main#1."
+    },
+    {
+      "id": "catalog-pr-review-ship",
+      "title": "Review and Ship a Pull Request (Origin catalog playbook)",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 59,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/pr-review-ship https://app.notion.com/p/3db735da33f381d5b8a1db2df7570f2d Status active. Review and ship a pull request from the Genesis catalog playbook. Implement on origin.cursor.com/git/yuri-afk/genesis only.",
+      "verify": "Origin playbook playbook/pr-review-ship is implemented there. Do not invent LIVE lanes or package paths on this pad.",
+      "files": [],
+      "collision": "Origin genesis only. Coordinate with catalog-notion-sync. Do not reopen yuro1991-afk/main#1."
+    },
+    {
+      "id": "catalog-compound-eng-feature",
+      "title": "Ship a Feature with Compound Engineering (Origin catalog playbook)",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 60,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/compound-eng-feature https://app.notion.com/p/3db735da33f381a292e9e8e09a48adce Status active. Ship a feature with Compound Engineering from the Genesis catalog playbook. Implement on origin.cursor.com/git/yuri-afk/genesis only.",
+      "verify": "Origin playbook playbook/compound-eng-feature is implemented there. Do not invent LIVE lanes or package paths on this pad.",
+      "files": [],
+      "collision": "Origin genesis only. Coordinate with catalog-notion-sync. Do not reopen yuro1991-afk/main#1."
+    }
+  ]
+}

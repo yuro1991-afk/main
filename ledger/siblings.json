@@ -1,0 +1,50 @@
+{
+  "contract": "agent-ops.siblings.v1",
+  "notes": [
+    "This GitHub repo is a landing pad. Do not open a fourth dispatch board.",
+    "Do not reopen https://github.com/yuro1991-afk/main/pull/1.",
+    "Genesis source of truth is origin.cursor.com/git/yuri-afk/genesis."
+  ],
+  "prs": [
+    {
+      "number": 2,
+      "url": "https://github.com/yuro1991-afk/main/pull/2",
+      "branch": "cursor/attention-pointers-e128",
+      "title": "Point this stub repo at Origin Genesis (MERGED)",
+      "role": "pointers",
+      "owns": ["do-not-reopen-main-pr1"]
+    },
+    {
+      "number": 3,
+      "url": "https://github.com/yuro1991-afk/main/pull/3",
+      "branch": "cursor/agent-dispatch-board-108b",
+      "title": "Add a claimable dispatch board so agents stay busy",
+      "role": "ops-board",
+      "owns": ["agent-ops-board"]
+    },
+    {
+      "number": 4,
+      "url": "https://github.com/yuro1991-afk/main/pull/4",
+      "branch": "cursor/keep-busy-queue-65cc",
+      "title": "Add a claimable job queue so idle agents take real work",
+      "role": "keep-busy-queue",
+      "owns": ["opensussy-linux-syntax-ci", "faceswap-mock-engine-ci", "bloom-readme-honest-export"]
+    },
+    {
+      "number": 5,
+      "url": "https://github.com/yuro1991-afk/main/pull/5",
+      "branch": "cursor/attention-router-7646",
+      "title": "Stop the needs-attention loop and stage the DroneHive CI fix",
+      "role": "attention-and-dronehive-patch",
+      "owns": ["dronehive-unicode-ci"]
+    },
+    {
+      "number": 6,
+      "url": "https://github.com/yuro1991-afk/main/pull/6",
+      "branch": "cursor/autofix-dronehive-ci-ab19",
+      "title": "Add a verified DroneHive cp1252 autofix runner",
+      "role": "autofix-runner",
+      "owns": ["dronehive-unicode-ci"]
+    }
+  ]
+}

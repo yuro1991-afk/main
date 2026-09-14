@@ -1,0 +1,34 @@
+{
+  "name": "agent-ops",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Genesis-only claimable dispatch board. Default next is Origin; sibling GitHub cards stay blocked.",
+  "bin": {
+    "agent-ops": "src/cli.js"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "list": "node src/cli.js list",
+    "next": "node src/cli.js next",
+    "slots": "node src/cli.js slots",
+    "assign": "node src/cli.js assign",
+    "sync": "node src/cli.js sync",
+    "catalog": "node src/cli.js catalog",
+    "busy": "node src/cli.js busy",
+    "helpers": "node src/cli.js helpers",
+    "status": "node src/cli.js status",
+    "probe": "node src/cli.js probe",
+    "origin": "node src/cli.js origin",
+    "tick": "node src/cli.js tick",
+    "brief": "node src/cli.js brief",
+    "prompt": "node src/cli.js prompt",
+    "siblings": "node src/cli.js siblings",
+    "handoff": "node src/cli.js handoff",
+    "relaunch": "node src/cli.js relaunch",
+    "playbooks": "node src/cli.js playbooks"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
