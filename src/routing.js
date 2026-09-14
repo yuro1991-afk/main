@@ -2,7 +2,7 @@ import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { assertNeverKind } from "./kinds.js";
 import { jobIdForEntry } from "./catalog.js";
-import { unusedGenesisCards } from "./sync.js";
+import { unusedGithubCards } from "./sync.js";
 import { peekBusyJob } from "./dispatch.js";
 
 export const ROUTE_CONTRACT = "agent-ops.route.v1";
@@ -23,9 +23,9 @@ export const ROUTE_CONTRACT = "agent-ops.route.v1";
 export const ROUTES = Object.freeze([
   {
     intent: "keep agents busy",
-    destination: "origin.cursor.com/git/yuri-afk/genesis",
-    kind: "origin-slice",
-    notes: "Relaunch Origin. Take the next unused card. Do not sit on this pad.",
+    destination: "the next unused GitHub sibling (dronehive / opensussy / bloom / face-swap / ollama-voice)",
+    kind: "fix",
+    notes: "Forget Origin. Take a unique GitHub card. This pad token cannot push siblings.",
     jobId: null,
     packet: null,
   },
@@ -139,7 +139,7 @@ export function scorePlaybooks(text, entries) {
 export function leftoverForRoute(context = {}) {
   if (!context.ledger) return [];
   const used = new Set((context.roster?.assignments ?? []).map((row) => row.jobId));
-  return unusedGenesisCards(context.ledger, used, context.nowMs ?? Date.now());
+  return unusedGithubCards(context.ledger, used, context.nowMs ?? Date.now());
 }
 
 /**
@@ -190,7 +190,7 @@ export function routeIntent(text, context = {}) {
     return routeFromJob(
       text,
       scoredJob,
-      `Catalog playbook ${scored[0].entry.entryId} scored ${scored[0].score}. Relaunch Origin. Do not sit on this pad.`,
+      `Catalog playbook ${scored[0].entry.entryId} scored ${scored[0].score}. Take that GitHub or leftover card.`,
     );
   }
 
@@ -199,14 +199,14 @@ export function routeIntent(text, context = {}) {
       return routeFromJob(
         text,
         agentJob,
-        "Keep-busy goes to this agent's roster Origin card (or leftover next). Do not sit on this pad.",
+        "Keep-busy goes to this agent's roster GitHub card (or leftover next). Forget Origin.",
       );
     }
     if (leftover[0]) {
       return routeFromJob(
         text,
         leftover[0],
-        "Keep-busy goes to the next unused Origin card. Do not sit on this pad.",
+        "Keep-busy goes to the next unused GitHub sibling card. Forget Origin.",
       );
     }
     return withContract(ROUTES[0], text);
@@ -224,14 +224,14 @@ export function routeIntent(text, context = {}) {
     return routeFromJob(
       text,
       agentJob,
-      "Unmatched intent still takes this agent's roster Origin card.",
+      "Unmatched intent still takes this agent's roster GitHub card.",
     );
   }
   if (leftover[0]) {
     return routeFromJob(
       text,
       leftover[0],
-      "Unmatched intent still takes the next unused Origin card.",
+      "Unmatched intent still takes the next unused GitHub sibling card.",
     );
   }
   return withContract(ROUTES[0], text);
@@ -310,7 +310,7 @@ function jobForAgent(context) {
   return peekBusyJob(
     context.ledger,
     context.agentId,
-    { genesis: true },
+    { github: true },
     context.nowMs ?? Date.now(),
     context.roster ?? null,
   );

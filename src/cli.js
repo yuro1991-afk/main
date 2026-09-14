@@ -429,7 +429,11 @@ export function jobFilters(flags) {
     kind: flags.kind,
     repo: flags.repo,
     scope: flags.here === "true" ? "here" : undefined,
-    genesis: flags.all === "true" ? undefined : true,
+    github:
+      flags.all === "true" || flags.origin === "true" || flags.genesis === "true" || flags.world === "true"
+        ? undefined
+        : true,
+    genesis: flags.origin === "true" || flags.genesis === "true" || flags.world === "true" ? true : undefined,
     world: flags.world === "true" ? true : undefined,
   };
 }
@@ -507,12 +511,12 @@ function helpText() {
 
 Commands:
   list
-  next [--kind kind] [--repo repo] [--here] [--all] [--world] [--agent <bcId>]
-  slots [--here] [--all] [--world]
+  next [--kind kind] [--repo repo] [--here] [--all] [--origin] [--world] [--agent <bcId>]
+  slots [--here] [--all] [--origin] [--world]
   assign [--out dir]
   sync --agents path.json [--write] [--out dir]
   catalog [--entries path.json] [--write] [--out path]
-  busy [--agent <bcId>] [--here] [--all] [--world]   # roster card first, then leftover next
+  busy [--agent <bcId>] [--here] [--all] [--origin] [--world]   # roster card first, then leftover next
   helpers [id] [--agent <bcId>]
   prompt [id] [--agent <bcId>] [--json]
   brief [id] [--agent <bcId>]
@@ -530,8 +534,8 @@ Commands:
   siblings
   playbooks [--here] [--out dir]
 
-Genesis only (Yuri). Pass --world for Python world planes. Pass --all to see out-of-scope cards.
-Do not reopen GitHub PR #1. Origin: origin.cursor.com/git/yuri-afk/genesis.`;
+GitHub siblings first (Yuri: forget Origin). Pass --origin for Genesis cards. Pass --all for both.
+Do not reopen GitHub PR #1. Sibling push still needs that repo's token.`;
 }
 
 const isDirect = process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1]);

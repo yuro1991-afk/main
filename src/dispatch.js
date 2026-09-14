@@ -1,6 +1,6 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { isGenesisJob, isWorldPhaseJob, jobScope } from "./kinds.js";
+import { isGenesisJob, isGithubJob, isWorldPhaseJob, jobScope } from "./kinds.js";
 import {
   claimedByAgent,
   claimJob,
@@ -8,10 +8,10 @@ import {
   listJobs,
   nextJob,
 } from "./ledger.js";
-import { unusedGenesisCards } from "./sync.js";
+import { unusedGenesisCards, unusedGithubCards } from "./sync.js";
 import { buildHelperPacket } from "./helpers.js";
 import { buildRelaunch, packetPathFor, relaunchFor } from "./handoff.js";
-import { ORIGIN_UI, renderLaunchPrompt } from "./prompt.js";
+import { renderLaunchPrompt } from "./prompt.js";
 
 export const BUSY_CONTRACT = "agent-ops.busy.v1";
 export const SLOTS_CONTRACT = "agent-ops.slots.v1";
@@ -138,9 +138,9 @@ export function launchPathFor(jobId) {
  * @param {{ assignments?: Array<{ jobId: string }> } | null} roster
  * @param {number} [nowMs]
  */
-export function leftoverLaunchRows(ledger, roster, nowMs = Date.now()) {
+export function leftoverLaunchRows(ledger, roster, nowMs = Date.now(), filters = { github: true }) {
   const used = new Set((roster?.assignments ?? []).map((row) => row.jobId));
-  return unusedGenesisCards(ledger, used, nowMs).map((job) => ({
+  return unusedCardsForFilters(ledger, used, filters, nowMs).map((job) => ({
     jobId: job.id,
     prompt: renderLeftoverLaunch(job),
   }));
@@ -153,21 +153,22 @@ export function leftoverLaunchRows(ledger, roster, nowMs = Date.now()) {
  */
 export function renderLeftoverLaunch(job) {
   if (!job) {
-    return `# No leftover unused Genesis card
+    return `# No leftover unused GitHub card
 
-Do not open another landing-pad queue on yuro1991-afk/main.
-Do not reopen https://github.com/yuro1991-afk/main/pull/1.
+Every GitHub sibling card is already assigned. Review an open PR.
+Do not invent Origin work. Do not reopen https://github.com/yuro1991-afk/main/pull/1.
 `;
   }
+  const target = relaunchFor(job);
   return `# Leftover unused — ${job.id}
 
 No parked pad agent owns this card yet. The next unassigned idle agent takes it.
 
 - card: \`${job.id}\`
 - launch: \`${launchPathFor(job.id)}\`
-- Origin: ${ORIGIN_UI}
+- GitHub: ${target.url}
 
-Paste the brief below into a new Origin cloud agent. Do not inventory this landing pad.
+Relaunch the named GitHub repo. This pad token cannot push siblings. Forget Origin.
 
 ---
 
@@ -192,9 +193,9 @@ You are parked on github.com/yuro1991-afk/main. Leave this pad.
 - bcId: \`${row.bcId}\`
 - card: \`${row.jobId}\`
 - launch: \`${launchPathFor(row.jobId)}\`
-- Origin: ${ORIGIN_UI}
+- GitHub: ${job ? relaunchFor(job).url : "https://github.com/yuro1991-afk"}
 
-Paste the brief below into a new Origin cloud agent. Do not inventory this landing pad.
+Relaunch the named GitHub repo. Forget Origin. Do not inventory this pad for another queue.
 
 ---
 
@@ -251,7 +252,7 @@ export function peekBusyJob(ledger, agentId, filters = {}, nowMs = Date.now(), r
       .filter((row) => !agentId || row.bcId !== agentId)
       .map((row) => row.jobId),
   );
-  const leftover = unusedGenesisCards(ledger, used, nowMs).filter((job) =>
+  const leftover = unusedCardsForFilters(ledger, used, filters, nowMs).filter((job) =>
     jobPassesBusyFilters(job, filters, nowMs),
   );
   if (leftover[0]) return leftover[0];
@@ -289,8 +290,22 @@ function jobPassesBusyFilters(job, filters, nowMs) {
   if (filters.repo && job.repo !== filters.repo) return false;
   if (filters.scope && jobScope(job) !== filters.scope) return false;
   if (filters.genesis === true && !isGenesisJob(job)) return false;
+  if (filters.github === true && !isGithubJob(job)) return false;
   if (filters.world === true && !isWorldPhaseJob(job)) return false;
   return true;
+}
+
+/**
+ * @param {import("./ledger.js").Ledger} ledger
+ * @param {Set<string>} used
+ * @param {{ genesis?: boolean, github?: boolean, world?: boolean }} filters
+ * @param {number} nowMs
+ */
+function unusedCardsForFilters(ledger, used, filters, nowMs) {
+  if (filters.world === true || filters.genesis === true) {
+    return unusedGenesisCards(ledger, used, nowMs);
+  }
+  return unusedGithubCards(ledger, used, nowMs);
 }
 
 /**
@@ -323,7 +338,7 @@ export function buildAssign(ledger, roster, nowMs = Date.now()) {
     leftoverNext: leftover[0]?.jobId ?? null,
     leftoverLaunches: leftover,
     next: assignments.find((row) => row.status === "open") ?? null,
-    rule: "Every idle pad agent relaunches the listed Origin world-phase card. A new unassigned agent takes leftoverNext. Do not stay on yuro1991-afk/main. Do not all peek next without claiming. Do not lease cards to agents that stay idle.",
+    rule: "Every idle pad agent takes a unique GitHub sibling card. A new unassigned agent takes leftoverNext. Forget Origin. Do not all peek next without claiming. Do not lease cards to agents that stay idle.",
   };
 }
 

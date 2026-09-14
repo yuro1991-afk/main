@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { isWorldPhaseJob } from "./kinds.js";
+import { isGithubJob, isWorldPhaseJob } from "./kinds.js";
 import { effectiveStatus, listJobs } from "./ledger.js";
 
 export const SYNC_CONTRACT = "agent-ops.sync.v1";
@@ -89,6 +89,19 @@ export function unusedGenesisCards(ledger, usedJobIds, nowMs) {
 }
 
 /**
+ * Open GitHub sibling cards not already recommended to an idle agent.
+ * Priority order. Claimed cards stay off the list.
+ * @param {import("./ledger.js").Ledger} ledger
+ * @param {Set<string>} usedJobIds
+ * @param {number} nowMs
+ */
+export function unusedGithubCards(ledger, usedJobIds, nowMs) {
+  return listJobs(ledger, { github: true, status: "open" }, nowMs)
+    .filter((job) => !usedJobIds.has(job.id) && isGithubJob(job) && effectiveStatus(job, nowMs) === "open")
+    .sort((a, b) => a.priority - b.priority);
+}
+
+/**
  * Map newly idle pad agents onto unused Genesis cards.
  * Does not lease. Does not drop existing assignments.
  * @param {import("./ledger.js").Ledger} ledger
@@ -102,7 +115,7 @@ export function syncRoster(ledger, roster, agents, nowMs = Date.now()) {
   const assignedIds = new Set(roster.assignments.map((row) => row.bcId));
   const usedJobIds = new Set(roster.assignments.map((row) => row.jobId));
   const newcomers = idle.filter((agent) => !assignedIds.has(agent.bcId));
-  const leftover = unusedGenesisCards(ledger, usedJobIds, nowMs);
+  const leftover = unusedGithubCards(ledger, usedJobIds, nowMs);
   const added = [];
   for (const agent of newcomers) {
     const job = leftover.shift();
@@ -123,6 +136,6 @@ export function syncRoster(ledger, roster, agents, nowMs = Date.now()) {
     uncovered,
     gone,
     leftover: leftover.map((job) => job.id),
-    rule: "New idle pad agents get the next unused Genesis card. Existing assignments stay. No 45-minute leases.",
+    rule: "New idle pad agents get the next unused GitHub sibling card. Existing assignments stay. No 45-minute leases. Forget Origin.",
   };
 }

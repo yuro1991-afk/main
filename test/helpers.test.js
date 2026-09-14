@@ -52,6 +52,6 @@ test("cli helpers defaults to next Genesis card", async () => {
     },
   });
   assert.equal(code, 0);
-  assert.match(chunks.join(""), /gub-route-intent/);
-  assert.doesNotMatch(chunks.join(""), /dronehive-unicode-ci/);
+  assert.match(chunks.join(""), /review-landing-pad-prs/);
+  assert.doesNotMatch(chunks.join(""), /gub-route-intent/);
 });

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Genesis-only claimable dispatch board. Default next is Origin; sibling GitHub cards stay blocked.",
+  "description": "GitHub-first claimable dispatch board. Default next is a sibling GitHub card. Pass --origin for Genesis.",
   "bin": {
     "agent-ops": "src/cli.js"
   },

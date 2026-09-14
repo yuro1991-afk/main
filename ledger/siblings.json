@@ -45,6 +45,22 @@
       "title": "Add a verified DroneHive cp1252 autofix runner",
       "role": "autofix-runner",
       "owns": ["dronehive-unicode-ci"]
+    },
+    {
+      "number": 7,
+      "url": "https://github.com/yuro1991-afk/main/pull/7",
+      "branch": "cursor/stub-wake-roster-108b",
+      "title": "Add the parked-agent wake table to merged main",
+      "role": "pointers",
+      "owns": []
+    },
+    {
+      "number": 8,
+      "url": "https://github.com/yuro1991-afk/main/pull/8",
+      "branch": "cursor/github-first-dispatch-108b",
+      "title": "Retarget the dispatch board from Origin to GitHub siblings",
+      "role": "ops-board",
+      "owns": ["review-main-pr8", "review-landing-pad-prs"]
     }
   ]
 }

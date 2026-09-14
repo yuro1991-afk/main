@@ -41,5 +41,5 @@ test("cli playbooks --here writes into --out", async () => {
     },
   });
   assert.equal(code, 0);
-  assert.match(chunks.join(""), /"count": 0/);
+  assert.match(chunks.join(""), /review-landing-pad-prs/);
 });

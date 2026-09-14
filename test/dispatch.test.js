@@ -30,8 +30,8 @@ function seededPath() {
       {
         id: "first",
         title: "First",
-        repo: "origin.cursor.com/git/yuri-afk/genesis",
-        kind: "origin-slice",
+        repo: "github.com/yuro1991-afk/dronehive",
+        kind: "fix",
         priority: 1,
         status: "open",
         claim: null,
@@ -43,8 +43,8 @@ function seededPath() {
       {
         id: "second",
         title: "Second",
-        repo: "origin.cursor.com/git/yuri-afk/genesis",
-        kind: "origin-slice",
+        repo: "github.com/yuro1991-afk/opensussy",
+        kind: "implement",
         priority: 2,
         status: "open",
         claim: null,
@@ -142,12 +142,12 @@ test("peekBusyJob uses the roster card without claiming", () => {
   const ledger = loadLedger(fileURLToPath(new URL("../ledger/queue.json", import.meta.url)));
   const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
   const parked = roster.assignments[0];
-  const job = peekBusyJob(ledger, parked.bcId, { genesis: true }, NOW, roster);
+  const job = peekBusyJob(ledger, parked.bcId, { github: true }, NOW, roster);
   assert.equal(job.id, parked.jobId);
   assert.equal(job.status, "open");
   assert.equal(job.claim, null);
-  const leftover = peekBusyJob(ledger, "bc-brand-new", { genesis: true }, NOW, roster);
-  assert.equal(leftover.id, "gub-route-intent");
+  const leftover = peekBusyJob(ledger, "bc-brand-new", { github: true }, NOW, roster);
+  assert.equal(leftover.id, "review-landing-pad-prs");
   assert.equal(leftover.status, "open");
 });
 
@@ -155,14 +155,14 @@ test("claimBusyJob uses the roster card instead of leftover next", () => {
   const ledger = loadLedger(fileURLToPath(new URL("../ledger/queue.json", import.meta.url)));
   const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
   const parked = roster.assignments[0];
-  const job = claimBusyJob(ledger, parked.bcId, { genesis: true }, NOW, roster);
+  const job = claimBusyJob(ledger, parked.bcId, { github: true }, NOW, roster);
   assert.equal(job.id, parked.jobId);
-  assert.notEqual(job.id, "gub-inventory-tick");
-  const leftoverAgent = claimBusyJob(ledger, "bc-brand-new", { genesis: true }, NOW, roster);
-  assert.equal(leftoverAgent.id, "gub-route-intent");
+  assert.notEqual(job.id, "review-landing-pad-prs");
+  const leftoverAgent = claimBusyJob(ledger, "bc-brand-new", { github: true }, NOW, roster);
+  assert.equal(leftoverAgent.id, "review-landing-pad-prs");
 });
 
-test("busy --agent claims the roster Origin card, not leftover next", async () => {
+test("busy --agent claims the roster GitHub card, not leftover next", async () => {
   const dir = mkdtempSync(join(tmpdir(), "agent-ops-busy-roster-"));
   const ledgerPath = join(dir, "queue.json");
   saveLedger(ledgerPath, loadLedger(fileURLToPath(new URL("../ledger/queue.json", import.meta.url))));
@@ -189,96 +189,87 @@ test("busy --agent claims the roster Origin card, not leftover next", async () =
   assert.equal(written.reserved, true);
 });
 
-test("assign maps every idle pad agent to a distinct Origin world card", () => {
+test("assign maps parked agents to distinct GitHub sibling cards", () => {
   const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
   const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
   const packet = buildAssign(ledger, roster, NOW);
   assert.equal(packet.contract, ASSIGN_CONTRACT);
-  assert.equal(packet.count, 36);
-  assert.equal(packet.next.jobId, "genesis-world-layer-102");
+  assert.equal(packet.count, 21);
+  assert.equal(packet.next.jobId, "dronehive-unicode-ci");
   const ids = packet.assignments.map((row) => row.jobId);
   const agents = packet.assignments.map((row) => row.bcId);
-  assert.equal(new Set(ids).size, 36);
-  assert.equal(new Set(agents).size, 36);
-  assert.ok(packet.assignments.some((row) => row.jobId === "genesis-world-unifier"));
-  assert.ok(packet.assignments.some((row) => row.jobId === "genesis-world-robotics"));
-  assert.ok(packet.assignments.every((row) => row.relaunch.kind === "origin"));
+  assert.equal(new Set(ids).size, 21);
+  assert.equal(new Set(agents).size, 21);
+  assert.ok(packet.assignments.some((row) => row.jobId === "dronehive-unicode-ci"));
+  assert.ok(packet.assignments.some((row) => row.jobId === "review-main-pr8"));
+  assert.ok(packet.assignments.some((row) => row.jobId === "bloom-health-probe"));
+  assert.ok(packet.assignments.every((row) => row.relaunch.kind === "github" || row.relaunch.kind === "here"));
   assert.ok(packet.assignments.every((row) => row.status === "open"));
   assert.ok(packet.assignments.every((row) => row.launch === `reviews/launch/${row.jobId}.md`));
   assert.ok(packet.assignments.every((row) => /Leave this pad/.test(row.prompt)));
-  assert.match(packet.next.prompt, /genesis-world-layer-102/);
-  assert.ok(ids.includes("gub-inventory-tick"));
-  assert.ok(!ids.includes("catalog-expand-domain"));
+  assert.match(packet.next.prompt, /dronehive-unicode-ci/);
+  assert.ok(ids.includes("dronehive-unicode-ci"));
   assert.ok(!ids.includes("gub-route-intent"));
-  assert.ok(!ids.includes("dronehive-unicode-ci"));
-  assert.equal(packet.leftoverNext, "gub-route-intent");
-  assert.equal(packet.leftover[0], "gub-route-intent");
-  assert.ok(packet.leftover.includes("gub-run-playbook"));
-  assert.ok(packet.leftover.includes("catalog-expand-domain"));
-  assert.ok(!packet.leftover.includes("gub-inventory-tick"));
+  assert.ok(!ids.includes("genesis-world-layer-102"));
+  assert.ok(!ids.includes("review-landing-pad-prs"));
+  assert.equal(packet.leftoverNext, "review-landing-pad-prs");
+  assert.equal(packet.leftover[0], "review-landing-pad-prs");
+  assert.ok(!packet.leftover.includes("dronehive-unicode-ci"));
+  assert.ok(!packet.leftover.includes("gub-route-intent"));
 });
 
-test("cli assign writes paste-ready Origin launch files", async () => {
+test("cli assign writes paste-ready GitHub launch files", async () => {
   const out = mkdtempSync(join(tmpdir(), "agent-ops-launch-"));
   const result = await capture(["assign", "--out", out]);
   assert.equal(result.code, 0);
-  assert.match(result.out, /genesis-world-layer-102/);
-  assert.match(result.out, /genesis-world-unifier/);
-  assert.match(result.out, /genesis-python-infra-50/);
-  assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
-  const dest = join(out, "genesis-world-layer-102.md");
+  assert.match(result.out, /dronehive-unicode-ci/);
+  assert.match(result.out, /bloom-health-probe/);
+  assert.doesNotMatch(result.out, /genesis-world-layer-102/);
+  const dest = join(out, "dronehive-unicode-ci.md");
   assert.equal(existsSync(dest), true);
   const text = readFileSync(dest, "utf8");
   assert.match(text, /Genesis catalog handoff/);
-  assert.match(text, /cursor\.com\/codebase\/yuri-afk\/genesis/);
-  assert.match(text, /origin auth status/);
-  assert.match(text, /repo clone yuri-afk\/genesis/);
-  assert.doesNotMatch(text, /dronehive-unicode-ci/);
-  const leftover = join(out, "gub-route-intent.md");
+  assert.match(text, /dronehive-unicode-ci/);
+  assert.match(text, /github\.com\/yuro1991-afk\/dronehive/);
+  assert.doesNotMatch(text, /genesis-world-layer-102/);
+  const leftover = join(out, "review-landing-pad-prs.md");
   assert.equal(existsSync(leftover), true);
   const leftoverText = readFileSync(leftover, "utf8");
-  assert.match(leftoverText, /Leftover unused — gub-route-intent/);
+  assert.match(leftoverText, /Leftover unused — review-landing-pad-prs/);
   assert.match(leftoverText, /No parked pad agent owns this card yet/);
-  assert.doesNotMatch(leftoverText, /Leftover unused — gub-inventory-tick/);
-  assert.doesNotMatch(leftoverText, /Agent workload management \(fork\)/);
-  assert.match(result.out, /"leftoverNext": "gub-route-intent"/);
+  assert.doesNotMatch(leftoverText, /Leftover unused — dronehive-unicode-ci/);
+  assert.match(result.out, /"leftoverNext": "review-landing-pad-prs"/);
 });
 
-test("peekBusyJob --world does not steal a rostered world card", () => {
+test("peekBusyJob --world is opt-in Origin leftover, not a GitHub steal", () => {
   const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
   const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
-  assert.equal(peekBusyJob(ledger, undefined, { world: true }, NOW, roster), null);
-  assert.equal(peekBusyJob(ledger, "bc-brand-new", { world: true }, NOW, roster), null);
+  assert.equal(peekBusyJob(ledger, undefined, { world: true }, NOW, roster).id, "genesis-world-layer-102");
+  assert.equal(peekBusyJob(ledger, "bc-brand-new", { world: true }, NOW, roster).id, "genesis-world-layer-102");
   const parked = roster.assignments[0];
-  assert.equal(peekBusyJob(ledger, parked.bcId, { world: true }, NOW, roster).id, parked.jobId);
-  const claimed = claimBusyJob(ledger, "bc-brand-new", { world: true }, NOW, roster);
-  assert.equal(claimed, null);
-  assert.equal(ledger.jobs.find((job) => job.id === "genesis-world-layer-102").claim, null);
+  assert.equal(peekBusyJob(ledger, parked.bcId, { github: true }, NOW, roster).id, parked.jobId);
+  assert.equal(peekBusyJob(ledger, parked.bcId, { world: true }, NOW, roster).id, "genesis-world-layer-102");
+  assert.equal(ledger.jobs.find((job) => job.id === "dronehive-unicode-ci").claim, null);
 });
 
 test("leftover launch rows skip rostered cards", () => {
   const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
   const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
   const rows = leftoverLaunchRows(ledger, roster, NOW);
-  assert.equal(rows[0].jobId, "gub-route-intent");
-  assert.match(rows[0].prompt, /Leftover unused — gub-route-intent/);
-  assert.ok(!rows.some((row) => row.jobId === "gub-inventory-tick"));
-  assert.ok(!rows.some((row) => row.jobId === "genesis-world-layer-102"));
-  assert.match(renderLeftoverLaunch(null), /No leftover unused Genesis card/);
-  assert.ok(
-    rows.every((row) =>
-      existsSync(fileURLToPath(new URL(`../reviews/launch/${row.jobId}.md`, import.meta.url))),
-    ),
-  );
+  assert.equal(rows[0].jobId, "review-landing-pad-prs");
+  assert.match(rows[0].prompt, /Leftover unused — review-landing-pad-prs/);
+  assert.ok(!rows.some((row) => row.jobId === "dronehive-unicode-ci"));
+  assert.ok(!rows.some((row) => row.jobId === "gub-route-intent"));
+  assert.match(renderLeftoverLaunch(null), /No leftover unused GitHub card/);
 });
 
-test("cli slots defaults to Genesis cards", async () => {
+test("cli slots defaults to GitHub sibling cards", async () => {
   const result = await capture(["slots"]);
   assert.equal(result.code, 0);
-  assert.match(result.out, /gub-inventory-tick/);
-  assert.match(result.out, /genesis-python-bridge-57/);
-  assert.match(result.out, /genesis-world-unifier/);
-  assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
+  assert.match(result.out, /dronehive-unicode-ci/);
+  assert.match(result.out, /review-landing-pad-prs/);
+  assert.doesNotMatch(result.out, /gub-inventory-tick/);
+  assert.doesNotMatch(result.out, /genesis-world-unifier/);
 });
 
 test("cli slots --world hides GUB inventory and catalog cards", async () => {
