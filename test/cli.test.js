@@ -1,9 +1,11 @@
 import { mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { loadLedger, saveLedger } from "../src/ledger.js";
+import { loadRoster } from "../src/dispatch.js";
 import { parseArgs, runCli } from "../src/cli.js";
 
 const NOW = Date.parse("2026-09-14T16:00:00.000Z");
@@ -75,6 +77,12 @@ test("cli route and probe", async () => {
   assert.equal(routed.code, 0);
   assert.match(routed.out, /gub-inventory-tick/);
   assert.match(routed.out, /yuri-afk\/genesis/);
+  const parked = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)))
+    .assignments[0];
+  const mine = await capture(["route", "keep", "agents", "busy", "--agent", parked.bcId]);
+  assert.equal(mine.code, 0);
+  assert.match(mine.out, new RegExp(`"jobId": "${parked.jobId}"`));
+  assert.doesNotMatch(mine.out, /"jobId": "gub-inventory-tick"/);
   const probed = await capture(["probe"], {
     fetchImpl: async () => ({ ok: false, status: 504 }),
     root: mkdtempSync(join(tmpdir(), "agent-ops-probe-cli-")),

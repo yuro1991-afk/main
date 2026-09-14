@@ -27,9 +27,10 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
    `ledger/catalog-entries.json` (Notion Genesis Entries) and appends
    uncarded playbooks.
    `slots --world` / `busy --world` stay on those
-   planes. Peek without claiming: `node src/cli.js relaunch` (`gub-inventory-tick`
-   while the probe is claimed). `node src/cli.js route "keep agents busy"` now
-   returns the next unused Origin card, not this pad.
+   planes. Peek leftover next (no `--agent`): `node src/cli.js next`
+   (`gub-inventory-tick` while the probe is claimed).
+   `node src/cli.js route "keep agents busy"` without `--agent` is that
+   leftover card. With `--agent` it is **your roster Origin card**.
    Paste `node src/cli.js prompt --agent <your-bcId>` into an
    Origin agent — that prints **your roster card**, not leftover
    `gub-inventory-tick`. Peek leftover next with `node src/cli.js next`

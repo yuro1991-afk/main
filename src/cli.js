@@ -202,6 +202,7 @@ export async function runCli(argv, options = {}) {
         roster,
         entries,
         nowMs,
+        agentId: flags.agent || process.env.CURSOR_AGENT_ID || process.env.AGENT_ID,
       });
       writeRoute(
         packet,
@@ -508,7 +509,7 @@ Commands:
   status
   probe [--timeout ms]   Superbrain lanes + Origin CLI auth
   origin [--login] [--out path]
-  route <intent>
+  route <intent> [--agent <bcId>]   # roster card if --agent, else leftover next
   tick [--out path]
   siblings
   playbooks [--here] [--out dir]

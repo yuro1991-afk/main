@@ -74,6 +74,22 @@ test("catalog playbook intent scores onto the matching leftover card", () => {
   assert.equal(route.jobId, "gub-route-intent");
 });
 
+test("keep-busy with --agent routes to the roster card, not leftover next", () => {
+  const ledger = loadLedger(join(ROOT, "ledger", "queue.json"));
+  const roster = loadRoster(join(ROOT, "ledger", "roster.json"));
+  const parked = roster.assignments[0];
+  const route = routeIntent("keep agents busy", {
+    ledger,
+    roster,
+    nowMs: NOW,
+    agentId: parked.bcId,
+  });
+  assert.equal(route.jobId, parked.jobId);
+  assert.notEqual(route.jobId, "gub-inventory-tick");
+  const leftover = routeIntent("keep agents busy", { ledger, roster, nowMs: NOW });
+  assert.equal(leftover.jobId, "gub-inventory-tick");
+});
+
 test("seeded queue leftover after the real roster is gub-inventory-tick", () => {
   const ledger = loadLedger(join(ROOT, "ledger", "queue.json"));
   const roster = loadRoster(join(ROOT, "ledger", "roster.json"));

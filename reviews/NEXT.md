@@ -81,8 +81,9 @@ agent's roster Origin card first. `prompt` / `relaunch` / `brief` /
 `gub-route-intent` / `gub-run-playbook`, then catalog cards.
 `node src/cli.js catalog` diffs Notion Genesis Entries
 (`ledger/catalog-entries.json`) so new playbooks become cards.
-`node src/cli.js route "keep agents busy"` now returns that leftover
-Origin card (`gub-inventory-tick`), not this pad. No self-hosted workers.
+`node src/cli.js route "keep agents busy"` without `--agent` returns
+that leftover Origin card (`gub-inventory-tick`), not this pad.
+With `--agent` it returns the agent's roster card. No self-hosted workers.
 
 Do not reopen [main#1](https://github.com/yuro1991-afk/main/pull/1).
 Do not work dronehive / opensussy / face-swap / ollama-voice / bloom.

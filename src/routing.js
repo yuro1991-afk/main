@@ -3,6 +3,7 @@ import { dirname, join } from "node:path";
 import { assertNeverKind } from "./kinds.js";
 import { jobIdForEntry } from "./catalog.js";
 import { unusedGenesisCards } from "./sync.js";
+import { peekBusyJob } from "./dispatch.js";
 
 export const ROUTE_CONTRACT = "agent-ops.route.v1";
 
@@ -162,9 +163,10 @@ export function routeFromJob(text, job, notes) {
  * @param {string} text
  * @param {{
  *   ledger?: { jobs: Array<{ id: string, repo: string, kind: string }> },
- *   roster?: { assignments?: Array<{ jobId: string }> },
+ *   roster?: { assignments?: Array<{ bcId: string, jobId: string }> },
  *   entries?: object[],
- *   nowMs?: number
+ *   nowMs?: number,
+ *   agentId?: string
  * }} [context]
  * @returns {Route}
  */
@@ -181,6 +183,7 @@ export function routeIntent(text, context = {}) {
   }
 
   const leftover = leftoverForRoute(context);
+  const agentJob = jobForAgent(context);
   const scored = scorePlaybooks(text, context.entries ?? []);
   const scoredJob = jobForScored(scored[0], leftover, context.ledger);
   if (scoredJob) {
@@ -192,6 +195,13 @@ export function routeIntent(text, context = {}) {
   }
 
   if (includesAny(q, ["keep", "busy", "workload", "dispatch", "idle"])) {
+    if (agentJob) {
+      return routeFromJob(
+        text,
+        agentJob,
+        "Keep-busy goes to this agent's roster Origin card (or leftover next). Do not sit on this pad.",
+      );
+    }
     if (leftover[0]) {
       return routeFromJob(
         text,
@@ -209,6 +219,13 @@ export function routeIntent(text, context = {}) {
   }
   if (includesAny(q, ["catalog", "notion", "inventory"])) {
     return withContract(ROUTES[6], text);
+  }
+  if (agentJob) {
+    return routeFromJob(
+      text,
+      agentJob,
+      "Unmatched intent still takes this agent's roster Origin card.",
+    );
   }
   if (leftover[0]) {
     return routeFromJob(
@@ -280,6 +297,25 @@ function withContract(route, text) {
  * @param {object[]} leftover
  * @param {{ jobs?: object[] } | undefined} ledger
  */
+/**
+ * @param {{
+ *   ledger?: { jobs: object[] },
+ *   roster?: { assignments?: Array<{ bcId: string, jobId: string }> },
+ *   nowMs?: number,
+ *   agentId?: string
+ * }} context
+ */
+function jobForAgent(context) {
+  if (!context.agentId || !context.ledger) return null;
+  return peekBusyJob(
+    context.ledger,
+    context.agentId,
+    { genesis: true },
+    context.nowMs ?? Date.now(),
+    context.roster ?? null,
+  );
+}
+
 function jobForScored(scored, leftover, ledger) {
   if (!scored) return null;
   const jobId = jobIdForEntry(scored.entry.entryId);

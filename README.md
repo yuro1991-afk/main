@@ -35,7 +35,8 @@ node src/cli.js claim <id> --agent "$CURSOR_AGENT_ID"
 node src/cli.js probe
 node src/cli.js origin [--login]
 node src/cli.js tick
-node src/cli.js route "keep my agents busy"   # leftover Origin card, not this pad
+node src/cli.js route "keep my agents busy"                 # leftover Origin card
+node src/cli.js route "keep my agents busy" --agent "$CURSOR_AGENT_ID"  # your roster card
 ```
 
 `assign` maps all 35 idle pad agents onto unique Genesis Python world
