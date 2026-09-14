@@ -131,6 +131,21 @@ test("cli busy without agent peeks the next Genesis card", async () => {
   assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
 });
 
+test("cli list --all drops the Genesis-only blocked line on catalog cards", async () => {
+  const result = await capture(["list", "--all"]);
+  assert.equal(result.code, 0);
+  const jobs = JSON.parse(result.out);
+  const drone = jobs.find((job) => job.id === "dronehive-unicode-ci");
+  assert.ok(drone);
+  assert.match(drone.notes, /cp1252|UnicodeEncodeError|python-smoke/);
+  assert.doesNotMatch(drone.notes, /Blocked: Yuri scoped this landing pad to Genesis only/);
+  const ledger = JSON.parse(
+    readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"),
+  );
+  const raw = ledger.jobs.find((job) => job.id === "dronehive-unicode-ci");
+  assert.match(raw.notes, /Blocked: Yuri scoped this landing pad to Genesis only/);
+});
+
 test("unknown command is a usage error", async () => {
   const result = await capture(["explode"]);
   assert.equal(result.code, 2);

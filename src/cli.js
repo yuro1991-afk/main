@@ -23,7 +23,7 @@ import {
 } from "./origin.js";
 import { defaultRoutePath, routeIntent, writeRoute } from "./routing.js";
 import { defaultInventoryPath, writeInventoryTick } from "./tick.js";
-import { buildBrief } from "./brief.js";
+import { buildBrief, jobForDisplay } from "./brief.js";
 import { buildPrompt } from "./prompt.js";
 import {
   buildHandoff,
@@ -102,7 +102,10 @@ export async function runCli(argv, options = {}) {
   switch (command) {
     case "list": {
       const ledger = loadLedger(ledgerPath);
-      write(JSON.stringify(listJobs(ledger, jobFilters(flags), nowMs), null, 2));
+      const jobs = listJobs(ledger, jobFilters(flags), nowMs).map((job) =>
+        jobForDisplay(job),
+      );
+      write(JSON.stringify(jobs, null, 2));
       return 0;
     }
     case "next": {
@@ -433,10 +436,11 @@ export async function runCli(argv, options = {}) {
 
 function withRelaunch(job) {
   if (!job) return null;
+  const shown = jobForDisplay(job);
   return {
-    ...job,
-    packet: packetPathFor(job),
-    relaunch: relaunchFor(job),
+    ...shown,
+    packet: packetPathFor(shown),
+    relaunch: relaunchFor(shown),
   };
 }
 
