@@ -79,7 +79,8 @@
         "ova-readme-linux-honesty",
         "dronehive-icons-manifest-relative",
         "dronehive-app-links-host-paths",
-        "bloom-ci-lint"
+        "bloom-ci-lint",
+        "ova-voice-card-linux-honesty"
       ]
     }
   ]

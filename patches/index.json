@@ -3,7 +3,7 @@
   "cannotPush": true,
   "apply": "git clone https://github.com/<repo>.git work && cd work && git apply --check ../<file> && git apply ../<file>",
   "doNot": "Do not copy PR #6 npm run autofix. This catalog lists diffs only.",
-  "verifiedAt": "2026-09-14T19:50:00Z",
+  "verifiedAt": "2026-09-14T19:54:00Z",
   "patches": [
     {
       "id": "dronehive-unicode-ci",
@@ -261,6 +261,15 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "New-file .github/workflows/lint.yml runs npm ci && npm run lint. Independent of bloom-ci-typecheck (ci.yml). eslint . is 0 errors / 2 warnings on 288a484. Do not fold lint into typecheck."
+    },
+    {
+      "id": "ova-voice-card-linux-honesty",
+      "repo": "github.com/yuro1991-afk/ollama-voice-access",
+      "file": "patches/ova-voice-card-linux-honesty.patch",
+      "base": "074bad0",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "VOICE-ACCESS.md: Voice Access / Start Menu phrases are Windows-only. Linux pwsh is not a Voice Access install. Independent of ova-readme-linux-honesty (README) and ova-api-host-override (License appendix)."
     }
   ]
 }

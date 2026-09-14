@@ -1133,6 +1133,21 @@
       "collision": "Docs only. Independent of api-host-override (that patch appends after License)."
     },
     {
+      "id": "ova-voice-card-linux-honesty",
+      "title": "Mark OVA voice card Voice Access as Windows-only",
+      "repo": "github.com/yuro1991-afk/ollama-voice-access",
+      "kind": "implement",
+      "priority": 32,
+      "status": "blocked",
+      "claim": null,
+      "notes": "VOICE-ACCESS.md still lists Voice Access phrases with no Linux honesty. Applyable catalog patch is patches/ova-voice-card-linux-honesty.patch on main#9. Independent of ova-readme-linux-honesty (README) and ova-api-host-override. This token cannot push ollama-voice-access.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "VOICE-ACCESS.md says Voice Access / Start Menu are Windows-only and Linux pwsh is not a Voice Access install.",
+      "files": [
+        "VOICE-ACCESS.md"
+      ],
+      "collision": "Docs only. Different file from ova-readme-linux-honesty. Independent of api-host-override."
+    },
+    {
       "id": "bloom-gitignore-vercel",
       "title": "Stop shipping .vercel/output in Omni-Forge",
       "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
