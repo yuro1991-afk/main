@@ -1,4 +1,4 @@
-import { catalogPatchFor, firstCommands } from "./brief.js";
+import { catalogPatchFor, displayNotes, firstCommands } from "./brief.js";
 import { packetPathFor, relaunchFor } from "./handoff.js";
 
 export const PROMPT_CONTRACT = "agent-ops.prompt.v1";
@@ -38,7 +38,7 @@ Yuri: forget Origin for this card. Apply the catalog patch on a sibling write ch
 
 ## Notes
 
-${job.notes}
+${displayNotes(job)}
 
 ## Collision
 
@@ -71,7 +71,7 @@ Yuri: no more Superbrain. Pad probes stop.
 
 ## Notes
 
-${job.notes}
+${displayNotes(job)}
 
 ## Collision
 
@@ -105,7 +105,7 @@ Work on Cursor Origin. This GitHub repo is the ops pad only.
 
 ## Notes
 
-${job.notes}
+${displayNotes(job)}
 
 ## Collision
 

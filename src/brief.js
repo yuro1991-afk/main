@@ -35,11 +35,30 @@ export function buildBrief(job, siblings, options = {}) {
     contract: BRIEF_CONTRACT,
     job,
     kind: describeKind(job.kind),
-    destination: destinationForKind(job.kind),
+    destination: catalogPatchFor(job, { root: options.root })
+      ? `Apply the catalog patch on ${job.repo}`
+      : destinationForKind(job.kind),
     related,
     firstCommands: firstCommands(job, { root: options.root }),
     hardRules: hardRules(job),
   };
+}
+
+const BLOCKED_GENESIS_ONLY =
+  /\nBlocked: Yuri scoped this landing pad to Genesis only\.\s*$/;
+
+/**
+ * Cataloged sibling cards stay status=blocked on this Genesis-only tree,
+ * but --job apply text must not tell the agent to sit out.
+ * @param {import("./ledger.js").Job} job
+ * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { file: string, afterApply?: string[] } | null }} [options]
+ */
+export function displayNotes(job, options = {}) {
+  const notes = job.notes ?? "";
+  if (catalogPatchFor(job, options)) {
+    return notes.replace(BLOCKED_GENESIS_ONLY, "").trimEnd();
+  }
+  return notes;
 }
 
 /**

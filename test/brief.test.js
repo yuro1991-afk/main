@@ -55,6 +55,8 @@ test("brief attaches sibling PR 5 to the unicode card", () => {
   assert.ok(brief.hardRules.some((rule) => rule.includes("forget Origin for this card")));
   assert.ok(!brief.hardRules.some((rule) => rule.includes("sibling cards stay blocked")));
   assert.ok(!brief.hardRules.some((rule) => rule.includes("Extend PR #3")));
+  assert.equal(brief.destination, "Apply the catalog patch on github.com/yuro1991-afk/dronehive");
+  assert.doesNotMatch(brief.destination, /Notion/);
 });
 
 test("firstCommands is exhaustive", () => {
@@ -114,6 +116,16 @@ test("cataloged sibling firstCommands use git apply, not edit", () => {
   const gitignore = queue.jobs.find((item) => item.id === "bloom-gitignore-vercel");
   const gitignoreLines = firstCommands(gitignore);
   assert.ok(gitignoreLines.includes("git rm -r --cached .vercel/output"));
+});
+
+test("catalog-kind sibling brief destination is apply, not Notion", () => {
+  const siblings = loadSiblings(SIBLINGS);
+  const queue = JSON.parse(readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"));
+  const honesty = queue.jobs.find((item) => item.id === "faceswap-honesty-env-paths");
+  const brief = buildBrief(honesty, siblings);
+  assert.equal(brief.destination, "Apply the catalog patch on github.com/yuro1991-afk/face-swap-ios");
+  assert.doesNotMatch(brief.destination, /Notion/);
+  assert.ok(brief.hardRules.some((rule) => rule.includes("forget Origin for this card")));
 });
 
 test("unknown sibling role fails closed", () => {

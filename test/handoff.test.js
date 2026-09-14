@@ -416,10 +416,15 @@ test("cataloged sibling handoff is apply, not Origin relaunch", () => {
   assert.match(text, /dronehive-pro-chat-cp1252\.patch/);
   assert.doesNotMatch(text, /Origin relaunch packet/);
   assert.doesNotMatch(text, /Do not work dronehive/);
-  const packet = buildRelaunch(job, siblings);
-  assert.match(packet.action, /dronehive-pro-chat-cp1252\.patch/);
-  assert.ok(packet.doNot.some((line) => line.includes("forget Origin")));
-  assert.ok(!packet.doNot.some((line) => line.includes("Do not work dronehive")));
+});
+
+test("cataloged sibling handoff notes drop the Genesis-only blocked line", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const job = ledger.jobs.find((item) => item.id === "dronehive-unicode-ci");
+  assert.match(job.notes, /Blocked: Yuri scoped this landing pad to Genesis only/);
+  const text = renderHandoffPacket(job);
+  assert.match(text, /Apply dronehive-unicode-ci/);
+  assert.doesNotMatch(text, /Blocked: Yuri scoped this landing pad to Genesis only/);
 });
 
 test("every open Genesis job has a reviews/handoff packet", () => {

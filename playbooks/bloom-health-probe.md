@@ -10,7 +10,6 @@
 ## Notes
 
 src/routes/api/v1/health.ts plus docs: GET /api/v1/health (liveness, catalog size, agent flag). After npm run dev -- --host 0.0.0.0 --port 8080, GET health with a short timeout. Timeouts/connection errors are unreachable, never live. This is not BOSS Superbrain :45001 and not GOOSE-PC :8791.
-Blocked: Yuri scoped this landing pad to Genesis only.
 
 ## Collision
 

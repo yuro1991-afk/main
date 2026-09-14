@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -72,6 +73,18 @@ test("cataloged sibling prompt is apply, not Origin launch", () => {
   assert.match(text, /forget Origin/);
   assert.doesNotMatch(text, /Origin launch/);
   assert.doesNotMatch(text, /Do not work dronehive/);
+});
+
+test("cataloged sibling prompt notes drop the Genesis-only blocked line", () => {
+  const queue = JSON.parse(
+    readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"),
+  );
+  const drone = queue.jobs.find((item) => item.id === "dronehive-unicode-ci");
+  assert.match(drone.notes, /Blocked: Yuri scoped this landing pad to Genesis only/);
+  const text = renderLaunchPrompt(drone);
+  assert.match(text, /Apply dronehive-unicode-ci/);
+  assert.match(text, /cp1252|UnicodeEncodeError|python-smoke/);
+  assert.doesNotMatch(text, /Blocked: Yuri scoped this landing pad to Genesis only/);
 });
 
 test("empty prompt refuses a fifth queue", () => {

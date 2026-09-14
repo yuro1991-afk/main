@@ -26,10 +26,9 @@ test("cataloged GitHub playbooks name the patch in why, not the generic relaunch
     assert.ok(why, `${patch.id} playbook has a why line`);
     assert.doesNotMatch(why, /Relaunch against the named repo/);
     assert.match(why, new RegExp(patch.file.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
-    assert.match(
-      readFileSync(dest, "utf8"),
-      new RegExp(`patches --prove --job ${patch.id}`),
-    );
+    const body = readFileSync(dest, "utf8");
+    assert.match(body, new RegExp(`patches --prove --job ${patch.id}`));
+    assert.doesNotMatch(body, /Blocked: Yuri scoped this landing pad to Genesis only/);
     checked += 1;
   }
   assert.ok(checked >= 162, `expected catalog playbooks, got ${checked}`);
@@ -43,6 +42,8 @@ test("renderPlaybook includes collision and verify", () => {
   assert.match(md, /patches --prove --job dronehive-unicode-ci/);
   assert.match(md, /Collision/);
   assert.match(md, /Do not reopen/);
+  assert.match(job.notes, /Blocked: Yuri scoped this landing pad to Genesis only/);
+  assert.doesNotMatch(md, /Blocked: Yuri scoped this landing pad to Genesis only/);
 });
 
 test("writePlaybooks writes one file per job", () => {

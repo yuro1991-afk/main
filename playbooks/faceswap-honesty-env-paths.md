@@ -10,7 +10,6 @@
 ## Notes
 
 HONESTY.md pins G:\AI-Home\projects\multomoda-face-studio and G:\AI-Home\models\insightface. Gateway already uses FACESWAP_ENGINE / FACESWAP_IOS_PORT / FACESWAP_IOS_HOST. Catalog those env vars in README + HONESTY so Linux agents do not treat G: as required. Weights stay off git.
-Blocked: Yuri scoped this landing pad to Genesis only.
 
 ## Collision
 

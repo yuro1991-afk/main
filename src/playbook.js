@@ -1,7 +1,7 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { describeKind, jobScope } from "./kinds.js";
-import { firstCommands } from "./brief.js";
+import { displayNotes, firstCommands } from "./brief.js";
 import { relaunchFor } from "./handoff.js";
 
 /**
@@ -30,7 +30,7 @@ export function renderPlaybook(job) {
 
 ## Notes
 
-${job.notes}
+${displayNotes(job)}
 
 ## Collision
 
