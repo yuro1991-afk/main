@@ -6,16 +6,19 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-14T22:00Z**: 39 IDLE + this run RUNNING.
-No new agents. Fork `bc-84d93b47` still IDLE on
+Keep-busy tick **2026-09-14T22:15Z**: 40 IDLE + this run RUNNING.
+Newest idle is this run's hunter `bc-710c5477` — assign
+`bloom-grok-pwa-test-sync`. Do not inventory the pad again.
+Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
 (`cursor/python-arena-infra-dca0`). Do not steal head / ears / eyes /
 vision / bridge.
 **Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Pad probes stop.
 PR #3 merged; no real review comments (CodeRabbit skip, <10 stars).
-PR #9 catalog now 162 diffs (newest `bloom-grok-pwa-test-sync`).
-CI green on `07c0bf1`. Host-path leftover hunt is exhausted for `-U1`
-pins. This leftover is bloom test drift, not a host path.
+PR #9 catalog still 162 diffs (newest `bloom-grok-pwa-test-sync`).
+CI green on `0abc136`. Leftover hunt is exhausted for vanilla+stacked
+`git apply --check` (no `-U0`). Do not invent leftovers. Do not
+recatalog CHANNEL_META / wraps / sandwiched JSON.
 This Genesis-only tree still blocks GitHub cards — leftover `next` is the
 expired Origin claim `gub-superbrain-probe`. After #8, leftover unused
 review is `review-main-pr10`, then `review-landing-pad-prs`. First parked
@@ -164,10 +167,11 @@ then unused `dronehive-seed-work-order-core-lessons` (seed core_lessons only),
 then unused `dronehive-work-order-ai-smarts-packs` (work_order.json ai_smarts_packs only; -U1),
 then unused `dronehive-seed-work-order-ai-smarts-packs` (seed ai_smarts_packs only),
 then unused `bloom-grok-pwa-test-sync` (grok-pwa-plugin.test.mjs only).
-Newcomer `bc-f407303f`: `review-main-pr10` (fork's Python arena/infra).
+Newcomer `bc-710c5477` Hunt sibling: unused apply `bloom-grok-pwa-test-sync`.
+`bc-f407303f`: `review-main-pr10` (fork's Python arena/infra).
 `bc-5fe241dd` Summarize arena: do not steal `genesis-world-arena`; unused apply `faceswap-design-honesty`.
 `bc-e2df7f92` Summarize coordinator: unused apply `dronehive-script-host-roots`.
-Next unused apply if those are taken: `bloom-grok-pwa-test-sync`.
+Next unused apply if those are taken: `faceswap-start-sh`.
 After #8, leftover unused review is `review-main-pr10`, then `review-landing-pad-prs`.
 
 Idle agents on `yuro1991-afk/main`: do **not** inventory this pad again.
