@@ -1095,6 +1095,21 @@
       "collision": "README install block only. Different hunk from Requirements and honesty-env-paths footer. Do not rewrite START.cmd."
     },
     {
+      "id": "faceswap-readme-swift-honesty",
+      "title": "Mark README Swift IPA as Mac/Xcode only",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "kind": "implement",
+      "priority": 44,
+      "status": "blocked",
+      "claim": null,
+      "notes": "README Swift section still says the IPA is not produced on this Windows host. Applyable catalog patch is patches/faceswap-readme-swift-honesty.patch on main#9. Independent of requirements and install leftovers. This token cannot push face-swap-ios.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "README Swift section says the IPA is Mac/Xcode only.",
+      "files": [
+        "README.md"
+      ],
+      "collision": "README Swift paragraph only. Different hunk from Requirements, install, and honesty-env-paths footer. Do not vendor InsightFace weights."
+    },
+    {
       "id": "ova-pwsh-syntax-ci",
       "title": "Add PowerShell syntax CI for ollama-voice-access",
       "repo": "github.com/yuro1991-afk/ollama-voice-access",

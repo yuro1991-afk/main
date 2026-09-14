@@ -369,6 +369,15 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "drone/app/seed/configs/work_order.json fabric_root is . Independent of live configs/work_order.json leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "faceswap-readme-swift-honesty",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "file": "patches/faceswap-readme-swift-honesty.patch",
+      "base": "bba7188",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "README Swift section: IPA is Mac/Xcode only, not Windows/Linux/this pad. Independent of honesty-env-paths (footer), requirements, and install-sh hunks."
     }
   ]
 }
