@@ -604,6 +604,36 @@
       "collision": "Seed WORK_ORDER.md Library law line only. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-work-order-doc-fabric-root",
+      "title": "Point docs/WORK_ORDER.md header fabric at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 68,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/WORK_ORDER.md header fabric still pins G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b. Applyable catalog patch is patches/dronehive-work-order-doc-fabric-root.patch on main#9. Independent of work-order-doc-honesty (NEXT.json), work-order-doc-law-truth (Library law), and the JSON fabric-root leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/WORK_ORDER.md header fabric is `.`.",
+      "files": [
+        "docs/WORK_ORDER.md"
+      ],
+      "collision": "docs/WORK_ORDER.md header fabric line only. Seed copy is a later leftover. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-fabric-root",
+      "title": "Point seed WORK_ORDER.md header fabric at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 69,
+      "status": "blocked",
+      "claim": null,
+      "notes": "drone/app/seed/docs/WORK_ORDER.md header fabric still pins G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b. Applyable catalog patch is patches/dronehive-seed-work-order-doc-fabric-root.patch on main#9. Independent of live leftover (different file) and seed-work-order-doc-honesty (NEXT.json). Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "drone/app/seed/docs/WORK_ORDER.md header fabric is `.`.",
+      "files": [
+        "drone/app/seed/docs/WORK_ORDER.md"
+      ],
+      "collision": "Seed WORK_ORDER.md header fabric line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",
