@@ -151,6 +151,8 @@ function dronehiveRelaunchReason(jobId) {
       return "This token cannot push dronehive. Apply patches/dronehive-ubuntu-smoke.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
     case "dronehive-portable-paths":
       return "This token cannot push dronehive. Apply patches/dronehive-portable-paths.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-script-host-roots":
+      return "This token cannot push dronehive. Apply patches/dronehive-script-host-roots.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
     case "dronehive-rebase-packaging":
       return "This token cannot push dronehive. Rebase packaging stays blocked until dronehive#1 python-smoke is green. Do not copy PR #6 autofix.";
     default:

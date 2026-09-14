@@ -65,6 +65,23 @@
       "collision": "After unicode-ci; do not fight PR #2 packaging."
     },
     {
+      "id": "dronehive-script-host-roots",
+      "title": "Point dronehive scripts at repo root instead of G: AI-Home",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 23,
+      "status": "blocked",
+      "claim": null,
+      "notes": "scripts/bench_vs_helpers.py, smoke_delegate_wire.py, and stress_ai_bus_hive.py hardcode G:\\AI-Home\\projects\\ai-worker-drone-0.5b. Applyable catalog patch is patches/dronehive-script-host-roots.patch on main#9. Independent of portable-paths (ROOT via __file__). Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "python3 -m py_compile scripts/bench_vs_helpers.py scripts/smoke_delegate_wire.py scripts/stress_ai_bus_hive.py && python3 -c \"from pathlib import Path; import ast; ast.parse(Path('scripts/bench_vs_helpers.py').read_text())\"",
+      "files": [
+        "scripts/bench_vs_helpers.py",
+        "scripts/smoke_delegate_wire.py",
+        "scripts/stress_ai_bus_hive.py"
+      ],
+      "collision": "Do not edit drone/pro/tool_agent.py. Independent of portable-paths."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",
@@ -809,6 +826,21 @@
         "gateway.py"
       ],
       "collision": "Docs/env only. Do not vendor InsightFace weights. Same path-leak theme as dronehive-portable-paths but different repo."
+    },
+    {
+      "id": "faceswap-start-sh",
+      "title": "Add a Linux START.sh that fail-closes like START.cmd",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "kind": "implement",
+      "priority": 24,
+      "status": "blocked",
+      "claim": null,
+      "notes": "START.cmd is Windows-only. Add START.sh that honors FACESWAP_ENGINE and exits 1 when the engine health check fails. Applyable catalog patch is patches/faceswap-start-sh.patch on main#9. New file; stacks with honesty-env-paths and health-offline. This token cannot push face-swap-ios.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "FACESWAP_ENGINE=http://127.0.0.1:9 ./START.sh exits 1 and prints RED.",
+      "files": [
+        "START.sh"
+      ],
+      "collision": "New file only. Do not vendor InsightFace weights. Do not change POST /api/ios/swap."
     },
     {
       "id": "ova-pwsh-syntax-ci",

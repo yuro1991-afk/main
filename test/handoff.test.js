@@ -36,6 +36,8 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
   const paths = relaunchFor({ ...job, id: "dronehive-portable-paths" });
   assert.match(paths.reason, /dronehive-portable-paths\.patch/);
   assert.doesNotMatch(paths.reason, /npm run autofix/);
+  const scripts = relaunchFor({ ...job, id: "dronehive-script-host-roots" });
+  assert.match(scripts.reason, /dronehive-script-host-roots\.patch/);
 });
 
 test("origin jobs relaunch to the Origin codebase", () => {

@@ -70,7 +70,9 @@
         "ova-stop-noui-guard",
         "ova-pester-qa-math",
         "dronehive-ubuntu-smoke",
-        "dronehive-portable-paths"
+        "dronehive-portable-paths",
+        "dronehive-script-host-roots",
+        "faceswap-start-sh"
       ]
     }
   ]

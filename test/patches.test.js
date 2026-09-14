@@ -41,7 +41,7 @@ test("repo index loads without duplicate ids and files exist", () => {
   const index = loadPatchIndex(defaultPatchesIndexPath(ROOT));
   assert.equal(index.contract, PATCH_CONTRACT.id);
   assert.equal(index.cannotPush, true);
-  assert.ok(index.patches.length >= 19);
+  assert.ok(index.patches.length >= 21);
   assertPatchFilesExist(index, ROOT);
   const ids = index.patches.map((row) => row.id);
   assert.equal(new Set(ids).size, ids.length);
@@ -54,6 +54,8 @@ test("repo index loads without duplicate ids and files exist", () => {
   assert.ok(ids.includes("faceswap-health-offline"));
   assert.ok(ids.includes("dronehive-ubuntu-smoke"));
   assert.ok(ids.includes("dronehive-portable-paths"));
+  assert.ok(ids.includes("dronehive-script-host-roots"));
+  assert.ok(ids.includes("faceswap-start-sh"));
 });
 
 test("text patches start with diff --git; icons are PNGs", () => {
@@ -147,7 +149,7 @@ test("cli patches lists the catalog", async () => {
   assert.equal(code, 0);
   const parsed = JSON.parse(chunks.join(""));
   assert.equal(parsed.command, "patches");
-  assert.ok(parsed.count >= 19);
+  assert.ok(parsed.count >= 21);
   assert.equal(parsed.cannotPush, true);
   assert.match(parsed.doNot, /autofix/);
 });

@@ -492,7 +492,7 @@ index 0000000..a8261bf
 +            return base.joinpath(*rest.split("/")) if rest else base
 +    return Path(raw)
 diff --git a/drone/knowledge_imprint.py b/drone/knowledge_imprint.py
-index 136b032..3f24f2b 100644
+index 136b032..cac9bc1 100644
 --- a/drone/knowledge_imprint.py
 +++ b/drone/knowledge_imprint.py
 @@ -16,6 +16,8 @@ false_green: 0 — only real paths / real bytes.
@@ -537,6 +537,15 @@ index 136b032..3f24f2b 100644
      "cache_rel": "data/hive/knowledge_cache",
      "progress_rel": "data/hive/school_progress",
      "library_outbox_rel": "data/hive/library_outbox",
+@@ -1134,7 +1136,7 @@ def write_knowledge_to_library(
+         path = outbox / f"knowledge_{int(time.time())}_{buzzer_id or 'x'}.json"
+         path.write_text(json.dumps(slim, indent=2), encoding="utf-8")
+     # also try F: mirror under GrokSelfLibrary if present
+-    f_mirror = Path(r"F:\GrokSelfLibrary\knowledge\indexes\drone_imprints.jsonl")
++    f_mirror = resolve_host_path(r"F:\GrokSelfLibrary\knowledge\indexes\drone_imprints.jsonl")
+     try:
+         f_mirror.parent.mkdir(parents=True, exist_ok=True)
+         with f_mirror.open("a", encoding="utf-8") as f:
 diff --git a/drone/library_bridge.py b/drone/library_bridge.py
 index 13ab7a4..bfa033c 100644
 --- a/drone/library_bridge.py
