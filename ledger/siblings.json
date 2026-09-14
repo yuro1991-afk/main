@@ -82,7 +82,8 @@
         "bloom-ci-lint",
         "ova-voice-card-linux-honesty",
         "faceswap-ios-readme-honesty",
-        "dronehive-hive-docstring-honesty"
+        "dronehive-hive-docstring-honesty",
+        "dronehive-work-order-doc-honesty"
       ]
     }
   ]

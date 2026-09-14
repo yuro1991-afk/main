@@ -169,6 +169,21 @@
       "collision": "Docstring only. Independent of config-load-overlay. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-work-order-doc-honesty",
+      "title": "Point WORK_ORDER.md NEXT.json example at host/library",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 35,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/WORK_ORDER.md NEXT.json example still pins F:\\\\GrokSelfLibrary\\\\knowledge\\\\codex\\\\CODEX.min.json. Applyable catalog patch is patches/dronehive-work-order-doc-honesty.patch on main#9. Independent of hive-docstring-honesty. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/WORK_ORDER.md NEXT.json example codex_ref is host/library/knowledge/codex/CODEX.min.json.",
+      "files": [
+        "docs/WORK_ORDER.md"
+      ],
+      "collision": "Docs only. Different file from hive.py. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",

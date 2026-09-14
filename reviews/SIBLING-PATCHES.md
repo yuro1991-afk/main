@@ -1,4 +1,4 @@
-# Sibling patch catalog (verified 2026-09-14T19:58Z)
+# Sibling patch catalog (verified 2026-09-14T20:00Z)
 
 **Yuri: forget Origin.** This pad token cannot push the public GitHub
 siblings. These diffs apply clean (`git apply --check`) on current
@@ -39,13 +39,14 @@ This is **not** PR #6’s autofix runner. Do not copy `bin/autofix.js`.
 | `ova-voice-card-linux-honesty` | ollama-voice-access `074bad0` | `patches/ova-voice-card-linux-honesty.patch` | OK |
 | `faceswap-ios-readme-honesty` | face-swap-ios `bba7188` | `patches/faceswap-ios-readme-honesty.patch` | OK |
 | `dronehive-hive-docstring-honesty` | dronehive `d538a89` | `patches/dronehive-hive-docstring-honesty.patch` | OK |
+| `dronehive-work-order-doc-honesty` | dronehive `d538a89` | `patches/dronehive-work-order-doc-honesty.patch` | OK |
 
 ## After apply
 
 - bloom gitignore: also `git rm -r --cached .vercel/output` (58 tracked files). Keep `package-lock.json`.
 - face-swap icons: copies also live under `patches/faceswap-pwa-icons/` if `git apply --binary` is awkward.
 - opensussy 2.0.0: leave CHANGELOG `## 1.3.0` and `docs/superpowers/**` historical. `usb_zip_bytes` / `utc` stay until a real v2 USB zip exists.
-- dronehive: do not rebase dronehive#2 until #1 `python-smoke` is green. Ubuntu smoke, portable-paths, script-host-roots, runtime-host-paths, config-load-overlay, icons-manifest-relative, app-links-host-paths, and hive-docstring-honesty stack on the unicode patch. Apply `dronehive-runtime-host-paths`, `dronehive-config-load-overlay`, and `dronehive-app-links-host-paths` **after** portable-paths (they are independent of each other). `dronehive-icons-manifest-relative` and `dronehive-hive-docstring-honesty` are independent of portable-paths. Do not edit `drone/pro/tool_agent.py` in the path patches.
+- dronehive: do not rebase dronehive#2 until #1 `python-smoke` is green. Ubuntu smoke, portable-paths, script-host-roots, runtime-host-paths, config-load-overlay, icons-manifest-relative, app-links-host-paths, hive-docstring-honesty, and work-order-doc-honesty stack on the unicode patch. Apply `dronehive-runtime-host-paths`, `dronehive-config-load-overlay`, and `dronehive-app-links-host-paths` **after** portable-paths (they are independent of each other). `dronehive-icons-manifest-relative`, `dronehive-hive-docstring-honesty`, and `dronehive-work-order-doc-honesty` are independent of portable-paths. Do not edit `drone/pro/tool_agent.py` in the path patches.
 - face-swap `START.sh`: fail-closed like `START.cmd`. New file; apply on vanilla `main`.
 - face-swap `DESIGN.md`: `FACESWAP_ENGINE` is the contract; G: is one host example.
 - OVA README: Voice Access / Start Menu / Win+Ctrl+S stay Windows-only. Linux `pwsh` is syntax/math CI, not a Voice Access install. Independent of `ova-api-host-override`.

@@ -3,7 +3,7 @@
   "cannotPush": true,
   "apply": "git clone https://github.com/<repo>.git work && cd work && git apply --check ../<file> && git apply ../<file>",
   "doNot": "Do not copy PR #6 npm run autofix. This catalog lists diffs only.",
-  "verifiedAt": "2026-09-14T19:58:00Z",
+  "verifiedAt": "2026-09-14T20:00:00Z",
   "patches": [
     {
       "id": "dronehive-unicode-ci",
@@ -288,6 +288,15 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "drone/hive.py module docstring: F:\\\\GrokSelfLibrary is one host example. Independent of config-load-overlay (import/_load_cfg hunks only). Does not need portable-paths. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-honesty",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-doc-honesty.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/WORK_ORDER.md NEXT.json example codex_ref uses host/library, not F:\\\\GrokSelfLibrary. Independent of hive-docstring-honesty and config-load-overlay. Does not touch tool_agent.py."
     }
   ]
 }
