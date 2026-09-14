@@ -32,3 +32,8 @@ export {
   probeLane,
 } from "./probe.js";
 export { ROUTES, destinationForKind, routeIntent } from "./routing.js";
+export {
+  INVENTORY_CONTRACT,
+  defaultInventoryPath,
+  writeInventoryTick,
+} from "./tick.js";

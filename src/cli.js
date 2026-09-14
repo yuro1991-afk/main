@@ -14,6 +14,7 @@ import {
 } from "./ledger.js";
 import { probeKnownLanes } from "./probe.js";
 import { routeIntent } from "./routing.js";
+import { defaultInventoryPath, writeInventoryTick } from "./tick.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -111,6 +112,15 @@ export async function runCli(argv, options = {}) {
       write(JSON.stringify(routeIntent(intent), null, 2));
       return 0;
     }
+    case "tick": {
+      const ledger = loadLedger(ledgerPath);
+      const destPath = flags.out
+        ? resolve(flags.out)
+        : defaultInventoryPath(options.root ?? ROOT);
+      const snapshot = writeInventoryTick(ledger, destPath, nowMs);
+      write(JSON.stringify(snapshot, null, 2));
+      return 0;
+    }
     case "help":
     case "--help":
     case "-h": {
@@ -151,6 +161,7 @@ Commands:
   status
   probe
   route <intent>
+  tick [--out path]
 
 Do not reopen GitHub PR #1. Genesis lives on Cursor Origin.`;
 }
