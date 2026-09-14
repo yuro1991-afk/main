@@ -33,10 +33,10 @@ test("empty prompt refuses a fifth queue", () => {
   const packet = buildPrompt(null);
   assert.equal(packet.contract, PROMPT_CONTRACT);
   assert.equal(packet.url, ORIGIN_UI);
-  assert.match(packet.text, /Do not open another landing-pad queue/);
+  assert.match(packet.text, /Do not invent Origin work/);
 });
 
-test("cli prompt defaults to next Genesis card as markdown", async () => {
+test("cli prompt defaults to leftover GitHub card as markdown", async () => {
   const chunks = [];
   const code = await runCli(["prompt"], {
     nowMs: NOW,
@@ -46,12 +46,12 @@ test("cli prompt defaults to next Genesis card as markdown", async () => {
   });
   assert.equal(code, 0);
   const text = chunks.join("");
-  assert.match(text, /gub-route-intent/);
-  assert.match(text, /Origin launch/);
-  assert.doesNotMatch(text, /dronehive-unicode-ci/);
+  assert.match(text, /review-landing-pad-prs/);
+  assert.match(text, /GitHub launch/);
+  assert.doesNotMatch(text, /gub-route-intent/);
 });
 
-test("cli prompt --agent prints the roster Origin card, not leftover next", async () => {
+test("cli prompt --agent prints the roster GitHub card, not leftover next", async () => {
   const parked = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)))
     .assignments[0];
   const chunks = [];
@@ -63,8 +63,8 @@ test("cli prompt --agent prints the roster Origin card, not leftover next", asyn
   });
   assert.equal(code, 0);
   const text = chunks.join("");
-  assert.match(text, new RegExp(`Origin launch — ${parked.jobId}`));
-  assert.doesNotMatch(text, /gub-inventory-tick/);
+  assert.match(text, new RegExp(`GitHub launch — ${parked.jobId}`));
+  assert.doesNotMatch(text, /review-landing-pad-prs/);
 });
 
 test("cli prompt --json wraps the text", async () => {
@@ -78,6 +78,6 @@ test("cli prompt --json wraps the text", async () => {
   assert.equal(code, 0);
   const packet = JSON.parse(chunks.join(""));
   assert.equal(packet.contract, PROMPT_CONTRACT);
-  assert.equal(packet.jobId, "gub-route-intent");
-  assert.match(packet.text, /POST \/v1\/route/);
+  assert.equal(packet.jobId, "review-landing-pad-prs");
+  assert.match(packet.text, /GitHub launch/);
 });

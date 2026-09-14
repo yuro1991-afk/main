@@ -18,10 +18,10 @@ export function packetPathFor(job) {
  */
 export function renderHandoffPacket(job) {
   const target = relaunchFor(job);
-  return `# Origin relaunch packet — ${job.id}
+  return `# GitHub relaunch packet — ${job.id}
 
-This landing-pad token cannot authenticate to Origin. Yuri scoped this
-pad to Genesis only. Do not implement here.
+Yuri: forget Origin. Take the named GitHub repo. This pad token cannot
+push siblings — clone, patch, and relaunch there.
 
 ## Job
 
@@ -53,7 +53,7 @@ ${job.verify}
 
 - Do not reopen https://github.com/yuro1991-afk/main/pull/1
 - Do not open another landing-pad queue
-- Do not work dronehive / opensussy / bloom / face-swap / ollama-voice
+- Do not invent Origin work
 `;
 }
 
@@ -103,7 +103,7 @@ export function buildHandoff(job, siblings) {
       "Do not reopen yuro1991-afk/main#1.",
       "Do not copy PR #6 autofix onto this ops board.",
       "Do not open a fifth landing-pad queue.",
-      "Do not work dronehive / opensussy / bloom from this pad.",
+      "Do not invent Origin work. Take the named GitHub sibling.",
     ],
   };
 }
@@ -120,7 +120,7 @@ export function buildRelaunch(job, siblings) {
       contract: RELAUNCH_CONTRACT,
       board: "reviews/NEXT.md",
       ...handoff,
-      action: "Add a Genesis card. Do not open another landing-pad queue.",
+      action: "Add a GitHub sibling card. Do not open another landing-pad queue.",
     };
   }
   const target = handoff.relaunch;
@@ -133,7 +133,7 @@ export function buildRelaunch(job, siblings) {
     relaunch: target,
     action:
       target.kind === "origin"
-        ? "Open https://cursor.com/codebase/yuri-afk/genesis with Origin login. Do not implement on this GitHub pad."
+        ? "Origin card (pass --origin). Prefer a GitHub sibling unless Yuri asks for Origin."
         : target.reason,
     doNot: handoff.doNot,
   };

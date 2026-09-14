@@ -8,6 +8,7 @@ export {
   describeKind,
   describeScope,
   isGenesisJob,
+  isGithubJob,
   isWorldPhaseJob,
   WORLD_PHASE_IDS,
   isJobKind,
@@ -135,6 +136,7 @@ export {
   readAgents,
   syncRoster,
   unusedGenesisCards,
+  unusedGithubCards,
   writeAgents,
 } from "./sync.js";
 export {

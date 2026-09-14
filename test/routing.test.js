@@ -27,29 +27,53 @@ function job(id, extras = {}) {
   };
 }
 
-test("keep-busy routes to Origin, not this pad", () => {
+test("keep-busy routes to GitHub siblings, not Origin", () => {
   const route = routeIntent("Keep my agents busy");
-  assert.match(route.destination, /yuri-afk\/genesis/);
-  assert.equal(route.kind, "origin-slice");
-  assert.match(route.notes, /Do not sit on this pad/);
+  assert.match(route.destination, /GitHub sibling/);
+  assert.equal(route.kind, "fix");
+  assert.match(route.notes, /Forget Origin/);
 });
 
-test("keep-busy with roster leftover picks the unused Origin card", () => {
+test("keep-busy with roster leftover picks the unused GitHub card", () => {
   const ledger = {
     jobs: [
-      job("genesis-world-layer-102", { priority: 12 }),
-      job("gub-inventory-tick", { priority: 6 }),
+      {
+        id: "dronehive-unicode-ci",
+        title: "unicode",
+        repo: "github.com/yuro1991-afk/dronehive",
+        kind: "fix",
+        priority: 1,
+        status: "open",
+        claim: null,
+        notes: "",
+        verify: "true",
+        files: [],
+        collision: "",
+      },
+      {
+        id: "bloom-readme-honest-export",
+        title: "readme",
+        repo: "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+        kind: "implement",
+        priority: 19,
+        status: "open",
+        claim: null,
+        notes: "",
+        verify: "true",
+        files: [],
+        collision: "",
+      },
     ],
   };
   const roster = {
-    assignments: [{ bcId: "bc-old", name: "Parked", jobId: "genesis-world-layer-102" }],
+    assignments: [{ bcId: "bc-old", name: "Parked", jobId: "dronehive-unicode-ci" }],
   };
   const leftover = leftoverForRoute({ ledger, roster, nowMs: NOW });
-  assert.deepEqual(leftover.map((item) => item.id), ["gub-inventory-tick"]);
+  assert.deepEqual(leftover.map((item) => item.id), ["bloom-readme-honest-export"]);
   const route = routeIntent("keep agents busy", { ledger, roster, nowMs: NOW });
-  assert.equal(route.jobId, "gub-inventory-tick");
-  assert.match(route.destination, /gub-inventory-tick/);
-  assert.equal(route.packet, "reviews/handoff-gub-inventory-tick.md");
+  assert.equal(route.jobId, "bloom-readme-honest-export");
+  assert.match(route.destination, /bloom-readme-honest-export/);
+  assert.equal(route.packet, "reviews/handoff-bloom-readme-honest-export.md");
 });
 
 test("catalog playbook intent scores onto the matching leftover card", () => {
@@ -85,17 +109,17 @@ test("keep-busy with --agent routes to the roster card, not leftover next", () =
     agentId: parked.bcId,
   });
   assert.equal(route.jobId, parked.jobId);
-  assert.notEqual(route.jobId, "gub-inventory-tick");
+  assert.notEqual(route.jobId, "review-landing-pad-prs");
   const leftover = routeIntent("keep agents busy", { ledger, roster, nowMs: NOW });
-  assert.equal(leftover.jobId, "gub-route-intent");
+  assert.equal(leftover.jobId, "review-landing-pad-prs");
 });
 
-test("seeded queue leftover after the real roster is gub-route-intent", () => {
+test("seeded queue leftover after the real roster is review-landing-pad-prs", () => {
   const ledger = loadLedger(join(ROOT, "ledger", "queue.json"));
   const roster = loadRoster(join(ROOT, "ledger", "roster.json"));
   const entries = loadEntries(defaultEntriesPath(ROOT));
   const route = routeIntent("Keep my agents busy", { ledger, roster, entries, nowMs: NOW });
-  assert.equal(route.jobId, "gub-route-intent");
+  assert.equal(route.jobId, "review-landing-pad-prs");
 });
 
 test("genesis routes to Origin, not GitHub PR 1", () => {

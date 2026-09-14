@@ -75,8 +75,8 @@ test("cli next exits 1 when empty", async () => {
 test("cli route and probe", async () => {
   const routed = await capture(["route", "keep", "agents", "busy"]);
   assert.equal(routed.code, 0);
-  assert.match(routed.out, /gub-route-intent/);
-  assert.match(routed.out, /yuri-afk\/genesis/);
+  assert.match(routed.out, /review-landing-pad-prs/);
+  assert.match(routed.out, /yuro1991-afk\/main/);
   const parked = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)))
     .assignments[0];
   const mine = await capture(["route", "keep", "agents", "busy", "--agent", parked.bcId]);
@@ -93,40 +93,39 @@ test("cli route and probe", async () => {
 
 test("cli next --here stays on this repo", async () => {
   const result = await capture(["next", "--here"]);
-  assert.equal(result.code, 1);
-  assert.equal(result.out.trim(), "null");
+  assert.equal(result.code, 0);
+  assert.match(result.out, /review-landing-pad-prs/);
 });
 
-test("cli next defaults to the first Genesis card", async () => {
+test("cli next defaults to leftover GitHub card", async () => {
   const result = await capture(["next"]);
   assert.equal(result.code, 0);
-  assert.match(result.out, /gub-route-intent/);
-  assert.match(result.out, /handoff-gub-route-intent/);
-  assert.match(result.out, /yuri-afk\/genesis/);
-  assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
+  assert.match(result.out, /review-landing-pad-prs/);
+  assert.match(result.out, /handoff-review-landing-pad-prs/);
+  assert.match(result.out, /yuro1991-afk\/main/);
+  assert.doesNotMatch(result.out, /gub-route-intent/);
 });
 
-test("cli next --world is empty when every world card is rostered", async () => {
+test("cli next --world is leftover Origin world after GitHub remapping", async () => {
   const result = await capture(["next", "--world"]);
-  assert.equal(result.code, 1);
-  assert.equal(result.out.trim(), "null");
+  assert.equal(result.code, 0);
+  assert.match(result.out, /genesis-world-layer-102/);
 });
 
-test("cli busy --world without agent does not peek a rostered world card", async () => {
+test("cli busy --world without agent peeks leftover Origin world", async () => {
   const out = join(mkdtempSync(join(tmpdir(), "agent-ops-busy-world-")), "last-dispatch.json");
   const result = await capture(["busy", "--world", "--out", out]);
-  assert.equal(result.code, 1);
-  assert.match(result.out, /"job": null/);
-  assert.doesNotMatch(result.out, /"jobId": "genesis-world-layer-102"/);
+  assert.equal(result.code, 0);
+  assert.match(result.out, /"jobId": "genesis-world-layer-102"/);
 });
 
-test("cli busy without agent peeks the next Genesis card", async () => {
+test("cli busy without agent peeks leftover GitHub card", async () => {
   const out = join(mkdtempSync(join(tmpdir(), "agent-ops-busy-cli-")), "last-dispatch.json");
   const result = await capture(["busy", "--out", out]);
   assert.equal(result.code, 0);
-  assert.match(result.out, /gub-route-intent/);
+  assert.match(result.out, /review-landing-pad-prs/);
   assert.match(result.out, /"reserved": false/);
-  assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
+  assert.doesNotMatch(result.out, /"jobId": "dronehive-unicode-ci"/);
 });
 
 test("unknown command is a usage error", async () => {

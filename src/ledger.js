@@ -3,6 +3,7 @@ import { dirname, join } from "node:path";
 import {
   assertNeverStatus,
   isGenesisJob,
+  isGithubJob,
   isJobKind,
   isJobStatus,
   isWorldPhaseJob,
@@ -109,7 +110,7 @@ export function effectiveStatus(job, nowMs) {
 
 /**
  * @param {Ledger} ledger
- * @param {{ status?: string, kind?: string, repo?: string, scope?: string, genesis?: boolean, world?: boolean }} [filters]
+ * @param {{ status?: string, kind?: string, repo?: string, scope?: string, genesis?: boolean, github?: boolean, world?: boolean }} [filters]
  * @param {number} [nowMs]
  */
 export function listJobs(ledger, filters = {}, nowMs = Date.now()) {
@@ -120,6 +121,7 @@ export function listJobs(ledger, filters = {}, nowMs = Date.now()) {
     if (filters.repo && job.repo !== filters.repo) return false;
     if (filters.scope && jobScope(job) !== filters.scope) return false;
     if (filters.genesis === true && !isGenesisJob(job)) return false;
+    if (filters.github === true && !isGithubJob(job)) return false;
     if (filters.world === true && !isWorldPhaseJob(job)) return false;
     return true;
   });

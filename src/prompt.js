@@ -1,18 +1,19 @@
 import { firstCommands } from "./brief.js";
+import { isGenesisJob } from "./kinds.js";
 import { packetPathFor, relaunchFor } from "./handoff.js";
 
 export const PROMPT_CONTRACT = "agent-ops.prompt.v1";
 export const ORIGIN_UI = "https://cursor.com/codebase/yuri-afk/genesis";
 
 /**
- * Paste-ready brief for spinning an Origin cloud agent.
+ * Paste-ready brief for a GitHub sibling (default) or Origin card.
  * @param {import("./ledger.js").Job | null} job
  */
 export function renderLaunchPrompt(job) {
   if (!job) {
-    return `# No open Genesis card
+    return `# No open GitHub card
 
-Do not open another landing-pad queue on yuro1991-afk/main.
+Review an existing PR. Do not invent Origin work.
 Do not reopen https://github.com/yuro1991-afk/main/pull/1.
 `;
   }
@@ -20,9 +21,14 @@ Do not reopen https://github.com/yuro1991-afk/main/pull/1.
   const commands = firstCommands(job)
     .map((line) => `- ${line}`)
     .join("\n");
-  return `# Origin launch — ${job.id}
+  const origin = isGenesisJob(job);
+  const heading = origin ? `# Origin launch — ${job.id}` : `# GitHub launch — ${job.id}`;
+  const where = origin
+    ? "Work on Cursor Origin only if `--origin` was requested."
+    : "Work on the named GitHub repo. Forget Origin.";
+  return `${heading}
 
-Work on Cursor Origin. This GitHub repo is the ops pad only.
+${where}
 
 - UI: ${target.url}
 - Git: \`${job.repo}\`
@@ -47,10 +53,9 @@ ${commands}
 ## Do not
 
 - Do not reopen https://github.com/yuro1991-afk/main/pull/1
-- Do not work dronehive / opensussy / bloom / face-swap / ollama-voice
 - Do not open another landing-pad queue
 - Do not mark Superbrain LIVE without a successful probe
-- This pad token cannot push Origin — implement there
+- This pad token cannot push sibling GitHub repos — relaunch there or apply a verified patch
 `;
 }
 

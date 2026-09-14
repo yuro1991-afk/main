@@ -72,7 +72,7 @@ export function planHelpers(job) {
         {
           role: "relaunch",
           title: `Relaunch ${job.id} on Origin`,
-          prompt: `Run origin auth status. If logged out: origin auth login --api-key "$CURSOR_API_KEY" then origin repo clone yuri-afk/genesis. Or open https://cursor.com/codebase/yuri-afk/genesis. Read reviews/handoff-${job.id}.md and playbooks/${job.id}.md. Implement the slice there. The handoff packet already exists — do not rewrite it. Do not work dronehive / opensussy / bloom.`,
+          prompt: `Run origin auth status. If logged out: origin auth login --api-key "$CURSOR_API_KEY" then origin repo clone yuri-afk/genesis. Or open https://cursor.com/codebase/yuri-afk/genesis. Read reviews/handoff-${job.id}.md and playbooks/${job.id}.md. Implement the slice there. Pass --origin only when Yuri asks.`,
         },
         {
           role: "reserve",

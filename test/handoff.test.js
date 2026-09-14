@@ -106,7 +106,7 @@ test("relaunch packet points at Origin and the handoff file", () => {
   assert.equal(packet.contract, "agent-ops.relaunch.v1");
   assert.equal(packetPathFor(job), "reviews/handoff-gub-inventory-tick.md");
   assert.equal(packet.packet, "reviews/handoff-gub-inventory-tick.md");
-  assert.match(packet.action, /yuri-afk\/genesis/);
+  assert.match(packet.action, /Origin card/);
   assert.match(packet.relaunch.url, /yuri-afk\/genesis/);
 });
 
@@ -119,8 +119,8 @@ test("cli handoff defaults to next", async () => {
     },
   });
   assert.equal(code, 0);
-  assert.match(chunks.join(""), /gub-route-intent/);
-  assert.match(chunks.join(""), /yuri-afk\/genesis/);
+  assert.match(chunks.join(""), /review-landing-pad-prs/);
+  assert.match(chunks.join(""), /yuro1991-afk\/main/);
 });
 
 test("cli relaunch --agent peeks the roster Origin card", async () => {
@@ -139,7 +139,7 @@ test("cli relaunch --agent peeks the roster Origin card", async () => {
   assert.doesNotMatch(text, /gub-inventory-tick/);
 });
 
-test("cli relaunch defaults to next Genesis card", async () => {
+test("cli relaunch defaults to leftover GitHub card", async () => {
   const chunks = [];
   const code = await runCli(["relaunch"], {
     nowMs: NOW,
@@ -149,8 +149,8 @@ test("cli relaunch defaults to next Genesis card", async () => {
   });
   assert.equal(code, 0);
   const text = chunks.join("");
-  assert.match(text, /gub-route-intent/);
-  assert.match(text, /handoff-gub-route-intent/);
-  assert.match(text, /yuri-afk\/genesis/);
-  assert.doesNotMatch(text, /dronehive-unicode-ci/);
+  assert.match(text, /review-landing-pad-prs/);
+  assert.match(text, /handoff-review-landing-pad-prs/);
+  assert.match(text, /yuro1991-afk\/main/);
+  assert.doesNotMatch(text, /gub-route-intent/);
 });
