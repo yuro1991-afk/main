@@ -131,6 +131,44 @@ test("cli busy without agent peeks the next Genesis card", async () => {
   assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
 });
 
+test("cli busy --job peeks the named catalog card", async () => {
+  const out = join(mkdtempSync(join(tmpdir(), "agent-ops-busy-job-")), "last-dispatch.json");
+  const result = await capture(["busy", "--job", "dronehive-unicode-ci", "--out", out]);
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.jobId, "dronehive-unicode-ci");
+  assert.equal(parsed.reserved, false);
+  assert.ok(parsed.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.notEqual(parsed.jobId, "gub-route-intent");
+});
+
+test("cli busy --job with --agent does not claim a blocked catalog card", async () => {
+  const out = join(mkdtempSync(join(tmpdir(), "agent-ops-busy-job-agent-")), "last-dispatch.json");
+  const before = JSON.parse(
+    readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"),
+  );
+  const result = await capture([
+    "busy",
+    "--job",
+    "dronehive-unicode-ci",
+    "--agent",
+    "bc-test-busy-job",
+    "--out",
+    out,
+  ]);
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.jobId, "dronehive-unicode-ci");
+  assert.equal(parsed.reserved, false);
+  const after = JSON.parse(
+    readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"),
+  );
+  const job = after.jobs.find((item) => item.id === "dronehive-unicode-ci");
+  const prior = before.jobs.find((item) => item.id === "dronehive-unicode-ci");
+  assert.equal(job.status, prior.status);
+  assert.deepEqual(job.claim, prior.claim);
+});
+
 test("cli list --all drops the Genesis-only blocked line on catalog cards", async () => {
   const result = await capture(["list", "--all"]);
   assert.equal(result.code, 0);

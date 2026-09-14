@@ -367,14 +367,20 @@ export async function runCli(argv, options = {}) {
       const roster = readRosterSafe(
         flags.roster ? resolve(flags.roster) : defaultRosterPath(options.root ?? ROOT),
       );
-      const job = agentId
-        ? claimBusyJob(ledger, agentId, filters, nowMs, roster)
-        : peekBusyJob(ledger, undefined, filters, nowMs, roster);
-      if (agentId) {
+      const explicitId =
+        positionals[0] || (flags.job && flags.job !== "true" ? flags.job : "");
+      const job = explicitId
+        ? resolveJob(ledger, positionals, flags, nowMs, options)
+        : agentId
+          ? claimBusyJob(ledger, agentId, filters, nowMs, roster)
+          : peekBusyJob(ledger, undefined, filters, nowMs, roster);
+      if (agentId && !explicitId) {
         saveLedger(ledgerPath, ledger);
       }
       const slots = listSlots(ledger, filters, nowMs);
-      const snapshot = buildBusy(job, siblings, slots, { reserved: Boolean(agentId && job) });
+      const snapshot = buildBusy(job, siblings, slots, {
+        reserved: Boolean(agentId && job && !explicitId),
+      });
       const destPath = flags.out
         ? resolve(flags.out)
         : defaultDispatchPath(options.root ?? ROOT);
@@ -533,7 +539,7 @@ Commands:
   assign [--out dir]
   sync --agents path.json [--write] [--out dir]
   catalog [--entries path.json] [--write] [--out path]
-  busy [--agent <bcId>] [--here] [--all] [--world]   # roster card first, then leftover next
+  busy [id] [--job id] [--agent <bcId>] [--here] [--all] [--world]   # --job peeks; else roster then leftover next
   helpers [id] [--job id] [--agent <bcId>]
   prompt [id] [--job id] [--agent <bcId>] [--json]
   brief [id] [--job id] [--agent <bcId>]
