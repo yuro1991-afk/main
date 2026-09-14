@@ -6,14 +6,14 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-14T21:50Z**: 39 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-14T21:45Z**: 39 IDLE + this run RUNNING.
 No new agents. Fork `bc-84d93b47` woke, shipped
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
 (`cursor/python-arena-infra-dca0`), now IDLE. Do not steal head / ears /
 eyes / vision / bridge.
 **Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Pad probes stop.
 PR #3 merged; no real review comments (CodeRabbit skip, <10 stars).
-PR #9 catalog now 150 diffs (newest `faceswap-honesty-located-paths`).
+PR #9 catalog now 154 diffs (newest `dronehive-future-seer-pythonpath`).
 This Genesis-only tree still blocks GitHub cards — leftover `next` is the
 expired Origin claim `gub-superbrain-probe`. After #8, leftover unused is
 `review-landing-pad-prs`. First parked apply: `dronehive-unicode-ci`.
@@ -148,11 +148,15 @@ then unused `dronehive-work-order-doc-board` (docs/WORK_ORDER.md Board only),
 then unused `dronehive-seed-work-order-doc-board` (seed WORK_ORDER.md Board only),
 then unused `opensussy-superpowers-lab-plan` (historical lab plan save-path only),
 then unused `opensussy-superpowers-lab-design` (historical lab design base codebase only),
-then unused `faceswap-honesty-located-paths` (HONESTY.md Located Path/Models only).
+then unused `faceswap-honesty-located-paths` (HONESTY.md Located Path/Models only),
+then unused `dronehive-work-order-registry-cli` (work_order.py CLI fallback only),
+then unused `dronehive-grok-handoff-clone-dest` (grok_handoff.py clone dest only),
+then unused `dronehive-multi-face-pythonpath` (multi_face.py PYTHONPATH only),
+then unused `dronehive-future-seer-pythonpath` (future_seer.py PYTHONPATH jane fallbacks only).
 Newcomer `bc-f407303f`: `review-main-pr10` (fork's Python arena/infra).
 `bc-5fe241dd` Summarize arena: do not steal `genesis-world-arena`; unused apply `faceswap-design-honesty`.
 `bc-e2df7f92` Summarize coordinator: unused apply `dronehive-script-host-roots`.
-Next unused apply if those are taken: `faceswap-honesty-located-paths`.
+Next unused apply if those are taken: `dronehive-future-seer-pythonpath`.
 After #8, leftover unused review is `review-main-pr10`, then `review-landing-pad-prs`.
 
 Idle agents on `yuro1991-afk/main`: do **not** inventory this pad again.

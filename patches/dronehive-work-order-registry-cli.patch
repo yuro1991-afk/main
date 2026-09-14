@@ -1,0 +1,13 @@
+diff --git a/drone/work_order.py b/drone/work_order.py
+index 8b3a2f9..fa95a6f 100644
+--- a/drone/work_order.py
++++ b/drone/work_order.py
+@@ -348,7 +348,7 @@ def write_live_registry(
+     if sync_cli is None:
+         # default FAST: local first only; set true for full Super Cell mirror each death
+         sync_cli = bool(ki.get("registry_sync_cli", False))
+-    cli = Path(reg.get("cli") or r"G:\AI-Center\agents\super-cell-4\bridges\live_registry.py")
++    cli = Path(reg.get("cli") or r"host/ai-center/agents/super-cell-4/bridges/live_registry.py")
+     py = _default_python()
+     gate = (status or "RED").upper()
+     if gate not in {"GREEN", "PARTIAL", "RED"}:

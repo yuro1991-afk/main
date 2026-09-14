@@ -213,7 +213,11 @@
         "dronehive-seed-work-order-doc-board",
         "opensussy-superpowers-lab-plan",
         "opensussy-superpowers-lab-design",
-        "faceswap-honesty-located-paths"
+        "faceswap-honesty-located-paths",
+        "dronehive-work-order-registry-cli",
+        "dronehive-grok-handoff-clone-dest",
+        "dronehive-multi-face-pythonpath",
+        "dronehive-future-seer-pythonpath"
       ]
     }
   ]

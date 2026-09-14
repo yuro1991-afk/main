@@ -1894,6 +1894,66 @@
       "collision": "HONESTY.md Located Path/Models only. Different hunk from honesty-env-paths footer. Do not vendor InsightFace weights."
     },
     {
+      "id": "dronehive-work-order-registry-cli",
+      "title": "Point work_order live_registry CLI fallback at host/ai-center",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 154,
+      "status": "blocked",
+      "claim": null,
+      "notes": "work_order.py live_registry CLI fallback still pins G:\\\\AI-Center. Applyable catalog patch is patches/dronehive-work-order-registry-cli.patch on main#9. Independent of portable-paths query_codex wraps and JSON live-registry leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "work_order.py live_registry CLI fallback uses host/ai-center",
+      "files": [
+        "drone/work_order.py"
+      ],
+      "collision": "drone/work_order.py write_live_registry CLI fallback only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-grok-handoff-clone-dest",
+      "title": "Point grok_handoff clone dest defaults at host/ai-home",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 155,
+      "status": "blocked",
+      "claim": null,
+      "notes": "grok_handoff.py clone dest still pins G:\\\\AI-Home. Applyable catalog patch is patches/dronehive-grok-handoff-clone-dest.patch on main#9. Two dest assignments are one leftover. Independent of runtime-host-paths DEFAULT_ROOT wrap. Leave the G: goal regex. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "grok_handoff.py clone dest defaults use host/ai-home/projects/dronehive-clone-test",
+      "files": [
+        "drone/grok_handoff.py"
+      ],
+      "collision": "drone/grok_handoff.py clone dest defaults only. Leave the G: goal regex. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-multi-face-pythonpath",
+      "title": "Point multi_face PYTHONPATH fallbacks at host/ai-center",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 156,
+      "status": "blocked",
+      "claim": null,
+      "notes": "multi_face.py PYTHONPATH still pins G:\\\\AI-Center. Applyable catalog patch is patches/dronehive-multi-face-pythonpath.patch on main#9. Two sites are one leftover. Independent of config-load-overlay. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "multi_face.py PYTHONPATH fallbacks use host/ai-center",
+      "files": [
+        "drone/multi_face.py"
+      ],
+      "collision": "drone/multi_face.py PYTHONPATH assignments only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-future-seer-pythonpath",
+      "title": "Point future_seer PYTHONPATH jane fallbacks at host/ai-center",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 157,
+      "status": "blocked",
+      "claim": null,
+      "notes": "future_seer.py PYTHONPATH jane fallback still pins G:\\\\AI-Center. Applyable catalog patch is patches/dronehive-future-seer-pythonpath.patch on main#9. Three sites are one leftover. Independent of jane JSON leftover and runtime outbox wrap. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "future_seer.py PYTHONPATH jane fallbacks use host/ai-center",
+      "files": [
+        "drone/future_seer.py"
+      ],
+      "collision": "drone/future_seer.py PYTHONPATH jane fallbacks only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",
