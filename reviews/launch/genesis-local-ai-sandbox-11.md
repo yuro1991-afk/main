@@ -34,7 +34,9 @@ Port :8788 is also auto-runner #41 and python-bridge #57. :8787 is inventory. Do
 
 ## First moves
 
-- Attach to origin.cursor.com/git/yuri-afk/genesis — not this GitHub repo.
+- origin auth status
+- If logged out: origin auth login --api-key "$CURSOR_API_KEY" (browser login is not available on this pad)
+- origin repo clone yuri-afk/genesis genesis && cd genesis
 - Do not reopen yuro1991-afk/main#1.
 - cd packages/sandbox && pytest && genesis-sandbox serve. Stub provider; no LIVE without a probe.
 

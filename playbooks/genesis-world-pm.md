@@ -17,7 +17,9 @@ Do not steal :8793 halls, unifier :8792, task hub :8788, agent manager :8789, or
 
 ## First commands
 
-- Attach to origin.cursor.com/git/yuri-afk/genesis — not this GitHub repo.
+- origin auth status
+- If logged out: origin auth login --api-key "$CURSOR_API_KEY" (browser login is not available on this pad)
+- origin repo clone yuri-afk/genesis genesis && cd genesis
 - Do not reopen yuro1991-afk/main#1.
 - cd packages/world-project-manager && npm test && npm start. Probe Superbrain before LIVE. Never bind UDP 2419.
 

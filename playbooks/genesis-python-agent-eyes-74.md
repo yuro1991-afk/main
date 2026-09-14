@@ -17,7 +17,9 @@ Coordinate with genesis-python-vision-84 (vision chair). Do not claim Superbrain
 
 ## First commands
 
-- Attach to origin.cursor.com/git/yuri-afk/genesis — not this GitHub repo.
+- origin auth status
+- If logged out: origin auth login --api-key "$CURSOR_API_KEY" (browser login is not available on this pad)
+- origin repo clone yuri-afk/genesis genesis && cd genesis
 - Do not reopen yuro1991-afk/main#1.
 - pip install -e ".[dev]" && pytest && python -m genesis_eyes list. Heuristic vision stays local; no LIVE without a probe.
 

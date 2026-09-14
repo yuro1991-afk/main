@@ -15,6 +15,7 @@ import {
   summarize,
 } from "./ledger.js";
 import { defaultSuperbrainPath, probeKnownLanes, writeLaneProbe } from "./probe.js";
+import { defaultOriginPath, loginOriginAuth, probeOriginAuth, writeOriginProbe } from "./origin.js";
 import { routeIntent } from "./routing.js";
 import { defaultInventoryPath, writeInventoryTick } from "./tick.js";
 import { buildBrief } from "./brief.js";
@@ -128,12 +129,39 @@ export async function runCli(argv, options = {}) {
         timeoutMs: flags.timeout ? Number(flags.timeout) : undefined,
         nowMs,
       });
+      report.origin = await probeOriginAuth({
+        nowMs,
+        execImpl: options.originExecImpl,
+      });
       const destPath = flags.out
         ? resolve(flags.out)
         : defaultSuperbrainPath(options.root ?? ROOT);
       writeLaneProbe(report, destPath);
+      writeOriginProbe(
+        report.origin,
+        flags.originOut ? resolve(flags.originOut) : defaultOriginPath(options.root ?? ROOT),
+      );
       write(JSON.stringify(report, null, 2));
       return 0;
+    }
+    case "origin": {
+      const destPath = flags.out
+        ? resolve(flags.out)
+        : defaultOriginPath(options.root ?? ROOT);
+      let report = await probeOriginAuth({
+        nowMs,
+        execImpl: options.originExecImpl,
+      });
+      if (flags.login === "true" && !report.loggedIn) {
+        report = await loginOriginAuth({
+          nowMs,
+          execImpl: options.originExecImpl,
+          apiKey: options.originApiKey ?? process.env.CURSOR_API_KEY,
+        });
+      }
+      writeOriginProbe(report, destPath);
+      write(JSON.stringify(report, null, 2));
+      return report.loggedIn ? 0 : 1;
     }
     case "route": {
       const intent = positionals.join(" ") || flags.intent || "";
@@ -346,7 +374,8 @@ Commands:
   block <id> --agent <bcId> --reason <text>
   release <id> --agent <bcId>
   status
-  probe
+  probe [--timeout ms]   Superbrain lanes + Origin CLI auth
+  origin [--login] [--out path]
   route <intent>
   tick [--out path]
   siblings

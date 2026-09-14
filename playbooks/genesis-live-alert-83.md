@@ -17,7 +17,9 @@ Coordinate with gub-superbrain-probe. Do not invent LIVE lanes.
 
 ## First commands
 
-- Attach to origin.cursor.com/git/yuri-afk/genesis — not this GitHub repo.
+- origin auth status
+- If logged out: origin auth login --api-key "$CURSOR_API_KEY" (browser login is not available on this pad)
+- origin repo clone yuri-afk/genesis genesis && cd genesis
 - Do not reopen yuro1991-afk/main#1.
 - Failed probes stay unreachable. Do not mark Superbrain LIVE.
 

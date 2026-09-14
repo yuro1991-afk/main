@@ -34,7 +34,9 @@ Do not fork python-agent-suit onto this card. Do not steal :8792/:8793/:8794.
 
 ## First moves
 
-- Attach to origin.cursor.com/git/yuri-afk/genesis — not this GitHub repo.
+- origin auth status
+- If logged out: origin auth login --api-key "$CURSOR_API_KEY" (browser login is not available on this pad)
+- origin repo clone yuri-afk/genesis genesis && cd genesis
 - Do not reopen yuro1991-afk/main#1.
 - Robotics plane lands on Origin. Coordinate with suit #58 / head #76. No GPU claim.
 

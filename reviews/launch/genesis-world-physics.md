@@ -34,7 +34,9 @@ World-host #87 does not run physics. Coordinate with layer #102 rigid/fluid tick
 
 ## First moves
 
-- Attach to origin.cursor.com/git/yuri-afk/genesis — not this GitHub repo.
+- origin auth status
+- If logged out: origin auth login --api-key "$CURSOR_API_KEY" (browser login is not available on this pad)
+- origin repo clone yuri-afk/genesis genesis && cd genesis
 - Do not reopen yuro1991-afk/main#1.
 - Slice lands on Origin only. CPU/local only; no GPU claim. GET /health stays live=dark until Superbrain probed.
 

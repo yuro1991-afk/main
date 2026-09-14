@@ -17,7 +17,9 @@ Coordinate with gub-inventory-tick. This pad is not the auto-runner.
 
 ## First commands
 
-- Attach to origin.cursor.com/git/yuri-afk/genesis — not this GitHub repo.
+- origin auth status
+- If logged out: origin auth login --api-key "$CURSOR_API_KEY" (browser login is not available on this pad)
+- origin repo clone yuri-afk/genesis genesis && cd genesis
 - Do not reopen yuro1991-afk/main#1.
 - Runner binds :8788/:8789 and does not steal :8787 from gub-inventory-tick / genesis#22.
 

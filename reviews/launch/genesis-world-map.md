@@ -34,7 +34,9 @@ Coordinate with world-generator, world-language #95, and world-canon #93.
 
 ## First moves
 
-- Attach to origin.cursor.com/git/yuri-afk/genesis — not this GitHub repo.
+- origin auth status
+- If logged out: origin auth login --api-key "$CURSOR_API_KEY" (browser login is not available on this pad)
+- origin repo clone yuri-afk/genesis genesis && cd genesis
 - Do not reopen yuro1991-afk/main#1.
 - Slice lands on Origin only. Do not rewrite world-canon roster or steal generator work.
 

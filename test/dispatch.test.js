@@ -171,6 +171,8 @@ test("cli assign writes paste-ready Origin launch files", async () => {
   const text = readFileSync(dest, "utf8");
   assert.match(text, /Genesis catalog handoff/);
   assert.match(text, /cursor\.com\/codebase\/yuri-afk\/genesis/);
+  assert.match(text, /origin auth status/);
+  assert.match(text, /repo clone yuri-afk\/genesis/);
   assert.doesNotMatch(text, /dronehive-unicode-ci/);
 });
 

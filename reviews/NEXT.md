@@ -14,8 +14,12 @@ Paste-ready Origin briefs for the 35 parked agents live in
 `reviews/launch/<jobId>.md`. Open yours, then relaunch Origin. Do not
 stay on this pad.
 
-This pad cannot move a cloud agent into Origin. Paste the packet at
-https://cursor.com/codebase/yuri-afk/genesis
+This pad has the Origin CLI (`/exec-daemon/tools/origin`) but is
+**not logged in**. `node src/cli.js origin` records that as `logged-out`,
+never a clone. `origin --login` only attempts login when `CURSOR_API_KEY`
+is set. To implement here: `origin auth login --api-key "$CURSOR_API_KEY"`
+then `origin repo clone yuri-afk/genesis genesis`. Otherwise paste the
+packet at https://cursor.com/codebase/yuri-afk/genesis
 
 **Peek without claiming:** `gub-inventory-tick` (GUB, not a world plane).  
 World peek: `node src/cli.js next --world` → `genesis-world-layer-102`  
@@ -60,8 +64,9 @@ Full table: `reviews/WORLD-PHASES.md` · backlog: `reviews/genesis-backlog.md`
 | Genesis repo location | `genesis-job-organizer-37` |
 
 `gub-superbrain-probe` stays claimed on this pad for the probe only.
-Pad probe **2026-09-14T17:50:30Z**: `:45001` health/live **timeout=unreachable**;
-GOOSE `:8791` fetch failed. Never LIVE. Origin still must implement that playbook.
+Pad probe **2026-09-14T17:57:58Z**: `:45001` health/live **timeout=unreachable**;
+GOOSE `:8791` fetch failed. Origin CLI **logged-out** (`CURSOR_API_KEY` missing).
+Never LIVE. Origin still must implement that playbook.
 
 Do not reopen [main#1](https://github.com/yuro1991-afk/main/pull/1).
 Do not work dronehive / opensussy / face-swap / ollama-voice / bloom.

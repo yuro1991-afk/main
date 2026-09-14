@@ -26,6 +26,9 @@ test("writePlaybooks writes one file per job", () => {
   assert.equal(written.length, open.length);
   const body = readFileSync(join(dir, "gub-inventory-tick.md"), "utf8");
   assert.match(body, /gub-inventory-tick/);
+  assert.match(body, /origin auth status/);
+  const world = readFileSync(join(dir, "genesis-world-layer-102.md"), "utf8");
+  assert.match(world, /origin auth status/);
 });
 
 test("cli playbooks --here writes into --out", async () => {

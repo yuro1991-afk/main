@@ -17,7 +17,9 @@ Coordinate with world-map and world-layer #102. Host #87 does not generate maps.
 
 ## First commands
 
-- Attach to origin.cursor.com/git/yuri-afk/genesis — not this GitHub repo.
+- origin auth status
+- If logged out: origin auth login --api-key "$CURSOR_API_KEY" (browser login is not available on this pad)
+- origin repo clone yuri-afk/genesis genesis && cd genesis
 - Do not reopen yuro1991-afk/main#1.
 - Generator stays on Origin. Do not occupy the village or merge unifier logs.
 

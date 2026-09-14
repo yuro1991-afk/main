@@ -40,6 +40,7 @@ test("origin-slice helpers relaunch to Genesis", () => {
   assert.ok(packet.helpers.some((helper) => helper.role === "relaunch"));
   assert.ok(packet.helpers.some((helper) => helper.role === "reserve"));
   assert.match(packet.helpers[0].prompt, /yuri-afk\/genesis/);
+  assert.match(packet.helpers[0].prompt, /origin auth status/);
 });
 
 test("cli helpers defaults to next Genesis card", async () => {

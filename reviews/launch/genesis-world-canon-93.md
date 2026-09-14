@@ -34,7 +34,9 @@ Canon is not a unifier shard. Coordinate halls :8793 and unifier :8792.
 
 ## First moves
 
-- Attach to origin.cursor.com/git/yuri-afk/genesis — not this GitHub repo.
+- origin auth status
+- If logged out: origin auth login --api-key "$CURSOR_API_KEY" (browser login is not available on this pad)
+- origin repo clone yuri-afk/genesis genesis && cd genesis
 - Do not reopen yuro1991-afk/main#1.
 - genesis-world-canon validate; /health reports claimedLive false.
 

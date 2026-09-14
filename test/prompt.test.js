@@ -22,6 +22,8 @@ test("renderLaunchPrompt is paste-ready Origin text", () => {
   assert.match(text, /Origin launch — gub-inventory-tick/);
   assert.match(text, /yuri-afk\/genesis/);
   assert.match(text, /handoff-gub-inventory-tick/);
+  assert.match(text, /origin auth status/);
+  assert.match(text, /repo clone yuri-afk\/genesis/);
   assert.doesNotMatch(text, /dronehive-unicode/);
 });
 

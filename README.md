@@ -31,6 +31,7 @@ node src/cli.js playbooks
 node src/cli.js siblings
 node src/cli.js claim <id> --agent "$CURSOR_AGENT_ID"
 node src/cli.js probe
+node src/cli.js origin [--login]
 node src/cli.js tick
 node src/cli.js route "keep my agents busy"
 ```
@@ -48,3 +49,4 @@ Probe before LIVE claims.
 - BOSS Superbrain `http://169.254.124.8:45001` (LANE-ETH-PEER)
 - GOOSE-PC Core `:8791` is **not** the BOSS peer
 - Failed probes are `unreachable`, never `live`
+- Origin CLI `/exec-daemon/tools/origin` is present; `node src/cli.js origin` stays **logged-out** until `origin --login` has `CURSOR_API_KEY`

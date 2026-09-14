@@ -17,7 +17,9 @@ Port :8794 is also world-canon #93, sentient #96, and sound #104. Coordinate; do
 
 ## First commands
 
-- Attach to origin.cursor.com/git/yuri-afk/genesis — not this GitHub repo.
+- origin auth status
+- If logged out: origin auth login --api-key "$CURSOR_API_KEY" (browser login is not available on this pad)
+- origin repo clone yuri-afk/genesis genesis && cd genesis
 - Do not reopen yuro1991-afk/main#1.
 - cd packages/python-world-host && pytest && genesis-world-host serve. GET /health stays live=dark. Never bind UDP 2419.
 

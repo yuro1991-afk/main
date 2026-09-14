@@ -17,7 +17,9 @@ Port :8790 is python-infra lattice. Do not steal :8787/:8788/:8789.
 
 ## First commands
 
-- Attach to origin.cursor.com/git/yuri-afk/genesis — not this GitHub repo.
+- origin auth status
+- If logged out: origin auth login --api-key "$CURSOR_API_KEY" (browser login is not available on this pad)
+- origin repo clone yuri-afk/genesis genesis && cd genesis
 - Do not reopen yuro1991-afk/main#1.
 - Lattice stays on Origin. Do not steal :8790 from python-infra without coordinating.
 

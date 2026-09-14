@@ -49,6 +49,17 @@ export {
   writeInventoryTick,
 } from "./tick.js";
 export { BRIEF_CONTRACT, buildBrief, firstCommands } from "./brief.js";
+export {
+  DEFAULT_ORIGIN_BIN,
+  ORIGIN_CONTRACT,
+  ORIGIN_REPO,
+  defaultOriginPath,
+  loginOriginAuth,
+  parseOriginAuthStatus,
+  probeOriginAuth,
+  resolveOriginBin,
+  writeOriginProbe,
+} from "./origin.js";
 export { ORIGIN_UI, PROMPT_CONTRACT, buildPrompt, renderLaunchPrompt } from "./prompt.js";
 export {
   HANDOFF_CONTRACT,

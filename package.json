@@ -17,6 +17,7 @@
     "helpers": "node src/cli.js helpers",
     "status": "node src/cli.js status",
     "probe": "node src/cli.js probe",
+    "origin": "node src/cli.js origin",
     "tick": "node src/cli.js tick",
     "brief": "node src/cli.js brief",
     "prompt": "node src/cli.js prompt",

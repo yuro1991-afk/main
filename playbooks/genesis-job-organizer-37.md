@@ -17,7 +17,9 @@ This pad agent-ops is not the Origin organizer. Do not bind UDP 2419. Do not clo
 
 ## First commands
 
-- Attach to origin.cursor.com/git/yuri-afk/genesis — not this GitHub repo.
+- origin auth status
+- If logged out: origin auth login --api-key "$CURSOR_API_KEY" (browser login is not available on this pad)
+- origin repo clone yuri-afk/genesis genesis && cd genesis
 - Do not reopen yuro1991-afk/main#1.
 - cd job-organizer && npm test && npm start. Bodies never ride UDP 2419.
 

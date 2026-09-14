@@ -26,7 +26,12 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
    Optionally `node src/cli.js tick` to write `.genesis/last-inventory.json`.
    `node src/cli.js playbooks` writes one markdown card per open **Genesis** job.
 3. If you skipped `busy`, `node src/cli.js claim <id> --agent <your-bcId>` before you start.
-4. Work on **Origin**. This cloud environment has no Origin auth — relaunch to https://cursor.com/codebase/yuri-afk/genesis.
+4. Work on **Origin**. This pad has `/exec-daemon/tools/origin` but is
+   **not logged in**. `node src/cli.js origin` (or `probe`) records that
+   in `.genesis/last-origin.json`. `node src/cli.js origin --login`
+   uses `CURSOR_API_KEY` when present and otherwise stays logged-out.
+   Then `origin repo clone yuri-afk/genesis genesis`. Until then,
+   relaunch to https://cursor.com/codebase/yuri-afk/genesis.
 
 ## Do not
 

@@ -34,7 +34,9 @@ Coordinate with world-PM :8793. Do not steal unifier :8792 or host :8794.
 
 ## First moves
 
-- Attach to origin.cursor.com/git/yuri-afk/genesis — not this GitHub repo.
+- origin auth status
+- If logged out: origin auth login --api-key "$CURSOR_API_KEY" (browser login is not available on this pad)
+- origin repo clone yuri-afk/genesis genesis && cd genesis
 - Do not reopen yuro1991-afk/main#1.
 - Arena stays on Origin. Probe Superbrain before LIVE. Never bind UDP 2419.
 
