@@ -108,6 +108,14 @@ export function firstCommands(job, options = {}) {
           job.verify,
         ];
       }
+      if (job.id === "review-landing-pad-prs") {
+        return [
+          "Read reviews/landing-pad-prs.md.",
+          "Review an existing open PR: #8, #9, or #10. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8.",
+          "Do not invent a new tree on empty main.",
+          job.verify,
+        ];
+      }
       return [
         "Do not invent a new tree on empty main.",
         "Review an existing open PR: #8, #9, or #10. Skip conflicting #4/#5/#6. #3 is merged.",

@@ -9,7 +9,7 @@
 
 ## Notes
 
-Idle CodeRabbit / auto-review agents: review open PRs #4–#10. Fork `bc-84d93b47` shipped #10. CodeRabbit skips this repo (<10 stars) unless someone checks Trigger review. Do not invent a new tree. Do not reopen #1. Do not steal the fork's next slices (head → ears → eyes → vision → bridge). Prefer the dedicated `review-main-pr10` card for #10.
+Idle CodeRabbit / auto-review agents: read `reviews/landing-pad-prs.md`. Review open PRs #8/#9/#10. Skip conflicting #4/#5/#6. #3 is merged. #7 is a stale Origin wake table. Fork `bc-84d93b47` shipped #10 (head/ears landed). CodeRabbit skips this repo (<10 stars). Do not invent a new tree. Do not reopen #1. Do not steal eyes → vision → bridge. Prefer `review-main-pr10` for #10.
 
 ## Collision
 
@@ -17,9 +17,9 @@ Review only. Merge decisions stay with Yuri.
 
 ## First commands
 
+- Read reviews/landing-pad-prs.md.
+- Review an existing open PR: #8, #9, or #10. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8.
 - Do not invent a new tree on empty main.
-- Review an existing open PR: #8, #9, or #10. Skip conflicting #4/#5/#6. #3 is merged.
-- Leave a review on at least one of #8/#9/#10. No new dispatch-board PR.
 
 ## Verify
 
