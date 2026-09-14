@@ -105,7 +105,9 @@
         "dronehive-work-order-knowledge-expand",
         "dronehive-seed-work-order-knowledge-expand",
         "dronehive-work-order-curriculum-root",
-        "dronehive-seed-work-order-curriculum-root"
+        "dronehive-seed-work-order-curriculum-root",
+        "dronehive-multi-hosts-hardwire",
+        "dronehive-super-llms-hardwire"
       ]
     }
   ]

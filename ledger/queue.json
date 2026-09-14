@@ -454,6 +454,36 @@
       "collision": "Seed curriculum_root / curriculum_json only. Different file from configs/work_order.json. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-multi-hosts-hardwire",
+      "title": "Point multi_hosts.json hardwire at repo data/",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 58,
+      "status": "blocked",
+      "claim": null,
+      "notes": "configs/multi_hosts.json super_mesh.hardwire still pins G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b. That is this repo; use data/super_mesh/HARDWIRE.json. Applyable catalog patch is patches/dronehive-multi-hosts-hardwire.patch on main#9. Independent of multi-hosts-exe-honesty (exe keys) and super-llms-hardwire (different file). Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "configs/multi_hosts.json super_mesh.hardwire is data/super_mesh/HARDWIRE.json.",
+      "files": [
+        "configs/multi_hosts.json"
+      ],
+      "collision": "configs/multi_hosts.json super_mesh.hardwire key only. Do not edit C:\\\\ AppData exe leftovers. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-super-llms-hardwire",
+      "title": "Point super_llms.json hardwire at repo data/",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 59,
+      "status": "blocked",
+      "claim": null,
+      "notes": "configs/super_llms.json super_mesh.hardwire still pins G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b. That is this repo; use data/super_mesh/HARDWIRE.json. Applyable catalog patch is patches/dronehive-super-llms-hardwire.patch on main#9. Independent of multi-hosts-hardwire (different file). Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "configs/super_llms.json super_mesh.hardwire is data/super_mesh/HARDWIRE.json.",
+      "files": [
+        "configs/super_llms.json"
+      ],
+      "collision": "configs/super_llms.json super_mesh.hardwire key only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",

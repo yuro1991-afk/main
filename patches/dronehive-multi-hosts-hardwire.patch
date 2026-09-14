@@ -1,0 +1,9 @@
+diff --git a/configs/multi_hosts.json b/configs/multi_hosts.json
+index 7eaaae7..6b98cf0 100644
+--- a/configs/multi_hosts.json
++++ b/configs/multi_hosts.json
+@@ -240,3 +240,3 @@
+     "enabled": true,
+-    "hardwire": "G:\\AI-Home\\projects\\ai-worker-drone-0.5b\\data\\super_mesh\\HARDWIRE.json",
++    "hardwire": "data/super_mesh/HARDWIRE.json",
+     "config": "configs/super_mesh.json",
