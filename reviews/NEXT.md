@@ -6,8 +6,8 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-14T22:15Z**: 40 IDLE + this run RUNNING.
-Newest idle is this run's hunter `bc-710c5477` — assign
+Keep-busy tick **2026-09-14T22:30Z**: 40 IDLE + this run RUNNING.
+No new agents. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Do not inventory the pad again.
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -16,12 +16,12 @@ vision / bridge.
 **Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Pad probes stop.
 PR #3 merged; no real review comments (CodeRabbit skip, <10 stars).
 PR #9 catalog still 162 diffs (newest `bloom-grok-pwa-test-sync`).
-CI green on `9a4ed4e`. Leftover hunt is exhausted for vanilla+stacked
+CI green on `e447f13`. Leftover hunt is exhausted for vanilla+stacked
 `git apply --check` (no `-U0`). Do not invent leftovers. Do not
 recatalog CHANNEL_META / wraps / sandwiched JSON.
-First-wave playbooks (`dronehive-unicode-ci` and 17 peers) now say
-`git apply` instead of `edit:`. `firstCommands` uses the catalog when
-a patch exists (fix/implement/catalog/probe).
+First-wave playbooks now say `git apply` (shipped this session).
+Value leftover is applying queued diffs on write checkouts, not mining
+new ones.
 This Genesis-only tree still blocks GitHub cards — leftover `next` is the
 expired Origin claim `gub-superbrain-probe`. After #8, leftover unused
 review is `review-main-pr10`, then `review-landing-pad-prs`. First parked
