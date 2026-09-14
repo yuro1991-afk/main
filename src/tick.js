@@ -1,5 +1,6 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { peekBusyJob } from "./dispatch.js";
 import { assertNeverStatus } from "./kinds.js";
 import { effectiveStatus, nextJob, summarize } from "./ledger.js";
 
@@ -19,7 +20,12 @@ export function defaultInventoryPath(repoRoot) {
  */
 export function writeInventoryTick(ledger, destPath, nowMs, extras = {}) {
   const counts = summarize(ledger, nowMs);
-  const next = nextJob(ledger, { genesis: true }, nowMs) ?? nextJob(ledger, {}, nowMs);
+  const roster = extras.roster?.assignments?.length ? extras.roster : null;
+  const leftover = roster
+    ? peekBusyJob(ledger, extras.agentId, { genesis: true }, nowMs, roster)
+    : null;
+  const next =
+    leftover ?? nextJob(ledger, { genesis: true }, nowMs) ?? nextJob(ledger, {}, nowMs);
   const worldNext = nextJob(ledger, { world: true }, nowMs);
   const origin = extras.origin ?? null;
   const snapshot = {

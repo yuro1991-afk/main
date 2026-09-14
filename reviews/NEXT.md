@@ -73,10 +73,11 @@ Do not invent `packages/world-*` on this pad. Those cards stay Origin-only
 and start from the PM planes list.
 
 `gub-superbrain-probe` stays claimed on this pad for the probe only.
-Pad probe **2026-09-14T18:30:13Z**: `:45001` health/live **timeout=unreachable**;
+Pad probe **2026-09-14T18:37:35Z**: `:45001` health/live **timeout=unreachable**;
 GOOSE `:8791` fetch failed. Origin CLI **logged-out** (`CURSOR_API_KEY` missing).
 Never LIVE. Origin still must implement that playbook.
-Keep-busy tick: 36 idle / 1 running. New fork
+Keep-busy tick: 36 idle / 1 running. `tick` nextId is leftover
+`gub-route-intent` (does not steal the fork's card). New fork
 `bc-84d93b47-d0e0-4d4c-bc55-94c546b5dca0` is rostered onto
 `gub-inventory-tick` (no lease). `busy --agent` claims the agent's
 roster Origin card first. World peek remains `genesis-world-layer-102`.

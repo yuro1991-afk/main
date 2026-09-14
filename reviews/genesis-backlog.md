@@ -6,7 +6,7 @@ https://cursor.com/codebase/yuri-afk/genesis only. This pad cannot auth.
 | id | Origin PR | Notion |
 | --- | --- | --- |
 | gub-superbrain-probe (claimed here) | — | [draft](https://app.notion.com/p/3db735da33f381a58f19ceffc771ecdd) |
-| gub-inventory-tick (**next**) | [#22](https://cursor.com/codebase/yuri-afk/genesis/pull/22) | [draft](https://app.notion.com/p/3db735da33f38109a568ed3d589253b6) + [GUB](https://app.notion.com/p/3db735da33f3819ba589fd969cefe4a3) |
+| gub-inventory-tick (rostered to fork) | [#22](https://cursor.com/codebase/yuri-afk/genesis/pull/22) | [draft](https://app.notion.com/p/3db735da33f38109a568ed3d589253b6) + [GUB](https://app.notion.com/p/3db735da33f3819ba589fd969cefe4a3) |
 | agent-routing-matrix | — | [page](https://app.notion.com/p/3db735da33f381679966e19d177079ce) |
 | catalog-notion-sync | — | [page](https://app.notion.com/p/3db735da33f381a1b427d391daa071c5) |
 | genesis-local-repo | — | [page](https://app.notion.com/p/3db735da33f38180b0d0f36f30fc5dbd) |
@@ -48,7 +48,7 @@ https://cursor.com/codebase/yuri-afk/genesis only. This pad cannot auth.
 | catalog-inventory-skills | — | [playbook](https://app.notion.com/p/3db735da33f381bb9bafca916c22169f) |
 | catalog-add-custom-entry | — | [playbook](https://app.notion.com/p/3db735da33f38189907ef132836d95bf) |
 | catalog-notion-skill-author | — | [playbook](https://app.notion.com/p/3db735da33f381c1a42ccf030628e7dc) |
-| gub-route-intent | — | [playbook](https://app.notion.com/p/3db735da33f3819db32ecfc122a40c70) |
+| gub-route-intent (**leftover next**) | — | [playbook](https://app.notion.com/p/3db735da33f3819db32ecfc122a40c70) |
 | gub-run-playbook | — | [playbook](https://app.notion.com/p/3db735da33f381edbc43e852d28dee37) |
 | catalog-inventory-mcp | — | [playbook](https://app.notion.com/p/3db735da33f381d9805fc1058440faf2) |
 | catalog-vercel-preview-debug | — | [playbook](https://app.notion.com/p/3db735da33f38144a8ade3f6b34e92a7) |

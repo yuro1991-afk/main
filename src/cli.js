@@ -216,10 +216,14 @@ export async function runCli(argv, options = {}) {
         ? resolve(flags.out)
         : defaultInventoryPath(options.root ?? ROOT);
       const agents = readAgents(defaultAgentsPath(options.root ?? ROOT));
+      const roster = readRosterSafe(
+        flags.roster ? resolve(flags.roster) : defaultRosterPath(options.root ?? ROOT),
+      );
       const snapshot = writeInventoryTick(ledger, destPath, nowMs, {
         origin: readOriginProbe(defaultOriginPath(options.root ?? ROOT)),
         idleCount: agents ? agents.filter((agent) => agent.status === "IDLE").length : undefined,
         runningCount: agents ? agents.filter((agent) => agent.status === "RUNNING").length : undefined,
+        roster,
       });
       write(JSON.stringify(snapshot, null, 2));
       return 0;

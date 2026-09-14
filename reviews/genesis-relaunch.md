@@ -11,7 +11,9 @@ node src/cli.js slots
 node src/cli.js helpers
 ```
 
-Peek `next` is `gub-inventory-tick` while the pad holds `gub-superbrain-probe`.
+Peek leftover unused `next` is `gub-route-intent`. `gub-inventory-tick`
+is rostered to the fork — do not steal it. The pad holds
+`gub-superbrain-probe` for the probe only.
 
 ## 1. gub-superbrain-probe (priority 3)
 

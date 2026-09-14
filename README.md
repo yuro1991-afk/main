@@ -44,7 +44,8 @@ paste-ready briefs under `reviews/launch/`. `busy --agent` claims
 **your roster card** first. Unassigned agents take leftover
 `gub-route-intent`. `busy --world --agent` still stays on
 world planes. `slots --world` lists the rest. Peek `next` (no `--agent`)
-is still `gub-inventory-tick` (GUB). Claim leases expire in 45 minutes.
+is leftover unused `gub-route-intent` — it does not steal the fork's
+`gub-inventory-tick`. Claim leases expire in 45 minutes.
 
 ## Lanes
 
