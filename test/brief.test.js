@@ -52,6 +52,8 @@ test("brief attaches sibling PR 5 to the unicode card", () => {
   assert.equal(brief.related[0].number, 5);
   assert.ok(brief.hardRules.some((rule) => rule.includes("no more Superbrain")));
   assert.ok(brief.hardRules.some((rule) => rule.includes("#8/#9/#10")));
+  assert.ok(brief.hardRules.some((rule) => rule.includes("forget Origin for this card")));
+  assert.ok(!brief.hardRules.some((rule) => rule.includes("sibling cards stay blocked")));
   assert.ok(!brief.hardRules.some((rule) => rule.includes("Extend PR #3")));
 });
 
@@ -128,6 +130,7 @@ test("cli brief defaults to next and siblings lists PRs", async () => {
   });
   assert.equal(code, 0);
   assert.match(chunks.join(""), /gub-route-intent/);
+  assert.match(chunks.join(""), /sibling cards stay blocked/);
   const listed = [];
   const siblingsCode = await runCli(["siblings"], {
     write: (value) => {

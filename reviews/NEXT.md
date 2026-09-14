@@ -24,6 +24,7 @@ on sibling `main` (no `-U0`). Repeat with
 Catalog leftover firstCommands now start with `--prove --job`.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
+Catalog `brief` hardRules say forget Origin — not “sibling cards stay blocked.”
 Leftover hunt is closed. Do not invent leftovers. Do not recatalog
 CHANNEL_META / wraps / sandwiched JSON.
 Sibling `main` SHAs still match catalog bases. Do not invent leftovers.

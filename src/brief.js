@@ -19,7 +19,7 @@ export function buildBrief(job, siblings, options = {}) {
     return {
       contract: BRIEF_CONTRACT,
       job: null,
-      hardRules: hardRules(),
+      hardRules: hardRules(null),
       message: "No open job. Add a card to ledger/queue.json instead of opening another board.",
     };
   }
@@ -38,7 +38,7 @@ export function buildBrief(job, siblings, options = {}) {
     destination: destinationForKind(job.kind),
     related,
     firstCommands: firstCommands(job, { root: options.root }),
-    hardRules: hardRules(),
+    hardRules: hardRules(job),
   };
 }
 
@@ -143,12 +143,24 @@ export function firstCommands(job, options = {}) {
   }
 }
 
-function hardRules() {
-  return [
+/**
+ * @param {import("./ledger.js").Job | null} [job]
+ */
+function hardRules(job) {
+  const shared = [
     "Do not reopen https://github.com/yuro1991-afk/main/pull/1.",
     "Do not open another landing-pad queue. Review #8/#9/#10 or apply a catalog patch.",
     "Do not copy packages/keep-busy from PR #4 onto this branch.",
-    "Yuri scoped this pad to Genesis only. Other sibling cards stay blocked until #8 merges.",
     "Yuri: no more Superbrain. Do not probe :45001 / :8791. Do not run node src/cli.js probe.",
+  ];
+  if (job && catalogPatchFor(job)) {
+    return [
+      ...shared,
+      "Yuri: forget Origin for this card. Apply the catalog patch. Do not invent a new leftover.",
+    ];
+  }
+  return [
+    ...shared,
+    "Yuri scoped this pad to Genesis only. Other sibling cards stay blocked until #8 merges.",
   ];
 }
