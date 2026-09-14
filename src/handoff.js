@@ -255,6 +255,18 @@ function dronehiveRelaunchReason(jobId) {
       return "This token cannot push dronehive. Apply patches/dronehive-work-order-doc-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
     case "dronehive-seed-work-order-doc-cd":
       return "This token cannot push dronehive. Apply patches/dronehive-seed-work-order-doc-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-spec-relative":
+      return "This token cannot push dronehive. Apply patches/dronehive-spec-relative.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-start-super-mesh-cd":
+      return "This token cannot push dronehive. Apply patches/dronehive-start-super-mesh-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-start-multi-model-pythonpath":
+      return "This token cannot push dronehive. Apply patches/dronehive-start-multi-model-pythonpath.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-start-seer-pythonpath":
+      return "This token cannot push dronehive. Apply patches/dronehive-start-seer-pythonpath.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-enable-bridge-fallback":
+      return "This token cannot push dronehive. Apply patches/dronehive-enable-bridge-fallback.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-truth-bind-paths":
+      return "This token cannot push dronehive. Apply patches/dronehive-truth-bind-paths.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
     case "dronehive-rebase-packaging":
       return "This token cannot push dronehive. Rebase packaging stays blocked until dronehive#1 python-smoke is green. Do not copy PR #6 autofix.";
     default:

@@ -41,7 +41,7 @@ test("repo index loads without duplicate ids and files exist", () => {
   const index = loadPatchIndex(defaultPatchesIndexPath(ROOT));
   assert.equal(index.contract, PATCH_CONTRACT.id);
   assert.equal(index.cannotPush, true);
-  assert.ok(index.patches.length >= 81);
+  assert.ok(index.patches.length >= 87);
   assertPatchFilesExist(index, ROOT);
   const ids = index.patches.map((row) => row.id);
   assert.equal(new Set(ids).size, ids.length);
@@ -116,6 +116,12 @@ test("repo index loads without duplicate ids and files exist", () => {
   assert.ok(ids.includes("dronehive-seed-work-order-doc-models"));
   assert.ok(ids.includes("dronehive-work-order-doc-cd"));
   assert.ok(ids.includes("dronehive-seed-work-order-doc-cd"));
+  assert.ok(ids.includes("dronehive-spec-relative"));
+  assert.ok(ids.includes("dronehive-start-super-mesh-cd"));
+  assert.ok(ids.includes("dronehive-start-multi-model-pythonpath"));
+  assert.ok(ids.includes("dronehive-start-seer-pythonpath"));
+  assert.ok(ids.includes("dronehive-enable-bridge-fallback"));
+  assert.ok(ids.includes("dronehive-truth-bind-paths"));
 });
 
 test("text patches start with diff --git; icons are PNGs", () => {
@@ -209,7 +215,7 @@ test("cli patches lists the catalog", async () => {
   assert.equal(code, 0);
   const parsed = JSON.parse(chunks.join(""));
   assert.equal(parsed.command, "patches");
-  assert.ok(parsed.count >= 81);
+  assert.ok(parsed.count >= 87);
   assert.equal(parsed.cannotPush, true);
   assert.match(parsed.doNot, /autofix/);
 });

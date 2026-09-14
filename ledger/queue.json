@@ -859,6 +859,96 @@
       "collision": "Seed WORK_ORDER.md section 8 cd line only. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-spec-relative",
+      "title": "Point DroneHive.spec at repo-relative desktop.py",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 85,
+      "status": "blocked",
+      "claim": null,
+      "notes": "DroneHive.spec Analysis still pins G:/AI-Home/projects/ai-worker-drone-0.5b. Applyable catalog patch is patches/dronehive-spec-relative.patch on main#9. Independent of portable-paths and start-script leftovers (different file). Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "DroneHive.spec Analysis uses drone/app/desktop.py and pathex '.'",
+      "files": [
+        "DroneHive.spec"
+      ],
+      "collision": "DroneHive.spec Analysis script/pathex only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-start-super-mesh-cd",
+      "title": "Point START_SUPER_MESH.bat cd at the script directory",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 86,
+      "status": "blocked",
+      "claim": null,
+      "notes": "START_SUPER_MESH.bat still cds to G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b. Applyable catalog patch is patches/dronehive-start-super-mesh-cd.patch on main#9. Independent of spec leftover and PYTHONPATH leftovers. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "START_SUPER_MESH.bat cds to %~dp0",
+      "files": [
+        "START_SUPER_MESH.bat"
+      ],
+      "collision": "START_SUPER_MESH.bat cd line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-start-multi-model-pythonpath",
+      "title": "Point START_MULTI_MODEL.bat PYTHONPATH at host/ai-center",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 87,
+      "status": "blocked",
+      "claim": null,
+      "notes": "START_MULTI_MODEL.bat PYTHONPATH still appends G:\\\\AI-Center. Applyable catalog patch is patches/dronehive-start-multi-model-pythonpath.patch on main#9. Independent of START_SEER leftover (different file). Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "START_MULTI_MODEL.bat PYTHONPATH uses %ROOT%\\\\host\\\\ai-center",
+      "files": [
+        "START_MULTI_MODEL.bat"
+      ],
+      "collision": "START_MULTI_MODEL.bat PYTHONPATH line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-start-seer-pythonpath",
+      "title": "Point START_SEER.bat PYTHONPATH at host/ai-center",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 88,
+      "status": "blocked",
+      "claim": null,
+      "notes": "START_SEER.bat PYTHONPATH still appends G:\\\\AI-Center. Applyable catalog patch is patches/dronehive-start-seer-pythonpath.patch on main#9. Independent of START_MULTI_MODEL leftover (different file). Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "START_SEER.bat PYTHONPATH uses %ROOT%\\\\host\\\\ai-center",
+      "files": [
+        "START_SEER.bat"
+      ],
+      "collision": "START_SEER.bat PYTHONPATH line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-enable-bridge-fallback",
+      "title": "Point Enable-Bridge1080 fallback root at the repo",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 89,
+      "status": "blocked",
+      "claim": null,
+      "notes": "scripts/Enable-Bridge1080-Admin.ps1 fallback still pins G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b. Applyable catalog patch is patches/dronehive-enable-bridge-fallback.patch on main#9. Independent of start-script leftovers. Leaves the double-parent probe. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "Enable-Bridge1080-Admin.ps1 fallback is Split-Path $PSScriptRoot -Parent",
+      "files": [
+        "scripts/Enable-Bridge1080-Admin.ps1"
+      ],
+      "collision": "scripts/Enable-Bridge1080-Admin.ps1 fallback line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-truth-bind-paths",
+      "title": "Point TRUTH_BIND.json host paths at repo overlays",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 90,
+      "status": "blocked",
+      "claim": null,
+      "notes": "TRUTH_BIND.json root/universal/oath_gate/agreement still pin G:\\\\AI-Home and F:\\\\GrokSelfLibrary. Applyable catalog patch is patches/dronehive-truth-bind-paths.patch on main#9. Independent of work_order JSON leftovers (different file). Leaves core_imprint F:/C: text and the C:\\\\ grok hardwire. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "TRUTH_BIND.json root is '.' and universal/oath_gate/agreement use host/library",
+      "files": [
+        "TRUTH_BIND.json"
+      ],
+      "collision": "TRUTH_BIND.json remappable keys only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",

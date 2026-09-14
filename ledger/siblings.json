@@ -132,7 +132,13 @@
         "dronehive-work-order-doc-models",
         "dronehive-seed-work-order-doc-models",
         "dronehive-work-order-doc-cd",
-        "dronehive-seed-work-order-doc-cd"
+        "dronehive-seed-work-order-doc-cd",
+        "dronehive-spec-relative",
+        "dronehive-start-super-mesh-cd",
+        "dronehive-start-multi-model-pythonpath",
+        "dronehive-start-seer-pythonpath",
+        "dronehive-enable-bridge-fallback",
+        "dronehive-truth-bind-paths"
       ]
     }
   ]

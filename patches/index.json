@@ -3,7 +3,7 @@
   "cannotPush": true,
   "apply": "git clone https://github.com/<repo>.git work && cd work && git apply --check ../<file> && git apply ../<file>",
   "doNot": "Do not copy PR #6 npm run autofix. This catalog lists diffs only.",
-  "verifiedAt": "2026-09-14T21:00:00Z",
+  "verifiedAt": "2026-09-14T21:10:00Z",
   "patches": [
     {
       "id": "dronehive-unicode-ci",
@@ -738,6 +738,60 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "drone/app/seed/docs/WORK_ORDER.md swarm entry cd uses repo-relative '.'. Independent of live leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-spec-relative",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-spec-relative.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "DroneHive.spec Analysis script/pathex use drone/app/desktop.py and '.' instead of G:/AI-Home. Independent of portable-paths and start-script leftovers (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-start-super-mesh-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-start-super-mesh-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "START_SUPER_MESH.bat cds to %~dp0 like the other start scripts, not G:\\\\AI-Home. Independent of spec leftover and PYTHONPATH leftovers (different files). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-start-multi-model-pythonpath",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-start-multi-model-pythonpath.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "START_MULTI_MODEL.bat PYTHONPATH uses %ROOT%\\\\host\\\\ai-center, not G:\\\\AI-Center. Independent of START_SEER leftover (different file) and super-mesh cd leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-start-seer-pythonpath",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-start-seer-pythonpath.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "START_SEER.bat PYTHONPATH uses %ROOT%\\\\host\\\\ai-center, not G:\\\\AI-Center. Independent of START_MULTI_MODEL leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-enable-bridge-fallback",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-enable-bridge-fallback.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "scripts/Enable-Bridge1080-Admin.ps1 fallback root is Split-Path $PSScriptRoot -Parent, not G:\\\\AI-Home. Independent of start-script leftovers (different file). Leaves the double-parent probe line. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-truth-bind-paths",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-truth-bind-paths.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "TRUTH_BIND.json root/universal/oath_gate/agreement use '.' and host/library. Independent of JSON work_order leftovers (different file). Leaves core_imprint F:/C: text and the C:\\\\ grok hardwire. Does not touch tool_agent.py."
     }
   ]
 }
