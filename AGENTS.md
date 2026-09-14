@@ -52,8 +52,9 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
 ## Sibling patches (GitHub)
 
 **Yuri: forget Origin** for these cards. `node src/cli.js patches` lists
-applyable diffs under `patches/`. This token **cannot push** those repos —
-clone and relaunch there. Do not copy PR #6’s autofix runner.
+applyable diffs under `patches/`. `patches --prove` re-checks them with
+`git apply --check` and resets the checkout. This token **cannot push**
+those repos — clone and relaunch there. Do not copy PR #6’s autofix runner.
 Evidence: `reviews/SIBLING-PATCHES.md`. Merge
 [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first defaults.
 

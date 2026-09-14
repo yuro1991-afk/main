@@ -1,6 +1,8 @@
 # Merge #8 then #9
 
-Catalog bases still match sibling `main` (2026-09-14T23:13Z):
+Catalog bases still match sibling `main` (re-proof 2026-09-14T23:16Z:
+162/162 vanilla + stacked `git apply --check`, no `-U0`). Leftover hunt
+is closed. Do not invent leftovers.
 
 | sibling | base |
 | --- | --- |
@@ -41,5 +43,6 @@ files (`reviews/main-pr10.md`, `reviews/landing-pad-prs.md`).
 ## After merge
 
 Leftover unused review is done locally. First parked apply:
-`dronehive-unicode-ci` on a dronehive write checkout. Fork leftover
-organs: eyes → vision → bridge.
+`dronehive-unicode-ci` on a dronehive write checkout. Repeat the catalog
+proof with `node src/cli.js patches --prove --siblings-root /tmp/siblings`.
+Fork leftover organs: eyes → vision → bridge.

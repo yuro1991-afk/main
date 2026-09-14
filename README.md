@@ -60,5 +60,7 @@ is leftover unused `gub-route-intent` — it does not steal the fork's
 **Yuri: forget Origin** for public GitHub siblings. `node src/cli.js patches`
 lists applyable diffs (DroneHive unicode, bloom ignore/README/CI, OpenSussy
 2.0.0 leftovers, face-swap icons/env, Ollama Voice syntax + loopback API).
-This pad token cannot push those repos. Do **not** copy PR #6’s autofix runner.
+`node src/cli.js patches --prove --siblings-root /tmp/siblings` re-checks
+vanilla+stacked `git apply --check` and resets the checkout. This pad token
+cannot push those repos. Do **not** copy PR #6’s autofix runner.
 See `reviews/SIBLING-PATCHES.md`.

@@ -18,10 +18,11 @@ route now refuse.
 **Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Pad probes stop.
 PR #3 merged; no real review comments (CodeRabbit skip, <10 stars).
 PR #9 catalog still 162 diffs (newest `bloom-grok-pwa-test-sync`).
-CI green on `722d3e5`. Leftover hunt is exhausted for vanilla+stacked
-`git apply --check` (no `-U0`). Do not invent leftovers. Do not
-recatalog CHANNEL_META / wraps / sandwiched JSON.
-Shipped this tick: recheck only. No new idle agents. Catalog still 162.
+Re-proof 2026-09-14T23:16Z: 162/162 vanilla + stacked `git apply --check`
+on sibling `main` (no `-U0`). Repeat with
+`node src/cli.js patches --prove --siblings-root /tmp/siblings`.
+Leftover hunt is closed. Do not invent leftovers. Do not recatalog
+CHANNEL_META / wraps / sandwiched JSON.
 Sibling `main` SHAs still match catalog bases. Do not invent leftovers.
 Do not steal eyes / vision / bridge. Do not copy #8's GitHub-first
 retarget onto #9. Merge #8 then #9 via `reviews/MERGE-8-9.md`.

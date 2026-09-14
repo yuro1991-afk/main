@@ -1,10 +1,16 @@
-# Sibling patch catalog (verified 2026-09-14T22:10Z)
+# Sibling patch catalog (verified 2026-09-14T23:16Z)
 
 **Yuri: forget Origin.** This pad token cannot push the public GitHub
 siblings. These diffs apply clean (`git apply --check`) on current
 `main` of each repo. List them with `node src/cli.js patches`.
 
 This is **not** PR #6’s autofix runner. Do not copy `bin/autofix.js`.
+
+Leftover hunt is **closed** (2026-09-14T23:16Z). Isolated F:/G:/D:
+source leftovers that apply vanilla **and** stacked without `-U0` are
+exhausted. Do not invent leftovers. Do not recatalog CHANNEL_META,
+`resolve_host_path` wraps, or sandwiched JSON keys. Value leftover is
+applying these diffs on a sibling write checkout.
 
 | job | sibling @ base | patch | apply-check |
 | --- | --- | --- | --- |
@@ -193,6 +199,7 @@ This is **not** PR #6’s autofix runner. Do not copy `bin/autofix.js`.
 ## Relaunch
 
 ```bash
+node src/cli.js patches --prove --siblings-root /tmp/siblings
 node src/cli.js patches --job "$JOB_ID"
 git clone "https://github.com/yuro1991-afk/<sibling>.git" work && cd work
 git apply --check /path/to/main/<patch>

@@ -1,3 +1,4 @@
+import { spawnSync } from "node:child_process";
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -5,13 +6,17 @@ import { fileURLToPath } from "node:url";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
+  DEFAULT_SIBLINGS_ROOT,
   PATCH_CONTRACT,
   assertPatchFilesExist,
   buildPatchCatalog,
   defaultPatchesIndexPath,
+  defaultSiblingsRoot,
   listPatches,
   loadPatchIndex,
   patchForJob,
+  provePatches,
+  resolveSiblingCheckout,
   validatePatchEntry,
 } from "../src/patches.js";
 import { runCli } from "../src/cli.js";
@@ -317,4 +322,238 @@ test("cli patches unknown job exits 1", async () => {
   });
   assert.equal(code, 1);
   assert.equal(JSON.parse(chunks.join("")).count, 0);
+});
+
+/**
+ * @param {string} cwd
+ * @param {string[]} args
+ */
+function gitOk(cwd, args) {
+  const result = spawnSync("git", args, { cwd, encoding: "utf8" });
+  assert.equal(result.status, 0, `${args.join(" ")}\n${result.stderr}\n${result.stdout}`);
+  return result;
+}
+
+/**
+ * @param {string} dir
+ */
+function initProveRepo(dir) {
+  mkdirSync(dir, { recursive: true });
+  gitOk(dir, ["init"]);
+  gitOk(dir, ["config", "user.email", "prove@test"]);
+  gitOk(dir, ["config", "user.name", "Prove Test"]);
+}
+
+test("resolveSiblingCheckout prefers bloom alias", () => {
+  const root = mkdtempSync(join(tmpdir(), "agent-ops-sib-"));
+  mkdirSync(join(root, "bloom"));
+  assert.equal(
+    resolveSiblingCheckout("github.com/yuro1991-afk/bloom-fair-yellow-charm", root),
+    join(root, "bloom"),
+  );
+  assert.equal(resolveSiblingCheckout("github.com/yuro1991-afk/dronehive", root), null);
+});
+
+test("defaultSiblingsRoot reads SIBLINGS_ROOT", () => {
+  assert.equal(defaultSiblingsRoot({}), DEFAULT_SIBLINGS_ROOT);
+  assert.equal(defaultSiblingsRoot({ SIBLINGS_ROOT: "/custom/siblings" }), "/custom/siblings");
+});
+
+test("provePatches reports missing checkout", () => {
+  const pad = mkdtempSync(join(tmpdir(), "agent-ops-prove-miss-"));
+  mkdirSync(join(pad, "patches"));
+  writeFileSync(join(pad, "patches", "one.patch"), "diff --git a/n b/n\n");
+  writeFileSync(
+    join(pad, "patches", "index.json"),
+    JSON.stringify({
+      cannotPush: true,
+      patches: [
+        {
+          id: "one",
+          repo: "github.com/yuro1991-afk/dronehive",
+          file: "patches/one.patch",
+          base: "abc",
+          applyCheck: "ok",
+        },
+      ],
+    }),
+  );
+  const index = loadPatchIndex(join(pad, "patches", "index.json"));
+  const proof = provePatches(index, {
+    repoRoot: pad,
+    siblingsRoot: join(pad, "empty"),
+  });
+  assert.equal(proof.prove, true);
+  assert.equal(proof.skipped, 1);
+  assert.equal(proof.failed, 0);
+  assert.equal(proof.results[0].status, "missing-checkout");
+  assert.match(proof.doNot, /autofix/);
+});
+
+test("provePatches stacked apply-check then resets", () => {
+  const pad = mkdtempSync(join(tmpdir(), "agent-ops-prove-stack-"));
+  const siblings = join(pad, "siblings");
+  const checkout = join(siblings, "dronehive");
+  const patchesDir = join(pad, "patches");
+  mkdirSync(patchesDir, { recursive: true });
+  initProveRepo(checkout);
+  writeFileSync(join(checkout, "note.txt"), "line1\n");
+  gitOk(checkout, ["add", "note.txt"]);
+  gitOk(checkout, ["commit", "-m", "init"]);
+
+  writeFileSync(join(checkout, "note.txt"), "line1A\n");
+  gitOk(checkout, ["add", "note.txt"]);
+  gitOk(checkout, ["commit", "-m", "a"]);
+  const one = spawnSync("git", ["format-patch", "-1", "--stdout"], {
+    cwd: checkout,
+    encoding: "utf8",
+  });
+  assert.equal(one.status, 0, one.stderr);
+  writeFileSync(join(patchesDir, "one.patch"), one.stdout);
+
+  writeFileSync(join(checkout, "note.txt"), "line1B\n");
+  gitOk(checkout, ["add", "note.txt"]);
+  gitOk(checkout, ["commit", "-m", "b"]);
+  const two = spawnSync("git", ["format-patch", "-1", "--stdout"], {
+    cwd: checkout,
+    encoding: "utf8",
+  });
+  assert.equal(two.status, 0, two.stderr);
+  writeFileSync(join(patchesDir, "two.patch"), two.stdout);
+
+  gitOk(checkout, ["reset", "--hard", "HEAD~2"]);
+  assert.equal(readFileSync(join(checkout, "note.txt"), "utf8"), "line1\n");
+
+  writeFileSync(
+    join(pad, "patches", "index.json"),
+    JSON.stringify({
+      cannotPush: true,
+      patches: [
+        {
+          id: "one",
+          repo: "github.com/yuro1991-afk/dronehive",
+          file: "patches/one.patch",
+          base: "init",
+          applyCheck: "ok",
+        },
+        {
+          id: "two",
+          repo: "github.com/yuro1991-afk/dronehive",
+          file: "patches/two.patch",
+          base: "init",
+          applyCheck: "ok",
+        },
+      ],
+    }),
+  );
+  const index = loadPatchIndex(join(pad, "patches", "index.json"));
+  const proof = provePatches(index, { repoRoot: pad, siblingsRoot: siblings });
+  assert.equal(proof.failed, 0, JSON.stringify(proof.results, null, 2));
+  assert.equal(proof.ok, 2);
+  assert.equal(proof.results[0].stacked, false);
+  assert.equal(proof.results[1].stacked, true);
+
+  const onlyTwo = provePatches(index, {
+    repoRoot: pad,
+    siblingsRoot: siblings,
+    id: "two",
+  });
+  assert.equal(onlyTwo.ok, 1);
+  assert.equal(onlyTwo.results[0].id, "two");
+  assert.equal(onlyTwo.results[0].stacked, true);
+  assert.equal(readFileSync(join(checkout, "note.txt"), "utf8"), "line1\n");
+  const status = spawnSync("git", ["status", "--porcelain"], {
+    cwd: checkout,
+    encoding: "utf8",
+  });
+  assert.equal(status.stdout, "");
+});
+
+test("cli patches --prove stacked then resets", async () => {
+  const pad = mkdtempSync(join(tmpdir(), "agent-ops-prove-cli-"));
+  const siblings = join(pad, "siblings");
+  const checkout = join(siblings, "dronehive");
+  const patchesDir = join(pad, "patches");
+  mkdirSync(patchesDir, { recursive: true });
+  initProveRepo(checkout);
+  writeFileSync(join(checkout, "note.txt"), "line1\n");
+  gitOk(checkout, ["add", "note.txt"]);
+  gitOk(checkout, ["commit", "-m", "init"]);
+  writeFileSync(join(checkout, "note.txt"), "line1A\n");
+  gitOk(checkout, ["add", "note.txt"]);
+  gitOk(checkout, ["commit", "-m", "a"]);
+  const one = spawnSync("git", ["format-patch", "-1", "--stdout"], {
+    cwd: checkout,
+    encoding: "utf8",
+  });
+  assert.equal(one.status, 0, one.stderr);
+  writeFileSync(join(patchesDir, "one.patch"), one.stdout);
+  gitOk(checkout, ["reset", "--hard", "HEAD~1"]);
+
+  writeFileSync(
+    join(patchesDir, "index.json"),
+    JSON.stringify({
+      cannotPush: true,
+      patches: [
+        {
+          id: "one",
+          repo: "github.com/yuro1991-afk/dronehive",
+          file: "patches/one.patch",
+          base: "init",
+          applyCheck: "ok",
+        },
+      ],
+    }),
+  );
+
+  const chunks = [];
+  const code = await runCli(
+    ["patches", "--prove", "--index", join(patchesDir, "index.json"), "--siblings-root", siblings],
+    {
+      root: pad,
+      write: (value) => {
+        chunks.push(value);
+      },
+    },
+  );
+  assert.equal(code, 0, chunks.join(""));
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.prove, true);
+  assert.equal(parsed.ok, 1);
+  assert.equal(parsed.failed, 0);
+  assert.equal(readFileSync(join(checkout, "note.txt"), "utf8"), "line1\n");
+});
+
+test("cli patches --prove missing checkout exits 1", async () => {
+  const pad = mkdtempSync(join(tmpdir(), "agent-ops-prove-cli-miss-"));
+  mkdirSync(join(pad, "patches"));
+  writeFileSync(join(pad, "patches", "one.patch"), "diff --git a/n b/n\n");
+  const indexPath = join(pad, "patches", "index.json");
+  writeFileSync(
+    indexPath,
+    JSON.stringify({
+      cannotPush: true,
+      patches: [
+        {
+          id: "one",
+          repo: "github.com/yuro1991-afk/dronehive",
+          file: "patches/one.patch",
+          base: "abc",
+          applyCheck: "ok",
+        },
+      ],
+    }),
+  );
+  const chunks = [];
+  const code = await runCli(
+    ["patches", "--prove", "--index", indexPath, "--siblings-root", join(pad, "empty")],
+    {
+      root: pad,
+      write: (value) => {
+        chunks.push(value);
+      },
+    },
+  );
+  assert.equal(code, 1);
+  assert.equal(JSON.parse(chunks.join("")).skipped, 1);
 });

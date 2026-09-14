@@ -147,12 +147,18 @@ export {
   siblingsForJob,
 } from "./siblings.js";
 export {
+  DEFAULT_SIBLINGS_ROOT,
   PATCH_CONTRACT,
+  SIBLING_CHECKOUT_ALIASES,
   assertPatchFilesExist,
   buildPatchCatalog,
+  defaultGitRunner,
   defaultPatchesIndexPath,
+  defaultSiblingsRoot,
   listPatches,
   loadPatchIndex,
   patchForJob,
+  provePatches,
+  resolveSiblingCheckout,
   validatePatchEntry,
 } from "./patches.js";
