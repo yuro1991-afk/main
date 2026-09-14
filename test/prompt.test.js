@@ -29,6 +29,28 @@ test("renderLaunchPrompt is paste-ready Origin text", () => {
   assert.doesNotMatch(text, /dronehive-unicode/);
 });
 
+test("gub-superbrain-probe prompt refuses the probe", () => {
+  const text = renderLaunchPrompt({
+    id: "gub-superbrain-probe",
+    title: "Probe Superbrain",
+    repo: "origin.cursor.com/git/yuri-afk/genesis",
+    kind: "origin-slice",
+    priority: 3,
+    status: "claimed",
+    claim: null,
+    notes: "Expired leftover next",
+    verify: "Do not probe. Leave a review on main#10 or apply one catalog patch.",
+    files: [],
+    collision: "Do not reopen main#1",
+  });
+  assert.match(text, /Stop Superbrain probe — gub-superbrain-probe/);
+  assert.match(text, /no more Superbrain/);
+  assert.match(text, /Do not run node src\/cli.js probe/);
+  assert.doesNotMatch(text, /Origin launch/);
+  assert.doesNotMatch(text, /Do not mark Superbrain LIVE without a successful probe/);
+  assert.doesNotMatch(text, /This pad token cannot push Origin — implement there/);
+});
+
 test("empty prompt refuses a fifth queue", () => {
   const packet = buildPrompt(null);
   assert.equal(packet.contract, PROMPT_CONTRACT);

@@ -16,10 +16,42 @@ Do not open another landing-pad queue on yuro1991-afk/main.
 Do not reopen https://github.com/yuro1991-afk/main/pull/1.
 `;
   }
-  const target = relaunchFor(job);
   const commands = firstCommands(job)
     .map((line) => `- ${line}`)
     .join("\n");
+  if (job.id === "gub-superbrain-probe") {
+    return `# Stop Superbrain probe — ${job.id}
+
+Yuri: no more Superbrain. Pad probes stop.
+
+- Job: \`${job.id}\` — ${job.title}
+- Packet: \`${packetPathFor(job)}\`
+- Playbook: \`playbooks/${job.id}.md\`
+- Priority: ${job.priority}
+- Verify: ${job.verify}
+
+## Notes
+
+${job.notes}
+
+## Collision
+
+${job.collision}
+
+## First moves
+
+${commands}
+
+## Do not
+
+- Do not reopen https://github.com/yuro1991-afk/main/pull/1
+- Do not probe :45001 / :8791
+- Do not run node src/cli.js probe
+- Do not mark Superbrain LIVE
+- Take review-main-pr10, or apply a catalog patch on a sibling write checkout
+`;
+  }
+  const target = relaunchFor(job);
   return `# Origin launch — ${job.id}
 
 Work on Cursor Origin. This GitHub repo is the ops pad only.

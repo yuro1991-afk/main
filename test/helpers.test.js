@@ -32,15 +32,48 @@ test("planHelpers is exhaustive", () => {
 
 test("origin-slice helpers relaunch to Genesis", () => {
   const packet = buildHelperPacket(
-    job("origin-slice", { id: "gub-superbrain-probe" }),
+    job("origin-slice", { id: "gub-inventory-tick" }),
   );
   assert.equal(packet.contract, "agent-ops.helpers.v1");
-  assert.equal(packet.jobId, "gub-superbrain-probe");
+  assert.equal(packet.jobId, "gub-inventory-tick");
   assert.equal(packet.scope, "relaunch");
   assert.ok(packet.helpers.some((helper) => helper.role === "relaunch"));
   assert.ok(packet.helpers.some((helper) => helper.role === "reserve"));
   assert.match(packet.helpers[0].prompt, /yuri-afk\/genesis/);
   assert.match(packet.helpers[0].prompt, /origin auth status/);
+});
+
+test("gub-superbrain-probe helpers refuse the probe", () => {
+  const packet = buildHelperPacket(
+    job("origin-slice", { id: "gub-superbrain-probe" }),
+  );
+  assert.equal(packet.jobId, "gub-superbrain-probe");
+  const text = packet.helpers.map((helper) => helper.prompt).join("\n");
+  assert.ok(packet.helpers.some((helper) => helper.role === "refuse"));
+  assert.match(text, /no more Superbrain/);
+  assert.match(text, /Do not run node src\/cli.js probe/);
+  assert.doesNotMatch(text, /origin auth status/);
+  assert.doesNotMatch(text, /Implement the slice there/);
+});
+
+test("review helpers name open PRs #8/#9/#10", () => {
+  const landing = planHelpers(job("review", { id: "review-landing-pad-prs" }));
+  const landingText = landing.map((helper) => helper.prompt).join("\n");
+  assert.match(landingText, /#8, #9, or #10/);
+  assert.match(landingText, /gh pr view 8,9,10/);
+  assert.doesNotMatch(landingText, /gh pr view 3,4,5,6/);
+
+  const pr10 = planHelpers(job("review", { id: "review-main-pr10" }));
+  const pr10Text = pr10.map((helper) => helper.prompt).join("\n");
+  assert.match(pr10Text, /main\/pull\/10/);
+  assert.match(pr10Text, /gh pr view 10/);
+  assert.match(pr10Text, /Do not steal head\/ears\/eyes\/vision\/bridge/);
+});
+
+test("probe helpers refuse the Superbrain CLI probe", () => {
+  const plans = planHelpers(job("probe", { id: "bloom-health-probe" }));
+  assert.match(plans[0].prompt, /Do not run node src\/cli.js probe/);
+  assert.doesNotMatch(plans[0].prompt, /^Run node src\/cli.js probe/);
 });
 
 test("cli helpers defaults to next Genesis card", async () => {
