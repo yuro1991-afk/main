@@ -44,7 +44,7 @@ export function buildBrief(job, siblings, options = {}) {
 
 /**
  * @param {import("./ledger.js").Job} job
- * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { file: string } | null }} [options]
+ * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { file: string, afterApply?: string[] } | null }} [options]
  */
 function catalogPatchFor(job, options = {}) {
   if (options.patch) return options.patch;
@@ -60,7 +60,7 @@ function catalogPatchFor(job, options = {}) {
 
 /**
  * @param {import("./ledger.js").Job} job
- * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { file: string } | null }} [options]
+ * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { file: string, afterApply?: string[] } | null }} [options]
  * @returns {string[]}
  */
 export function firstCommands(job, options = {}) {
@@ -76,6 +76,7 @@ export function firstCommands(job, options = {}) {
           `git checkout -b cursor/${job.id}-from-ops`,
           `git apply --check /path/to/main/${patch.file}`,
           `git apply /path/to/main/${patch.file}`,
+          ...(patch.afterApply ?? []),
           job.verify,
         ];
       }

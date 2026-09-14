@@ -68,6 +68,9 @@ test("cataloged sibling firstCommands use git apply, not edit", () => {
   const honestyLines = firstCommands(honesty);
   assert.ok(honestyLines.some((line) => line.includes("faceswap-honesty-env-paths.patch")));
   assert.ok(!honestyLines.some((line) => line.includes("Notion")));
+  const gitignore = queue.jobs.find((item) => item.id === "bloom-gitignore-vercel");
+  const gitignoreLines = firstCommands(gitignore);
+  assert.ok(gitignoreLines.includes("git rm -r --cached .vercel/output"));
 });
 
 test("unknown sibling role fails closed", () => {
