@@ -41,7 +41,7 @@ test("repo index loads without duplicate ids and files exist", () => {
   const index = loadPatchIndex(defaultPatchesIndexPath(ROOT));
   assert.equal(index.contract, PATCH_CONTRACT.id);
   assert.equal(index.cannotPush, true);
-  assert.ok(index.patches.length >= 62);
+  assert.ok(index.patches.length >= 64);
   assertPatchFilesExist(index, ROOT);
   const ids = index.patches.map((row) => row.id);
   assert.equal(new Set(ids).size, ids.length);
@@ -97,6 +97,8 @@ test("repo index loads without duplicate ids and files exist", () => {
   assert.ok(ids.includes("dronehive-seed-work-order-codex-paths"));
   assert.ok(ids.includes("dronehive-work-order-law-truth"));
   assert.ok(ids.includes("dronehive-seed-work-order-law-truth"));
+  assert.ok(ids.includes("dronehive-work-order-doc-law-truth"));
+  assert.ok(ids.includes("dronehive-seed-work-order-doc-law-truth"));
 });
 
 test("text patches start with diff --git; icons are PNGs", () => {
@@ -190,7 +192,7 @@ test("cli patches lists the catalog", async () => {
   assert.equal(code, 0);
   const parsed = JSON.parse(chunks.join(""));
   assert.equal(parsed.command, "patches");
-  assert.ok(parsed.count >= 62);
+  assert.ok(parsed.count >= 64);
   assert.equal(parsed.cannotPush, true);
   assert.match(parsed.doNot, /autofix/);
 });

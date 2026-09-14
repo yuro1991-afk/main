@@ -3,7 +3,7 @@
   "cannotPush": true,
   "apply": "git clone https://github.com/<repo>.git work && cd work && git apply --check ../<file> && git apply ../<file>",
   "doNot": "Do not copy PR #6 npm run autofix. This catalog lists diffs only.",
-  "verifiedAt": "2026-09-14T20:44:00Z",
+  "verifiedAt": "2026-09-14T20:46:00Z",
   "patches": [
     {
       "id": "dronehive-unicode-ci",
@@ -567,6 +567,24 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "drone/app/seed/configs/work_order.json LAW_TRUTH.md uses host/library. Independent of live leftover (different file). Leaves the C:\\\\ grok rules path. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-law-truth",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-doc-law-truth.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/WORK_ORDER.md Library law uses host/library/LAW_TRUTH.md. Independent of work-order-doc-honesty (NEXT.json) and the JSON law-truth leftover. Leaves the C:\\\\ host-law line. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-law-truth",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-doc-law-truth.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "drone/app/seed/docs/WORK_ORDER.md Library law uses host/library. Independent of live leftover (different file) and seed-work-order-doc-honesty (NEXT.json). Does not touch tool_agent.py."
     }
   ]
 }

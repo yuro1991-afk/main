@@ -574,6 +574,36 @@
       "collision": "Seed LAW_TRUTH.md path only. Different file from configs/work_order.json. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-work-order-doc-law-truth",
+      "title": "Point docs/WORK_ORDER.md Library law at host/library",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 66,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/WORK_ORDER.md Library law still pins F:\\\\GrokSelfLibrary\\\\LAW_TRUTH.md. Applyable catalog patch is patches/dronehive-work-order-doc-law-truth.patch on main#9. Independent of work-order-doc-honesty (NEXT.json) and the JSON law-truth leftover. Leave the C:\\\\ host-law line. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/WORK_ORDER.md Library law is host/library/LAW_TRUTH.md.",
+      "files": [
+        "docs/WORK_ORDER.md"
+      ],
+      "collision": "docs/WORK_ORDER.md Library law line only. Seed copy is a later leftover. Do not edit the C:\\\\ host-law line. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-law-truth",
+      "title": "Point seed WORK_ORDER.md Library law at host/library",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 67,
+      "status": "blocked",
+      "claim": null,
+      "notes": "drone/app/seed/docs/WORK_ORDER.md Library law still pins F:\\\\GrokSelfLibrary\\\\LAW_TRUTH.md. Applyable catalog patch is patches/dronehive-seed-work-order-doc-law-truth.patch on main#9. Independent of live leftover (different file) and seed-work-order-doc-honesty (NEXT.json). Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "drone/app/seed/docs/WORK_ORDER.md Library law is host/library/LAW_TRUTH.md.",
+      "files": [
+        "drone/app/seed/docs/WORK_ORDER.md"
+      ],
+      "collision": "Seed WORK_ORDER.md Library law line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",
