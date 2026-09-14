@@ -21,7 +21,8 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
    not hide `next`). `slots --world` / `busy --world` stay on those
    planes. Peek without claiming: `node src/cli.js relaunch` (`gub-inventory-tick`
    while the probe is claimed). Paste `node src/cli.js prompt` into an
-   Origin agent. Read `reviews/WORLD-PHASES.md`. Do not sit in inventory.
+   Origin agent. Read `reviews/WORLD-PHASES.md` and your
+   `reviews/launch/<jobId>.md`. Do not sit in inventory.
    Optionally `node src/cli.js tick` to write `.genesis/last-inventory.json`.
    `node src/cli.js playbooks` writes one markdown card per open **Genesis** job.
 3. If you skipped `busy`, `node src/cli.js claim <id> --agent <your-bcId>` before you start.

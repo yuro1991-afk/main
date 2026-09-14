@@ -10,6 +10,10 @@ node src/cli.js busy --world --agent "$CURSOR_AGENT_ID"
 node src/cli.js prompt
 ```
 
+Paste-ready Origin briefs for the 35 parked agents live in
+`reviews/launch/<jobId>.md`. Open yours, then relaunch Origin. Do not
+stay on this pad.
+
 This pad cannot move a cloud agent into Origin. Paste the packet at
 https://cursor.com/codebase/yuri-afk/genesis
 

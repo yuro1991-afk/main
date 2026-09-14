@@ -3,6 +3,7 @@ import { dirname, join } from "node:path";
 import { effectiveStatus, listJobs } from "./ledger.js";
 import { buildHelperPacket } from "./helpers.js";
 import { buildRelaunch, packetPathFor, relaunchFor } from "./handoff.js";
+import { ORIGIN_UI, renderLaunchPrompt } from "./prompt.js";
 
 export const BUSY_CONTRACT = "agent-ops.busy.v1";
 export const SLOTS_CONTRACT = "agent-ops.slots.v1";
@@ -94,6 +95,7 @@ export function buildBusy(job, siblings, slots, options = {}) {
     playbook: `playbooks/${job.id}.md`,
     job,
     relaunch: relaunch.relaunch,
+    prompt: renderLaunchPrompt(job),
     helpers: buildHelperPacket(job).helpers,
     remaining: slots.filter((slot) => slot.id !== job.id),
     action: relaunch.action,
@@ -102,14 +104,51 @@ export function buildBusy(job, siblings, slots, options = {}) {
 }
 
 /**
- * @param {object} snapshot
- * @param {string} destPath
- */
-/**
  * @param {string} repoRoot
  */
 export function defaultRosterPath(repoRoot) {
   return join(repoRoot, "ledger", "roster.json");
+}
+
+/**
+ * @param {string} repoRoot
+ */
+export function defaultLaunchPath(repoRoot) {
+  return join(repoRoot, "reviews", "launch");
+}
+
+/**
+ * @param {string} jobId
+ */
+export function launchPathFor(jobId) {
+  return `reviews/launch/${jobId}.md`;
+}
+
+/**
+ * Paste-ready Origin brief for one parked pad agent.
+ * @param {{ bcId: string, name: string, jobId: string }} row
+ * @param {import("./ledger.js").Job | null} job
+ */
+export function renderAssignedLaunch(row, job) {
+  const body = job
+    ? renderLaunchPrompt(job)
+    : "Unknown job. Do not invent a fifth landing-pad queue.";
+  return `# Idle-agent relaunch — ${row.name}
+
+You are parked on github.com/yuro1991-afk/main. Leave this pad.
+
+- agent: ${row.name}
+- bcId: \`${row.bcId}\`
+- card: \`${row.jobId}\`
+- launch: \`${launchPathFor(row.jobId)}\`
+- Origin: ${ORIGIN_UI}
+
+Paste the brief below into a new Origin cloud agent. Do not inventory this landing pad.
+
+---
+
+${body}
+`;
 }
 
 /**
@@ -139,7 +178,9 @@ export function buildAssign(ledger, roster, nowMs = Date.now()) {
       jobId: row.jobId,
       status: job ? effectiveStatus(job, nowMs) : "missing",
       packet: job ? packetPathFor(job) : null,
+      launch: job ? launchPathFor(row.jobId) : null,
       relaunch: job ? relaunchFor(job) : null,
+      prompt: renderAssignedLaunch(row, job),
     };
   });
   return {
@@ -149,6 +190,21 @@ export function buildAssign(ledger, roster, nowMs = Date.now()) {
     next: assignments.find((row) => row.status === "open") ?? null,
     rule: "Every idle pad agent relaunches the listed Origin world-phase card. Do not stay on yuro1991-afk/main. Do not all peek next without claiming. Do not lease cards to agents that stay idle.",
   };
+}
+
+/**
+ * @param {Array<{ jobId: string, prompt?: string | null }>} assignments
+ * @param {string} dir
+ */
+export function writeLaunchPrompts(assignments, dir) {
+  mkdirSync(dir, { recursive: true });
+  return assignments
+    .filter((row) => row.prompt)
+    .map((row) => {
+      const dest = join(dir, `${row.jobId}.md`);
+      writeFileSync(dest, `${row.prompt}\n`);
+      return dest;
+    });
 }
 
 export function writeDispatch(snapshot, destPath) {

@@ -36,7 +36,8 @@ node src/cli.js route "keep my agents busy"
 ```
 
 `assign` maps all 35 idle pad agents onto unique Genesis Python world
-phases. `busy --world --agent` reserves the next world-plane card.
+phases and writes paste-ready briefs under `reviews/launch/`.
+`busy --world --agent` reserves the next world-plane card.
 `slots --world` lists the rest. Default `next` is still
 `gub-inventory-tick` (GUB). Claim leases expire in 45 minutes.
 

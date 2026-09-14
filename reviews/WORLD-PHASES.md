@@ -8,7 +8,7 @@ occupies the world.
 35 idle agents were parked on `github.com/yuro1991-afk/main`. Each gets
 one Origin card. This pad cannot authenticate to Origin — relaunch at
 https://cursor.com/codebase/yuri-afk/genesis with the matching
-`reviews/handoff-<id>.md`.
+`reviews/launch/<id>.md` (paste-ready) or `reviews/handoff-<id>.md`.
 
 | # | idle agent | bcId | card | plane / PR |
 | --- | --- | --- | --- | --- |

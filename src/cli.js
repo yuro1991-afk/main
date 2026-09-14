@@ -34,10 +34,12 @@ import {
   buildBusy,
   buildSlots,
   defaultDispatchPath,
+  defaultLaunchPath,
   defaultRosterPath,
   listSlots,
   loadRoster,
   writeDispatch,
+  writeLaunchPrompts,
 } from "./dispatch.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -198,7 +200,12 @@ export async function runCli(argv, options = {}) {
       const roster = loadRoster(
         flags.roster ? resolve(flags.roster) : defaultRosterPath(options.root ?? ROOT),
       );
-      write(JSON.stringify(buildAssign(ledger, roster, nowMs), null, 2));
+      const packet = buildAssign(ledger, roster, nowMs);
+      const dest = flags.out
+        ? resolve(flags.out)
+        : defaultLaunchPath(options.root ?? ROOT);
+      const launches = writeLaunchPrompts(packet.assignments, dest);
+      write(JSON.stringify({ ...packet, launches }, null, 2));
       return 0;
     }
     case "slots": {
@@ -331,7 +338,7 @@ Commands:
   list
   next [--kind kind] [--repo repo] [--here] [--all] [--world]
   slots [--here] [--all] [--world]
-  assign
+  assign [--out dir]
   busy [--agent <bcId>] [--here] [--all] [--world]
   helpers [id]
   claim <id> --agent <bcId>

@@ -1,4 +1,4 @@
-import { mkdtempSync, readFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -149,19 +149,29 @@ test("assign maps every idle pad agent to a distinct Origin world card", () => {
   assert.ok(packet.assignments.some((row) => row.jobId === "genesis-world-robotics"));
   assert.ok(packet.assignments.every((row) => row.relaunch.kind === "origin"));
   assert.ok(packet.assignments.every((row) => row.status === "open"));
+  assert.ok(packet.assignments.every((row) => row.launch === `reviews/launch/${row.jobId}.md`));
+  assert.ok(packet.assignments.every((row) => /Leave this pad/.test(row.prompt)));
+  assert.match(packet.next.prompt, /genesis-world-layer-102/);
   assert.ok(!ids.includes("catalog-expand-domain"));
   assert.ok(!ids.includes("gub-inventory-tick"));
   assert.ok(!ids.includes("dronehive-unicode-ci"));
 });
 
-test("cli assign prints the world roster", async () => {
-  const result = await capture(["assign"]);
+test("cli assign writes paste-ready Origin launch files", async () => {
+  const out = mkdtempSync(join(tmpdir(), "agent-ops-launch-"));
+  const result = await capture(["assign", "--out", out]);
   assert.equal(result.code, 0);
   assert.match(result.out, /genesis-world-layer-102/);
   assert.match(result.out, /genesis-world-unifier/);
   assert.match(result.out, /genesis-python-infra-50/);
   assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
   assert.doesNotMatch(result.out, /catalog-expand-domain/);
+  const dest = join(out, "genesis-world-layer-102.md");
+  assert.equal(existsSync(dest), true);
+  const text = readFileSync(dest, "utf8");
+  assert.match(text, /Genesis catalog handoff/);
+  assert.match(text, /cursor\.com\/codebase\/yuri-afk\/genesis/);
+  assert.doesNotMatch(text, /dronehive-unicode-ci/);
 });
 
 test("cli slots defaults to Genesis cards", async () => {
