@@ -239,6 +239,22 @@ function dronehiveRelaunchReason(jobId) {
       return "This token cannot push dronehive. Apply patches/dronehive-work-order-doc-codex-cli.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
     case "dronehive-seed-work-order-doc-codex-cli":
       return "This token cannot push dronehive. Apply patches/dronehive-seed-work-order-doc-codex-cli.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-work-order-doc-recall-router":
+      return "This token cannot push dronehive. Apply patches/dronehive-work-order-doc-recall-router.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-seed-work-order-doc-recall-router":
+      return "This token cannot push dronehive. Apply patches/dronehive-seed-work-order-doc-recall-router.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-work-order-doc-memory-recycle":
+      return "This token cannot push dronehive. Apply patches/dronehive-work-order-doc-memory-recycle.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-seed-work-order-doc-memory-recycle":
+      return "This token cannot push dronehive. Apply patches/dronehive-seed-work-order-doc-memory-recycle.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-work-order-doc-models":
+      return "This token cannot push dronehive. Apply patches/dronehive-work-order-doc-models.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-seed-work-order-doc-models":
+      return "This token cannot push dronehive. Apply patches/dronehive-seed-work-order-doc-models.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-work-order-doc-cd":
+      return "This token cannot push dronehive. Apply patches/dronehive-work-order-doc-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-seed-work-order-doc-cd":
+      return "This token cannot push dronehive. Apply patches/dronehive-seed-work-order-doc-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
     case "dronehive-rebase-packaging":
       return "This token cannot push dronehive. Rebase packaging stays blocked until dronehive#1 python-smoke is green. Do not copy PR #6 autofix.";
     default:

@@ -6,11 +6,11 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-14T20:56Z**: 39 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-14T21:00Z**: 39 IDLE + this run RUNNING.
 No new agents. Fork `bc-84d93b47` IDLE.
 **Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Pad probes stop.
 PR #3 merged; no real review comments (CodeRabbit skip, <10 stars).
-PR #9 catalog now 73 diffs (newest `dronehive-seed-work-order-doc-codex-cli`).
+PR #9 catalog now 81 diffs (newest `dronehive-seed-work-order-doc-cd`).
 This Genesis-only tree still blocks GitHub cards — leftover `next` is the
 expired Origin claim `gub-superbrain-probe`. After #8, leftover unused is
 `review-landing-pad-prs`. First parked apply: `dronehive-unicode-ci`.
@@ -68,11 +68,19 @@ then unused `dronehive-seed-work-order-doc-live-registry` (seed docs live-regist
 then unused `dronehive-work-order-doc-codex-paths` (docs codex table only; independent of CLI examples),
 then unused `dronehive-seed-work-order-doc-codex-paths` (seed docs codex table only; independent of live docs),
 then unused `dronehive-work-order-doc-codex-cli` (docs & $py query_llm_codex examples only; independent of table leftover),
-then unused `dronehive-seed-work-order-doc-codex-cli` (seed docs & $py query_llm_codex examples only; independent of live docs).
+then unused `dronehive-seed-work-order-doc-codex-cli` (seed docs & $py query_llm_codex examples only; independent of live docs),
+then unused `dronehive-work-order-doc-recall-router` (docs recall.py + ai_smarts_router.py only),
+then unused `dronehive-seed-work-order-doc-recall-router` (seed recall/router only),
+then unused `dronehive-work-order-doc-memory-recycle` (docs memory_recycle path only),
+then unused `dronehive-seed-work-order-doc-memory-recycle` (seed memory_recycle only),
+then unused `dronehive-work-order-doc-models` (docs install-proof models path only),
+then unused `dronehive-seed-work-order-doc-models` (seed install-proof models path only),
+then unused `dronehive-work-order-doc-cd` (docs swarm entry cd only),
+then unused `dronehive-seed-work-order-doc-cd` (seed swarm entry cd only).
 Newcomer `bc-f407303f`: `review-main-pr8`.
 `bc-5fe241dd` Summarize arena: do not steal `genesis-world-arena`; unused apply `faceswap-design-honesty`.
 `bc-e2df7f92` Summarize coordinator: unused apply `dronehive-script-host-roots`.
-Next unused apply if those are taken: `dronehive-seed-work-order-doc-codex-cli`.
+Next unused apply if those are taken: `dronehive-seed-work-order-doc-cd`.
 
 Idle agents on `yuro1991-afk/main`: do **not** inventory this pad again.
 Relaunch Origin. 35 parked agents have unique world-phase cards. The

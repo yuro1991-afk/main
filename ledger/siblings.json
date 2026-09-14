@@ -124,7 +124,15 @@
         "dronehive-work-order-doc-codex-paths",
         "dronehive-seed-work-order-doc-codex-paths",
         "dronehive-work-order-doc-codex-cli",
-        "dronehive-seed-work-order-doc-codex-cli"
+        "dronehive-seed-work-order-doc-codex-cli",
+        "dronehive-work-order-doc-recall-router",
+        "dronehive-seed-work-order-doc-recall-router",
+        "dronehive-work-order-doc-memory-recycle",
+        "dronehive-seed-work-order-doc-memory-recycle",
+        "dronehive-work-order-doc-models",
+        "dronehive-seed-work-order-doc-models",
+        "dronehive-work-order-doc-cd",
+        "dronehive-seed-work-order-doc-cd"
       ]
     }
   ]

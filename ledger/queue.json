@@ -739,6 +739,126 @@
       "collision": "Seed WORK_ORDER.md & $py query_llm_codex.py examples only. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-work-order-doc-recall-router",
+      "title": "Point docs/WORK_ORDER.md recall and router examples at host roots",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 77,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/WORK_ORDER.md recall.py and ai_smarts_router.py examples still pin F:\\\\GrokSelfLibrary and G:\\\\AI-Home. Applyable catalog patch is patches/dronehive-work-order-doc-recall-router.patch on main#9. Independent of CLI leftover and models leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/WORK_ORDER.md recall.py uses host/library/bin and ai_smarts_router.py uses host/ai-home.",
+      "files": [
+        "docs/WORK_ORDER.md"
+      ],
+      "collision": "docs/WORK_ORDER.md section 2.6 examples only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-recall-router",
+      "title": "Point seed WORK_ORDER.md recall and router examples at host roots",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 78,
+      "status": "blocked",
+      "claim": null,
+      "notes": "drone/app/seed/docs/WORK_ORDER.md recall.py and ai_smarts_router.py examples still pin F: and G: hosts. Applyable catalog patch is patches/dronehive-seed-work-order-doc-recall-router.patch on main#9. Independent of live leftover (different file). Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "drone/app/seed/docs/WORK_ORDER.md recall.py uses host/library/bin and ai_smarts_router.py uses host/ai-home.",
+      "files": [
+        "drone/app/seed/docs/WORK_ORDER.md"
+      ],
+      "collision": "Seed WORK_ORDER.md section 2.6 examples only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-memory-recycle",
+      "title": "Point docs/WORK_ORDER.md memory_recycle at repo data/",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 79,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/WORK_ORDER.md memory_recycle still pins G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b\\\\data\\\\hive\\\\memory_recycle. Applyable catalog patch is patches/dronehive-work-order-doc-memory-recycle.patch on main#9. Use repo-relative data/hive/memory_recycle/. Independent of header fabric leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/WORK_ORDER.md memory_recycle path is data/hive/memory_recycle/.",
+      "files": [
+        "docs/WORK_ORDER.md"
+      ],
+      "collision": "docs/WORK_ORDER.md section 6.2 path only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-memory-recycle",
+      "title": "Point seed WORK_ORDER.md memory_recycle at repo data/",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 80,
+      "status": "blocked",
+      "claim": null,
+      "notes": "drone/app/seed/docs/WORK_ORDER.md memory_recycle still pins G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b. Applyable catalog patch is patches/dronehive-seed-work-order-doc-memory-recycle.patch on main#9. Independent of live leftover (different file). Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "drone/app/seed/docs/WORK_ORDER.md memory_recycle path is data/hive/memory_recycle/.",
+      "files": [
+        "drone/app/seed/docs/WORK_ORDER.md"
+      ],
+      "collision": "Seed WORK_ORDER.md section 6.2 path only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-models",
+      "title": "Point docs/WORK_ORDER.md models install-proof path at host/ai-home",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 81,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/WORK_ORDER.md install-proof line still pins G:\\\\AI-Home\\\\models. Applyable catalog patch is patches/dronehive-work-order-doc-models.patch on main#9. Independent of CLI leftover and recall leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/WORK_ORDER.md install-proof line uses host/ai-home/models.",
+      "files": [
+        "docs/WORK_ORDER.md"
+      ],
+      "collision": "docs/WORK_ORDER.md section 2.4 item 6 only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-models",
+      "title": "Point seed WORK_ORDER.md models install-proof path at host/ai-home",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 82,
+      "status": "blocked",
+      "claim": null,
+      "notes": "drone/app/seed/docs/WORK_ORDER.md install-proof line still pins G:\\\\AI-Home\\\\models. Applyable catalog patch is patches/dronehive-seed-work-order-doc-models.patch on main#9. Independent of live leftover (different file). Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "drone/app/seed/docs/WORK_ORDER.md install-proof line uses host/ai-home/models.",
+      "files": [
+        "drone/app/seed/docs/WORK_ORDER.md"
+      ],
+      "collision": "Seed WORK_ORDER.md section 2.4 item 6 only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-cd",
+      "title": "Point docs/WORK_ORDER.md swarm entry cd at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 83,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/WORK_ORDER.md swarm entry still cds to G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b. Applyable catalog patch is patches/dronehive-work-order-doc-cd.patch on main#9. Independent of NEXT.json leftover and header fabric leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/WORK_ORDER.md swarm entry is cd .",
+      "files": [
+        "docs/WORK_ORDER.md"
+      ],
+      "collision": "docs/WORK_ORDER.md section 8 cd line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-cd",
+      "title": "Point seed WORK_ORDER.md swarm entry cd at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 84,
+      "status": "blocked",
+      "claim": null,
+      "notes": "drone/app/seed/docs/WORK_ORDER.md swarm entry still cds to G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b. Applyable catalog patch is patches/dronehive-seed-work-order-doc-cd.patch on main#9. Independent of live leftover (different file). Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "drone/app/seed/docs/WORK_ORDER.md swarm entry is cd .",
+      "files": [
+        "drone/app/seed/docs/WORK_ORDER.md"
+      ],
+      "collision": "Seed WORK_ORDER.md section 8 cd line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",

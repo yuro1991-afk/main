@@ -166,6 +166,20 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
   const seedDocCodexCli = relaunchFor({ ...job, id: "dronehive-seed-work-order-doc-codex-cli" });
   assert.match(seedDocCodexCli.reason, /dronehive-seed-work-order-doc-codex-cli\.patch/);
   assert.doesNotMatch(seedDocCodexCli.reason, /npm run autofix/);
+  for (const id of [
+    "dronehive-work-order-doc-recall-router",
+    "dronehive-seed-work-order-doc-recall-router",
+    "dronehive-work-order-doc-memory-recycle",
+    "dronehive-seed-work-order-doc-memory-recycle",
+    "dronehive-work-order-doc-models",
+    "dronehive-seed-work-order-doc-models",
+    "dronehive-work-order-doc-cd",
+    "dronehive-seed-work-order-doc-cd",
+  ]) {
+    const target = relaunchFor({ ...job, id });
+    assert.match(target.reason, new RegExp(`${id}\\.patch`));
+    assert.doesNotMatch(target.reason, /npm run autofix/);
+  }
 });
 
 test("origin jobs relaunch to the Origin codebase", () => {

@@ -1,0 +1,13 @@
+diff --git a/drone/app/seed/docs/WORK_ORDER.md b/drone/app/seed/docs/WORK_ORDER.md
+index 3789067..645c7c9 100644
+--- a/drone/app/seed/docs/WORK_ORDER.md
++++ b/drone/app/seed/docs/WORK_ORDER.md
+@@ -407,7 +407,7 @@ data\hive\imprints\
+ ## 8. SWARM ENTRY POINTS (host) — both systems
+ 
+ ```powershell
+-cd G:\AI-Home\projects\ai-worker-drone-0.5b
++cd .
+ $py = "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe"
+ 
+ # Shared imprint law

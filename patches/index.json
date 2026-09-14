@@ -3,7 +3,7 @@
   "cannotPush": true,
   "apply": "git clone https://github.com/<repo>.git work && cd work && git apply --check ../<file> && git apply ../<file>",
   "doNot": "Do not copy PR #6 npm run autofix. This catalog lists diffs only.",
-  "verifiedAt": "2026-09-14T20:56:00Z",
+  "verifiedAt": "2026-09-14T21:00:00Z",
   "patches": [
     {
       "id": "dronehive-unicode-ci",
@@ -666,6 +666,78 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "drone/app/seed/docs/WORK_ORDER.md & $py query_llm_codex.py examples use host/library/bin. Independent of live leftover (different file) and seed table leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-recall-router",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-doc-recall-router.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/WORK_ORDER.md recall.py and ai_smarts_router.py examples use host/library and host/ai-home. Independent of CLI leftover and models leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-recall-router",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-doc-recall-router.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "drone/app/seed/docs/WORK_ORDER.md recall.py and ai_smarts_router.py examples use host paths. Independent of live leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-memory-recycle",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-doc-memory-recycle.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/WORK_ORDER.md memory_recycle path uses repo-relative data/hive/memory_recycle/. Independent of header fabric leftover and live-registry leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-memory-recycle",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-doc-memory-recycle.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "drone/app/seed/docs/WORK_ORDER.md memory_recycle path uses repo-relative data/hive/memory_recycle/. Independent of live leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-models",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-doc-models.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/WORK_ORDER.md install-proof models path uses host/ai-home/models. Independent of CLI leftover and recall leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-models",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-doc-models.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "drone/app/seed/docs/WORK_ORDER.md install-proof models path uses host/ai-home/models. Independent of live leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-doc-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/WORK_ORDER.md swarm entry cd uses repo-relative '.'. Independent of NEXT.json leftover and header fabric leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-doc-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "drone/app/seed/docs/WORK_ORDER.md swarm entry cd uses repo-relative '.'. Independent of live leftover (different file). Does not touch tool_agent.py."
     }
   ]
 }
