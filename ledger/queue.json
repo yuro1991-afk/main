@@ -199,6 +199,21 @@
       "collision": "Seed docs only. Different file from docs/WORK_ORDER.md. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-bench-goal-honesty",
+      "title": "Mark bench GOAL G: path as one host example",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 37,
+      "status": "blocked",
+      "claim": null,
+      "notes": "scripts/bench_vs_helpers.py GOAL still says paths under G:\\\\AI-Home. Applyable catalog patch is patches/dronehive-bench-goal-honesty.patch on main#9. Independent of script-host-roots (ROOT/MUSCLE/out_dir hunks only). Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "scripts/bench_vs_helpers.py GOAL mentions host/ and that G:\\\\AI-Home is one host example.",
+      "files": [
+        "scripts/bench_vs_helpers.py"
+      ],
+      "collision": "GOAL string only. Same file as script-host-roots but different hunks. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",

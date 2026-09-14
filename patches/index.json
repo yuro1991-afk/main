@@ -306,6 +306,15 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "drone/app/seed/docs/WORK_ORDER.md NEXT.json example codex_ref uses host/library, not F:\\\\GrokSelfLibrary. Independent of docs/WORK_ORDER.md leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-bench-goal-honesty",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-bench-goal-honesty.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "scripts/bench_vs_helpers.py GOAL string: G:\\\\AI-Home is one host example. Independent of script-host-roots (ROOT/MUSCLE/out_dir hunks only). Does not touch tool_agent.py."
     }
   ]
 }
