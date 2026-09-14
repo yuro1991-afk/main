@@ -37,7 +37,7 @@
       "priority": 4,
       "status": "blocked",
       "claim": null,
-      "notes": "Hardcoded F:\\GrokSelfLibrary, D:\\GrokCoreMemory, G:\\AI-Home\\... leak onto Linux cwd. Not on PR #1 or #2.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "notes": "Hardcoded F:\\GrokSelfLibrary, D:\\GrokCoreMemory, G:\\AI-Home\\... leak onto Linux cwd. Not on PR #1 or #2. Applyable catalog patch is patches/dronehive-portable-paths.patch on main#9. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "python -m drone work-order-show",
       "files": [
         "drone/ai_bus.py",

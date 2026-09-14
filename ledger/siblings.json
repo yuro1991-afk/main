@@ -69,7 +69,8 @@
         "faceswap-mock-engine-ci",
         "ova-stop-noui-guard",
         "ova-pester-qa-math",
-        "dronehive-ubuntu-smoke"
+        "dronehive-ubuntu-smoke",
+        "dronehive-portable-paths"
       ]
     }
   ]

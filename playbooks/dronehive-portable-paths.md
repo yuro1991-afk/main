@@ -5,7 +5,7 @@
 - scope: relaunch
 - repo: github.com/yuro1991-afk/dronehive
 - relaunch: https://github.com/yuro1991-afk/dronehive
-- why: This token cannot push dronehive. Apply PR #6: npm run autofix -- apply <checkout>.
+- why: This token cannot push dronehive. Apply `patches/dronehive-portable-paths.patch` from [main#9](https://github.com/yuro1991-afk/main/pull/9). Do not copy PR #6 autofix.
 
 ## Notes
 
@@ -19,7 +19,8 @@ Avoid drone/pro/tool_agent.py while unicode-ci is claimed.
 
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-portable-paths-from-ops
-- edit: drone/ai_bus.py, drone/library_bridge.py, drone/knowledge_imprint.py, drone/work_order.py, drone/clean_slate.py, configs/work_order.json
+- git apply --check /path/to/main/patches/dronehive-portable-paths.patch
+- git apply /path/to/main/patches/dronehive-portable-paths.patch
 - python -m drone work-order-show
 
 ## Verify

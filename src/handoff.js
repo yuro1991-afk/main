@@ -140,6 +140,25 @@ export function buildRelaunch(job, siblings) {
 }
 
 /**
+ * Catalog diffs live on main#9. Do not send waking agents to copy PR #6 autofix.
+ * @param {string} jobId
+ */
+function dronehiveRelaunchReason(jobId) {
+  switch (jobId) {
+    case "dronehive-unicode-ci":
+      return "This token cannot push dronehive. Apply patches/dronehive-pro-chat-cp1252.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-ubuntu-smoke":
+      return "This token cannot push dronehive. Apply patches/dronehive-ubuntu-smoke.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-portable-paths":
+      return "This token cannot push dronehive. Apply patches/dronehive-portable-paths.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-rebase-packaging":
+      return "This token cannot push dronehive. Rebase packaging stays blocked until dronehive#1 python-smoke is green. Do not copy PR #6 autofix.";
+    default:
+      return "This token cannot push dronehive. Apply the matching catalog patch from main#9 (`node src/cli.js patches --job <id>`). Do not copy PR #6 autofix.";
+  }
+}
+
+/**
  * @param {import("./ledger.js").Job} job
  */
 export function relaunchFor(job) {
@@ -163,7 +182,7 @@ export function relaunchFor(job) {
         return {
           kind: "github",
           url: "https://github.com/yuro1991-afk/dronehive",
-          reason: "This token cannot push dronehive. Apply PR #6: npm run autofix -- apply <checkout>.",
+          reason: dronehiveRelaunchReason(job.id),
         };
       }
       return {

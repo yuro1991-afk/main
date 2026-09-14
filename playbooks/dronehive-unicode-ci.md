@@ -5,7 +5,7 @@
 - scope: relaunch
 - repo: github.com/yuro1991-afk/dronehive
 - relaunch: https://github.com/yuro1991-afk/dronehive
-- why: This token cannot push dronehive. Apply PR #6: npm run autofix -- apply <checkout>.
+- why: This token cannot push dronehive. Apply `patches/dronehive-pro-chat-cp1252.patch` from [main#9](https://github.com/yuro1991-afk/main/pull/9). Do not copy PR #6 autofix.
 
 ## Notes
 
