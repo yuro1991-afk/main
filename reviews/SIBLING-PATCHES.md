@@ -1,4 +1,4 @@
-# Sibling patch catalog (verified 2026-09-14T19:28Z)
+# Sibling patch catalog (verified 2026-09-14T19:30Z)
 
 **Yuri: forget Origin.** This pad token cannot push the public GitHub
 siblings. These diffs apply clean (`git apply --check`) on current
@@ -29,13 +29,14 @@ This is **not** PR #6’s autofix runner. Do not copy `bin/autofix.js`.
 | `dronehive-portable-paths` | dronehive `d538a89` | `patches/dronehive-portable-paths.patch` | OK |
 | `dronehive-script-host-roots` | dronehive `d538a89` | `patches/dronehive-script-host-roots.patch` | OK |
 | `faceswap-start-sh` | face-swap-ios `bba7188` | `patches/faceswap-start-sh.patch` | OK |
+| `dronehive-runtime-host-paths` | dronehive `d538a89` | `patches/dronehive-runtime-host-paths.patch` | OK |
 
 ## After apply
 
 - bloom gitignore: also `git rm -r --cached .vercel/output` (58 tracked files). Keep `package-lock.json`.
 - face-swap icons: copies also live under `patches/faceswap-pwa-icons/` if `git apply --binary` is awkward.
 - opensussy 2.0.0: leave CHANGELOG `## 1.3.0` and `docs/superpowers/**` historical. `usb_zip_bytes` / `utc` stay until a real v2 USB zip exists.
-- dronehive: do not rebase dronehive#2 until #1 `python-smoke` is green. Ubuntu smoke, portable-paths, and script-host-roots stack on the unicode patch. Do not edit `drone/pro/tool_agent.py` in the path patches.
+- dronehive: do not rebase dronehive#2 until #1 `python-smoke` is green. Ubuntu smoke, portable-paths, script-host-roots, and runtime-host-paths stack on the unicode patch. Apply `dronehive-runtime-host-paths` **after** portable-paths. Do not edit `drone/pro/tool_agent.py` in the path patches.
 - face-swap `START.sh`: fail-closed like `START.cmd`. New file; apply on vanilla `main`.
 
 ## Relaunch

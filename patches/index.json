@@ -3,7 +3,7 @@
   "cannotPush": true,
   "apply": "git clone https://github.com/<repo>.git work && cd work && git apply --check ../<file> && git apply ../<file>",
   "doNot": "Do not copy PR #6 npm run autofix. This catalog lists diffs only.",
-  "verifiedAt": "2026-09-14T19:28:00Z",
+  "verifiedAt": "2026-09-14T19:30:00Z",
   "patches": [
     {
       "id": "dronehive-unicode-ci",
@@ -198,6 +198,15 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "Linux START.sh fail-closed on FACESWAP_ENGINE like START.cmd. New file; stacks with honesty-env-paths and health-offline."
+    },
+    {
+      "id": "dronehive-runtime-host-paths",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-runtime-host-paths.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "Wraps leftover Path() in grok_handoff / future_seer / tools / operational. Apply after dronehive-portable-paths so drone/host_paths.py exists. Does not touch tool_agent.py."
     }
   ]
 }

@@ -82,6 +82,24 @@
       "collision": "Do not edit drone/pro/tool_agent.py. Independent of portable-paths."
     },
     {
+      "id": "dronehive-runtime-host-paths",
+      "title": "Wrap leftover dronehive runtime Path() via host_paths",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 25,
+      "status": "blocked",
+      "claim": null,
+      "notes": "After portable-paths, grok_handoff / future_seer / tools / operational still hardcode G: Path(). Apply portable-paths first, then patches/dronehive-runtime-host-paths.patch from main#9. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "python3 -m py_compile drone/grok_handoff.py drone/future_seer.py drone/tools.py drone/operational.py",
+      "files": [
+        "drone/grok_handoff.py",
+        "drone/future_seer.py",
+        "drone/tools.py",
+        "drone/operational.py"
+      ],
+      "collision": "Apply after dronehive-portable-paths. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",
