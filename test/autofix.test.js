@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { mkdtempSync, rmSync } from "node:fs";
+import { existsSync, mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { test } from "node:test";
@@ -8,7 +8,12 @@ import { fileURLToPath } from "node:url";
 import { COMMANDS, diagnose, parseArgv, reproduce, run, verify } from "../src/autofix.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const DRONEHIVE = process.env.DRONEHIVE_TREE || "/tmp/sibling/dronehive";
+const LOCAL_DRONEHIVE = "/tmp/sibling/dronehive";
+const DRONEHIVE =
+  process.env.DRONEHIVE_TREE ||
+  (existsSync(path.join(LOCAL_DRONEHIVE, ".git"))
+    ? LOCAL_DRONEHIVE
+    : "https://github.com/yuro1991-afk/dronehive.git");
 
 test("diagnose names the dronehive cp1252 crash and refuses a local push", () => {
   const report = diagnose();
@@ -55,15 +60,7 @@ test("parseArgv defaults to diagnose", () => {
   });
 });
 
-test("apply patches a fresh dronehive clone and the extracted _chat holds", (t) => {
-  const probe = spawnSync("git", ["-C", DRONEHIVE, "rev-parse", "--is-inside-work-tree"], {
-    encoding: "utf8",
-  });
-  if (probe.status !== 0) {
-    t.skip(`dronehive checkout not available at ${DRONEHIVE}`);
-    return;
-  }
-
+test("apply patches a fresh dronehive clone and the extracted _chat holds", () => {
   const scratch = mkdtempSync(path.join(tmpdir(), "autofix-dronehive-"));
   try {
     const clone = spawnSync("git", ["clone", "--depth", "1", DRONEHIVE, scratch], {
