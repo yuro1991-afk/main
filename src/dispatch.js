@@ -8,6 +8,7 @@ import {
   listJobs,
   nextJob,
 } from "./ledger.js";
+import { jobForDisplay } from "./brief.js";
 import { unusedGenesisCards } from "./sync.js";
 import { buildHelperPacket } from "./helpers.js";
 import { buildRelaunch, packetPathFor, relaunchFor } from "./handoff.js";
@@ -101,7 +102,7 @@ export function buildBusy(job, siblings, slots, options = {}) {
     jobId: job.id,
     packet: packetPathFor(job),
     playbook: `playbooks/${job.id}.md`,
-    job,
+    job: jobForDisplay(job),
     relaunch: relaunch.relaunch,
     prompt: renderLaunchPrompt(job),
     helpers: buildHelperPacket(job).helpers,

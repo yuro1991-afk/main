@@ -33,7 +33,7 @@ export function buildBrief(job, siblings, options = {}) {
   }));
   return {
     contract: BRIEF_CONTRACT,
-    job,
+    job: jobForDisplay(job, { root: options.root }),
     kind: describeKind(job.kind),
     destination: catalogPatchFor(job, { root: options.root })
       ? `Apply the catalog patch on ${job.repo}`
@@ -59,6 +59,16 @@ export function displayNotes(job, options = {}) {
     return notes.replace(BLOCKED_GENESIS_ONLY, "").trimEnd();
   }
   return notes;
+}
+
+/**
+ * @param {import("./ledger.js").Job} job
+ * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { file: string, afterApply?: string[] } | null }} [options]
+ */
+export function jobForDisplay(job, options = {}) {
+  const notes = displayNotes(job, options);
+  if (notes === (job.notes ?? "")) return job;
+  return { ...job, notes };
 }
 
 /**

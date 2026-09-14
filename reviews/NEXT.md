@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-14T23:37Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-14T23:39Z**: 40 IDLE + this run RUNNING.
 No new agents. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Do not inventory the pad again.
-Shipped this tick: catalog `--job` notes drop the Genesis-only
-Blocked line; catalog-kind brief destination is apply, not Notion.
-Catalog still 162. Sibling SHAs unchanged. PR #10 still `82161d8`.
+Shipped this tick: catalog `brief` / `busy` job.notes drop the
+Genesis-only Blocked line. Catalog still 162. Sibling SHAs unchanged.
+PR #10 still `82161d8`.
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
 (`cursor/python-arena-infra-dca0`). Head and ears already landed.
@@ -30,8 +30,8 @@ Helpers for cataloged cards prove then apply — they do not draft a new leftove
 Catalog `brief` hardRules say forget Origin — not “sibling cards stay blocked.”
 `cli handoff --job <catalog-id>` and `relaunch --job` say forget Origin
 and apply — they do not say “Do not work dronehive.”
-Catalog `--job` prompt / handoff / playbook notes drop
-“Blocked: Yuri scoped this landing pad to Genesis only.”
+Catalog `--job` prompt / handoff / playbook / `brief.job.notes` /
+`busy.job.notes` drop “Blocked: Yuri scoped this landing pad to Genesis only.”
 Catalog-kind sibling `brief` destination is apply, not Notion + Origin.
 Leftover hunt is closed. Do not invent leftovers. Do not recatalog
 CHANNEL_META / wraps / sandwiched JSON.

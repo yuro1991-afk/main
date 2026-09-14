@@ -57,6 +57,8 @@ test("brief attaches sibling PR 5 to the unicode card", () => {
   assert.ok(!brief.hardRules.some((rule) => rule.includes("Extend PR #3")));
   assert.equal(brief.destination, "Apply the catalog patch on github.com/yuro1991-afk/dronehive");
   assert.doesNotMatch(brief.destination, /Notion/);
+  assert.match(drone.notes, /Blocked: Yuri scoped this landing pad to Genesis only/);
+  assert.doesNotMatch(brief.job.notes, /Blocked: Yuri scoped this landing pad to Genesis only/);
 });
 
 test("firstCommands is exhaustive", () => {
