@@ -17,6 +17,7 @@ scripts/Enable-Bridge1080-Admin.ps1 fallback line only. Do not edit drone/pro/to
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-enable-bridge-fallback
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-enable-bridge-fallback-from-ops
 - git apply --check /path/to/main/patches/dronehive-enable-bridge-fallback.patch

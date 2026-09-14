@@ -17,6 +17,7 @@ drone/grok_handoff.py clone dest defaults only. Leave the G: goal regex. Do not 
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-grok-handoff-clone-dest
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-grok-handoff-clone-dest-from-ops
 - git apply --check /path/to/main/patches/dronehive-grok-handoff-clone-dest.patch

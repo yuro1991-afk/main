@@ -17,6 +17,7 @@ Seed WORK_ORDER.md section 2.6 examples only. Do not edit drone/pro/tool_agent.p
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-seed-work-order-doc-recall-router
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-seed-work-order-doc-recall-router-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-doc-recall-router.patch

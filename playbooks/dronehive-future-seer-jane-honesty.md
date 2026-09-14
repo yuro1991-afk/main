@@ -17,6 +17,7 @@ configs/future_seer.json jane keys only. Do not edit drone/pro/tool_agent.py.
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-future-seer-jane-honesty
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-future-seer-jane-honesty-from-ops
 - git apply --check /path/to/main/patches/dronehive-future-seer-jane-honesty.patch

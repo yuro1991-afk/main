@@ -17,6 +17,7 @@ Seed curriculum_root / curriculum_json only. Different file from configs/work_or
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-seed-work-order-curriculum-root
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-seed-work-order-curriculum-root-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-curriculum-root.patch

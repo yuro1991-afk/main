@@ -17,6 +17,7 @@ apps/drone-ollama-mount/README.md build block only. Do not edit drone/pro/tool_a
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-mount-readme-cargo
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-mount-readme-cargo-from-ops
 - git apply --check /path/to/main/patches/dronehive-mount-readme-cargo.patch

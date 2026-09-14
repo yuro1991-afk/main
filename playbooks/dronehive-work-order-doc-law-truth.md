@@ -17,6 +17,7 @@ docs/WORK_ORDER.md Library law line only. Do not edit the C:\ host-law line. Do 
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-work-order-doc-law-truth
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-work-order-doc-law-truth-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-doc-law-truth.patch

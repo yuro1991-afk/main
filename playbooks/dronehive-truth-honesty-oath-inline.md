@@ -17,6 +17,7 @@ TRUTH_AND_HONESTY.md inline Oath line only. Leave C:\\Users hardwire. Do not edi
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-truth-honesty-oath-inline
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-truth-honesty-oath-inline-from-ops
 - git apply --check /path/to/main/patches/dronehive-truth-honesty-oath-inline.patch

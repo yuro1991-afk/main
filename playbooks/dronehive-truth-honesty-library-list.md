@@ -17,6 +17,7 @@ TRUTH_AND_HONESTY.md Universal/Oath/Coder list only. Leave C:\\Users hardwire. D
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-truth-honesty-library-list
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-truth-honesty-library-list-from-ops
 - git apply --check /path/to/main/patches/dronehive-truth-honesty-library-list.patch

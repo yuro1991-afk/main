@@ -17,6 +17,7 @@ Do not bind or rewrite MultoModa on :8855. Do not commit G:\AI-Home host paths. 
 
 ## First commands
 
+- node src/cli.js patches --prove --job faceswap-mock-engine-ci
 - git clone https://github.com/yuro1991-afk/face-swap-ios.git work && cd work
 - git checkout -b cursor/faceswap-mock-engine-ci-from-ops
 - git apply --check /path/to/main/patches/faceswap-mock-engine-ci.patch

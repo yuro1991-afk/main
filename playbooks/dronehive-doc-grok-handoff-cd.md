@@ -17,6 +17,7 @@ docs/GROK_HANDOFF.md cd line only. Do not edit drone/pro/tool_agent.py.
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-doc-grok-handoff-cd
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-doc-grok-handoff-cd-from-ops
 - git apply --check /path/to/main/patches/dronehive-doc-grok-handoff-cd.patch

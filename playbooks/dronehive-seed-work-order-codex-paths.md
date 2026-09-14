@@ -17,6 +17,7 @@ Seed codex path keys only. Different file from configs/work_order.json. Do not e
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-seed-work-order-codex-paths
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-seed-work-order-codex-paths-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-codex-paths.patch

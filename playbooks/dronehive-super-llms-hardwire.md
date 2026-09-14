@@ -17,6 +17,7 @@ configs/super_llms.json super_mesh.hardwire key only. Do not edit drone/pro/tool
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-super-llms-hardwire
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-super-llms-hardwire-from-ops
 - git apply --check /path/to/main/patches/dronehive-super-llms-hardwire.patch

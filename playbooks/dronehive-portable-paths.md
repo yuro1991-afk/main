@@ -17,6 +17,7 @@ Avoid drone/pro/tool_agent.py while unicode-ci is claimed.
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-portable-paths
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-portable-paths-from-ops
 - git apply --check /path/to/main/patches/dronehive-portable-paths.patch

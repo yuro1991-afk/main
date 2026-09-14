@@ -17,6 +17,7 @@ configs/buzzer_hive.json library keys only. Do not edit drone/pro/tool_agent.py.
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-buzzer-hive-library-honesty
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-buzzer-hive-library-honesty-from-ops
 - git apply --check /path/to/main/patches/dronehive-buzzer-hive-library-honesty.patch

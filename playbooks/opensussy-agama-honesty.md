@@ -17,6 +17,7 @@ Docs/honesty only. Do not change default --linux-disk or unattended wipe flags.
 
 ## First commands
 
+- node src/cli.js patches --prove --job opensussy-agama-honesty
 - git clone https://github.com/yuro1991-afk/opensussy.git work && cd work
 - git checkout -b cursor/opensussy-agama-honesty-from-ops
 - git apply --check /path/to/main/patches/opensussy-agama-honesty.patch

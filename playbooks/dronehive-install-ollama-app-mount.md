@@ -17,6 +17,7 @@ Install-DroneOllamaApp.ps1 $mountSrc line only. Do not edit drone/pro/tool_agent
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-install-ollama-app-mount
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-install-ollama-app-mount-from-ops
 - git apply --check /path/to/main/patches/dronehive-install-ollama-app-mount.patch

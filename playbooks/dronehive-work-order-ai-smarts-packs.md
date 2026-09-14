@@ -17,6 +17,7 @@ configs/work_order.json knowledge_imprint.ai_smarts_packs only. -U1 trailing kno
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-work-order-ai-smarts-packs
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-work-order-ai-smarts-packs-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-ai-smarts-packs.patch

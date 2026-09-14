@@ -17,6 +17,7 @@ README firewall sentence only. Different hunk from install, Requirements, and Sw
 
 ## First commands
 
+- node src/cli.js patches --prove --job faceswap-readme-firewall-honesty
 - git clone https://github.com/yuro1991-afk/face-swap-ios.git work && cd work
 - git checkout -b cursor/faceswap-readme-firewall-honesty-from-ops
 - git apply --check /path/to/main/patches/faceswap-readme-firewall-honesty.patch

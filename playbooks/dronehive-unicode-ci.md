@@ -17,6 +17,7 @@ Avoid rewriting drone/pro/tool_agent.py while this card is claimed. Stack ubuntu
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-unicode-ci
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-unicode-ci-from-ops
 - git apply --check /path/to/main/patches/dronehive-pro-chat-cp1252.patch

@@ -17,6 +17,7 @@ Historical lab design Base codebase line only. Leave CHANGELOG 1.3.0.
 
 ## First commands
 
+- node src/cli.js patches --prove --job opensussy-superpowers-lab-design
 - git clone https://github.com/yuro1991-afk/opensussy.git work && cd work
 - git checkout -b cursor/opensussy-superpowers-lab-design-from-ops
 - git apply --check /path/to/main/patches/opensussy-superpowers-lab-design.patch

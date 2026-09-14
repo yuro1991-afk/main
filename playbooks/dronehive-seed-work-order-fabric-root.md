@@ -17,6 +17,7 @@ Seed fabric_root key only. Different file from configs/work_order.json. Do not e
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-seed-work-order-fabric-root
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-seed-work-order-fabric-root-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-fabric-root.patch

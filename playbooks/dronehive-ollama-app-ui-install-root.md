@@ -17,6 +17,7 @@ apps/drone-ollama-app/src/main.rs UI install-root small() only. Do not edit dron
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-ollama-app-ui-install-root
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-ollama-app-ui-install-root-from-ops
 - git apply --check /path/to/main/patches/dronehive-ollama-app-ui-install-root.patch

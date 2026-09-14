@@ -17,6 +17,7 @@ seed work_order.json knowledge_imprint.core_lessons only. -U1 trailing cache_rel
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-seed-work-order-core-lessons
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-seed-work-order-core-lessons-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-core-lessons.patch

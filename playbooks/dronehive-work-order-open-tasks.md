@@ -17,6 +17,7 @@ configs/work_order.json open_tasks key only. Do not edit drone/pro/tool_agent.py
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-work-order-open-tasks
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-work-order-open-tasks-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-open-tasks.patch

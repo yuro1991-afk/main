@@ -17,6 +17,7 @@ docs/WORK_ORDER.md & $py query_llm_codex.py examples only. Do not edit the table
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-work-order-doc-codex-cli
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-work-order-doc-codex-cli-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-doc-codex-cli.patch

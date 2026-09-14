@@ -17,6 +17,7 @@ New file only. Do not vendor InsightFace weights. Do not change POST /api/ios/sw
 
 ## First commands
 
+- node src/cli.js patches --prove --job faceswap-start-sh
 - git clone https://github.com/yuro1991-afk/face-swap-ios.git work && cd work
 - git checkout -b cursor/faceswap-start-sh-from-ops
 - git apply --check /path/to/main/patches/faceswap-start-sh.patch

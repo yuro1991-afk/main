@@ -17,6 +17,7 @@ README Swift paragraph only. Different hunk from Requirements, install, and hone
 
 ## First commands
 
+- node src/cli.js patches --prove --job faceswap-readme-swift-honesty
 - git clone https://github.com/yuro1991-afk/face-swap-ios.git work && cd work
 - git checkout -b cursor/faceswap-readme-swift-honesty-from-ops
 - git apply --check /path/to/main/patches/faceswap-readme-swift-honesty.patch

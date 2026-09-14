@@ -17,6 +17,7 @@ Same as keep-busy commit-pwa-homescreen-icons. Do not fight faceswap-mock-engine
 
 ## First commands
 
+- node src/cli.js patches --prove --job faceswap-commit-pwa-icons
 - git clone https://github.com/yuro1991-afk/face-swap-ios.git work && cd work
 - git checkout -b cursor/faceswap-commit-pwa-icons-from-ops
 - git apply --check /path/to/main/patches/faceswap-commit-pwa-icons.patch

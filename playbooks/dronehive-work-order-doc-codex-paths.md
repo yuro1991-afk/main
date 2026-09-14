@@ -17,6 +17,7 @@ docs/WORK_ORDER.md codex table only. Do not edit the & $py CLI examples. Do not 
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-work-order-doc-codex-paths
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-work-order-doc-codex-paths-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-doc-codex-paths.patch

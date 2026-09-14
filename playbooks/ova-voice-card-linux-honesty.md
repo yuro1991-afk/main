@@ -17,6 +17,7 @@ Docs only. Different file from ova-readme-linux-honesty (README). Independent of
 
 ## First commands
 
+- node src/cli.js patches --prove --job ova-voice-card-linux-honesty
 - git clone https://github.com/yuro1991-afk/ollama-voice-access.git work && cd work
 - git checkout -b cursor/ova-voice-card-linux-honesty-from-ops
 - git apply --check /path/to/main/patches/ova-voice-card-linux-honesty.patch

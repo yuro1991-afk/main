@@ -17,6 +17,7 @@ Same as keep-busy gitignore-vercel-build-output. Keep package-lock.json tracked.
 
 ## First commands
 
+- node src/cli.js patches --prove --job bloom-gitignore-vercel
 - git clone https://github.com/yuro1991-afk/bloom-fair-yellow-charm.git work && cd work
 - git checkout -b cursor/bloom-gitignore-vercel-from-ops
 - git apply --check /path/to/main/patches/bloom-gitignore-vercel.patch

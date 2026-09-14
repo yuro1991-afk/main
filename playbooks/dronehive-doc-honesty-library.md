@@ -17,6 +17,7 @@ docs/HONESTY.md library row only. Do not edit drone/pro/tool_agent.py.
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-doc-honesty-library
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-doc-honesty-library-from-ops
 - git apply --check /path/to/main/patches/dronehive-doc-honesty-library.patch

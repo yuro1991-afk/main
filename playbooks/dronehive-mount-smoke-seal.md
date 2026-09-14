@@ -17,6 +17,7 @@ apps/drone-ollama-mount/src/main.rs SMOKE_SEAL only. Do not edit drone/pro/tool_
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-mount-smoke-seal
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-mount-smoke-seal-from-ops
 - git apply --check /path/to/main/patches/dronehive-mount-smoke-seal.patch

@@ -17,6 +17,7 @@ drone/multi_face.py PYTHONPATH assignments only. Do not edit drone/pro/tool_agen
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-multi-face-pythonpath
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-multi-face-pythonpath-from-ops
 - git apply --check /path/to/main/patches/dronehive-multi-face-pythonpath.patch

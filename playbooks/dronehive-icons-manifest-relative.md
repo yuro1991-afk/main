@@ -17,6 +17,7 @@ Manifest only. Independent of portable-paths and config-load-overlay. Do not edi
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-icons-manifest-relative
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-icons-manifest-relative-from-ops
 - git apply --check /path/to/main/patches/dronehive-icons-manifest-relative.patch

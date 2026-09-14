@@ -42,7 +42,7 @@ Do not implement a probe here or on Origin.
 - \`review-main-pr10\` — review https://github.com/yuro1991-afk/main/pull/10. Do not steal head / ears / eyes / vision / bridge.
 - first parked apply: \`dronehive-unicode-ci\` on a sibling write checkout
 - \`node src/cli.js brief --job review-main-pr10\`
-- \`node src/cli.js patches --job dronehive-unicode-ci\`
+- \`node src/cli.js patches --prove --job dronehive-unicode-ci\`
 
 ## Do not
 

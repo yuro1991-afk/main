@@ -17,6 +17,7 @@ scripts/package_release_v2.ps1 cargo/rustup env only. Do not edit drone/pro/tool
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-package-release-v2-cargo
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-package-release-v2-cargo-from-ops
 - git apply --check /path/to/main/patches/dronehive-package-release-v2-cargo.patch

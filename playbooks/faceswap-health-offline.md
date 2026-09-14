@@ -17,6 +17,7 @@ Do not change POST /api/ios/swap payload shape. Coordinate with faceswap-mock-en
 
 ## First commands
 
+- node src/cli.js patches --prove --job faceswap-health-offline
 - git clone https://github.com/yuro1991-afk/face-swap-ios.git work && cd work
 - git checkout -b cursor/faceswap-health-offline-from-ops
 - git apply --check /path/to/main/patches/faceswap-health-offline.patch

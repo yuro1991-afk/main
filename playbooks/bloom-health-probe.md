@@ -18,6 +18,7 @@ Do not probe or relabel Superbrain from this card. Do not bind :8787/:8788 Origi
 
 ## First commands
 
+- node src/cli.js patches --prove --job bloom-health-probe
 - git clone https://github.com/yuro1991-afk/bloom-fair-yellow-charm.git work && cd work
 - git checkout -b cursor/bloom-health-probe-from-ops
 - git apply --check /path/to/main/patches/bloom-health-probe.patch

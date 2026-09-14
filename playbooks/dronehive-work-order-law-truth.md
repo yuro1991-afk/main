@@ -17,6 +17,7 @@ configs/work_order.json LAW_TRUTH.md path only. Do not edit the C:\ Users grok r
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-work-order-law-truth
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-work-order-law-truth-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-law-truth.patch

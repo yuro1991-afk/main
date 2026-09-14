@@ -87,12 +87,12 @@ export function planHelpers(job) {
           {
             role: "refuse",
             title: `Stop Superbrain probe`,
-            prompt: `Yuri: no more Superbrain. Do not probe :45001 / :8791. Do not run node src/cli.js probe. Do not origin auth / clone yuri-afk/genesis for this card. Take review-main-pr10 or apply a catalog patch on a sibling write checkout.`,
+            prompt: `Yuri: no more Superbrain. Do not probe :45001 / :8791. Do not run node src/cli.js probe. Do not origin auth / clone yuri-afk/genesis for this card. Take review-main-pr10 or run node src/cli.js patches --prove then apply a catalog patch on a sibling write checkout.`,
           },
           {
             role: "apply",
             title: `Take a GitHub card instead`,
-            prompt: `Run node src/cli.js brief --job review-main-pr10, or node src/cli.js patches --job dronehive-unicode-ci. Apply on a sibling write checkout. Do not inventory the pad again.`,
+            prompt: `Run node src/cli.js brief --job review-main-pr10, or node src/cli.js patches --prove --job dronehive-unicode-ci. Apply on a sibling write checkout. Do not inventory the pad again.`,
           },
         ];
       }

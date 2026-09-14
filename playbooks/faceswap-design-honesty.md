@@ -17,6 +17,7 @@ Docs only. Do not vendor InsightFace weights. Different file from honesty-env-pa
 
 ## First commands
 
+- node src/cli.js patches --prove --job faceswap-design-honesty
 - git clone https://github.com/yuro1991-afk/face-swap-ios.git work && cd work
 - git checkout -b cursor/faceswap-design-honesty-from-ops
 - git apply --check /path/to/main/patches/faceswap-design-honesty.patch

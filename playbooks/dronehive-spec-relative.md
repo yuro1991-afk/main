@@ -17,6 +17,7 @@ DroneHive.spec Analysis script/pathex only. Do not edit drone/pro/tool_agent.py.
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-spec-relative
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-spec-relative-from-ops
 - git apply --check /path/to/main/patches/dronehive-spec-relative.patch

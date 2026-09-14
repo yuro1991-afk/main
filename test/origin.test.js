@@ -141,6 +141,7 @@ test("gub-superbrain-probe firstCommands refuse the probe", () => {
   });
   assert.ok(lines.some((line) => line.includes("no more Superbrain")));
   assert.ok(lines.some((line) => line.includes("Do not run node src/cli.js probe")));
+  assert.ok(lines.some((line) => line.includes("patches --prove")));
   assert.ok(!lines.some((line) => line.includes("origin auth")));
   assert.ok(!lines.some((line) => line.startsWith("node src/cli.js probe")));
   assert.ok(!lines.some((line) => line.includes("GET") && line.includes("45001")));

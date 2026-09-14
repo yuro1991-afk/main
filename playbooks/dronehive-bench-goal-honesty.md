@@ -17,6 +17,7 @@ GOAL string only. Same file as script-host-roots but different hunks. Do not edi
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-bench-goal-honesty
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-bench-goal-honesty-from-ops
 - git apply --check /path/to/main/patches/dronehive-bench-goal-honesty.patch

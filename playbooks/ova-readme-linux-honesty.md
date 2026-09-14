@@ -17,6 +17,7 @@ Docs only. Independent of api-host-override (that patch appends after License).
 
 ## First commands
 
+- node src/cli.js patches --prove --job ova-readme-linux-honesty
 - git clone https://github.com/yuro1991-afk/ollama-voice-access.git work && cd work
 - git checkout -b cursor/ova-readme-linux-honesty-from-ops
 - git apply --check /path/to/main/patches/ova-readme-linux-honesty.patch

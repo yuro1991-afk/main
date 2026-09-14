@@ -17,6 +17,7 @@ After unicode-ci; do not fight PR #2 packaging.
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-ubuntu-smoke
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-ubuntu-smoke-from-ops
 - git apply --check /path/to/main/patches/dronehive-ubuntu-smoke.patch

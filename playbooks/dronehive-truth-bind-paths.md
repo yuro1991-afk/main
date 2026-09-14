@@ -17,6 +17,7 @@ TRUTH_BIND.json remappable keys only. Do not edit drone/pro/tool_agent.py.
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-truth-bind-paths
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-truth-bind-paths-from-ops
 - git apply --check /path/to/main/patches/dronehive-truth-bind-paths.patch

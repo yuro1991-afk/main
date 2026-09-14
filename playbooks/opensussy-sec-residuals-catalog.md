@@ -18,6 +18,7 @@ Read-only review of wipe/sanitize behavior. Do not implement nuclear AutoYaST or
 
 ## First commands
 
+- node src/cli.js patches --prove --job opensussy-sec-residuals-catalog
 - git clone https://github.com/yuro1991-afk/opensussy.git work && cd work
 - git checkout -b cursor/opensussy-sec-residuals-catalog-from-ops
 - git apply --check /path/to/main/patches/opensussy-sec-residuals-catalog.patch

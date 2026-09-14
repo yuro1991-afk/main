@@ -17,6 +17,7 @@ apps/dronehive-tui/README.md PATH line only. Do not edit drone/pro/tool_agent.py
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-tui-readme-cargo
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-tui-readme-cargo-from-ops
 - git apply --check /path/to/main/patches/dronehive-tui-readme-cargo.patch

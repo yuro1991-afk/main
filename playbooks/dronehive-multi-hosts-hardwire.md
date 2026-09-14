@@ -17,6 +17,7 @@ configs/multi_hosts.json super_mesh.hardwire key only. Do not edit C:\ AppData e
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-multi-hosts-hardwire
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-multi-hosts-hardwire-from-ops
 - git apply --check /path/to/main/patches/dronehive-multi-hosts-hardwire.patch

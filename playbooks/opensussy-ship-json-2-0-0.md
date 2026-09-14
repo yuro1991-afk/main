@@ -17,6 +17,7 @@ Same card as keep-busy sync-2-0-0-docs-and-ship-json. Claim one board, not both.
 
 ## First commands
 
+- node src/cli.js patches --prove --job opensussy-ship-json-2-0-0
 - git clone https://github.com/yuro1991-afk/opensussy.git work && cd work
 - git checkout -b cursor/opensussy-ship-json-2-0-0-from-ops
 - git apply --check /path/to/main/patches/opensussy-ship-json-2-0-0.patch

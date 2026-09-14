@@ -17,6 +17,7 @@ configs/work_order.json school_root / school_lessons_md only. Do not edit drone/
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-work-order-school-root
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-work-order-school-root-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-school-root.patch

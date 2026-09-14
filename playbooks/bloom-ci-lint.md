@@ -17,6 +17,7 @@ New file. Independent of bloom-ci-typecheck (`ci.yml`) and bloom-health-probe (`
 
 ## First commands
 
+- node src/cli.js patches --prove --job bloom-ci-lint
 - git clone https://github.com/yuro1991-afk/bloom-fair-yellow-charm.git work && cd work
 - git checkout -b cursor/bloom-ci-lint-from-ops
 - git apply --check /path/to/main/patches/bloom-ci-lint.patch

@@ -17,6 +17,7 @@ drone/work_order.py write_live_registry CLI fallback only. Do not edit drone/pro
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-work-order-registry-cli
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-work-order-registry-cli-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-registry-cli.patch

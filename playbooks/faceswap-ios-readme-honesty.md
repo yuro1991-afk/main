@@ -17,6 +17,7 @@ Docs only. Different file from DESIGN.md and START.sh. Do not vendor InsightFace
 
 ## First commands
 
+- node src/cli.js patches --prove --job faceswap-ios-readme-honesty
 - git clone https://github.com/yuro1991-afk/face-swap-ios.git work && cd work
 - git checkout -b cursor/faceswap-ios-readme-honesty-from-ops
 - git apply --check /path/to/main/patches/faceswap-ios-readme-honesty.patch

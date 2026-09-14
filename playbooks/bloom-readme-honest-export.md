@@ -17,6 +17,7 @@ Docs only. Do not copy Genesis onto this tree. Do not reopen main#1.
 
 ## First commands
 
+- node src/cli.js patches --prove --job bloom-readme-honest-export
 - git clone https://github.com/yuro1991-afk/bloom-fair-yellow-charm.git work && cd work
 - git checkout -b cursor/bloom-readme-honest-export-from-ops
 - git apply --check /path/to/main/patches/bloom-readme-honest-export.patch

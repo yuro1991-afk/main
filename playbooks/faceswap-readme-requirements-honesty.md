@@ -17,6 +17,7 @@ README Requirements bullet only. Different hunk from honesty-env-paths footer. D
 
 ## First commands
 
+- node src/cli.js patches --prove --job faceswap-readme-requirements-honesty
 - git clone https://github.com/yuro1991-afk/face-swap-ios.git work && cd work
 - git checkout -b cursor/faceswap-readme-requirements-honesty-from-ops
 - git apply --check /path/to/main/patches/faceswap-readme-requirements-honesty.patch

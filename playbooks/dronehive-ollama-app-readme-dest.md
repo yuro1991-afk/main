@@ -17,6 +17,7 @@ apps/drone-ollama-app/README.md dest line only. Do not edit drone/pro/tool_agent
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-ollama-app-readme-dest
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-ollama-app-readme-dest-from-ops
 - git apply --check /path/to/main/patches/dronehive-ollama-app-readme-dest.patch

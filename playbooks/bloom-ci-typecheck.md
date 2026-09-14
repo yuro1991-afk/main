@@ -17,6 +17,7 @@ Do not edit dronehive .github. Coordinate with bloom-readme-honest-export if bot
 
 ## First commands
 
+- node src/cli.js patches --prove --job bloom-ci-typecheck
 - git clone https://github.com/yuro1991-afk/bloom-fair-yellow-charm.git work && cd work
 - git checkout -b cursor/bloom-ci-typecheck-from-ops
 - git apply --check /path/to/main/patches/bloom-ci-typecheck.patch

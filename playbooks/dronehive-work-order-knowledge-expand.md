@@ -17,6 +17,7 @@ configs/work_order.json knowledge_expand key only. Do not edit drone/pro/tool_ag
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-work-order-knowledge-expand
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-work-order-knowledge-expand-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-knowledge-expand.patch

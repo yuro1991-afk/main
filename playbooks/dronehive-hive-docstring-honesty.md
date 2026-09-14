@@ -17,6 +17,7 @@ Docstring only. Independent of portable-paths and config-load-overlay. Do not ed
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-hive-docstring-honesty
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-hive-docstring-honesty-from-ops
 - git apply --check /path/to/main/patches/dronehive-hive-docstring-honesty.patch

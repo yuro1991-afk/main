@@ -17,6 +17,7 @@ configs/work_order.json curriculum_root / curriculum_json only. Do not edit curr
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-work-order-curriculum-root
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-work-order-curriculum-root-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-curriculum-root.patch

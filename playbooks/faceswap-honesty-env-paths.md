@@ -18,6 +18,7 @@ Docs/env only. Do not vendor InsightFace weights. Same path-leak theme as droneh
 
 ## First commands
 
+- node src/cli.js patches --prove --job faceswap-honesty-env-paths
 - git clone https://github.com/yuro1991-afk/face-swap-ios.git work && cd work
 - git checkout -b cursor/faceswap-honesty-env-paths-from-ops
 - git apply --check /path/to/main/patches/faceswap-honesty-env-paths.patch

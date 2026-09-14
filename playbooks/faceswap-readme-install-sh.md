@@ -17,6 +17,7 @@ README install block only. Different hunk from Requirements and honesty-env-path
 
 ## First commands
 
+- node src/cli.js patches --prove --job faceswap-readme-install-sh
 - git clone https://github.com/yuro1991-afk/face-swap-ios.git work && cd work
 - git checkout -b cursor/faceswap-readme-install-sh-from-ops
 - git apply --check /path/to/main/patches/faceswap-readme-install-sh.patch

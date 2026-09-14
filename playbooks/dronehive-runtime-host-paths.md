@@ -17,6 +17,7 @@ Apply after dronehive-portable-paths. Do not edit drone/pro/tool_agent.py.
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-runtime-host-paths
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-runtime-host-paths-from-ops
 - git apply /path/to/main/patches/dronehive-portable-paths.patch

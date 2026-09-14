@@ -17,6 +17,7 @@ Install-DroneOllamaApp.ps1 cargo env only. Do not edit drone/pro/tool_agent.py.
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-install-ollama-app-cargo
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-install-ollama-app-cargo-from-ops
 - git apply --check /path/to/main/patches/dronehive-install-ollama-app-cargo.patch

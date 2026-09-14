@@ -17,6 +17,7 @@ apps/drone-ollama-app/src/drone_bridge.rs DRONE_ROOT + MOUNT_EXE only. Leave C:\
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-ollama-app-bridge-paths
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-ollama-app-bridge-paths-from-ops
 - git apply --check /path/to/main/patches/dronehive-ollama-app-bridge-paths.patch

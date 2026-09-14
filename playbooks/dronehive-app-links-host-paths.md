@@ -17,6 +17,7 @@ Apply after dronehive-portable-paths. Different file from runtime-host-paths. Do
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-app-links-host-paths
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-app-links-host-paths-from-ops
 - git apply /path/to/main/patches/dronehive-portable-paths.patch

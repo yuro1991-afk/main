@@ -17,6 +17,7 @@ scripts/grok-pwa-plugin.test.mjs only. Independent of bloom-ci-typecheck and blo
 
 ## First commands
 
+- node src/cli.js patches --prove --job bloom-grok-pwa-test-sync
 - git clone https://github.com/yuro1991-afk/bloom-fair-yellow-charm.git work && cd work
 - git checkout -b cursor/bloom-grok-pwa-test-sync-from-ops
 - git apply --check /path/to/main/patches/bloom-grok-pwa-test-sync.patch

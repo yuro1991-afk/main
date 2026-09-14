@@ -17,6 +17,7 @@ docs/PRO.md cd line only. Do not edit drone/pro/tool_agent.py.
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-doc-pro-cd
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-doc-pro-cd-from-ops
 - git apply --check /path/to/main/patches/dronehive-doc-pro-cd.patch

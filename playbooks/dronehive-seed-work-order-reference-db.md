@@ -17,6 +17,7 @@ Seed reference_db key only. Different file from configs/work_order.json. Do not 
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-seed-work-order-reference-db
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-seed-work-order-reference-db-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-reference-db.patch

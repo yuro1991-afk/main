@@ -17,6 +17,7 @@ Do not edit Windows WPF / LinuxPayload.cs wipe path. Do not collide dronehive CI
 
 ## First commands
 
+- node src/cli.js patches --prove --job opensussy-linux-syntax-ci
 - git clone https://github.com/yuro1991-afk/opensussy.git work && cd work
 - git checkout -b cursor/opensussy-linux-syntax-ci-from-ops
 - git apply --check /path/to/main/patches/opensussy-linux-syntax-ci.patch

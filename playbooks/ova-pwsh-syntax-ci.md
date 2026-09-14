@@ -17,6 +17,7 @@ Do not change Start Menu Bypass installers in the same PR as stop-guard unless o
 
 ## First commands
 
+- node src/cli.js patches --prove --job ova-pwsh-syntax-ci
 - git clone https://github.com/yuro1991-afk/ollama-voice-access.git work && cd work
 - git checkout -b cursor/ova-pwsh-syntax-ci-from-ops
 - git apply --check /path/to/main/patches/ova-pwsh-syntax-ci.patch

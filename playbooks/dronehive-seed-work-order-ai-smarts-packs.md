@@ -17,6 +17,7 @@ seed work_order.json knowledge_imprint.ai_smarts_packs only. -U1 trailing knowle
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-seed-work-order-ai-smarts-packs
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-seed-work-order-ai-smarts-packs-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-ai-smarts-packs.patch

@@ -17,6 +17,7 @@ docs/WORK_ORDER.md live-registry table + $reg only. Do not edit drone/pro/tool_a
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-work-order-doc-live-registry
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-work-order-doc-live-registry-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-doc-live-registry.patch

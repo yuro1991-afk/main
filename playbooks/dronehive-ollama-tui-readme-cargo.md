@@ -17,6 +17,7 @@ apps/drone-ollama-tui/README.md build block only. Do not edit drone/pro/tool_age
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-ollama-tui-readme-cargo
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-ollama-tui-readme-cargo-from-ops
 - git apply --check /path/to/main/patches/dronehive-ollama-tui-readme-cargo.patch

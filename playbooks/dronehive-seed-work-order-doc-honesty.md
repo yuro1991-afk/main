@@ -17,6 +17,7 @@ Seed docs only. Different file from docs/WORK_ORDER.md. Do not edit drone/pro/to
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-seed-work-order-doc-honesty
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-seed-work-order-doc-honesty-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-doc-honesty.patch

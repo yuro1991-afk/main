@@ -17,6 +17,7 @@ START_MULTI_MODEL.bat PYTHONPATH line only. Do not edit drone/pro/tool_agent.py.
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-start-multi-model-pythonpath
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-start-multi-model-pythonpath-from-ops
 - git apply --check /path/to/main/patches/dronehive-start-multi-model-pythonpath.patch

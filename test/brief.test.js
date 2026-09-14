@@ -101,6 +101,7 @@ test("cataloged sibling firstCommands use git apply, not edit", () => {
   const queue = JSON.parse(readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"));
   const drone = queue.jobs.find((item) => item.id === "dronehive-unicode-ci");
   const lines = firstCommands(drone);
+  assert.equal(lines[0], "node src/cli.js patches --prove --job dronehive-unicode-ci");
   assert.ok(lines.some((line) => line.includes("git apply --check") && line.includes("dronehive-pro-chat-cp1252.patch")));
   assert.ok(lines.some((line) => line.startsWith("git apply /path/to/main/patches/dronehive-pro-chat-cp1252.patch")));
   assert.ok(!lines.some((line) => line.startsWith("edit:")));

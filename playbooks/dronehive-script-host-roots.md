@@ -17,6 +17,7 @@ Do not edit drone/pro/tool_agent.py. Independent of portable-paths.
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-script-host-roots
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-script-host-roots-from-ops
 - git apply --check /path/to/main/patches/dronehive-script-host-roots.patch

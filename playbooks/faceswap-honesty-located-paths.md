@@ -17,6 +17,7 @@ HONESTY.md Located Path/Models only. Different hunk from honesty-env-paths foote
 
 ## First commands
 
+- node src/cli.js patches --prove --job faceswap-honesty-located-paths
 - git clone https://github.com/yuro1991-afk/face-swap-ios.git work && cd work
 - git checkout -b cursor/faceswap-honesty-located-paths-from-ops
 - git apply --check /path/to/main/patches/faceswap-honesty-located-paths.patch

@@ -17,6 +17,7 @@ Safety default stays refuse. Do not point api.baseUrl at untrusted hosts.
 
 ## First commands
 
+- node src/cli.js patches --prove --job ova-stop-noui-guard
 - git clone https://github.com/yuro1991-afk/ollama-voice-access.git work && cd work
 - git checkout -b cursor/ova-stop-noui-guard-from-ops
 - git apply --check /path/to/main/patches/ova-stop-noui-guard.patch

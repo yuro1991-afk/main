@@ -17,6 +17,7 @@ configs/work_order.json codex path keys only. Do not edit python_default. Do not
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-work-order-codex-paths
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-work-order-codex-paths-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-codex-paths.patch

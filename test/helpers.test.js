@@ -52,6 +52,7 @@ test("gub-superbrain-probe helpers refuse the probe", () => {
   assert.ok(packet.helpers.some((helper) => helper.role === "refuse"));
   assert.match(text, /no more Superbrain/);
   assert.match(text, /Do not run node src\/cli.js probe/);
+  assert.match(text, /patches --prove/);
   assert.doesNotMatch(text, /origin auth status/);
   assert.doesNotMatch(text, /Implement the slice there/);
 });

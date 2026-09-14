@@ -17,6 +17,7 @@ drone/app/seed/docs/HONESTY.md library row only. Do not edit drone/pro/tool_agen
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-seed-doc-honesty-library
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-seed-doc-honesty-library-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-doc-honesty-library.patch

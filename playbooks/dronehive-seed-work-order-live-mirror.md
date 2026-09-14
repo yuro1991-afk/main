@@ -17,6 +17,7 @@ seed work_order.json live_registry.mirror only. -U1 trailing kind. Do not edit d
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-seed-work-order-live-mirror
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-seed-work-order-live-mirror-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-live-mirror.patch

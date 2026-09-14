@@ -17,6 +17,7 @@ apps/drone-ollama-app/src/main.rs Open drone out only. Do not edit drone/pro/too
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-ollama-app-open-out
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-ollama-app-open-out-from-ops
 - git apply --check /path/to/main/patches/dronehive-ollama-app-open-out.patch

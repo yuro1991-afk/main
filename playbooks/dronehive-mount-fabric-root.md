@@ -17,6 +17,7 @@ apps/drone-ollama-mount/src/fabric.rs default_drone_root only. Leave C:\\Python 
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-mount-fabric-root
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-mount-fabric-root-from-ops
 - git apply --check /path/to/main/patches/dronehive-mount-fabric-root.patch

@@ -17,6 +17,7 @@ apps/drone-ollama-mount/Launch.ps1 cargo env only. Do not edit drone/pro/tool_ag
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-mount-launch-cargo
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-mount-launch-cargo-from-ops
 - git apply --check /path/to/main/patches/dronehive-mount-launch-cargo.patch

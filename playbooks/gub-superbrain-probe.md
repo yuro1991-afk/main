@@ -24,7 +24,7 @@ fork’s head / ears / eyes / vision / bridge slices.
 
 - Yuri: no more Superbrain. Do not probe :45001 / :8791.
 - Do not run node src/cli.js probe.
-- Take review-main-pr10, or apply a catalog patch on a sibling write checkout.
+- Take review-main-pr10, or run node src/cli.js patches --prove then apply a catalog patch on a sibling write checkout.
 - Failed probe stays unreachable. GOOSE-PC :8791 is not the BOSS peer.
 
 ## Verify

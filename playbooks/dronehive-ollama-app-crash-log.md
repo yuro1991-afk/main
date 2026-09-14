@@ -17,6 +17,7 @@ apps/drone-ollama-app/src/main.rs crash_log_path only. Do not edit drone/pro/too
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-ollama-app-crash-log
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-ollama-app-crash-log-from-ops
 - git apply --check /path/to/main/patches/dronehive-ollama-app-crash-log.patch

@@ -72,6 +72,7 @@ export function firstCommands(job, options = {}) {
     case "probe":
       if (patch) {
         return [
+          `node src/cli.js patches --prove --job ${job.id}`,
           `git clone https://${job.repo}.git work && cd work`,
           `git checkout -b cursor/${job.id}-from-ops`,
           `git apply --check /path/to/main/${patch.file}`,
@@ -126,7 +127,7 @@ export function firstCommands(job, options = {}) {
         return [
           "Yuri: no more Superbrain. Do not probe :45001 / :8791.",
           "Do not run node src/cli.js probe.",
-          "Take review-main-pr10, or apply a catalog patch on a sibling write checkout.",
+          "Take review-main-pr10, or run node src/cli.js patches --prove then apply a catalog patch on a sibling write checkout.",
           job.verify,
         ];
       }

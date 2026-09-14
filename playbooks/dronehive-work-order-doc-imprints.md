@@ -17,6 +17,7 @@ docs/WORK_ORDER.md imprint table row only. Do not edit drone/pro/tool_agent.py.
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-work-order-doc-imprints
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-work-order-doc-imprints-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-doc-imprints.patch

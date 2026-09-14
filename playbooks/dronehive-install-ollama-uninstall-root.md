@@ -17,6 +17,7 @@ Install-DroneOllamaApp.ps1 uninstall here-string $InstallRoot only. Do not edit 
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-install-ollama-uninstall-root
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-install-ollama-uninstall-root-from-ops
 - git apply --check /path/to/main/patches/dronehive-install-ollama-uninstall-root.patch

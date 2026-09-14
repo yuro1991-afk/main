@@ -17,6 +17,7 @@ Seed JSON only. Different file from configs/buzzer_hive.json. Do not edit drone/
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-seed-buzzer-hive-library-honesty
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-seed-buzzer-hive-library-honesty-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-buzzer-hive-library-honesty.patch

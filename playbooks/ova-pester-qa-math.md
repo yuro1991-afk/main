@@ -17,6 +17,7 @@ Same as keep-busy pester-qa-math-unit-tests. Leave Invoke-OllamaVoiceQA.ps1 as t
 
 ## First commands
 
+- node src/cli.js patches --prove --job ova-pester-qa-math
 - git clone https://github.com/yuro1991-afk/ollama-voice-access.git work && cd work
 - git checkout -b cursor/ova-pester-qa-math-from-ops
 - git apply --check /path/to/main/patches/ova-pester-qa-math.patch

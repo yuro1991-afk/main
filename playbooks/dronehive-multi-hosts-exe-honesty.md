@@ -17,6 +17,7 @@ configs/multi_hosts.json G: exe keys only. Do not edit drone/pro/tool_agent.py.
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-multi-hosts-exe-honesty
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-multi-hosts-exe-honesty-from-ops
 - git apply --check /path/to/main/patches/dronehive-multi-hosts-exe-honesty.patch

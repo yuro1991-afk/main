@@ -17,6 +17,7 @@ docs/SUPER_KERNEL.md Set-Location line only. Do not edit drone/pro/tool_agent.py
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-doc-super-kernel-cd
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-doc-super-kernel-cd-from-ops
 - git apply --check /path/to/main/patches/dronehive-doc-super-kernel-cd.patch

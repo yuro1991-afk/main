@@ -17,6 +17,7 @@ configs/work_order.json live_registry G: keys only. Do not edit drone/pro/tool_a
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-work-order-live-registry
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-work-order-live-registry-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-live-registry.patch

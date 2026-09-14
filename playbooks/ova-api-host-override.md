@@ -17,6 +17,7 @@ Local Ollama only. Do not add cloud inference. Do not collide ova-stop-noui-guar
 
 ## First commands
 
+- node src/cli.js patches --prove --job ova-api-host-override
 - git clone https://github.com/yuro1991-afk/ollama-voice-access.git work && cd work
 - git checkout -b cursor/ova-api-host-override-from-ops
 - git apply --check /path/to/main/patches/ova-api-host-override.patch

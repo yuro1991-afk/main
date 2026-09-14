@@ -17,6 +17,7 @@ install/docs/SEC_REVIEW.md Target line only.
 
 ## First commands
 
+- node src/cli.js patches --prove --job opensussy-install-sec-review-target
 - git clone https://github.com/yuro1991-afk/opensussy.git work && cd work
 - git checkout -b cursor/opensussy-install-sec-review-target-from-ops
 - git apply --check /path/to/main/patches/opensussy-install-sec-review-target.patch

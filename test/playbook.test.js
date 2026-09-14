@@ -26,6 +26,10 @@ test("cataloged GitHub playbooks name the patch in why, not the generic relaunch
     assert.ok(why, `${patch.id} playbook has a why line`);
     assert.doesNotMatch(why, /Relaunch against the named repo/);
     assert.match(why, new RegExp(patch.file.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+    assert.match(
+      readFileSync(dest, "utf8"),
+      new RegExp(`patches --prove --job ${patch.id}`),
+    );
     checked += 1;
   }
   assert.ok(checked >= 162, `expected catalog playbooks, got ${checked}`);
@@ -36,6 +40,7 @@ test("renderPlaybook includes collision and verify", () => {
   const job = ledger.jobs.find((item) => item.id === "dronehive-unicode-ci");
   const md = renderPlaybook(job);
   assert.match(md, /dronehive-unicode-ci/);
+  assert.match(md, /patches --prove --job dronehive-unicode-ci/);
   assert.match(md, /Collision/);
   assert.match(md, /Do not reopen/);
 });

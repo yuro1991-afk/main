@@ -17,6 +17,7 @@ drone/future_seer.py PYTHONPATH jane fallbacks only. Do not edit drone/pro/tool_
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-future-seer-pythonpath
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-future-seer-pythonpath-from-ops
 - git apply --check /path/to/main/patches/dronehive-future-seer-pythonpath.patch
