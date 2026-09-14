@@ -116,7 +116,11 @@ test("repo queue validates", () => {
   const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
   assert.ok(ledger.jobs.length >= 8);
   const next = nextJob(ledger, { genesis: true }, NOW);
-  assert.equal(next.id, "gub-superbrain-probe");
+  assert.equal(next.id, "gub-inventory-tick");
+  assert.equal(
+    ledger.jobs.find((job) => job.id === "gub-superbrain-probe").status,
+    "claimed",
+  );
   assert.equal(
     ledger.jobs.find((job) => job.id === "do-not-reopen-main-pr1").status,
     "done",

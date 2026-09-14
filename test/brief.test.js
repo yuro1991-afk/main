@@ -69,7 +69,7 @@ test("cli brief defaults to next and siblings lists PRs", async () => {
     },
   });
   assert.equal(code, 0);
-  assert.match(chunks.join(""), /gub-superbrain-probe/);
+  assert.match(chunks.join(""), /gub-inventory-tick/);
   const listed = [];
   const siblingsCode = await runCli(["siblings"], {
     write: (value) => {

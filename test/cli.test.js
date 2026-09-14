@@ -91,7 +91,7 @@ test("cli next --here stays on this repo", async () => {
 test("cli next defaults to the first Genesis card", async () => {
   const result = await capture(["next"]);
   assert.equal(result.code, 0);
-  assert.match(result.out, /gub-superbrain-probe/);
+  assert.match(result.out, /gub-inventory-tick/);
   assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
 });
 

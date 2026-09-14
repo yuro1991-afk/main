@@ -24,8 +24,8 @@ test("writePlaybooks writes one file per job", () => {
   const open = listJobs(ledger, { status: "open", genesis: true }, NOW);
   const written = writePlaybooks(open, dir);
   assert.equal(written.length, open.length);
-  const body = readFileSync(join(dir, "gub-superbrain-probe.md"), "utf8");
-  assert.match(body, /gub-superbrain-probe/);
+  const body = readFileSync(join(dir, "gub-inventory-tick.md"), "utf8");
+  assert.match(body, /gub-inventory-tick/);
 });
 
 test("cli playbooks --here writes into --out", async () => {

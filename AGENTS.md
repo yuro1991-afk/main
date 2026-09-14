@@ -13,7 +13,8 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
 ## First moves
 
 1. `npm test` if you touch this repo.
-2. `node src/cli.js next` — default job is `gub-superbrain-probe` (Origin).
+2. Read `reviews/NEXT.md`. `node src/cli.js next` — current open job is
+   `gub-inventory-tick` while probe is claimed. Relaunch Origin.
    `node src/cli.js helpers` then spin a local Task per helper. Do not sit in inventory.
    Optionally `node src/cli.js tick` to write `.genesis/last-inventory.json`.
    `node src/cli.js playbooks` writes one markdown card per open **Genesis** job.

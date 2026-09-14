@@ -76,7 +76,7 @@
         "claimedAt": "2026-09-14T17:21:31.816Z",
         "leaseUntil": "2026-09-14T18:06:31.816Z"
       },
-      "notes": "Notion draft https://app.notion.com/p/3db735da33f381a58f19ceffc771ecdd — short-timeout GET http://169.254.124.8:45001/health, write .genesis/last-superbrain.json, never mark LIVE on timeout.",
+      "notes": "Notion draft https://app.notion.com/p/3db735da33f381a58f19ceffc771ecdd — short-timeout GET http://169.254.124.8:45001/health, write .genesis/last-superbrain.json, never mark LIVE on timeout.\nPad probe 2026-09-14T17:20:55Z: boss-superbrain-health/live timeout=unreachable. GOOSE-PC :8791 fetch failed=unreachable. Origin implement still required.",
       "verify": "Failed probe stays unreachable. GOOSE-PC :8791 is not the BOSS peer.",
       "files": [],
       "collision": "Origin genesis only. Do not reopen github.com/yuro1991-afk/main/pull/1."
