@@ -34,11 +34,13 @@ Do not invent leftovers. Do not copy PR #6 autofix.
 Keep #9’s `describeRole` cases. After merge, `ops-board` is the landing-pad
 CLI (#3 merged, #8 GitHub-first) — not “this PR”.
 
-`src/brief.js`, `src/cli.js`, `src/handoff.js`, `src/helpers.js`,
-`src/prompt.js`, `src/routing.js`, `AGENTS.md`, `README.md`, and
-`reviews/NEXT.md` will also conflict. Prefer **#8’s GitHub-first
-defaults**, then keep #9’s catalog, Superbrain refuse, and review
-files (`reviews/main-pr10.md`, `reviews/landing-pad-prs.md`).
+`src/brief.js`, `src/cli.js`, `src/dispatch.js`, `src/handoff.js`,
+`src/helpers.js`, `src/patches.js`, `src/playbook.js`, `src/prompt.js`,
+`src/routing.js`, `AGENTS.md`, `README.md`, and `reviews/NEXT.md` will
+also conflict. Prefer **#8’s GitHub-first defaults**, then keep #9’s
+catalog, Superbrain refuse, prove/`applyNext` apply path, `displayNotes`
+/ `jobForDisplay`, and review files (`reviews/main-pr10.md`,
+`reviews/landing-pad-prs.md`).
 
 ## After merge
 

@@ -284,6 +284,8 @@ test("buildPatchCatalog is list-only", () => {
   assert.equal(catalog.count, 1);
   assert.match(catalog.doNot, /autofix/);
   assert.equal(catalog.patches[0].id, "bloom-gitignore-vercel");
+  assert.ok(catalog.patches[0].applyNext.includes("git rm -r --cached .vercel/output"));
+  assert.deepEqual(catalog.applyNext, catalog.patches[0].applyNext);
 });
 
 test("cli patches lists the catalog", async () => {
@@ -312,6 +314,9 @@ test("cli patches --job filters one card", async () => {
   const parsed = JSON.parse(chunks.join(""));
   assert.equal(parsed.count, 1);
   assert.equal(parsed.patches[0].id, "dronehive-unicode-ci");
+  assert.ok(
+    parsed.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")),
+  );
 });
 
 test("cli patches unknown job exits 1", async () => {

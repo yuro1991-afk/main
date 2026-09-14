@@ -350,7 +350,10 @@ export function assertPatchFilesExist(index, repoRoot) {
  * @param {{ id?: string, repo?: string }} [filters]
  */
 export function buildPatchCatalog(index, filters = {}) {
-  const patches = listPatches(index, filters);
+  const patches = listPatches(index, filters).map((row) => ({
+    ...row,
+    applyNext: applyNextFor(row),
+  }));
   return {
     contract: PATCH_CONTRACT.id,
     command: PATCH_CONTRACT.command,
@@ -359,6 +362,7 @@ export function buildPatchCatalog(index, filters = {}) {
     doNot: index.doNot,
     verifiedAt: index.verifiedAt ?? null,
     count: patches.length,
+    applyNext: patches.length === 1 ? patches[0].applyNext : undefined,
     patches,
   };
 }
