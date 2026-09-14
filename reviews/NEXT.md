@@ -6,7 +6,7 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-14T22:40Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-14T22:45Z**: 40 IDLE + this run RUNNING.
 No new agents. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Do not inventory the pad again.
 Fork `bc-84d93b47` still IDLE on
@@ -16,11 +16,12 @@ vision / bridge.
 **Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Pad probes stop.
 PR #3 merged; no real review comments (CodeRabbit skip, <10 stars).
 PR #9 catalog still 162 diffs (newest `bloom-grok-pwa-test-sync`).
-CI green on `d58ad49`. Leftover hunt is exhausted for vanilla+stacked
+CI green on `5b059b9`. Leftover hunt is exhausted for vanilla+stacked
 `git apply --check` (no `-U0`). Do not invent leftovers. Do not
 recatalog CHANNEL_META / wraps / sandwiched JSON.
-Shipped this tick: three leftover face-swap playbook `why` lines now
-name the catalog patch (they still said the generic relaunch line).
+Shipped this tick: here-scope `relaunchFor` no longer says review
+#3–#6 (`review-main-pr10` points at the PR). Stale
+`playbooks/review-landing-pad.md` now redirects to #8/#9/#10.
 Do not copy #8's GitHub-first retarget onto #9.
 Value leftover is applying queued diffs on write checkouts, not mining
 new ones.

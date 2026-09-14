@@ -330,6 +330,26 @@ test("here jobs stay on this checkout", () => {
   });
   assert.equal(target.kind, "here");
   assert.match(target.reason, /Stay on this checkout/);
+  assert.match(target.reason, /#8\/#9\/#10/);
+  assert.doesNotMatch(target.reason, /#3–#6/);
+  assert.doesNotMatch(target.reason, /extend PR #3/);
+  const pr10 = relaunchFor({
+    id: "review-main-pr10",
+    title: "review #10",
+    repo: "github.com/yuro1991-afk/main",
+    kind: "review",
+    priority: 21,
+    status: "blocked",
+    claim: null,
+    notes: "",
+    verify: "",
+    files: [],
+    collision: "",
+  });
+  assert.equal(pr10.kind, "here");
+  assert.equal(pr10.url, "https://github.com/yuro1991-afk/main/pull/10");
+  assert.match(pr10.reason, /main#10/);
+  assert.doesNotMatch(pr10.reason, /#3–#6/);
 });
 
 test("every open Genesis job has a reviews/handoff packet", () => {

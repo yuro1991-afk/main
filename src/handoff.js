@@ -437,17 +437,35 @@ function dronehiveRelaunchReason(jobId) {
 }
 
 /**
+ * Landing-pad review cards stay on this checkout. #3 is merged.
+ * Leftover unused after #8 is review-main-pr10, then review-landing-pad-prs.
+ * @param {import("./ledger.js").Job} job
+ */
+function hereRelaunchFor(job) {
+  if (job.id === "review-main-pr10") {
+    return {
+      kind: "here",
+      url: "https://github.com/yuro1991-afk/main/pull/10",
+      reason:
+        "Stay on this checkout. Review main#10. Do not steal head/ears/eyes/vision/bridge. Do not open another queue.",
+    };
+  }
+  return {
+    kind: "here",
+    url: "https://github.com/yuro1991-afk/main",
+    reason:
+      "Stay on this checkout. Review open PRs #8/#9/#10. #3 is merged. Skip conflicting #4/#5/#6. Do not open another queue.",
+  };
+}
+
+/**
  * @param {import("./ledger.js").Job} job
  */
 export function relaunchFor(job) {
   const scope = jobScope(job);
   switch (scope) {
     case "here":
-      return {
-        kind: "here",
-        url: "https://github.com/yuro1991-afk/main",
-        reason: "Stay on this checkout. Review PRs #3–#6 or extend PR #3. Do not open another queue.",
-      };
+      return hereRelaunchFor(job);
     case "relaunch":
       if (job.repo.startsWith("origin.cursor.com")) {
         return {
