@@ -476,10 +476,11 @@ function loadOrReadAgents(flags, options) {
  * @param {{ root?: string }} options
  */
 function resolveJob(ledger, positionals, flags, nowMs, options) {
-  if (positionals[0]) {
-    const job = ledger.jobs.find((item) => item.id === positionals[0]);
+  const id = positionals[0] || (flags.job && flags.job !== "true" ? flags.job : "");
+  if (id) {
+    const job = ledger.jobs.find((item) => item.id === id);
     if (!job) {
-      throw new Error(`unknown job: ${positionals[0]}`);
+      throw new Error(`unknown job: ${id}`);
     }
     return job;
   }
@@ -531,11 +532,11 @@ Commands:
   sync --agents path.json [--write] [--out dir]
   catalog [--entries path.json] [--write] [--out path]
   busy [--agent <bcId>] [--here] [--all] [--world]   # roster card first, then leftover next
-  helpers [id] [--agent <bcId>]
-  prompt [id] [--agent <bcId>] [--json]
-  brief [id] [--agent <bcId>]
-  handoff [id] [--agent <bcId>]
-  relaunch [id] [--agent <bcId>]
+  helpers [id] [--job id] [--agent <bcId>]
+  prompt [id] [--job id] [--agent <bcId>] [--json]
+  brief [id] [--job id] [--agent <bcId>]
+  handoff [id] [--job id] [--agent <bcId>]
+  relaunch [id] [--job id] [--agent <bcId>]
   claim <id> --agent <bcId>
   complete <id> --agent <bcId>
   block <id> --agent <bcId> --reason <text>

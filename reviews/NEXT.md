@@ -6,7 +6,7 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-14T22:48Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-14T22:51Z**: 40 IDLE + this run RUNNING.
 No new agents. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Do not inventory the pad again.
 Fork `bc-84d93b47` still IDLE on
@@ -16,12 +16,13 @@ vision / bridge.
 **Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Pad probes stop.
 PR #3 merged; no real review comments (CodeRabbit skip, <10 stars).
 PR #9 catalog still 162 diffs (newest `bloom-grok-pwa-test-sync`).
-CI green on `ad2d2e7`. Leftover hunt is exhausted for vanilla+stacked
+CI green on `110c2b9`. Leftover hunt is exhausted for vanilla+stacked
 `git apply --check` (no `-U0`). Do not invent leftovers. Do not
 recatalog CHANNEL_META / wraps / sandwiched JSON.
-Shipped this tick: `siblings.json` lists main#10 (`python-arena`);
-review `firstCommands` name #8/#9/#10 instead of “PRs in siblings.json”
-(which omitted #8 and #10). Do not copy #8's GitHub-first retarget onto #9.
+Shipped this tick: `brief` / `handoff` / `relaunch` honor `--job`
+(same as `patches`). `--job review-main-pr10` no longer falls through
+to leftover next `gub-superbrain-probe`. Do not probe Superbrain.
+Do not copy #8's GitHub-first retarget onto #9.
 Value leftover is applying queued diffs on write checkouts, not mining
 new ones.
 This Genesis-only tree still blocks GitHub cards — leftover `next` is the

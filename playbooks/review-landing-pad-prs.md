@@ -18,7 +18,7 @@ Review only. Merge decisions stay with Yuri.
 ## First commands
 
 - Do not invent a new tree on empty main.
-- Review an existing open PR listed in ledger/siblings.json or main#10.
+- Review an existing open PR: #8, #9, or #10. Skip conflicting #4/#5/#6. #3 is merged.
 - Leave a review on at least one of #8/#9/#10. No new dispatch-board PR.
 
 ## Verify

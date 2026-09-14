@@ -111,6 +111,22 @@ test("cli brief defaults to next and siblings lists PRs", async () => {
   assert.match(listed.join(""), /patch-catalog/);
 });
 
+test("cli brief --job selects the named card, not leftover next", async () => {
+  const chunks = [];
+  const code = await runCli(["brief", "--job", "review-main-pr10"], {
+    nowMs: NOW,
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.job.id, "review-main-pr10");
+  assert.ok(parsed.related.some((pr) => pr.number === 10));
+  assert.doesNotMatch(chunks.join(""), /gub-superbrain-probe/);
+  assert.doesNotMatch(chunks.join(""), /gub-route-intent/);
+});
+
 test("cli brief unknown id errors", async () => {
   const dir = mkdtempSync(join(tmpdir(), "agent-ops-brief-"));
   const path = join(dir, "queue.json");
