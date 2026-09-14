@@ -115,6 +115,12 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
   const slHw = relaunchFor({ ...job, id: "dronehive-super-llms-hardwire" });
   assert.match(slHw.reason, /dronehive-super-llms-hardwire\.patch/);
   assert.doesNotMatch(slHw.reason, /npm run autofix/);
+  const openTasks = relaunchFor({ ...job, id: "dronehive-work-order-open-tasks" });
+  assert.match(openTasks.reason, /dronehive-work-order-open-tasks\.patch/);
+  assert.doesNotMatch(openTasks.reason, /npm run autofix/);
+  const seedOpenTasks = relaunchFor({ ...job, id: "dronehive-seed-work-order-open-tasks" });
+  assert.match(seedOpenTasks.reason, /dronehive-seed-work-order-open-tasks\.patch/);
+  assert.doesNotMatch(seedOpenTasks.reason, /npm run autofix/);
 });
 
 test("origin jobs relaunch to the Origin codebase", () => {

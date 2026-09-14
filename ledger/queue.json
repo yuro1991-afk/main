@@ -484,6 +484,36 @@
       "collision": "configs/super_llms.json super_mesh.hardwire key only. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-work-order-open-tasks",
+      "title": "Point work_order.json open_tasks at host/continuous",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 60,
+      "status": "blocked",
+      "claim": null,
+      "notes": "configs/work_order.json rank_5.open_tasks still pins D:\\\\GrokCoreMemory. Applyable catalog patch is patches/dronehive-work-order-open-tasks.patch on main#9. Same host/continuous mapping as buzzer leftover. Independent of portable-paths, fabric-root, and buzzer leftover (different file). Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "configs/work_order.json rank_5.open_tasks is host/continuous/OPEN_TASKS.json.",
+      "files": [
+        "configs/work_order.json"
+      ],
+      "collision": "configs/work_order.json open_tasks key only. Seed copy is a later leftover. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-open-tasks",
+      "title": "Point seed work_order.json open_tasks at host/continuous",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 61,
+      "status": "blocked",
+      "claim": null,
+      "notes": "drone/app/seed/configs/work_order.json rank_5.open_tasks still pins D:\\\\GrokCoreMemory. Applyable catalog patch is patches/dronehive-seed-work-order-open-tasks.patch on main#9. Independent of live leftover (different file). Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "drone/app/seed/configs/work_order.json rank_5.open_tasks is host/continuous/OPEN_TASKS.json.",
+      "files": [
+        "drone/app/seed/configs/work_order.json"
+      ],
+      "collision": "Seed open_tasks key only. Different file from configs/work_order.json. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",
