@@ -74,6 +74,26 @@ export function isGenesisJob(job) {
   return repo.includes("yuri-afk/genesis") || repo.includes("origin.cursor.com");
 }
 
+/** World-PM planes plus the Python body that occupies the world. */
+export const WORLD_PHASE_IDS = Object.freeze([
+  "genesis-sentient-world-96",
+  "genesis-comms-server-94",
+  "genesis-agent-support-99",
+]);
+
+/**
+ * Real next phases on the Genesis Python world project.
+ * Catalog / GUB inventory / hub-ops cards are Genesis but not world phases.
+ * @param {{ id?: string, kind?: string, repo?: string } | null | undefined} job
+ */
+export function isWorldPhaseJob(job) {
+  if (!isGenesisJob(job)) return false;
+  const id = typeof job?.id === "string" ? job.id : "";
+  if (id.startsWith("genesis-world-")) return true;
+  if (id.startsWith("genesis-python-")) return true;
+  return WORLD_PHASE_IDS.includes(id);
+}
+
 /**
  * @param {string} scope
  */

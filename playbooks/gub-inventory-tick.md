@@ -9,7 +9,7 @@
 
 ## Notes
 
-Notion draft https://app.notion.com/p/3db735da33f38109a568ed3d589253b6 — Wave 4 rebuild/stats, .genesis/last-inventory.json. GUB engine https://app.notion.com/p/3db735da33f3819ba589fd969cefe4a3 — `python3 -m gub serve --port 8787`, POST /v1/schedule/tick. Related Origin PR genesis#22.
+Notion draft https://app.notion.com/p/3db735da33f38109a568ed3d589253b6 — Entry playbook/gub-inventory-tick. Steps: snapshot catalog stats; run scripts/build_catalog.py and scripts/inventory.py when present; write .genesis/last-inventory.json. GUB engine https://app.notion.com/p/3db735da33f3819ba589fd969cefe4a3 — gub/, workflows/, data/playbooks/playbook__gub-*.json. `python3 -m gub serve --port 8787`; GET /; POST /v1/route, /v1/runs, /v1/schedule/tick. Shell allowlist: scripts/inventory.py, scripts/build_catalog.py, scripts/query_catalog.py. Related Origin PR genesis#22.
 
 ## Collision
 

@@ -18,6 +18,7 @@ import { defaultSuperbrainPath, probeKnownLanes, writeLaneProbe } from "./probe.
 import { routeIntent } from "./routing.js";
 import { defaultInventoryPath, writeInventoryTick } from "./tick.js";
 import { buildBrief } from "./brief.js";
+import { buildPrompt } from "./prompt.js";
 import {
   buildHandoff,
   buildRelaunch,
@@ -251,6 +252,18 @@ export async function runCli(argv, options = {}) {
       );
       return 0;
     }
+    case "prompt": {
+      const ledger = loadLedger(ledgerPath);
+      const job = positionals[0]
+        ? ledger.jobs.find((item) => item.id === positionals[0])
+        : nextJob(ledger, jobFilters(flags), nowMs);
+      if (positionals[0] && !job) {
+        throw new Error(`unknown job: ${positionals[0]}`);
+      }
+      const packet = buildPrompt(job ?? null);
+      write(flags.json === "true" ? JSON.stringify(packet, null, 2) : packet.text);
+      return job ? 0 : 1;
+    }
     case "brief": {
       const ledger = loadLedger(ledgerPath);
       const siblings = loadSiblings(
@@ -292,6 +305,7 @@ export function jobFilters(flags) {
     repo: flags.repo,
     scope: flags.here === "true" ? "here" : undefined,
     genesis: flags.all === "true" ? undefined : true,
+    world: flags.world === "true" ? true : undefined,
   };
 }
 
@@ -315,10 +329,10 @@ function helpText() {
 
 Commands:
   list
-  next [--kind kind] [--repo repo] [--here] [--all]
-  slots [--here] [--all]
+  next [--kind kind] [--repo repo] [--here] [--all] [--world]
+  slots [--here] [--all] [--world]
   assign
-  busy [--agent <bcId>] [--here] [--all]
+  busy [--agent <bcId>] [--here] [--all] [--world]
   helpers [id]
   claim <id> --agent <bcId>
   complete <id> --agent <bcId>
@@ -330,11 +344,12 @@ Commands:
   tick [--out path]
   siblings
   brief [id]
+  prompt [id] [--json]
   handoff [id]
   relaunch [id]
   playbooks [--here] [--out dir]
 
-Genesis only (Yuri). Pass --all to see out-of-scope cards.
+Genesis only (Yuri). Pass --world for Python world planes. Pass --all to see out-of-scope cards.
 Do not reopen GitHub PR #1. Origin: origin.cursor.com/git/yuri-afk/genesis.`;
 }
 

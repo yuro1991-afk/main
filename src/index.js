@@ -8,6 +8,8 @@ export {
   describeKind,
   describeScope,
   isGenesisJob,
+  isWorldPhaseJob,
+  WORLD_PHASE_IDS,
   isJobKind,
   isJobStatus,
   jobScope,
@@ -47,6 +49,7 @@ export {
   writeInventoryTick,
 } from "./tick.js";
 export { BRIEF_CONTRACT, buildBrief, firstCommands } from "./brief.js";
+export { ORIGIN_UI, PROMPT_CONTRACT, buildPrompt, renderLaunchPrompt } from "./prompt.js";
 export {
   HANDOFF_CONTRACT,
   RELAUNCH_CONTRACT,

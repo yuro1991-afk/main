@@ -1,33 +1,32 @@
 # Origin relaunch packet — genesis-online-portal-26
 
-This landing-pad token cannot authenticate to Origin. Yuri scoped this
-pad to Genesis only. Do not implement here.
+This landing-pad token cannot authenticate to Origin. Implement on Origin.
 
 ## Job
 
 - id: `genesis-online-portal-26`
-- title: Land Origin online portal genesis#26
-- kind: origin-slice
-- priority: 16
-- repo: `origin.cursor.com/git/yuri-afk/genesis`
+- Origin PR: genesis#26
+- Branch: `cursor/genesis-online-portal-0eeb`
+- Path: `apps/online-portal`
+- Notion: https://app.notion.com/p/3db735da33f38116b915ccfa7fb74bc1
 - UI: https://cursor.com/codebase/yuri-afk/genesis
-- playbook: `playbooks/genesis-online-portal-26.md`
 
-## Why relaunch
+Public gateway to Yuri's origin kernel. The local hub is the operator
+console; this app is the online face.
 
-This cloud environment cannot authenticate to Origin.
+Surfaces: `/` `/status` `/roster` `/lanes` `/catalog` `/directory`
+`/shelf` `/operator`.
 
-## Notes
+## First commands (on Origin)
 
-Notion https://app.notion.com/p/3db735da33f38116b915ccfa7fb74bc1. Branch cursor/genesis-online-portal-0eeb. Origin PR genesis#26.
+```bash
+cd apps/online-portal
+npm test
+npm run dev
+```
 
-## Collision
-
-Public gateway work stays on Origin.
-
-## Verify
-
-Slice lands on Origin only.
+Probe Superbrain before LIVE. GOOSE-PC `:8791` is not the BOSS peer.
+Cite the hub and catalog pages; do not fork them onto this pad.
 
 ## Do not
 

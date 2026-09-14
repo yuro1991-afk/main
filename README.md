@@ -21,6 +21,7 @@ node src/cli.js status
 node src/cli.js next
 node src/cli.js slots
 node src/cli.js assign
+node src/cli.js prompt
 node src/cli.js busy --agent "$CURSOR_AGENT_ID"
 node src/cli.js relaunch
 node src/cli.js helpers
@@ -34,9 +35,10 @@ node src/cli.js tick
 node src/cli.js route "keep my agents busy"
 ```
 
-`busy --agent` reserves the next Origin card so idle agents do not all
-take `gub-inventory-tick`. `slots` lists the rest. `relaunch` prints the
-peek packet. Claim leases expire in 45 minutes.
+`assign` maps all 35 idle pad agents onto unique Genesis Python world
+phases. `busy --world --agent` reserves the next world-plane card.
+`slots --world` lists the rest. Default `next` is still
+`gub-inventory-tick` (GUB). Claim leases expire in 45 minutes.
 
 ## Lanes
 

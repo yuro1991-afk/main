@@ -147,7 +147,7 @@ export function buildAssign(ledger, roster, nowMs = Date.now()) {
     count: assignments.length,
     assignments,
     next: assignments.find((row) => row.status === "open") ?? null,
-    rule: "Named idle agents relaunch the listed Origin card. Do not all peek next without claiming. Do not lease cards to agents that stay idle.",
+    rule: "Every idle pad agent relaunches the listed Origin world-phase card. Do not stay on yuro1991-afk/main. Do not all peek next without claiming. Do not lease cards to agents that stay idle.",
   };
 }
 

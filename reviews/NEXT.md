@@ -1,35 +1,61 @@
-# Next card (Genesis only)
+# Next card (Genesis Python world)
 
 Idle agents on `yuro1991-afk/main`: do **not** inventory this pad again.
-Reserve a unique Origin card, then relaunch.
+Relaunch Origin. Every idle agent already has a unique world-phase card.
 
 ```bash
-node src/cli.js busy --agent "$CURSOR_AGENT_ID"
-node src/cli.js slots
+node src/cli.js assign
+node src/cli.js slots --world
+node src/cli.js busy --world --agent "$CURSOR_AGENT_ID"
+node src/cli.js prompt
 ```
 
-`busy` claims the next open Genesis job for you (or returns the card you
-already hold). `slots` lists every open Origin card so a second agent
-does not pile onto the same `next`.
+This pad cannot move a cloud agent into Origin. Paste the packet at
+https://cursor.com/codebase/yuri-afk/genesis
 
-**Peek without claiming:** `gub-inventory-tick` — https://cursor.com/codebase/yuri-afk/genesis  
-Packet: `reviews/handoff-gub-inventory-tick.md`  
-Named idle agents: `node src/cli.js assign`  
-Full Origin list: `reviews/genesis-backlog.md`
+**Peek without claiming:** `gub-inventory-tick` (GUB, not a world plane).  
+World peek: `node src/cli.js next --world` → `genesis-world-layer-102`  
+Full table: `reviews/WORLD-PHASES.md` · backlog: `reviews/genesis-backlog.md`
 
-| idle agent | take this card |
+| idle agent | take this Origin card |
 | --- | --- |
-| Genesis inventory handoff | `gub-inventory-tick` |
-| Genesis routing handoff | `agent-routing-matrix` |
-| Genesis catalog handoff | `catalog-notion-sync` |
-| Genesis probe handoff | `gub-superbrain-probe` (Origin still required) |
-| Genesis repo location | `genesis-local-repo` |
-| Mine Genesis Notion backlog | `catalog-expand-domain` |
-| Add inventory tick command | `genesis-hub-24` |
+| Genesis catalog handoff | `genesis-world-layer-102` |
+| Genesis routing handoff | `genesis-world-canon-93` |
+| Genesis inventory handoff | `genesis-world-host-87` |
+| Genesis probe handoff | `genesis-world-knowledge-88` |
+| Evidence bloom vercel gitignore | `genesis-world-language-95` |
+| Evidence face-swap PWA icons | `genesis-sentient-world-96` |
+| Evidence opensussy 2.0 leftovers | `genesis-world-sound-104` |
+| Verify dronehive patch applies | `genesis-world-pm` |
+| Review sibling PRs 4-6 | `genesis-world-unifier` |
+| Write review-agent playbook | `genesis-world-map` |
+| Automatic fixes | `genesis-world-spawner` |
+| Add inventory tick command | `genesis-world-physics` |
+| Inventory other repo jobs | `genesis-world-atmosphere` |
+| Summarize inventory transcripts | `genesis-world-generator` |
+| Summarize CodeRabbit review | `genesis-world-lattice` |
+| Draft opensussy face-swap jobs | `genesis-world-arena` |
+| Inventory dronehive work | `genesis-world-robotics` |
+| Mine Genesis Notion backlog | `genesis-python-infra-50` |
+| Summarize Genesis transcript | `genesis-python-agent-suit-58` |
+| Summarize review transcripts | `genesis-python-agent-mind-65` |
+| Summarize attention items | `genesis-python-agent-head-76` |
+| Summarize Genesis transcript | `genesis-python-agent-ears-78` |
+| Summarize sibling agents | `genesis-python-agent-eyes-74` |
+| Summarize sibling agents | `genesis-python-vision-84` |
+| Summarize Genesis transcript | `genesis-python-bridge-57` |
+| CodeRabbit auto review | `genesis-comms-server-94` |
+| Needs attention automation | `genesis-agent-support-99` |
+| Summarize auto-review transcript | `genesis-local-ai-sandbox-11` |
+| Summarize Genesis transcript | `genesis-data-logger-20` |
+| Auto review | `genesis-auto-runner-41` |
+| Agent workload management | `genesis-hub-24` |
+| CodeRabbit Genesis review | `genesis-local-repo` |
+| Items for attention | `genesis-live-alert-83` |
+| Genesis auto review | `genesis-online-portal-26` |
+| Genesis repo location | `genesis-job-organizer-37` |
 
-Full named roster: `node src/cli.js assign` (15 idle agents → distinct Origin cards).
-
-`gub-superbrain-probe` is claimed here for the pad-side probe only.
+`gub-superbrain-probe` stays claimed on this pad for the probe only.
 Pad probe **2026-09-14T17:36:02Z**: `:45001` health/live **timeout=unreachable**;
 GOOSE `:8791` fetch failed. Never LIVE. Origin still must implement that playbook.
 

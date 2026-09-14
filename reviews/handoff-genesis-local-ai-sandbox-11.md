@@ -1,33 +1,35 @@
 # Origin relaunch packet — genesis-local-ai-sandbox-11
 
-This landing-pad token cannot authenticate to Origin. Yuri scoped this
-pad to Genesis only. Do not implement here.
+This landing-pad token cannot authenticate to Origin. Implement on Origin.
 
 ## Job
 
 - id: `genesis-local-ai-sandbox-11`
-- title: Land Origin local AI sandbox genesis#11
-- kind: origin-slice
-- priority: 14
-- repo: `origin.cursor.com/git/yuri-afk/genesis`
+- Origin PR: genesis#11
+- Branch: `cursor/local-ai-sandbox-3931`
+- Path: `packages/sandbox`
+- Notion: https://app.notion.com/p/3db735da33f381708d56f2abec3626d9
 - UI: https://cursor.com/codebase/yuri-afk/genesis
-- playbook: `playbooks/genesis-local-ai-sandbox-11.md`
 
-## Why relaunch
+Isolated Python jail + OpenAI-compatible chat on `http://127.0.0.1:8788`.
+Stub provider by default (no GPU). MCP HTTP `:8787`. Origin seat stays
+with the hub.
 
-This cloud environment cannot authenticate to Origin.
+## First commands (on Origin)
 
-## Notes
+```bash
+cd packages/sandbox
+pip install -e ".[dev]"
+pytest
+genesis-sandbox serve
+```
 
-Notion https://app.notion.com/p/3db735da33f381708d56f2abec3626d9. Origin PR genesis#11.
+Optional local coder: `GENESIS_SANDBOX_PROVIDER=openai`,
+`GENESIS_LLM_BASE_URL=http://127.0.0.1:8080/v1`.
 
-## Collision
-
-Relaunch Origin. Not this GitHub pad.
-
-## Verify
-
-Slice lands on Origin only. Do not reopen main#1.
+`:8788` is also auto-runner #41 and python-bridge #57. `:8787` is
+inventory. Do not steal those binds. Never report Superbrain LIVE
+without a probe.
 
 ## Do not
 

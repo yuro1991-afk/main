@@ -169,10 +169,12 @@
       "priority": 12,
       "status": "open",
       "claim": null,
-      "notes": "Notion https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a. Origin PR genesis#102, branch cursor/genesis-world-layer-engine-232b. Do not invent a GitHub world clone.",
-      "verify": "Slice lands on origin.cursor.com/git/yuri-afk/genesis only.",
-      "files": [],
-      "collision": "Relaunch Origin. Do not open another landing-pad queue."
+      "notes": "Notion https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a. Origin PR genesis#102, branch cursor/genesis-world-layer-engine-232b. Path packages/world-layer-engine, import genesis_world_layer. Stack: terrain → occupancy → rigid → fluid → atmosphere → agents → sensors → memory. Sibling planes (do not steal): world-map, unifier :8792, spawner. HTTP 127.0.0.1:8793 — coordinate with world-PM. Do not invent a GitHub world clone.",
+      "verify": "cd packages/world-layer-engine && pip install -e \".[dev]\" && pytest && python -m genesis_world_layer demo --steps 48. GET /health stays live=dark.",
+      "files": [
+        "packages/world-layer-engine"
+      ],
+      "collision": "Does not generate map shards, merge unifier logs, or spawn subprocesses. Coordinate halls :8793 and unifier :8792."
     },
     {
       "id": "genesis-world-canon-93",
@@ -197,10 +199,12 @@
       "priority": 14,
       "status": "open",
       "claim": null,
-      "notes": "Notion https://app.notion.com/p/3db735da33f381708d56f2abec3626d9. Origin PR genesis#11.",
-      "verify": "Slice lands on Origin only. Do not reopen main#1.",
-      "files": [],
-      "collision": "Relaunch Origin. Not this GitHub pad."
+      "notes": "Notion https://app.notion.com/p/3db735da33f381708d56f2abec3626d9. Branch cursor/local-ai-sandbox-3931. Origin PR genesis#11. Path packages/sandbox. Isolated Python jail + OpenAI-compatible chat on http://127.0.0.1:8788. Stub provider by default (no GPU). MCP HTTP :8787.",
+      "verify": "cd packages/sandbox && pytest && genesis-sandbox serve. Stub provider; no LIVE without a probe.",
+      "files": [
+        "packages/sandbox"
+      ],
+      "collision": "Port :8788 is also auto-runner #41 and python-bridge #57. :8787 is inventory. Do not steal those binds."
     },
     {
       "id": "genesis-data-logger-20",
@@ -210,10 +214,12 @@
       "priority": 15,
       "status": "open",
       "claim": null,
-      "notes": "Notion https://app.notion.com/p/3db735da33f381bbb3a7da19798da61e. Branch cursor/genesis-data-logger-9c7b. Origin PR genesis#20.",
-      "verify": "Slice lands on Origin only.",
-      "files": [],
-      "collision": "Relaunch Origin."
+      "notes": "Notion https://app.notion.com/p/3db735da33f381bbb3a7da19798da61e. Branch cursor/genesis-data-logger-9c7b. Origin PR genesis#20. Path packages/data-logger. Append-only JSONL event plane. UI http://127.0.0.1:7430. UDP ingest 2420. Mail pong stays on 2419.",
+      "verify": "cd packages/data-logger && npm test. POST /v1/events works. Do not bind UDP 2419.",
+      "files": [
+        "packages/data-logger"
+      ],
+      "collision": "UDP 2419 is pong only. Ingest is 2420. Do not steal organizer :7432."
     },
     {
       "id": "genesis-online-portal-26",
@@ -223,10 +229,12 @@
       "priority": 16,
       "status": "open",
       "claim": null,
-      "notes": "Notion https://app.notion.com/p/3db735da33f38116b915ccfa7fb74bc1. Branch cursor/genesis-online-portal-0eeb. Origin PR genesis#26.",
-      "verify": "Slice lands on Origin only.",
-      "files": [],
-      "collision": "Public gateway work stays on Origin."
+      "notes": "Notion https://app.notion.com/p/3db735da33f38116b915ccfa7fb74bc1. Branch cursor/genesis-online-portal-0eeb. Origin PR genesis#26. Path apps/online-portal. Surfaces: / /status /roster /lanes /catalog /directory /shelf /operator. Local hub stays the operator console.",
+      "verify": "cd apps/online-portal && npm test && npm run dev. Probe Superbrain before LIVE.",
+      "files": [
+        "apps/online-portal"
+      ],
+      "collision": "Public gateway work stays on Origin. Do not fork the hub onto this pad."
     },
     {
       "id": "genesis-python-infra-50",
@@ -236,10 +244,12 @@
       "priority": 17,
       "status": "open",
       "claim": null,
-      "notes": "Notion https://app.notion.com/p/3db735da33f381b5a411faa0d9317b81. Origin PR genesis#50.",
-      "verify": "Slice lands on Origin only.",
-      "files": [],
-      "collision": "Coordinate with python agent suit/head/mind/ears cards."
+      "notes": "Notion https://app.notion.com/p/3db735da33f381b5a411faa0d9317b81. Branch cursor/python-infrastructure-6871. Origin PR genesis#50. Path packages/python-infra, import genesis_infra, contract genesis.python-infra.v1. Control plane http://127.0.0.1:8800/health. Sibling attach for env/roster/mail/dispatch/ports/probes.",
+      "verify": "./scripts/install-python.sh && python3 -m pytest && genesis-infra wire. Never report Superbrain LIVE without a probe.",
+      "files": [
+        "packages/python-infra"
+      ],
+      "collision": "Do not steal :8787 inventory, :8788 sandbox/runner/bridge, :8789 CPU bridge, :8790 lattice, :8765 glasses, or planned hub :8801."
     },
     {
       "id": "genesis-python-agent-suit-58",
@@ -314,10 +324,12 @@
       "priority": 23,
       "status": "open",
       "claim": null,
-      "notes": "Notion https://app.notion.com/p/3db735da33f38166aebfc5ed8ace53a9. Origin PR genesis#87.",
-      "verify": "Slice lands on Origin only.",
-      "files": [],
-      "collision": "Coordinate with world-canon :8794 and world-layer #102."
+      "notes": "Notion https://app.notion.com/p/3db735da33f38166aebfc5ed8ace53a9. Branch cursor/genesis-world-host-1a8f. Origin PR genesis#87. Path packages/python-world-host, import genesis_world_host, contract genesis.python-world-host.v1. HTTP 127.0.0.1:8794. Binds occupancy and ticks the world clock. Does not merge shards, spawn brains, generate maps, or run physics.",
+      "verify": "cd packages/python-world-host && pytest && genesis-world-host serve. GET /health stays live=dark. Never bind UDP 2419.",
+      "files": [
+        "packages/python-world-host"
+      ],
+      "collision": "Port :8794 is also world-canon #93, sentient #96, and sound #104. Coordinate; do not steal :8792/:8793."
     },
     {
       "id": "genesis-world-knowledge-88",
@@ -477,11 +489,128 @@
       "collision": "Do not steal :8793 halls, unifier :8792, task hub :8788, agent manager :8789, or organizer :7432."
     },
     {
+      "id": "genesis-world-unifier",
+      "title": "Land Origin world-unifier plane",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 35,
+      "status": "open",
+      "claim": null,
+      "notes": "World-PM plane `unifier` — canonical shard merge on HTTP 127.0.0.1:8792. World-layer #102 does not merge unifier logs. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d + layer https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a. No dedicated Origin PR yet — implement on Origin only.",
+      "verify": "Unifier stays on Origin. GET /health claimedLive false until Superbrain probed. Coordinate with python-vision #84 before binding :8792.",
+      "files": [],
+      "collision": "Port :8792 is also the vision HUD / unifier. Do not steal :8793 halls or :8794. UDP 2419 is pong only."
+    },
+    {
+      "id": "genesis-world-map",
+      "title": "Land Origin world-map plane",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 36,
+      "status": "open",
+      "claim": null,
+      "notes": "World-PM plane `map`. World-layer #102 does not generate map shards — those stay here. Atlas (Chart) holds language; this plane holds the atlas. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d + layer https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a.",
+      "verify": "Slice lands on Origin only. Do not rewrite world-canon roster or steal generator work.",
+      "files": [],
+      "collision": "Coordinate with world-generator, world-language #95, and world-canon #93."
+    },
+    {
+      "id": "genesis-world-spawner",
+      "title": "Land Origin world-spawner plane",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 37,
+      "status": "open",
+      "claim": null,
+      "notes": "World-PM plane `spawner` — occupancy inside the map. World-layer #102 does not spawn subprocesses. World-PM does not occupy the village. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d + layer https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a.",
+      "verify": "Spawner stays on Origin. Never bind UDP 2419. Do not steal host occupancy on :8794.",
+      "files": [],
+      "collision": "Coordinate with world-host #87 (binds occupancy) and world-map. Do not spawn from world-PM."
+    },
+    {
+      "id": "genesis-world-physics",
+      "title": "Land Origin world-physics plane",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 38,
+      "status": "open",
+      "claim": null,
+      "notes": "World-PM plane `physics`. Layer stack includes rigid + fluid. Not NVIDIA Genesis World. Not NVIDIA physics. Sound #104 is hearing, not this card. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d + layer https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a.",
+      "verify": "Slice lands on Origin only. CPU/local only; no GPU claim. GET /health stays live=dark until Superbrain probed.",
+      "files": [],
+      "collision": "World-host #87 does not run physics. Coordinate with layer #102 rigid/fluid ticks."
+    },
+    {
+      "id": "genesis-world-atmosphere",
+      "title": "Land Origin world-atmosphere plane",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 39,
+      "status": "open",
+      "claim": null,
+      "notes": "World-PM plane `atmosphere`. Layer stack: terrain → occupancy → rigid → fluid → atmosphere → agents → sensors → memory. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d + layer https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a.",
+      "verify": "Atmosphere plane lands on Origin. Do not steal layer #102 coupler ticks.",
+      "files": [],
+      "collision": "Coordinate with world-layer #102 and world-physics. Not NVIDIA weather."
+    },
+    {
+      "id": "genesis-world-generator",
+      "title": "Land Origin world-generator plane",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 40,
+      "status": "open",
+      "claim": null,
+      "notes": "World-PM plane `generator`. World-layer #102 does not generate map shards; this plane authors them. Map plane stores the atlas. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d + layer https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a.",
+      "verify": "Generator stays on Origin. Do not occupy the village or merge unifier logs.",
+      "files": [],
+      "collision": "Coordinate with world-map and world-layer #102. Host #87 does not generate maps."
+    },
+    {
+      "id": "genesis-world-lattice",
+      "title": "Land Origin world-lattice plane",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 41,
+      "status": "open",
+      "claim": null,
+      "notes": "World-PM plane `lattice`. Python-infra #50 sibling attach mentions lattice :8790. Eyes #74 is a lattice vision node, not this plane. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d.",
+      "verify": "Lattice stays on Origin. Do not steal :8790 from python-infra without coordinating.",
+      "files": [],
+      "collision": "Port :8790 is python-infra lattice. Do not steal :8787/:8788/:8789."
+    },
+    {
+      "id": "genesis-world-arena",
+      "title": "Land Origin world-arena plane",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 42,
+      "status": "open",
+      "claim": null,
+      "notes": "World-PM plane `arena`. Evaluation / arena work for the world program. Does not merge shards or occupy the village. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d.",
+      "verify": "Arena stays on Origin. Probe Superbrain before LIVE. Never bind UDP 2419.",
+      "files": [],
+      "collision": "Coordinate with world-PM :8793. Do not steal unifier :8792 or host :8794."
+    },
+    {
+      "id": "genesis-world-robotics",
+      "title": "Land Origin world-robotics plane",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 43,
+      "status": "open",
+      "claim": null,
+      "notes": "World-PM plane `robotics`. Body/suit/head/ears/eyes stay on python-agent cards; this is the world-side robotics stack. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d.",
+      "verify": "Robotics plane lands on Origin. Coordinate with suit #58 / head #76. No GPU claim.",
+      "files": [],
+      "collision": "Do not fork python-agent-suit onto this card. Do not steal :8792/:8793/:8794."
+    },
+    {
       "id": "catalog-expand-domain",
       "title": "Expand the Origin catalog domain-by-domain",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",
       "kind": "catalog",
-      "priority": 35,
+      "priority": 50,
       "status": "open",
       "claim": null,
       "notes": "Notion playbook/expand-by-domain https://app.notion.com/p/3db735da33f38155b7d9e11df17ddea4 Status active. Pick a domain from catalog/stats.json, inventory existing skills/tools, author missing playbooks, add resource links, rebuild and commit on Origin.",
@@ -497,7 +626,7 @@
       "title": "Inventory Cursor skills into the Origin catalog",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",
       "kind": "catalog",
-      "priority": 36,
+      "priority": 51,
       "status": "open",
       "claim": null,
       "notes": "Notion playbook/inventory-skills https://app.notion.com/p/3db735da33f381bb9bafca916c22169f. Run scripts/inventory.py, review catalog/stats.json, commit catalog updates, optionally sync highlights to Notion.",
@@ -513,7 +642,7 @@
       "title": "Add a schema-valid custom Genesis catalog entry",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",
       "kind": "catalog",
-      "priority": 37,
+      "priority": 52,
       "status": "open",
       "claim": null,
       "notes": "Notion playbook/add-custom-entry https://app.notion.com/p/3db735da33f38189907ef132836d95bf. Copy schema/entry.example.yaml, place under data/<type>s/, run scripts/build_catalog.py, validate schema/entry.schema.json.",
@@ -530,7 +659,7 @@
       "title": "Author a Notion Skill from an Origin workflow",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",
       "kind": "catalog",
-      "priority": 38,
+      "priority": 53,
       "status": "open",
       "claim": null,
       "notes": "Notion playbook/notion-skill-author https://app.notion.com/p/3db735da33f381c1a42ccf030628e7dc. Read notion://docs/skills, write outcome/when-to-use/inputs/steps/checks, create_pages is_skill=true, optionally catalog as a Genesis skill entry.",

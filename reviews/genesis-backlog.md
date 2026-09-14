@@ -35,11 +35,21 @@ https://cursor.com/codebase/yuri-afk/genesis only. This pad cannot auth.
 | genesis-world-sound-104 | [#104](https://cursor.com/codebase/yuri-afk/genesis/pull/104) | [page](https://app.notion.com/p/3db735da33f381b58ce8eb310d0c6fa2) |
 | genesis-python-bridge-57 | [#57](https://cursor.com/codebase/yuri-afk/genesis/pull/57) | [page](https://app.notion.com/p/3db735da33f38161b4dbc856c5c46893) |
 | genesis-world-pm | — | [page](https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d) |
+| genesis-world-unifier | — | [PM](https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d) plane `unifier` `:8792` |
+| genesis-world-map | — | [PM](https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d) plane `map` |
+| genesis-world-spawner | — | [PM](https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d) plane `spawner` |
+| genesis-world-physics | — | [PM](https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d) plane `physics` |
+| genesis-world-atmosphere | — | [PM](https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d) plane `atmosphere` |
+| genesis-world-generator | — | [PM](https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d) plane `generator` |
+| genesis-world-lattice | — | [PM](https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d) plane `lattice` `:8790` |
+| genesis-world-arena | — | [PM](https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d) plane `arena` |
+| genesis-world-robotics | — | [PM](https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d) plane `robotics` |
 | catalog-expand-domain | — | [playbook](https://app.notion.com/p/3db735da33f38155b7d9e11df17ddea4) |
 | catalog-inventory-skills | — | [playbook](https://app.notion.com/p/3db735da33f381bb9bafca916c22169f) |
 | catalog-add-custom-entry | — | [playbook](https://app.notion.com/p/3db735da33f38189907ef132836d95bf) |
 | catalog-notion-skill-author | — | [playbook](https://app.notion.com/p/3db735da33f381c1a42ccf030628e7dc) |
 
 `node src/cli.js next` still returns `gub-inventory-tick`.
-Idle agents: `node src/cli.js busy --agent "$CURSOR_AGENT_ID"` then
-`node src/cli.js assign` / `slots`. Do not reopen main#1.
+`node src/cli.js next --world` returns `genesis-world-layer-102`.
+Idle agents: `node src/cli.js assign` (35 parked pad agents → unique
+world-phase Origin cards). `reviews/WORLD-PHASES.md`. Do not reopen main#1.

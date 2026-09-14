@@ -16,10 +16,12 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
 2. `node src/cli.js busy --agent <your-bcId>` — reserves a unique Origin
    card (or returns the one you already hold). `node src/cli.js slots`
    lists the rest so a second agent does not pile on.
-   `node src/cli.js assign` maps named idle Genesis handoff agents to
-   distinct cards (no lease — dead idle agents must not hide `next`).
-   Peek without claiming: `node src/cli.js relaunch` (`gub-inventory-tick`
-   while the probe is claimed). Read `reviews/NEXT.md`. Do not sit in inventory.
+   `node src/cli.js assign` maps every idle pad agent to a distinct
+   Genesis Python world-phase card (no lease — dead idle agents must
+   not hide `next`). `slots --world` / `busy --world` stay on those
+   planes. Peek without claiming: `node src/cli.js relaunch` (`gub-inventory-tick`
+   while the probe is claimed). Paste `node src/cli.js prompt` into an
+   Origin agent. Read `reviews/WORLD-PHASES.md`. Do not sit in inventory.
    Optionally `node src/cli.js tick` to write `.genesis/last-inventory.json`.
    `node src/cli.js playbooks` writes one markdown card per open **Genesis** job.
 3. If you skipped `busy`, `node src/cli.js claim <id> --agent <your-bcId>` before you start.

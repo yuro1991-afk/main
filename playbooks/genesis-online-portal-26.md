@@ -9,21 +9,21 @@
 
 ## Notes
 
-Notion https://app.notion.com/p/3db735da33f38116b915ccfa7fb74bc1. Branch cursor/genesis-online-portal-0eeb. Origin PR genesis#26.
+Notion https://app.notion.com/p/3db735da33f38116b915ccfa7fb74bc1. Branch cursor/genesis-online-portal-0eeb. Origin PR genesis#26. Path apps/online-portal. Surfaces: / /status /roster /lanes /catalog /directory /shelf /operator. Local hub stays the operator console.
 
 ## Collision
 
-Public gateway work stays on Origin.
+Public gateway work stays on Origin. Do not fork the hub onto this pad.
 
 ## First commands
 
 - Attach to origin.cursor.com/git/yuri-afk/genesis — not this GitHub repo.
 - Do not reopen yuro1991-afk/main#1.
-- Slice lands on Origin only.
+- cd apps/online-portal && npm test && npm run dev. Probe Superbrain before LIVE.
 
 ## Verify
 
-Slice lands on Origin only.
+cd apps/online-portal && npm test && npm run dev. Probe Superbrain before LIVE.
 
 Do not reopen https://github.com/yuro1991-afk/main/pull/1.
 Do not open another landing-pad queue.

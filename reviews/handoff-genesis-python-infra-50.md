@@ -1,33 +1,39 @@
 # Origin relaunch packet — genesis-python-infra-50
 
-This landing-pad token cannot authenticate to Origin. Yuri scoped this
-pad to Genesis only. Do not implement here.
+This landing-pad token cannot authenticate to Origin. Implement on Origin.
 
 ## Job
 
 - id: `genesis-python-infra-50`
-- title: Land Origin Python infrastructure genesis#50
-- kind: origin-slice
-- priority: 17
-- repo: `origin.cursor.com/git/yuri-afk/genesis`
+- Origin PR: genesis#50
+- Branch: `cursor/python-infrastructure-6871`
+- Path: `packages/python-infra`
+- Import: `genesis_infra`
+- Contract: `genesis.python-infra.v1`
+- Notion: https://app.notion.com/p/3db735da33f381b5a411faa0d9317b81
 - UI: https://cursor.com/codebase/yuri-afk/genesis
-- playbook: `playbooks/genesis-python-infra-50.md`
 
-## Why relaunch
+Shared Python handshake for the lattice. It does not speak for the
+origin kernel. Sibling packages attach here for env, roster, mail,
+dispatch, ports, and lane probes.
 
-This cloud environment cannot authenticate to Origin.
+## Ports
 
-## Notes
+Control plane `http://127.0.0.1:8800/health`. Do not steal `:8787`
+inventory, `:8788` sandbox/runner/bridge, `:8789` CPU bridge, `:8790`
+lattice, `:8765` glasses, or planned hub `:8801`.
 
-Notion https://app.notion.com/p/3db735da33f381b5a411faa0d9317b81. Origin PR genesis#50.
+## First commands (on Origin)
 
-## Collision
+```bash
+./scripts/install-python.sh
+python3 -m pytest
+genesis-infra wire
+genesis-infra serve
+```
 
-Coordinate with python agent suit/head/mind/ears cards.
-
-## Verify
-
-Slice lands on Origin only.
+Never report Superbrain LIVE without a probe. GOOSE-PC `:8791` is not
+the BOSS peer.
 
 ## Do not
 

@@ -134,29 +134,34 @@ test("busy --agent claims next; a second agent gets the next slot", async () => 
   assert.equal(written.jobId, "first");
 });
 
-test("assign maps named idle agents to distinct Origin cards", () => {
+test("assign maps every idle pad agent to a distinct Origin world card", () => {
   const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
   const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
   const packet = buildAssign(ledger, roster, NOW);
   assert.equal(packet.contract, ASSIGN_CONTRACT);
-  assert.ok(packet.count >= 4);
-  assert.equal(packet.next.jobId, "gub-inventory-tick");
-  assert.ok(
-    packet.assignments.some(
-      (row) => row.jobId === "gub-superbrain-probe" && row.status === "claimed",
-    ),
-  );
-  assert.ok(packet.assignments.some((row) => row.jobId === "catalog-expand-domain"));
+  assert.equal(packet.count, 35);
+  assert.equal(packet.next.jobId, "genesis-world-layer-102");
+  const ids = packet.assignments.map((row) => row.jobId);
+  const agents = packet.assignments.map((row) => row.bcId);
+  assert.equal(new Set(ids).size, 35);
+  assert.equal(new Set(agents).size, 35);
+  assert.ok(packet.assignments.some((row) => row.jobId === "genesis-world-unifier"));
+  assert.ok(packet.assignments.some((row) => row.jobId === "genesis-world-robotics"));
   assert.ok(packet.assignments.every((row) => row.relaunch.kind === "origin"));
+  assert.ok(packet.assignments.every((row) => row.status === "open"));
+  assert.ok(!ids.includes("catalog-expand-domain"));
+  assert.ok(!ids.includes("gub-inventory-tick"));
+  assert.ok(!ids.includes("dronehive-unicode-ci"));
 });
 
-test("cli assign prints the roster", async () => {
+test("cli assign prints the world roster", async () => {
   const result = await capture(["assign"]);
   assert.equal(result.code, 0);
-  assert.match(result.out, /gub-inventory-tick/);
-  assert.match(result.out, /agent-routing-matrix/);
-  assert.match(result.out, /catalog-notion-sync/);
+  assert.match(result.out, /genesis-world-layer-102/);
+  assert.match(result.out, /genesis-world-unifier/);
+  assert.match(result.out, /genesis-python-infra-50/);
   assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
+  assert.doesNotMatch(result.out, /catalog-expand-domain/);
 });
 
 test("cli slots defaults to Genesis cards", async () => {
@@ -164,5 +169,16 @@ test("cli slots defaults to Genesis cards", async () => {
   assert.equal(result.code, 0);
   assert.match(result.out, /gub-inventory-tick/);
   assert.match(result.out, /genesis-python-bridge-57/);
+  assert.match(result.out, /genesis-world-unifier/);
+  assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
+});
+
+test("cli slots --world hides GUB inventory and catalog cards", async () => {
+  const result = await capture(["slots", "--world"]);
+  assert.equal(result.code, 0);
+  assert.match(result.out, /genesis-world-layer-102/);
+  assert.match(result.out, /genesis-world-unifier/);
+  assert.doesNotMatch(result.out, /gub-inventory-tick/);
+  assert.doesNotMatch(result.out, /catalog-expand-domain/);
   assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
 });

@@ -1,85 +1,185 @@
 {
   "contract": "agent-ops.roster.v1",
   "notes": [
-    "Idle agents on this pad. Assignments are recommended relaunch targets, not 45-minute leases.",
+    "All idle agents on yuro1991-afk/main relaunch Origin world phases. Assignments are recommended targets, not 45-minute leases.",
     "Dead idle agents must not hide high-priority cards behind a claim they will never work.",
-    "Sibling evidence agents (dronehive / opensussy / bloom / face-swap) stay off this roster — Genesis only.",
-    "Each named agent should run: node src/cli.js claim <jobId> --agent <bcId> then relaunch Origin."
+    "Sibling evidence / review / inventory agents are on this roster now — Yuri moved everyone off main into genesis.",
+    "Each named agent should relaunch https://cursor.com/codebase/yuri-afk/genesis with reviews/handoff-<jobId>.md."
   ],
   "assignments": [
     {
-      "bcId": "bc-3a1e5eed-7d37-5cfc-bdd8-939ebc0b84aa",
-      "name": "Genesis inventory handoff",
-      "jobId": "gub-inventory-tick"
+      "bcId": "bc-7ea3a99b-a561-5188-a4ed-451f761a979b",
+      "name": "Genesis catalog handoff",
+      "jobId": "genesis-world-layer-102"
     },
     {
       "bcId": "bc-0d442773-0df2-5780-92da-605c3f4ac598",
       "name": "Genesis routing handoff",
-      "jobId": "agent-routing-matrix"
+      "jobId": "genesis-world-canon-93"
     },
     {
-      "bcId": "bc-7ea3a99b-a561-5188-a4ed-451f761a979b",
-      "name": "Genesis catalog handoff",
-      "jobId": "catalog-notion-sync"
+      "bcId": "bc-3a1e5eed-7d37-5cfc-bdd8-939ebc0b84aa",
+      "name": "Genesis inventory handoff",
+      "jobId": "genesis-world-host-87"
     },
     {
       "bcId": "bc-49564fc3-2875-51aa-b240-02e9b43bebc3",
       "name": "Genesis probe handoff",
-      "jobId": "gub-superbrain-probe"
+      "jobId": "genesis-world-knowledge-88"
     },
     {
-      "bcId": "bc-01a0a0b7-5fa4-7f55-99fe-679f9ae98657",
-      "name": "Genesis repo location",
-      "jobId": "genesis-local-repo"
+      "bcId": "bc-1698c4bc-1d68-543e-a0a5-9744302bc6d7",
+      "name": "Evidence bloom vercel gitignore",
+      "jobId": "genesis-world-language-95"
+    },
+    {
+      "bcId": "bc-8d94d815-8646-5a3f-9a4e-f4011f197a28",
+      "name": "Evidence face-swap PWA icons",
+      "jobId": "genesis-sentient-world-96"
+    },
+    {
+      "bcId": "bc-96706468-d670-57cf-a55d-61275942914f",
+      "name": "Evidence opensussy 2.0 leftovers",
+      "jobId": "genesis-world-sound-104"
+    },
+    {
+      "bcId": "bc-9191e2c4-7d89-5574-818f-d3f07aefdc97",
+      "name": "Verify dronehive patch applies",
+      "jobId": "genesis-world-pm"
+    },
+    {
+      "bcId": "bc-059889f4-2b79-5473-a64e-f5c990ed531a",
+      "name": "Review sibling PRs 4-6",
+      "jobId": "genesis-world-unifier"
+    },
+    {
+      "bcId": "bc-c4f43f97-1d35-5934-b905-814766efe507",
+      "name": "Write review-agent playbook",
+      "jobId": "genesis-world-map"
+    },
+    {
+      "bcId": "bc-01a0a0da-ad32-75f7-a2a1-18a8602bab19",
+      "name": "Automatic fixes",
+      "jobId": "genesis-world-spawner"
     },
     {
       "bcId": "bc-26e3762b-232c-54c8-847a-a9edb8d92bc1",
       "name": "Add inventory tick command",
-      "jobId": "genesis-hub-24"
-    },
-    {
-      "bcId": "bc-01a0a0c7-861a-7cd1-b552-28ddfc9841e0",
-      "name": "Genesis auto review",
-      "jobId": "genesis-auto-runner-41"
-    },
-    {
-      "bcId": "bc-c024f316-123a-5563-b56e-219042e6642b",
-      "name": "Mine Genesis Notion backlog",
-      "jobId": "catalog-expand-domain"
-    },
-    {
-      "bcId": "bc-85f02dce-0d5e-56bd-b7aa-652bbd74203f",
-      "name": "CodeRabbit Genesis review",
-      "jobId": "genesis-world-canon-93"
-    },
-    {
-      "bcId": "bc-186c633c-95aa-57f0-9db4-dd5a8dd6e3f3",
-      "name": "Summarize Genesis transcript",
-      "jobId": "catalog-inventory-skills"
-    },
-    {
-      "bcId": "bc-cf29c4d2-a1ca-5f1b-9e17-41293659736c",
-      "name": "Summarize Genesis transcript",
-      "jobId": "catalog-add-custom-entry"
-    },
-    {
-      "bcId": "bc-d97f2638-90e4-55bb-9bde-47e356a0647e",
-      "name": "Summarize Genesis transcript",
-      "jobId": "catalog-notion-skill-author"
-    },
-    {
-      "bcId": "bc-6b25900f-2fad-5f5b-8806-b3208a5af369",
-      "name": "Summarize Genesis transcript",
-      "jobId": "genesis-world-layer-102"
-    },
-    {
-      "bcId": "bc-1d53d8a9-d5b1-554e-af52-c612eca2920d",
-      "name": "Summarize inventory transcripts",
-      "jobId": "genesis-world-pm"
+      "jobId": "genesis-world-physics"
     },
     {
       "bcId": "bc-bdb91c45-75dd-58ec-8b52-7d3f1ae77b86",
       "name": "Inventory other repo jobs",
+      "jobId": "genesis-world-atmosphere"
+    },
+    {
+      "bcId": "bc-1d53d8a9-d5b1-554e-af52-c612eca2920d",
+      "name": "Summarize inventory transcripts",
+      "jobId": "genesis-world-generator"
+    },
+    {
+      "bcId": "bc-7bdd2cbd-7307-55d4-bcc9-da7f01c6bee7",
+      "name": "Summarize CodeRabbit review",
+      "jobId": "genesis-world-lattice"
+    },
+    {
+      "bcId": "bc-cf031331-b61b-534a-adda-8f5de7f7ba04",
+      "name": "Draft opensussy face-swap jobs",
+      "jobId": "genesis-world-arena"
+    },
+    {
+      "bcId": "bc-97b038c2-8acd-5139-9dcd-6ae70cf4b3c1",
+      "name": "Inventory dronehive work",
+      "jobId": "genesis-world-robotics"
+    },
+    {
+      "bcId": "bc-c024f316-123a-5563-b56e-219042e6642b",
+      "name": "Mine Genesis Notion backlog",
+      "jobId": "genesis-python-infra-50"
+    },
+    {
+      "bcId": "bc-186c633c-95aa-57f0-9db4-dd5a8dd6e3f3",
+      "name": "Summarize Genesis transcript",
+      "jobId": "genesis-python-agent-suit-58"
+    },
+    {
+      "bcId": "bc-f9dc3a77-bb20-5c80-bd26-90ca64c8051c",
+      "name": "Summarize review transcripts",
+      "jobId": "genesis-python-agent-mind-65"
+    },
+    {
+      "bcId": "bc-d9383c67-bc3e-5c84-8964-110023630899",
+      "name": "Summarize attention items",
+      "jobId": "genesis-python-agent-head-76"
+    },
+    {
+      "bcId": "bc-cf29c4d2-a1ca-5f1b-9e17-41293659736c",
+      "name": "Summarize Genesis transcript",
+      "jobId": "genesis-python-agent-ears-78"
+    },
+    {
+      "bcId": "bc-211a1732-f84c-5460-b995-88480af997b3",
+      "name": "Summarize sibling agents",
+      "jobId": "genesis-python-agent-eyes-74"
+    },
+    {
+      "bcId": "bc-d3220be7-e0d3-52b5-a9be-bcaa783a315e",
+      "name": "Summarize sibling agents",
+      "jobId": "genesis-python-vision-84"
+    },
+    {
+      "bcId": "bc-d97f2638-90e4-55bb-9bde-47e356a0647e",
+      "name": "Summarize Genesis transcript",
+      "jobId": "genesis-python-bridge-57"
+    },
+    {
+      "bcId": "bc-3f62df73-addb-5bd7-b00f-584df5157405",
+      "name": "CodeRabbit auto review",
+      "jobId": "genesis-comms-server-94"
+    },
+    {
+      "bcId": "bc-01a0a0ce-7099-79cf-9f58-1cc8c71e7646",
+      "name": "Needs attention automation",
+      "jobId": "genesis-agent-support-99"
+    },
+    {
+      "bcId": "bc-a0676248-ac40-5a63-83ac-c5a867f0ad96",
+      "name": "Summarize auto-review transcript",
+      "jobId": "genesis-local-ai-sandbox-11"
+    },
+    {
+      "bcId": "bc-6b25900f-2fad-5f5b-8806-b3208a5af369",
+      "name": "Summarize Genesis transcript",
+      "jobId": "genesis-data-logger-20"
+    },
+    {
+      "bcId": "bc-01a0a0ce-3e78-7a73-8324-65fc9a4ebc9d",
+      "name": "Auto review",
+      "jobId": "genesis-auto-runner-41"
+    },
+    {
+      "bcId": "bc-01a0a0cd-b78b-799a-afa7-cdbfda0065cc",
+      "name": "Agent workload management",
+      "jobId": "genesis-hub-24"
+    },
+    {
+      "bcId": "bc-85f02dce-0d5e-56bd-b7aa-652bbd74203f",
+      "name": "CodeRabbit Genesis review",
+      "jobId": "genesis-local-repo"
+    },
+    {
+      "bcId": "bc-01a0a0cc-e546-7669-8275-c75b3990e128",
+      "name": "Items for attention",
+      "jobId": "genesis-live-alert-83"
+    },
+    {
+      "bcId": "bc-01a0a0c7-861a-7cd1-b552-28ddfc9841e0",
+      "name": "Genesis auto review",
+      "jobId": "genesis-online-portal-26"
+    },
+    {
+      "bcId": "bc-01a0a0b7-5fa4-7f55-99fe-679f9ae98657",
+      "name": "Genesis repo location",
       "jobId": "genesis-job-organizer-37"
     }
   ]

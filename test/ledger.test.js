@@ -17,7 +17,7 @@ import {
   saveLedger,
   summarize,
 } from "../src/ledger.js";
-import { isGenesisJob } from "../src/kinds.js";
+import { isGenesisJob, isWorldPhaseJob } from "../src/kinds.js";
 
 const NOW = Date.parse("2026-09-14T16:00:00.000Z");
 
@@ -164,6 +164,19 @@ test("genesis filter skips sibling GitHub cards even when they are open", () => 
   assert.equal(nextJob(ledger, {}, NOW).id, "high");
   assert.equal(nextJob(ledger, { genesis: true }, NOW).id, "origin");
   assert.equal(listJobs(ledger, { genesis: true }, NOW).length, 1);
+});
+
+test("world filter keeps Python world phases and skips GUB catalog", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  assert.equal(isWorldPhaseJob(ledger.jobs.find((job) => job.id === "genesis-world-layer-102")), true);
+  assert.equal(isWorldPhaseJob(ledger.jobs.find((job) => job.id === "genesis-world-unifier")), true);
+  assert.equal(isWorldPhaseJob(ledger.jobs.find((job) => job.id === "genesis-python-infra-50")), true);
+  assert.equal(isWorldPhaseJob(ledger.jobs.find((job) => job.id === "gub-inventory-tick")), false);
+  assert.equal(isWorldPhaseJob(ledger.jobs.find((job) => job.id === "catalog-expand-domain")), false);
+  assert.equal(nextJob(ledger, { world: true }, NOW).id, "genesis-world-layer-102");
+  const world = listJobs(ledger, { world: true, status: "open" }, NOW);
+  assert.ok(world.length >= 17);
+  assert.ok(world.every((job) => isWorldPhaseJob(job)));
 });
 
 test("rejects unknown kind", () => {
