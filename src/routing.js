@@ -1,9 +1,13 @@
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { assertNeverKind } from "./kinds.js";
 import { jobIdForEntry } from "./catalog.js";
 import { unusedGenesisCards } from "./sync.js";
 import { peekBusyJob } from "./dispatch.js";
+import { applyNextFor, defaultPatchesIndexPath, loadPatchIndex, patchForJob } from "./patches.js";
+
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
 export const ROUTE_CONTRACT = "agent-ops.route.v1";
 
@@ -148,7 +152,7 @@ export function leftoverForRoute(context = {}) {
  * @param {object} job
  * @param {string} notes
  */
-export function routeFromJob(text, job, notes) {
+export function routeFromJob(text, job, notes, extras = {}) {
   return {
     contract: ROUTE_CONTRACT,
     intent: text,
@@ -157,6 +161,7 @@ export function routeFromJob(text, job, notes) {
     notes,
     jobId: job.id,
     packet: `reviews/handoff-${job.id}.md`,
+    applyNext: extras.applyNext,
   };
 }
 
@@ -176,11 +181,23 @@ export function routeIntent(text, context = {}) {
   if (includesAny(q, ["review", "coderabbit", "code rabbit"])) {
     return withContract(ROUTES[2], text);
   }
-  if (includesAny(q, ["dronehive", "drone", "unicode", "wheel"])) {
-    return withContract(ROUTES[4], text);
-  }
   if (includesAny(q, ["superbrain", "lane", "probe", "boss"])) {
     return withContract(ROUTES[5], text);
+  }
+  const named = namedJobForIntent(text, context.ledger);
+  if (named) {
+    const patch = catalogPatchRow(named.id);
+    return routeFromJob(
+      text,
+      named,
+      patch
+        ? `Yuri: forget Origin for this card. Apply ${patch.file}. Do not invent a leftover.`
+        : `Take ${named.id}. Do not invent a leftover.`,
+      { applyNext: patch ? applyNextFor(patch) : undefined },
+    );
+  }
+  if (includesAny(q, ["dronehive", "drone", "unicode", "wheel"])) {
+    return withContract(ROUTES[4], text);
   }
 
   const leftover = leftoverForRoute(context);
@@ -330,4 +347,32 @@ function jobForScored(scored, leftover, ledger) {
  */
 function includesAny(q, needles) {
   return needles.some((needle) => q.includes(needle));
+}
+
+/**
+ * Longest ledger id mentioned in the intent wins (seed vs live leftovers).
+ * @param {string} text
+ * @param {{ jobs?: Array<{ id?: string }> } | undefined} ledger
+ */
+function namedJobForIntent(text, ledger) {
+  if (!text || !Array.isArray(ledger?.jobs)) return null;
+  const q = String(text).toLowerCase();
+  let best = null;
+  for (const job of ledger.jobs) {
+    if (!job?.id) continue;
+    if (!q.includes(job.id.toLowerCase())) continue;
+    if (!best || job.id.length > best.id.length) best = job;
+  }
+  return best;
+}
+
+/**
+ * @param {string} jobId
+ */
+function catalogPatchRow(jobId) {
+  try {
+    return patchForJob(loadPatchIndex(defaultPatchesIndexPath(ROOT)), jobId);
+  } catch {
+    return null;
+  }
 }

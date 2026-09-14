@@ -118,6 +118,24 @@ test("dronehive and probe intents", () => {
   assert.match(superbrain.notes, /no more Superbrain/);
 });
 
+test("named catalog job id routes to apply, not leftover Origin", () => {
+  const ledger = loadLedger(join(ROOT, "ledger", "queue.json"));
+  const roster = loadRoster(join(ROOT, "ledger", "roster.json"));
+  const route = routeIntent("apply dronehive-unicode-ci", {
+    ledger,
+    roster,
+    nowMs: NOW,
+  });
+  assert.equal(route.jobId, "dronehive-unicode-ci");
+  assert.match(route.destination, /dronehive#dronehive-unicode-ci/);
+  assert.match(route.notes, /forget Origin/);
+  assert.match(route.notes, /dronehive-pro-chat-cp1252\.patch/);
+  assert.ok(route.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.notEqual(route.jobId, "gub-route-intent");
+  const keep = routeIntent("keep agents busy", { ledger, roster, nowMs: NOW });
+  assert.equal(keep.jobId, "gub-route-intent");
+});
+
 test("destinationForKind is exhaustive", () => {
   for (const kind of JOB_KINDS) {
     assert.equal(typeof destinationForKind(kind), "string");
