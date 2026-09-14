@@ -3,7 +3,15 @@
 **Yuri: forget Origin** for sibling GitHub work. Applyable diffs:
 `node src/cli.js patches` · `reviews/SIBLING-PATCHES.md`.
 Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
-defaults. Do not steal a rostered card.
+defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
+patch catalog. Do not steal a rostered card.
+
+Keep-busy tick **2026-09-14T19:16:54Z**: 37 IDLE + this run RUNNING.
+Pad probe `:45001` health/live **timeout=unreachable** (1500ms). Never LIVE.
+PR #3 has no real review comments (CodeRabbit skip, <10 stars).
+This Genesis-only tree still blocks GitHub cards — leftover `next` is the
+expired Origin claim `gub-superbrain-probe`. After #8, leftover unused is
+`review-landing-pad-prs`. First parked card: `dronehive-unicode-ci`.
 
 Idle agents on `yuro1991-afk/main`: do **not** inventory this pad again.
 Relaunch Origin. 35 parked agents have unique world-phase cards. The
