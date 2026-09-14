@@ -13,7 +13,7 @@ No new agents. Fork `bc-84d93b47` woke, shipped
 eyes / vision / bridge.
 **Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Pad probes stop.
 PR #3 merged; no real review comments (CodeRabbit skip, <10 stars).
-PR #9 catalog now 95 diffs (newest `dronehive-apps-readme-cargo`).
+PR #9 catalog now 99 diffs (newest `dronehive-install-ollama-uninstall-root`).
 This Genesis-only tree still blocks GitHub cards — leftover `next` is the
 expired Origin claim `gub-superbrain-probe`. After #8, leftover unused is
 `review-landing-pad-prs`. First parked apply: `dronehive-unicode-ci`.
@@ -93,11 +93,15 @@ then unused `dronehive-start-tui-cargo-honesty` (START_TUI_OLLAMA Build echo onl
 then unused `dronehive-ollama-tui-readme-cargo` (drone-ollama-tui README build only),
 then unused `dronehive-mount-readme-cargo` (mount README build only),
 then unused `dronehive-tui-readme-cargo` (dronehive-tui README PATH only),
-then unused `dronehive-apps-readme-cargo` (apps/README.md Rust path only).
+then unused `dronehive-apps-readme-cargo` (apps/README.md Rust path only),
+then unused `dronehive-install-ollama-app-root` (installer $InstallRoot only; -U1 skips cargo leftover),
+then unused `dronehive-install-ollama-app-mount` ($mountSrc only),
+then unused `dronehive-install-ollama-app-manifest` (manifest drone_root / mount_exe only),
+then unused `dronehive-install-ollama-uninstall-root` (uninstall here-string only).
 Newcomer `bc-f407303f`: `review-main-pr10` (fork's Python arena/infra).
 `bc-5fe241dd` Summarize arena: do not steal `genesis-world-arena`; unused apply `faceswap-design-honesty`.
 `bc-e2df7f92` Summarize coordinator: unused apply `dronehive-script-host-roots`.
-Next unused apply if those are taken: `dronehive-apps-readme-cargo`.
+Next unused apply if those are taken: `dronehive-install-ollama-uninstall-root`.
 After #8, leftover unused review is `review-main-pr10`, then `review-landing-pad-prs`.
 
 Idle agents on `yuro1991-afk/main`: do **not** inventory this pad again.

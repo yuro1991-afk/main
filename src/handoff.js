@@ -283,6 +283,14 @@ function dronehiveRelaunchReason(jobId) {
       return "This token cannot push dronehive. Apply patches/dronehive-tui-readme-cargo.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
     case "dronehive-apps-readme-cargo":
       return "This token cannot push dronehive. Apply patches/dronehive-apps-readme-cargo.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-install-ollama-app-root":
+      return "This token cannot push dronehive. Apply patches/dronehive-install-ollama-app-root.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-install-ollama-app-mount":
+      return "This token cannot push dronehive. Apply patches/dronehive-install-ollama-app-mount.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-install-ollama-app-manifest":
+      return "This token cannot push dronehive. Apply patches/dronehive-install-ollama-app-manifest.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-install-ollama-uninstall-root":
+      return "This token cannot push dronehive. Apply patches/dronehive-install-ollama-uninstall-root.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
     case "dronehive-rebase-packaging":
       return "This token cannot push dronehive. Rebase packaging stays blocked until dronehive#1 python-smoke is green. Do not copy PR #6 autofix.";
     default:

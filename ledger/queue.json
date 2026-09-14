@@ -1069,6 +1069,66 @@
       "collision": "apps/README.md build line only. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-install-ollama-app-root",
+      "title": "Point Install-DroneOllamaApp InstallRoot at host/ai-home",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 99,
+      "status": "blocked",
+      "claim": null,
+      "notes": "Install-DroneOllamaApp.ps1 $InstallRoot still pins G:\\\\AI-Home\\\\apps\\\\DroneOllama. Applyable catalog patch is patches/dronehive-install-ollama-app-root.patch on main#9. -U1 skips the cargo leftover. Leaves uninstall here-string. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "Install-DroneOllamaApp.ps1 $InstallRoot uses host\\\\ai-home\\\\apps\\\\DroneOllama",
+      "files": [
+        "apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1"
+      ],
+      "collision": "Install-DroneOllamaApp.ps1 $InstallRoot line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-install-ollama-app-mount",
+      "title": "Point Install-DroneOllamaApp mountSrc at apps/drone-ollama-mount",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 100,
+      "status": "blocked",
+      "claim": null,
+      "notes": "Install-DroneOllamaApp.ps1 $mountSrc still pins G:\\\\AI-Home\\\\projects\\\\drone-ollama-mount. Applyable catalog patch is patches/dronehive-install-ollama-app-mount.patch on main#9. Independent of cargo leftover and InstallRoot leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "Install-DroneOllamaApp.ps1 $mountSrc uses apps\\\\drone-ollama-mount",
+      "files": [
+        "apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1"
+      ],
+      "collision": "Install-DroneOllamaApp.ps1 $mountSrc line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-install-ollama-app-manifest",
+      "title": "Point Install-DroneOllamaApp manifest host paths at the repo",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 101,
+      "status": "blocked",
+      "claim": null,
+      "notes": "Install-DroneOllamaApp.ps1 manifest drone_root / mount_exe still pin G:\\\\AI-Home. Applyable catalog patch is patches/dronehive-install-ollama-app-manifest.patch on main#9. Independent of $mountSrc leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "manifest drone_root is '.' and mount_exe uses apps\\\\drone-ollama-mount",
+      "files": [
+        "apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1"
+      ],
+      "collision": "Install-DroneOllamaApp.ps1 manifest drone_root / mount_exe only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-install-ollama-uninstall-root",
+      "title": "Point Install-DroneOllamaApp uninstall root at host/ai-home",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 102,
+      "status": "blocked",
+      "claim": null,
+      "notes": "Install-DroneOllamaApp.ps1 uninstall here-string still pins G:\\\\AI-Home\\\\apps\\\\DroneOllama. Applyable catalog patch is patches/dronehive-install-ollama-uninstall-root.patch on main#9. Independent of live $InstallRoot leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "uninstall here-string $InstallRoot uses host\\\\ai-home\\\\apps\\\\DroneOllama",
+      "files": [
+        "apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1"
+      ],
+      "collision": "Install-DroneOllamaApp.ps1 uninstall here-string $InstallRoot only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",

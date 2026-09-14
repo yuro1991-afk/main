@@ -41,7 +41,7 @@ test("repo index loads without duplicate ids and files exist", () => {
   const index = loadPatchIndex(defaultPatchesIndexPath(ROOT));
   assert.equal(index.contract, PATCH_CONTRACT.id);
   assert.equal(index.cannotPush, true);
-  assert.ok(index.patches.length >= 95);
+  assert.ok(index.patches.length >= 99);
   assertPatchFilesExist(index, ROOT);
   const ids = index.patches.map((row) => row.id);
   assert.equal(new Set(ids).size, ids.length);
@@ -130,6 +130,10 @@ test("repo index loads without duplicate ids and files exist", () => {
   assert.ok(ids.includes("dronehive-mount-readme-cargo"));
   assert.ok(ids.includes("dronehive-tui-readme-cargo"));
   assert.ok(ids.includes("dronehive-apps-readme-cargo"));
+  assert.ok(ids.includes("dronehive-install-ollama-app-root"));
+  assert.ok(ids.includes("dronehive-install-ollama-app-mount"));
+  assert.ok(ids.includes("dronehive-install-ollama-app-manifest"));
+  assert.ok(ids.includes("dronehive-install-ollama-uninstall-root"));
 });
 
 test("text patches start with diff --git; icons are PNGs", () => {
@@ -223,7 +227,7 @@ test("cli patches lists the catalog", async () => {
   assert.equal(code, 0);
   const parsed = JSON.parse(chunks.join(""));
   assert.equal(parsed.command, "patches");
-  assert.ok(parsed.count >= 95);
+  assert.ok(parsed.count >= 99);
   assert.equal(parsed.cannotPush, true);
   assert.match(parsed.doNot, /autofix/);
 });

@@ -189,6 +189,10 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
     "dronehive-mount-readme-cargo",
     "dronehive-tui-readme-cargo",
     "dronehive-apps-readme-cargo",
+    "dronehive-install-ollama-app-root",
+    "dronehive-install-ollama-app-mount",
+    "dronehive-install-ollama-app-manifest",
+    "dronehive-install-ollama-uninstall-root",
   ]) {
     const target = relaunchFor({ ...job, id });
     assert.match(target.reason, new RegExp(`${id}\\.patch`));
