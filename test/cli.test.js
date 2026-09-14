@@ -100,8 +100,8 @@ test("cli next --here stays on this repo", async () => {
 test("cli next defaults to the first Genesis card", async () => {
   const result = await capture(["next"]);
   assert.equal(result.code, 0);
-  assert.match(result.out, /gub-inventory-tick/);
-  assert.match(result.out, /handoff-gub-inventory-tick/);
+  assert.match(result.out, /gub-route-intent/);
+  assert.match(result.out, /handoff-gub-route-intent/);
   assert.match(result.out, /yuri-afk\/genesis/);
   assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
 });
@@ -110,7 +110,7 @@ test("cli busy without agent peeks the next Genesis card", async () => {
   const out = join(mkdtempSync(join(tmpdir(), "agent-ops-busy-cli-")), "last-dispatch.json");
   const result = await capture(["busy", "--out", out]);
   assert.equal(result.code, 0);
-  assert.match(result.out, /gub-inventory-tick/);
+  assert.match(result.out, /gub-route-intent/);
   assert.match(result.out, /"reserved": false/);
   assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
 });

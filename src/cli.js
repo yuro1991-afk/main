@@ -9,7 +9,6 @@ import {
   defaultLedgerPath,
   listJobs,
   loadLedger,
-  nextJob,
   releaseJob,
   saveLedger,
   summarize,
@@ -101,7 +100,7 @@ export async function runCli(argv, options = {}) {
     }
     case "next": {
       const ledger = loadLedger(ledgerPath);
-      const job = nextJob(ledger, jobFilters(flags), nowMs);
+      const job = peekDefaultJob(ledger, flags, nowMs, options);
       write(JSON.stringify(withRelaunch(job), null, 2));
       return job ? 0 : 1;
     }
@@ -142,7 +141,7 @@ export async function runCli(argv, options = {}) {
     case "status": {
       const ledger = loadLedger(ledgerPath);
       const summary = summarize(ledger, nowMs);
-      summary.next = withRelaunch(nextJob(ledger, jobFilters(flags), nowMs));
+      summary.next = withRelaunch(peekDefaultJob(ledger, flags, nowMs, options));
       summary.origin = readOriginProbe(defaultOriginPath(options.root ?? ROOT));
       write(JSON.stringify(summary, null, 2));
       return 0;
@@ -342,7 +341,7 @@ export async function runCli(argv, options = {}) {
       );
       const job = agentId
         ? claimBusyJob(ledger, agentId, filters, nowMs, roster)
-        : nextJob(ledger, filters, nowMs);
+        : peekBusyJob(ledger, undefined, filters, nowMs, roster);
       if (agentId) {
         saveLedger(ledgerPath, ledger);
       }
@@ -457,15 +456,23 @@ function resolveJob(ledger, positionals, flags, nowMs, options) {
     }
     return job;
   }
-  const filters = jobFilters(flags);
+  return peekDefaultJob(ledger, flags, nowMs, options);
+}
+
+/**
+ * Roster-aware peek. Without --agent this is leftover unused
+ * (not a card already recommended to a parked agent).
+ * @param {import("./ledger.js").Ledger} ledger
+ * @param {Record<string, string>} flags
+ * @param {number} nowMs
+ * @param {{ root?: string }} options
+ */
+function peekDefaultJob(ledger, flags, nowMs, options) {
   const agentId = flags.agent || process.env.CURSOR_AGENT_ID || process.env.AGENT_ID;
-  if (agentId) {
-    const roster = readRosterSafe(
-      flags.roster ? resolve(flags.roster) : defaultRosterPath(options.root ?? ROOT),
-    );
-    return peekBusyJob(ledger, agentId, filters, nowMs, roster);
-  }
-  return nextJob(ledger, filters, nowMs);
+  const roster = readRosterSafe(
+    flags.roster ? resolve(flags.roster) : defaultRosterPath(options.root ?? ROOT),
+  );
+  return peekBusyJob(ledger, agentId, jobFilters(flags), nowMs, roster);
 }
 
 function readRosterSafe(destPath) {
@@ -491,7 +498,7 @@ function helpText() {
 
 Commands:
   list
-  next [--kind kind] [--repo repo] [--here] [--all] [--world]
+  next [--kind kind] [--repo repo] [--here] [--all] [--world] [--agent <bcId>]
   slots [--here] [--all] [--world]
   assign [--out dir]
   sync --agents path.json [--write] [--out dir]

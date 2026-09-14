@@ -28,7 +28,7 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
    uncarded playbooks.
    `slots --world` / `busy --world` stay on those
    planes. Peek leftover next (no `--agent`): `node src/cli.js next`
-   (`gub-inventory-tick` while the probe is claimed).
+   (`gub-route-intent` — does not steal a rostered card).
    `node src/cli.js route "keep agents busy"` without `--agent` is that
    leftover card. With `--agent` it is **your roster Origin card**.
    Paste `node src/cli.js prompt --agent <your-bcId>` into an

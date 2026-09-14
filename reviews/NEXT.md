@@ -23,7 +23,8 @@ is set. To implement here: `origin auth login --api-key "$CURSOR_API_KEY"`
 then `origin repo clone yuri-afk/genesis genesis`. Otherwise paste the
 packet at https://cursor.com/codebase/yuri-afk/genesis
 
-**Peek without claiming:** `gub-inventory-tick` (GUB, not a world plane).  
+**Peek leftover unused (no `--agent`):** `gub-route-intent`  
+(`gub-inventory-tick` is rostered to the fork — do not steal it.)  
 World peek: `node src/cli.js next --world` → `genesis-world-layer-102`  
 Full table: `reviews/WORLD-PHASES.md` · backlog: `reviews/genesis-backlog.md`
 
