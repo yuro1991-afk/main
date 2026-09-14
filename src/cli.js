@@ -64,6 +64,11 @@ import {
   mineCatalog,
   writeCatalogMine,
 } from "./catalog.js";
+import {
+  buildPatchCatalog,
+  defaultPatchesIndexPath,
+  loadPatchIndex,
+} from "./patches.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -234,6 +239,19 @@ export async function runCli(argv, options = {}) {
       );
       write(JSON.stringify(siblings, null, 2));
       return 0;
+    }
+    case "patches": {
+      const index = loadPatchIndex(
+        flags.index
+          ? resolve(flags.index)
+          : defaultPatchesIndexPath(options.root ?? ROOT),
+      );
+      const catalog = buildPatchCatalog(index, {
+        id: positionals[0] || flags.job,
+        repo: flags.repo,
+      });
+      write(JSON.stringify(catalog, null, 2));
+      return catalog.count > 0 ? 0 : 1;
     }
     case "handoff": {
       const ledger = loadLedger(ledgerPath);
@@ -528,9 +546,12 @@ Commands:
   route <intent> [--agent <bcId>]   # roster card if --agent, else leftover next
   tick [--out path]
   siblings
+  patches [jobId] [--job id] [--repo github.com/yuro1991-afk/...]
   playbooks [--here] [--out dir]
 
-Genesis only (Yuri). Pass --world for Python world planes. Pass --all to see out-of-scope cards.
+Yuri: forget Origin for sibling work. patches lists applyable GitHub diffs.
+This token cannot push those repos. Do not copy PR #6 autofix.
+Genesis only unless you pass --all / merge the GitHub-first board.
 Do not reopen GitHub PR #1. Origin: origin.cursor.com/git/yuri-afk/genesis.`;
 }
 

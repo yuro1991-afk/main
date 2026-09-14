@@ -45,6 +45,25 @@
       "title": "Add a verified DroneHive cp1252 autofix runner",
       "role": "autofix-runner",
       "owns": ["dronehive-unicode-ci"]
+    },
+    {
+      "number": 0,
+      "url": "https://github.com/yuro1991-afk/main/compare/main...cursor/sibling-patch-catalog-108b",
+      "branch": "cursor/sibling-patch-catalog-108b",
+      "title": "Add applyable sibling patches (catalog only, not autofix)",
+      "role": "patch-catalog",
+      "owns": [
+        "bloom-gitignore-vercel",
+        "bloom-readme-honest-export",
+        "bloom-ci-typecheck",
+        "bloom-health-probe",
+        "opensussy-ship-json-2-0-0",
+        "opensussy-agama-honesty",
+        "faceswap-honesty-env-paths",
+        "faceswap-commit-pwa-icons",
+        "ova-pwsh-syntax-ci",
+        "ova-api-host-override"
+      ]
     }
   ]
 }

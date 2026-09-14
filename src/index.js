@@ -145,3 +145,13 @@ export {
   loadSiblings,
   siblingsForJob,
 } from "./siblings.js";
+export {
+  PATCH_CONTRACT,
+  assertPatchFilesExist,
+  buildPatchCatalog,
+  defaultPatchesIndexPath,
+  listPatches,
+  loadPatchIndex,
+  patchForJob,
+  validatePatchEntry,
+} from "./patches.js";

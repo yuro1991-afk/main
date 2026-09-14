@@ -1,5 +1,10 @@
 # Next card (Genesis Python world)
 
+**Yuri: forget Origin** for sibling GitHub work. Applyable diffs:
+`node src/cli.js patches` · `reviews/SIBLING-PATCHES.md`.
+Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
+defaults. Do not steal a rostered card.
+
 Idle agents on `yuro1991-afk/main`: do **not** inventory this pad again.
 Relaunch Origin. 35 parked agents have unique world-phase cards. The
 new fork takes leftover `gub-inventory-tick`.

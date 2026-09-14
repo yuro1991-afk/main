@@ -30,7 +30,7 @@ function job(kind) {
 
 test("siblings.json loads and maps dronehive to PR 5", () => {
   const siblings = loadSiblings(SIBLINGS);
-  assert.equal(siblings.prs.length, 5);
+  assert.equal(siblings.prs.length, 6);
   const related = siblingsForJob(siblings, "dronehive-unicode-ci");
   assert.deepEqual(
     related.map((pr) => pr.number),
@@ -78,6 +78,7 @@ test("cli brief defaults to next and siblings lists PRs", async () => {
   });
   assert.equal(siblingsCode, 0);
   assert.match(listed.join(""), /keep-busy-queue/);
+  assert.match(listed.join(""), /patch-catalog/);
 });
 
 test("cli brief unknown id errors", async () => {

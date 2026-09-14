@@ -1,0 +1,48 @@
+diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+index 0b202bd..325d113 100644
+--- a/.github/workflows/ci.yml
++++ b/.github/workflows/ci.yml
+@@ -8,6 +8,9 @@ on:
+ jobs:
+   python-smoke:
+     runs-on: windows-latest
++    env:
++      PYTHONIOENCODING: utf-8
++      PYTHONUTF8: "1"
+     steps:
+       - uses: actions/checkout@v4
+       - uses: actions/setup-python@v5
+diff --git a/drone/pro/tool_agent.py b/drone/pro/tool_agent.py
+index 2690bc5..5bc3636 100644
+--- a/drone/pro/tool_agent.py
++++ b/drone/pro/tool_agent.py
+@@ -11,6 +11,7 @@ from __future__ import annotations
+ 
+ import json
+ import re
++import sys
+ import time
+ import uuid
+ from pathlib import Path
+@@ -28,8 +29,19 @@ def _chat(role: str, text: str) -> None:
+     line = (text or "").replace("\n", " ").strip()
+     if not line:
+         return
+-    # flush so Rust TUI sees progress live
+-    print(f"CHAT|{role}|{line[:500]}", flush=True)
++    message = f"CHAT|{role}|{line[:500]}"
++    try:
++        print(message, flush=True)
++    except UnicodeEncodeError:
++        encoding = getattr(sys.stdout, "encoding", None) or "ascii"
++        payload = (message + "\n").encode(encoding, errors="replace")
++        buffer = getattr(sys.stdout, "buffer", None)
++        if buffer is not None:
++            buffer.write(payload)
++            buffer.flush()
++            return
++        sys.stdout.write(payload.decode(encoding, errors="replace"))
++        sys.stdout.flush()
+ 
+ 
+ TOOL_CATALOG = [

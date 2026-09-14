@@ -31,6 +31,7 @@ node src/cli.js brief
 node src/cli.js handoff
 node src/cli.js playbooks
 node src/cli.js siblings
+node src/cli.js patches
 node src/cli.js claim <id> --agent "$CURSOR_AGENT_ID"
 node src/cli.js probe
 node src/cli.js origin [--login]
@@ -55,3 +56,11 @@ Probe before LIVE claims.
 - GOOSE-PC Core `:8791` is **not** the BOSS peer
 - Failed probes are `unreachable`, never `live`
 - Origin CLI `/exec-daemon/tools/origin` is present; `node src/cli.js origin` stays **logged-out** until `origin --login` has `CURSOR_API_KEY`
+
+## Sibling patches
+
+**Yuri: forget Origin** for public GitHub siblings. `node src/cli.js patches`
+lists applyable diffs (DroneHive unicode, bloom ignore/README/CI, OpenSussy
+2.0.0 leftovers, face-swap icons/env, Ollama Voice syntax + loopback API).
+This pad token cannot push those repos. Do **not** copy PR #6’s autofix runner.
+See `reviews/SIBLING-PATCHES.md`.

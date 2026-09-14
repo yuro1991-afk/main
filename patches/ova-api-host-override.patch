@@ -1,0 +1,70 @@
+diff --git a/README.md b/README.md
+index 8643ceb..3673ceb 100644
+--- a/README.md
++++ b/README.md
+@@ -129,3 +129,10 @@ Invoke-OllamaVoiceQA.ps1
+ ## License
+ 
+ MIT — see [LICENSE](LICENSE).
++
++## Local API override
++
++Set `OV_API_BASE` or `OLLAMA_HOST` to a **loopback** URL when the default
++`http://127.0.0.1:11434` is wrong on this machine (for example
++`http://127.0.0.1:11434` or `localhost:11434`). Non-loopback hosts are
++rejected. Voice Access launcher names are unchanged.
+diff --git a/SECURITY.md b/SECURITY.md
+index e752383..1235fba 100644
+--- a/SECURITY.md
++++ b/SECURITY.md
+@@ -14,3 +14,10 @@ If you find a vulnerability in this repository, open a private security advisory
+ - Do not point `api.baseUrl` at untrusted hosts.
+ - Do not commit machine logs under `logs/` or personal QA reports under `reports/`.
+ - Review Start Menu shortcuts after install; they invoke PowerShell with `-ExecutionPolicy Bypass` only for this package's scripts.
++
++## Loopback API override
++
++`OV_API_BASE` and `OLLAMA_HOST` are accepted only when the URL host is
++`127.0.0.1`, `localhost`, or `::1`. LAN/WAN values are rejected and the
++configured `api.baseUrl` is used. Do not point `api.baseUrl` at untrusted
++hosts.
+diff --git a/lib/OllamaVoice.Common.ps1 b/lib/OllamaVoice.Common.ps1
+index 75fb5c6..da6ce7a 100644
+--- a/lib/OllamaVoice.Common.ps1
++++ b/lib/OllamaVoice.Common.ps1
+@@ -76,8 +76,34 @@ function Get-OVOllamaExe {
+   return $null
+ }
+ 
++function Test-OVLoopbackApiBase {
++  param([string]$Candidate)
++  if (-not $Candidate) { return $false }
++  try {
++    $uri = [Uri]$Candidate
++  } catch {
++    return $false
++  }
++  if ($uri.Scheme -notin @("http", "https")) { return $false }
++  $hostName = $uri.IdnHost
++  return $hostName -in @("127.0.0.1", "localhost", "::1")
++}
++
+ function Get-OVApiBase {
+-  return (Get-OVConfig).api.baseUrl.TrimEnd("/")
++  $cfgUrl = (Get-OVConfig).api.baseUrl.TrimEnd("/")
++  foreach ($raw in @($env:OV_API_BASE, $env:OLLAMA_HOST)) {
++    if (-not $raw) { continue }
++    $candidate = $raw.Trim().TrimEnd("/")
++    if (-not $candidate) { continue }
++    if ($candidate -notmatch "^[a-zA-Z][a-zA-Z0-9+.-]*://") {
++      $candidate = "http://$candidate"
++    }
++    if (Test-OVLoopbackApiBase $candidate) {
++      return $candidate.TrimEnd("/")
++    }
++    Write-OVLog WARN "Rejected non-loopback API override" @{ Value = "$raw" }
++  }
++  return $cfgUrl
+ }
+ 
+ function Test-OVApi {

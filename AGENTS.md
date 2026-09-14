@@ -48,14 +48,23 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
    Then `origin repo clone yuri-afk/genesis genesis`. Until then,
    relaunch to https://cursor.com/codebase/yuri-afk/genesis.
 
+## Sibling patches (GitHub)
+
+**Yuri: forget Origin** for these cards. `node src/cli.js patches` lists
+applyable diffs under `patches/`. This token **cannot push** those repos —
+clone and relaunch there. Do not copy PR #6’s autofix runner.
+Evidence: `reviews/SIBLING-PATCHES.md`. Merge
+[main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first defaults.
+
 ## Do not
 
-- Work dronehive / opensussy / face-swap / ollama-voice / bloom from this pad.
+- Push dronehive / opensussy / face-swap / ollama-voice / bloom from this pad.
 - Reconstruct the 39 sibling slices here.
 - Reopen closed PR #1 (`Assemble all Genesis sibling slices in one repo`).
 - Claim BOSS Superbrain (`169.254.124.8:45001`) or GOOSE-PC (`:8791`) LIVE without a successful probe from this host. Timeouts stay `unreachable`.
 - Treat a CodeRabbit skip-on-draft comment as a completed review.
 - Copy `packages/keep-busy` from PR #4 onto this branch.
+- Copy `bin/autofix.js` / `src/autofix.js` from PR #6.
 
 ## If the user asks for Genesis work
 
