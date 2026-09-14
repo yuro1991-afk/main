@@ -46,8 +46,9 @@ bloom / face-swap / ollama-voice — clone and relaunch there.
 | Mine Genesis Notion backlog | `bloom-readme-honest-export` |
 | Summarize Genesis transcript | `bloom-ci-typecheck` |
 | Summarize review transcripts | `bloom-health-probe` |
+| Extract arena assignment | `review-main-pr8` |
 
-A 21st unassigned agent takes leftover `review-landing-pad-prs`.
+A 22nd unassigned agent takes leftover `review-landing-pad-prs`.
 Do not invent Origin work.
 
 ## Do not

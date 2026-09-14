@@ -30,7 +30,7 @@ function job(kind) {
 
 test("siblings.json loads and maps dronehive to PR 5", () => {
   const siblings = loadSiblings(SIBLINGS);
-  assert.equal(siblings.prs.length, 5);
+  assert.equal(siblings.prs.length, 7);
   const related = siblingsForJob(siblings, "dronehive-unicode-ci");
   assert.deepEqual(
     related.map((pr) => pr.number),

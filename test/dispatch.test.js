@@ -194,13 +194,14 @@ test("assign maps parked agents to distinct GitHub sibling cards", () => {
   const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
   const packet = buildAssign(ledger, roster, NOW);
   assert.equal(packet.contract, ASSIGN_CONTRACT);
-  assert.equal(packet.count, 20);
+  assert.equal(packet.count, 21);
   assert.equal(packet.next.jobId, "dronehive-unicode-ci");
   const ids = packet.assignments.map((row) => row.jobId);
   const agents = packet.assignments.map((row) => row.bcId);
-  assert.equal(new Set(ids).size, 20);
-  assert.equal(new Set(agents).size, 20);
+  assert.equal(new Set(ids).size, 21);
+  assert.equal(new Set(agents).size, 21);
   assert.ok(packet.assignments.some((row) => row.jobId === "dronehive-unicode-ci"));
+  assert.ok(packet.assignments.some((row) => row.jobId === "review-main-pr8"));
   assert.ok(packet.assignments.some((row) => row.jobId === "bloom-health-probe"));
   assert.ok(packet.assignments.every((row) => row.relaunch.kind === "github" || row.relaunch.kind === "here"));
   assert.ok(packet.assignments.every((row) => row.status === "open"));

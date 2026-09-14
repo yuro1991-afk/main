@@ -1015,6 +1015,23 @@
       "collision": "Review only. Merge decisions stay with Yuri."
     },
     {
+      "id": "review-main-pr8",
+      "title": "Review GitHub-first dispatch PR #8",
+      "repo": "github.com/yuro1991-afk/main",
+      "kind": "review",
+      "priority": 23,
+      "status": "open",
+      "claim": null,
+      "notes": "Newcomer card. Read https://github.com/yuro1991-afk/main/pull/8. CI is green. Do not copy #4/#6. Do not reopen #1.",
+      "verify": "Confirm #8 stays GitHub-first (default next is a sibling card). Merge stays with Yuri.",
+      "files": [
+        "src/cli.js",
+        "ledger/roster.json",
+        "AGENTS.md"
+      ],
+      "collision": "Do not open another dispatch board. Extend #8 or take leftover review-landing-pad-prs."
+    },
+    {
       "id": "gub-route-intent",
       "title": "Implement GUB route-intent playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",
