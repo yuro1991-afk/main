@@ -49,6 +49,29 @@ test("gub-superbrain-probe prompt refuses the probe", () => {
   assert.doesNotMatch(text, /Origin launch/);
   assert.doesNotMatch(text, /Do not mark Superbrain LIVE without a successful probe/);
   assert.doesNotMatch(text, /This pad token cannot push Origin — implement there/);
+  assert.match(text, /patches --prove/);
+});
+
+test("cataloged sibling prompt is apply, not Origin launch", () => {
+  const text = renderLaunchPrompt({
+    id: "dronehive-unicode-ci",
+    title: "Fix dronehive python-smoke UnicodeEncodeError",
+    repo: "github.com/yuro1991-afk/dronehive",
+    kind: "fix",
+    priority: 8,
+    status: "blocked",
+    claim: null,
+    notes: "cp1252",
+    verify: "python -m drone app pro",
+    files: [],
+    collision: "tool_agent.py",
+  });
+  assert.match(text, /Apply dronehive-unicode-ci/);
+  assert.match(text, /patches --prove --job dronehive-unicode-ci/);
+  assert.match(text, /dronehive-pro-chat-cp1252\.patch/);
+  assert.match(text, /forget Origin/);
+  assert.doesNotMatch(text, /Origin launch/);
+  assert.doesNotMatch(text, /Do not work dronehive/);
 });
 
 test("empty prompt refuses a fifth queue", () => {

@@ -1,4 +1,4 @@
-import { firstCommands } from "./brief.js";
+import { catalogPatchFor, firstCommands } from "./brief.js";
 import { packetPathFor, relaunchFor } from "./handoff.js";
 
 export const PROMPT_CONTRACT = "agent-ops.prompt.v1";
@@ -19,6 +19,45 @@ Do not reopen https://github.com/yuro1991-afk/main/pull/1.
   const commands = firstCommands(job)
     .map((line) => `- ${line}`)
     .join("\n");
+  const patch = catalogPatchFor(job);
+  if (patch) {
+    const target = relaunchFor(job);
+    const after = (patch.afterApply ?? []).length
+      ? `\n- After apply: ${(patch.afterApply ?? []).join("; ")}`
+      : "";
+    return `# Apply ${job.id}
+
+Yuri: forget Origin for this card. Apply the catalog patch on a sibling write checkout.
+
+- Sibling: https://${job.repo}
+- Relaunch: ${target.url}
+- Patch: \`${patch.file}\`
+- Job: \`${job.id}\` — ${job.title}
+- Playbook: \`playbooks/${job.id}.md\`
+- Prove: \`node src/cli.js patches --prove --job ${job.id}\`${after}
+
+## Notes
+
+${job.notes}
+
+## Collision
+
+${job.collision}
+
+## First moves
+
+${commands}
+
+## Do not
+
+- Do not reopen https://github.com/yuro1991-afk/main/pull/1
+- Do not copy PR #6 autofix
+- Do not invent a new leftover
+- Do not probe :45001 / :8791
+- Do not run node src/cli.js probe
+- This pad token cannot push ${job.repo} — apply there
+`;
+  }
   if (job.id === "gub-superbrain-probe") {
     return `# Stop Superbrain probe — ${job.id}
 
@@ -48,7 +87,7 @@ ${commands}
 - Do not probe :45001 / :8791
 - Do not run node src/cli.js probe
 - Do not mark Superbrain LIVE
-- Take review-main-pr10, or apply a catalog patch on a sibling write checkout
+- Take review-main-pr10, or run node src/cli.js patches --prove then apply a catalog patch on a sibling write checkout
 `;
   }
   const target = relaunchFor(job);

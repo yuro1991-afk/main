@@ -23,6 +23,7 @@ on sibling `main` (no `-U0`). Repeat with
 `node src/cli.js patches --prove --siblings-root /tmp/siblings`.
 Catalog leftover firstCommands now start with `--prove --job`.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
+`cli prompt --job <catalog-id>` is Apply, not Origin launch.
 Leftover hunt is closed. Do not invent leftovers. Do not recatalog
 CHANNEL_META / wraps / sandwiched JSON.
 Sibling `main` SHAs still match catalog bases. Do not invent leftovers.
