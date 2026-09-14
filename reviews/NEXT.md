@@ -79,8 +79,6 @@ Keep-busy tick: 35 idle / 1 running. World next remains `genesis-world-layer-102
 `node src/cli.js catalog` diffs Notion Genesis Entries
 (`ledger/catalog-entries.json`) so new playbooks become cards.
 `node src/cli.js route "keep agents busy"` now returns that leftover
-Origin card (`gub-inventory-tick`), not this pad.
-`node src/cli.js route "keep agents busy"` now returns that leftover
 Origin card (`gub-inventory-tick`), not this pad. No self-hosted workers.
 
 Do not reopen [main#1](https://github.com/yuro1991-afk/main/pull/1).
