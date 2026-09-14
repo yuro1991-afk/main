@@ -61,6 +61,9 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
   const benchGoal = relaunchFor({ ...job, id: "dronehive-bench-goal-honesty" });
   assert.match(benchGoal.reason, /dronehive-bench-goal-honesty\.patch/);
   assert.doesNotMatch(benchGoal.reason, /npm run autofix/);
+  const buzzerHive = relaunchFor({ ...job, id: "dronehive-buzzer-hive-library-honesty" });
+  assert.match(buzzerHive.reason, /dronehive-buzzer-hive-library-honesty\.patch/);
+  assert.doesNotMatch(buzzerHive.reason, /npm run autofix/);
 });
 
 test("origin jobs relaunch to the Origin codebase", () => {

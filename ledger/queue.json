@@ -214,6 +214,21 @@
       "collision": "GOAL string only. Same file as script-host-roots but different hunks. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-buzzer-hive-library-honesty",
+      "title": "Point buzzer_hive.json library paths at host/",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 40,
+      "status": "blocked",
+      "claim": null,
+      "notes": "configs/buzzer_hive.json still pins F:\\\\GrokSelfLibrary and D:\\\\GrokCoreMemory. Applyable catalog patch is patches/dronehive-buzzer-hive-library-honesty.patch on main#9. Independent of config-load-overlay (Python remap only). Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "configs/buzzer_hive.json library.root is host/library and continuous_tasks is host/continuous/OPEN_TASKS.json.",
+      "files": [
+        "configs/buzzer_hive.json"
+      ],
+      "collision": "configs/buzzer_hive.json library keys only. Seed copy is a later leftover. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",
