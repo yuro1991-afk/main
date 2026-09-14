@@ -70,8 +70,12 @@
       "repo": "origin.cursor.com/git/yuri-afk/genesis",
       "kind": "origin-slice",
       "priority": 3,
-      "status": "open",
-      "claim": null,
+      "status": "claimed",
+      "claim": {
+        "agentId": "bc-01a0a0ce-1d96-7bb9-b7a7-aeaf5271108b",
+        "claimedAt": "2026-09-14T17:21:31.816Z",
+        "leaseUntil": "2026-09-14T18:06:31.816Z"
+      },
       "notes": "Notion draft https://app.notion.com/p/3db735da33f381a58f19ceffc771ecdd — short-timeout GET http://169.254.124.8:45001/health, write .genesis/last-superbrain.json, never mark LIVE on timeout.",
       "verify": "Failed probe stays unreachable. GOOSE-PC :8791 is not the BOSS peer.",
       "files": [],
