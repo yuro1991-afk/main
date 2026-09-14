@@ -100,6 +100,30 @@
       "collision": "Apply after dronehive-portable-paths. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-config-load-overlay",
+      "title": "Remap F:/D:/G: strings when dronehive JSON configs load",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 27,
+      "status": "blocked",
+      "claim": null,
+      "notes": "After Path() wraps, hive / future_seer / multi_hosts / work_order / super_llms JSON still leak F:/D:/G: on load. Apply portable-paths first, then patches/dronehive-config-load-overlay.patch from main#9. Independent of runtime-host-paths. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "python3 -m py_compile drone/config_overlay.py drone/hive.py drone/future_seer.py drone/multi_face.py drone/model_clones.py drone/super_mesh.py drone/super_llms.py drone/work_order.py drone/knowledge_imprint.py drone/__main__.py",
+      "files": [
+        "drone/config_overlay.py",
+        "drone/hive.py",
+        "drone/future_seer.py",
+        "drone/multi_face.py",
+        "drone/model_clones.py",
+        "drone/super_mesh.py",
+        "drone/super_llms.py",
+        "drone/work_order.py",
+        "drone/knowledge_imprint.py",
+        "drone/__main__.py"
+      ],
+      "collision": "Apply after dronehive-portable-paths. Independent of runtime-host-paths. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",

@@ -74,7 +74,8 @@
         "dronehive-script-host-roots",
         "faceswap-start-sh",
         "dronehive-runtime-host-paths",
-        "faceswap-design-honesty"
+        "faceswap-design-honesty",
+        "dronehive-config-load-overlay"
       ]
     }
   ]
