@@ -60,7 +60,7 @@ export {
   defaultInventoryPath,
   writeInventoryTick,
 } from "./tick.js";
-export { BRIEF_CONTRACT, buildBrief, firstCommands } from "./brief.js";
+export { BRIEF_CONTRACT, buildBrief, catalogPatchFor, firstCommands } from "./brief.js";
 export {
   DEFAULT_ORIGIN_BIN,
   ORIGIN_CONTRACT,

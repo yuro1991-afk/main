@@ -46,7 +46,7 @@ export function buildBrief(job, siblings, options = {}) {
  * @param {import("./ledger.js").Job} job
  * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { file: string, afterApply?: string[] } | null }} [options]
  */
-function catalogPatchFor(job, options = {}) {
+export function catalogPatchFor(job, options = {}) {
   if (options.patch) return options.patch;
   if (options.skipCatalog) return null;
   const indexPath = options.patchesIndex ?? defaultPatchesIndexPath(options.root ?? ROOT);

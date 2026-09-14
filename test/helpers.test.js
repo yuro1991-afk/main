@@ -72,9 +72,25 @@ test("review helpers name open PRs #8/#9/#10", () => {
 });
 
 test("probe helpers refuse the Superbrain CLI probe", () => {
-  const plans = planHelpers(job("probe", { id: "bloom-health-probe" }));
+  const plans = planHelpers(job("probe", { id: "unlisted-lane-probe" }));
   assert.match(plans[0].prompt, /Do not run node src\/cli.js probe/);
   assert.doesNotMatch(plans[0].prompt, /^Run node src\/cli.js probe/);
+});
+
+test("cataloged sibling helpers prove then apply", () => {
+  const plans = planHelpers(
+    job("fix", {
+      id: "dronehive-unicode-ci",
+      repo: "github.com/yuro1991-afk/dronehive",
+    }),
+  );
+  const text = plans.map((helper) => helper.prompt).join("\n");
+  assert.ok(plans.some((helper) => helper.role === "prove"));
+  assert.ok(plans.some((helper) => helper.role === "apply"));
+  assert.match(text, /patches --prove --job dronehive-unicode-ci/);
+  assert.match(text, /dronehive-pro-chat-cp1252\.patch/);
+  assert.doesNotMatch(text, /write a precise patch plan/);
+  assert.doesNotMatch(text, /Do not invent Superbrain LIVE/);
 });
 
 test("cli helpers defaults to next Genesis card", async () => {

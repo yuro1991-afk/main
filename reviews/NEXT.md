@@ -22,6 +22,7 @@ Re-proof 2026-09-14T23:16Z: 162/162 vanilla + stacked `git apply --check`
 on sibling `main` (no `-U0`). Repeat with
 `node src/cli.js patches --prove --siblings-root /tmp/siblings`.
 Catalog leftover firstCommands now start with `--prove --job`.
+Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 Leftover hunt is closed. Do not invent leftovers. Do not recatalog
 CHANNEL_META / wraps / sandwiched JSON.
 Sibling `main` SHAs still match catalog bases. Do not invent leftovers.

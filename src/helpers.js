@@ -1,3 +1,4 @@
+import { catalogPatchFor } from "./brief.js";
 import { assertNeverKind, jobScope } from "./kinds.js";
 
 export const HELPER_CONTRACT = "agent-ops.helpers.v1";
@@ -11,6 +12,24 @@ export const HELPER_CONTRACT = "agent-ops.helpers.v1";
  * @param {import("./ledger.js").Job} job
  * @returns {HelperPlan[]}
  */
+/**
+ * @param {import("./kinds.js").JobKind} kind
+ */
+function catalogApplyKind(kind) {
+  switch (kind) {
+    case "fix":
+    case "implement":
+    case "catalog":
+    case "probe":
+      return true;
+    case "review":
+    case "origin-slice":
+      return false;
+    default:
+      return assertNeverKind(kind);
+  }
+}
+
 export function planHelpers(job) {
   if (!job) return [];
   const scope = jobScope(job);
@@ -21,6 +40,24 @@ export function planHelpers(job) {
       prompt: `Read-only. Clone or fetch ${job.repo} into /tmp if needed. Confirm these files exist: ${(job.files ?? []).join(", ") || "(see notes)"}. Confirm verify command is still the right gate: ${job.verify}. Do not open a new landing-pad queue. Do not reopen main#1. Write findings only.`,
     },
   ];
+  const patch = catalogPatchFor(job);
+  if (patch && catalogApplyKind(job.kind)) {
+    const after = (patch.afterApply ?? []).length
+      ? ` Then: ${patch.afterApply.join("; ")}.`
+      : "";
+    return [
+      {
+        role: "prove",
+        title: `Prove ${job.id}`,
+        prompt: `Run node src/cli.js patches --prove --job ${job.id}. Do not copy PR #6 autofix. Do not invent a new leftover.`,
+      },
+      {
+        role: "apply",
+        title: `Apply ${job.id}`,
+        prompt: `On a write checkout of ${job.repo}: git apply --check /path/to/main/${patch.file} && git apply /path/to/main/${patch.file}.${after} Gate: ${job.verify}. If this token cannot push, relaunch there. Do not inventory the pad again.`,
+      },
+    ];
+  }
   switch (job.kind) {
     case "fix":
     case "implement":
