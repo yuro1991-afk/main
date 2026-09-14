@@ -3,7 +3,7 @@
   "cannotPush": true,
   "apply": "git clone https://github.com/<repo>.git work && cd work && git apply --check ../<file> && git apply ../<file>",
   "doNot": "Do not copy PR #6 npm run autofix. This catalog lists diffs only.",
-  "verifiedAt": "2026-09-14T20:50:00Z",
+  "verifiedAt": "2026-09-14T20:53:00Z",
   "patches": [
     {
       "id": "dronehive-unicode-ci",
@@ -603,6 +603,33 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "drone/app/seed/docs/WORK_ORDER.md header fabric uses repo-relative '.'. Independent of live leftover (different file) and seed-work-order-doc-honesty (NEXT.json). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-imprints",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-doc-imprints.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/WORK_ORDER.md imprint table uses host/library for drone_imprints.jsonl. Independent of header fabric, Library law, NEXT.json, and live-registry docs leftovers. No seed copy of this row. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-live-registry",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-doc-live-registry.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/WORK_ORDER.md live-registry table + $reg use host/ai-center and host/library. Independent of JSON live-registry leftover and other docs leftovers. Leaves Events/HOT relative. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-live-registry",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-doc-live-registry.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "drone/app/seed/docs/WORK_ORDER.md live-registry table + $reg use host paths. Independent of live leftover (different file). Leaves Events/HOT relative. Does not touch tool_agent.py."
     }
   ]
 }

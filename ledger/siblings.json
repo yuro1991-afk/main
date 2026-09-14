@@ -117,7 +117,10 @@
         "dronehive-work-order-doc-law-truth",
         "dronehive-seed-work-order-doc-law-truth",
         "dronehive-work-order-doc-fabric-root",
-        "dronehive-seed-work-order-doc-fabric-root"
+        "dronehive-seed-work-order-doc-fabric-root",
+        "dronehive-work-order-doc-imprints",
+        "dronehive-work-order-doc-live-registry",
+        "dronehive-seed-work-order-doc-live-registry"
       ]
     }
   ]
