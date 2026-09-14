@@ -1,13 +1,35 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { mkdtempSync, readFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { loadLedger, listJobs } from "../src/ledger.js";
 import { renderPlaybook, writePlaybooks } from "../src/playbook.js";
+import { defaultPatchesIndexPath, loadPatchIndex } from "../src/patches.js";
 import { runCli } from "../src/cli.js";
 
+const ROOT = dirname(fileURLToPath(new URL("../package.json", import.meta.url)));
+
 const NOW = Date.parse("2026-09-14T16:00:00.000Z");
+
+test("cataloged GitHub playbooks name the patch in why, not the generic relaunch line", () => {
+  const index = loadPatchIndex(defaultPatchesIndexPath(ROOT));
+  const playbookDir = join(ROOT, "playbooks");
+  let checked = 0;
+  for (const patch of index.patches) {
+    const dest = join(playbookDir, `${patch.id}.md`);
+    if (!existsSync(dest)) continue;
+    const why = readFileSync(dest, "utf8")
+      .split("\n")
+      .find((line) => line.startsWith("- why:"));
+    assert.ok(why, `${patch.id} playbook has a why line`);
+    assert.doesNotMatch(why, /Relaunch against the named repo/);
+    assert.match(why, new RegExp(patch.file.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+    checked += 1;
+  }
+  assert.ok(checked >= 162, `expected catalog playbooks, got ${checked}`);
+});
 
 test("renderPlaybook includes collision and verify", () => {
   const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));

@@ -5,7 +5,7 @@
 - scope: relaunch
 - repo: github.com/yuro1991-afk/face-swap-ios
 - relaunch: https://github.com/yuro1991-afk/face-swap-ios
-- why: Relaunch against the named repo. This landing-pad token cannot push it.
+- why: This token cannot push face-swap-ios. Apply `patches/faceswap-honesty-located-paths.patch` from [main#9](https://github.com/yuro1991-afk/main/pull/9). Do not copy PR #6 autofix.
 
 ## Notes
 
