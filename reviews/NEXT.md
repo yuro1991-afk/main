@@ -27,7 +27,9 @@ packet at https://cursor.com/codebase/yuri-afk/genesis
 
 **Peek leftover unused (no `--agent`):** `gub-route-intent`  
 (`gub-inventory-tick` is rostered to the fork — do not steal it.)  
-World peek: `node src/cli.js next --world` → `genesis-world-layer-102`  
+World leftover unused: none (all 35 world cards are rostered).
+`node src/cli.js next --world` → null. First world phase in the table
+is still `genesis-world-layer-102` — do not steal it.  
 Full table: `reviews/WORLD-PHASES.md` · backlog: `reviews/genesis-backlog.md`
 
 | idle agent | take this Origin card |
@@ -82,7 +84,8 @@ Keep-busy tick: 36 idle / 1 running. `tick` nextId is leftover
 `gub-route-intent` (does not steal the fork's card). New fork
 `bc-84d93b47-d0e0-4d4c-bc55-94c546b5dca0` is rostered onto
 `gub-inventory-tick` (no lease). `busy --agent` claims the agent's
-roster Origin card first. World peek remains `genesis-world-layer-102`.
+roster Origin card first. World leftover unused is empty — `next --world`
+is null (do not steal `genesis-world-layer-102`).
 `sync` leftover for a 37th idle agent: `gub-route-intent`, then
 `gub-run-playbook`, then catalog cards.
 `node src/cli.js catalog` diffs Notion Genesis Entries

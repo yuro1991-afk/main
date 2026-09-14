@@ -244,6 +244,18 @@ test("cli assign writes paste-ready Origin launch files", async () => {
   assert.match(result.out, /"leftoverNext": "gub-route-intent"/);
 });
 
+test("peekBusyJob --world does not steal a rostered world card", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
+  assert.equal(peekBusyJob(ledger, undefined, { world: true }, NOW, roster), null);
+  assert.equal(peekBusyJob(ledger, "bc-brand-new", { world: true }, NOW, roster), null);
+  const parked = roster.assignments[0];
+  assert.equal(peekBusyJob(ledger, parked.bcId, { world: true }, NOW, roster).id, parked.jobId);
+  const claimed = claimBusyJob(ledger, "bc-brand-new", { world: true }, NOW, roster);
+  assert.equal(claimed, null);
+  assert.equal(ledger.jobs.find((job) => job.id === "genesis-world-layer-102").claim, null);
+});
+
 test("leftover launch rows skip rostered cards", () => {
   const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
   const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));

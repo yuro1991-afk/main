@@ -180,7 +180,7 @@ test("writeInventoryTick nextId skips rostered cards", () => {
   const snapshot = writeInventoryTick(ledger, dest, NOW, { roster });
   assert.equal(snapshot.nextId, "gub-route-intent");
   assert.notEqual(snapshot.nextId, "gub-inventory-tick");
-  assert.equal(snapshot.worldNextId, "genesis-world-layer-102");
+  assert.equal(snapshot.worldNextId, null);
 });
 
 test("cli tick nextId is leftover unused, not the fork's card", async () => {

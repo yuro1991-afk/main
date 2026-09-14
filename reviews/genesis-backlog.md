@@ -67,7 +67,8 @@ lattice · arena · robotics. Cite PM + layer #102 only.
 (does not steal the fork's `gub-inventory-tick`).
 Paste-ready leftover brief: `reviews/launch/gub-route-intent.md`.
 `node src/cli.js prompt --agent <bcId>` prints that agent's roster card.
-`node src/cli.js next --world` returns `genesis-world-layer-102`.
+`node src/cli.js next --world` returns null while every world card is
+rostered (do not steal `genesis-world-layer-102`).
 `node src/cli.js catalog` now diffs `ledger/catalog-entries.json`
 (Notion Genesis Entries). All 18 playbooks are carded; leftover after
 the 35 world assignments plus the fork's `gub-inventory-tick` is

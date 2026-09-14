@@ -26,8 +26,9 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
    `node src/cli.js catalog --write` diffs
    `ledger/catalog-entries.json` (Notion Genesis Entries) and appends
    uncarded playbooks.
-   `slots --world` / `busy --world` stay on those
-   planes. Peek leftover next (no `--agent`): `node src/cli.js next`
+   `slots --world` lists world cards. `busy --world` without an unused
+   world leftover peeks/claims nothing (do not steal
+   `genesis-world-layer-102`). Peek leftover next (no `--agent`): `node src/cli.js next`
    (`gub-route-intent` — does not steal a rostered card;
    paste-ready brief: `reviews/launch/gub-route-intent.md`).
    `node src/cli.js route "keep agents busy"` without `--agent` is that

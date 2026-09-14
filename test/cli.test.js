@@ -106,6 +106,20 @@ test("cli next defaults to the first Genesis card", async () => {
   assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
 });
 
+test("cli next --world is empty when every world card is rostered", async () => {
+  const result = await capture(["next", "--world"]);
+  assert.equal(result.code, 1);
+  assert.equal(result.out.trim(), "null");
+});
+
+test("cli busy --world without agent does not peek a rostered world card", async () => {
+  const out = join(mkdtempSync(join(tmpdir(), "agent-ops-busy-world-")), "last-dispatch.json");
+  const result = await capture(["busy", "--world", "--out", out]);
+  assert.equal(result.code, 1);
+  assert.match(result.out, /"job": null/);
+  assert.doesNotMatch(result.out, /"jobId": "genesis-world-layer-102"/);
+});
+
 test("cli busy without agent peeks the next Genesis card", async () => {
   const out = join(mkdtempSync(join(tmpdir(), "agent-ops-busy-cli-")), "last-dispatch.json");
   const result = await capture(["busy", "--out", out]);

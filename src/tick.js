@@ -26,7 +26,9 @@ export function writeInventoryTick(ledger, destPath, nowMs, extras = {}) {
     : null;
   const next =
     leftover ?? nextJob(ledger, { genesis: true }, nowMs) ?? nextJob(ledger, {}, nowMs);
-  const worldNext = nextJob(ledger, { world: true }, nowMs);
+  const worldNext = roster
+    ? peekBusyJob(ledger, extras.agentId, { world: true }, nowMs, roster)
+    : nextJob(ledger, { world: true }, nowMs);
   const origin = extras.origin ?? null;
   const snapshot = {
     contract: INVENTORY_CONTRACT,

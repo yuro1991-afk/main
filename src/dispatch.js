@@ -226,7 +226,8 @@ export function saveRoster(rosterPath, roster) {
 /**
  * Which Origin card a waking pad agent should take.
  * Prefer an active claim, then the roster card for this bcId, then
- * leftover unused Genesis, then next(). Does not lease.
+ * leftover unused Genesis. Never a card already on the roster.
+ * Does not lease.
  * @param {import("./ledger.js").Ledger} ledger
  * @param {string | undefined} agentId
  * @param {{ kind?: string, repo?: string, scope?: string, genesis?: boolean, world?: boolean }} [filters]
@@ -254,14 +255,17 @@ export function peekBusyJob(ledger, agentId, filters = {}, nowMs = Date.now(), r
     jobPassesBusyFilters(job, filters, nowMs),
   );
   if (leftover[0]) return leftover[0];
-  return nextJob(ledger, filters, nowMs);
+  const raw = nextJob(ledger, filters, nowMs);
+  if (raw && !used.has(raw.id)) return raw;
+  return null;
 }
 
 /**
  * Reserve work for a waking pad agent.
  * Prefer the roster card already assigned to this bcId so 35 idle
  * agents do not all claim leftover `gub-inventory-tick`.
- * Unassigned agents take the next unused Genesis leftover, then next().
+ * Unassigned agents take the next unused Genesis leftover. Do not
+ * fall through to a card already recommended on the roster.
  * @param {import("./ledger.js").Ledger} ledger
  * @param {string} agentId
  * @param {{ kind?: string, repo?: string, scope?: string, genesis?: boolean, world?: boolean }} [filters]
