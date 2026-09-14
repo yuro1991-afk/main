@@ -52,6 +52,8 @@ export {
   buildRelaunch,
   packetPathFor,
   relaunchFor,
+  renderHandoffPacket,
+  writeHandoffPackets,
 } from "./handoff.js";
 export { playbookPath, renderPlaybook, writePlaybooks } from "./playbook.js";
 export { HELPER_CONTRACT, buildHelperPacket, planHelpers } from "./helpers.js";

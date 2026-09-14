@@ -17,7 +17,13 @@ import { defaultSuperbrainPath, probeKnownLanes, writeLaneProbe } from "./probe.
 import { routeIntent } from "./routing.js";
 import { defaultInventoryPath, writeInventoryTick } from "./tick.js";
 import { buildBrief } from "./brief.js";
-import { buildHandoff, buildRelaunch, packetPathFor, relaunchFor } from "./handoff.js";
+import {
+  buildHandoff,
+  buildRelaunch,
+  packetPathFor,
+  relaunchFor,
+  writeHandoffPackets,
+} from "./handoff.js";
 import { writePlaybooks } from "./playbook.js";
 import { buildHelperPacket } from "./helpers.js";
 import { defaultSiblingsPath, loadSiblings } from "./siblings.js";
@@ -182,7 +188,21 @@ export async function runCli(argv, options = {}) {
         : resolve(options.root ?? ROOT, "playbooks");
       const jobs = listJobs(ledger, { status: "open", ...jobFilters(flags) }, nowMs);
       const written = writePlaybooks(jobs, dest);
-      write(JSON.stringify({ dir: dest, count: written.length, files: written }, null, 2));
+      const defaultReviews = resolve(options.root ?? ROOT, "reviews");
+      const defaultPlaybooks = resolve(options.root ?? ROOT, "playbooks");
+      const packetDir = flags.packets
+        ? resolve(flags.packets)
+        : dest === defaultPlaybooks
+          ? defaultReviews
+          : dest;
+      const packets = writeHandoffPackets(jobs, packetDir);
+      write(
+        JSON.stringify(
+          { dir: dest, count: written.length, files: written, packets },
+          null,
+          2,
+        ),
+      );
       return 0;
     }
     case "brief": {

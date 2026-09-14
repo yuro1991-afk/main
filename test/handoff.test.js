@@ -1,6 +1,10 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { join } from "node:path";
 import { buildHandoff, buildRelaunch, packetPathFor, relaunchFor } from "../src/handoff.js";
+import { listJobs, loadLedger } from "../src/ledger.js";
 import { loadSiblings, describeRole, SIBLING_ROLES } from "../src/siblings.js";
 import { runCli } from "../src/cli.js";
 
@@ -68,6 +72,18 @@ test("here jobs stay on this checkout", () => {
   });
   assert.equal(target.kind, "here");
   assert.match(target.reason, /Stay on this checkout/);
+});
+
+test("every open Genesis job has a reviews/handoff packet", () => {
+  const root = fileURLToPath(new URL("..", import.meta.url));
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const jobs = listJobs(ledger, { genesis: true }, NOW).filter(
+    (job) => job.status === "open" || job.status === "claimed",
+  );
+  assert.ok(jobs.length >= 8);
+  for (const job of jobs) {
+    assert.equal(existsSync(join(root, packetPathFor(job))), true, packetPathFor(job));
+  }
 });
 
 test("relaunch packet points at Origin and the handoff file", () => {

@@ -1,3 +1,5 @@
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 import { assertNeverScope, jobScope } from "./kinds.js";
 import { siblingsForJob, describeRole } from "./siblings.js";
 
@@ -9,6 +11,66 @@ export const RELAUNCH_CONTRACT = "agent-ops.relaunch.v1";
  */
 export function packetPathFor(job) {
   return job ? `reviews/handoff-${job.id}.md` : "reviews/NEXT.md";
+}
+
+/**
+ * @param {import("./ledger.js").Job} job
+ */
+export function renderHandoffPacket(job) {
+  const target = relaunchFor(job);
+  return `# Origin relaunch packet — ${job.id}
+
+This landing-pad token cannot authenticate to Origin. Yuri scoped this
+pad to Genesis only. Do not implement here.
+
+## Job
+
+- id: \`${job.id}\`
+- title: ${job.title}
+- kind: ${job.kind}
+- priority: ${job.priority}
+- repo: \`${job.repo}\`
+- UI: ${target.url}
+- playbook: \`playbooks/${job.id}.md\`
+
+## Why relaunch
+
+${target.reason}
+
+## Notes
+
+${job.notes}
+
+## Collision
+
+${job.collision}
+
+## Verify
+
+${job.verify}
+
+## Do not
+
+- Do not reopen https://github.com/yuro1991-afk/main/pull/1
+- Do not open another landing-pad queue
+- Do not work dronehive / opensussy / bloom / face-swap / ollama-voice
+`;
+}
+
+/**
+ * @param {import("./ledger.js").Job[]} jobs
+ * @param {string} dir
+ */
+export function writeHandoffPackets(jobs, dir, options = {}) {
+  mkdirSync(dir, { recursive: true });
+  return jobs.map((job) => {
+    const dest = join(dir, `handoff-${job.id}.md`);
+    if (!options.overwrite && existsSync(dest)) {
+      return dest;
+    }
+    writeFileSync(dest, renderHandoffPacket(job));
+    return dest;
+  });
 }
 
 /**
