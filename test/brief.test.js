@@ -30,9 +30,12 @@ function job(kind) {
 
 test("siblings.json loads and maps dronehive to PR 5", () => {
   const siblings = loadSiblings(SIBLINGS);
-  assert.equal(siblings.prs.length, 4);
+  assert.equal(siblings.prs.length, 5);
   const related = siblingsForJob(siblings, "dronehive-unicode-ci");
-  assert.equal(related[0].number, 5);
+  assert.deepEqual(
+    related.map((pr) => pr.number),
+    [5, 6],
+  );
   assert.match(describeRole("attention-and-dronehive-patch"), /dronehive/);
 });
 

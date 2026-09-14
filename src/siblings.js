@@ -6,6 +6,7 @@ export const SIBLING_ROLES = Object.freeze([
   "ops-board",
   "keep-busy-queue",
   "attention-and-dronehive-patch",
+  "autofix-runner",
 ]);
 
 /**
@@ -29,6 +30,8 @@ export function describeRole(role) {
       return "Sibling lease queue. Do not copy packages/keep-busy here.";
     case "attention-and-dronehive-patch":
       return "Holds patches/dronehive-pro-chat-cp1252.patch. Apply it on dronehive, not here.";
+    case "autofix-runner":
+      return "PR #6: npm run autofix -- apply <dronehive-checkout>. Do not copy that runner onto this board.";
     default:
       return assertNeverRole(role);
   }

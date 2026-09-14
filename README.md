@@ -18,6 +18,7 @@ npm test
 node src/cli.js status
 node src/cli.js next
 node src/cli.js brief
+node src/cli.js handoff
 node src/cli.js siblings
 node src/cli.js claim <id> --agent "$CURSOR_AGENT_ID"
 node src/cli.js probe

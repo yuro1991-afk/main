@@ -15,7 +15,8 @@
     "probe": "node src/cli.js probe",
     "tick": "node src/cli.js tick",
     "brief": "node src/cli.js brief",
-    "siblings": "node src/cli.js siblings"
+    "siblings": "node src/cli.js siblings",
+    "handoff": "node src/cli.js handoff"
   },
   "engines": {
     "node": ">=20"

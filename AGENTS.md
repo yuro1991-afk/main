@@ -6,7 +6,7 @@ This GitHub checkout is a **landing pad**, not Genesis.
 
 Source of truth for Genesis is **Cursor Origin** (`origin.cursor.com/git/yuri-afk/genesis`). This tree is the claimable ops board (`node src/cli.js`).
 
-Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open a fourth queue. `node src/cli.js brief` prints the next work packet.
+Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another queue. `node src/cli.js brief` and `node src/cli.js handoff` print the next work packet and relaunch target.
 
 ## First moves
 

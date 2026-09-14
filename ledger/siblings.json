@@ -37,6 +37,14 @@
       "title": "Stop the needs-attention loop and stage the DroneHive CI fix",
       "role": "attention-and-dronehive-patch",
       "owns": ["dronehive-unicode-ci"]
+    },
+    {
+      "number": 6,
+      "url": "https://github.com/yuro1991-afk/main/pull/6",
+      "branch": "cursor/autofix-dronehive-ci-ab19",
+      "title": "Add a verified DroneHive cp1252 autofix runner",
+      "role": "autofix-runner",
+      "owns": ["dronehive-unicode-ci"]
     }
   ]
 }

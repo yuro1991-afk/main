@@ -40,6 +40,7 @@ export {
   writeInventoryTick,
 } from "./tick.js";
 export { BRIEF_CONTRACT, buildBrief, firstCommands } from "./brief.js";
+export { HANDOFF_CONTRACT, buildHandoff, relaunchFor } from "./handoff.js";
 export {
   SIBLING_ROLES,
   assertNeverRole,

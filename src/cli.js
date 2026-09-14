@@ -16,6 +16,7 @@ import { defaultSuperbrainPath, probeKnownLanes, writeLaneProbe } from "./probe.
 import { routeIntent } from "./routing.js";
 import { defaultInventoryPath, writeInventoryTick } from "./tick.js";
 import { buildBrief } from "./brief.js";
+import { buildHandoff } from "./handoff.js";
 import { defaultSiblingsPath, loadSiblings } from "./siblings.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -134,6 +135,20 @@ export async function runCli(argv, options = {}) {
       write(JSON.stringify(siblings, null, 2));
       return 0;
     }
+    case "handoff": {
+      const ledger = loadLedger(ledgerPath);
+      const siblings = loadSiblings(
+        flags.siblings ? resolve(flags.siblings) : defaultSiblingsPath(options.root ?? ROOT),
+      );
+      const job = positionals[0]
+        ? ledger.jobs.find((item) => item.id === positionals[0])
+        : nextJob(ledger, { kind: flags.kind, repo: flags.repo }, nowMs);
+      if (positionals[0] && !job) {
+        throw new Error(`unknown job: ${positionals[0]}`);
+      }
+      write(JSON.stringify(buildHandoff(job ?? null, siblings), null, 2));
+      return job ? 0 : 1;
+    }
     case "brief": {
       const ledger = loadLedger(ledgerPath);
       const siblings = loadSiblings(
@@ -191,6 +206,7 @@ Commands:
   tick [--out path]
   siblings
   brief [id]
+  handoff [id]
 
 Do not reopen GitHub PR #1. Genesis lives on Cursor Origin.`;
 }
