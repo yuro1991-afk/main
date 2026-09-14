@@ -67,7 +67,7 @@ test("chatLine skips empty text", () => {
 test("chatLine prefixes CHAT| and truncates", () => {
   let out = "";
   const stream = { write: (chunk) => (out += chunk) };
-  chatLine("tool", `✓ write_text → ${"x".repeat(600)}`);
+  chatLine("tool", `✓ write_text → ${"x".repeat(600)}`, stream);
   assert.match(out, /^CHAT\|tool\|/);
   assert.ok(out.length <= "CHAT|tool|".length + 500 + 1);
 });

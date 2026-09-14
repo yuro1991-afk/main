@@ -7,7 +7,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "test": "node --test test/*.test.js && python3 -m unittest -v test/test_safe_chat.py",
+    "test": "node --test test/*.test.js && python3 test/test_safe_chat.py -v",
     "attention": "node bin/attention.js",
     "verify": "npm test && node bin/attention.js --offline"
   },
