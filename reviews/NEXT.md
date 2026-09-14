@@ -7,7 +7,7 @@ Relaunch Origin. Every idle agent already has a unique world-phase card.
 node src/cli.js assign
 node src/cli.js sync --agents .genesis/last-agents.json --write
 node src/cli.js slots --world
-node src/cli.js busy --world --agent "$CURSOR_AGENT_ID"
+node src/cli.js busy --agent "$CURSOR_AGENT_ID"   # your roster card, not leftover next
 node src/cli.js prompt
 ```
 
@@ -70,10 +70,12 @@ Do not invent `packages/world-*` on this pad. Those cards stay Origin-only
 and start from the PM planes list.
 
 `gub-superbrain-probe` stays claimed on this pad for the probe only.
-Pad probe **2026-09-14T18:16:45Z**: `:45001` health/live **timeout=unreachable**;
+Pad probe **2026-09-14T18:20:49Z**: `:45001` health/live **timeout=unreachable**;
 GOOSE `:8791` fetch failed. Origin CLI **logged-out** (`CURSOR_API_KEY` missing).
 Never LIVE. Origin still must implement that playbook.
-Keep-busy tick: 35 idle / 1 running. World next remains `genesis-world-layer-102`.
+Keep-busy tick: 35 idle / 1 running. `busy --agent` now claims the
+agent's roster Origin card first (world-phase), not leftover
+`gub-inventory-tick`. World peek remains `genesis-world-layer-102`.
 `sync` leftover for a 36th idle agent: `gub-inventory-tick`, then
 `gub-route-intent` / `gub-run-playbook`, then catalog cards.
 `node src/cli.js catalog` diffs Notion Genesis Entries

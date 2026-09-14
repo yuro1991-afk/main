@@ -13,9 +13,12 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
 ## First moves
 
 1. `npm test` if you touch this repo.
-2. `node src/cli.js busy --agent <your-bcId>` — reserves a unique Origin
-   card (or returns the one you already hold). `node src/cli.js slots`
-   lists the rest so a second agent does not pile on.
+2. `node src/cli.js busy --agent <your-bcId>` — claims **your roster
+   Origin card** if `ledger/roster.json` already assigned you one
+   (world-phase first). Otherwise it claims the leftover `next` card
+   (`gub-inventory-tick` today). Re-running returns the card you already
+   hold. `node src/cli.js slots` lists the rest so a second agent does
+   not pile on.
    `node src/cli.js assign` maps every idle pad agent to a distinct
    Genesis Python world-phase card (no lease — dead idle agents must
    not hide `next`). `node src/cli.js sync --agents last-agents.json

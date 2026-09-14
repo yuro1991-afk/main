@@ -92,6 +92,7 @@ export {
   buildAssign,
   buildBusy,
   buildSlots,
+  claimBusyJob,
   defaultDispatchPath,
   defaultLaunchPath,
   defaultRosterPath,

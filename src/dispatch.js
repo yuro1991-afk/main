@@ -1,6 +1,14 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { effectiveStatus, listJobs } from "./ledger.js";
+import { isGenesisJob, isWorldPhaseJob, jobScope } from "./kinds.js";
+import {
+  claimedByAgent,
+  claimJob,
+  claimNextJob,
+  effectiveStatus,
+  listJobs,
+} from "./ledger.js";
+import { unusedGenesisCards } from "./sync.js";
 import { buildHelperPacket } from "./helpers.js";
 import { buildRelaunch, packetPathFor, relaunchFor } from "./handoff.js";
 import { ORIGIN_UI, renderLaunchPrompt } from "./prompt.js";
@@ -170,6 +178,56 @@ export function saveRoster(rosterPath, roster) {
   mkdirSync(dirname(rosterPath), { recursive: true });
   writeFileSync(rosterPath, `${JSON.stringify(roster, null, 2)}\n`);
   return rosterPath;
+}
+
+/**
+ * Reserve work for a waking pad agent.
+ * Prefer the roster card already assigned to this bcId so 35 idle
+ * agents do not all claim leftover `gub-inventory-tick`.
+ * Unassigned agents take the next unused Genesis leftover, then next().
+ * @param {import("./ledger.js").Ledger} ledger
+ * @param {string} agentId
+ * @param {{ kind?: string, repo?: string, scope?: string, genesis?: boolean, world?: boolean }} [filters]
+ * @param {number} [nowMs]
+ * @param {{ assignments?: Array<{ bcId: string, jobId: string }> } | null} [roster]
+ */
+export function claimBusyJob(ledger, agentId, filters = {}, nowMs = Date.now(), roster = null) {
+  const existing = claimedByAgent(ledger, agentId, filters, nowMs);
+  if (existing) return existing;
+  const assignedId = roster?.assignments?.find((row) => row.bcId === agentId)?.jobId;
+  if (assignedId) {
+    const assigned = ledger.jobs.find((job) => job.id === assignedId);
+    if (assigned && jobPassesBusyFilters(assigned, filters, nowMs)) {
+      return claimJob(ledger, assigned.id, agentId, nowMs);
+    }
+  }
+  const used = new Set(
+    (roster?.assignments ?? [])
+      .filter((row) => row.bcId !== agentId)
+      .map((row) => row.jobId),
+  );
+  const leftover = unusedGenesisCards(ledger, used, nowMs).filter((job) =>
+    jobPassesBusyFilters(job, filters, nowMs),
+  );
+  if (leftover[0]) {
+    return claimJob(ledger, leftover[0].id, agentId, nowMs);
+  }
+  return claimNextJob(ledger, agentId, filters, nowMs);
+}
+
+/**
+ * @param {import("./ledger.js").Job} job
+ * @param {{ kind?: string, repo?: string, scope?: string, genesis?: boolean, world?: boolean }} filters
+ * @param {number} nowMs
+ */
+function jobPassesBusyFilters(job, filters, nowMs) {
+  if (effectiveStatus(job, nowMs) !== "open") return false;
+  if (filters.kind && job.kind !== filters.kind) return false;
+  if (filters.repo && job.repo !== filters.repo) return false;
+  if (filters.scope && jobScope(job) !== filters.scope) return false;
+  if (filters.genesis === true && !isGenesisJob(job)) return false;
+  if (filters.world === true && !isWorldPhaseJob(job)) return false;
+  return true;
 }
 
 /**

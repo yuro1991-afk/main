@@ -77,7 +77,7 @@ export function planHelpers(job) {
         {
           role: "reserve",
           title: `Reserve ${job.id}`,
-          prompt: `Run node src/cli.js busy --agent "$CURSOR_AGENT_ID" so other idle agents take a different slot from node src/cli.js slots.`,
+          prompt: `Run node src/cli.js busy --agent "$CURSOR_AGENT_ID" to claim your roster Origin card (or leftover next if you have none). Other idle agents take a different slot from node src/cli.js slots.`,
         },
       ];
     default:

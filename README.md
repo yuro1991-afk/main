@@ -40,9 +40,11 @@ node src/cli.js route "keep my agents busy"   # leftover Origin card, not this p
 
 `assign` maps all 35 idle pad agents onto unique Genesis Python world
 phases and writes paste-ready briefs under `reviews/launch/`.
-`busy --world --agent` reserves the next world-plane card.
-`slots --world` lists the rest. Default `next` is still
-`gub-inventory-tick` (GUB). Claim leases expire in 45 minutes.
+`busy --agent` claims **your roster card** first so those 35 agents do
+not all stampede onto leftover `gub-inventory-tick`. Unassigned agents
+take the leftover `next` card. `busy --world --agent` still stays on
+world planes. `slots --world` lists the rest. Peek `next` (no `--agent`)
+is still `gub-inventory-tick` (GUB). Claim leases expire in 45 minutes.
 
 ## Lanes
 

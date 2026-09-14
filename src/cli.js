@@ -5,7 +5,6 @@ import { dirname, resolve } from "node:path";
 import {
   blockJob,
   claimJob,
-  claimNextJob,
   completeJob,
   defaultLedgerPath,
   listJobs,
@@ -41,6 +40,7 @@ import {
   buildAssign,
   buildBusy,
   buildSlots,
+  claimBusyJob,
   defaultDispatchPath,
   defaultLaunchPath,
   defaultRosterPath,
@@ -350,8 +350,11 @@ export async function runCli(argv, options = {}) {
       );
       const filters = jobFilters(flags);
       const agentId = flags.agent || process.env.CURSOR_AGENT_ID || process.env.AGENT_ID;
+      const roster = readRosterSafe(
+        flags.roster ? resolve(flags.roster) : defaultRosterPath(options.root ?? ROOT),
+      );
       const job = agentId
-        ? claimNextJob(ledger, agentId, filters, nowMs)
+        ? claimBusyJob(ledger, agentId, filters, nowMs, roster)
         : nextJob(ledger, filters, nowMs);
       if (agentId) {
         saveLedger(ledgerPath, ledger);
@@ -488,7 +491,7 @@ Commands:
   assign [--out dir]
   sync --agents path.json [--write] [--out dir]
   catalog [--entries path.json] [--write] [--out path]
-  busy [--agent <bcId>] [--here] [--all] [--world]
+  busy [--agent <bcId>] [--here] [--all] [--world]   # roster card first, then leftover next
   helpers [id]
   claim <id> --agent <bcId>
   complete <id> --agent <bcId>

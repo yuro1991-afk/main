@@ -11,6 +11,7 @@ import {
   SLOTS_CONTRACT,
   buildAssign,
   buildSlots,
+  claimBusyJob,
   loadRoster,
 } from "../src/dispatch.js";
 import { runCli } from "../src/cli.js";
@@ -132,6 +133,44 @@ test("busy --agent claims next; a second agent gets the next slot", async () => 
   assert.match(again.out, /"jobId": "first"/);
   const written = JSON.parse(readFileSync(join(root, "a.json"), "utf8"));
   assert.equal(written.jobId, "first");
+});
+
+test("claimBusyJob uses the roster card instead of leftover next", () => {
+  const ledger = loadLedger(fileURLToPath(new URL("../ledger/queue.json", import.meta.url)));
+  const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
+  const parked = roster.assignments[0];
+  const job = claimBusyJob(ledger, parked.bcId, { genesis: true }, NOW, roster);
+  assert.equal(job.id, parked.jobId);
+  assert.notEqual(job.id, "gub-inventory-tick");
+  const leftoverAgent = claimBusyJob(ledger, "bc-brand-new", { genesis: true }, NOW, roster);
+  assert.equal(leftoverAgent.id, "gub-inventory-tick");
+});
+
+test("busy --agent claims the roster Origin card, not leftover next", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "agent-ops-busy-roster-"));
+  const ledgerPath = join(dir, "queue.json");
+  saveLedger(ledgerPath, loadLedger(fileURLToPath(new URL("../ledger/queue.json", import.meta.url))));
+  const rosterPath = fileURLToPath(new URL("../ledger/roster.json", import.meta.url));
+  const parked = loadRoster(rosterPath).assignments[0];
+  const result = await capture([
+    "busy",
+    "--agent",
+    parked.bcId,
+    "--ledger",
+    ledgerPath,
+    "--roster",
+    rosterPath,
+    "--siblings",
+    SIBLINGS,
+    "--out",
+    join(dir, "out.json"),
+  ]);
+  assert.equal(result.code, 0);
+  assert.match(result.out, new RegExp(`"jobId": "${parked.jobId}"`));
+  assert.doesNotMatch(result.out, /"jobId": "gub-inventory-tick"/);
+  const written = JSON.parse(readFileSync(join(dir, "out.json"), "utf8"));
+  assert.equal(written.jobId, parked.jobId);
+  assert.equal(written.reserved, true);
 });
 
 test("assign maps every idle pad agent to a distinct Origin world card", () => {
