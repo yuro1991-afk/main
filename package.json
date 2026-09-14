@@ -1,0 +1,17 @@
+{
+  "name": "attention",
+  "private": true,
+  "description": "Agent inbox for yuro1991-afk/main — route work, do not rebuild Genesis here.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js && python3 test/test_safe_chat.py -v",
+    "attention": "node bin/attention.js",
+    "verify": "npm test && node bin/attention.js --offline"
+  },
+  "bin": {
+    "attention": "./bin/attention.js"
+  }
+}
