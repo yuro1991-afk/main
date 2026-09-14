@@ -13,7 +13,9 @@
     "next": "node src/cli.js next",
     "status": "node src/cli.js status",
     "probe": "node src/cli.js probe",
-    "tick": "node src/cli.js tick"
+    "tick": "node src/cli.js tick",
+    "brief": "node src/cli.js brief",
+    "siblings": "node src/cli.js siblings"
   },
   "engines": {
     "node": ">=20"

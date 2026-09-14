@@ -8,10 +8,10 @@
       "priority": 1,
       "status": "open",
       "claim": null,
-      "notes": "windows-latest CI dies printing ✓ via _chat in drone/pro/tool_agent.py (~367, 424, 464–506) under cp1252. Blocks PR #1 and stacked PR #2. Optional: PYTHONIOENCODING=utf-8 on python-smoke.",
+      "notes": "windows-latest CI dies printing ✓ via _chat in drone/pro/tool_agent.py (~367, 424, 464–506) under cp1252. Blocks dronehive PR #1 and stacked #2. Patch already staged on landing-pad PR #5: patches/dronehive-pro-chat-cp1252.patch. Apply it on yuro1991-afk/dronehive — this token cannot push that repo.",
       "verify": "python -m drone app pro --goal \"ci pro write ci_ok.txt\" --rounds 3 --no-ollama",
       "files": ["drone/pro/tool_agent.py", ".github/workflows/ci.yml"],
-      "collision": "Work on dronehive branch cursor/setup-dev-environment-2e0b. Do not edit PR #2 files until #1 is green."
+      "collision": "Do not rewrite the patch on this repo. Checkout dronehive, apply github.com/yuro1991-afk/main/pull/5 patch, push on cursor/setup-dev-environment-2e0b."
     },
     {
       "id": "dronehive-rebase-packaging",
@@ -332,6 +332,84 @@
       "verify": "Write a small evidence JSON (status ok | unreachable). Never upgrade a timeout to LIVE. Optional: npm run preview if build already exists.",
       "files": ["src/routes/api/v1/health.ts", "src/routes/docs.tsx", "startup.sh"],
       "collision": "Do not probe or relabel Superbrain from this card. Do not bind :8787/:8788 Origin auto-runner ports."
+    },
+    {
+      "id": "do-not-open-fourth-queue",
+      "title": "Do not open a fourth landing-pad dispatch board",
+      "repo": "github.com/yuro1991-afk/main",
+      "kind": "review",
+      "priority": 98,
+      "status": "done",
+      "claim": null,
+      "notes": "PR #3 is this ops board. PR #4 is keep-busy. PR #2 is pointers. PR #5 is attention + dronehive patch. A fifth queue is waste.",
+      "verify": "gh pr list --repo yuro1991-afk/main --state open shows no new queue PR after #5.",
+      "files": ["ledger/siblings.json"],
+      "collision": "Extend PR #3 or claim a card. Do not copy packages/keep-busy onto this branch."
+    },
+    {
+      "id": "opensussy-ship-json-2-0-0",
+      "title": "Make leftover 1.3.0 ship/docs match released OpenSussy 2.0.0",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "kind": "fix",
+      "priority": 9,
+      "status": "open",
+      "claim": null,
+      "notes": "VERSION / PRODUCT.json / csproj are 2.0.0, but SHIP.json, USER_GUIDE.md, SETUP-DESKTOP.cmd, and INSTALL.cmd still say 1.3.0. Seeded from sibling PR #4 so both boards agree.",
+      "verify": "SHIP.json and generated docs say 2.0.0; leftover 1.3.0 only in CHANGELOG.",
+      "files": ["SHIP.json", "docs/USER_GUIDE.md", "SETUP-DESKTOP.cmd", "INSTALL.cmd"],
+      "collision": "Same card as keep-busy sync-2-0-0-docs-and-ship-json. Claim one board, not both."
+    },
+    {
+      "id": "faceswap-commit-pwa-icons",
+      "title": "Commit the PWA icons face-swap already names",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "kind": "implement",
+      "priority": 13,
+      "status": "open",
+      "claim": null,
+      "notes": "manifest/index.html/sw.js require icon-192.png, icon-512.png, apple-touch-icon.png. make_icons.py exists; PNGs were never committed.",
+      "verify": "Those three PNGs exist under pwa/ and return HTTP 200 when served.",
+      "files": ["pwa/icon-192.png", "pwa/icon-512.png", "pwa/apple-touch-icon.png", "make_icons.py"],
+      "collision": "Same as keep-busy commit-pwa-homescreen-icons. Do not fight faceswap-mock-engine-ci if both touch sw.js."
+    },
+    {
+      "id": "ova-pester-qa-math",
+      "title": "Pester tests for Ollama Voice percentile / stdev / tok-s math",
+      "repo": "github.com/yuro1991-afk/ollama-voice-access",
+      "kind": "implement",
+      "priority": 16,
+      "status": "open",
+      "claim": null,
+      "notes": "README math lives in lib/OllamaVoice.Common.ps1. No tests/ tree. Live QA needs Ollama; unit tests must not.",
+      "verify": "Pester covers empty stats, n=1 stdev 0, n=5 p50/p95, tokens/s with no network.",
+      "files": ["lib/OllamaVoice.Common.ps1", "tests/"],
+      "collision": "Same as keep-busy pester-qa-math-unit-tests. Leave Invoke-OllamaVoiceQA.ps1 as the live SLO owner."
+    },
+    {
+      "id": "bloom-gitignore-vercel",
+      "title": "Stop shipping .vercel/output in Omni-Forge",
+      "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+      "kind": "fix",
+      "priority": 18,
+      "status": "open",
+      "claim": null,
+      "notes": ".gitignore is only node_modules and env crumbs; the tree includes Nitro/Vercel build output.",
+      "verify": ".gitignore includes .vercel/ and dist/; committed output is removed; npm run build still works.",
+      "files": [".gitignore", ".vercel/"],
+      "collision": "Same as keep-busy gitignore-vercel-build-output. Keep package-lock.json tracked."
+    },
+    {
+      "id": "review-landing-pad-prs",
+      "title": "Review existing landing-pad PRs #2 #3 #4 #5",
+      "repo": "github.com/yuro1991-afk/main",
+      "kind": "review",
+      "priority": 22,
+      "status": "open",
+      "claim": null,
+      "notes": "Idle CodeRabbit / auto-review agents: review these open PRs. Do not invent a new tree. Do not reopen #1.",
+      "verify": "Leave a review on at least one of #2/#3/#4/#5. No new dispatch-board PR.",
+      "files": ["ledger/siblings.json"],
+      "collision": "Review only. Merge decisions stay with Yuri."
     }
   ]
 }

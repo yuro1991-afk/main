@@ -8,6 +8,8 @@ Source of truth for Genesis is **Cursor Origin** (`origin.cursor.com/git/yuri-af
 
 Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open a fourth queue. `node src/cli.js brief` prints the next work packet.
 
+Sibling landing-pad PRs already exist — `node src/cli.js siblings`. Do **not** open a fourth queue. `node src/cli.js brief` prints the next work packet.
+
 ## First moves
 
 1. `npm test` if you touch this repo.

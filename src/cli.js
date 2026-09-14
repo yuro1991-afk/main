@@ -15,6 +15,8 @@ import {
 import { probeKnownLanes } from "./probe.js";
 import { routeIntent } from "./routing.js";
 import { defaultInventoryPath, writeInventoryTick } from "./tick.js";
+import { buildBrief } from "./brief.js";
+import { defaultSiblingsPath, loadSiblings } from "./siblings.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -121,6 +123,27 @@ export async function runCli(argv, options = {}) {
       write(JSON.stringify(snapshot, null, 2));
       return 0;
     }
+    case "siblings": {
+      const siblings = loadSiblings(
+        flags.siblings ? resolve(flags.siblings) : defaultSiblingsPath(options.root ?? ROOT),
+      );
+      write(JSON.stringify(siblings, null, 2));
+      return 0;
+    }
+    case "brief": {
+      const ledger = loadLedger(ledgerPath);
+      const siblings = loadSiblings(
+        flags.siblings ? resolve(flags.siblings) : defaultSiblingsPath(options.root ?? ROOT),
+      );
+      const job = positionals[0]
+        ? ledger.jobs.find((item) => item.id === positionals[0])
+        : nextJob(ledger, { kind: flags.kind, repo: flags.repo }, nowMs);
+      if (positionals[0] && !job) {
+        throw new Error(`unknown job: ${positionals[0]}`);
+      }
+      write(JSON.stringify(buildBrief(job ?? null, siblings), null, 2));
+      return job ? 0 : 1;
+    }
     case "help":
     case "--help":
     case "-h": {
@@ -162,6 +185,8 @@ Commands:
   probe
   route <intent>
   tick [--out path]
+  siblings
+  brief [id]
 
 Do not reopen GitHub PR #1. Genesis lives on Cursor Origin.`;
 }
