@@ -41,7 +41,7 @@ test("repo index loads without duplicate ids and files exist", () => {
   const index = loadPatchIndex(defaultPatchesIndexPath(ROOT));
   assert.equal(index.contract, PATCH_CONTRACT.id);
   assert.equal(index.cannotPush, true);
-  assert.ok(index.patches.length >= 106);
+  assert.ok(index.patches.length >= 128);
   assertPatchFilesExist(index, ROOT);
   const ids = index.patches.map((row) => row.id);
   assert.equal(new Set(ids).size, ids.length);
@@ -141,6 +141,28 @@ test("repo index loads without duplicate ids and files exist", () => {
   assert.ok(ids.includes("dronehive-mount-readme-related"));
   assert.ok(ids.includes("opensussy-sec-review-target"));
   assert.ok(ids.includes("opensussy-install-sec-review-target"));
+  assert.ok(ids.includes("dronehive-readme-cd"));
+  assert.ok(ids.includes("dronehive-doc-agent-loop-cd"));
+  assert.ok(ids.includes("dronehive-doc-bridge-1080-cd"));
+  assert.ok(ids.includes("dronehive-doc-code-worker-cd"));
+  assert.ok(ids.includes("dronehive-doc-future-seer-cd"));
+  assert.ok(ids.includes("dronehive-doc-measured-diagnostics-cd"));
+  assert.ok(ids.includes("dronehive-doc-multi-face-cd"));
+  assert.ok(ids.includes("dronehive-doc-operational-cd"));
+  assert.ok(ids.includes("dronehive-seed-doc-operational-cd"));
+  assert.ok(ids.includes("dronehive-doc-pro-cd"));
+  assert.ok(ids.includes("dronehive-doc-super-llms-cd"));
+  assert.ok(ids.includes("dronehive-doc-super-mesh-cd"));
+  assert.ok(ids.includes("dronehive-doc-synaptic-loop-cd"));
+  assert.ok(ids.includes("dronehive-doc-super-kernel-cd"));
+  assert.ok(ids.includes("dronehive-doc-honesty-library"));
+  assert.ok(ids.includes("dronehive-seed-doc-honesty-library"));
+  assert.ok(ids.includes("dronehive-doc-app-library"));
+  assert.ok(ids.includes("dronehive-seed-doc-app-library"));
+  assert.ok(ids.includes("dronehive-doc-app-cd"));
+  assert.ok(ids.includes("dronehive-seed-doc-app-cd"));
+  assert.ok(ids.includes("dronehive-doc-grok-handoff-root"));
+  assert.ok(ids.includes("dronehive-doc-grok-handoff-cd"));
 });
 
 test("text patches start with diff --git; icons are PNGs", () => {
@@ -234,7 +256,7 @@ test("cli patches lists the catalog", async () => {
   assert.equal(code, 0);
   const parsed = JSON.parse(chunks.join(""));
   assert.equal(parsed.command, "patches");
-  assert.ok(parsed.count >= 106);
+  assert.ok(parsed.count >= 128);
   assert.equal(parsed.cannotPush, true);
   assert.match(parsed.doNot, /autofix/);
 });

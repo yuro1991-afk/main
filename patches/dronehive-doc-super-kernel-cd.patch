@@ -1,0 +1,13 @@
+diff --git a/docs/SUPER_KERNEL.md b/docs/SUPER_KERNEL.md
+index 433b336..550128e 100644
+--- a/docs/SUPER_KERNEL.md
++++ b/docs/SUPER_KERNEL.md
+@@ -21,7 +21,7 @@ START_SUPER_KERNEL.bat
+ 
+ ```powershell
+ $py = "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe"
+-Set-Location G:\AI-Home\projects\ai-worker-drone-0.5b
++Set-Location .
+ & $py -m drone super-kernel start   # detached + watchdog
+ ```
+ 

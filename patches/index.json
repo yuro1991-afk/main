@@ -3,7 +3,7 @@
   "cannotPush": true,
   "apply": "git clone https://github.com/<repo>.git work && cd work && git apply --check ../<file> && git apply ../<file>",
   "doNot": "Do not copy PR #6 npm run autofix. This catalog lists diffs only.",
-  "verifiedAt": "2026-09-14T21:25:00Z",
+  "verifiedAt": "2026-09-14T21:30:00Z",
   "patches": [
     {
       "id": "dronehive-unicode-ci",
@@ -20,7 +20,9 @@
       "file": "patches/bloom-gitignore-vercel.patch",
       "base": "288a484",
       "applyCheck": "ok",
-      "afterApply": ["git rm -r --cached .vercel/output"],
+      "afterApply": [
+        "git rm -r --cached .vercel/output"
+      ],
       "notes": "Ignore rule only. 58 tracked .vercel/output files still need git rm --cached. Keep package-lock.json."
     },
     {
@@ -57,7 +59,7 @@
       "base": "d4b2949",
       "applyCheck": "ok",
       "afterApply": [],
-      "notes": "User-facing 1.3.0 → 2.0.0. CHANGELOG 1.3.0 history and superpowers specs left alone. usb_zip_bytes/utc unchanged until a real v2 zip exists."
+      "notes": "User-facing 1.3.0 \u2192 2.0.0. CHANGELOG 1.3.0 history and superpowers specs left alone. usb_zip_bytes/utc unchanged until a real v2 zip exists."
     },
     {
       "id": "opensussy-agama-honesty",
@@ -125,7 +127,7 @@
       "base": "d4b2949",
       "applyCheck": "ok",
       "afterApply": [],
-      "notes": "R1–R10 still open on 2.0.0 tree. Pins LinuxPayload.cs / Sanitizer.cs. false_green 0."
+      "notes": "R1\u2013R10 still open on 2.0.0 tree. Pins LinuxPayload.cs / Sanitizer.cs. false_green 0."
     },
     {
       "id": "faceswap-health-offline",
@@ -963,6 +965,204 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "install/docs/SEC_REVIEW.md Target uses '.'. Independent of reviews/SEC_REVIEW.md leftover (different file) and ship-json-2-0-0."
+    },
+    {
+      "id": "dronehive-readme-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-readme-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "README.md quick-start cd uses '.'. Independent of existing leftovers. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-agent-loop-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-agent-loop-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/AGENT_LOOP.md CLI cd uses '.'. Independent of work-order-doc-cd. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-bridge-1080-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-bridge-1080-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/BRIDGE_1080.md cd uses '.'. Independent of work-order-doc-cd. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-code-worker-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-code-worker-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/CODE_WORKER_8B.md cd uses '.'. Independent of work-order-doc-cd. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-future-seer-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-future-seer-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/FUTURE_SEER.md cd uses '.'. Independent of work-order-doc-cd. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-measured-diagnostics-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-measured-diagnostics-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/MEASURED_DIAGNOSTICS.md cd uses '.'. Independent of work-order-doc-cd. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-multi-face-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-multi-face-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/MULTI_FACE.md cd uses '.'. Independent of work-order-doc-cd. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-operational-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-operational-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/OPERATIONAL.md cd uses '.'. Independent of seed OPERATIONAL leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-doc-operational-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-doc-operational-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "seed OPERATIONAL.md cd uses '.'. Independent of live docs leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-pro-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-pro-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/PRO.md cd uses '.'. Independent of work-order-doc-cd. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-super-llms-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-super-llms-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/SUPER_LLMS.md cd uses '.'. Independent of work-order-doc-cd. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-super-mesh-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-super-mesh-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/SUPER_MESH.md cd uses '.'. Independent of START_SUPER_MESH leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-synaptic-loop-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-synaptic-loop-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/SYNAPTIC_LOOP.md cd uses '.'. Independent of work-order-doc-cd. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-super-kernel-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-super-kernel-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/SUPER_KERNEL.md Set-Location uses '.'. Independent of work-order-doc-cd. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-honesty-library",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-honesty-library.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/HONESTY.md library row uses host/library. Independent of hive-docstring-honesty. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-doc-honesty-library",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-doc-honesty-library.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "seed HONESTY.md library row uses host/library. Independent of live docs leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-app-library",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-app-library.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/APP.md Library row uses host/library. Independent of APP.md cd leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-doc-app-library",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-doc-app-library.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "seed APP.md Library row uses host/library. Independent of live docs leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-app-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-app-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/APP.md cd uses '.'. Independent of Library row leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-doc-app-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-doc-app-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "seed APP.md cd uses '.'. Independent of live docs leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-grok-handoff-root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-grok-handoff-root.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/GROK_HANDOFF.md project root uses '.'. Independent of CLI cd leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-grok-handoff-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-grok-handoff-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/GROK_HANDOFF.md CLI cd uses '.'. Independent of project-root leftover. Does not touch tool_agent.py."
     }
   ]
 }

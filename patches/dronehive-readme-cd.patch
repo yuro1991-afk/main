@@ -1,0 +1,13 @@
+diff --git a/README.md b/README.md
+index 3b32c40..2e6f615 100644
+--- a/README.md
++++ b/README.md
+@@ -17,7 +17,7 @@ Installable modular AI worker-drone swarm for Windows (Python 3.10+).
+ ## Quick start
+ 
+ ```powershell
+-cd G:\AI-Home\projects\ai-worker-drone-0.5b   # or your clone path
++cd .   # or your clone path
+ .\INSTALL.bat                                  # pip install -e ".[desktop]"
+ .\START_TUI.bat                                # same console TUI
+ ```

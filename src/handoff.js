@@ -301,6 +301,50 @@ function dronehiveRelaunchReason(jobId) {
       return "This token cannot push dronehive. Apply patches/dronehive-mount-readme-launch.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
     case "dronehive-mount-readme-related":
       return "This token cannot push dronehive. Apply patches/dronehive-mount-readme-related.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-readme-cd":
+      return "This token cannot push dronehive. Apply patches/dronehive-readme-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-doc-agent-loop-cd":
+      return "This token cannot push dronehive. Apply patches/dronehive-doc-agent-loop-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-doc-bridge-1080-cd":
+      return "This token cannot push dronehive. Apply patches/dronehive-doc-bridge-1080-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-doc-code-worker-cd":
+      return "This token cannot push dronehive. Apply patches/dronehive-doc-code-worker-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-doc-future-seer-cd":
+      return "This token cannot push dronehive. Apply patches/dronehive-doc-future-seer-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-doc-measured-diagnostics-cd":
+      return "This token cannot push dronehive. Apply patches/dronehive-doc-measured-diagnostics-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-doc-multi-face-cd":
+      return "This token cannot push dronehive. Apply patches/dronehive-doc-multi-face-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-doc-operational-cd":
+      return "This token cannot push dronehive. Apply patches/dronehive-doc-operational-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-seed-doc-operational-cd":
+      return "This token cannot push dronehive. Apply patches/dronehive-seed-doc-operational-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-doc-pro-cd":
+      return "This token cannot push dronehive. Apply patches/dronehive-doc-pro-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-doc-super-llms-cd":
+      return "This token cannot push dronehive. Apply patches/dronehive-doc-super-llms-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-doc-super-mesh-cd":
+      return "This token cannot push dronehive. Apply patches/dronehive-doc-super-mesh-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-doc-synaptic-loop-cd":
+      return "This token cannot push dronehive. Apply patches/dronehive-doc-synaptic-loop-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-doc-super-kernel-cd":
+      return "This token cannot push dronehive. Apply patches/dronehive-doc-super-kernel-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-doc-honesty-library":
+      return "This token cannot push dronehive. Apply patches/dronehive-doc-honesty-library.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-seed-doc-honesty-library":
+      return "This token cannot push dronehive. Apply patches/dronehive-seed-doc-honesty-library.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-doc-app-library":
+      return "This token cannot push dronehive. Apply patches/dronehive-doc-app-library.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-seed-doc-app-library":
+      return "This token cannot push dronehive. Apply patches/dronehive-seed-doc-app-library.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-doc-app-cd":
+      return "This token cannot push dronehive. Apply patches/dronehive-doc-app-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-seed-doc-app-cd":
+      return "This token cannot push dronehive. Apply patches/dronehive-seed-doc-app-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-doc-grok-handoff-root":
+      return "This token cannot push dronehive. Apply patches/dronehive-doc-grok-handoff-root.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-doc-grok-handoff-cd":
+      return "This token cannot push dronehive. Apply patches/dronehive-doc-grok-handoff-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
     case "dronehive-rebase-packaging":
       return "This token cannot push dronehive. Rebase packaging stays blocked until dronehive#1 python-smoke is green. Do not copy PR #6 autofix.";
     default:

@@ -13,7 +13,7 @@ No new agents. Fork `bc-84d93b47` woke, shipped
 eyes / vision / bridge.
 **Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Pad probes stop.
 PR #3 merged; no real review comments (CodeRabbit skip, <10 stars).
-PR #9 catalog now 106 diffs (newest `opensussy-install-sec-review-target`).
+PR #9 catalog now 128 diffs (newest `dronehive-doc-grok-handoff-cd`).
 This Genesis-only tree still blocks GitHub cards — leftover `next` is the
 expired Origin claim `gub-superbrain-probe`. After #8, leftover unused is
 `review-landing-pad-prs`. First parked apply: `dronehive-unicode-ci`.
@@ -104,11 +104,33 @@ then unused `dronehive-mount-readme-layout` (mount README layout only),
 then unused `dronehive-mount-readme-launch` (mount README Launch.ps1 only),
 then unused `dronehive-mount-readme-related` (mount README related only),
 then unused `opensussy-sec-review-target` (reviews/SEC_REVIEW.md Target only),
-then unused `opensussy-install-sec-review-target` (install/docs/SEC_REVIEW.md Target only).
+then unused `opensussy-install-sec-review-target` (install/docs/SEC_REVIEW.md Target only),
+then unused `dronehive-readme-cd` (README.md only),
+then unused `dronehive-doc-agent-loop-cd` (docs/AGENT_LOOP.md only),
+then unused `dronehive-doc-bridge-1080-cd` (docs/BRIDGE_1080.md only),
+then unused `dronehive-doc-code-worker-cd` (docs/CODE_WORKER_8B.md only),
+then unused `dronehive-doc-future-seer-cd` (docs/FUTURE_SEER.md only),
+then unused `dronehive-doc-measured-diagnostics-cd` (docs/MEASURED_DIAGNOSTICS.md only),
+then unused `dronehive-doc-multi-face-cd` (docs/MULTI_FACE.md only),
+then unused `dronehive-doc-operational-cd` (docs/OPERATIONAL.md only),
+then unused `dronehive-seed-doc-operational-cd` (drone/app/seed/docs/OPERATIONAL.md only),
+then unused `dronehive-doc-pro-cd` (docs/PRO.md only),
+then unused `dronehive-doc-super-llms-cd` (docs/SUPER_LLMS.md only),
+then unused `dronehive-doc-super-mesh-cd` (docs/SUPER_MESH.md only),
+then unused `dronehive-doc-synaptic-loop-cd` (docs/SYNAPTIC_LOOP.md only),
+then unused `dronehive-doc-super-kernel-cd` (docs/SUPER_KERNEL.md only),
+then unused `dronehive-doc-honesty-library` (docs/HONESTY.md only),
+then unused `dronehive-seed-doc-honesty-library` (drone/app/seed/docs/HONESTY.md only),
+then unused `dronehive-doc-app-library` (docs/APP.md only),
+then unused `dronehive-seed-doc-app-library` (drone/app/seed/docs/APP.md only),
+then unused `dronehive-doc-app-cd` (docs/APP.md only),
+then unused `dronehive-seed-doc-app-cd` (drone/app/seed/docs/APP.md only),
+then unused `dronehive-doc-grok-handoff-root` (docs/GROK_HANDOFF.md only),
+then unused `dronehive-doc-grok-handoff-cd` (docs/GROK_HANDOFF.md only).
 Newcomer `bc-f407303f`: `review-main-pr10` (fork's Python arena/infra).
 `bc-5fe241dd` Summarize arena: do not steal `genesis-world-arena`; unused apply `faceswap-design-honesty`.
 `bc-e2df7f92` Summarize coordinator: unused apply `dronehive-script-host-roots`.
-Next unused apply if those are taken: `opensussy-install-sec-review-target`.
+Next unused apply if those are taken: `dronehive-doc-grok-handoff-cd`.
 After #8, leftover unused review is `review-main-pr10`, then `review-landing-pad-prs`.
 
 Idle agents on `yuro1991-afk/main`: do **not** inventory this pad again.

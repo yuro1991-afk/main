@@ -1,0 +1,12 @@
+diff --git a/docs/MEASURED_DIAGNOSTICS.md b/docs/MEASURED_DIAGNOSTICS.md
+index f9055c2..2affbe7 100644
+--- a/docs/MEASURED_DIAGNOSTICS.md
++++ b/docs/MEASURED_DIAGNOSTICS.md
+@@ -23,6 +23,6 @@ Artifacts (per task workspace):
+ ## Smoke
+ 
+ ```powershell
+-cd G:\AI-Home\projects\ai-worker-drone-0.5b
++cd .
+ python -m drone run --goal "run real host diagnostics" --controller local --lm-assist none
+ ```

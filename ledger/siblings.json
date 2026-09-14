@@ -12,7 +12,9 @@
       "branch": "cursor/attention-pointers-e128",
       "title": "Point this stub repo at Origin Genesis (MERGED)",
       "role": "pointers",
-      "owns": ["do-not-reopen-main-pr1"]
+      "owns": [
+        "do-not-reopen-main-pr1"
+      ]
     },
     {
       "number": 3,
@@ -20,7 +22,9 @@
       "branch": "cursor/agent-dispatch-board-108b",
       "title": "Add a claimable dispatch board so agents stay busy",
       "role": "ops-board",
-      "owns": ["agent-ops-board"]
+      "owns": [
+        "agent-ops-board"
+      ]
     },
     {
       "number": 4,
@@ -28,7 +32,11 @@
       "branch": "cursor/keep-busy-queue-65cc",
       "title": "Add a claimable job queue so idle agents take real work",
       "role": "keep-busy-queue",
-      "owns": ["opensussy-linux-syntax-ci", "faceswap-mock-engine-ci", "bloom-readme-honest-export"]
+      "owns": [
+        "opensussy-linux-syntax-ci",
+        "faceswap-mock-engine-ci",
+        "bloom-readme-honest-export"
+      ]
     },
     {
       "number": 5,
@@ -36,7 +44,9 @@
       "branch": "cursor/attention-router-7646",
       "title": "Stop the needs-attention loop and stage the DroneHive CI fix",
       "role": "attention-and-dronehive-patch",
-      "owns": ["dronehive-unicode-ci"]
+      "owns": [
+        "dronehive-unicode-ci"
+      ]
     },
     {
       "number": 6,
@@ -44,7 +54,9 @@
       "branch": "cursor/autofix-dronehive-ci-ab19",
       "title": "Add a verified DroneHive cp1252 autofix runner",
       "role": "autofix-runner",
-      "owns": ["dronehive-unicode-ci"]
+      "owns": [
+        "dronehive-unicode-ci"
+      ]
     },
     {
       "number": 9,
@@ -157,7 +169,29 @@
         "dronehive-mount-readme-launch",
         "dronehive-mount-readme-related",
         "opensussy-sec-review-target",
-        "opensussy-install-sec-review-target"
+        "opensussy-install-sec-review-target",
+        "dronehive-readme-cd",
+        "dronehive-doc-agent-loop-cd",
+        "dronehive-doc-bridge-1080-cd",
+        "dronehive-doc-code-worker-cd",
+        "dronehive-doc-future-seer-cd",
+        "dronehive-doc-measured-diagnostics-cd",
+        "dronehive-doc-multi-face-cd",
+        "dronehive-doc-operational-cd",
+        "dronehive-seed-doc-operational-cd",
+        "dronehive-doc-pro-cd",
+        "dronehive-doc-super-llms-cd",
+        "dronehive-doc-super-mesh-cd",
+        "dronehive-doc-synaptic-loop-cd",
+        "dronehive-doc-super-kernel-cd",
+        "dronehive-doc-honesty-library",
+        "dronehive-seed-doc-honesty-library",
+        "dronehive-doc-app-library",
+        "dronehive-seed-doc-app-library",
+        "dronehive-doc-app-cd",
+        "dronehive-seed-doc-app-cd",
+        "dronehive-doc-grok-handoff-root",
+        "dronehive-doc-grok-handoff-cd"
       ]
     }
   ]

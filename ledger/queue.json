@@ -8,7 +8,7 @@
       "priority": 1,
       "status": "blocked",
       "claim": null,
-      "notes": "windows-latest CI dies printing ✓ via _chat in drone/pro/tool_agent.py (~367, 424, 464–506) under cp1252. Blocks dronehive PR #1 and stacked #2. Patch is on landing-pad PR #5; verified apply runner is PR #6 (`npm run autofix -- apply <checkout>`). This token cannot push dronehive — relaunch there.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "notes": "windows-latest CI dies printing \u2713 via _chat in drone/pro/tool_agent.py (~367, 424, 464\u2013506) under cp1252. Blocks dronehive PR #1 and stacked #2. Patch is on landing-pad PR #5; verified apply runner is PR #6 (`npm run autofix -- apply <checkout>`). This token cannot push dronehive \u2014 relaunch there.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "python -m drone app pro --goal \"ci pro write ci_ok.txt\" --rounds 3 --no-ollama",
       "files": [
         "drone/pro/tool_agent.py",
@@ -551,7 +551,7 @@
       "priority": 64,
       "status": "blocked",
       "claim": null,
-      "notes": "configs/work_order.json rank_0.paths LAW_TRUTH.md still pins F:\\\\GrokSelfLibrary. Applyable catalog patch is patches/dronehive-work-order-law-truth.patch on main#9. Portable-paths uses this line as context — apply after portable-paths. Leave the C:\\\\ grok rules path. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "notes": "configs/work_order.json rank_0.paths LAW_TRUTH.md still pins F:\\\\GrokSelfLibrary. Applyable catalog patch is patches/dronehive-work-order-law-truth.patch on main#9. Portable-paths uses this line as context \u2014 apply after portable-paths. Leave the C:\\\\ grok rules path. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "configs/work_order.json rank_0.paths includes host/library/LAW_TRUTH.md.",
       "files": [
         "configs/work_order.json"
@@ -1234,6 +1234,336 @@
       "collision": "install/docs/SEC_REVIEW.md Target line only."
     },
     {
+      "id": "dronehive-readme-cd",
+      "title": "Point dronehive README quick-start cd at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 110,
+      "status": "blocked",
+      "claim": null,
+      "notes": "README.md quick-start still pins G:\\\\AI-Home cd. Applyable catalog patch is patches/dronehive-readme-cd.patch on main#9. Independent of existing catalog leftovers. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "README.md quick-start cd is .",
+      "files": [
+        "README.md"
+      ],
+      "collision": "README.md quick-start cd line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-agent-loop-cd",
+      "title": "Point AGENT_LOOP.md swarm cd at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 111,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/AGENT_LOOP.md CLI still pins G:\\\\AI-Home cd. Applyable catalog patch is patches/dronehive-doc-agent-loop-cd.patch on main#9. Independent of work-order-doc-cd. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/AGENT_LOOP.md cd is .",
+      "files": [
+        "docs/AGENT_LOOP.md"
+      ],
+      "collision": "docs/AGENT_LOOP.md cd line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-bridge-1080-cd",
+      "title": "Point BRIDGE_1080.md swarm cd at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 112,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/BRIDGE_1080.md still pins G:\\\\AI-Home cd. Applyable catalog patch is patches/dronehive-doc-bridge-1080-cd.patch on main#9. Independent of work-order-doc-cd. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/BRIDGE_1080.md cd is .",
+      "files": [
+        "docs/BRIDGE_1080.md"
+      ],
+      "collision": "docs/BRIDGE_1080.md cd line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-code-worker-cd",
+      "title": "Point CODE_WORKER_8B.md swarm cd at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 113,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/CODE_WORKER_8B.md still pins G:\\\\AI-Home cd. Applyable catalog patch is patches/dronehive-doc-code-worker-cd.patch on main#9. Independent of work-order-doc-cd. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/CODE_WORKER_8B.md cd is .",
+      "files": [
+        "docs/CODE_WORKER_8B.md"
+      ],
+      "collision": "docs/CODE_WORKER_8B.md cd line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-future-seer-cd",
+      "title": "Point FUTURE_SEER.md swarm cd at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 114,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/FUTURE_SEER.md still pins G:\\\\AI-Home cd. Applyable catalog patch is patches/dronehive-doc-future-seer-cd.patch on main#9. Independent of work-order-doc-cd. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/FUTURE_SEER.md cd is .",
+      "files": [
+        "docs/FUTURE_SEER.md"
+      ],
+      "collision": "docs/FUTURE_SEER.md cd line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-measured-diagnostics-cd",
+      "title": "Point MEASURED_DIAGNOSTICS.md swarm cd at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 115,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/MEASURED_DIAGNOSTICS.md still pins G:\\\\AI-Home cd. Applyable catalog patch is patches/dronehive-doc-measured-diagnostics-cd.patch on main#9. Independent of work-order-doc-cd. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/MEASURED_DIAGNOSTICS.md cd is .",
+      "files": [
+        "docs/MEASURED_DIAGNOSTICS.md"
+      ],
+      "collision": "docs/MEASURED_DIAGNOSTICS.md cd line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-multi-face-cd",
+      "title": "Point MULTI_FACE.md swarm cd at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 116,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/MULTI_FACE.md still pins G:\\\\AI-Home cd. Applyable catalog patch is patches/dronehive-doc-multi-face-cd.patch on main#9. Independent of work-order-doc-cd. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/MULTI_FACE.md cd is .",
+      "files": [
+        "docs/MULTI_FACE.md"
+      ],
+      "collision": "docs/MULTI_FACE.md cd line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-operational-cd",
+      "title": "Point OPERATIONAL.md swarm cd at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 117,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/OPERATIONAL.md still pins G:\\\\AI-Home cd. Applyable catalog patch is patches/dronehive-doc-operational-cd.patch on main#9. Independent of seed copy. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/OPERATIONAL.md cd is .",
+      "files": [
+        "docs/OPERATIONAL.md"
+      ],
+      "collision": "docs/OPERATIONAL.md cd line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-doc-operational-cd",
+      "title": "Point seed OPERATIONAL.md swarm cd at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 118,
+      "status": "blocked",
+      "claim": null,
+      "notes": "drone/app/seed/docs/OPERATIONAL.md still pins G:\\\\AI-Home cd. Applyable catalog patch is patches/dronehive-seed-doc-operational-cd.patch on main#9. Independent of live docs leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "seed OPERATIONAL.md cd is .",
+      "files": [
+        "drone/app/seed/docs/OPERATIONAL.md"
+      ],
+      "collision": "drone/app/seed/docs/OPERATIONAL.md cd line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-pro-cd",
+      "title": "Point PRO.md swarm cd at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 119,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/PRO.md still pins G:\\\\AI-Home cd. Applyable catalog patch is patches/dronehive-doc-pro-cd.patch on main#9. Independent of work-order-doc-cd. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/PRO.md cd is .",
+      "files": [
+        "docs/PRO.md"
+      ],
+      "collision": "docs/PRO.md cd line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-super-llms-cd",
+      "title": "Point SUPER_LLMS.md swarm cd at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 120,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/SUPER_LLMS.md still pins G:\\\\AI-Home cd. Applyable catalog patch is patches/dronehive-doc-super-llms-cd.patch on main#9. Independent of work-order-doc-cd. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/SUPER_LLMS.md cd is .",
+      "files": [
+        "docs/SUPER_LLMS.md"
+      ],
+      "collision": "docs/SUPER_LLMS.md cd line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-super-mesh-cd",
+      "title": "Point SUPER_MESH.md swarm cd at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 121,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/SUPER_MESH.md still pins G:\\\\AI-Home cd. Applyable catalog patch is patches/dronehive-doc-super-mesh-cd.patch on main#9. Independent of start-super-mesh-cd. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/SUPER_MESH.md cd is .",
+      "files": [
+        "docs/SUPER_MESH.md"
+      ],
+      "collision": "docs/SUPER_MESH.md cd line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-synaptic-loop-cd",
+      "title": "Point SYNAPTIC_LOOP.md swarm cd at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 122,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/SYNAPTIC_LOOP.md still pins G:\\\\AI-Home cd. Applyable catalog patch is patches/dronehive-doc-synaptic-loop-cd.patch on main#9. Independent of work-order-doc-cd. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/SYNAPTIC_LOOP.md cd is .",
+      "files": [
+        "docs/SYNAPTIC_LOOP.md"
+      ],
+      "collision": "docs/SYNAPTIC_LOOP.md cd line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-super-kernel-cd",
+      "title": "Point SUPER_KERNEL.md Set-Location at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 123,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/SUPER_KERNEL.md still pins G:\\\\AI-Home Set-Location. Applyable catalog patch is patches/dronehive-doc-super-kernel-cd.patch on main#9. Independent of work-order-doc-cd. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/SUPER_KERNEL.md Set-Location is .",
+      "files": [
+        "docs/SUPER_KERNEL.md"
+      ],
+      "collision": "docs/SUPER_KERNEL.md Set-Location line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-honesty-library",
+      "title": "Point HONESTY.md library root at host/library",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 124,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/HONESTY.md library row still pins F:\\\\GrokSelfLibrary. Applyable catalog patch is patches/dronehive-doc-honesty-library.patch on main#9. Independent of hive-docstring-honesty. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/HONESTY.md library row uses host/library",
+      "files": [
+        "docs/HONESTY.md"
+      ],
+      "collision": "docs/HONESTY.md library row only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-doc-honesty-library",
+      "title": "Point seed HONESTY.md library root at host/library",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 125,
+      "status": "blocked",
+      "claim": null,
+      "notes": "seed HONESTY.md library row still pins F:\\\\GrokSelfLibrary. Applyable catalog patch is patches/dronehive-seed-doc-honesty-library.patch on main#9. Independent of live docs leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "seed HONESTY.md library row uses host/library",
+      "files": [
+        "drone/app/seed/docs/HONESTY.md"
+      ],
+      "collision": "drone/app/seed/docs/HONESTY.md library row only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-app-library",
+      "title": "Point APP.md library root at host/library",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 126,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/APP.md Library row still pins F:\\\\GrokSelfLibrary. Applyable catalog patch is patches/dronehive-doc-app-library.patch on main#9. Independent of APP.md cd leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/APP.md Library row uses host/library",
+      "files": [
+        "docs/APP.md"
+      ],
+      "collision": "docs/APP.md Library row only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-doc-app-library",
+      "title": "Point seed APP.md library root at host/library",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 127,
+      "status": "blocked",
+      "claim": null,
+      "notes": "seed APP.md Library row still pins F:\\\\GrokSelfLibrary. Applyable catalog patch is patches/dronehive-seed-doc-app-library.patch on main#9. Independent of live docs leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "seed APP.md Library row uses host/library",
+      "files": [
+        "drone/app/seed/docs/APP.md"
+      ],
+      "collision": "drone/app/seed/docs/APP.md Library row only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-app-cd",
+      "title": "Point APP.md swarm cd at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 128,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/APP.md still pins G:\\\\AI-Home cd. Applyable catalog patch is patches/dronehive-doc-app-cd.patch on main#9. Independent of Library row leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/APP.md cd is .",
+      "files": [
+        "docs/APP.md"
+      ],
+      "collision": "docs/APP.md cd line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-doc-app-cd",
+      "title": "Point seed APP.md swarm cd at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 129,
+      "status": "blocked",
+      "claim": null,
+      "notes": "seed APP.md still pins G:\\\\AI-Home cd. Applyable catalog patch is patches/dronehive-seed-doc-app-cd.patch on main#9. Independent of live docs leftover and seed Library leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "seed APP.md cd is .",
+      "files": [
+        "drone/app/seed/docs/APP.md"
+      ],
+      "collision": "drone/app/seed/docs/APP.md cd line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-grok-handoff-root",
+      "title": "Point GROK_HANDOFF.md project root at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 130,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/GROK_HANDOFF.md project root still pins G:\\\\AI-Home. Applyable catalog patch is patches/dronehive-doc-grok-handoff-root.patch on main#9. Independent of CLI cd leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/GROK_HANDOFF.md project root is .",
+      "files": [
+        "docs/GROK_HANDOFF.md"
+      ],
+      "collision": "docs/GROK_HANDOFF.md project root line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-grok-handoff-cd",
+      "title": "Point GROK_HANDOFF.md swarm cd at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 131,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/GROK_HANDOFF.md CLI still pins G:\\\\AI-Home cd. Applyable catalog patch is patches/dronehive-doc-grok-handoff-cd.patch on main#9. Independent of project-root leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/GROK_HANDOFF.md cd is .",
+      "files": [
+        "docs/GROK_HANDOFF.md"
+      ],
+      "collision": "docs/GROK_HANDOFF.md cd line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",
@@ -1245,7 +1575,7 @@
         "claimedAt": "2026-09-14T18:02:20.364Z",
         "leaseUntil": "2026-09-14T18:47:20.364Z"
       },
-      "notes": "Notion draft https://app.notion.com/p/3db735da33f381a58f19ceffc771ecdd — short-timeout GET http://169.254.124.8:45001/health, write .genesis/last-superbrain.json, never mark LIVE on timeout. Catalog resource https://app.notion.com/p/3db735da33f3810faa09de097a086e8e (Entry ID resource/boss-superbrain, Status cataloged). Yuri 2026-09-14T20:16Z: no more Superbrain. Do not probe :45001 / :8791. Pad probes stop. Origin CLI logged-out. Forget Origin.",
+      "notes": "Notion draft https://app.notion.com/p/3db735da33f381a58f19ceffc771ecdd \u2014 short-timeout GET http://169.254.124.8:45001/health, write .genesis/last-superbrain.json, never mark LIVE on timeout. Catalog resource https://app.notion.com/p/3db735da33f3810faa09de097a086e8e (Entry ID resource/boss-superbrain, Status cataloged). Yuri 2026-09-14T20:16Z: no more Superbrain. Do not probe :45001 / :8791. Pad probes stop. Origin CLI logged-out. Forget Origin.",
       "verify": "Failed probe stays unreachable. GOOSE-PC :8791 is not the BOSS peer.",
       "files": [],
       "collision": "Origin genesis only. Do not reopen github.com/yuro1991-afk/main/pull/1."
@@ -1258,7 +1588,7 @@
       "priority": 6,
       "status": "open",
       "claim": null,
-      "notes": "Notion draft https://app.notion.com/p/3db735da33f38109a568ed3d589253b6 — Entry playbook/gub-inventory-tick. Steps: snapshot catalog stats; run scripts/build_catalog.py and scripts/inventory.py when present; write .genesis/last-inventory.json. GUB engine https://app.notion.com/p/3db735da33f3819ba589fd969cefe4a3 — gub/, workflows/, data/playbooks/playbook__gub-*.json. `python3 -m gub serve --port 8787`; GET /; POST /v1/route, /v1/runs, /v1/schedule/tick. Shell allowlist: scripts/inventory.py, scripts/build_catalog.py, scripts/query_catalog.py. Related Origin PR genesis#22.",
+      "notes": "Notion draft https://app.notion.com/p/3db735da33f38109a568ed3d589253b6 \u2014 Entry playbook/gub-inventory-tick. Steps: snapshot catalog stats; run scripts/build_catalog.py and scripts/inventory.py when present; write .genesis/last-inventory.json. GUB engine https://app.notion.com/p/3db735da33f3819ba589fd969cefe4a3 \u2014 gub/, workflows/, data/playbooks/playbook__gub-*.json. `python3 -m gub serve --port 8787`; GET /; POST /v1/route, /v1/runs, /v1/schedule/tick. Shell allowlist: scripts/inventory.py, scripts/build_catalog.py, scripts/query_catalog.py. Related Origin PR genesis#22.",
       "verify": "Inventory tick writes last-inventory.json without claiming Superbrain LIVE.",
       "files": [],
       "collision": "Port :8787 is also auto-runner dispatch. Coordinate with genesis#41."
@@ -1271,10 +1601,10 @@
       "priority": 7,
       "status": "open",
       "claim": null,
-      "notes": "Notion https://app.notion.com/p/3db735da33f381679966e19d177079ce — intent → skill/tool/subagent vs Genesis/Sentinel/Mnemosyne/Forge/Atlas/Lumen.",
+      "notes": "Notion https://app.notion.com/p/3db735da33f381679966e19d177079ce \u2014 intent \u2192 skill/tool/subagent vs Genesis/Sentinel/Mnemosyne/Forge/Atlas/Lumen.",
       "verify": "Matrix cites existing hub roster; no new false LIVE lanes.",
       "files": [],
-      "collision": "This GitHub board already has a seed matrix in src/routing.js — extend Origin, do not fork it here."
+      "collision": "This GitHub board already has a seed matrix in src/routing.js \u2014 extend Origin, do not fork it here."
     },
     {
       "id": "catalog-notion-sync",
@@ -1284,7 +1614,7 @@
       "priority": 8,
       "status": "open",
       "claim": null,
-      "notes": "https://app.notion.com/p/3db735da33f381a1b427d391daa071c5 — catalog/notion_map.json, fill empty Genesis Entries URLs.",
+      "notes": "https://app.notion.com/p/3db735da33f381a1b427d391daa071c5 \u2014 catalog/notion_map.json, fill empty Genesis Entries URLs.",
       "verify": "Do not invent Notion URLs. Seeded-first catalog stays the map.",
       "files": [
         "catalog/notion_map.json"
@@ -1325,7 +1655,7 @@
       "priority": 11,
       "status": "open",
       "claim": null,
-      "notes": "Notion https://app.notion.com/p/3db735da33f3819ab863cf5f50af9b4f — listen HTTP :8788, UDP :8789. Branch cursor/genesis-auto-agent-runner-7d7b. Port :8787 is inventory, not this runner.",
+      "notes": "Notion https://app.notion.com/p/3db735da33f3819ab863cf5f50af9b4f \u2014 listen HTTP :8788, UDP :8789. Branch cursor/genesis-auto-agent-runner-7d7b. Port :8787 is inventory, not this runner.",
       "verify": "Runner binds :8788/:8789 and does not steal :8787 from gub-inventory-tick / genesis#22.",
       "files": [],
       "collision": "Coordinate with gub-inventory-tick. This pad is not the auto-runner."
@@ -1338,7 +1668,7 @@
       "priority": 12,
       "status": "open",
       "claim": null,
-      "notes": "Notion https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a. Origin PR genesis#102, branch cursor/genesis-world-layer-engine-232b. Path packages/world-layer-engine, import genesis_world_layer. Stack: terrain → occupancy → rigid → fluid → atmosphere → agents → sensors → memory. Sibling planes (do not steal): world-map, unifier :8792, spawner. HTTP 127.0.0.1:8793 — coordinate with world-PM. Do not invent a GitHub world clone.",
+      "notes": "Notion https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a. Origin PR genesis#102, branch cursor/genesis-world-layer-engine-232b. Path packages/world-layer-engine, import genesis_world_layer. Stack: terrain \u2192 occupancy \u2192 rigid \u2192 fluid \u2192 atmosphere \u2192 agents \u2192 sensors \u2192 memory. Sibling planes (do not steal): world-map, unifier :8792, spawner. HTTP 127.0.0.1:8793 \u2014 coordinate with world-PM. Do not invent a GitHub world clone.",
       "verify": "cd packages/world-layer-engine && pip install -e \".[dev]\" && pytest && python -m genesis_world_layer demo --steps 48. GET /health stays live=dark.",
       "files": [
         "packages/world-layer-engine"
@@ -1575,7 +1905,7 @@
       "priority": 29,
       "status": "open",
       "claim": null,
-      "notes": "Notion https://app.notion.com/p/3db735da33f38118a49ed9ef135bf5ad. Branch cursor/python-vision-e3c4. Origin PR genesis#84. packages/python-vision, import genesis_vision. HUD http://127.0.0.1:8792/ — not GOOSE-PC :8791. Health live: dark until Superbrain probed.",
+      "notes": "Notion https://app.notion.com/p/3db735da33f38118a49ed9ef135bf5ad. Branch cursor/python-vision-e3c4. Origin PR genesis#84. packages/python-vision, import genesis_vision. HUD http://127.0.0.1:8792/ \u2014 not GOOSE-PC :8791. Health live: dark until Superbrain probed.",
       "verify": "pip install -e \"packages/python-vision[dev]\" && genesis-vision seat. CPU color-blob only; no GPU.",
       "files": [
         "packages/python-vision"
@@ -1625,7 +1955,7 @@
       "files": [
         "src/genesis_sound"
       ],
-      "collision": "Port :8794 is also world-canon #93 and sentient #96. Hearing pin ears — coordinate with python-agent-ears #78."
+      "collision": "Port :8794 is also world-canon #93 and sentient #96. Hearing pin ears \u2014 coordinate with python-agent-ears #78."
     },
     {
       "id": "genesis-python-bridge-57",
@@ -1650,7 +1980,7 @@
       "priority": 34,
       "status": "open",
       "claim": null,
-      "notes": "Notion https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d. Path packages/world-project-manager/. HTTP 127.0.0.1:8793. Contract genesis.world-project-manager.v1. Env GENESIS_WORLD_PM_URL. Tracks planes/milestones/risks — does not spawn loops, merge shards, or occupy the village.",
+      "notes": "Notion https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d. Path packages/world-project-manager/. HTTP 127.0.0.1:8793. Contract genesis.world-project-manager.v1. Env GENESIS_WORLD_PM_URL. Tracks planes/milestones/risks \u2014 does not spawn loops, merge shards, or occupy the village.",
       "verify": "cd packages/world-project-manager && npm test && npm start. Probe Superbrain before LIVE. Never bind UDP 2419.",
       "files": [
         "packages/world-project-manager"
@@ -1665,7 +1995,7 @@
       "priority": 35,
       "status": "open",
       "claim": null,
-      "notes": "World-PM plane `unifier` — canonical shard merge on HTTP 127.0.0.1:8792. World-layer #102 does not merge unifier logs. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d + layer https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a. No dedicated Origin PR yet — implement on Origin only.",
+      "notes": "World-PM plane `unifier` \u2014 canonical shard merge on HTTP 127.0.0.1:8792. World-layer #102 does not merge unifier logs. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d + layer https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a. No dedicated Origin PR yet \u2014 implement on Origin only.",
       "verify": "Unifier stays on Origin. GET /health claimedLive false until Superbrain probed. Coordinate with python-vision #84 before binding :8792.",
       "files": [],
       "collision": "Port :8792 is also the vision HUD / unifier. Do not steal :8793 halls or :8794. UDP 2419 is pong only."
@@ -1678,7 +2008,7 @@
       "priority": 36,
       "status": "open",
       "claim": null,
-      "notes": "World-PM plane `map`. World-layer #102 does not generate map shards — those stay here. Atlas (Chart) holds language; this plane holds the atlas. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d + layer https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a.",
+      "notes": "World-PM plane `map`. World-layer #102 does not generate map shards \u2014 those stay here. Atlas (Chart) holds language; this plane holds the atlas. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d + layer https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a.",
       "verify": "Slice lands on Origin only. Do not rewrite world-canon roster or steal generator work.",
       "files": [],
       "collision": "Coordinate with world-generator, world-language #95, and world-canon #93."
@@ -1691,7 +2021,7 @@
       "priority": 37,
       "status": "open",
       "claim": null,
-      "notes": "World-PM plane `spawner` — occupancy inside the map. World-layer #102 does not spawn subprocesses. World-PM does not occupy the village. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d + layer https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a.",
+      "notes": "World-PM plane `spawner` \u2014 occupancy inside the map. World-layer #102 does not spawn subprocesses. World-PM does not occupy the village. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d + layer https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a.",
       "verify": "Spawner stays on Origin. Never bind UDP 2419. Do not steal host occupancy on :8794.",
       "files": [],
       "collision": "Coordinate with world-host #87 (binds occupancy) and world-map. Do not spawn from world-PM."
@@ -1717,7 +2047,7 @@
       "priority": 39,
       "status": "open",
       "claim": null,
-      "notes": "World-PM plane `atmosphere`. Layer stack: terrain → occupancy → rigid → fluid → atmosphere → agents → sensors → memory. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d + layer https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a.",
+      "notes": "World-PM plane `atmosphere`. Layer stack: terrain \u2192 occupancy \u2192 rigid \u2192 fluid \u2192 atmosphere \u2192 agents \u2192 sensors \u2192 memory. Notion PM https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d + layer https://app.notion.com/p/3db735da33f3817cb84fcf529384cb0a.",
       "verify": "Atmosphere plane lands on Origin. Do not steal layer #102 coupler ticks.",
       "files": [],
       "collision": "Coordinate with world-layer #102 and world-physics. Not NVIDIA weather."
@@ -1832,7 +2162,7 @@
       "status": "open",
       "claim": null,
       "notes": "Notion playbook/notion-skill-author https://app.notion.com/p/3db735da33f381c1a42ccf030628e7dc. Read notion://docs/skills, write outcome/when-to-use/inputs/steps/checks, create_pages is_skill=true, optionally catalog as a Genesis skill entry.",
-      "verify": "Skill page exists in Yuri’s Space and cites a real Origin playbook. Do not invent workflows.",
+      "verify": "Skill page exists in Yuri\u2019s Space and cites a real Origin playbook. Do not invent workflows.",
       "files": [],
       "collision": "Coordinate with catalog-add-custom-entry if both write a catalog row."
     },
@@ -1898,7 +2228,7 @@
       "priority": 11,
       "status": "blocked",
       "claim": null,
-      "notes": "SEC_REVIEW residual R4: AutoYaST 1.0 XML is not Agama JSON; Leap 16 / Agama-first media will not eat autoinst-*.xml silently. HOW_TO_RUN.txt already mentions classic AutoYaST vs Agama — add a one-screen warning in install/linux/HOW_TO_RUN.txt plus flavor HOW_TOs that Leap 15.6 XML is export-only. Do not invent Agama JSON profiles.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "notes": "SEC_REVIEW residual R4: AutoYaST 1.0 XML is not Agama JSON; Leap 16 / Agama-first media will not eat autoinst-*.xml silently. HOW_TO_RUN.txt already mentions classic AutoYaST vs Agama \u2014 add a one-screen warning in install/linux/HOW_TO_RUN.txt plus flavor HOW_TOs that Leap 15.6 XML is export-only. Do not invent Agama JSON profiles.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "HOW_TO files state Agama is unsupported; no new autoinst that claims Leap 16 GREEN.",
       "files": [
         "install/linux/HOW_TO_RUN.txt",
@@ -1915,7 +2245,7 @@
       "priority": 12,
       "status": "blocked",
       "claim": null,
-      "notes": "reviews/SEC_REVIEW.md is labeled 1.1 PARTIAL (R1–R10). PRODUCT.json is 2.0.0 with Leap 15.6 + Tumbleweed packs. Inventory which residuals still apply to src/OpenSussy.Installer/Engine/LinuxPayload.cs and Sanitizer.cs. Write a short residuals table in-repo; do not invent CVEs or wipe procedures.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "notes": "reviews/SEC_REVIEW.md is labeled 1.1 PARTIAL (R1\u2013R10). PRODUCT.json is 2.0.0 with Leap 15.6 + Tumbleweed packs. Inventory which residuals still apply to src/OpenSussy.Installer/Engine/LinuxPayload.cs and Sanitizer.cs. Write a short residuals table in-repo; do not invent CVEs or wipe procedures.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "Each residual cites a current path or is marked closed with a file pin. false_green stays 0.",
       "files": [
         "reviews/SEC_REVIEW.md",
@@ -2326,7 +2656,7 @@
       "priority": 22,
       "status": "blocked",
       "claim": null,
-      "notes": "Idle CodeRabbit / auto-review agents: review open PRs #4–#10. #3 is merged. Fork bc-84d93b47 shipped #10 (python-arena-infra). CodeRabbit skips this repo (<10 stars) unless someone checks Trigger review. Do not invent a new tree. Do not reopen #1. Do not steal the fork's next slices (head → ears → eyes → vision → bridge).\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "notes": "Idle CodeRabbit / auto-review agents: review open PRs #4\u2013#10. #3 is merged. Fork bc-84d93b47 shipped #10 (python-arena-infra). CodeRabbit skips this repo (<10 stars) unless someone checks Trigger review. Do not invent a new tree. Do not reopen #1. Do not steal the fork's next slices (head \u2192 ears \u2192 eyes \u2192 vision \u2192 bridge).\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "Leave a review on at least one of #8/#9/#10. No new dispatch-board PR.",
       "files": [
         "ledger/siblings.json"
