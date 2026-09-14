@@ -31,7 +31,7 @@ node src/cli.js tick
 node src/cli.js route "keep my agents busy"
 ```
 
-`next` defaults to `gub-superbrain-probe`. Spin every helper from `helpers` as a local Task. Claim leases expire in 45 minutes. Expired claims are open again.
+`relaunch` prints the next Origin card (`gub-inventory-tick` while probe is claimed). Spin helpers. Claim leases expire in 45 minutes.
 
 ## Lanes
 
