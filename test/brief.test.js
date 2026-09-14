@@ -48,7 +48,9 @@ test("brief attaches sibling PR 5 to the unicode card", () => {
   const brief = buildBrief(drone, siblings);
   assert.equal(brief.contract, "agent-ops.brief.v1");
   assert.equal(brief.related[0].number, 5);
-  assert.ok(brief.hardRules.some((rule) => rule.includes("fourth")));
+  assert.ok(brief.hardRules.some((rule) => rule.includes("no more Superbrain")));
+  assert.ok(brief.hardRules.some((rule) => rule.includes("#8/#9/#10")));
+  assert.ok(!brief.hardRules.some((rule) => rule.includes("Extend PR #3")));
 });
 
 test("firstCommands is exhaustive", () => {

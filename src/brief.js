@@ -137,9 +137,9 @@ export function firstCommands(job, options = {}) {
 function hardRules() {
   return [
     "Do not reopen https://github.com/yuro1991-afk/main/pull/1.",
-    "Do not open a fourth landing-pad queue. Extend PR #3 or claim a card.",
+    "Do not open another landing-pad queue. Review #8/#9/#10 or apply a catalog patch.",
     "Do not copy packages/keep-busy from PR #4 onto this branch.",
-    "Yuri scoped this pad to Genesis only. Other sibling cards stay blocked.",
-    "Failed Superbrain probes are unreachable, never live.",
+    "Yuri scoped this pad to Genesis only. Other sibling cards stay blocked until #8 merges.",
+    "Yuri: no more Superbrain. Do not probe :45001 / :8791. Do not run node src/cli.js probe.",
   ];
 }

@@ -19,10 +19,10 @@ PR #9 catalog still 162 diffs (newest `bloom-grok-pwa-test-sync`).
 CI green on `38ec8e1`. Leftover hunt is exhausted for vanilla+stacked
 `git apply --check` (no `-U0`). Do not invent leftovers. Do not
 recatalog CHANNEL_META / wraps / sandwiched JSON.
-Shipped this tick: leftover next `gub-superbrain-probe` helpers and
-prompt refuse the probe (firstCommands already refused). Review helpers
-name #8/#9/#10. Probe helpers refuse `node src/cli.js probe`. Do not
-copy #8's GitHub-first retarget onto #9.
+Shipped this tick: leftover next `gub-superbrain-probe` helpers,
+prompt, and brief hardRules refuse the probe (firstCommands already
+refused). Review helpers name #8/#9/#10. Probe helpers refuse
+`node src/cli.js probe`. Do not copy #8's GitHub-first retarget onto #9.
 Value leftover is applying queued diffs on write checkouts, not mining
 new ones.
 This Genesis-only tree still blocks GitHub cards — leftover `next` is the
