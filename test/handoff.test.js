@@ -243,6 +243,7 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
     "dronehive-grok-handoff-clone-dest",
     "dronehive-multi-face-pythonpath",
     "dronehive-future-seer-pythonpath",
+    "dronehive-ai-bus-packs-root",
   ]) {
     const target = relaunchFor({ ...job, id });
     assert.match(target.reason, new RegExp(`${id}\\.patch`));

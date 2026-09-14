@@ -217,7 +217,8 @@
         "dronehive-work-order-registry-cli",
         "dronehive-grok-handoff-clone-dest",
         "dronehive-multi-face-pythonpath",
-        "dronehive-future-seer-pythonpath"
+        "dronehive-future-seer-pythonpath",
+        "dronehive-ai-bus-packs-root"
       ]
     }
   ]

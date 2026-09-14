@@ -1,0 +1,13 @@
+diff --git a/drone/ai_bus.py b/drone/ai_bus.py
+index 0009c85..91b485f 100644
+--- a/drone/ai_bus.py
++++ b/drone/ai_bus.py
+@@ -863,7 +863,7 @@ class AIBus:
+             "unit_id": unit_id,
+             "goal": goal[:400],
+             "note": payload,
+-            "packs_root": r"G:\AI-Home\docs\ai-smarts\packs",
++            "packs_root": r"host/ai-home/docs/ai-smarts/packs",
+             "false_green": 0,
+         }
+         path.write_text(json.dumps(blob, indent=2), encoding="utf-8")
