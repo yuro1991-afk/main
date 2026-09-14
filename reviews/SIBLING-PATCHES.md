@@ -1,4 +1,4 @@
-# Sibling patch catalog (verified 2026-09-14T19:36Z)
+# Sibling patch catalog (verified 2026-09-14T19:40Z)
 
 **Yuri: forget Origin.** This pad token cannot push the public GitHub
 siblings. These diffs apply clean (`git apply --check`) on current
@@ -32,6 +32,7 @@ This is **not** PR #6’s autofix runner. Do not copy `bin/autofix.js`.
 | `dronehive-runtime-host-paths` | dronehive `d538a89` | `patches/dronehive-runtime-host-paths.patch` | OK |
 | `faceswap-design-honesty` | face-swap-ios `bba7188` | `patches/faceswap-design-honesty.patch` | OK |
 | `dronehive-config-load-overlay` | dronehive `d538a89` | `patches/dronehive-config-load-overlay.patch` | OK |
+| `ova-readme-linux-honesty` | ollama-voice-access `074bad0` | `patches/ova-readme-linux-honesty.patch` | OK |
 
 ## After apply
 
@@ -41,6 +42,7 @@ This is **not** PR #6’s autofix runner. Do not copy `bin/autofix.js`.
 - dronehive: do not rebase dronehive#2 until #1 `python-smoke` is green. Ubuntu smoke, portable-paths, script-host-roots, runtime-host-paths, and config-load-overlay stack on the unicode patch. Apply `dronehive-runtime-host-paths` and `dronehive-config-load-overlay` **after** portable-paths (they are independent of each other). Do not edit `drone/pro/tool_agent.py` in the path patches.
 - face-swap `START.sh`: fail-closed like `START.cmd`. New file; apply on vanilla `main`.
 - face-swap `DESIGN.md`: `FACESWAP_ENGINE` is the contract; G: is one host example.
+- OVA README: Voice Access / Start Menu / Win+Ctrl+S stay Windows-only. Linux `pwsh` is syntax/math CI, not a Voice Access install. Independent of `ova-api-host-override`.
 
 ## Relaunch
 

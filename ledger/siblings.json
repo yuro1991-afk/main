@@ -75,7 +75,8 @@
         "faceswap-start-sh",
         "dronehive-runtime-host-paths",
         "faceswap-design-honesty",
-        "dronehive-config-load-overlay"
+        "dronehive-config-load-overlay",
+        "ova-readme-linux-honesty"
       ]
     }
   ]

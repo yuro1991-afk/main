@@ -1073,6 +1073,21 @@
       "collision": "Same as keep-busy pester-qa-math-unit-tests. Leave Invoke-OllamaVoiceQA.ps1 as the live SLO owner."
     },
     {
+      "id": "ova-readme-linux-honesty",
+      "title": "Mark OVA README Voice Access as Windows-only",
+      "repo": "github.com/yuro1991-afk/ollama-voice-access",
+      "kind": "implement",
+      "priority": 28,
+      "status": "blocked",
+      "claim": null,
+      "notes": "README still says Platform: Windows 11 only. Syntax/math CI already runs on Linux pwsh. Applyable catalog patch is patches/ova-readme-linux-honesty.patch on main#9. Independent of api-host-override. This token cannot push ollama-voice-access.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "README says Voice Access is Windows-only and Linux pwsh is not a Voice Access install.",
+      "files": [
+        "README.md"
+      ],
+      "collision": "Docs only. Independent of api-host-override (that patch appends after License)."
+    },
+    {
       "id": "bloom-gitignore-vercel",
       "title": "Stop shipping .vercel/output in Omni-Forge",
       "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",

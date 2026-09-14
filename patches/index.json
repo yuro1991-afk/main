@@ -3,7 +3,7 @@
   "cannotPush": true,
   "apply": "git clone https://github.com/<repo>.git work && cd work && git apply --check ../<file> && git apply ../<file>",
   "doNot": "Do not copy PR #6 npm run autofix. This catalog lists diffs only.",
-  "verifiedAt": "2026-09-14T19:36:00Z",
+  "verifiedAt": "2026-09-14T19:40:00Z",
   "patches": [
     {
       "id": "dronehive-unicode-ci",
@@ -225,6 +225,15 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "Adds drone/config_overlay.py remap_host_strings and wraps JSON loaders (hive, future_seer, multi_face, model_clones, super_mesh, super_llms, work_order, knowledge_imprint, __main__). Apply after portable-paths so host_paths.py exists. Independent of runtime-host-paths. Does not touch tool_agent.py."
+    },
+    {
+      "id": "ova-readme-linux-honesty",
+      "repo": "github.com/yuro1991-afk/ollama-voice-access",
+      "file": "patches/ova-readme-linux-honesty.patch",
+      "base": "074bad0",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "README: Voice Access / Start Menu / Win+Ctrl+S are Windows-only. pwsh on Linux is syntax/math CI, not a Voice Access install. Independent of api-host-override (License appendix)."
     }
   ]
 }
