@@ -83,7 +83,7 @@ function hardRules() {
     "Do not reopen https://github.com/yuro1991-afk/main/pull/1.",
     "Do not open a fourth landing-pad queue. Extend PR #3 or claim a card.",
     "Do not copy packages/keep-busy from PR #4 onto this branch.",
-    "DroneHive Unicode patch already lives on PR #5. Apply it on dronehive.",
+    "Yuri scoped this pad to Genesis only. Other sibling cards stay blocked.",
     "Failed Superbrain probes are unreachable, never live.",
   ];
 }

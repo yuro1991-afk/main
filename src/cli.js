@@ -19,6 +19,7 @@ import { defaultInventoryPath, writeInventoryTick } from "./tick.js";
 import { buildBrief } from "./brief.js";
 import { buildHandoff } from "./handoff.js";
 import { writePlaybooks } from "./playbook.js";
+import { buildHelperPacket } from "./helpers.js";
 import { defaultSiblingsPath, loadSiblings } from "./siblings.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -51,7 +52,7 @@ export async function runCli(argv, options = {}) {
   switch (command) {
     case "list": {
       const ledger = loadLedger(ledgerPath);
-      write(JSON.stringify(ledger.jobs, null, 2));
+      write(JSON.stringify(listJobs(ledger, jobFilters(flags), nowMs), null, 2));
       return 0;
     }
     case "next": {
@@ -96,7 +97,9 @@ export async function runCli(argv, options = {}) {
     }
     case "status": {
       const ledger = loadLedger(ledgerPath);
-      write(JSON.stringify(summarize(ledger, nowMs), null, 2));
+      const summary = summarize(ledger, nowMs);
+      summary.next = nextJob(ledger, jobFilters(flags), nowMs);
+      write(JSON.stringify(summary, null, 2));
       return 0;
     }
     case "probe": {
@@ -147,6 +150,17 @@ export async function runCli(argv, options = {}) {
       write(JSON.stringify(buildHandoff(job ?? null, siblings), null, 2));
       return job ? 0 : 1;
     }
+    case "helpers": {
+      const ledger = loadLedger(ledgerPath);
+      const job = positionals[0]
+        ? ledger.jobs.find((item) => item.id === positionals[0])
+        : nextJob(ledger, jobFilters(flags), nowMs);
+      if (positionals[0] && !job) {
+        throw new Error(`unknown job: ${positionals[0]}`);
+      }
+      write(JSON.stringify(buildHelperPacket(job ?? null), null, 2));
+      return job ? 0 : 1;
+    }
     case "playbooks": {
       const ledger = loadLedger(ledgerPath);
       const dest = flags.out
@@ -188,6 +202,7 @@ export function jobFilters(flags) {
     kind: flags.kind,
     repo: flags.repo,
     scope: flags.here === "true" ? "here" : undefined,
+    genesis: flags.all === "true" ? undefined : true,
   };
 }
 
@@ -211,7 +226,8 @@ function helpText() {
 
 Commands:
   list
-  next [--kind kind] [--repo repo] [--here]
+  next [--kind kind] [--repo repo] [--here] [--all]
+  helpers [id]
   claim <id> --agent <bcId>
   complete <id> --agent <bcId>
   block <id> --agent <bcId> --reason <text>
@@ -225,7 +241,8 @@ Commands:
   handoff [id]
   playbooks [--here] [--out dir]
 
-Do not reopen GitHub PR #1. Genesis lives on Cursor Origin.`;
+Genesis only (Yuri). Pass --all to see out-of-scope cards.
+Do not reopen GitHub PR #1. Origin: origin.cursor.com/git/yuri-afk/genesis.`;
 }
 
 const isDirect = process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1]);

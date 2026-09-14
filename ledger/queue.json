@@ -6,11 +6,14 @@
       "repo": "github.com/yuro1991-afk/dronehive",
       "kind": "fix",
       "priority": 1,
-      "status": "open",
+      "status": "blocked",
       "claim": null,
-      "notes": "windows-latest CI dies printing ✓ via _chat in drone/pro/tool_agent.py (~367, 424, 464–506) under cp1252. Blocks dronehive PR #1 and stacked #2. Patch is on landing-pad PR #5; verified apply runner is PR #6 (`npm run autofix -- apply <checkout>`). This token cannot push dronehive — relaunch there.",
+      "notes": "windows-latest CI dies printing ✓ via _chat in drone/pro/tool_agent.py (~367, 424, 464–506) under cp1252. Blocks dronehive PR #1 and stacked #2. Patch is on landing-pad PR #5; verified apply runner is PR #6 (`npm run autofix -- apply <checkout>`). This token cannot push dronehive — relaunch there.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "python -m drone app pro --goal \"ci pro write ci_ok.txt\" --rounds 3 --no-ollama",
-      "files": ["drone/pro/tool_agent.py", ".github/workflows/ci.yml"],
+      "files": [
+        "drone/pro/tool_agent.py",
+        ".github/workflows/ci.yml"
+      ],
       "collision": "Do not rewrite the patch on this repo. Checkout dronehive, apply github.com/yuro1991-afk/main/pull/5 patch, push on cursor/setup-dev-environment-2e0b."
     },
     {
@@ -21,7 +24,7 @@
       "priority": 2,
       "status": "blocked",
       "claim": null,
-      "notes": "Stacked on #1. Rebase cursor/package-install-cli-2e0b after Unicode CI is green. Do not re-edit drone/app/service.py.",
+      "notes": "Stacked on #1. Rebase cursor/package-install-cli-2e0b after Unicode CI is green. Do not re-edit drone/app/service.py.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "Confirm python-smoke on the rebased head.",
       "files": [],
       "collision": "Blocked until dronehive-unicode-ci is done."
@@ -32,9 +35,9 @@
       "repo": "github.com/yuro1991-afk/dronehive",
       "kind": "implement",
       "priority": 4,
-      "status": "open",
+      "status": "blocked",
       "claim": null,
-      "notes": "Hardcoded F:\\GrokSelfLibrary, D:\\GrokCoreMemory, G:\\AI-Home\\... leak onto Linux cwd. Not on PR #1 or #2.",
+      "notes": "Hardcoded F:\\GrokSelfLibrary, D:\\GrokCoreMemory, G:\\AI-Home\\... leak onto Linux cwd. Not on PR #1 or #2.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "python -m drone work-order-show",
       "files": [
         "drone/ai_bus.py",
@@ -52,11 +55,13 @@
       "repo": "github.com/yuro1991-afk/dronehive",
       "kind": "implement",
       "priority": 5,
-      "status": "open",
+      "status": "blocked",
       "claim": null,
-      "notes": "Keep windows-latest. Do not add packaging steps that overlap scripts/package_release.sh on PR #2.",
+      "notes": "Keep windows-latest. Do not add packaging steps that overlap scripts/package_release.sh on PR #2.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "Same four python-smoke commands on ubuntu-latest.",
-      "files": [".github/workflows/ci.yml"],
+      "files": [
+        ".github/workflows/ci.yml"
+      ],
       "collision": "After unicode-ci; do not fight PR #2 packaging."
     },
     {
@@ -108,8 +113,62 @@
       "claim": null,
       "notes": "https://app.notion.com/p/3db735da33f381a1b427d391daa071c5 — catalog/notion_map.json, fill empty Genesis Entries URLs.",
       "verify": "Do not invent Notion URLs. Seeded-first catalog stays the map.",
-      "files": ["catalog/notion_map.json"],
+      "files": [
+        "catalog/notion_map.json"
+      ],
       "collision": "Notion Entries DB is the workspace inventory; Origin repo is SoT for files."
+    },
+    {
+      "id": "genesis-local-repo",
+      "title": "Stand up the Genesis local-repo checkout",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 9,
+      "status": "open",
+      "claim": null,
+      "notes": "Origin branch cursor/genesis-local-repo-67b3. Clone or attach the Origin tree so later slices have a working copy. This GitHub pad is not that checkout.",
+      "verify": "A local Origin clone exists; GitHub yuro1991-afk/main is still the ops pad, not a Genesis duplicate.",
+      "files": [],
+      "collision": "Do not reconstruct sibling stubs on this repo. Do not reopen main#1."
+    },
+    {
+      "id": "genesis-hub-24",
+      "title": "Land Origin hub roster PR genesis#24",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 10,
+      "status": "open",
+      "claim": null,
+      "notes": "Hub roster Genesis/Sentinel/Mnemosyne/Forge/Atlas/Lumen. Notion https://app.notion.com/p/3db735da33f381f491eff11e350a62c1. Origin PR genesis#24.",
+      "verify": "Hub page cites the six roles; this GitHub board stays ops, not the hub.",
+      "files": [],
+      "collision": "Do not fork the hub onto yuro1991-afk/main. Extend Origin."
+    },
+    {
+      "id": "genesis-auto-runner-41",
+      "title": "Ship Origin auto-runner genesis#41 on :8788/:8789",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 11,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f3819ab863cf5f50af9b4f — listen HTTP :8788, UDP :8789. Port :8787 is inventory, not this runner.",
+      "verify": "Runner binds :8788/:8789 and does not steal :8787 from gub-inventory-tick / genesis#22.",
+      "files": [],
+      "collision": "Coordinate with gub-inventory-tick. This pad is not the auto-runner."
+    },
+    {
+      "id": "genesis-world-layer-102",
+      "title": "Implement Origin world-layer genesis#102",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 12,
+      "status": "open",
+      "claim": null,
+      "notes": "Origin PR genesis#102. World/layer work stays on the Origin tree. Do not invent a GitHub world clone.",
+      "verify": "Slice lands on origin.cursor.com/git/yuri-afk/genesis only.",
+      "files": [],
+      "collision": "Relaunch Origin. Do not open another landing-pad queue."
     },
     {
       "id": "do-not-reopen-main-pr1",
@@ -138,8 +197,13 @@
       },
       "notes": "Shipped on PR #3. Keep agents from stacking on LICENSE-only main. Sibling workload manager bc-01a0a0cd-b78b-799a-afa7-cdbfda0065cc should claim a different card.",
       "verify": "npm test && node src/cli.js next",
-      "files": ["src/ledger.js", "src/cli.js", "ledger/queue.json", "AGENTS.md"],
-      "collision": "Do not open a second dispatch-board PR. Extend this one or take dronehive-unicode-ci."
+      "files": [
+        "src/ledger.js",
+        "src/cli.js",
+        "ledger/queue.json",
+        "AGENTS.md"
+      ],
+      "collision": "Do not open a second dispatch-board PR. Extend this one or take a Genesis card."
     },
     {
       "id": "opensussy-linux-syntax-ci",
@@ -147,9 +211,9 @@
       "repo": "github.com/yuro1991-afk/opensussy",
       "kind": "implement",
       "priority": 10,
-      "status": "open",
+      "status": "blocked",
       "claim": null,
-      "notes": "No open issues/PRs. Repo has no .github/workflows. Add ubuntu-latest bash -n (and optional shellcheck) on install/linux/OpenSussy-light.sh, OpenSussy-deep.sh, and leap/tumbleweed copies. Never apply AutoYaST, never run deep wipe, never touch /dev/nvme0n1. Residual R2: confirm=false + initialize=true is nuclear.",
+      "notes": "No open issues/PRs. Repo has no .github/workflows. Add ubuntu-latest bash -n (and optional shellcheck) on install/linux/OpenSussy-light.sh, OpenSussy-deep.sh, and leap/tumbleweed copies. Never apply AutoYaST, never run deep wipe, never touch /dev/nvme0n1. Residual R2: confirm=false + initialize=true is nuclear.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "Workflow parses the six shell wrappers; job must not execute autoinst-deep.xml or format disks.",
       "files": [
         ".github/workflows/linux-syntax.yml",
@@ -166,9 +230,9 @@
       "repo": "github.com/yuro1991-afk/opensussy",
       "kind": "implement",
       "priority": 11,
-      "status": "open",
+      "status": "blocked",
       "claim": null,
-      "notes": "SEC_REVIEW residual R4: AutoYaST 1.0 XML is not Agama JSON; Leap 16 / Agama-first media will not eat autoinst-*.xml silently. HOW_TO_RUN.txt already mentions classic AutoYaST vs Agama — add a one-screen warning in install/linux/HOW_TO_RUN.txt plus flavor HOW_TOs that Leap 15.6 XML is export-only. Do not invent Agama JSON profiles.",
+      "notes": "SEC_REVIEW residual R4: AutoYaST 1.0 XML is not Agama JSON; Leap 16 / Agama-first media will not eat autoinst-*.xml silently. HOW_TO_RUN.txt already mentions classic AutoYaST vs Agama — add a one-screen warning in install/linux/HOW_TO_RUN.txt plus flavor HOW_TOs that Leap 15.6 XML is export-only. Do not invent Agama JSON profiles.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "HOW_TO files state Agama is unsupported; no new autoinst that claims Leap 16 GREEN.",
       "files": [
         "install/linux/HOW_TO_RUN.txt",
@@ -183,9 +247,9 @@
       "repo": "github.com/yuro1991-afk/opensussy",
       "kind": "catalog",
       "priority": 12,
-      "status": "open",
+      "status": "blocked",
       "claim": null,
-      "notes": "reviews/SEC_REVIEW.md is labeled 1.1 PARTIAL (R1–R10). PRODUCT.json is 2.0.0 with Leap 15.6 + Tumbleweed packs. Inventory which residuals still apply to src/OpenSussy.Installer/Engine/LinuxPayload.cs and Sanitizer.cs. Write a short residuals table in-repo; do not invent CVEs or wipe procedures.",
+      "notes": "reviews/SEC_REVIEW.md is labeled 1.1 PARTIAL (R1–R10). PRODUCT.json is 2.0.0 with Leap 15.6 + Tumbleweed packs. Inventory which residuals still apply to src/OpenSussy.Installer/Engine/LinuxPayload.cs and Sanitizer.cs. Write a short residuals table in-repo; do not invent CVEs or wipe procedures.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "Each residual cites a current path or is marked closed with a file pin. false_green stays 0.",
       "files": [
         "reviews/SEC_REVIEW.md",
@@ -201,9 +265,9 @@
       "repo": "github.com/yuro1991-afk/face-swap-ios",
       "kind": "implement",
       "priority": 13,
-      "status": "open",
+      "status": "blocked",
       "claim": null,
-      "notes": "No open issues/PRs, no .github. prove_swap.py requires live :8855 + :8860. Add a stdlib mock that serves GET /api/health and POST swap JSON, point FACESWAP_ENGINE at it, run gateway.py, curl GET /api/ios/health and a fixture POST /api/ios/swap. Do not start InsightFace, CUDA, or Jane.",
+      "notes": "No open issues/PRs, no .github. prove_swap.py requires live :8855 + :8860. Add a stdlib mock that serves GET /api/health and POST swap JSON, point FACESWAP_ENGINE at it, run gateway.py, curl GET /api/ios/health and a fixture POST /api/ios/swap. Do not start InsightFace, CUDA, or Jane.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "Workflow GREEN without MultoModa. prove_swap.py --gateway http://127.0.0.1:8860 against the mock writes out/PROVE.json with false_green 0.",
       "files": [
         "gateway.py",
@@ -220,11 +284,15 @@
       "repo": "github.com/yuro1991-afk/face-swap-ios",
       "kind": "fix",
       "priority": 14,
-      "status": "open",
+      "status": "blocked",
       "claim": null,
-      "notes": "gateway.py engine_json already returns 502 {detail: engine unreachable}. PWA chip and prove_swap treat status!=ok as RED. Ensure GET /api/ios/health never reports ok/GREEN when FACESWAP_ENGINE is closed, and keep the health call on the existing 5s timeout (do not use the 180s swap default).",
+      "notes": "gateway.py engine_json already returns 502 {detail: engine unreachable}. PWA chip and prove_swap treat status!=ok as RED. Ensure GET /api/ios/health never reports ok/GREEN when FACESWAP_ENGINE is closed, and keep the health call on the existing 5s timeout (do not use the 180s swap default).\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "With FACESWAP_ENGINE=http://127.0.0.1:9 gateway health JSON is not status ok; prove_swap exits 2.",
-      "files": ["gateway.py", "pwa/index.html", "prove_swap.py"],
+      "files": [
+        "gateway.py",
+        "pwa/index.html",
+        "prove_swap.py"
+      ],
       "collision": "Do not change POST /api/ios/swap payload shape. Coordinate with faceswap-mock-engine-ci if both claimed."
     },
     {
@@ -233,11 +301,16 @@
       "repo": "github.com/yuro1991-afk/face-swap-ios",
       "kind": "catalog",
       "priority": 15,
-      "status": "open",
+      "status": "blocked",
       "claim": null,
-      "notes": "HONESTY.md pins G:\\AI-Home\\projects\\multomoda-face-studio and G:\\AI-Home\\models\\insightface. Gateway already uses FACESWAP_ENGINE / FACESWAP_IOS_PORT / FACESWAP_IOS_HOST. Catalog those env vars in README + HONESTY so Linux agents do not treat G: as required. Weights stay off git.",
+      "notes": "HONESTY.md pins G:\\AI-Home\\projects\\multomoda-face-studio and G:\\AI-Home\\models\\insightface. Gateway already uses FACESWAP_ENGINE / FACESWAP_IOS_PORT / FACESWAP_IOS_HOST. Catalog those env vars in README + HONESTY so Linux agents do not treat G: as required. Weights stay off git.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "README lists the three env vars; HONESTY marks G: as one host example, not the contract.",
-      "files": ["README.md", "HONESTY.md", "START.cmd", "gateway.py"],
+      "files": [
+        "README.md",
+        "HONESTY.md",
+        "START.cmd",
+        "gateway.py"
+      ],
       "collision": "Docs/env only. Do not vendor InsightFace weights. Same path-leak theme as dronehive-portable-paths but different repo."
     },
     {
@@ -246,9 +319,9 @@
       "repo": "github.com/yuro1991-afk/ollama-voice-access",
       "kind": "implement",
       "priority": 16,
-      "status": "open",
+      "status": "blocked",
       "claim": null,
-      "notes": "No open issues/PRs, no .github. Add a workflow that runs pwsh -NoProfile -Command parser/AST check (or -File -? ) on Install/Uninstall, Open/Start/Stop, Chat/Status, Invoke-OllamaVoiceQA.ps1, lib/OllamaVoice.Common.ps1. Do not hit http://127.0.0.1:11434 and do not stop a live Ollama.",
+      "notes": "No open issues/PRs, no .github. Add a workflow that runs pwsh -NoProfile -Command parser/AST check (or -File -? ) on Install/Uninstall, Open/Start/Stop, Chat/Status, Invoke-OllamaVoiceQA.ps1, lib/OllamaVoice.Common.ps1. Do not hit http://127.0.0.1:11434 and do not stop a live Ollama.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "Syntax job passes on ubuntu-latest pwsh without a local ollama.exe.",
       "files": [
         ".github/workflows/pwsh-syntax.yml",
@@ -264,11 +337,15 @@
       "repo": "github.com/yuro1991-afk/ollama-voice-access",
       "kind": "fix",
       "priority": 17,
-      "status": "open",
+      "status": "blocked",
       "claim": null,
-      "notes": "SECURITY.md and Stop-Ollama.ps1 already refuse kill in -NoUI without -Force (exit 4) before Stop-OVServe. Add a no-network assertion (Pester or a tiny .ps1 under tests/) that mocks Show-OVMessage and proves exit 4 and zero Stop-Process. Do not add a default -Force.",
+      "notes": "SECURITY.md and Stop-Ollama.ps1 already refuse kill in -NoUI without -Force (exit 4) before Stop-OVServe. Add a no-network assertion (Pester or a tiny .ps1 under tests/) that mocks Show-OVMessage and proves exit 4 and zero Stop-Process. Do not add a default -Force.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "pwsh -File Stop-Ollama.ps1 -NoUI exits 4; no ollama processes signaled.",
-      "files": ["Stop-Ollama.ps1", "lib/OllamaVoice.Common.ps1", "SECURITY.md"],
+      "files": [
+        "Stop-Ollama.ps1",
+        "lib/OllamaVoice.Common.ps1",
+        "SECURITY.md"
+      ],
       "collision": "Safety default stays refuse. Do not point api.baseUrl at untrusted hosts."
     },
     {
@@ -277,9 +354,9 @@
       "repo": "github.com/yuro1991-afk/ollama-voice-access",
       "kind": "implement",
       "priority": 18,
-      "status": "open",
+      "status": "blocked",
       "claim": null,
-      "notes": "Get-OVApiBase reads config/product.json api.baseUrl (http://127.0.0.1:11434). SECURITY.md: do not point baseUrl at untrusted hosts. Accept OLLAMA_HOST / OV_API_BASE only when the URL is loopback (127.0.0.1 or localhost). Reject LAN/WAN silently falling back to config. Document in README.",
+      "notes": "Get-OVApiBase reads config/product.json api.baseUrl (http://127.0.0.1:11434). SECURITY.md: do not point baseUrl at untrusted hosts. Accept OLLAMA_HOST / OV_API_BASE only when the URL is loopback (127.0.0.1 or localhost). Reject LAN/WAN silently falling back to config. Document in README.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "OV_API_BASE=http://127.0.0.1:11434 works; http://example.com is rejected. Existing launchers still resolve Voice Access names.",
       "files": [
         "lib/OllamaVoice.Common.ps1",
@@ -295,11 +372,16 @@
       "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
       "kind": "implement",
       "priority": 19,
-      "status": "open",
+      "status": "blocked",
       "claim": null,
-      "notes": "Single commit 'Export from Grok' (2026-08-19). No README, no open issues/PRs. Package is app-builder-workspace (Vite 8080, TanStack Start). UI is OMNI-FORGE (src/routes/docs.tsx HTTP API). README must say Grok Build export, npm run dev/typecheck/test, and this is not Origin genesis / not yuro1991-afk/main.",
+      "notes": "Single commit 'Export from Grok' (2026-08-19). No README, no open issues/PRs. Package is app-builder-workspace (Vite 8080, TanStack Start). UI is OMNI-FORGE (src/routes/docs.tsx HTTP API). README must say Grok Build export, npm run dev/typecheck/test, and this is not Origin genesis / not yuro1991-afk/main.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "README.md exists; does not claim Superbrain LIVE or duplicate sibling stubs.",
-      "files": ["README.md", "package.json", "AGENTS.md", "src/routes/docs.tsx"],
+      "files": [
+        "README.md",
+        "package.json",
+        "AGENTS.md",
+        "src/routes/docs.tsx"
+      ],
       "collision": "Docs only. Do not copy Genesis onto this tree. Do not reopen main#1."
     },
     {
@@ -308,9 +390,9 @@
       "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
       "kind": "implement",
       "priority": 20,
-      "status": "open",
+      "status": "blocked",
       "claim": null,
-      "notes": "No .github/workflows. package.json already has typecheck, lint, and node --test scripts/**/*.test.mjs (brand-check, grok-pwa-plugin). Add npm ci && npm test && npm run typecheck. Fix only errors the workflow surfaces. Do not require a running :8080 preview for CI.",
+      "notes": "No .github/workflows. package.json already has typecheck, lint, and node --test scripts/**/*.test.mjs (brand-check, grok-pwa-plugin). Add npm ci && npm test && npm run typecheck. Fix only errors the workflow surfaces. Do not require a running :8080 preview for CI.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "GitHub Actions green on those three commands. Do not mark LIVE on a failed typecheck.",
       "files": [
         ".github/workflows/ci.yml",
@@ -326,11 +408,15 @@
       "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
       "kind": "probe",
       "priority": 21,
-      "status": "open",
+      "status": "blocked",
       "claim": null,
-      "notes": "src/routes/api/v1/health.ts plus docs: GET /api/v1/health (liveness, catalog size, agent flag). After npm run dev -- --host 0.0.0.0 --port 8080, GET health with a short timeout. Timeouts/connection errors are unreachable, never live. This is not BOSS Superbrain :45001 and not GOOSE-PC :8791.",
+      "notes": "src/routes/api/v1/health.ts plus docs: GET /api/v1/health (liveness, catalog size, agent flag). After npm run dev -- --host 0.0.0.0 --port 8080, GET health with a short timeout. Timeouts/connection errors are unreachable, never live. This is not BOSS Superbrain :45001 and not GOOSE-PC :8791.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "Write a small evidence JSON (status ok | unreachable). Never upgrade a timeout to LIVE. Optional: npm run preview if build already exists.",
-      "files": ["src/routes/api/v1/health.ts", "src/routes/docs.tsx", "startup.sh"],
+      "files": [
+        "src/routes/api/v1/health.ts",
+        "src/routes/docs.tsx",
+        "startup.sh"
+      ],
       "collision": "Do not probe or relabel Superbrain from this card. Do not bind :8787/:8788 Origin auto-runner ports."
     },
     {
@@ -343,7 +429,9 @@
       "claim": null,
       "notes": "PR #3 is this ops board. PR #4 is keep-busy. PR #2 is pointers. PR #5 is attention + dronehive patch. A fifth queue is waste.",
       "verify": "gh pr list --repo yuro1991-afk/main --state open shows no new queue PR after #5.",
-      "files": ["ledger/siblings.json"],
+      "files": [
+        "ledger/siblings.json"
+      ],
       "collision": "Extend PR #3 or claim a card. Do not copy packages/keep-busy onto this branch."
     },
     {
@@ -352,11 +440,16 @@
       "repo": "github.com/yuro1991-afk/opensussy",
       "kind": "fix",
       "priority": 9,
-      "status": "open",
+      "status": "blocked",
       "claim": null,
-      "notes": "VERSION / PRODUCT.json / csproj are 2.0.0, but SHIP.json, USER_GUIDE.md, SETUP-DESKTOP.cmd, and INSTALL.cmd still say 1.3.0. Seeded from sibling PR #4 so both boards agree.",
+      "notes": "VERSION / PRODUCT.json / csproj are 2.0.0, but SHIP.json, USER_GUIDE.md, SETUP-DESKTOP.cmd, and INSTALL.cmd still say 1.3.0. Seeded from sibling PR #4 so both boards agree.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "SHIP.json and generated docs say 2.0.0; leftover 1.3.0 only in CHANGELOG.",
-      "files": ["SHIP.json", "docs/USER_GUIDE.md", "SETUP-DESKTOP.cmd", "INSTALL.cmd"],
+      "files": [
+        "SHIP.json",
+        "docs/USER_GUIDE.md",
+        "SETUP-DESKTOP.cmd",
+        "INSTALL.cmd"
+      ],
       "collision": "Same card as keep-busy sync-2-0-0-docs-and-ship-json. Claim one board, not both."
     },
     {
@@ -365,11 +458,16 @@
       "repo": "github.com/yuro1991-afk/face-swap-ios",
       "kind": "implement",
       "priority": 13,
-      "status": "open",
+      "status": "blocked",
       "claim": null,
-      "notes": "manifest/index.html/sw.js require icon-192.png, icon-512.png, apple-touch-icon.png. make_icons.py exists; PNGs were never committed.",
+      "notes": "manifest/index.html/sw.js require icon-192.png, icon-512.png, apple-touch-icon.png. make_icons.py exists; PNGs were never committed.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "Those three PNGs exist under pwa/ and return HTTP 200 when served.",
-      "files": ["pwa/icon-192.png", "pwa/icon-512.png", "pwa/apple-touch-icon.png", "make_icons.py"],
+      "files": [
+        "pwa/icon-192.png",
+        "pwa/icon-512.png",
+        "pwa/apple-touch-icon.png",
+        "make_icons.py"
+      ],
       "collision": "Same as keep-busy commit-pwa-homescreen-icons. Do not fight faceswap-mock-engine-ci if both touch sw.js."
     },
     {
@@ -378,11 +476,14 @@
       "repo": "github.com/yuro1991-afk/ollama-voice-access",
       "kind": "implement",
       "priority": 16,
-      "status": "open",
+      "status": "blocked",
       "claim": null,
-      "notes": "README math lives in lib/OllamaVoice.Common.ps1. No tests/ tree. Live QA needs Ollama; unit tests must not.",
+      "notes": "README math lives in lib/OllamaVoice.Common.ps1. No tests/ tree. Live QA needs Ollama; unit tests must not.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "Pester covers empty stats, n=1 stdev 0, n=5 p50/p95, tokens/s with no network.",
-      "files": ["lib/OllamaVoice.Common.ps1", "tests/"],
+      "files": [
+        "lib/OllamaVoice.Common.ps1",
+        "tests/"
+      ],
       "collision": "Same as keep-busy pester-qa-math-unit-tests. Leave Invoke-OllamaVoiceQA.ps1 as the live SLO owner."
     },
     {
@@ -391,11 +492,14 @@
       "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
       "kind": "fix",
       "priority": 18,
-      "status": "open",
+      "status": "blocked",
       "claim": null,
-      "notes": ".gitignore is only node_modules and env crumbs; the tree includes Nitro/Vercel build output.",
+      "notes": ".gitignore is only node_modules and env crumbs; the tree includes Nitro/Vercel build output.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": ".gitignore includes .vercel/ and dist/; committed output is removed; npm run build still works.",
-      "files": [".gitignore", ".vercel/"],
+      "files": [
+        ".gitignore",
+        ".vercel/"
+      ],
       "collision": "Same as keep-busy gitignore-vercel-build-output. Keep package-lock.json tracked."
     },
     {
@@ -404,11 +508,13 @@
       "repo": "github.com/yuro1991-afk/main",
       "kind": "review",
       "priority": 22,
-      "status": "open",
+      "status": "blocked",
       "claim": null,
-      "notes": "Idle CodeRabbit / auto-review agents: review open PRs #3–#6. CodeRabbit skips this repo (<10 stars) unless someone checks Trigger review. Do not invent a new tree. Do not reopen #1.",
+      "notes": "Idle CodeRabbit / auto-review agents: review open PRs #3–#6. CodeRabbit skips this repo (<10 stars) unless someone checks Trigger review. Do not invent a new tree. Do not reopen #1.\nBlocked: Yuri scoped this landing pad to Genesis only.",
       "verify": "Leave a review on at least one of #3/#4/#5/#6. No new dispatch-board PR.",
-      "files": ["ledger/siblings.json"],
+      "files": [
+        "ledger/siblings.json"
+      ],
       "collision": "Review only. Merge decisions stay with Yuri."
     }
   ]

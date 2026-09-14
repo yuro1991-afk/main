@@ -79,6 +79,6 @@ test("cli handoff defaults to next", async () => {
     },
   });
   assert.equal(code, 0);
-  assert.match(chunks.join(""), /dronehive-unicode-ci/);
-  assert.match(chunks.join(""), /autofix/);
+  assert.match(chunks.join(""), /gub-superbrain-probe/);
+  assert.match(chunks.join(""), /yuri-afk\/genesis/);
 });

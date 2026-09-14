@@ -84,8 +84,14 @@ test("cli route and probe", async () => {
 
 test("cli next --here stays on this repo", async () => {
   const result = await capture(["next", "--here"]);
+  assert.equal(result.code, 1);
+  assert.equal(result.out.trim(), "null");
+});
+
+test("cli next defaults to the first Genesis card", async () => {
+  const result = await capture(["next"]);
   assert.equal(result.code, 0);
-  assert.match(result.out, /review-landing-pad-prs/);
+  assert.match(result.out, /gub-superbrain-probe/);
   assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
 });
 

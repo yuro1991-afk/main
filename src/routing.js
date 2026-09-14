@@ -16,7 +16,7 @@ export const ROUTES = Object.freeze([
     intent: "keep agents busy",
     destination: "github.com/yuro1991-afk/main (this dispatch board)",
     kind: "implement",
-    notes: "Claim the next open job. Do not rebuild the 39 Genesis sibling stubs.",
+    notes: "Genesis only. Claim the next Origin card. Do not rebuild sibling stubs.",
   },
   {
     intent: "genesis slice / origin kernel",

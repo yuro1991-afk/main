@@ -6,6 +6,7 @@ import { JOB_KINDS } from "../src/kinds.js";
 test("keep-busy routes to this board, not Origin stubs", () => {
   const route = routeIntent("Keep my agents busy");
   assert.match(route.destination, /dispatch board/);
+  assert.match(route.notes, /Genesis only/);
   assert.match(route.notes, /Do not rebuild/);
 });
 

@@ -21,11 +21,11 @@ test("renderPlaybook includes collision and verify", () => {
 test("writePlaybooks writes one file per job", () => {
   const dir = mkdtempSync(join(tmpdir(), "agent-ops-playbooks-"));
   const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
-  const open = listJobs(ledger, { status: "open", scope: "here" }, NOW);
+  const open = listJobs(ledger, { status: "open", genesis: true }, NOW);
   const written = writePlaybooks(open, dir);
   assert.equal(written.length, open.length);
-  const body = readFileSync(join(dir, "review-landing-pad-prs.md"), "utf8");
-  assert.match(body, /review-landing-pad-prs/);
+  const body = readFileSync(join(dir, "gub-superbrain-probe.md"), "utf8");
+  assert.match(body, /gub-superbrain-probe/);
 });
 
 test("cli playbooks --here writes into --out", async () => {
@@ -38,5 +38,5 @@ test("cli playbooks --here writes into --out", async () => {
     },
   });
   assert.equal(code, 0);
-  assert.match(chunks.join(""), /review-landing-pad-prs.md/);
+  assert.match(chunks.join(""), /"count": 0/);
 });

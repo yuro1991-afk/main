@@ -63,6 +63,18 @@ export function jobScope(job) {
 }
 
 /**
+ * Yuri scoped this landing pad to Genesis. Other GitHub siblings stay
+ * on the ledger as blocked history; they are not default work.
+ * @param {{ kind?: string, repo?: string } | null | undefined} job
+ */
+export function isGenesisJob(job) {
+  if (!job) return false;
+  if (job.kind === "origin-slice") return true;
+  const repo = typeof job.repo === "string" ? job.repo : "";
+  return repo.includes("yuri-afk/genesis") || repo.includes("origin.cursor.com");
+}
+
+/**
  * @param {string} scope
  */
 export function describeScope(scope) {

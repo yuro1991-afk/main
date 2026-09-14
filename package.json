@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Claimable dispatch board so Yuri's cloud agents pick real work instead of re-inventorying an empty checkout.",
+  "description": "Genesis-only claimable dispatch board. Default next is Origin; sibling GitHub cards stay blocked.",
   "bin": {
     "agent-ops": "src/cli.js"
   },
@@ -11,6 +11,7 @@
     "test": "node --test test/*.test.js",
     "list": "node src/cli.js list",
     "next": "node src/cli.js next",
+    "helpers": "node src/cli.js helpers",
     "status": "node src/cli.js status",
     "probe": "node src/cli.js probe",
     "tick": "node src/cli.js tick",

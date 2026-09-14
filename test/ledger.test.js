@@ -8,12 +8,14 @@ import {
   claimJob,
   completeJob,
   effectiveStatus,
+  listJobs,
   loadLedger,
   nextJob,
   releaseJob,
   saveLedger,
   summarize,
 } from "../src/ledger.js";
+import { isGenesisJob } from "../src/kinds.js";
 
 const NOW = Date.parse("2026-09-14T16:00:00.000Z");
 
@@ -106,20 +108,45 @@ test("summarize counts effective statuses", () => {
 
 test("next --here skips relaunch cards", () => {
   const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
-  const here = nextJob(ledger, { scope: "here" }, NOW);
-  assert.equal(here.id, "review-landing-pad-prs");
-  assert.equal(here.repo, "github.com/yuro1991-afk/main");
+  const here = nextJob(ledger, { scope: "here", genesis: true }, NOW);
+  assert.equal(here, null);
 });
 
 test("repo queue validates", () => {
   const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
   assert.ok(ledger.jobs.length >= 8);
-  const next = nextJob(ledger, {}, NOW);
-  assert.equal(next.id, "dronehive-unicode-ci");
+  const next = nextJob(ledger, { genesis: true }, NOW);
+  assert.equal(next.id, "gub-superbrain-probe");
   assert.equal(
     ledger.jobs.find((job) => job.id === "do-not-reopen-main-pr1").status,
     "done",
   );
+  assert.equal(
+    ledger.jobs.find((job) => job.id === "dronehive-unicode-ci").status,
+    "blocked",
+  );
+});
+
+test("genesis filter skips sibling GitHub cards even when they are open", () => {
+  const ledger = sampleLedger();
+  ledger.jobs.push({
+    id: "origin",
+    title: "Origin",
+    repo: "origin.cursor.com/git/yuri-afk/genesis",
+    kind: "origin-slice",
+    priority: 8,
+    status: "open",
+    claim: null,
+    notes: "",
+    verify: "true",
+    files: [],
+    collision: "",
+  });
+  assert.equal(isGenesisJob(ledger.jobs[0]), false);
+  assert.equal(isGenesisJob(ledger.jobs[2]), true);
+  assert.equal(nextJob(ledger, {}, NOW).id, "high");
+  assert.equal(nextJob(ledger, { genesis: true }, NOW).id, "origin");
+  assert.equal(listJobs(ledger, { genesis: true }, NOW).length, 1);
 });
 
 test("rejects unknown kind", () => {

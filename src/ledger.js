@@ -2,6 +2,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import {
   assertNeverStatus,
+  isGenesisJob,
   isJobKind,
   isJobStatus,
   jobScope,
@@ -107,7 +108,7 @@ export function effectiveStatus(job, nowMs) {
 
 /**
  * @param {Ledger} ledger
- * @param {{ status?: string, kind?: string, repo?: string, scope?: string }} [filters]
+ * @param {{ status?: string, kind?: string, repo?: string, scope?: string, genesis?: boolean }} [filters]
  * @param {number} [nowMs]
  */
 export function listJobs(ledger, filters = {}, nowMs = Date.now()) {
@@ -117,6 +118,7 @@ export function listJobs(ledger, filters = {}, nowMs = Date.now()) {
     if (filters.kind && job.kind !== filters.kind) return false;
     if (filters.repo && job.repo !== filters.repo) return false;
     if (filters.scope && jobScope(job) !== filters.scope) return false;
+    if (filters.genesis === true && !isGenesisJob(job)) return false;
     return true;
   });
 }
@@ -124,7 +126,7 @@ export function listJobs(ledger, filters = {}, nowMs = Date.now()) {
 /**
  * Highest-priority open job. Lower number wins; ties keep ledger order.
  * @param {Ledger} ledger
- * @param {{ kind?: string, repo?: string, scope?: string }} [filters]
+ * @param {{ kind?: string, repo?: string, scope?: string, genesis?: boolean }} [filters]
  * @param {number} [nowMs]
  * @returns {Job | null}
  */

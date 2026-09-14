@@ -19,7 +19,7 @@ export function defaultInventoryPath(repoRoot) {
  */
 export function writeInventoryTick(ledger, destPath, nowMs) {
   const counts = summarize(ledger, nowMs);
-  const next = nextJob(ledger, {}, nowMs);
+  const next = nextJob(ledger, { genesis: true }, nowMs) ?? nextJob(ledger, {}, nowMs);
   const snapshot = {
     contract: INVENTORY_CONTRACT,
     at: new Date(nowMs).toISOString(),
