@@ -163,6 +163,16 @@ export function loadRoster(rosterPath) {
 }
 
 /**
+ * @param {string} rosterPath
+ * @param {{ assignments: Array<{ bcId: string, name: string, jobId: string }> }} roster
+ */
+export function saveRoster(rosterPath, roster) {
+  mkdirSync(dirname(rosterPath), { recursive: true });
+  writeFileSync(rosterPath, `${JSON.stringify(roster, null, 2)}\n`);
+  return rosterPath;
+}
+
+/**
  * Recommended relaunch targets for named idle Genesis agents.
  * Does not claim — idle agents that never wake must not hide next.
  * @param {import("./ledger.js").Ledger} ledger

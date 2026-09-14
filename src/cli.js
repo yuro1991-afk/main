@@ -45,9 +45,16 @@ import {
   defaultRosterPath,
   listSlots,
   loadRoster,
+  saveRoster,
   writeDispatch,
   writeLaunchPrompts,
 } from "./dispatch.js";
+import {
+  defaultAgentsPath,
+  loadAgents,
+  readAgents,
+  syncRoster,
+} from "./sync.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -180,8 +187,11 @@ export async function runCli(argv, options = {}) {
       const destPath = flags.out
         ? resolve(flags.out)
         : defaultInventoryPath(options.root ?? ROOT);
+      const agents = readAgents(defaultAgentsPath(options.root ?? ROOT));
       const snapshot = writeInventoryTick(ledger, destPath, nowMs, {
         origin: readOriginProbe(defaultOriginPath(options.root ?? ROOT)),
+        idleCount: agents ? agents.filter((agent) => agent.status === "IDLE").length : undefined,
+        runningCount: agents ? agents.filter((agent) => agent.status === "RUNNING").length : undefined,
       });
       write(JSON.stringify(snapshot, null, 2));
       return 0;
@@ -244,6 +254,24 @@ export async function runCli(argv, options = {}) {
       const launches = writeLaunchPrompts(packet.assignments, dest);
       write(JSON.stringify({ ...packet, launches }, null, 2));
       return 0;
+    }
+    case "sync": {
+      const ledger = loadLedger(ledgerPath);
+      const rosterPath = flags.roster
+        ? resolve(flags.roster)
+        : defaultRosterPath(options.root ?? ROOT);
+      const roster = loadRoster(rosterPath);
+      const agents = loadOrReadAgents(flags, options);
+      const packet = syncRoster(ledger, roster, agents, nowMs);
+      if (flags.write === "true") {
+        saveRoster(rosterPath, roster);
+        const dest = flags.out
+          ? resolve(flags.out)
+          : defaultLaunchPath(options.root ?? ROOT);
+        writeLaunchPrompts(buildAssign(ledger, roster, nowMs).assignments, dest);
+      }
+      write(JSON.stringify(packet, null, 2));
+      return packet.uncovered.length === 0 ? 0 : 1;
     }
     case "slots": {
       const ledger = loadLedger(ledgerPath);
@@ -360,6 +388,13 @@ function requireId(id) {
   return id;
 }
 
+function loadOrReadAgents(flags, options) {
+  const destPath = flags.agents
+    ? resolve(flags.agents)
+    : defaultAgentsPath(options.root ?? ROOT);
+  return loadAgents(destPath);
+}
+
 function requireAgent(flags) {
   const agentId = flags.agent || process.env.CURSOR_AGENT_ID || process.env.AGENT_ID;
   if (!agentId) {
@@ -376,6 +411,7 @@ Commands:
   next [--kind kind] [--repo repo] [--here] [--all] [--world]
   slots [--here] [--all] [--world]
   assign [--out dir]
+  sync --agents path.json [--write] [--out dir]
   busy [--agent <bcId>] [--here] [--all] [--world]
   helpers [id]
   claim <id> --agent <bcId>

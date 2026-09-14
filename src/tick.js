@@ -34,6 +34,8 @@ export function writeInventoryTick(ledger, destPath, nowMs, extras = {}) {
     worldNextId: worldNext ? worldNext.id : null,
     originLoggedIn: origin ? Boolean(origin.loggedIn) : null,
     originStatus: origin ? origin.status ?? null : null,
+    idleCount: Number.isInteger(extras.idleCount) ? extras.idleCount : null,
+    runningCount: Number.isInteger(extras.runningCount) ? extras.runningCount : null,
     jobs: ledger.jobs.map((job) => inventoryJob(job, nowMs)),
   };
   mkdirSync(dirname(destPath), { recursive: true });

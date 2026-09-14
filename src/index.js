@@ -87,11 +87,22 @@ export {
   launchPathFor,
   listSlots,
   loadRoster,
+  saveRoster,
   renderAssignedLaunch,
   slotFor,
   writeDispatch,
   writeLaunchPrompts,
 } from "./dispatch.js";
+export {
+  SYNC_CONTRACT,
+  defaultAgentsPath,
+  loadAgents,
+  normalizeAgents,
+  readAgents,
+  syncRoster,
+  unusedGenesisCards,
+  writeAgents,
+} from "./sync.js";
 export {
   SIBLING_ROLES,
   assertNeverRole,

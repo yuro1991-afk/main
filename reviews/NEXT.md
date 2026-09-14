@@ -5,6 +5,7 @@ Relaunch Origin. Every idle agent already has a unique world-phase card.
 
 ```bash
 node src/cli.js assign
+node src/cli.js sync --agents .genesis/last-agents.json --write
 node src/cli.js slots --world
 node src/cli.js busy --world --agent "$CURSOR_AGENT_ID"
 node src/cli.js prompt

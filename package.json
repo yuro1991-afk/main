@@ -13,6 +13,7 @@
     "next": "node src/cli.js next",
     "slots": "node src/cli.js slots",
     "assign": "node src/cli.js assign",
+    "sync": "node src/cli.js sync",
     "busy": "node src/cli.js busy",
     "helpers": "node src/cli.js helpers",
     "status": "node src/cli.js status",
