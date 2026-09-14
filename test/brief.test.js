@@ -69,7 +69,8 @@ test("review firstCommands name open PRs #8/#9/#10, not siblings.json only", () 
   const pr10 = queue.jobs.find((item) => item.id === "review-main-pr10");
   const pr10Lines = firstCommands(pr10);
   assert.ok(pr10Lines.some((line) => line.includes("github.com/yuro1991-afk/main/pull/10")));
-  assert.ok(pr10Lines.some((line) => line.includes("head / ears / eyes / vision / bridge")));
+  assert.ok(pr10Lines.some((line) => line.includes("reviews/main-pr10.md")));
+  assert.ok(pr10Lines.some((line) => line.includes("eyes") && line.includes("bridge")));
 });
 
 test("cataloged sibling firstCommands use git apply, not edit", () => {

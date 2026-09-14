@@ -103,8 +103,9 @@ export function firstCommands(job, options = {}) {
       if (job.id === "review-main-pr10") {
         return [
           "Review https://github.com/yuro1991-afk/main/pull/10",
+          "Read reviews/main-pr10.md. Head and ears already landed. Leftover: eyes → vision → bridge.",
           "Do not invent a new tree on empty main.",
-          "Do not implement head / ears / eyes / vision / bridge here",
+          "Do not implement eyes / vision / bridge here",
           job.verify,
         ];
       }

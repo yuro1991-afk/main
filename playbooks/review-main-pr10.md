@@ -9,9 +9,9 @@
 
 ## Notes
 
-Fork `bc-84d93b47` shipped Python infra handshake, six-head suit, mind loop, and evaluation arena on `cursor/python-arena-infra-dca0`. Base is `cursor/agent-dispatch-board-108b`. Superbrain / GOOSE probes that time out stay `unreachable`. `claimedLive` only when Superbrain `/live` is HTTP 200. UDP 2419 is never bound.
+Fork `bc-84d93b47` shipped Python infra, suit, mind, head, and ears on `cursor/python-arena-infra-dca0`. Base is `cursor/agent-dispatch-board-108b`. Local review: `reviews/main-pr10.md`. Superbrain / GOOSE probes that time out stay `unreachable`. `claimedLive` only when Superbrain `/live` is HTTP 200. UDP 2419 is never bound.
 
-Do not steal the fork's next slices: head → ears → eyes → vision → bridge.
+Head and ears already landed. Do not steal the fork's leftover slices: eyes → vision → bridge.
 
 ## Collision
 
@@ -20,8 +20,9 @@ Review only. The fork owns that branch. Merge decisions stay with Yuri.
 ## First commands
 
 - Review https://github.com/yuro1991-afk/main/pull/10
+- Read reviews/main-pr10.md. Head and ears already landed. Leftover: eyes → vision → bridge.
 - Do not invent a new tree on empty main
-- Do not implement head / ears / eyes / vision / bridge here
+- Do not implement eyes / vision / bridge here
 
 ## Verify
 

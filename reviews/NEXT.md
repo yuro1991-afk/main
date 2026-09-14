@@ -6,23 +6,25 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-14T23:00Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-14T23:08Z**: 40 IDLE + this run RUNNING.
 No new agents. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Do not inventory the pad again.
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
-(`cursor/python-arena-infra-dca0`). Do not steal head / ears / eyes /
-vision / bridge.
+(`cursor/python-arena-infra-dca0`). Head and ears already landed.
+Do not steal eyes / vision / bridge.
+Local review: `reviews/main-pr10.md`. `cli probe` and superbrain
+route now refuse.
 **Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Pad probes stop.
 PR #3 merged; no real review comments (CodeRabbit skip, <10 stars).
 PR #9 catalog still 162 diffs (newest `bloom-grok-pwa-test-sync`).
 CI green on `722d3e5`. Leftover hunt is exhausted for vanilla+stacked
 `git apply --check` (no `-U0`). Do not invent leftovers. Do not
 recatalog CHANNEL_META / wraps / sandwiched JSON.
-Shipped this tick: leftover next `gub-superbrain-probe` relaunch and
-handoff refuse Origin / the probe (helpers, prompt, hardRules, and
-firstCommands already refused). Do not copy #8's GitHub-first retarget
-onto #9.
+Shipped this tick: local review `reviews/main-pr10.md` (head/ears
+landed; leftover eyes → vision → bridge). `cli probe` and superbrain
+`route` refuse `:45001` / `:8791`. Do not copy #8's GitHub-first
+retarget onto #9.
 Value leftover is applying queued diffs on write checkouts, not mining
 new ones.
 This Genesis-only tree still blocks GitHub cards — leftover `next` is the

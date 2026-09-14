@@ -37,7 +37,7 @@ export function describeRole(role) {
     case "patch-catalog":
       return "Applyable sibling diffs under patches/. node src/cli.js patches lists them. Not an autofix runner.";
     case "python-arena":
-      return "Fork Python arena/infra on main#10. Review only. Do not steal head/ears/eyes/vision/bridge.";
+      return "Fork Python arena/infra on main#10. Review only. Head/ears landed. Do not steal eyes/vision/bridge.";
     default:
       return assertNeverRole(role);
   }
