@@ -342,6 +342,15 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "configs/buzzer_hive.json library.root / continuous_tasks use host/library and host/continuous. Independent of config-load-overlay (Python remap only). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-buzzer-hive-library-honesty",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-buzzer-hive-library-honesty.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "drone/app/seed/configs/buzzer_hive.json library.root / continuous_tasks use host/. Independent of live configs/buzzer_hive.json leftover (different file). Does not touch tool_agent.py."
     }
   ]
 }

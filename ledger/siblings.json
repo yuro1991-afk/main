@@ -88,7 +88,8 @@
         "dronehive-bench-goal-honesty",
         "faceswap-readme-requirements-honesty",
         "faceswap-readme-install-sh",
-        "dronehive-buzzer-hive-library-honesty"
+        "dronehive-buzzer-hive-library-honesty",
+        "dronehive-seed-buzzer-hive-library-honesty"
       ]
     }
   ]
