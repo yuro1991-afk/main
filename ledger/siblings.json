@@ -77,7 +77,8 @@
         "faceswap-design-honesty",
         "dronehive-config-load-overlay",
         "ova-readme-linux-honesty",
-        "dronehive-icons-manifest-relative"
+        "dronehive-icons-manifest-relative",
+        "dronehive-app-links-host-paths"
       ]
     }
   ]

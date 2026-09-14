@@ -159,6 +159,8 @@ function dronehiveRelaunchReason(jobId) {
       return "This token cannot push dronehive. Apply patches/dronehive-portable-paths.patch then patches/dronehive-config-load-overlay.patch from main#9. Do not copy PR #6 autofix.";
     case "dronehive-icons-manifest-relative":
       return "This token cannot push dronehive. Apply patches/dronehive-icons-manifest-relative.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-app-links-host-paths":
+      return "This token cannot push dronehive. Apply patches/dronehive-portable-paths.patch then patches/dronehive-app-links-host-paths.patch from main#9. Do not copy PR #6 autofix.";
     case "dronehive-rebase-packaging":
       return "This token cannot push dronehive. Rebase packaging stays blocked until dronehive#1 python-smoke is green. Do not copy PR #6 autofix.";
     default:

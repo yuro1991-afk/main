@@ -139,6 +139,21 @@
       "collision": "Manifest only. Independent of portable-paths and config-load-overlay. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-app-links-host-paths",
+      "title": "Resolve dronehive app link catalog F:/D: URIs via host_paths",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 30,
+      "status": "blocked",
+      "claim": null,
+      "notes": "drone/app/links.py list_links still hardcodes F:\\\\GrokSelfLibrary and D:\\\\GrokCoreMemory\\\\continuous\\\\OPEN_TASKS.json. Apply portable-paths first, then patches/dronehive-app-links-host-paths.patch from main#9. Independent of runtime-host-paths and config-load-overlay. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "python3 -m py_compile drone/app/links.py",
+      "files": [
+        "drone/app/links.py"
+      ],
+      "collision": "Apply after dronehive-portable-paths. Different file from runtime-host-paths. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",
