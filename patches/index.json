@@ -378,6 +378,15 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "README Swift section: IPA is Mac/Xcode only, not Windows/Linux/this pad. Independent of honesty-env-paths (footer), requirements, and install-sh hunks."
+    },
+    {
+      "id": "faceswap-readme-firewall-honesty",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "file": "patches/faceswap-readme-firewall-honesty.patch",
+      "base": "bba7188",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "README: inbound TCP 8860; Windows Firewall is one host example. Independent of install-sh, requirements, and swift leftovers."
     }
   ]
 }

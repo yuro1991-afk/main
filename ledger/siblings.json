@@ -92,7 +92,8 @@
         "dronehive-seed-buzzer-hive-library-honesty",
         "dronehive-work-order-fabric-root",
         "dronehive-seed-work-order-fabric-root",
-        "faceswap-readme-swift-honesty"
+        "faceswap-readme-swift-honesty",
+        "faceswap-readme-firewall-honesty"
       ]
     }
   ]

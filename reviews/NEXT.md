@@ -6,11 +6,11 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-14T20:03:18Z**: 39 IDLE + this run RUNNING.
-No new agents. Fork `bc-84d93b47` IDLE. Last pad probe `:45001` health/live
-**timeout=unreachable** (1500ms at 20:03:18Z). GOOSE `:8791` fetch failed. Never LIVE.
+Keep-busy tick **2026-09-14T20:16Z**: 39 IDLE + this run RUNNING.
+No new agents. Fork `bc-84d93b47` IDLE.
+**Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Pad probes stop.
 PR #3 merged; no real review comments (CodeRabbit skip, <10 stars).
-PR #9 catalog now 41 diffs (newest `faceswap-readme-swift-honesty`).
+PR #9 catalog now 42 diffs (newest `faceswap-readme-firewall-honesty`).
 This Genesis-only tree still blocks GitHub cards — leftover `next` is the
 expired Origin claim `gub-superbrain-probe`. After #8, leftover unused is
 `review-landing-pad-prs`. First parked apply: `dronehive-unicode-ci`.
@@ -36,11 +36,12 @@ then unused `dronehive-buzzer-hive-library-honesty` (buzzer_hive.json library ke
 then unused `dronehive-seed-buzzer-hive-library-honesty` (seed buzzer_hive.json only; independent of live config),
 then unused `dronehive-work-order-fabric-root` (fabric_root key only; independent of portable-paths later hunks),
 then unused `dronehive-seed-work-order-fabric-root` (seed fabric_root only; independent of live config),
-then unused `faceswap-readme-swift-honesty` (README Swift paragraph only; independent of Requirements and install).
+then unused `faceswap-readme-swift-honesty` (README Swift paragraph only; independent of Requirements and install),
+then unused `faceswap-readme-firewall-honesty` (README firewall sentence only; independent of install/Requirements/Swift).
 Newcomer `bc-f407303f`: `review-main-pr8`.
 `bc-5fe241dd` Summarize arena: do not steal `genesis-world-arena`; unused apply `faceswap-design-honesty`.
 `bc-e2df7f92` Summarize coordinator: unused apply `dronehive-script-host-roots`.
-Next unused apply if those are taken: `faceswap-readme-swift-honesty`.
+Next unused apply if those are taken: `faceswap-readme-firewall-honesty`.
 
 Idle agents on `yuro1991-afk/main`: do **not** inventory this pad again.
 Relaunch Origin. 35 parked agents have unique world-phase cards. The
@@ -118,10 +119,8 @@ spawner / physics / atmosphere / generator / lattice / arena / robotics.
 Do not invent `packages/world-*` on this pad. Those cards stay Origin-only
 and start from the PM planes list.
 
-`gub-superbrain-probe` stays claimed on this pad for the probe only.
-Pad probe **2026-09-14T20:03:18Z**: `:45001` health/live **timeout=unreachable**;
-GOOSE `:8791` fetch failed. Origin CLI **logged-out** (`CURSOR_API_KEY` missing).
-Never LIVE. Origin still must implement that playbook.
+`gub-superbrain-probe` is done on this pad. **Yuri: no more Superbrain.**
+Do not probe `:45001` / `:8791`. Do not run `node src/cli.js probe`.
 Keep-busy tick: 36 idle / 1 running. No new agents. Catalog proposed 0.
 `tick` nextId is leftover
 `gub-route-intent` (does not steal the fork's card). New fork

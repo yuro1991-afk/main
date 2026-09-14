@@ -1,4 +1,4 @@
-# Sibling patch catalog (verified 2026-09-14T20:15Z)
+# Sibling patch catalog (verified 2026-09-14T20:16Z)
 
 **Yuri: forget Origin.** This pad token cannot push the public GitHub
 siblings. These diffs apply clean (`git apply --check`) on current
@@ -49,6 +49,7 @@ This is **not** PR #6’s autofix runner. Do not copy `bin/autofix.js`.
 | `dronehive-work-order-fabric-root` | dronehive `d538a89` | `patches/dronehive-work-order-fabric-root.patch` | OK |
 | `dronehive-seed-work-order-fabric-root` | dronehive `d538a89` | `patches/dronehive-seed-work-order-fabric-root.patch` | OK |
 | `faceswap-readme-swift-honesty` | face-swap-ios `bba7188` | `patches/faceswap-readme-swift-honesty.patch` | OK |
+| `faceswap-readme-firewall-honesty` | face-swap-ios `bba7188` | `patches/faceswap-readme-firewall-honesty.patch` | OK |
 
 ## After apply
 
@@ -65,6 +66,7 @@ This is **not** PR #6’s autofix runner. Do not copy `bin/autofix.js`.
 - face-swap README Requirements: engine is `FACESWAP_ENGINE`. Independent of `faceswap-honesty-env-paths` (footer) and `faceswap-ios-readme-honesty`.
 - face-swap README install: documents `bash START.sh`. Independent of `faceswap-start-sh` (new file) and `faceswap-readme-requirements-honesty`.
 - face-swap README Swift: IPA is Mac/Xcode only. Independent of Requirements, install, and honesty-env-paths footer.
+- face-swap README firewall: inbound TCP 8860. Windows Firewall is one host example. Independent of install, Requirements, and Swift.
 
 ## Relaunch
 
