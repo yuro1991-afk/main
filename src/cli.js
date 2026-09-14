@@ -12,7 +12,7 @@ import {
   saveLedger,
   summarize,
 } from "./ledger.js";
-import { probeKnownLanes } from "./probe.js";
+import { defaultSuperbrainPath, probeKnownLanes, writeLaneProbe } from "./probe.js";
 import { routeIntent } from "./routing.js";
 import { defaultInventoryPath, writeInventoryTick } from "./tick.js";
 import { buildBrief } from "./brief.js";
@@ -106,6 +106,10 @@ export async function runCli(argv, options = {}) {
         timeoutMs: flags.timeout ? Number(flags.timeout) : undefined,
         nowMs,
       });
+      const destPath = flags.out
+        ? resolve(flags.out)
+        : defaultSuperbrainPath(options.root ?? ROOT);
+      writeLaneProbe(report, destPath);
       write(JSON.stringify(report, null, 2));
       return 0;
     }

@@ -76,6 +76,7 @@ test("cli route and probe", async () => {
   assert.match(routed.out, /dispatch board/);
   const probed = await capture(["probe"], {
     fetchImpl: async () => ({ ok: false, status: 504 }),
+    root: mkdtempSync(join(tmpdir(), "agent-ops-probe-cli-")),
   });
   assert.equal(probed.code, 0);
   assert.match(probed.out, /unreachable/);

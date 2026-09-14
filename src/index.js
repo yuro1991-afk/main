@@ -28,8 +28,10 @@ export {
   SUPERBRAIN_HEALTH,
   SUPERBRAIN_LIVE,
   assertNotFalseLive,
+  defaultSuperbrainPath,
   probeKnownLanes,
   probeLane,
+  writeLaneProbe,
 } from "./probe.js";
 export { ROUTES, destinationForKind, routeIntent } from "./routing.js";
 export {

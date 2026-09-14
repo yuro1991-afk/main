@@ -1,3 +1,6 @@
+import { mkdirSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+
 export const SUPERBRAIN_HEALTH = "http://169.254.124.8:45001/health";
 export const SUPERBRAIN_LIVE = "http://169.254.124.8:45001/live";
 export const GOOSE_PC_CORE = "http://127.0.0.1:8791/health";
@@ -111,4 +114,25 @@ export function assertNotFalseLive(result) {
   if (result.status === "live" && result.statusCode === null) {
     throw new Error("live requires an HTTP status; timeouts are unreachable");
   }
+}
+
+/**
+ * @param {string} repoRoot
+ */
+export function defaultSuperbrainPath(repoRoot) {
+  return join(repoRoot, ".genesis", "last-superbrain.json");
+}
+
+/**
+ * Persist a probe. Never rewrite a timeout as live.
+ * @param {{ lanes: ProbeResult[] }} report
+ * @param {string} destPath
+ */
+export function writeLaneProbe(report, destPath) {
+  for (const lane of report.lanes) {
+    assertNotFalseLive(lane);
+  }
+  mkdirSync(dirname(destPath), { recursive: true });
+  writeFileSync(destPath, `${JSON.stringify(report, null, 2)}\n`);
+  return destPath;
 }

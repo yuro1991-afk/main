@@ -10,7 +10,7 @@
       "number": 2,
       "url": "https://github.com/yuro1991-afk/main/pull/2",
       "branch": "cursor/attention-pointers-e128",
-      "title": "Point this stub repo at Origin Genesis",
+      "title": "Point this stub repo at Origin Genesis (MERGED)",
       "role": "pointers",
       "owns": ["do-not-reopen-main-pr1"]
     },
