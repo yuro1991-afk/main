@@ -130,13 +130,13 @@
       "repo": "github.com/yuro1991-afk/main",
       "kind": "implement",
       "priority": 0,
-      "status": "claimed",
+      "status": "done",
       "claim": {
         "agentId": "bc-01a0a0ce-1d96-7bb9-b7a7-aeaf5271108b",
         "claimedAt": "2026-09-14T16:46:00.000Z",
         "leaseUntil": "2026-09-14T17:31:00.000Z"
       },
-      "notes": "This PR. Keep agents from stacking on LICENSE-only main. Sibling workload manager bc-01a0a0cd-b78b-799a-afa7-cdbfda0065cc should claim a different card.",
+      "notes": "Shipped on PR #3. Keep agents from stacking on LICENSE-only main. Sibling workload manager bc-01a0a0cd-b78b-799a-afa7-cdbfda0065cc should claim a different card.",
       "verify": "npm test && node src/cli.js next",
       "files": ["src/ledger.js", "src/cli.js", "ledger/queue.json", "AGENTS.md"],
       "collision": "Do not open a second dispatch-board PR. Extend this one or take dronehive-unicode-ci."
