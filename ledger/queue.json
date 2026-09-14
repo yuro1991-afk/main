@@ -861,6 +861,21 @@
       "collision": "New file only. Do not vendor InsightFace weights. Do not change POST /api/ios/swap."
     },
     {
+      "id": "faceswap-design-honesty",
+      "title": "Mark DESIGN.md G: MultoModa path as one host example",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "kind": "implement",
+      "priority": 26,
+      "status": "blocked",
+      "claim": null,
+      "notes": "DESIGN.md still lists G:\\\\AI-Home\\\\projects\\\\multomoda-face-studio as the canonical path. Contract is FACESWAP_ENGINE. Applyable catalog patch is patches/faceswap-design-honesty.patch on main#9. Independent of honesty-env-paths. This token cannot push face-swap-ios.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "DESIGN.md says FACESWAP_ENGINE is the contract and G: is one host example.",
+      "files": [
+        "DESIGN.md"
+      ],
+      "collision": "Docs only. Do not vendor InsightFace weights. Different file from honesty-env-paths."
+    },
+    {
       "id": "ova-pwsh-syntax-ci",
       "title": "Add PowerShell syntax CI for ollama-voice-access",
       "repo": "github.com/yuro1991-afk/ollama-voice-access",

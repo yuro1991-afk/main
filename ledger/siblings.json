@@ -73,7 +73,8 @@
         "dronehive-portable-paths",
         "dronehive-script-host-roots",
         "faceswap-start-sh",
-        "dronehive-runtime-host-paths"
+        "dronehive-runtime-host-paths",
+        "faceswap-design-honesty"
       ]
     }
   ]
