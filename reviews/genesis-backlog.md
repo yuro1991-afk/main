@@ -34,7 +34,8 @@ https://cursor.com/codebase/yuri-afk/genesis only. This pad cannot auth.
 | genesis-job-organizer-37 | [#37](https://cursor.com/codebase/yuri-afk/genesis/pull/37) | [page](https://app.notion.com/p/3db735da33f381ef954fe2df21ad3027) |
 | genesis-world-sound-104 | [#104](https://cursor.com/codebase/yuri-afk/genesis/pull/104) | [page](https://app.notion.com/p/3db735da33f381b58ce8eb310d0c6fa2) |
 | genesis-python-bridge-57 | [#57](https://cursor.com/codebase/yuri-afk/genesis/pull/57) | [page](https://app.notion.com/p/3db735da33f38161b4dbc856c5c46893) |
+| genesis-world-pm | — | [page](https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d) |
 
 `node src/cli.js next` still returns `gub-inventory-tick`.
 Idle agents: `node src/cli.js busy --agent "$CURSOR_AGENT_ID"` then
-`node src/cli.js slots`. Do not reopen main#1.
+`node src/cli.js assign` / `slots`. Do not reopen main#1.

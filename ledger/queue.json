@@ -76,7 +76,7 @@
         "claimedAt": "2026-09-14T17:21:31.816Z",
         "leaseUntil": "2026-09-14T18:06:31.816Z"
       },
-      "notes": "Notion draft https://app.notion.com/p/3db735da33f381a58f19ceffc771ecdd — short-timeout GET http://169.254.124.8:45001/health, write .genesis/last-superbrain.json, never mark LIVE on timeout.\nPad probe 2026-09-14T17:20:55Z: boss-superbrain-health/live timeout=unreachable. GOOSE-PC :8791 fetch failed=unreachable. Origin implement still required.",
+      "notes": "Notion draft https://app.notion.com/p/3db735da33f381a58f19ceffc771ecdd — short-timeout GET http://169.254.124.8:45001/health, write .genesis/last-superbrain.json, never mark LIVE on timeout.\nPad probe 2026-09-14T17:36:02Z: boss-superbrain-health/live timeout=unreachable. GOOSE-PC :8791 fetch failed=unreachable. Origin implement still required.",
       "verify": "Failed probe stays unreachable. GOOSE-PC :8791 is not the BOSS peer.",
       "files": [],
       "collision": "Origin genesis only. Do not reopen github.com/yuro1991-afk/main/pull/1."
@@ -460,6 +460,21 @@
         "packages/python-bridge"
       ],
       "collision": "Port :8788 is also auto-runner #41. :8787 is inventory. Do not steal those binds. UDP 2419 is pong only."
+    },
+    {
+      "id": "genesis-world-pm",
+      "title": "Land Origin world project manager",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 34,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f381b6ac1dc62b85b35f2d. Path packages/world-project-manager/. HTTP 127.0.0.1:8793. Contract genesis.world-project-manager.v1. Env GENESIS_WORLD_PM_URL. Tracks planes/milestones/risks — does not spawn loops, merge shards, or occupy the village.",
+      "verify": "cd packages/world-project-manager && npm test && npm start. Probe Superbrain before LIVE. Never bind UDP 2419.",
+      "files": [
+        "packages/world-project-manager"
+      ],
+      "collision": "Do not steal :8793 halls, unifier :8792, task hub :8788, agent manager :8789, or organizer :7432."
     },
     {
       "id": "do-not-reopen-main-pr1",

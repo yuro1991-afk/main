@@ -1,11 +1,12 @@
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { listJobs } from "./ledger.js";
+import { effectiveStatus, listJobs } from "./ledger.js";
 import { buildHelperPacket } from "./helpers.js";
 import { buildRelaunch, packetPathFor, relaunchFor } from "./handoff.js";
 
 export const BUSY_CONTRACT = "agent-ops.busy.v1";
 export const SLOTS_CONTRACT = "agent-ops.slots.v1";
+export const ASSIGN_CONTRACT = "agent-ops.assign.v1";
 
 /**
  * @param {string} repoRoot
@@ -104,6 +105,52 @@ export function buildBusy(job, siblings, slots, options = {}) {
  * @param {object} snapshot
  * @param {string} destPath
  */
+/**
+ * @param {string} repoRoot
+ */
+export function defaultRosterPath(repoRoot) {
+  return join(repoRoot, "ledger", "roster.json");
+}
+
+/**
+ * @param {string} rosterPath
+ */
+export function loadRoster(rosterPath) {
+  const parsed = JSON.parse(readFileSync(rosterPath, "utf8"));
+  if (!parsed || !Array.isArray(parsed.assignments)) {
+    throw new Error("roster must be { assignments: Assignment[] }");
+  }
+  return parsed;
+}
+
+/**
+ * Recommended relaunch targets for named idle Genesis agents.
+ * Does not claim — idle agents that never wake must not hide next.
+ * @param {import("./ledger.js").Ledger} ledger
+ * @param {{ assignments: Array<{ bcId: string, name: string, jobId: string }> }} roster
+ * @param {number} [nowMs]
+ */
+export function buildAssign(ledger, roster, nowMs = Date.now()) {
+  const assignments = roster.assignments.map((row) => {
+    const job = ledger.jobs.find((item) => item.id === row.jobId) ?? null;
+    return {
+      bcId: row.bcId,
+      name: row.name,
+      jobId: row.jobId,
+      status: job ? effectiveStatus(job, nowMs) : "missing",
+      packet: job ? packetPathFor(job) : null,
+      relaunch: job ? relaunchFor(job) : null,
+    };
+  });
+  return {
+    contract: ASSIGN_CONTRACT,
+    count: assignments.length,
+    assignments,
+    next: assignments.find((row) => row.status === "open") ?? null,
+    rule: "Named idle agents relaunch the listed Origin card. Do not all peek next without claiming. Do not lease cards to agents that stay idle.",
+  };
+}
+
 export function writeDispatch(snapshot, destPath) {
   mkdirSync(dirname(destPath), { recursive: true });
   writeFileSync(destPath, `${JSON.stringify(snapshot, null, 2)}\n`);

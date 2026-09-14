@@ -20,6 +20,7 @@ npm test
 node src/cli.js status
 node src/cli.js next
 node src/cli.js slots
+node src/cli.js assign
 node src/cli.js busy --agent "$CURSOR_AGENT_ID"
 node src/cli.js relaunch
 node src/cli.js helpers

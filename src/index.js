@@ -60,12 +60,16 @@ export {
 export { playbookPath, renderPlaybook, writePlaybooks } from "./playbook.js";
 export { HELPER_CONTRACT, buildHelperPacket, planHelpers } from "./helpers.js";
 export {
+  ASSIGN_CONTRACT,
   BUSY_CONTRACT,
   SLOTS_CONTRACT,
+  buildAssign,
   buildBusy,
   buildSlots,
   defaultDispatchPath,
+  defaultRosterPath,
   listSlots,
+  loadRoster,
   slotFor,
   writeDispatch,
 } from "./dispatch.js";

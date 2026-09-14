@@ -5,7 +5,14 @@ import { fileURLToPath } from "node:url";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { loadLedger, saveLedger } from "../src/ledger.js";
-import { BUSY_CONTRACT, SLOTS_CONTRACT, buildSlots } from "../src/dispatch.js";
+import {
+  ASSIGN_CONTRACT,
+  BUSY_CONTRACT,
+  SLOTS_CONTRACT,
+  buildAssign,
+  buildSlots,
+  loadRoster,
+} from "../src/dispatch.js";
 import { runCli } from "../src/cli.js";
 
 const NOW = Date.parse("2026-09-14T16:00:00.000Z");
@@ -125,6 +132,27 @@ test("busy --agent claims next; a second agent gets the next slot", async () => 
   assert.match(again.out, /"jobId": "first"/);
   const written = JSON.parse(readFileSync(join(root, "a.json"), "utf8"));
   assert.equal(written.jobId, "first");
+});
+
+test("assign maps named idle agents to distinct Origin cards", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
+  const packet = buildAssign(ledger, roster, NOW);
+  assert.equal(packet.contract, ASSIGN_CONTRACT);
+  assert.equal(packet.count, 4);
+  assert.equal(packet.next.jobId, "gub-inventory-tick");
+  assert.equal(packet.assignments[3].jobId, "gub-superbrain-probe");
+  assert.equal(packet.assignments[3].status, "claimed");
+  assert.ok(packet.assignments.every((row) => row.relaunch.kind === "origin"));
+});
+
+test("cli assign prints the roster", async () => {
+  const result = await capture(["assign"]);
+  assert.equal(result.code, 0);
+  assert.match(result.out, /gub-inventory-tick/);
+  assert.match(result.out, /agent-routing-matrix/);
+  assert.match(result.out, /catalog-notion-sync/);
+  assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
 });
 
 test("cli slots defaults to Genesis cards", async () => {

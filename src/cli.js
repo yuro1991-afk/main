@@ -29,10 +29,13 @@ import { writePlaybooks } from "./playbook.js";
 import { buildHelperPacket } from "./helpers.js";
 import { defaultSiblingsPath, loadSiblings } from "./siblings.js";
 import {
+  buildAssign,
   buildBusy,
   buildSlots,
   defaultDispatchPath,
+  defaultRosterPath,
   listSlots,
+  loadRoster,
   writeDispatch,
 } from "./dispatch.js";
 
@@ -189,6 +192,14 @@ export async function runCli(argv, options = {}) {
       write(JSON.stringify(buildHelperPacket(job ?? null), null, 2));
       return job ? 0 : 1;
     }
+    case "assign": {
+      const ledger = loadLedger(ledgerPath);
+      const roster = loadRoster(
+        flags.roster ? resolve(flags.roster) : defaultRosterPath(options.root ?? ROOT),
+      );
+      write(JSON.stringify(buildAssign(ledger, roster, nowMs), null, 2));
+      return 0;
+    }
     case "slots": {
       const ledger = loadLedger(ledgerPath);
       write(JSON.stringify(buildSlots(ledger, jobFilters(flags), nowMs), null, 2));
@@ -306,6 +317,7 @@ Commands:
   list
   next [--kind kind] [--repo repo] [--here] [--all]
   slots [--here] [--all]
+  assign
   busy [--agent <bcId>] [--here] [--all]
   helpers [id]
   claim <id> --agent <bcId>

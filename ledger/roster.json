@@ -1,0 +1,30 @@
+{
+  "contract": "agent-ops.roster.v1",
+  "notes": [
+    "Named idle Genesis handoff agents on this pad. Assignments are recommended relaunch targets, not 45-minute leases.",
+    "Dead idle agents must not hide high-priority cards behind a claim they will never work.",
+    "Each named agent should run: node src/cli.js claim <jobId> --agent <bcId> then relaunch Origin."
+  ],
+  "assignments": [
+    {
+      "bcId": "bc-3a1e5eed-7d37-5cfc-bdd8-939ebc0b84aa",
+      "name": "Genesis inventory handoff",
+      "jobId": "gub-inventory-tick"
+    },
+    {
+      "bcId": "bc-0d442773-0df2-5780-92da-605c3f4ac598",
+      "name": "Genesis routing handoff",
+      "jobId": "agent-routing-matrix"
+    },
+    {
+      "bcId": "bc-7ea3a99b-a561-5188-a4ed-451f761a979b",
+      "name": "Genesis catalog handoff",
+      "jobId": "catalog-notion-sync"
+    },
+    {
+      "bcId": "bc-49564fc3-2875-51aa-b240-02e9b43bebc3",
+      "name": "Genesis probe handoff",
+      "jobId": "gub-superbrain-probe"
+    }
+  ]
+}
