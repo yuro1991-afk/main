@@ -1,4 +1,4 @@
-# Sibling patch catalog (verified 2026-09-14T19:12Z)
+# Sibling patch catalog (verified 2026-09-14T19:20Z)
 
 **Yuri: forget Origin.** This pad token cannot push the public GitHub
 siblings. These diffs apply clean (`git apply --check`) on current
@@ -19,13 +19,20 @@ This is **not** PR #6’s autofix runner. Do not copy `bin/autofix.js`.
 | `faceswap-commit-pwa-icons` | face-swap-ios `bba7188` | `patches/faceswap-commit-pwa-icons.patch` | OK |
 | `ova-pwsh-syntax-ci` | ollama-voice-access `074bad0` | `patches/ova-pwsh-syntax-ci.patch` | OK |
 | `ova-api-host-override` | ollama-voice-access `074bad0` | `patches/ova-api-host-override.patch` | OK |
+| `opensussy-linux-syntax-ci` | opensussy `d4b2949` | `patches/opensussy-linux-syntax-ci.patch` | OK |
+| `opensussy-sec-residuals-catalog` | opensussy `d4b2949` | `patches/opensussy-sec-residuals-catalog.patch` | OK |
+| `faceswap-health-offline` | face-swap-ios `bba7188` | `patches/faceswap-health-offline.patch` | OK |
+| `faceswap-mock-engine-ci` | face-swap-ios `bba7188` | `patches/faceswap-mock-engine-ci.patch` | OK |
+| `ova-stop-noui-guard` | ollama-voice-access `074bad0` | `patches/ova-stop-noui-guard.patch` | OK |
+| `ova-pester-qa-math` | ollama-voice-access `074bad0` | `patches/ova-pester-qa-math.patch` | OK |
+| `dronehive-ubuntu-smoke` | dronehive `d538a89` | `patches/dronehive-ubuntu-smoke.patch` | OK |
 
 ## After apply
 
 - bloom gitignore: also `git rm -r --cached .vercel/output` (58 tracked files). Keep `package-lock.json`.
 - face-swap icons: copies also live under `patches/faceswap-pwa-icons/` if `git apply --binary` is awkward.
 - opensussy 2.0.0: leave CHANGELOG `## 1.3.0` and `docs/superpowers/**` historical. `usb_zip_bytes` / `utc` stay until a real v2 USB zip exists.
-- dronehive: do not rebase dronehive#2 until #1 `python-smoke` is green.
+- dronehive: do not rebase dronehive#2 until #1 `python-smoke` is green. Ubuntu smoke stacks on the unicode patch.
 
 ## Relaunch
 

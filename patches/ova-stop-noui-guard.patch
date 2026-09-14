@@ -1,0 +1,19 @@
+diff --git a/tests/assert-stop-noui.ps1 b/tests/assert-stop-noui.ps1
+new file mode 100644
+index 0000000..9b75a86
+--- /dev/null
++++ b/tests/assert-stop-noui.ps1
+@@ -0,0 +1,13 @@
++#Requires -Version 5.1
++# Prove -NoUI without -Force exits 4 and does not call Stop-Process.
++$ErrorActionPreference = "Stop"
++Set-StrictMode -Version Latest
++$root = Split-Path -Parent $PSScriptRoot
++$script = Join-Path $root "Stop-Ollama.ps1"
++$p = Start-Process -FilePath "pwsh" -ArgumentList @("-NoProfile","-File",$script,"-NoUI") -Wait -PassThru -NoNewWindow
++if ($p.ExitCode -ne 4) {
++  Write-Host "RED expected exit 4, got $($p.ExitCode)"
++  exit 2
++}
++Write-Host "OK Stop-Ollama -NoUI exit 4 (no -Force)"
++exit 0

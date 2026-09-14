@@ -3,7 +3,7 @@
   "cannotPush": true,
   "apply": "git clone https://github.com/<repo>.git work && cd work && git apply --check ../<file> && git apply ../<file>",
   "doNot": "Do not copy PR #6 npm run autofix. This catalog lists diffs only.",
-  "verifiedAt": "2026-09-14T19:12:00Z",
+  "verifiedAt": "2026-09-14T19:20:00Z",
   "patches": [
     {
       "id": "dronehive-unicode-ci",
@@ -108,6 +108,69 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "OV_API_BASE / OLLAMA_HOST accepted only for loopback. LAN/WAN rejected."
+    },
+    {
+      "id": "opensussy-linux-syntax-ci",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "file": "patches/opensussy-linux-syntax-ci.patch",
+      "base": "d4b2949",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "ubuntu-latest bash -n on six wrappers. Does not execute AutoYaST or format disks."
+    },
+    {
+      "id": "opensussy-sec-residuals-catalog",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "file": "patches/opensussy-sec-residuals-catalog.patch",
+      "base": "d4b2949",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "R1–R10 still open on 2.0.0 tree. Pins LinuxPayload.cs / Sanitizer.cs. false_green 0."
+    },
+    {
+      "id": "faceswap-health-offline",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "file": "patches/faceswap-health-offline.patch",
+      "base": "bba7188",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "Health status is red (not ok) when the engine port is closed. 5s timeout unchanged."
+    },
+    {
+      "id": "faceswap-mock-engine-ci",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "file": "patches/faceswap-mock-engine-ci.patch",
+      "base": "bba7188",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "stdlib mock_engine.py + gateway-smoke workflow. No InsightFace/CUDA/Jane."
+    },
+    {
+      "id": "ova-stop-noui-guard",
+      "repo": "github.com/yuro1991-afk/ollama-voice-access",
+      "file": "patches/ova-stop-noui-guard.patch",
+      "base": "074bad0",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "tests/assert-stop-noui.ps1 expects exit 4 without -Force. Does not add default -Force."
+    },
+    {
+      "id": "ova-pester-qa-math",
+      "repo": "github.com/yuro1991-afk/ollama-voice-access",
+      "file": "patches/ova-pester-qa-math.patch",
+      "base": "074bad0",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "No-network math script + math-unit workflow. Empty / n=1 / n=5 / tok-s."
+    },
+    {
+      "id": "dronehive-ubuntu-smoke",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-ubuntu-smoke.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "Adds ubuntu-latest python-smoke alongside windows-latest. Stacks with the unicode patch."
     }
   ]
 }

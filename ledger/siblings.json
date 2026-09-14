@@ -62,7 +62,14 @@
         "faceswap-honesty-env-paths",
         "faceswap-commit-pwa-icons",
         "ova-pwsh-syntax-ci",
-        "ova-api-host-override"
+        "ova-api-host-override",
+        "opensussy-linux-syntax-ci",
+        "opensussy-sec-residuals-catalog",
+        "faceswap-health-offline",
+        "faceswap-mock-engine-ci",
+        "ova-stop-noui-guard",
+        "ova-pester-qa-math",
+        "dronehive-ubuntu-smoke"
       ]
     }
   ]

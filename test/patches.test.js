@@ -41,7 +41,7 @@ test("repo index loads without duplicate ids and files exist", () => {
   const index = loadPatchIndex(defaultPatchesIndexPath(ROOT));
   assert.equal(index.contract, PATCH_CONTRACT.id);
   assert.equal(index.cannotPush, true);
-  assert.ok(index.patches.length >= 11);
+  assert.ok(index.patches.length >= 18);
   assertPatchFilesExist(index, ROOT);
   const ids = index.patches.map((row) => row.id);
   assert.equal(new Set(ids).size, ids.length);
@@ -50,6 +50,9 @@ test("repo index loads without duplicate ids and files exist", () => {
   assert.ok(ids.includes("opensussy-ship-json-2-0-0"));
   assert.ok(ids.includes("faceswap-commit-pwa-icons"));
   assert.ok(ids.includes("ova-api-host-override"));
+  assert.ok(ids.includes("opensussy-linux-syntax-ci"));
+  assert.ok(ids.includes("faceswap-health-offline"));
+  assert.ok(ids.includes("dronehive-ubuntu-smoke"));
 });
 
 test("text patches start with diff --git; icons are PNGs", () => {
@@ -143,7 +146,7 @@ test("cli patches lists the catalog", async () => {
   assert.equal(code, 0);
   const parsed = JSON.parse(chunks.join(""));
   assert.equal(parsed.command, "patches");
-  assert.ok(parsed.count >= 11);
+  assert.ok(parsed.count >= 18);
   assert.equal(parsed.cannotPush, true);
   assert.match(parsed.doNot, /autofix/);
 });

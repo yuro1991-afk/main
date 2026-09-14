@@ -1,0 +1,28 @@
+diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+index 0b202bd..58e39b7 100644
+--- a/.github/workflows/ci.yml
++++ b/.github/workflows/ci.yml
+@@ -41,3 +41,23 @@ jobs:
+         with:
+           name: dronehive-tui-windows
+           path: apps/dronehive-tui/target/release/dronehive-tui.exe
++
++  python-smoke-ubuntu:
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v4
++      - uses: actions/setup-python@v5
++        with:
++          python-version: "3.12"
++      - name: Install package
++        run: |
++          python -m pip install -U pip setuptools wheel
++          python -m pip install -e ".[desktop]"
++      - name: Health
++        run: python -m drone app health
++      - name: Fast task
++        run: python -m drone app task --goal "ci smoke" --lane fast --lm-assist none --controller local
++      - name: Pro agent (no ollama)
++        run: python -m drone app pro --goal "ci pro write ci_ok.txt" --rounds 3 --no-ollama
++      - name: Work order show
++        run: python -m drone work-order-show

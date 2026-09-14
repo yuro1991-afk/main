@@ -1,0 +1,95 @@
+diff --git a/.github/workflows/gateway-smoke.yml b/.github/workflows/gateway-smoke.yml
+new file mode 100644
+index 0000000..3f11968
+--- /dev/null
++++ b/.github/workflows/gateway-smoke.yml
+@@ -0,0 +1,32 @@
++name: gateway-smoke
++
++on:
++  push:
++    branches: ["**"]
++  pull_request:
++
++jobs:
++  mock-engine:
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v4
++      - uses: actions/setup-python@v5
++        with:
++          python-version: "3.12"
++      - name: Mock engine + gateway health (no InsightFace)
++        run: |
++          set -eu
++          mkdir -p out
++          python mock_engine.py &
++          echo $! > /tmp/mock.pid
++          FACESWAP_ENGINE=http://127.0.0.1:8855 FACESWAP_IOS_HOST=127.0.0.1 FACESWAP_IOS_PORT=8860 python gateway.py &
++          echo $! > /tmp/gw.pid
++          for i in $(seq 1 30); do
++            if curl -fsS http://127.0.0.1:8860/api/ios/health | tee /tmp/health.json; then
++              break
++            fi
++            sleep 0.2
++          done
++          python -c "import json; h=json.load(open('/tmp/health.json')); assert h.get('status')=='ok', h"
++          python -c "import json; from pathlib import Path; Path('out/PROVE.json').write_text(json.dumps({'false_green':0,'engine':'mock','status':'ok'}, indent=2))"
++          kill $(cat /tmp/gw.pid) $(cat /tmp/mock.pid) || true
+diff --git a/mock_engine.py b/mock_engine.py
+new file mode 100644
+index 0000000..ee25ae1
+--- /dev/null
++++ b/mock_engine.py
+@@ -0,0 +1,51 @@
++"""Stdlib MultoModa stand-in. No InsightFace, CUDA, or Jane."""
++from __future__ import annotations
++
++import json
++import os
++from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
++
++HOST = os.environ.get("MOCK_ENGINE_HOST", "127.0.0.1")
++PORT = int(os.environ.get("MOCK_ENGINE_PORT", "8855"))
++
++
++class Handler(BaseHTTPRequestHandler):
++    def log_message(self, fmt: str, *args) -> None:
++        return
++
++    def _send(self, status: int, payload: dict) -> None:
++        blob = json.dumps(payload).encode("utf-8")
++        self.send_response(status)
++        self.send_header("Content-Type", "application/json")
++        self.send_header("Content-Length", str(len(blob)))
++        self.end_headers()
++        self.wfile.write(blob)
++
++    def do_GET(self) -> None:  # noqa: N802
++        if self.path.startswith("/api/health"):
++            self._send(200, {"status": "ok", "local_only": True, "mock": True})
++            return
++        self._send(404, {"detail": "not found"})
++
++    def do_POST(self) -> None:  # noqa: N802
++        length = int(self.headers.get("Content-Length") or "0")
++        if length:
++            self.rfile.read(length)
++        if self.path.startswith("/api/faces/register"):
++            self._send(200, {"ok": True, "face_id": "mock"})
++            return
++        if self.path.startswith("/api/swap"):
++            # 1x1 JPEG so prove_swap can decode without InsightFace
++            jpeg = (
++                "/9j/4AAQSkZJRgABAQAAAQABAAD/2wAAAQAAAQAAAQAAAQAAAQAAAQAAAQAAAQAAAQAAA"
++                "QAAAQAAAQAAAQAAAQAAAQAAAQAAAQAAAQAAAQD/wAARCAABAAEDASIAAhEBAxEB/8QAFQ"
++                "ABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIQAxA"
++                "AAAGf/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAgBAQABPwB//9k="
++            )
++            self._send(200, {"ok": True, "image_base64": jpeg, "faces": 1, "metrics": {"mock": True}})
++            return
++        self._send(404, {"detail": "not found"})
++
++
++if __name__ == "__main__":
++    ThreadingHTTPServer((HOST, PORT), Handler).serve_forever()
