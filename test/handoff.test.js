@@ -73,6 +73,9 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
   const seedFabric = relaunchFor({ ...job, id: "dronehive-seed-work-order-fabric-root" });
   assert.match(seedFabric.reason, /dronehive-seed-work-order-fabric-root\.patch/);
   assert.doesNotMatch(seedFabric.reason, /npm run autofix/);
+  const jane = relaunchFor({ ...job, id: "dronehive-future-seer-jane-honesty" });
+  assert.match(jane.reason, /dronehive-future-seer-jane-honesty\.patch/);
+  assert.doesNotMatch(jane.reason, /npm run autofix/);
 });
 
 test("origin jobs relaunch to the Origin codebase", () => {

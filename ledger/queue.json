@@ -274,6 +274,21 @@
       "collision": "Seed fabric_root key only. Different file from configs/work_order.json. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-future-seer-jane-honesty",
+      "title": "Point future_seer.json jane paths at host/ai-center",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 46,
+      "status": "blocked",
+      "claim": null,
+      "notes": "configs/future_seer.json jane.* still pins G:\\\\AI-Center. Applyable catalog patch is patches/dronehive-future-seer-jane-honesty.patch on main#9. Independent of config-load-overlay (Python remap only) and runtime-host-paths (future_seer.py Path wraps). Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "configs/future_seer.json jane.super_cell is host/ai-center/agents/super-cell-4 and pythonpath_ai_center is host/ai-center.",
+      "files": [
+        "configs/future_seer.json"
+      ],
+      "collision": "configs/future_seer.json jane keys only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",

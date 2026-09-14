@@ -3,7 +3,7 @@
   "cannotPush": true,
   "apply": "git clone https://github.com/<repo>.git work && cd work && git apply --check ../<file> && git apply ../<file>",
   "doNot": "Do not copy PR #6 npm run autofix. This catalog lists diffs only.",
-  "verifiedAt": "2026-09-14T20:06:00Z",
+  "verifiedAt": "2026-09-14T20:22:00Z",
   "patches": [
     {
       "id": "dronehive-unicode-ci",
@@ -387,6 +387,15 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "README: inbound TCP 8860; Windows Firewall is one host example. Independent of install-sh, requirements, and swift leftovers."
+    },
+    {
+      "id": "dronehive-future-seer-jane-honesty",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-future-seer-jane-honesty.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "configs/future_seer.json jane.* uses host/ai-center, not G:\\\\AI-Center. Independent of config-load-overlay (Python remap only) and runtime-host-paths (future_seer.py Path wraps). Does not touch tool_agent.py."
     }
   ]
 }
