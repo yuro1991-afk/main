@@ -3,7 +3,7 @@
   "cannotPush": true,
   "apply": "git clone https://github.com/<repo>.git work && cd work && git apply --check ../<file> && git apply ../<file>",
   "doNot": "Do not copy PR #6 npm run autofix. This catalog lists diffs only.",
-  "verifiedAt": "2026-09-14T22:02:00Z",
+  "verifiedAt": "2026-09-14T22:10:00Z",
   "patches": [
     {
       "id": "dronehive-unicode-ci",
@@ -1460,6 +1460,15 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "seed knowledge_imprint.ai_smarts_packs uses host/ai-home. -U1 trailing knowledge_pack_min. Independent of configs leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "bloom-grok-pwa-test-sync",
+      "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+      "file": "patches/bloom-grok-pwa-test-sync.patch",
+      "base": "288a484",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "scripts/grok-pwa-plugin.test.mjs calls GrokHeadContext. Independent of bloom-ci-typecheck (ci.yml). Proven 43/43 on 288a484. Does not copy PR #6 autofix."
     }
   ]
 }

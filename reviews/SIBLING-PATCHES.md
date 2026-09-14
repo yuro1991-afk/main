@@ -1,4 +1,4 @@
-# Sibling patch catalog (verified 2026-09-14T22:02Z)
+# Sibling patch catalog (verified 2026-09-14T22:10Z)
 
 **Yuri: forget Origin.** This pad token cannot push the public GitHub
 siblings. These diffs apply clean (`git apply --check`) on current
@@ -169,6 +169,7 @@ This is **not** PR #6’s autofix runner. Do not copy `bin/autofix.js`.
 | `dronehive-seed-work-order-core-lessons` | dronehive `d538a89` | `patches/dronehive-seed-work-order-core-lessons.patch` | OK |
 | `dronehive-work-order-ai-smarts-packs` | dronehive `d538a89` | `patches/dronehive-work-order-ai-smarts-packs.patch` | OK |
 | `dronehive-seed-work-order-ai-smarts-packs` | dronehive `d538a89` | `patches/dronehive-seed-work-order-ai-smarts-packs.patch` | OK |
+| `bloom-grok-pwa-test-sync` | bloom `288a484` | `patches/bloom-grok-pwa-test-sync.patch` | OK |
 
 ## After apply
 
@@ -180,6 +181,7 @@ This is **not** PR #6’s autofix runner. Do not copy `bin/autofix.js`.
 - face-swap `DESIGN.md`: `FACESWAP_ENGINE` is the contract; G: is one host example.
 - OVA README: Voice Access / Start Menu / Win+Ctrl+S stay Windows-only. Linux `pwsh` is syntax/math CI, not a Voice Access install. Independent of `ova-api-host-override`.
 - bloom lint: new-file `.github/workflows/lint.yml`. Independent of `bloom-ci-typecheck` (`ci.yml`). `eslint .` is 0 errors / 2 warnings on `288a484`. Do not fold lint into typecheck.
+- bloom grok-pwa tests: `scripts/grok-pwa-plugin.test.mjs` only. Call `GrokHeadContext`. Independent of `bloom-ci-typecheck`. Apply before relying on `npm test` in that CI. 43/43 on `288a484`.
 - OVA voice card: Voice Access / Start Menu phrases stay Windows-only. Linux `pwsh` is not a Voice Access install. Independent of `ova-readme-linux-honesty`.
 - face-swap `ios/README.md`: gateway URL comes from `START.cmd` or `START.sh` (`FACESWAP_ENGINE`). Independent of `faceswap-design-honesty`.
 - face-swap README Requirements: engine is `FACESWAP_ENGINE`. Independent of `faceswap-honesty-env-paths` (footer) and `faceswap-ios-readme-honesty`.

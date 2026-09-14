@@ -13,9 +13,9 @@ No new agents. Fork `bc-84d93b47` still IDLE on
 vision / bridge.
 **Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Pad probes stop.
 PR #3 merged; no real review comments (CodeRabbit skip, <10 stars).
-PR #9 catalog now 161 diffs (newest `dronehive-seed-work-order-ai-smarts-packs`).
-CI green on `07c0bf1`. 22:00Z leftover hunt found no new `-U1` pins —
-CHANNEL_META stays wrap-only; sandwiched JSON stays skipped.
+PR #9 catalog now 162 diffs (newest `bloom-grok-pwa-test-sync`).
+CI green on `07c0bf1`. Host-path leftover hunt is exhausted for `-U1`
+pins. This leftover is bloom test drift, not a host path.
 This Genesis-only tree still blocks GitHub cards — leftover `next` is the
 expired Origin claim `gub-superbrain-probe`. After #8, leftover unused
 review is `review-main-pr10`, then `review-landing-pad-prs`. First parked
@@ -162,11 +162,12 @@ then unused `dronehive-seed-work-order-live-mirror` (seed live_registry.mirror o
 then unused `dronehive-work-order-core-lessons` (work_order.json core_lessons only; -U1),
 then unused `dronehive-seed-work-order-core-lessons` (seed core_lessons only),
 then unused `dronehive-work-order-ai-smarts-packs` (work_order.json ai_smarts_packs only; -U1),
-then unused `dronehive-seed-work-order-ai-smarts-packs` (seed ai_smarts_packs only).
+then unused `dronehive-seed-work-order-ai-smarts-packs` (seed ai_smarts_packs only),
+then unused `bloom-grok-pwa-test-sync` (grok-pwa-plugin.test.mjs only).
 Newcomer `bc-f407303f`: `review-main-pr10` (fork's Python arena/infra).
 `bc-5fe241dd` Summarize arena: do not steal `genesis-world-arena`; unused apply `faceswap-design-honesty`.
 `bc-e2df7f92` Summarize coordinator: unused apply `dronehive-script-host-roots`.
-Next unused apply if those are taken: `dronehive-work-order-live-mirror`.
+Next unused apply if those are taken: `bloom-grok-pwa-test-sync`.
 After #8, leftover unused review is `review-main-pr10`, then `review-landing-pad-prs`.
 
 Idle agents on `yuro1991-afk/main`: do **not** inventory this pad again.

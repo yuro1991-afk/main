@@ -2059,6 +2059,21 @@
       "collision": "seed work_order.json knowledge_imprint.ai_smarts_packs only. -U1 trailing knowledge_pack_min. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "bloom-grok-pwa-test-sync",
+      "title": "Sync bloom grok-pwa tests to GrokHeadContext",
+      "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+      "kind": "implement",
+      "priority": 165,
+      "status": "blocked",
+      "claim": null,
+      "notes": "scripts/grok-pwa-plugin.test.mjs still calls the old positional injectGrokPwaHead API. Applyable catalog patch is patches/bloom-grok-pwa-test-sync.patch on main#9. Proven 43/43 on 288a484. Independent of bloom-ci-typecheck (ci.yml). Do not copy PR #6 autofix. This token cannot push bloom-fair-yellow-charm.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "node --test scripts/grok-pwa-plugin.test.mjs scripts/brand-check.test.mjs (43 pass)",
+      "files": [
+        "scripts/grok-pwa-plugin.test.mjs"
+      ],
+      "collision": "scripts/grok-pwa-plugin.test.mjs only. Independent of bloom-ci-typecheck and bloom-ci-lint. Do not edit dronehive."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",
