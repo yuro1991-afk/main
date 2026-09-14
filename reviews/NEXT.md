@@ -6,8 +6,11 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-14T21:00Z**: 39 IDLE + this run RUNNING.
-No new agents. Fork `bc-84d93b47` IDLE.
+Keep-busy tick **2026-09-14T21:02Z**: 39 IDLE + this run RUNNING.
+No new agents. Fork `bc-84d93b47` woke, shipped
+[main#10](https://github.com/yuro1991-afk/main/pull/10)
+(`cursor/python-arena-infra-dca0`), now IDLE. Do not steal head / ears /
+eyes / vision / bridge.
 **Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Pad probes stop.
 PR #3 merged; no real review comments (CodeRabbit skip, <10 stars).
 PR #9 catalog now 81 diffs (newest `dronehive-seed-work-order-doc-cd`).
@@ -77,10 +80,11 @@ then unused `dronehive-work-order-doc-models` (docs install-proof models path on
 then unused `dronehive-seed-work-order-doc-models` (seed install-proof models path only),
 then unused `dronehive-work-order-doc-cd` (docs swarm entry cd only),
 then unused `dronehive-seed-work-order-doc-cd` (seed swarm entry cd only).
-Newcomer `bc-f407303f`: `review-main-pr8`.
+Newcomer `bc-f407303f`: `review-main-pr10` (fork's Python arena/infra).
 `bc-5fe241dd` Summarize arena: do not steal `genesis-world-arena`; unused apply `faceswap-design-honesty`.
 `bc-e2df7f92` Summarize coordinator: unused apply `dronehive-script-host-roots`.
 Next unused apply if those are taken: `dronehive-seed-work-order-doc-cd`.
+After #8, leftover unused review is `review-main-pr10`, then `review-landing-pad-prs`.
 
 Idle agents on `yuro1991-afk/main`: do **not** inventory this pad again.
 Relaunch Origin. 35 parked agents have unique world-phase cards. The
