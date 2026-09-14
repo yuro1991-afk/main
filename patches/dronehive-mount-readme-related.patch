@@ -1,0 +1,9 @@
+diff --git a/apps/drone-ollama-mount/README.md b/apps/drone-ollama-mount/README.md
+index 4c4d8a7..984b5d2 100644
+--- a/apps/drone-ollama-mount/README.md
++++ b/apps/drone-ollama-mount/README.md
+@@ -68,3 +68,3 @@ drone-ollama-mount tui
+ 
+-- Existing desktop Ollama UI: `G:\AI-Home\projects\ollama-rust-ui` (egui)
++- Existing desktop Ollama UI: `host/ai-home/projects/ollama-rust-ui` (egui; G:\AI-Home is one host example)
+ - This project: **TUI + mount engine** focused on drones

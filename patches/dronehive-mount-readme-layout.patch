@@ -1,0 +1,11 @@
+diff --git a/apps/drone-ollama-mount/README.md b/apps/drone-ollama-mount/README.md
+index 4c4d8a7..1ab13bb 100644
+--- a/apps/drone-ollama-mount/README.md
++++ b/apps/drone-ollama-mount/README.md
+@@ -17,4 +17,4 @@ Rust engine that **mounts** the 24 controllable worker drones onto an **Ollama T
+ ```
+-G:\AI-Home\projects\drone-ollama-mount\     ← this engine (Rust)
+-G:\AI-Home\projects\ai-worker-drone-0.5b\   ← 24 drones + learn-from-build
++apps\drone-ollama-mount\                      ← this engine (Rust)
++.\                                            ← 24 drones + learn-from-build
+ http://127.0.0.1:11434                      ← Ollama parent controller

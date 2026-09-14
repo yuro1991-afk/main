@@ -1129,6 +1129,111 @@
       "collision": "Install-DroneOllamaApp.ps1 uninstall here-string $InstallRoot only. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-tui-readme-root",
+      "title": "Point dronehive-tui README --root at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 103,
+      "status": "blocked",
+      "claim": null,
+      "notes": "apps/dronehive-tui/README.md run example still pins G:\\\\AI-Home --root. Applyable catalog patch is patches/dronehive-tui-readme-root.patch on main#9. Independent of tui-readme-cargo. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "dronehive-tui README --root is .",
+      "files": [
+        "apps/dronehive-tui/README.md"
+      ],
+      "collision": "apps/dronehive-tui/README.md --root line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-tui-readme-install",
+      "title": "Point drone-ollama-tui README install path at host/ai-home",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 104,
+      "status": "blocked",
+      "claim": null,
+      "notes": "apps/drone-ollama-tui/README.md installed START_TUI.cmd still pins G:\\\\AI-Home\\\\apps\\\\DroneOllama. Applyable catalog patch is patches/dronehive-ollama-tui-readme-install.patch on main#9. Independent of ollama-tui-readme-cargo. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "drone-ollama-tui README installed path uses host\\\\ai-home\\\\apps\\\\DroneOllama",
+      "files": [
+        "apps/drone-ollama-tui/README.md"
+      ],
+      "collision": "apps/drone-ollama-tui/README.md installed START_TUI.cmd only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-readme-layout",
+      "title": "Point mount README layout at repo-relative paths",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 105,
+      "status": "blocked",
+      "claim": null,
+      "notes": "apps/drone-ollama-mount/README.md layout still pins G:\\\\AI-Home projects. Applyable catalog patch is patches/dronehive-mount-readme-layout.patch on main#9. Independent of mount-readme-cargo. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "mount README layout uses apps\\\\drone-ollama-mount and .",
+      "files": [
+        "apps/drone-ollama-mount/README.md"
+      ],
+      "collision": "apps/drone-ollama-mount/README.md layout block only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-readme-launch",
+      "title": "Point mount README Launch.ps1 at apps/drone-ollama-mount",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 106,
+      "status": "blocked",
+      "claim": null,
+      "notes": "apps/drone-ollama-mount/README.md Launch.ps1 still pins G:\\\\AI-Home\\\\projects\\\\drone-ollama-mount. Applyable catalog patch is patches/dronehive-mount-readme-launch.patch on main#9. Independent of cargo leftover and layout leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "mount README Launch.ps1 uses apps\\\\drone-ollama-mount\\\\Launch.ps1",
+      "files": [
+        "apps/drone-ollama-mount/README.md"
+      ],
+      "collision": "apps/drone-ollama-mount/README.md Launch.ps1 line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-readme-related",
+      "title": "Point mount README related UI at host/ai-home",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 107,
+      "status": "blocked",
+      "claim": null,
+      "notes": "apps/drone-ollama-mount/README.md related still pins G:\\\\AI-Home\\\\projects\\\\ollama-rust-ui. Applyable catalog patch is patches/dronehive-mount-readme-related.patch on main#9. Independent of layout and launch leftovers. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "mount README related uses host/ai-home/projects/ollama-rust-ui",
+      "files": [
+        "apps/drone-ollama-mount/README.md"
+      ],
+      "collision": "apps/drone-ollama-mount/README.md related line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "opensussy-sec-review-target",
+      "title": "Point OpenSussy SEC_REVIEW Target at repo root",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "kind": "implement",
+      "priority": 108,
+      "status": "blocked",
+      "claim": null,
+      "notes": "reviews/SEC_REVIEW.md Target still pins G:\\\\AI-Home\\\\projects\\\\opensussy. Applyable catalog patch is patches/opensussy-sec-review-target.patch on main#9. Independent of ship-json-2-0-0 and sec-residuals-catalog. Do not copy PR #6 autofix. This token cannot push opensussy.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "reviews/SEC_REVIEW.md Target is .",
+      "files": [
+        "reviews/SEC_REVIEW.md"
+      ],
+      "collision": "reviews/SEC_REVIEW.md Target line only."
+    },
+    {
+      "id": "opensussy-install-sec-review-target",
+      "title": "Point install SEC_REVIEW Target at repo root",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "kind": "implement",
+      "priority": 109,
+      "status": "blocked",
+      "claim": null,
+      "notes": "install/docs/SEC_REVIEW.md Target still pins G:\\\\AI-Home\\\\projects\\\\opensussy. Applyable catalog patch is patches/opensussy-install-sec-review-target.patch on main#9. Independent of reviews/SEC_REVIEW.md leftover. Do not copy PR #6 autofix. This token cannot push opensussy.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "install/docs/SEC_REVIEW.md Target is .",
+      "files": [
+        "install/docs/SEC_REVIEW.md"
+      ],
+      "collision": "install/docs/SEC_REVIEW.md Target line only."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",

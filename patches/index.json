@@ -3,7 +3,7 @@
   "cannotPush": true,
   "apply": "git clone https://github.com/<repo>.git work && cd work && git apply --check ../<file> && git apply ../<file>",
   "doNot": "Do not copy PR #6 npm run autofix. This catalog lists diffs only.",
-  "verifiedAt": "2026-09-14T21:20:00Z",
+  "verifiedAt": "2026-09-14T21:25:00Z",
   "patches": [
     {
       "id": "dronehive-unicode-ci",
@@ -900,6 +900,69 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "Install-DroneOllamaApp.ps1 uninstall here-string $InstallRoot uses host\\\\ai-home\\\\apps\\\\DroneOllama. Independent of live $InstallRoot leftover (different string). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-tui-readme-root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-tui-readme-root.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "apps/dronehive-tui/README.md --root uses '.'. Independent of tui-readme-cargo (PATH line only). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-tui-readme-install",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-ollama-tui-readme-install.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "apps/drone-ollama-tui/README.md installed START_TUI.cmd uses host\\\\ai-home\\\\apps\\\\DroneOllama. Independent of ollama-tui-readme-cargo (Build block). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-readme-layout",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-mount-readme-layout.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "apps/drone-ollama-mount/README.md layout uses apps\\\\drone-ollama-mount and '.'. Independent of mount-readme-cargo (Build block). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-readme-launch",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-mount-readme-launch.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "apps/drone-ollama-mount/README.md Launch.ps1 path uses apps\\\\drone-ollama-mount. Independent of mount-readme-cargo and layout leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-readme-related",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-mount-readme-related.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "apps/drone-ollama-mount/README.md related ollama-rust-ui uses host/ai-home. Independent of layout and launch leftovers. Does not touch tool_agent.py."
+    },
+    {
+      "id": "opensussy-sec-review-target",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "file": "patches/opensussy-sec-review-target.patch",
+      "base": "d4b2949",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "reviews/SEC_REVIEW.md Target uses '.' ; G:\\\\AI-Home is one host example. Independent of ship-json-2-0-0 and sec-residuals-catalog (new file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "opensussy-install-sec-review-target",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "file": "patches/opensussy-install-sec-review-target.patch",
+      "base": "d4b2949",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "install/docs/SEC_REVIEW.md Target uses '.'. Independent of reviews/SEC_REVIEW.md leftover (different file) and ship-json-2-0-0."
     }
   ]
 }
