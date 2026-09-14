@@ -140,6 +140,198 @@
       "verify": "npm test && node src/cli.js next",
       "files": ["src/ledger.js", "src/cli.js", "ledger/queue.json", "AGENTS.md"],
       "collision": "Do not open a second dispatch-board PR. Extend this one or take dronehive-unicode-ci."
+    },
+    {
+      "id": "opensussy-linux-syntax-ci",
+      "title": "Add non-nuclear Linux syntax CI for OpenSussy packs",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "kind": "implement",
+      "priority": 10,
+      "status": "open",
+      "claim": null,
+      "notes": "No open issues/PRs. Repo has no .github/workflows. Add ubuntu-latest bash -n (and optional shellcheck) on install/linux/OpenSussy-light.sh, OpenSussy-deep.sh, and leap/tumbleweed copies. Never apply AutoYaST, never run deep wipe, never touch /dev/nvme0n1. Residual R2: confirm=false + initialize=true is nuclear.",
+      "verify": "Workflow parses the six shell wrappers; job must not execute autoinst-deep.xml or format disks.",
+      "files": [
+        ".github/workflows/linux-syntax.yml",
+        "install/linux/OpenSussy-light.sh",
+        "install/linux/OpenSussy-deep.sh",
+        "install/linux/leap/OpenSussy-light.sh",
+        "install/linux/tumbleweed/OpenSussy-light.sh"
+      ],
+      "collision": "Do not edit Windows WPF / LinuxPayload.cs wipe path. Do not collide dronehive CI files. Do not reopen yuro1991-afk/main#1."
+    },
+    {
+      "id": "opensussy-agama-honesty",
+      "title": "Fail-fast Agama vs AutoYaST honesty in OpenSussy HOW_TO",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "kind": "implement",
+      "priority": 11,
+      "status": "open",
+      "claim": null,
+      "notes": "SEC_REVIEW residual R4: AutoYaST 1.0 XML is not Agama JSON; Leap 16 / Agama-first media will not eat autoinst-*.xml silently. HOW_TO_RUN.txt already mentions classic AutoYaST vs Agama — add a one-screen warning in install/linux/HOW_TO_RUN.txt plus flavor HOW_TOs that Leap 15.6 XML is export-only. Do not invent Agama JSON profiles.",
+      "verify": "HOW_TO files state Agama is unsupported; no new autoinst that claims Leap 16 GREEN.",
+      "files": [
+        "install/linux/HOW_TO_RUN.txt",
+        "docs/ENGINEER_PASS.md",
+        "reviews/SEC_REVIEW.md"
+      ],
+      "collision": "Docs/honesty only. Do not change default --linux-disk or unattended wipe flags."
+    },
+    {
+      "id": "opensussy-sec-residuals-catalog",
+      "title": "Catalog OpenSussy SEC_REVIEW residuals against 2.0.0 tree",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "kind": "catalog",
+      "priority": 12,
+      "status": "open",
+      "claim": null,
+      "notes": "reviews/SEC_REVIEW.md is labeled 1.1 PARTIAL (R1–R10). PRODUCT.json is 2.0.0 with Leap 15.6 + Tumbleweed packs. Inventory which residuals still apply to src/OpenSussy.Installer/Engine/LinuxPayload.cs and Sanitizer.cs. Write a short residuals table in-repo; do not invent CVEs or wipe procedures.",
+      "verify": "Each residual cites a current path or is marked closed with a file pin. false_green stays 0.",
+      "files": [
+        "reviews/SEC_REVIEW.md",
+        "src/OpenSussy.Installer/Engine/LinuxPayload.cs",
+        "src/OpenSussy.Installer/Engine/Sanitizer.cs",
+        "PRODUCT.json"
+      ],
+      "collision": "Read-only review of wipe/sanitize behavior. Do not implement nuclear AutoYaST or LUKS in this card."
+    },
+    {
+      "id": "faceswap-mock-engine-ci",
+      "title": "CI for face-swap-ios gateway with a mock MultoModa engine",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "kind": "implement",
+      "priority": 13,
+      "status": "open",
+      "claim": null,
+      "notes": "No open issues/PRs, no .github. prove_swap.py requires live :8855 + :8860. Add a stdlib mock that serves GET /api/health and POST swap JSON, point FACESWAP_ENGINE at it, run gateway.py, curl GET /api/ios/health and a fixture POST /api/ios/swap. Do not start InsightFace, CUDA, or Jane.",
+      "verify": "Workflow GREEN without MultoModa. prove_swap.py --gateway http://127.0.0.1:8860 against the mock writes out/PROVE.json with false_green 0.",
+      "files": [
+        "gateway.py",
+        "prove_swap.py",
+        "fixtures/portrait-a.jpg",
+        "fixtures/portrait-b.jpg",
+        ".github/workflows/gateway-smoke.yml"
+      ],
+      "collision": "Do not bind or rewrite MultoModa on :8855. Do not commit G:\\AI-Home host paths. Avoid dronehive CI."
+    },
+    {
+      "id": "faceswap-health-offline",
+      "title": "Make face-swap health fail closed when the engine is down",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "kind": "fix",
+      "priority": 14,
+      "status": "open",
+      "claim": null,
+      "notes": "gateway.py engine_json already returns 502 {detail: engine unreachable}. PWA chip and prove_swap treat status!=ok as RED. Ensure GET /api/ios/health never reports ok/GREEN when FACESWAP_ENGINE is closed, and keep the health call on the existing 5s timeout (do not use the 180s swap default).",
+      "verify": "With FACESWAP_ENGINE=http://127.0.0.1:9 gateway health JSON is not status ok; prove_swap exits 2.",
+      "files": ["gateway.py", "pwa/index.html", "prove_swap.py"],
+      "collision": "Do not change POST /api/ios/swap payload shape. Coordinate with faceswap-mock-engine-ci if both claimed."
+    },
+    {
+      "id": "faceswap-honesty-env-paths",
+      "title": "Document face-swap engine via env, not G: host paths",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "kind": "catalog",
+      "priority": 15,
+      "status": "open",
+      "claim": null,
+      "notes": "HONESTY.md pins G:\\AI-Home\\projects\\multomoda-face-studio and G:\\AI-Home\\models\\insightface. Gateway already uses FACESWAP_ENGINE / FACESWAP_IOS_PORT / FACESWAP_IOS_HOST. Catalog those env vars in README + HONESTY so Linux agents do not treat G: as required. Weights stay off git.",
+      "verify": "README lists the three env vars; HONESTY marks G: as one host example, not the contract.",
+      "files": ["README.md", "HONESTY.md", "START.cmd", "gateway.py"],
+      "collision": "Docs/env only. Do not vendor InsightFace weights. Same path-leak theme as dronehive-portable-paths but different repo."
+    },
+    {
+      "id": "ova-pwsh-syntax-ci",
+      "title": "Add PowerShell syntax CI for ollama-voice-access",
+      "repo": "github.com/yuro1991-afk/ollama-voice-access",
+      "kind": "implement",
+      "priority": 16,
+      "status": "open",
+      "claim": null,
+      "notes": "No open issues/PRs, no .github. Add a workflow that runs pwsh -NoProfile -Command parser/AST check (or -File -? ) on Install/Uninstall, Open/Start/Stop, Chat/Status, Invoke-OllamaVoiceQA.ps1, lib/OllamaVoice.Common.ps1. Do not hit http://127.0.0.1:11434 and do not stop a live Ollama.",
+      "verify": "Syntax job passes on ubuntu-latest pwsh without a local ollama.exe.",
+      "files": [
+        ".github/workflows/pwsh-syntax.yml",
+        "lib/OllamaVoice.Common.ps1",
+        "Invoke-OllamaVoiceQA.ps1",
+        "Stop-Ollama.ps1"
+      ],
+      "collision": "Do not change Start Menu Bypass installers in the same PR as stop-guard unless one agent owns both."
+    },
+    {
+      "id": "ova-stop-noui-guard",
+      "title": "Keep Stop-Ollama -NoUI refusing without -Force",
+      "repo": "github.com/yuro1991-afk/ollama-voice-access",
+      "kind": "fix",
+      "priority": 17,
+      "status": "open",
+      "claim": null,
+      "notes": "SECURITY.md and Stop-Ollama.ps1 already refuse kill in -NoUI without -Force (exit 4) before Stop-OVServe. Add a no-network assertion (Pester or a tiny .ps1 under tests/) that mocks Show-OVMessage and proves exit 4 and zero Stop-Process. Do not add a default -Force.",
+      "verify": "pwsh -File Stop-Ollama.ps1 -NoUI exits 4; no ollama processes signaled.",
+      "files": ["Stop-Ollama.ps1", "lib/OllamaVoice.Common.ps1", "SECURITY.md"],
+      "collision": "Safety default stays refuse. Do not point api.baseUrl at untrusted hosts."
+    },
+    {
+      "id": "ova-api-host-override",
+      "title": "Allow trusted OLLAMA_HOST override in Voice Access config",
+      "repo": "github.com/yuro1991-afk/ollama-voice-access",
+      "kind": "implement",
+      "priority": 18,
+      "status": "open",
+      "claim": null,
+      "notes": "Get-OVApiBase reads config/product.json api.baseUrl (http://127.0.0.1:11434). SECURITY.md: do not point baseUrl at untrusted hosts. Accept OLLAMA_HOST / OV_API_BASE only when the URL is loopback (127.0.0.1 or localhost). Reject LAN/WAN silently falling back to config. Document in README.",
+      "verify": "OV_API_BASE=http://127.0.0.1:11434 works; http://example.com is rejected. Existing launchers still resolve Voice Access names.",
+      "files": [
+        "lib/OllamaVoice.Common.ps1",
+        "config/product.json",
+        "README.md",
+        "SECURITY.md"
+      ],
+      "collision": "Local Ollama only. Do not add cloud inference. Do not collide ova-stop-noui-guard on Stop-Ollama.ps1."
+    },
+    {
+      "id": "bloom-readme-honest-export",
+      "title": "Add an honest README for bloom-fair-yellow-charm",
+      "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+      "kind": "implement",
+      "priority": 19,
+      "status": "open",
+      "claim": null,
+      "notes": "Single commit 'Export from Grok' (2026-08-19). No README, no open issues/PRs. Package is app-builder-workspace (Vite 8080, TanStack Start). UI is OMNI-FORGE (src/routes/docs.tsx HTTP API). README must say Grok Build export, npm run dev/typecheck/test, and this is not Origin genesis / not yuro1991-afk/main.",
+      "verify": "README.md exists; does not claim Superbrain LIVE or duplicate sibling stubs.",
+      "files": ["README.md", "package.json", "AGENTS.md", "src/routes/docs.tsx"],
+      "collision": "Docs only. Do not copy Genesis onto this tree. Do not reopen main#1."
+    },
+    {
+      "id": "bloom-ci-typecheck",
+      "title": "Add typecheck/lint/test CI for bloom-fair-yellow-charm",
+      "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+      "kind": "implement",
+      "priority": 20,
+      "status": "open",
+      "claim": null,
+      "notes": "No .github/workflows. package.json already has typecheck, lint, and node --test scripts/**/*.test.mjs (brand-check, grok-pwa-plugin). Add npm ci && npm test && npm run typecheck. Fix only errors the workflow surfaces. Do not require a running :8080 preview for CI.",
+      "verify": "GitHub Actions green on those three commands. Do not mark LIVE on a failed typecheck.",
+      "files": [
+        ".github/workflows/ci.yml",
+        "package.json",
+        "scripts/brand-check.test.mjs",
+        "scripts/grok-pwa-plugin.test.mjs"
+      ],
+      "collision": "Do not edit dronehive .github. Coordinate with bloom-readme-honest-export if both touch package.json scripts."
+    },
+    {
+      "id": "bloom-health-probe",
+      "title": "Probe OMNI-FORGE /api/v1/health without claiming LIVE",
+      "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+      "kind": "probe",
+      "priority": 21,
+      "status": "open",
+      "claim": null,
+      "notes": "src/routes/api/v1/health.ts plus docs: GET /api/v1/health (liveness, catalog size, agent flag). After npm run dev -- --host 0.0.0.0 --port 8080, GET health with a short timeout. Timeouts/connection errors are unreachable, never live. This is not BOSS Superbrain :45001 and not GOOSE-PC :8791.",
+      "verify": "Write a small evidence JSON (status ok | unreachable). Never upgrade a timeout to LIVE. Optional: npm run preview if build already exists.",
+      "files": ["src/routes/api/v1/health.ts", "src/routes/docs.tsx", "startup.sh"],
+      "collision": "Do not probe or relabel Superbrain from this card. Do not bind :8787/:8788 Origin auto-runner ports."
     }
   ]
 }
