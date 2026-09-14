@@ -1,4 +1,4 @@
-# Sibling patch catalog (verified 2026-09-14T19:54Z)
+# Sibling patch catalog (verified 2026-09-14T19:56Z)
 
 **Yuri: forget Origin.** This pad token cannot push the public GitHub
 siblings. These diffs apply clean (`git apply --check`) on current
@@ -37,6 +37,7 @@ This is **not** PR #6’s autofix runner. Do not copy `bin/autofix.js`.
 | `dronehive-app-links-host-paths` | dronehive `d538a89` | `patches/dronehive-app-links-host-paths.patch` | OK |
 | `bloom-ci-lint` | bloom `288a484` | `patches/bloom-ci-lint.patch` | OK |
 | `ova-voice-card-linux-honesty` | ollama-voice-access `074bad0` | `patches/ova-voice-card-linux-honesty.patch` | OK |
+| `faceswap-ios-readme-honesty` | face-swap-ios `bba7188` | `patches/faceswap-ios-readme-honesty.patch` | OK |
 
 ## After apply
 
@@ -49,6 +50,7 @@ This is **not** PR #6’s autofix runner. Do not copy `bin/autofix.js`.
 - OVA README: Voice Access / Start Menu / Win+Ctrl+S stay Windows-only. Linux `pwsh` is syntax/math CI, not a Voice Access install. Independent of `ova-api-host-override`.
 - bloom lint: new-file `.github/workflows/lint.yml`. Independent of `bloom-ci-typecheck` (`ci.yml`). `eslint .` is 0 errors / 2 warnings on `288a484`. Do not fold lint into typecheck.
 - OVA voice card: Voice Access / Start Menu phrases stay Windows-only. Linux `pwsh` is not a Voice Access install. Independent of `ova-readme-linux-honesty`.
+- face-swap `ios/README.md`: gateway URL comes from `START.cmd` or `START.sh` (`FACESWAP_ENGINE`). Independent of `faceswap-design-honesty`.
 
 ## Relaunch
 

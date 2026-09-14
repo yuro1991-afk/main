@@ -3,7 +3,7 @@
   "cannotPush": true,
   "apply": "git clone https://github.com/<repo>.git work && cd work && git apply --check ../<file> && git apply ../<file>",
   "doNot": "Do not copy PR #6 npm run autofix. This catalog lists diffs only.",
-  "verifiedAt": "2026-09-14T19:54:00Z",
+  "verifiedAt": "2026-09-14T19:56:00Z",
   "patches": [
     {
       "id": "dronehive-unicode-ci",
@@ -270,6 +270,15 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "VOICE-ACCESS.md: Voice Access / Start Menu phrases are Windows-only. Linux pwsh is not a Voice Access install. Independent of ova-readme-linux-honesty (README) and ova-api-host-override (License appendix)."
+    },
+    {
+      "id": "faceswap-ios-readme-honesty",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "file": "patches/faceswap-ios-readme-honesty.patch",
+      "base": "bba7188",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "ios/README.md: gateway URL comes from START.cmd or START.sh (FACESWAP_ENGINE). Windows LAN / G: is one host example. Independent of design-honesty (DESIGN.md) and start-sh (new file)."
     }
   ]
 }

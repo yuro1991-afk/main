@@ -930,6 +930,21 @@
       "collision": "Docs only. Do not vendor InsightFace weights. Different file from honesty-env-paths."
     },
     {
+      "id": "faceswap-ios-readme-honesty",
+      "title": "Mark ios/README gateway URL as FACESWAP_ENGINE, not Windows-only",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "kind": "implement",
+      "priority": 33,
+      "status": "blocked",
+      "claim": null,
+      "notes": "ios/README.md still says set the gateway URL to the Windows LAN address printed by START.cmd. Applyable catalog patch is patches/faceswap-ios-readme-honesty.patch on main#9. Independent of design-honesty (DESIGN.md) and start-sh (new file). This token cannot push face-swap-ios.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "ios/README.md cites START.cmd / START.sh and FACESWAP_ENGINE. Windows LAN / G: is one host example.",
+      "files": [
+        "ios/README.md"
+      ],
+      "collision": "Docs only. Different file from DESIGN.md and START.sh. Do not vendor InsightFace weights."
+    },
+    {
       "id": "ova-pwsh-syntax-ci",
       "title": "Add PowerShell syntax CI for ollama-voice-access",
       "repo": "github.com/yuro1991-afk/ollama-voice-access",
