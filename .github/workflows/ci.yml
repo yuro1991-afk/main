@@ -1,0 +1,25 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test
+        run: npm test
+      - name: Apply patch to dronehive
+        run: |
+          git clone --depth 1 https://github.com/yuro1991-afk/dronehive.git /tmp/dronehive
+          node bin/autofix.js apply /tmp/dronehive
+          python3 src/reproduce.py --tree /tmp/dronehive

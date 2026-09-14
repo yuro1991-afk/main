@@ -1,0 +1,17 @@
+{
+  "name": "autofix",
+  "private": true,
+  "description": "Apply and verify the DroneHive windows-latest CHAT| cp1252 fix. This repo is not Genesis.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js && python3 test/test_safe_chat.py -v && python3 test/test_reproduce.py -v",
+    "autofix": "node bin/autofix.js",
+    "verify": "npm test && node bin/autofix.js verify"
+  },
+  "bin": {
+    "autofix": "./bin/autofix.js"
+  }
+}
