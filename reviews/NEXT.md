@@ -23,6 +23,11 @@ Full Origin list: `reviews/genesis-backlog.md`
 | Genesis routing handoff | `agent-routing-matrix` |
 | Genesis catalog handoff | `catalog-notion-sync` |
 | Genesis probe handoff | `gub-superbrain-probe` (Origin still required) |
+| Genesis repo location | `genesis-local-repo` |
+| Mine Genesis Notion backlog | `catalog-expand-domain` |
+| Add inventory tick command | `genesis-hub-24` |
+
+Full named roster: `node src/cli.js assign` (15 idle agents → distinct Origin cards).
 
 `gub-superbrain-probe` is claimed here for the pad-side probe only.
 Pad probe **2026-09-14T17:36:02Z**: `:45001` health/live **timeout=unreachable**;

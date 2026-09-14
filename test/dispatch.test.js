@@ -139,10 +139,14 @@ test("assign maps named idle agents to distinct Origin cards", () => {
   const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
   const packet = buildAssign(ledger, roster, NOW);
   assert.equal(packet.contract, ASSIGN_CONTRACT);
-  assert.equal(packet.count, 4);
+  assert.ok(packet.count >= 4);
   assert.equal(packet.next.jobId, "gub-inventory-tick");
-  assert.equal(packet.assignments[3].jobId, "gub-superbrain-probe");
-  assert.equal(packet.assignments[3].status, "claimed");
+  assert.ok(
+    packet.assignments.some(
+      (row) => row.jobId === "gub-superbrain-probe" && row.status === "claimed",
+    ),
+  );
+  assert.ok(packet.assignments.some((row) => row.jobId === "catalog-expand-domain"));
   assert.ok(packet.assignments.every((row) => row.relaunch.kind === "origin"));
 });
 

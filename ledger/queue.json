@@ -76,7 +76,7 @@
         "claimedAt": "2026-09-14T17:21:31.816Z",
         "leaseUntil": "2026-09-14T18:06:31.816Z"
       },
-      "notes": "Notion draft https://app.notion.com/p/3db735da33f381a58f19ceffc771ecdd — short-timeout GET http://169.254.124.8:45001/health, write .genesis/last-superbrain.json, never mark LIVE on timeout.\nPad probe 2026-09-14T17:36:02Z: boss-superbrain-health/live timeout=unreachable. GOOSE-PC :8791 fetch failed=unreachable. Origin implement still required.",
+      "notes": "Notion draft https://app.notion.com/p/3db735da33f381a58f19ceffc771ecdd — short-timeout GET http://169.254.124.8:45001/health, write .genesis/last-superbrain.json, never mark LIVE on timeout. Catalog resource https://app.notion.com/p/3db735da33f3810faa09de097a086e8e (Entry ID resource/boss-superbrain, Status cataloged). Pad probe 2026-09-14T17:36:02Z: boss-superbrain-health/live timeout=unreachable. GOOSE-PC :8791 fetch failed=unreachable. Origin implement still required.",
       "verify": "Failed probe stays unreachable. GOOSE-PC :8791 is not the BOSS peer.",
       "files": [],
       "collision": "Origin genesis only. Do not reopen github.com/yuro1991-afk/main/pull/1."
@@ -475,6 +475,68 @@
         "packages/world-project-manager"
       ],
       "collision": "Do not steal :8793 halls, unifier :8792, task hub :8788, agent manager :8789, or organizer :7432."
+    },
+    {
+      "id": "catalog-expand-domain",
+      "title": "Expand the Origin catalog domain-by-domain",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 35,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/expand-by-domain https://app.notion.com/p/3db735da33f38155b7d9e11df17ddea4 Status active. Pick a domain from catalog/stats.json, inventory existing skills/tools, author missing playbooks, add resource links, rebuild and commit on Origin.",
+      "verify": "catalog/stats.json grows for the chosen domain. Do not invent Notion URLs.",
+      "files": [
+        "catalog/stats.json",
+        "docs/EXPANSION.md"
+      ],
+      "collision": "Coordinate with catalog-notion-sync and catalog-inventory-skills. Origin catalog is SoT."
+    },
+    {
+      "id": "catalog-inventory-skills",
+      "title": "Inventory Cursor skills into the Origin catalog",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 36,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/inventory-skills https://app.notion.com/p/3db735da33f381bb9bafca916c22169f. Run scripts/inventory.py, review catalog/stats.json, commit catalog updates, optionally sync highlights to Notion.",
+      "verify": "scripts/inventory.py writes data/skills + catalog.jsonl. Do not invent Superbrain LIVE.",
+      "files": [
+        "scripts/inventory.py",
+        "catalog/stats.json"
+      ],
+      "collision": "Coordinate with gub-inventory-tick (same inventory.py allowlist) and catalog-expand-domain."
+    },
+    {
+      "id": "catalog-add-custom-entry",
+      "title": "Add a schema-valid custom Genesis catalog entry",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 37,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/add-custom-entry https://app.notion.com/p/3db735da33f38189907ef132836d95bf. Copy schema/entry.example.yaml, place under data/<type>s/, run scripts/build_catalog.py, validate schema/entry.schema.json.",
+      "verify": "New entry validates. Do not invent URLs or LIVE lanes.",
+      "files": [
+        "schema/entry.example.yaml",
+        "schema/entry.schema.json",
+        "scripts/build_catalog.py"
+      ],
+      "collision": "Coordinate with catalog-expand-domain. Seeded-first catalog stays the map."
+    },
+    {
+      "id": "catalog-notion-skill-author",
+      "title": "Author a Notion Skill from an Origin workflow",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 38,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/notion-skill-author https://app.notion.com/p/3db735da33f381c1a42ccf030628e7dc. Read notion://docs/skills, write outcome/when-to-use/inputs/steps/checks, create_pages is_skill=true, optionally catalog as a Genesis skill entry.",
+      "verify": "Skill page exists in Yuri’s Space and cites a real Origin playbook. Do not invent workflows.",
+      "files": [],
+      "collision": "Coordinate with catalog-add-custom-entry if both write a catalog row."
     },
     {
       "id": "do-not-reopen-main-pr1",
