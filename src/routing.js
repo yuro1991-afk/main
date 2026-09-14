@@ -65,11 +65,11 @@ export function routeIntent(text) {
   if (includesAny(q, ["keep", "busy", "workload", "dispatch", "idle"])) {
     return ROUTES[0];
   }
-  if (includesAny(q, ["genesis", "origin", "sibling", "hub"])) {
-    return ROUTES[1];
-  }
   if (includesAny(q, ["review", "coderabbit", "code rabbit"])) {
     return ROUTES[2];
+  }
+  if (includesAny(q, ["genesis", "origin", "sibling", "hub"])) {
+    return ROUTES[1];
   }
   if (includesAny(q, ["attention", "needs attention", "attend"])) {
     return ROUTES[3];
