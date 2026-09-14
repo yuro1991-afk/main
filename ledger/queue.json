@@ -124,6 +124,21 @@
       "collision": "Apply after dronehive-portable-paths. Independent of runtime-host-paths. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-icons-manifest-relative",
+      "title": "Point ICONS_MANIFEST icon_root at repo assets/icons",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 29,
+      "status": "blocked",
+      "claim": null,
+      "notes": "assets/icons/ICONS_MANIFEST.json still pins G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b\\\\assets\\\\icons. Applyable catalog patch is patches/dronehive-icons-manifest-relative.patch on main#9. Independent of portable-paths. Desktop C: paths left as one host example. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "ICONS_MANIFEST icon_root is assets/icons.",
+      "files": [
+        "assets/icons/ICONS_MANIFEST.json"
+      ],
+      "collision": "Manifest only. Independent of portable-paths and config-load-overlay. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",

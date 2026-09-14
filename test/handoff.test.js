@@ -43,6 +43,9 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
   const overlay = relaunchFor({ ...job, id: "dronehive-config-load-overlay" });
   assert.match(overlay.reason, /dronehive-config-load-overlay\.patch/);
   assert.doesNotMatch(overlay.reason, /npm run autofix/);
+  const icons = relaunchFor({ ...job, id: "dronehive-icons-manifest-relative" });
+  assert.match(icons.reason, /dronehive-icons-manifest-relative\.patch/);
+  assert.doesNotMatch(icons.reason, /npm run autofix/);
 });
 
 test("origin jobs relaunch to the Origin codebase", () => {
