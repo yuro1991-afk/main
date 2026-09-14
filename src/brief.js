@@ -114,6 +114,14 @@ export function firstCommands(job, options = {}) {
         job.verify,
       ];
     case "origin-slice":
+      if (job.id === "gub-superbrain-probe") {
+        return [
+          "Yuri: no more Superbrain. Do not probe :45001 / :8791.",
+          "Do not run node src/cli.js probe.",
+          "Take review-main-pr10, or apply a catalog patch on a sibling write checkout.",
+          job.verify,
+        ];
+      }
       return [
         "origin auth status",
         "If logged out: origin auth login --api-key \"$CURSOR_API_KEY\" (browser login is not available on this pad)",

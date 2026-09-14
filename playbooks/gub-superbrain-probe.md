@@ -1,31 +1,35 @@
-# Implement GUB Superbrain probe playbook
+# Stop Superbrain probes (expired leftover next)
 
 - id: `gub-superbrain-probe`
 - kind: origin-slice (Work on origin.cursor.com/git/yuri-afk/genesis only.)
 - scope: relaunch
 - repo: origin.cursor.com/git/yuri-afk/genesis
 - relaunch: https://cursor.com/codebase/yuri-afk/genesis
-- why: This cloud environment cannot authenticate to Origin.
+- why: **Yuri: no more Superbrain.** Pad probes stop. Do not hit `:45001` / `:8791`.
 
 ## Notes
 
-Notion draft https://app.notion.com/p/3db735da33f381a58f19ceffc771ecdd — short-timeout GET http://169.254.124.8:45001/health, write .genesis/last-superbrain.json, never mark LIVE on timeout. Catalog resource https://app.notion.com/p/3db735da33f3810faa09de097a086e8e (Entry ID resource/boss-superbrain, Status cataloged). Pad probe 2026-09-14T19:30:41Z: boss-superbrain-health/live timeout=unreachable. GOOSE-PC :8791 fetch failed=unreachable. Origin CLI logged-out. Origin implement still required.
+Yuri 2026-09-14T20:16Z: no more Superbrain. Do not probe. Do not run
+`node src/cli.js probe`. This card is leftover next on the Genesis-only
+tree only because GitHub sibling cards stay blocked until #8 merges.
+Take `review-main-pr10` or apply a catalog patch on a sibling write
+checkout. Forget Origin for sibling GitHub work.
 
 ## Collision
 
-Origin genesis only. Do not reopen github.com/yuro1991-afk/main/pull/1.
+Do not reopen github.com/yuro1991-afk/main/pull/1. Do not steal the
+fork’s head / ears / eyes / vision / bridge slices.
 
 ## First commands
 
-- origin auth status
-- If logged out: origin auth login --api-key "$CURSOR_API_KEY" (browser login is not available on this pad)
-- origin repo clone yuri-afk/genesis genesis && cd genesis
-- Do not reopen yuro1991-afk/main#1.
+- Yuri: no more Superbrain. Do not probe :45001 / :8791.
+- Do not run node src/cli.js probe.
+- Take review-main-pr10, or apply a catalog patch on a sibling write checkout.
 - Failed probe stays unreachable. GOOSE-PC :8791 is not the BOSS peer.
 
 ## Verify
 
-Failed probe stays unreachable. GOOSE-PC :8791 is not the BOSS peer.
+Do not probe. Leave a review on main#10 or apply one catalog patch.
 
 Do not reopen https://github.com/yuro1991-afk/main/pull/1.
 Do not open another landing-pad queue.

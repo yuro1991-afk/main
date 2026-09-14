@@ -125,6 +125,27 @@ test("origin-slice first commands start with origin auth", () => {
   assert.ok(lines.some((line) => line.includes("repo clone yuri-afk/genesis")));
 });
 
+test("gub-superbrain-probe firstCommands refuse the probe", () => {
+  const lines = firstCommands({
+    id: "gub-superbrain-probe",
+    title: "probe",
+    repo: "origin.cursor.com/git/yuri-afk/genesis",
+    kind: "origin-slice",
+    priority: 3,
+    status: "claimed",
+    claim: null,
+    notes: "",
+    verify: "Failed probe stays unreachable. GOOSE-PC :8791 is not the BOSS peer.",
+    files: [],
+    collision: "",
+  });
+  assert.ok(lines.some((line) => line.includes("no more Superbrain")));
+  assert.ok(lines.some((line) => line.includes("Do not run node src/cli.js probe")));
+  assert.ok(!lines.some((line) => line.includes("origin auth")));
+  assert.ok(!lines.some((line) => line.startsWith("node src/cli.js probe")));
+  assert.ok(!lines.some((line) => line.includes("GET") && line.includes("45001")));
+});
+
 test("loginOriginAuth without a key stays logged-out and never clones", async () => {
   const calls = [];
   const report = await loginOriginAuth({
