@@ -22,6 +22,7 @@ Avoid rewriting drone/pro/tool_agent.py while this card is claimed. Stack ubuntu
 - git checkout -b cursor/dronehive-unicode-ci-from-ops
 - git apply --check /path/to/main/patches/dronehive-pro-chat-cp1252.patch
 - git apply /path/to/main/patches/dronehive-pro-chat-cp1252.patch
+- PYTHONPATH=. python3 -c "import io,sys; from drone.pro.tool_agent import _chat; sys.stdout=type('S',(),{'encoding':'cp1252','buffer':io.BytesIO(),'write':lambda self,s:s.encode('cp1252'),'flush':lambda self:None})(); _chat('sys','ok ✓')"
 - python -m drone app pro --goal "ci pro write ci_ok.txt" --rounds 3 --no-ollama
 
 ## Verify

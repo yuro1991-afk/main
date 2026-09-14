@@ -11,8 +11,10 @@
       "file": "patches/dronehive-pro-chat-cp1252.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "Copied from main#6. PYTHONUTF8 plus _chat cp1252 replace. This token cannot push dronehive."
+      "afterApply": [
+        "PYTHONPATH=. python3 -c \"import io,sys; from drone.pro.tool_agent import _chat; sys.stdout=type('S',(),{'encoding':'cp1252','buffer':io.BytesIO(),'write':lambda self,s:s.encode('cp1252'),'flush':lambda self:None})(); _chat('sys','ok \u2713')\""
+      ],
+      "notes": "Copied from main#6. PYTHONUTF8 plus _chat cp1252 replace. After apply: force cp1252 stdout and print ✓. This token cannot push dronehive."
     },
     {
       "id": "bloom-gitignore-vercel",

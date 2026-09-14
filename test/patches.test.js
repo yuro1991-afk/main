@@ -317,6 +317,9 @@ test("cli patches --job filters one card", async () => {
   assert.ok(
     parsed.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")),
   );
+  assert.ok(
+    parsed.applyNext.some((line) => line.includes("cp1252") && line.includes("_chat")),
+  );
 });
 
 test("cli patches unknown job exits 1", async () => {

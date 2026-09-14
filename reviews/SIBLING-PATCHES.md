@@ -179,6 +179,7 @@ applying these diffs on a sibling write checkout.
 
 ## After apply
 
+- dronehive-unicode-ci (2026-09-14T23:57Z): after `git apply`, force cp1252 stdout and `_chat('sys', 'ok ✓')`. Unpatched print raises; patched replace path writes to buffer. Then the full python-smoke gate on a dronehive write checkout.
 - bloom gitignore: also `git rm -r --cached .vercel/output` (58 tracked files). Keep `package-lock.json`.
 - face-swap icons: copies also live under `patches/faceswap-pwa-icons/` if `git apply --binary` is awkward.
 - opensussy 2.0.0: leave CHANGELOG `## 1.3.0` historical. Isolated superpowers honesty leftovers remap the lab plan save-path and design base codebase to repo-relative `docs/...` / `.` (G: is one host example). `usb_zip_bytes` / `utc` stay until a real v2 USB zip exists.

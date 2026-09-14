@@ -11,8 +11,8 @@ No new agents. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Do not inventory the pad again.
 Sibling `main` SHAs unchanged (`288a484` / `d4b2949` / `bba7188` /
 `074bad0` / `d538a89`). Catalog still 162. Hunt closed. PR #10 still
-`82161d8`. Shipped this interval: `route apply <catalog-id>` takes that
-card (not leftover Origin). Do not invent leftovers.
+`82161d8`. Shipped this interval: `dronehive-unicode-ci` afterApply
+proves `_chat` under cp1252. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
