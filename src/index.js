@@ -16,6 +16,8 @@ export {
   DEFAULT_LEASE_MS,
   blockJob,
   claimJob,
+  claimNextJob,
+  claimedByAgent,
   completeJob,
   defaultLedgerPath,
   effectiveStatus,
@@ -57,6 +59,16 @@ export {
 } from "./handoff.js";
 export { playbookPath, renderPlaybook, writePlaybooks } from "./playbook.js";
 export { HELPER_CONTRACT, buildHelperPacket, planHelpers } from "./helpers.js";
+export {
+  BUSY_CONTRACT,
+  SLOTS_CONTRACT,
+  buildBusy,
+  buildSlots,
+  defaultDispatchPath,
+  listSlots,
+  slotFor,
+  writeDispatch,
+} from "./dispatch.js";
 export {
   SIBLING_ROLES,
   assertNeverRole,

@@ -137,6 +137,46 @@ export function nextJob(ledger, filters = {}, nowMs = Date.now()) {
 }
 
 /**
+ * Active claim held by this agent (first match, ledger order).
+ * @param {Ledger} ledger
+ * @param {string} agentId
+ * @param {{ kind?: string, repo?: string, scope?: string, genesis?: boolean }} [filters]
+ * @param {number} [nowMs]
+ * @returns {Job | null}
+ */
+export function claimedByAgent(ledger, agentId, filters = {}, nowMs = Date.now()) {
+  if (!agentId) return null;
+  return (
+    listJobs(ledger, { ...filters, status: "claimed" }, nowMs).find(
+      (job) => job.claim && job.claim.agentId === agentId,
+    ) ?? null
+  );
+}
+
+/**
+ * Reserve the next open job. Re-running returns the same lease.
+ * @param {Ledger} ledger
+ * @param {string} agentId
+ * @param {{ kind?: string, repo?: string, scope?: string, genesis?: boolean }} [filters]
+ * @param {number} [nowMs]
+ * @param {number} [leaseMs]
+ * @returns {Job | null}
+ */
+export function claimNextJob(
+  ledger,
+  agentId,
+  filters = {},
+  nowMs = Date.now(),
+  leaseMs = DEFAULT_LEASE_MS,
+) {
+  const existing = claimedByAgent(ledger, agentId, filters, nowMs);
+  if (existing) return existing;
+  const job = nextJob(ledger, filters, nowMs);
+  if (!job) return null;
+  return claimJob(ledger, job.id, agentId, nowMs, leaseMs);
+}
+
+/**
  * @param {Ledger} ledger
  * @param {string} jobId
  * @param {string} agentId

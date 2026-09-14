@@ -6,9 +6,12 @@ against https://cursor.com/codebase/yuri-afk/genesis. Do not reopen
 dronehive / opensussy / face-swap / ollama-voice / bloom from this pad.
 
 ```bash
-node src/cli.js next      # gub-superbrain-probe
+node src/cli.js busy --agent "$CURSOR_AGENT_ID"
+node src/cli.js slots
 node src/cli.js helpers
 ```
+
+Peek `next` is `gub-inventory-tick` while the pad holds `gub-superbrain-probe`.
 
 ## 1. gub-superbrain-probe (priority 3)
 

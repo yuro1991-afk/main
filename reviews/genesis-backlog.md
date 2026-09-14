@@ -28,5 +28,13 @@ https://cursor.com/codebase/yuri-afk/genesis only. This pad cannot auth.
 | genesis-comms-server-94 | [#94](https://cursor.com/codebase/yuri-afk/genesis/pull/94) | [page](https://app.notion.com/p/3db735da33f3812bb007e61a2a432f0c) |
 | genesis-world-language-95 | [#95](https://cursor.com/codebase/yuri-afk/genesis/pull/95) | [page](https://app.notion.com/p/3db735da33f3812da855e683016a0a13) |
 | genesis-agent-support-99 | [#99](https://cursor.com/codebase/yuri-afk/genesis/pull/99) | [page](https://app.notion.com/p/3db735da33f381dea285fd9296079dbb) |
+| genesis-python-agent-eyes-74 | [#74](https://cursor.com/codebase/yuri-afk/genesis/pull/74) | [page](https://app.notion.com/p/3db735da33f3810b8069d7f47940ccd6) |
+| genesis-python-vision-84 | [#84](https://cursor.com/codebase/yuri-afk/genesis/pull/84) | [page](https://app.notion.com/p/3db735da33f38118a49ed9ef135bf5ad) |
+| genesis-sentient-world-96 | [#96](https://cursor.com/codebase/yuri-afk/genesis/pull/96) | [page](https://app.notion.com/p/3db735da33f3810fa818ecbbe082f824) |
+| genesis-job-organizer-37 | [#37](https://cursor.com/codebase/yuri-afk/genesis/pull/37) | [page](https://app.notion.com/p/3db735da33f381ef954fe2df21ad3027) |
+| genesis-world-sound-104 | [#104](https://cursor.com/codebase/yuri-afk/genesis/pull/104) | [page](https://app.notion.com/p/3db735da33f381b58ce8eb310d0c6fa2) |
+| genesis-python-bridge-57 | [#57](https://cursor.com/codebase/yuri-afk/genesis/pull/57) | [page](https://app.notion.com/p/3db735da33f38161b4dbc856c5c46893) |
 
-`node src/cli.js next` still returns `gub-inventory-tick`. Do not reopen main#1.
+`node src/cli.js next` still returns `gub-inventory-tick`.
+Idle agents: `node src/cli.js busy --agent "$CURSOR_AGENT_ID"` then
+`node src/cli.js slots`. Do not reopen main#1.

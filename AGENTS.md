@@ -13,11 +13,14 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
 ## First moves
 
 1. `npm test` if you touch this repo.
-2. `node src/cli.js relaunch` — current open job is `gub-inventory-tick`.
-   Read `reviews/NEXT.md`. Spin helpers. Do not sit in inventory.
+2. `node src/cli.js busy --agent <your-bcId>` — reserves a unique Origin
+   card (or returns the one you already hold). `node src/cli.js slots`
+   lists the rest so a second agent does not pile on. Peek without
+   claiming: `node src/cli.js relaunch` (`gub-inventory-tick` while the
+   probe is claimed). Read `reviews/NEXT.md`. Do not sit in inventory.
    Optionally `node src/cli.js tick` to write `.genesis/last-inventory.json`.
    `node src/cli.js playbooks` writes one markdown card per open **Genesis** job.
-3. `node src/cli.js claim <id> --agent <your-bcId>` before you start.
+3. If you skipped `busy`, `node src/cli.js claim <id> --agent <your-bcId>` before you start.
 4. Work on **Origin**. This cloud environment has no Origin auth — relaunch to https://cursor.com/codebase/yuri-afk/genesis.
 
 ## Do not

@@ -97,6 +97,15 @@ test("cli next defaults to the first Genesis card", async () => {
   assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
 });
 
+test("cli busy without agent peeks the next Genesis card", async () => {
+  const out = join(mkdtempSync(join(tmpdir(), "agent-ops-busy-cli-")), "last-dispatch.json");
+  const result = await capture(["busy", "--out", out]);
+  assert.equal(result.code, 0);
+  assert.match(result.out, /gub-inventory-tick/);
+  assert.match(result.out, /"reserved": false/);
+  assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
+});
+
 test("unknown command is a usage error", async () => {
   const result = await capture(["explode"]);
   assert.equal(result.code, 2);

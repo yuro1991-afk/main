@@ -6,6 +6,8 @@ import assert from "node:assert/strict";
 import {
   blockJob,
   claimJob,
+  claimNextJob,
+  claimedByAgent,
   completeJob,
   effectiveStatus,
   listJobs,
@@ -65,6 +67,17 @@ test("claim then complete is exclusive", () => {
   completeJob(ledger, "high", "agent-a", NOW + 1);
   assert.equal(ledger.jobs[0].status, "done");
   assert.equal(nextJob(ledger, {}, NOW + 1).id, "low");
+});
+
+test("claimNextJob is exclusive and sticky per agent", () => {
+  const ledger = sampleLedger();
+  const first = claimNextJob(ledger, "agent-a", {}, NOW, 60_000);
+  const again = claimNextJob(ledger, "agent-a", {}, NOW + 1, 60_000);
+  const other = claimNextJob(ledger, "agent-b", {}, NOW + 2, 60_000);
+  assert.equal(first.id, "high");
+  assert.equal(again.id, "high");
+  assert.equal(other.id, "low");
+  assert.equal(claimedByAgent(ledger, "agent-a", {}, NOW + 2).id, "high");
 });
 
 test("expired lease becomes claimable", () => {

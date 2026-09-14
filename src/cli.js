@@ -4,6 +4,7 @@ import { dirname, resolve } from "node:path";
 import {
   blockJob,
   claimJob,
+  claimNextJob,
   completeJob,
   defaultLedgerPath,
   listJobs,
@@ -27,6 +28,13 @@ import {
 import { writePlaybooks } from "./playbook.js";
 import { buildHelperPacket } from "./helpers.js";
 import { defaultSiblingsPath, loadSiblings } from "./siblings.js";
+import {
+  buildBusy,
+  buildSlots,
+  defaultDispatchPath,
+  listSlots,
+  writeDispatch,
+} from "./dispatch.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -181,6 +189,33 @@ export async function runCli(argv, options = {}) {
       write(JSON.stringify(buildHelperPacket(job ?? null), null, 2));
       return job ? 0 : 1;
     }
+    case "slots": {
+      const ledger = loadLedger(ledgerPath);
+      write(JSON.stringify(buildSlots(ledger, jobFilters(flags), nowMs), null, 2));
+      return 0;
+    }
+    case "busy": {
+      const ledger = loadLedger(ledgerPath);
+      const siblings = loadSiblings(
+        flags.siblings ? resolve(flags.siblings) : defaultSiblingsPath(options.root ?? ROOT),
+      );
+      const filters = jobFilters(flags);
+      const agentId = flags.agent || process.env.CURSOR_AGENT_ID || process.env.AGENT_ID;
+      const job = agentId
+        ? claimNextJob(ledger, agentId, filters, nowMs)
+        : nextJob(ledger, filters, nowMs);
+      if (agentId) {
+        saveLedger(ledgerPath, ledger);
+      }
+      const slots = listSlots(ledger, filters, nowMs);
+      const snapshot = buildBusy(job, siblings, slots, { reserved: Boolean(agentId && job) });
+      const destPath = flags.out
+        ? resolve(flags.out)
+        : defaultDispatchPath(options.root ?? ROOT);
+      writeDispatch(snapshot, destPath);
+      write(JSON.stringify(snapshot, null, 2));
+      return job ? 0 : 1;
+    }
     case "playbooks": {
       const ledger = loadLedger(ledgerPath);
       const dest = flags.out
@@ -270,6 +305,8 @@ function helpText() {
 Commands:
   list
   next [--kind kind] [--repo repo] [--here] [--all]
+  slots [--here] [--all]
+  busy [--agent <bcId>] [--here] [--all]
   helpers [id]
   claim <id> --agent <bcId>
   complete <id> --agent <bcId>

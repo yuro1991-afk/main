@@ -11,6 +11,8 @@
     "test": "node --test test/*.test.js",
     "list": "node src/cli.js list",
     "next": "node src/cli.js next",
+    "slots": "node src/cli.js slots",
+    "busy": "node src/cli.js busy",
     "helpers": "node src/cli.js helpers",
     "status": "node src/cli.js status",
     "probe": "node src/cli.js probe",

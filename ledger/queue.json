@@ -89,7 +89,7 @@
       "priority": 6,
       "status": "open",
       "claim": null,
-      "notes": "Notion draft https://app.notion.com/p/3db735da33f38109a568ed3d589253b6 — Wave 4 rebuild/stats, .genesis/last-inventory.json. GUB engine https://app.notion.com/p/3db735da33f3819ba589fd969cefe4a3 — `python3 -m gub serve --port 8787`, POST /v1/schedule/tick. Related Origin PR genesis#22.",
+      "notes": "Notion draft https://app.notion.com/p/3db735da33f38109a568ed3d589253b6 — Entry playbook/gub-inventory-tick. Steps: snapshot catalog stats; run scripts/build_catalog.py and scripts/inventory.py when present; write .genesis/last-inventory.json. GUB engine https://app.notion.com/p/3db735da33f3819ba589fd969cefe4a3 — gub/, workflows/, data/playbooks/playbook__gub-*.json. `python3 -m gub serve --port 8787`; GET /; POST /v1/route, /v1/runs, /v1/schedule/tick. Shell allowlist: scripts/inventory.py, scripts/build_catalog.py, scripts/query_catalog.py. Related Origin PR genesis#22.",
       "verify": "Inventory tick writes last-inventory.json without claiming Superbrain LIVE.",
       "files": [],
       "collision": "Port :8787 is also auto-runner dispatch. Coordinate with genesis#41."
@@ -372,6 +372,94 @@
       "verify": "Slice lands on Origin only.",
       "files": [],
       "collision": "Relaunch Origin. Do not open another landing-pad queue."
+    },
+    {
+      "id": "genesis-python-agent-eyes-74",
+      "title": "Land Origin Python agent eyes genesis#74",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 28,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f3810b8069d7f47940ccd6. Branch cursor/python-agent-eyes-9eb0. Origin PR genesis#74. Package genesis-eyes, lattice node vision, pin faces, protocol genesis-python-eyes/1. Gaze is exclusive (look / blink / pass_to).",
+      "verify": "pip install -e \".[dev]\" && pytest && python -m genesis_eyes list. Heuristic vision stays local; no LIVE without a probe.",
+      "files": [],
+      "collision": "Coordinate with genesis-python-vision-84 (vision chair). Do not claim Superbrain LIVE."
+    },
+    {
+      "id": "genesis-python-vision-84",
+      "title": "Land Origin Python vision genesis#84",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 29,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f38118a49ed9ef135bf5ad. Branch cursor/python-vision-e3c4. Origin PR genesis#84. packages/python-vision, import genesis_vision. HUD http://127.0.0.1:8792/ — not GOOSE-PC :8791. Health live: dark until Superbrain probed.",
+      "verify": "pip install -e \"packages/python-vision[dev]\" && genesis-vision seat. CPU color-blob only; no GPU.",
+      "files": [
+        "packages/python-vision"
+      ],
+      "collision": "Do not steal :8792 from world unifier or :8793 halls. Coordinate with eyes #74 and world-canon #93."
+    },
+    {
+      "id": "genesis-sentient-world-96",
+      "title": "Land Origin sentient world layer genesis#96",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 30,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f3810fa818ecbbe082f824. Branch cursor/sentient-world-layer-2726. Origin PR genesis#96. packages/python-sentient-world. HTTP 127.0.0.1:8794. GET /live is process liveness; claimed_live only when /live answers.",
+      "verify": "cd packages/python-sentient-world && pytest && genesis-sentient-world tick --steps 4. Never bind UDP 2419.",
+      "files": [
+        "packages/python-sentient-world"
+      ],
+      "collision": "Port :8794 is also world-canon #93 and sound #104. Coordinate; do not steal :8792/:8793."
+    },
+    {
+      "id": "genesis-job-organizer-37",
+      "title": "Land Origin job organizer genesis#37",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 31,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f381ef954fe2df21ad3027. Path job-organizer/. Origin PR genesis#37. mmap(MAP_SHARED) kanban; UDP 2419 notify/pong only. UI http://127.0.0.1:7432.",
+      "verify": "cd job-organizer && npm test && npm start. Bodies never ride UDP 2419.",
+      "files": [
+        "job-organizer"
+      ],
+      "collision": "This pad agent-ops is not the Origin organizer. Do not bind UDP 2419. Do not clone JSON as the mesh."
+    },
+    {
+      "id": "genesis-world-sound-104",
+      "title": "Land Origin world 3D sound genesis#104",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 32,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f381b58ce8eb310d0c6fa2. Branch cursor/world-3d-sound-engine-2c62. Origin PR genesis#104. src/genesis_sound beside genesis_spatial. HTTP 127.0.0.1:8794. Not NVIDIA physics. Not GOOSE-PC :8791.",
+      "verify": "python -m genesis_sound health stays live: dark until Superbrain probed. Never bind UDP 2419.",
+      "files": [
+        "src/genesis_sound"
+      ],
+      "collision": "Port :8794 is also world-canon #93 and sentient #96. Hearing pin ears — coordinate with python-agent-ears #78."
+    },
+    {
+      "id": "genesis-python-bridge-57",
+      "title": "Land Origin Python bridge server genesis#57",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 33,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion https://app.notion.com/p/3db735da33f38161b4dbc856c5c46893. Branch cursor/python-bridge-server-629c. Origin PR genesis#57. packages/python-bridge. Default HTTP 127.0.0.1:8788. --loopback keeps /live dark. Sibling ports: any-app :8787, CPU bridge :8789, lattice :8790.",
+      "verify": "python -m genesis_bridge serve --loopback. GET /live is 200 only when Ethernet Superbrain /live succeeds.",
+      "files": [
+        "packages/python-bridge"
+      ],
+      "collision": "Port :8788 is also auto-runner #41. :8787 is inventory. Do not steal those binds. UDP 2419 is pong only."
     },
     {
       "id": "do-not-reopen-main-pr1",

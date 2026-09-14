@@ -73,6 +73,22 @@ Never mark Superbrain LIVE from this card.
   from this packet.
 - Do not claim Superbrain or GOOSE-PC LIVE from inventory stats.
 
+## Engine (from Notion, 2026-09-14)
+
+In-repo on Origin: `gub/`, `workflows/`, `data/playbooks/playbook__gub-*.json`.
+Runs live under `.genesis/` (gitignored). Entry id: `playbook/gub-inventory-tick`.
+
+```bash
+python3 -m gub doctor
+python3 -m gub serve --port 8787
+# HTTP: GET /   POST /v1/route   POST /v1/runs   POST /v1/schedule/tick
+```
+
+Tick steps: snapshot catalog stats; run `scripts/build_catalog.py` and
+`scripts/inventory.py` when present; write `.genesis/last-inventory.json`.
+Shell allowlist is those two plus `scripts/query_catalog.py`. HTTP stays
+on localhost / Superbrain peer. Operators are allowlisted.
+
 ## First commands (on Origin)
 
 1. Attach to `origin.cursor.com/git/yuri-afk/genesis` via

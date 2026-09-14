@@ -37,7 +37,8 @@ test("origin-slice helpers relaunch to Genesis", () => {
   assert.equal(packet.contract, "agent-ops.helpers.v1");
   assert.equal(packet.jobId, "gub-superbrain-probe");
   assert.equal(packet.scope, "relaunch");
-  assert.ok(packet.helpers.some((helper) => helper.role === "handoff"));
+  assert.ok(packet.helpers.some((helper) => helper.role === "relaunch"));
+  assert.ok(packet.helpers.some((helper) => helper.role === "reserve"));
   assert.match(packet.helpers[0].prompt, /yuri-afk\/genesis/);
 });
 

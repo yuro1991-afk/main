@@ -70,9 +70,14 @@ export function planHelpers(job) {
     case "origin-slice":
       return [
         {
-          role: "handoff",
-          title: `Handoff ${job.id}`,
-          prompt: `Write the Origin relaunch packet for ${job.id}. Repo is origin.cursor.com/git/yuri-afk/genesis. This pod has no Origin auth. Do not rebuild siblings on GitHub main.`,
+          role: "relaunch",
+          title: `Relaunch ${job.id} on Origin`,
+          prompt: `Open https://cursor.com/codebase/yuri-afk/genesis. Read reviews/handoff-${job.id}.md and playbooks/${job.id}.md. Implement the slice there. The handoff packet already exists — do not rewrite it. This pad has no Origin auth. Do not work dronehive / opensussy / bloom.`,
+        },
+        {
+          role: "reserve",
+          title: `Reserve ${job.id}`,
+          prompt: `Run node src/cli.js busy --agent "$CURSOR_AGENT_ID" so other idle agents take a different slot from node src/cli.js slots.`,
         },
       ];
     default:

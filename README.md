@@ -19,6 +19,8 @@ Do **not** reopen [PR #1](https://github.com/yuro1991-afk/main/pull/1). That dra
 npm test
 node src/cli.js status
 node src/cli.js next
+node src/cli.js slots
+node src/cli.js busy --agent "$CURSOR_AGENT_ID"
 node src/cli.js relaunch
 node src/cli.js helpers
 node src/cli.js brief
@@ -31,7 +33,9 @@ node src/cli.js tick
 node src/cli.js route "keep my agents busy"
 ```
 
-`relaunch` prints the next Origin card (`gub-inventory-tick` while probe is claimed). Spin helpers. Claim leases expire in 45 minutes.
+`busy --agent` reserves the next Origin card so idle agents do not all
+take `gub-inventory-tick`. `slots` lists the rest. `relaunch` prints the
+peek packet. Claim leases expire in 45 minutes.
 
 ## Lanes
 
