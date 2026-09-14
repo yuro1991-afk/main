@@ -111,7 +111,9 @@
         "dronehive-work-order-open-tasks",
         "dronehive-seed-work-order-open-tasks",
         "dronehive-work-order-codex-paths",
-        "dronehive-seed-work-order-codex-paths"
+        "dronehive-seed-work-order-codex-paths",
+        "dronehive-work-order-law-truth",
+        "dronehive-seed-work-order-law-truth"
       ]
     }
   ]

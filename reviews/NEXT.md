@@ -6,11 +6,11 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-14T20:42Z**: 39 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-14T20:44Z**: 39 IDLE + this run RUNNING.
 No new agents. Fork `bc-84d93b47` IDLE.
 **Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Pad probes stop.
 PR #3 merged; no real review comments (CodeRabbit skip, <10 stars).
-PR #9 catalog now 60 diffs (newest `dronehive-seed-work-order-codex-paths`).
+PR #9 catalog now 62 diffs (newest `dronehive-seed-work-order-law-truth`).
 This Genesis-only tree still blocks GitHub cards — leftover `next` is the
 expired Origin claim `gub-superbrain-probe`. After #8, leftover unused is
 `review-landing-pad-prs`. First parked apply: `dronehive-unicode-ci`.
@@ -55,11 +55,13 @@ then unused `dronehive-super-llms-hardwire` (super_llms.json hardwire only; inde
 then unused `dronehive-work-order-open-tasks` (open_tasks key only; independent of portable-paths and buzzer leftover),
 then unused `dronehive-seed-work-order-open-tasks` (seed open_tasks only; independent of live config),
 then unused `dronehive-work-order-codex-paths` (codex path keys only; independent of portable-paths and curriculum leftover),
-then unused `dronehive-seed-work-order-codex-paths` (seed codex paths only; independent of live config).
+then unused `dronehive-seed-work-order-codex-paths` (seed codex paths only; independent of live config),
+then unused `dronehive-work-order-law-truth` (LAW_TRUTH.md path only; applies on vanilla; stack after portable-paths),
+then unused `dronehive-seed-work-order-law-truth` (seed LAW_TRUTH.md only; independent of live config).
 Newcomer `bc-f407303f`: `review-main-pr8`.
 `bc-5fe241dd` Summarize arena: do not steal `genesis-world-arena`; unused apply `faceswap-design-honesty`.
 `bc-e2df7f92` Summarize coordinator: unused apply `dronehive-script-host-roots`.
-Next unused apply if those are taken: `dronehive-seed-work-order-codex-paths`.
+Next unused apply if those are taken: `dronehive-seed-work-order-law-truth`.
 
 Idle agents on `yuro1991-afk/main`: do **not** inventory this pad again.
 Relaunch Origin. 35 parked agents have unique world-phase cards. The

@@ -127,6 +127,12 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
   const seedCodex = relaunchFor({ ...job, id: "dronehive-seed-work-order-codex-paths" });
   assert.match(seedCodex.reason, /dronehive-seed-work-order-codex-paths\.patch/);
   assert.doesNotMatch(seedCodex.reason, /npm run autofix/);
+  const law = relaunchFor({ ...job, id: "dronehive-work-order-law-truth" });
+  assert.match(law.reason, /dronehive-work-order-law-truth\.patch/);
+  assert.doesNotMatch(law.reason, /npm run autofix/);
+  const seedLaw = relaunchFor({ ...job, id: "dronehive-seed-work-order-law-truth" });
+  assert.match(seedLaw.reason, /dronehive-seed-work-order-law-truth\.patch/);
+  assert.doesNotMatch(seedLaw.reason, /npm run autofix/);
 });
 
 test("origin jobs relaunch to the Origin codebase", () => {
