@@ -1,6 +1,8 @@
+import { fileURLToPath } from "node:url";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { ORIGIN_UI, PROMPT_CONTRACT, buildPrompt, renderLaunchPrompt } from "../src/prompt.js";
+import { loadRoster } from "../src/dispatch.js";
 import { runCli } from "../src/cli.js";
 
 const NOW = Date.parse("2026-09-14T16:00:00.000Z");
@@ -47,6 +49,22 @@ test("cli prompt defaults to next Genesis card as markdown", async () => {
   assert.match(text, /gub-inventory-tick/);
   assert.match(text, /Origin launch/);
   assert.doesNotMatch(text, /dronehive-unicode-ci/);
+});
+
+test("cli prompt --agent prints the roster Origin card, not leftover next", async () => {
+  const parked = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)))
+    .assignments[0];
+  const chunks = [];
+  const code = await runCli(["prompt", "--agent", parked.bcId], {
+    nowMs: NOW,
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const text = chunks.join("");
+  assert.match(text, new RegExp(`Origin launch — ${parked.jobId}`));
+  assert.doesNotMatch(text, /gub-inventory-tick/);
 });
 
 test("cli prompt --json wraps the text", async () => {

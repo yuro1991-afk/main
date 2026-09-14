@@ -13,6 +13,7 @@ import {
   buildSlots,
   claimBusyJob,
   loadRoster,
+  peekBusyJob,
 } from "../src/dispatch.js";
 import { runCli } from "../src/cli.js";
 
@@ -133,6 +134,19 @@ test("busy --agent claims next; a second agent gets the next slot", async () => 
   assert.match(again.out, /"jobId": "first"/);
   const written = JSON.parse(readFileSync(join(root, "a.json"), "utf8"));
   assert.equal(written.jobId, "first");
+});
+
+test("peekBusyJob uses the roster card without claiming", () => {
+  const ledger = loadLedger(fileURLToPath(new URL("../ledger/queue.json", import.meta.url)));
+  const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
+  const parked = roster.assignments[0];
+  const job = peekBusyJob(ledger, parked.bcId, { genesis: true }, NOW, roster);
+  assert.equal(job.id, parked.jobId);
+  assert.equal(job.status, "open");
+  assert.equal(job.claim, null);
+  const leftover = peekBusyJob(ledger, "bc-brand-new", { genesis: true }, NOW, roster);
+  assert.equal(leftover.id, "gub-inventory-tick");
+  assert.equal(leftover.status, "open");
 });
 
 test("claimBusyJob uses the roster card instead of leftover next", () => {

@@ -41,6 +41,7 @@ import {
   buildBusy,
   buildSlots,
   claimBusyJob,
+  peekBusyJob,
   defaultDispatchPath,
   defaultLaunchPath,
   defaultRosterPath,
@@ -235,12 +236,7 @@ export async function runCli(argv, options = {}) {
       const siblings = loadSiblings(
         flags.siblings ? resolve(flags.siblings) : defaultSiblingsPath(options.root ?? ROOT),
       );
-      const job = positionals[0]
-        ? ledger.jobs.find((item) => item.id === positionals[0])
-        : nextJob(ledger, jobFilters(flags), nowMs);
-      if (positionals[0] && !job) {
-        throw new Error(`unknown job: ${positionals[0]}`);
-      }
+      const job = resolveJob(ledger, positionals, flags, nowMs, options);
       write(JSON.stringify(buildHandoff(job ?? null, siblings), null, 2));
       return job ? 0 : 1;
     }
@@ -249,23 +245,13 @@ export async function runCli(argv, options = {}) {
       const siblings = loadSiblings(
         flags.siblings ? resolve(flags.siblings) : defaultSiblingsPath(options.root ?? ROOT),
       );
-      const job = positionals[0]
-        ? ledger.jobs.find((item) => item.id === positionals[0])
-        : nextJob(ledger, jobFilters(flags), nowMs);
-      if (positionals[0] && !job) {
-        throw new Error(`unknown job: ${positionals[0]}`);
-      }
+      const job = resolveJob(ledger, positionals, flags, nowMs, options);
       write(JSON.stringify(buildRelaunch(job ?? null, siblings), null, 2));
       return job ? 0 : 1;
     }
     case "helpers": {
       const ledger = loadLedger(ledgerPath);
-      const job = positionals[0]
-        ? ledger.jobs.find((item) => item.id === positionals[0])
-        : nextJob(ledger, jobFilters(flags), nowMs);
-      if (positionals[0] && !job) {
-        throw new Error(`unknown job: ${positionals[0]}`);
-      }
+      const job = resolveJob(ledger, positionals, flags, nowMs, options);
       write(JSON.stringify(buildHelperPacket(job ?? null), null, 2));
       return job ? 0 : 1;
     }
@@ -394,12 +380,7 @@ export async function runCli(argv, options = {}) {
     }
     case "prompt": {
       const ledger = loadLedger(ledgerPath);
-      const job = positionals[0]
-        ? ledger.jobs.find((item) => item.id === positionals[0])
-        : nextJob(ledger, jobFilters(flags), nowMs);
-      if (positionals[0] && !job) {
-        throw new Error(`unknown job: ${positionals[0]}`);
-      }
+      const job = resolveJob(ledger, positionals, flags, nowMs, options);
       const packet = buildPrompt(job ?? null);
       write(flags.json === "true" ? JSON.stringify(packet, null, 2) : packet.text);
       return job ? 0 : 1;
@@ -409,12 +390,7 @@ export async function runCli(argv, options = {}) {
       const siblings = loadSiblings(
         flags.siblings ? resolve(flags.siblings) : defaultSiblingsPath(options.root ?? ROOT),
       );
-      const job = positionals[0]
-        ? ledger.jobs.find((item) => item.id === positionals[0])
-        : nextJob(ledger, jobFilters(flags), nowMs);
-      if (positionals[0] && !job) {
-        throw new Error(`unknown job: ${positionals[0]}`);
-      }
+      const job = resolveJob(ledger, positionals, flags, nowMs, options);
       write(JSON.stringify(buildBrief(job ?? null, siblings), null, 2));
       return job ? 0 : 1;
     }
@@ -463,6 +439,34 @@ function loadOrReadAgents(flags, options) {
   return loadAgents(destPath);
 }
 
+/**
+ * Explicit id wins. With --agent / CURSOR_AGENT_ID, honor the roster
+ * card (or leftover next). Peek only — do not lease.
+ * @param {import("./ledger.js").Ledger} ledger
+ * @param {string[]} positionals
+ * @param {Record<string, string>} flags
+ * @param {number} nowMs
+ * @param {{ root?: string }} options
+ */
+function resolveJob(ledger, positionals, flags, nowMs, options) {
+  if (positionals[0]) {
+    const job = ledger.jobs.find((item) => item.id === positionals[0]);
+    if (!job) {
+      throw new Error(`unknown job: ${positionals[0]}`);
+    }
+    return job;
+  }
+  const filters = jobFilters(flags);
+  const agentId = flags.agent || process.env.CURSOR_AGENT_ID || process.env.AGENT_ID;
+  if (agentId) {
+    const roster = readRosterSafe(
+      flags.roster ? resolve(flags.roster) : defaultRosterPath(options.root ?? ROOT),
+    );
+    return peekBusyJob(ledger, agentId, filters, nowMs, roster);
+  }
+  return nextJob(ledger, filters, nowMs);
+}
+
 function readRosterSafe(destPath) {
   if (!existsSync(destPath)) return { assignments: [] };
   return loadRoster(destPath);
@@ -492,7 +496,11 @@ Commands:
   sync --agents path.json [--write] [--out dir]
   catalog [--entries path.json] [--write] [--out path]
   busy [--agent <bcId>] [--here] [--all] [--world]   # roster card first, then leftover next
-  helpers [id]
+  helpers [id] [--agent <bcId>]
+  prompt [id] [--agent <bcId>] [--json]
+  brief [id] [--agent <bcId>]
+  handoff [id] [--agent <bcId>]
+  relaunch [id] [--agent <bcId>]
   claim <id> --agent <bcId>
   complete <id> --agent <bcId>
   block <id> --agent <bcId> --reason <text>
@@ -503,10 +511,6 @@ Commands:
   route <intent>
   tick [--out path]
   siblings
-  brief [id]
-  prompt [id] [--json]
-  handoff [id]
-  relaunch [id]
   playbooks [--here] [--out dir]
 
 Genesis only (Yuri). Pass --world for Python world planes. Pass --all to see out-of-scope cards.

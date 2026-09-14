@@ -30,8 +30,10 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
    planes. Peek without claiming: `node src/cli.js relaunch` (`gub-inventory-tick`
    while the probe is claimed). `node src/cli.js route "keep agents busy"` now
    returns the next unused Origin card, not this pad.
-   Paste `node src/cli.js prompt` into an
-   Origin agent. Read `reviews/WORLD-PHASES.md` and your
+   Paste `node src/cli.js prompt --agent <your-bcId>` into an
+   Origin agent — that prints **your roster card**, not leftover
+   `gub-inventory-tick`. Peek leftover next with `node src/cli.js next`
+   (no `--agent`). Read `reviews/WORLD-PHASES.md` and your
    `reviews/launch/<jobId>.md`. Do not sit in inventory.
    Optionally `node src/cli.js tick` to write `.genesis/last-inventory.json`.
    `node src/cli.js playbooks` writes one markdown card per open **Genesis** job.

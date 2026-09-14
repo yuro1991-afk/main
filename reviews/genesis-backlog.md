@@ -64,6 +64,7 @@ here): unifier · map · generator · atmosphere · physics · spawner ·
 lattice · arena · robotics. Cite PM + layer #102 only.
 
 `node src/cli.js next` still returns `gub-inventory-tick`.
+`node src/cli.js prompt --agent <bcId>` prints that agent's roster card.
 `node src/cli.js next --world` returns `genesis-world-layer-102`.
 `node src/cli.js catalog` now diffs `ledger/catalog-entries.json`
 (Notion Genesis Entries). All 18 playbooks are carded; leftover after

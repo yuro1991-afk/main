@@ -6,6 +6,7 @@ import { join } from "node:path";
 import { buildHandoff, buildRelaunch, packetPathFor, relaunchFor } from "../src/handoff.js";
 import { listJobs, loadLedger } from "../src/ledger.js";
 import { loadSiblings, describeRole, SIBLING_ROLES } from "../src/siblings.js";
+import { loadRoster } from "../src/dispatch.js";
 import { runCli } from "../src/cli.js";
 
 const NOW = Date.parse("2026-09-14T16:00:00.000Z");
@@ -120,6 +121,22 @@ test("cli handoff defaults to next", async () => {
   assert.equal(code, 0);
   assert.match(chunks.join(""), /gub-inventory-tick/);
   assert.match(chunks.join(""), /yuri-afk\/genesis/);
+});
+
+test("cli relaunch --agent peeks the roster Origin card", async () => {
+  const parked = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)))
+    .assignments[0];
+  const chunks = [];
+  const code = await runCli(["relaunch", "--agent", parked.bcId], {
+    nowMs: NOW,
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const text = chunks.join("");
+  assert.match(text, new RegExp(parked.jobId));
+  assert.doesNotMatch(text, /gub-inventory-tick/);
 });
 
 test("cli relaunch defaults to next Genesis card", async () => {

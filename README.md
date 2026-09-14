@@ -23,7 +23,7 @@ node src/cli.js slots
 node src/cli.js assign
 node src/cli.js sync --agents .genesis/last-agents.json --write
 node src/cli.js catalog --write
-node src/cli.js prompt
+node src/cli.js prompt --agent "$CURSOR_AGENT_ID"   # roster card, not leftover next
 node src/cli.js busy --agent "$CURSOR_AGENT_ID"
 node src/cli.js relaunch
 node src/cli.js helpers
