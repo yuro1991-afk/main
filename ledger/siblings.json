@@ -78,7 +78,8 @@
         "dronehive-config-load-overlay",
         "ova-readme-linux-honesty",
         "dronehive-icons-manifest-relative",
-        "dronehive-app-links-host-paths"
+        "dronehive-app-links-host-paths",
+        "bloom-ci-lint"
       ]
     }
   ]

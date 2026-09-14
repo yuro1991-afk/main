@@ -1,4 +1,4 @@
-# Sibling patch catalog (verified 2026-09-14T19:45Z)
+# Sibling patch catalog (verified 2026-09-14T19:50Z)
 
 **Yuri: forget Origin.** This pad token cannot push the public GitHub
 siblings. These diffs apply clean (`git apply --check`) on current
@@ -35,6 +35,7 @@ This is **not** PR #6’s autofix runner. Do not copy `bin/autofix.js`.
 | `ova-readme-linux-honesty` | ollama-voice-access `074bad0` | `patches/ova-readme-linux-honesty.patch` | OK |
 | `dronehive-icons-manifest-relative` | dronehive `d538a89` | `patches/dronehive-icons-manifest-relative.patch` | OK |
 | `dronehive-app-links-host-paths` | dronehive `d538a89` | `patches/dronehive-app-links-host-paths.patch` | OK |
+| `bloom-ci-lint` | bloom `288a484` | `patches/bloom-ci-lint.patch` | OK |
 
 ## After apply
 
@@ -45,6 +46,7 @@ This is **not** PR #6’s autofix runner. Do not copy `bin/autofix.js`.
 - face-swap `START.sh`: fail-closed like `START.cmd`. New file; apply on vanilla `main`.
 - face-swap `DESIGN.md`: `FACESWAP_ENGINE` is the contract; G: is one host example.
 - OVA README: Voice Access / Start Menu / Win+Ctrl+S stay Windows-only. Linux `pwsh` is syntax/math CI, not a Voice Access install. Independent of `ova-api-host-override`.
+- bloom lint: new-file `.github/workflows/lint.yml`. Independent of `bloom-ci-typecheck` (`ci.yml`). `eslint .` is 0 errors / 2 warnings on `288a484`. Do not fold lint into typecheck.
 
 ## Relaunch
 

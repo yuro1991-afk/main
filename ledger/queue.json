@@ -165,7 +165,7 @@
         "claimedAt": "2026-09-14T18:02:20.364Z",
         "leaseUntil": "2026-09-14T18:47:20.364Z"
       },
-      "notes": "Notion draft https://app.notion.com/p/3db735da33f381a58f19ceffc771ecdd — short-timeout GET http://169.254.124.8:45001/health, write .genesis/last-superbrain.json, never mark LIVE on timeout. Catalog resource https://app.notion.com/p/3db735da33f3810faa09de097a086e8e (Entry ID resource/boss-superbrain, Status cataloged). Pad probe 2026-09-14T19:46:25Z: boss-superbrain-health/live timeout=unreachable (1500ms). GOOSE-PC :8791 fetch failed; not the BOSS peer. Origin CLI logged-out. Yuri: forget Origin — pad probe is done; Origin implement still required if he asks again.",
+      "notes": "Notion draft https://app.notion.com/p/3db735da33f381a58f19ceffc771ecdd — short-timeout GET http://169.254.124.8:45001/health, write .genesis/last-superbrain.json, never mark LIVE on timeout. Catalog resource https://app.notion.com/p/3db735da33f3810faa09de097a086e8e (Entry ID resource/boss-superbrain, Status cataloged). Pad probe 2026-09-14T19:49:57Z: boss-superbrain-health/live timeout=unreachable (1500ms). GOOSE-PC :8791 fetch failed; not the BOSS peer. Origin CLI logged-out. Yuri: forget Origin — pad probe is done; Origin implement still required if he asks again.",
       "verify": "Failed probe stays unreachable. GOOSE-PC :8791 is not the BOSS peer.",
       "files": [],
       "collision": "Origin genesis only. Do not reopen github.com/yuro1991-afk/main/pull/1."
@@ -1017,6 +1017,21 @@
         "scripts/grok-pwa-plugin.test.mjs"
       ],
       "collision": "Do not edit dronehive .github. Coordinate with bloom-readme-honest-export if both touch package.json scripts."
+    },
+    {
+      "id": "bloom-ci-lint",
+      "title": "Add a lint-only GitHub Actions workflow for bloom",
+      "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+      "kind": "implement",
+      "priority": 31,
+      "status": "blocked",
+      "claim": null,
+      "notes": "package.json already has lint (eslint .). bloom-ci-typecheck only runs test + typecheck. Applyable catalog patch is patches/bloom-ci-lint.patch on main#9 (new-file lint.yml). Proven 0 errors / 2 warnings on 288a484. Independent of typecheck. Do not copy PR #6 autofix. This token cannot push bloom-fair-yellow-charm.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": ".github/workflows/lint.yml exists and npm run lint exits 0. Do not mark LIVE on a failed lint.",
+      "files": [
+        ".github/workflows/lint.yml"
+      ],
+      "collision": "New file. Independent of bloom-ci-typecheck (ci.yml). Do not fold lint into typecheck. Do not require --max-warnings 0."
     },
     {
       "id": "bloom-health-probe",

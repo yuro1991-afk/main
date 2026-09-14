@@ -1,0 +1,23 @@
+diff --git a/.github/workflows/lint.yml b/.github/workflows/lint.yml
+new file mode 100644
+index 0000000..939a7d5
+--- /dev/null
++++ b/.github/workflows/lint.yml
+@@ -0,0 +1,17 @@
++name: lint
++
++on:
++  push:
++    branches: ["**"]
++  pull_request:
++
++jobs:
++  lint:
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v4
++      - uses: actions/setup-node@v4
++        with:
++          node-version: "20"
++      - run: npm ci
++      - run: npm run lint

@@ -41,7 +41,7 @@ test("repo index loads without duplicate ids and files exist", () => {
   const index = loadPatchIndex(defaultPatchesIndexPath(ROOT));
   assert.equal(index.contract, PATCH_CONTRACT.id);
   assert.equal(index.cannotPush, true);
-  assert.ok(index.patches.length >= 27);
+  assert.ok(index.patches.length >= 28);
   assertPatchFilesExist(index, ROOT);
   const ids = index.patches.map((row) => row.id);
   assert.equal(new Set(ids).size, ids.length);
@@ -62,6 +62,7 @@ test("repo index loads without duplicate ids and files exist", () => {
   assert.ok(ids.includes("ova-readme-linux-honesty"));
   assert.ok(ids.includes("dronehive-icons-manifest-relative"));
   assert.ok(ids.includes("dronehive-app-links-host-paths"));
+  assert.ok(ids.includes("bloom-ci-lint"));
 });
 
 test("text patches start with diff --git; icons are PNGs", () => {
@@ -81,7 +82,7 @@ test("text patches start with diff --git; icons are PNGs", () => {
 test("listPatches and patchForJob filter", () => {
   const index = loadPatchIndex(defaultPatchesIndexPath(ROOT));
   const bloom = listPatches(index, { repo: "github.com/yuro1991-afk/bloom-fair-yellow-charm" });
-  assert.ok(bloom.length >= 4);
+  assert.ok(bloom.length >= 5);
   assert.ok(bloom.every((row) => row.repo.includes("bloom-fair-yellow-charm")));
   assert.equal(patchForJob(index, "missing"), null);
   assert.equal(patchForJob(index, "dronehive-unicode-ci")?.file, "patches/dronehive-pro-chat-cp1252.patch");
@@ -155,7 +156,7 @@ test("cli patches lists the catalog", async () => {
   assert.equal(code, 0);
   const parsed = JSON.parse(chunks.join(""));
   assert.equal(parsed.command, "patches");
-  assert.ok(parsed.count >= 27);
+  assert.ok(parsed.count >= 28);
   assert.equal(parsed.cannotPush, true);
   assert.match(parsed.doNot, /autofix/);
 });

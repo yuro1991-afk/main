@@ -3,7 +3,7 @@
   "cannotPush": true,
   "apply": "git clone https://github.com/<repo>.git work && cd work && git apply --check ../<file> && git apply ../<file>",
   "doNot": "Do not copy PR #6 npm run autofix. This catalog lists diffs only.",
-  "verifiedAt": "2026-09-14T19:45:00Z",
+  "verifiedAt": "2026-09-14T19:50:00Z",
   "patches": [
     {
       "id": "dronehive-unicode-ci",
@@ -252,6 +252,15 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "drone/app/links.py catalog URIs for library/continuous use resolve_host_path. Apply after portable-paths so host_paths.py exists. Independent of runtime-host-paths and config-load-overlay. Does not touch tool_agent.py."
+    },
+    {
+      "id": "bloom-ci-lint",
+      "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+      "file": "patches/bloom-ci-lint.patch",
+      "base": "288a484",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "New-file .github/workflows/lint.yml runs npm ci && npm run lint. Independent of bloom-ci-typecheck (ci.yml). eslint . is 0 errors / 2 warnings on 288a484. Do not fold lint into typecheck."
     }
   ]
 }
