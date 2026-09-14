@@ -3,7 +3,7 @@
   "cannotPush": true,
   "apply": "git clone https://github.com/<repo>.git work && cd work && git apply --check ../<file> && git apply ../<file>",
   "doNot": "Do not copy PR #6 npm run autofix. This catalog lists diffs only.",
-  "verifiedAt": "2026-09-14T21:55:00Z",
+  "verifiedAt": "2026-09-14T22:02:00Z",
   "patches": [
     {
       "id": "dronehive-unicode-ci",
@@ -1406,6 +1406,60 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "ai_bus.py _write_ai_smarts packs_root uses host/ai-home. Independent of portable-paths g_mirror wrap (different line). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-live-mirror",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-live-mirror.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "live_registry.mirror uses host/library. -U1 trailing kind so it stacks after live-registry leftover. Independent of that leftover (mirror was context). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-live-mirror",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-live-mirror.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "seed live_registry.mirror uses host/library. -U1 trailing kind. Independent of configs leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-core-lessons",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-core-lessons.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "knowledge_imprint.core_lessons uses host/core-memory. -U1 trailing cache_rel so it stacks after knowledge-expand leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-core-lessons",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-core-lessons.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "seed knowledge_imprint.core_lessons uses host/core-memory. -U1 trailing cache_rel. Independent of configs leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-ai-smarts-packs",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-ai-smarts-packs.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "knowledge_imprint.ai_smarts_packs uses host/ai-home. -U1 trailing knowledge_pack_min so it stacks after reference-db leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-ai-smarts-packs",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-ai-smarts-packs.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "seed knowledge_imprint.ai_smarts_packs uses host/ai-home. -U1 trailing knowledge_pack_min. Independent of configs leftover (different file). Does not touch tool_agent.py."
     }
   ]
 }

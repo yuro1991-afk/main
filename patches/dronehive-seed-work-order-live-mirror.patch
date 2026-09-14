@@ -1,0 +1,8 @@
+diff --git a/drone/app/seed/configs/work_order.json b/drone/app/seed/configs/work_order.json
+index ecac0ca..a62a377 100644
+--- a/drone/app/seed/configs/work_order.json
++++ b/drone/app/seed/configs/work_order.json
+@@ -151,2 +151,2 @@
+-    "mirror": "F:\\GrokSelfLibrary\\registry",
++    "mirror": "host/library/registry",
+     "kind": "drone",

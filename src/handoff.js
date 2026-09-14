@@ -393,6 +393,18 @@ function dronehiveRelaunchReason(jobId) {
       return "This token cannot push dronehive. Apply patches/dronehive-future-seer-pythonpath.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
     case "dronehive-ai-bus-packs-root":
       return "This token cannot push dronehive. Apply patches/dronehive-ai-bus-packs-root.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-work-order-live-mirror":
+      return "This token cannot push dronehive. Apply patches/dronehive-work-order-live-mirror.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-seed-work-order-live-mirror":
+      return "This token cannot push dronehive. Apply patches/dronehive-seed-work-order-live-mirror.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-work-order-core-lessons":
+      return "This token cannot push dronehive. Apply patches/dronehive-work-order-core-lessons.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-seed-work-order-core-lessons":
+      return "This token cannot push dronehive. Apply patches/dronehive-seed-work-order-core-lessons.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-work-order-ai-smarts-packs":
+      return "This token cannot push dronehive. Apply patches/dronehive-work-order-ai-smarts-packs.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-seed-work-order-ai-smarts-packs":
+      return "This token cannot push dronehive. Apply patches/dronehive-seed-work-order-ai-smarts-packs.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
     case "dronehive-rebase-packaging":
       return "This token cannot push dronehive. Rebase packaging stays blocked until dronehive#1 python-smoke is green. Do not copy PR #6 autofix.";
     default:
