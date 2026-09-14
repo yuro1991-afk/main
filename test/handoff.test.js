@@ -76,6 +76,9 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
   const jane = relaunchFor({ ...job, id: "dronehive-future-seer-jane-honesty" });
   assert.match(jane.reason, /dronehive-future-seer-jane-honesty\.patch/);
   assert.doesNotMatch(jane.reason, /npm run autofix/);
+  const multiHosts = relaunchFor({ ...job, id: "dronehive-multi-hosts-exe-honesty" });
+  assert.match(multiHosts.reason, /dronehive-multi-hosts-exe-honesty\.patch/);
+  assert.doesNotMatch(multiHosts.reason, /npm run autofix/);
 });
 
 test("origin jobs relaunch to the Origin codebase", () => {
