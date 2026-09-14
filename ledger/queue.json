@@ -1819,6 +1819,81 @@
       "collision": "apps/drone-ollama-app/src/drone_bridge.rs DRONE_ROOT + MOUNT_EXE only. Leave C:\\\\Python. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-work-order-doc-board",
+      "title": "Point docs/WORK_ORDER.md Board at host/continuous",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 149,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/WORK_ORDER.md Board still pins D:\\\\GrokCoreMemory\\\\continuous\\\\OPEN_TASKS.json. Applyable catalog patch is patches/dronehive-work-order-doc-board.patch on main#9. Independent of JSON open-tasks leftover (different file) and other WORK_ORDER.md leftovers. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "docs/WORK_ORDER.md Board is host/continuous/OPEN_TASKS.json",
+      "files": [
+        "docs/WORK_ORDER.md"
+      ],
+      "collision": "docs/WORK_ORDER.md Board line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-board",
+      "title": "Point seed WORK_ORDER.md Board at host/continuous",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 150,
+      "status": "blocked",
+      "claim": null,
+      "notes": "seed WORK_ORDER.md Board still pins D:\\\\GrokCoreMemory\\\\continuous\\\\OPEN_TASKS.json. Applyable catalog patch is patches/dronehive-seed-work-order-doc-board.patch on main#9. Independent of live leftover (different file). Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "drone/app/seed/docs/WORK_ORDER.md Board is host/continuous/OPEN_TASKS.json",
+      "files": [
+        "drone/app/seed/docs/WORK_ORDER.md"
+      ],
+      "collision": "seed WORK_ORDER.md Board line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "opensussy-superpowers-lab-plan",
+      "title": "Point OpenSussy lab plan save-path at repo-relative docs",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "kind": "implement",
+      "priority": 151,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/superpowers/plans/2026-08-16-opensussy-lab.md still pins G:\\\\AI-Home\\\\projects\\\\opensussy. Applyable catalog patch is patches/opensussy-superpowers-lab-plan.patch on main#9. Independent of SEC_REVIEW leftovers and ship-json-2-0-0. Do not copy PR #6 autofix. This token cannot push opensussy.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "lab plan save-path is docs/superpowers/plans/2026-08-16-opensussy-lab.md",
+      "files": [
+        "docs/superpowers/plans/2026-08-16-opensussy-lab.md"
+      ],
+      "collision": "Historical lab plan save-path line only. Leave CHANGELOG 1.3.0."
+    },
+    {
+      "id": "opensussy-superpowers-lab-design",
+      "title": "Point OpenSussy lab design base codebase at repo root",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "kind": "implement",
+      "priority": 152,
+      "status": "blocked",
+      "claim": null,
+      "notes": "docs/superpowers/specs/2026-08-16-opensussy-lab-design.md still pins G:\\\\AI-Home\\\\projects\\\\opensussy. Applyable catalog patch is patches/opensussy-superpowers-lab-design.patch on main#9. Independent of the plan leftover (different file) and SEC_REVIEW leftovers. Do not copy PR #6 autofix. This token cannot push opensussy.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "lab design base codebase is .",
+      "files": [
+        "docs/superpowers/specs/2026-08-16-opensussy-lab-design.md"
+      ],
+      "collision": "Historical lab design Base codebase line only. Leave CHANGELOG 1.3.0."
+    },
+    {
+      "id": "faceswap-honesty-located-paths",
+      "title": "Mark HONESTY.md Located G: paths as one host example",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "kind": "implement",
+      "priority": 153,
+      "status": "blocked",
+      "claim": null,
+      "notes": "HONESTY.md Located Path/Models still list G:\\\\AI-Home as the canonical host. Contract is FACESWAP_ENGINE. Applyable catalog patch is patches/faceswap-honesty-located-paths.patch on main#9. Adjacent Located lines are one leftover. Independent of honesty-env-paths footer. Do not copy PR #6 autofix. This token cannot push face-swap-ios.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "HONESTY.md Located Path/Models say G: is one host example and FACESWAP_ENGINE is the contract.",
+      "files": [
+        "HONESTY.md"
+      ],
+      "collision": "HONESTY.md Located Path/Models only. Different hunk from honesty-env-paths footer. Do not vendor InsightFace weights."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",

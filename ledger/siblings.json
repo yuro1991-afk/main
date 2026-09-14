@@ -208,7 +208,12 @@
         "dronehive-mount-smoke-seal",
         "dronehive-mount-swarm-seal",
         "dronehive-truth-honesty-library-list",
-        "dronehive-ollama-app-bridge-paths"
+        "dronehive-ollama-app-bridge-paths",
+        "dronehive-work-order-doc-board",
+        "dronehive-seed-work-order-doc-board",
+        "opensussy-superpowers-lab-plan",
+        "opensussy-superpowers-lab-design",
+        "faceswap-honesty-located-paths"
       ]
     }
   ]

@@ -3,7 +3,7 @@
   "cannotPush": true,
   "apply": "git clone https://github.com/<repo>.git work && cd work && git apply --check ../<file> && git apply ../<file>",
   "doNot": "Do not copy PR #6 npm run autofix. This catalog lists diffs only.",
-  "verifiedAt": "2026-09-14T21:35:00Z",
+  "verifiedAt": "2026-09-14T21:50:00Z",
   "patches": [
     {
       "id": "dronehive-unicode-ci",
@@ -1316,6 +1316,51 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "drone_bridge.rs DRONE_ROOT and MOUNT_EXE use '.' and apps\\\\drone-ollama-mount. Adjacent consts kept as one leftover. Leaves C:\\\\Python. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-board",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-doc-board.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "docs/WORK_ORDER.md Board uses host/continuous/OPEN_TASKS.json. Independent of JSON open-tasks leftover (different file) and other WORK_ORDER.md leftovers. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-board",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-doc-board.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "seed WORK_ORDER.md Board uses host/continuous/OPEN_TASKS.json. Independent of live leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "opensussy-superpowers-lab-plan",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "file": "patches/opensussy-superpowers-lab-plan.patch",
+      "base": "d4b2949",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "Historical lab plan save-path uses docs/superpowers/plans/... ; G:\\\\AI-Home is one host example. Independent of SEC_REVIEW leftovers and ship-json-2-0-0."
+    },
+    {
+      "id": "opensussy-superpowers-lab-design",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "file": "patches/opensussy-superpowers-lab-design.patch",
+      "base": "d4b2949",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "Historical lab design base codebase uses '.' ; G:\\\\AI-Home is one host example. Independent of the plan leftover (different file) and SEC_REVIEW leftovers."
+    },
+    {
+      "id": "faceswap-honesty-located-paths",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "file": "patches/faceswap-honesty-located-paths.patch",
+      "base": "bba7188",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "HONESTY.md Located Path/Models mark G: as one host example; contract is FACESWAP_ENGINE. Adjacent Located lines are one leftover. Independent of honesty-env-paths footer."
     }
   ]
 }

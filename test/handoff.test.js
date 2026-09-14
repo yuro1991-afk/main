@@ -237,6 +237,8 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
     "dronehive-mount-swarm-seal",
     "dronehive-truth-honesty-library-list",
     "dronehive-ollama-app-bridge-paths",
+    "dronehive-work-order-doc-board",
+    "dronehive-seed-work-order-doc-board",
   ]) {
     const target = relaunchFor({ ...job, id });
     assert.match(target.reason, new RegExp(`${id}\\.patch`));

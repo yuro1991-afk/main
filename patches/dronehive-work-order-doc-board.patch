@@ -1,0 +1,13 @@
+diff --git a/docs/WORK_ORDER.md b/docs/WORK_ORDER.md
+index 55c4bce..297ffcd 100644
+--- a/docs/WORK_ORDER.md
++++ b/docs/WORK_ORDER.md
+@@ -157,7 +157,7 @@ Paths, scripts, and evidence are **Windows-native** on BOSS. Prefer PowerShell /
+ 
+ OPEN / IN_PROGRESS tasks on the continuous board are the job queue.
+ 
+-- Board: `D:\GrokCoreMemory\continuous\OPEN_TASKS.json`
++- Board: `host/continuous/OPEN_TASKS.json`
+ - Fabric seal ≠ domain completion (e.g. Blender hand-sculpt stays OPEN until real engine work).
+ 
+ ### LAW 6 — Safety
