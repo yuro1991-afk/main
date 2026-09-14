@@ -17,7 +17,7 @@ import { defaultSuperbrainPath, probeKnownLanes, writeLaneProbe } from "./probe.
 import { routeIntent } from "./routing.js";
 import { defaultInventoryPath, writeInventoryTick } from "./tick.js";
 import { buildBrief } from "./brief.js";
-import { buildHandoff, buildRelaunch } from "./handoff.js";
+import { buildHandoff, buildRelaunch, packetPathFor, relaunchFor } from "./handoff.js";
 import { writePlaybooks } from "./playbook.js";
 import { buildHelperPacket } from "./helpers.js";
 import { defaultSiblingsPath, loadSiblings } from "./siblings.js";
@@ -58,7 +58,7 @@ export async function runCli(argv, options = {}) {
     case "next": {
       const ledger = loadLedger(ledgerPath);
       const job = nextJob(ledger, jobFilters(flags), nowMs);
-      write(JSON.stringify(job, null, 2));
+      write(JSON.stringify(withRelaunch(job), null, 2));
       return job ? 0 : 1;
     }
     case "claim": {
@@ -98,7 +98,7 @@ export async function runCli(argv, options = {}) {
     case "status": {
       const ledger = loadLedger(ledgerPath);
       const summary = summarize(ledger, nowMs);
-      summary.next = nextJob(ledger, jobFilters(flags), nowMs);
+      summary.next = withRelaunch(nextJob(ledger, jobFilters(flags), nowMs));
       write(JSON.stringify(summary, null, 2));
       return 0;
     }
@@ -209,6 +209,15 @@ export async function runCli(argv, options = {}) {
       write(`unknown command: ${command}\n${helpText()}`);
       return 2;
   }
+}
+
+function withRelaunch(job) {
+  if (!job) return null;
+  return {
+    ...job,
+    packet: packetPathFor(job),
+    relaunch: relaunchFor(job),
+  };
 }
 
 export function jobFilters(flags) {

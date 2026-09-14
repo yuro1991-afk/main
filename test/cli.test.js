@@ -92,6 +92,8 @@ test("cli next defaults to the first Genesis card", async () => {
   const result = await capture(["next"]);
   assert.equal(result.code, 0);
   assert.match(result.out, /gub-inventory-tick/);
+  assert.match(result.out, /handoff-gub-inventory-tick/);
+  assert.match(result.out, /yuri-afk\/genesis/);
   assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
 });
 
