@@ -1,6 +1,12 @@
+import { existsSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { assertNeverKind, describeKind } from "./kinds.js";
 import { destinationForKind } from "./routing.js";
 import { describeRole, siblingsForJob } from "./siblings.js";
+import { defaultPatchesIndexPath, loadPatchIndex, patchForJob } from "./patches.js";
+
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
 export const BRIEF_CONTRACT = "agent-ops.brief.v1";
 
@@ -8,7 +14,7 @@ export const BRIEF_CONTRACT = "agent-ops.brief.v1";
  * @param {import("./ledger.js").Job} job
  * @param {{ prs: Array<{ owns?: string[], number: number, url: string, role: string, title: string, branch: string }> }} siblings
  */
-export function buildBrief(job, siblings) {
+export function buildBrief(job, siblings, options = {}) {
   if (!job) {
     return {
       contract: BRIEF_CONTRACT,
@@ -31,19 +37,61 @@ export function buildBrief(job, siblings) {
     kind: describeKind(job.kind),
     destination: destinationForKind(job.kind),
     related,
-    firstCommands: firstCommands(job),
+    firstCommands: firstCommands(job, { root: options.root }),
     hardRules: hardRules(),
   };
 }
 
 /**
  * @param {import("./ledger.js").Job} job
+ * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { file: string } | null }} [options]
+ */
+function catalogPatchFor(job, options = {}) {
+  if (options.patch) return options.patch;
+  if (options.skipCatalog) return null;
+  const indexPath = options.patchesIndex ?? defaultPatchesIndexPath(options.root ?? ROOT);
+  if (!existsSync(indexPath)) return null;
+  try {
+    return patchForJob(loadPatchIndex(indexPath), job.id);
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * @param {import("./ledger.js").Job} job
+ * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { file: string } | null }} [options]
  * @returns {string[]}
  */
-export function firstCommands(job) {
+export function firstCommands(job, options = {}) {
+  const patch = catalogPatchFor(job, options);
   switch (job.kind) {
     case "fix":
     case "implement":
+    case "catalog":
+    case "probe":
+      if (patch) {
+        return [
+          `git clone https://${job.repo}.git work && cd work`,
+          `git checkout -b cursor/${job.id}-from-ops`,
+          `git apply --check /path/to/main/${patch.file}`,
+          `git apply /path/to/main/${patch.file}`,
+          job.verify,
+        ];
+      }
+      if (job.kind === "catalog") {
+        return [
+          "Work Notion + Origin catalog. Do not invent URLs.",
+          job.verify,
+        ];
+      }
+      if (job.kind === "probe") {
+        return [
+          "node src/cli.js probe",
+          "Timeouts and non-2xx stay unreachable. Never write live.",
+          job.verify,
+        ];
+      }
       return [
         `git clone https://${job.repo}.git work && cd work`,
         `git checkout -b cursor/${job.id}-from-ops`,
@@ -54,17 +102,6 @@ export function firstCommands(job) {
       return [
         "Do not invent a new tree on empty main.",
         "Review an existing open PR listed in ledger/siblings.json.",
-        job.verify,
-      ];
-    case "probe":
-      return [
-        "node src/cli.js probe",
-        "Timeouts and non-2xx stay unreachable. Never write live.",
-        job.verify,
-      ];
-    case "catalog":
-      return [
-        "Work Notion + Origin catalog. Do not invent URLs.",
         job.verify,
       ];
     case "origin-slice":

@@ -5,7 +5,7 @@
 - scope: relaunch
 - repo: github.com/yuro1991-afk/ollama-voice-access
 - relaunch: https://github.com/yuro1991-afk/ollama-voice-access
-- why: Relaunch against the named repo. This landing-pad token cannot push it.
+- why: This token cannot push ollama-voice-access. Apply `patches/ova-api-host-override.patch` from [main#9](https://github.com/yuro1991-afk/main/pull/9). Do not copy PR #6 autofix.
 
 ## Notes
 
@@ -19,7 +19,8 @@ Local Ollama only. Do not add cloud inference. Do not collide ova-stop-noui-guar
 
 - git clone https://github.com/yuro1991-afk/ollama-voice-access.git work && cd work
 - git checkout -b cursor/ova-api-host-override-from-ops
-- edit: lib/OllamaVoice.Common.ps1, config/product.json, README.md, SECURITY.md
+- git apply --check /path/to/main/patches/ova-api-host-override.patch
+- git apply /path/to/main/patches/ova-api-host-override.patch
 - OV_API_BASE=http://127.0.0.1:11434 works; http://example.com is rejected. Existing launchers still resolve Voice Access names.
 
 ## Verify

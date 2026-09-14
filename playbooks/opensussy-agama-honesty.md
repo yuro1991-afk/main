@@ -5,7 +5,7 @@
 - scope: relaunch
 - repo: github.com/yuro1991-afk/opensussy
 - relaunch: https://github.com/yuro1991-afk/opensussy
-- why: Relaunch against the named repo. This landing-pad token cannot push it.
+- why: This token cannot push opensussy. Apply `patches/opensussy-agama-honesty.patch` from [main#9](https://github.com/yuro1991-afk/main/pull/9). Do not copy PR #6 autofix.
 
 ## Notes
 
@@ -19,7 +19,8 @@ Docs/honesty only. Do not change default --linux-disk or unattended wipe flags.
 
 - git clone https://github.com/yuro1991-afk/opensussy.git work && cd work
 - git checkout -b cursor/opensussy-agama-honesty-from-ops
-- edit: install/linux/HOW_TO_RUN.txt, docs/ENGINEER_PASS.md, reviews/SEC_REVIEW.md
+- git apply --check /path/to/main/patches/opensussy-agama-honesty.patch
+- git apply /path/to/main/patches/opensussy-agama-honesty.patch
 - HOW_TO files state Agama is unsupported; no new autoinst that claims Leap 16 GREEN.
 
 ## Verify

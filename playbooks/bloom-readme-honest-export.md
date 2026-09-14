@@ -5,7 +5,7 @@
 - scope: relaunch
 - repo: github.com/yuro1991-afk/bloom-fair-yellow-charm
 - relaunch: https://github.com/yuro1991-afk/bloom-fair-yellow-charm
-- why: Relaunch against the named repo. This landing-pad token cannot push it.
+- why: This token cannot push bloom-fair-yellow-charm. Apply `patches/bloom-readme-honest-export.patch` from [main#9](https://github.com/yuro1991-afk/main/pull/9). Do not copy PR #6 autofix.
 
 ## Notes
 
@@ -19,7 +19,8 @@ Docs only. Do not copy Genesis onto this tree. Do not reopen main#1.
 
 - git clone https://github.com/yuro1991-afk/bloom-fair-yellow-charm.git work && cd work
 - git checkout -b cursor/bloom-readme-honest-export-from-ops
-- edit: README.md, package.json, AGENTS.md, src/routes/docs.tsx
+- git apply --check /path/to/main/patches/bloom-readme-honest-export.patch
+- git apply /path/to/main/patches/bloom-readme-honest-export.patch
 - README.md exists; does not claim Superbrain LIVE or duplicate sibling stubs.
 
 ## Verify

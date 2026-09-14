@@ -57,6 +57,19 @@ test("firstCommands is exhaustive", () => {
   }
 });
 
+test("cataloged sibling firstCommands use git apply, not edit", () => {
+  const queue = JSON.parse(readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"));
+  const drone = queue.jobs.find((item) => item.id === "dronehive-unicode-ci");
+  const lines = firstCommands(drone);
+  assert.ok(lines.some((line) => line.includes("git apply --check") && line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.ok(lines.some((line) => line.startsWith("git apply /path/to/main/patches/dronehive-pro-chat-cp1252.patch")));
+  assert.ok(!lines.some((line) => line.startsWith("edit:")));
+  const honesty = queue.jobs.find((item) => item.id === "faceswap-honesty-env-paths");
+  const honestyLines = firstCommands(honesty);
+  assert.ok(honestyLines.some((line) => line.includes("faceswap-honesty-env-paths.patch")));
+  assert.ok(!honestyLines.some((line) => line.includes("Notion")));
+});
+
 test("unknown sibling role fails closed", () => {
   assert.throws(() => describeRole("spawn-extra-board"));
 });

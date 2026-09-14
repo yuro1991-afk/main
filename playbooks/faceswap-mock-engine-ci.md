@@ -5,7 +5,7 @@
 - scope: relaunch
 - repo: github.com/yuro1991-afk/face-swap-ios
 - relaunch: https://github.com/yuro1991-afk/face-swap-ios
-- why: Relaunch against the named repo. This landing-pad token cannot push it.
+- why: This token cannot push face-swap-ios. Apply `patches/faceswap-mock-engine-ci.patch` from [main#9](https://github.com/yuro1991-afk/main/pull/9). Do not copy PR #6 autofix.
 
 ## Notes
 
@@ -19,7 +19,8 @@ Do not bind or rewrite MultoModa on :8855. Do not commit G:\AI-Home host paths. 
 
 - git clone https://github.com/yuro1991-afk/face-swap-ios.git work && cd work
 - git checkout -b cursor/faceswap-mock-engine-ci-from-ops
-- edit: gateway.py, prove_swap.py, fixtures/portrait-a.jpg, fixtures/portrait-b.jpg, .github/workflows/gateway-smoke.yml
+- git apply --check /path/to/main/patches/faceswap-mock-engine-ci.patch
+- git apply /path/to/main/patches/faceswap-mock-engine-ci.patch
 - Workflow GREEN without MultoModa. prove_swap.py --gateway http://127.0.0.1:8860 against the mock writes out/PROVE.json with false_green 0.
 
 ## Verify

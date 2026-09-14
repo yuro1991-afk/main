@@ -5,7 +5,7 @@
 - scope: relaunch
 - repo: github.com/yuro1991-afk/face-swap-ios
 - relaunch: https://github.com/yuro1991-afk/face-swap-ios
-- why: Relaunch against the named repo. This landing-pad token cannot push it.
+- why: This token cannot push face-swap-ios. Apply `patches/faceswap-honesty-env-paths.patch` from [main#9](https://github.com/yuro1991-afk/main/pull/9). Do not copy PR #6 autofix.
 
 ## Notes
 
@@ -18,7 +18,10 @@ Docs/env only. Do not vendor InsightFace weights. Same path-leak theme as droneh
 
 ## First commands
 
-- Work Notion + Origin catalog. Do not invent URLs.
+- git clone https://github.com/yuro1991-afk/face-swap-ios.git work && cd work
+- git checkout -b cursor/faceswap-honesty-env-paths-from-ops
+- git apply --check /path/to/main/patches/faceswap-honesty-env-paths.patch
+- git apply /path/to/main/patches/faceswap-honesty-env-paths.patch
 - README lists the three env vars; HONESTY marks G: as one host example, not the contract.
 
 ## Verify

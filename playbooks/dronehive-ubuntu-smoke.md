@@ -19,7 +19,8 @@ After unicode-ci; do not fight PR #2 packaging.
 
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-ubuntu-smoke-from-ops
-- edit: .github/workflows/ci.yml
+- git apply --check /path/to/main/patches/dronehive-ubuntu-smoke.patch
+- git apply /path/to/main/patches/dronehive-ubuntu-smoke.patch
 - Same four python-smoke commands on ubuntu-latest.
 
 ## Verify

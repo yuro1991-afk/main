@@ -16,9 +16,12 @@ vision / bridge.
 **Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Pad probes stop.
 PR #3 merged; no real review comments (CodeRabbit skip, <10 stars).
 PR #9 catalog still 162 diffs (newest `bloom-grok-pwa-test-sync`).
-CI green on `0abc136`. Leftover hunt is exhausted for vanilla+stacked
+CI green on `9a4ed4e`. Leftover hunt is exhausted for vanilla+stacked
 `git apply --check` (no `-U0`). Do not invent leftovers. Do not
 recatalog CHANNEL_META / wraps / sandwiched JSON.
+First-wave playbooks (`dronehive-unicode-ci` and 17 peers) now say
+`git apply` instead of `edit:`. `firstCommands` uses the catalog when
+a patch exists (fix/implement/catalog/probe).
 This Genesis-only tree still blocks GitHub cards — leftover `next` is the
 expired Origin claim `gub-superbrain-probe`. After #8, leftover unused
 review is `review-main-pr10`, then `review-landing-pad-prs`. First parked

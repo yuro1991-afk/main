@@ -5,7 +5,7 @@
 - scope: relaunch
 - repo: github.com/yuro1991-afk/face-swap-ios
 - relaunch: https://github.com/yuro1991-afk/face-swap-ios
-- why: Relaunch against the named repo. This landing-pad token cannot push it.
+- why: This token cannot push face-swap-ios. Apply `patches/faceswap-health-offline.patch` from [main#9](https://github.com/yuro1991-afk/main/pull/9). Do not copy PR #6 autofix.
 
 ## Notes
 
@@ -19,7 +19,8 @@ Do not change POST /api/ios/swap payload shape. Coordinate with faceswap-mock-en
 
 - git clone https://github.com/yuro1991-afk/face-swap-ios.git work && cd work
 - git checkout -b cursor/faceswap-health-offline-from-ops
-- edit: gateway.py, pwa/index.html, prove_swap.py
+- git apply --check /path/to/main/patches/faceswap-health-offline.patch
+- git apply /path/to/main/patches/faceswap-health-offline.patch
 - With FACESWAP_ENGINE=http://127.0.0.1:9 gateway health JSON is not status ok; prove_swap exits 2.
 
 ## Verify

@@ -5,7 +5,7 @@
 - scope: relaunch
 - repo: github.com/yuro1991-afk/opensussy
 - relaunch: https://github.com/yuro1991-afk/opensussy
-- why: Relaunch against the named repo. This landing-pad token cannot push it.
+- why: This token cannot push opensussy. Apply `patches/opensussy-sec-residuals-catalog.patch` from [main#9](https://github.com/yuro1991-afk/main/pull/9). Do not copy PR #6 autofix.
 
 ## Notes
 
@@ -18,7 +18,10 @@ Read-only review of wipe/sanitize behavior. Do not implement nuclear AutoYaST or
 
 ## First commands
 
-- Work Notion + Origin catalog. Do not invent URLs.
+- git clone https://github.com/yuro1991-afk/opensussy.git work && cd work
+- git checkout -b cursor/opensussy-sec-residuals-catalog-from-ops
+- git apply --check /path/to/main/patches/opensussy-sec-residuals-catalog.patch
+- git apply /path/to/main/patches/opensussy-sec-residuals-catalog.patch
 - Each residual cites a current path or is marked closed with a file pin. false_green stays 0.
 
 ## Verify

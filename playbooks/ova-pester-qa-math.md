@@ -5,7 +5,7 @@
 - scope: relaunch
 - repo: github.com/yuro1991-afk/ollama-voice-access
 - relaunch: https://github.com/yuro1991-afk/ollama-voice-access
-- why: Relaunch against the named repo. This landing-pad token cannot push it.
+- why: This token cannot push ollama-voice-access. Apply `patches/ova-pester-qa-math.patch` from [main#9](https://github.com/yuro1991-afk/main/pull/9). Do not copy PR #6 autofix.
 
 ## Notes
 
@@ -19,7 +19,8 @@ Same as keep-busy pester-qa-math-unit-tests. Leave Invoke-OllamaVoiceQA.ps1 as t
 
 - git clone https://github.com/yuro1991-afk/ollama-voice-access.git work && cd work
 - git checkout -b cursor/ova-pester-qa-math-from-ops
-- edit: lib/OllamaVoice.Common.ps1, tests/
+- git apply --check /path/to/main/patches/ova-pester-qa-math.patch
+- git apply /path/to/main/patches/ova-pester-qa-math.patch
 - Pester covers empty stats, n=1 stdev 0, n=5 p50/p95, tokens/s with no network.
 
 ## Verify
