@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { assertNeverKind, describeKind } from "./kinds.js";
 import { destinationForKind } from "./routing.js";
 import { describeRole, siblingsForJob } from "./siblings.js";
-import { defaultPatchesIndexPath, loadPatchIndex, patchForJob } from "./patches.js";
+import { applyNextFor, defaultPatchesIndexPath, loadPatchIndex, patchForJob } from "./patches.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -40,6 +40,7 @@ export function buildBrief(job, siblings, options = {}) {
       : destinationForKind(job.kind),
     related,
     firstCommands: firstCommands(job, { root: options.root }),
+    applyNext: applyNextForJob(job, { root: options.root }),
     hardRules: hardRules(job),
   };
 }
@@ -72,9 +73,24 @@ export function jobForDisplay(job, options = {}) {
 }
 
 /**
- * @param {import("./ledger.js").Job} job
- * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { file: string, afterApply?: string[] } | null }} [options]
+ * Write-checkout apply after a successful --prove. Undefined when the
+ * card is not in the patch catalog (review / Origin leftovers).
+ * @param {import("./ledger.js").Job | null} job
+ * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { id?: string, repo?: string, file: string, afterApply?: string[] } | null }} [options]
+ * @returns {string[] | undefined}
  */
+export function applyNextForJob(job, options = {}) {
+  if (!job) return undefined;
+  const patch = catalogPatchFor(job, options);
+  if (!patch) return undefined;
+  return applyNextFor({
+    id: patch.id ?? job.id,
+    repo: patch.repo ?? job.repo,
+    file: patch.file,
+    afterApply: patch.afterApply,
+  });
+}
+
 export function catalogPatchFor(job, options = {}) {
   if (options.patch) return options.patch;
   if (options.skipCatalog) return null;

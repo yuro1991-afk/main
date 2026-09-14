@@ -1,4 +1,4 @@
-import { catalogPatchFor } from "./brief.js";
+import { applyNextForJob, catalogPatchFor } from "./brief.js";
 import { assertNeverKind, jobScope } from "./kinds.js";
 
 export const HELPER_CONTRACT = "agent-ops.helpers.v1";
@@ -167,6 +167,7 @@ export function buildHelperPacket(job) {
     jobId: job.id,
     scope: jobScope(job),
     helpers: planHelpers(job),
+    applyNext: applyNextForJob(job),
     rule: "Spin every helper as a local Task. Do not wait in inventory.",
   };
 }

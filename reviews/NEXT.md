@@ -6,11 +6,26 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-14T23:45Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-14T23:46Z**: 40 IDLE + this run RUNNING.
 No new agents. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Do not inventory the pad again.
-Shipped this tick: `patches --job` list JSON includes `applyNext`.
-Catalog still 162. Sibling SHAs unchanged. PR #10 still `82161d8`.
+Sibling `main` SHAs unchanged (`288a484` / `d4b2949` / `bba7188` /
+`074bad0` / `d538a89`). Catalog still 162. Hunt closed. PR #10 still
+`82161d8`. Shipped this interval: `applyNext` on `brief` / `helpers` /
+`handoff` / `relaunch` / `busy` JSON (write-checkout steps were only on
+`patches --job` before). Do not invent leftovers.
+
+| who | take this |
+| --- | --- |
+| leftover unused after #8 | merge #8, then #9 via `reviews/MERGE-8-9.md` |
+| first parked apply | `dronehive-unicode-ci` on a dronehive write checkout |
+| `bc-e2df7f92` | `dronehive-script-host-roots` (independent) |
+| `bc-5fe241dd` | `faceswap-design-honesty` — do not steal `genesis-world-arena` |
+| `bc-f407303f` | read `reviews/main-pr10.md` — do not steal eyes |
+| `bc-710c5477` | `bloom-grok-pwa-test-sync` |
+| fork `bc-84d93b47` | **eyes → vision → bridge** (already theirs) |
+| next unused apply | `faceswap-start-sh` |
+
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
 (`cursor/python-arena-infra-dca0`). Head and ears already landed.
@@ -25,7 +40,8 @@ on sibling `main` (no `-U0`). Repeat with
 `node src/cli.js patches --prove --siblings-root /tmp/siblings`.
 Catalog leftover firstCommands now start with `--prove --job`.
 `patches --prove --job` and `patches --job` JSON include `applyNext`
-write-checkout steps.
+write-checkout steps. Catalog `brief` / `helpers` / `handoff` /
+`relaunch` / `busy` JSON now include the same `applyNext` array.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
 Catalog `brief` hardRules say forget Origin — not “sibling cards stay blocked.”

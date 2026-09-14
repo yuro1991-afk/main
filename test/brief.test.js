@@ -4,7 +4,7 @@ import { mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { JOB_KINDS } from "../src/kinds.js";
-import { buildBrief, firstCommands } from "../src/brief.js";
+import { applyNextForJob, buildBrief, firstCommands } from "../src/brief.js";
 import { describeRole, loadSiblings, siblingsForJob } from "../src/siblings.js";
 import { saveLedger } from "../src/ledger.js";
 import { runCli } from "../src/cli.js";
@@ -57,6 +57,8 @@ test("brief attaches sibling PR 5 to the unicode card", () => {
   assert.ok(!brief.hardRules.some((rule) => rule.includes("Extend PR #3")));
   assert.equal(brief.destination, "Apply the catalog patch on github.com/yuro1991-afk/dronehive");
   assert.doesNotMatch(brief.destination, /Notion/);
+  assert.ok(brief.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.deepEqual(brief.applyNext, applyNextForJob(drone));
   assert.match(drone.notes, /Blocked: Yuri scoped this landing pad to Genesis only/);
   assert.doesNotMatch(brief.job.notes, /Blocked: Yuri scoped this landing pad to Genesis only/);
 });

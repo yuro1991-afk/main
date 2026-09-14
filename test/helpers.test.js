@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { JOB_KINDS } from "../src/kinds.js";
+import { applyNextForJob } from "../src/brief.js";
 import { buildHelperPacket, planHelpers } from "../src/helpers.js";
 import { runCli } from "../src/cli.js";
 
@@ -78,12 +79,12 @@ test("probe helpers refuse the Superbrain CLI probe", () => {
 });
 
 test("cataloged sibling helpers prove then apply", () => {
-  const plans = planHelpers(
-    job("fix", {
-      id: "dronehive-unicode-ci",
-      repo: "github.com/yuro1991-afk/dronehive",
-    }),
-  );
+  const cataloged = job("fix", {
+    id: "dronehive-unicode-ci",
+    repo: "github.com/yuro1991-afk/dronehive",
+  });
+  const plans = planHelpers(cataloged);
+  const packet = buildHelperPacket(cataloged);
   const text = plans.map((helper) => helper.prompt).join("\n");
   assert.ok(plans.some((helper) => helper.role === "prove"));
   assert.ok(plans.some((helper) => helper.role === "apply"));
@@ -91,6 +92,8 @@ test("cataloged sibling helpers prove then apply", () => {
   assert.match(text, /dronehive-pro-chat-cp1252\.patch/);
   assert.doesNotMatch(text, /write a precise patch plan/);
   assert.doesNotMatch(text, /Do not invent Superbrain LIVE/);
+  assert.deepEqual(packet.applyNext, applyNextForJob(cataloged));
+  assert.ok(packet.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
 });
 
 test("cli helpers defaults to next Genesis card", async () => {

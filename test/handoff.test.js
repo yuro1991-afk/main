@@ -27,6 +27,7 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
     collision: "",
   };
   const handoff = buildHandoff(job, siblings);
+  const catalogRelaunch = buildRelaunch(job, siblings);
   assert.equal(handoff.relaunch.kind, "github");
   assert.match(handoff.relaunch.url, /dronehive/);
   assert.ok(handoff.related.some((pr) => pr.number === 6));
@@ -35,6 +36,9 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
   assert.ok(!handoff.doNot.some((line) => line.includes("Do not work dronehive")));
   assert.match(handoff.relaunch.reason, /dronehive-pro-chat-cp1252\.patch/);
   assert.doesNotMatch(handoff.relaunch.reason, /npm run autofix/);
+  assert.ok(handoff.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.ok(handoff.applyNext.some((line) => line.startsWith("git clone https://github.com/yuro1991-afk/dronehive.git")));
+  assert.deepEqual(catalogRelaunch.applyNext, handoff.applyNext);
   const paths = relaunchFor({ ...job, id: "dronehive-portable-paths" });
   assert.match(paths.reason, /dronehive-portable-paths\.patch/);
   assert.doesNotMatch(paths.reason, /npm run autofix/);
@@ -460,6 +464,7 @@ test("relaunch packet points at Origin and the handoff file", () => {
   assert.equal(packet.packet, "reviews/handoff-gub-inventory-tick.md");
   assert.match(packet.action, /yuri-afk\/genesis/);
   assert.match(packet.relaunch.url, /yuri-afk\/genesis/);
+  assert.equal(packet.applyNext, undefined);
 });
 
 test("cli handoff defaults to next", async () => {

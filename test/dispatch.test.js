@@ -10,6 +10,7 @@ import {
   BUSY_CONTRACT,
   SLOTS_CONTRACT,
   buildAssign,
+  buildBusy,
   buildSlots,
   claimBusyJob,
   leftoverLaunchRows,
@@ -17,6 +18,7 @@ import {
   peekBusyJob,
   renderLeftoverLaunch,
 } from "../src/dispatch.js";
+import { loadSiblings } from "../src/siblings.js";
 import { runCli } from "../src/cli.js";
 
 const NOW = Date.parse("2026-09-14T16:00:00.000Z");
@@ -78,6 +80,16 @@ test("slots lists open Genesis cards in priority order", () => {
   assert.equal(packet.slots[0].id, "gub-inventory-tick");
   assert.ok(packet.slots.some((slot) => slot.id === "genesis-python-bridge-57"));
   assert.ok(packet.claimed.some((job) => job.id === "gub-superbrain-probe"));
+});
+
+test("busy JSON for a cataloged job includes applyNext", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const job = ledger.jobs.find((item) => item.id === "dronehive-unicode-ci");
+  const siblings = loadSiblings(new URL("../ledger/siblings.json", import.meta.url));
+  const packet = buildBusy(job, siblings, []);
+  assert.ok(job);
+  assert.ok(packet.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.ok(packet.applyNext.some((line) => line.startsWith("git clone https://github.com/yuro1991-afk/dronehive.git")));
 });
 
 test("busy without agent peeks and does not claim", async () => {
