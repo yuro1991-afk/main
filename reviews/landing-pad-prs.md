@@ -23,7 +23,8 @@ at #8. This file is the current board, including #9/#10.
 ## Merge order
 
 1. Merge **#8**.
-2. Merge **#9** onto `main` (resolve `siblings.json` to PRs 2–10).
+2. Merge **#9** onto `main`. Resolve `siblings.json` to PRs 2–10
+   (`reviews/MERGE-8-9.md`).
 3. Review **#10**; do not merge onto `main` until Yuri retargets the base.
 4. Skip #4/#5/#6.
 5. Do not merge #7 after #8 unless rewritten.

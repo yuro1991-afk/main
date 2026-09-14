@@ -39,6 +39,8 @@ test("siblings.json loads and maps dronehive to PR 5", () => {
     [5, 6],
   );
   assert.match(describeRole("attention-and-dronehive-patch"), /dronehive/);
+  assert.match(describeRole("ops-board"), /GitHub-first defaults live on #8/);
+  assert.doesNotMatch(describeRole("ops-board"), /^This PR\./);
 });
 
 test("brief attaches sibling PR 5 to the unicode card", () => {

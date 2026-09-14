@@ -27,7 +27,7 @@ export function describeRole(role) {
     case "pointers":
       return "README/AGENTS only. Do not treat as a second queue.";
     case "ops-board":
-      return "This PR. Claim jobs with node src/cli.js.";
+      return "Landing-pad ops CLI (merged #3). GitHub-first defaults live on #8. This PR is the patch catalog."
     case "keep-busy-queue":
       return "Sibling lease queue. Do not copy packages/keep-busy here.";
     case "attention-and-dronehive-patch":

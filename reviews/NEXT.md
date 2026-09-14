@@ -6,7 +6,7 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-14T23:12Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-14T23:14Z**: 40 IDLE + this run RUNNING.
 No new agents. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Do not inventory the pad again.
 Fork `bc-84d93b47` still IDLE on
@@ -21,9 +21,9 @@ PR #9 catalog still 162 diffs (newest `bloom-grok-pwa-test-sync`).
 CI green on `722d3e5`. Leftover hunt is exhausted for vanilla+stacked
 `git apply --check` (no `-U0`). Do not invent leftovers. Do not
 recatalog CHANNEL_META / wraps / sandwiched JSON.
-Shipped this tick: `reviews/landing-pad-prs.md` (current #3–#10 board;
-#8 then #9 then review #10). Local #10 review already in
-`reviews/main-pr10.md`. Do not copy #8's GitHub-first retarget onto #9.
+Shipped this tick: `reviews/MERGE-8-9.md` (siblings.json union 2–10;
+catalog bases still match sibling main). `ops-board` no longer says
+"This PR". Do not copy #8's GitHub-first retarget onto #9.
 Value leftover is applying queued diffs on write checkouts, not mining
 new ones.
 This Genesis-only tree still blocks GitHub cards — leftover `next` is the
