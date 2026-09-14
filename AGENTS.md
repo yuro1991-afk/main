@@ -12,6 +12,7 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
 
 1. `npm test` if you touch this repo.
 2. `node src/cli.js next` — take that job unless its `collision` line forbids you.
+   If this token cannot push other repos, use `node src/cli.js next --here`.
    Optionally `node src/cli.js tick` to write `.genesis/last-inventory.json`.
 3. `node src/cli.js claim <id> --agent <your-bcId>` before you start.
 4. Work in the **repo on the job card**. Origin slices require Origin auth. This token can read `dronehive` but cannot push to it.

@@ -4,6 +4,7 @@ import {
   assertNeverStatus,
   isJobKind,
   isJobStatus,
+  jobScope,
 } from "./kinds.js";
 
 export const DEFAULT_LEASE_MS = 45 * 60 * 1000;
@@ -106,7 +107,7 @@ export function effectiveStatus(job, nowMs) {
 
 /**
  * @param {Ledger} ledger
- * @param {{ status?: string, kind?: string, repo?: string }} [filters]
+ * @param {{ status?: string, kind?: string, repo?: string, scope?: string }} [filters]
  * @param {number} [nowMs]
  */
 export function listJobs(ledger, filters = {}, nowMs = Date.now()) {
@@ -115,6 +116,7 @@ export function listJobs(ledger, filters = {}, nowMs = Date.now()) {
     if (filters.status && status !== filters.status) return false;
     if (filters.kind && job.kind !== filters.kind) return false;
     if (filters.repo && job.repo !== filters.repo) return false;
+    if (filters.scope && jobScope(job) !== filters.scope) return false;
     return true;
   });
 }
@@ -122,7 +124,7 @@ export function listJobs(ledger, filters = {}, nowMs = Date.now()) {
 /**
  * Highest-priority open job. Lower number wins; ties keep ledger order.
  * @param {Ledger} ledger
- * @param {{ kind?: string, repo?: string }} [filters]
+ * @param {{ kind?: string, repo?: string, scope?: string }} [filters]
  * @param {number} [nowMs]
  * @returns {Job | null}
  */

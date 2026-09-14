@@ -8,7 +8,7 @@
       "priority": 1,
       "status": "open",
       "claim": null,
-      "notes": "windows-latest CI dies printing ✓ via _chat in drone/pro/tool_agent.py (~367, 424, 464–506) under cp1252. Blocks dronehive PR #1 and stacked #2. Patch already staged on landing-pad PR #5: patches/dronehive-pro-chat-cp1252.patch. Apply it on yuro1991-afk/dronehive — this token cannot push that repo.",
+      "notes": "windows-latest CI dies printing ✓ via _chat in drone/pro/tool_agent.py (~367, 424, 464–506) under cp1252. Blocks dronehive PR #1 and stacked #2. Patch is on landing-pad PR #5; verified apply runner is PR #6 (`npm run autofix -- apply <checkout>`). This token cannot push dronehive — relaunch there.",
       "verify": "python -m drone app pro --goal \"ci pro write ci_ok.txt\" --rounds 3 --no-ollama",
       "files": ["drone/pro/tool_agent.py", ".github/workflows/ci.yml"],
       "collision": "Do not rewrite the patch on this repo. Checkout dronehive, apply github.com/yuro1991-afk/main/pull/5 patch, push on cursor/setup-dev-environment-2e0b."

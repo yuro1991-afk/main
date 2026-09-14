@@ -1,11 +1,15 @@
 export {
   JOB_KINDS,
+  JOB_SCOPES,
   JOB_STATUSES,
   assertNeverKind,
+  assertNeverScope,
   assertNeverStatus,
   describeKind,
+  describeScope,
   isJobKind,
   isJobStatus,
+  jobScope,
 } from "./kinds.js";
 export {
   DEFAULT_LEASE_MS,

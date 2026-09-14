@@ -11,6 +11,9 @@ export const JOB_KINDS = Object.freeze([
 /** Canonical job statuses. Keep exhaustive — switch defaults must fail. */
 export const JOB_STATUSES = Object.freeze(["open", "claimed", "done", "blocked"]);
 
+/** Where this landing-pad token can finish the card. */
+export const JOB_SCOPES = Object.freeze(["here", "relaunch"]);
+
 /**
  * @param {string} kind
  * @returns {kind is typeof JOB_KINDS[number]}
@@ -41,6 +44,36 @@ export function assertNeverKind(kind) {
  */
 export function assertNeverStatus(status) {
   throw new Error(`unhandled job status: ${status}`);
+}
+
+/**
+ * @param {string} scope
+ * @returns {never}
+ */
+export function assertNeverScope(scope) {
+  throw new Error(`unhandled job scope: ${scope}`);
+}
+
+/**
+ * @param {{ repo: string }} job
+ * @returns {typeof JOB_SCOPES[number]}
+ */
+export function jobScope(job) {
+  return job.repo === "github.com/yuro1991-afk/main" ? "here" : "relaunch";
+}
+
+/**
+ * @param {string} scope
+ */
+export function describeScope(scope) {
+  switch (scope) {
+    case "here":
+      return "This landing-pad token can finish the card.";
+    case "relaunch":
+      return "Relaunch against the named repo or Origin.";
+    default:
+      return assertNeverScope(scope);
+  }
 }
 
 /**

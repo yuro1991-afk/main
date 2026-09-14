@@ -104,6 +104,13 @@ test("summarize counts effective statuses", () => {
   assert.equal(expired.open, 2);
 });
 
+test("next --here skips relaunch cards", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const here = nextJob(ledger, { scope: "here" }, NOW);
+  assert.equal(here.id, "review-landing-pad-prs");
+  assert.equal(here.repo, "github.com/yuro1991-afk/main");
+});
+
 test("repo queue validates", () => {
   const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
   assert.ok(ledger.jobs.length >= 8);

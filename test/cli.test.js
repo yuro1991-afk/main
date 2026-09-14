@@ -82,6 +82,13 @@ test("cli route and probe", async () => {
   assert.match(probed.out, /unreachable/);
 });
 
+test("cli next --here stays on this repo", async () => {
+  const result = await capture(["next", "--here"]);
+  assert.equal(result.code, 0);
+  assert.match(result.out, /review-landing-pad-prs/);
+  assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
+});
+
 test("unknown command is a usage error", async () => {
   const result = await capture(["explode"]);
   assert.equal(result.code, 2);

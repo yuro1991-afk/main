@@ -54,11 +54,7 @@ export async function runCli(argv, options = {}) {
     }
     case "next": {
       const ledger = loadLedger(ledgerPath);
-      const job = nextJob(
-        ledger,
-        { kind: flags.kind, repo: flags.repo },
-        nowMs,
-      );
+      const job = nextJob(ledger, jobFilters(flags), nowMs);
       write(JSON.stringify(job, null, 2));
       return job ? 0 : 1;
     }
@@ -142,7 +138,7 @@ export async function runCli(argv, options = {}) {
       );
       const job = positionals[0]
         ? ledger.jobs.find((item) => item.id === positionals[0])
-        : nextJob(ledger, { kind: flags.kind, repo: flags.repo }, nowMs);
+        : nextJob(ledger, jobFilters(flags), nowMs);
       if (positionals[0] && !job) {
         throw new Error(`unknown job: ${positionals[0]}`);
       }
@@ -156,7 +152,7 @@ export async function runCli(argv, options = {}) {
       );
       const job = positionals[0]
         ? ledger.jobs.find((item) => item.id === positionals[0])
-        : nextJob(ledger, { kind: flags.kind, repo: flags.repo }, nowMs);
+        : nextJob(ledger, jobFilters(flags), nowMs);
       if (positionals[0] && !job) {
         throw new Error(`unknown job: ${positionals[0]}`);
       }
@@ -173,6 +169,14 @@ export async function runCli(argv, options = {}) {
       write(`unknown command: ${command}\n${helpText()}`);
       return 2;
   }
+}
+
+export function jobFilters(flags) {
+  return {
+    kind: flags.kind,
+    repo: flags.repo,
+    scope: flags.here === "true" ? "here" : undefined,
+  };
 }
 
 function requireId(id) {
@@ -195,7 +199,7 @@ function helpText() {
 
 Commands:
   list
-  next [--kind kind] [--repo repo]
+  next [--kind kind] [--repo repo] [--here]
   claim <id> --agent <bcId>
   complete <id> --agent <bcId>
   block <id> --agent <bcId> --reason <text>
