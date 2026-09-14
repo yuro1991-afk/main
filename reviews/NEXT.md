@@ -11,8 +11,8 @@ No new agents. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Do not inventory the pad again.
 Sibling `main` SHAs unchanged (`288a484` / `d4b2949` / `bba7188` /
 `074bad0` / `d538a89`). Catalog still 162. Hunt closed. PR #10 still
-`82161d8`. Shipped this interval: `busy --job` peeks the named catalog
-card (does not claim blocked leftovers / leftover next). Do not invent leftovers.
+`82161d8`. Shipped this interval: `next --job` peeks the named catalog
+card and includes `applyNext`. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -41,7 +41,8 @@ Catalog leftover firstCommands now start with `--prove --job`.
 `patches --prove --job` and `patches --job` JSON include `applyNext`
 write-checkout steps. Catalog `brief` / `helpers` / `handoff` /
 `relaunch` / `busy` JSON now include the same `applyNext` array.
-`busy --job <catalog-id>` peeks that card (does not claim leftover next).
+`busy --job <catalog-id>` and `next --job <catalog-id>` peek that card
+(do not claim leftover next). `next --job` JSON includes `applyNext`.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
 Catalog `brief` hardRules say forget Origin — not “sibling cards stay blocked.”

@@ -108,6 +108,15 @@ test("cli next defaults to the first Genesis card", async () => {
   assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
 });
 
+test("cli next --job peeks the named catalog card", async () => {
+  const result = await capture(["next", "--job", "dronehive-unicode-ci"]);
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.id, "dronehive-unicode-ci");
+  assert.ok(parsed.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.notEqual(parsed.id, "gub-route-intent");
+});
+
 test("cli next --world is empty when every world card is rostered", async () => {
   const result = await capture(["next", "--world"]);
   assert.equal(result.code, 1);

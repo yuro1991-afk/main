@@ -23,7 +23,7 @@ import {
 } from "./origin.js";
 import { defaultRoutePath, routeIntent, writeRoute } from "./routing.js";
 import { defaultInventoryPath, writeInventoryTick } from "./tick.js";
-import { buildBrief, jobForDisplay } from "./brief.js";
+import { applyNextForJob, buildBrief, jobForDisplay } from "./brief.js";
 import { buildPrompt } from "./prompt.js";
 import {
   buildHandoff,
@@ -110,7 +110,7 @@ export async function runCli(argv, options = {}) {
     }
     case "next": {
       const ledger = loadLedger(ledgerPath);
-      const job = peekDefaultJob(ledger, flags, nowMs, options);
+      const job = resolveJob(ledger, positionals, flags, nowMs, options);
       write(JSON.stringify(withRelaunch(job), null, 2));
       return job ? 0 : 1;
     }
@@ -447,6 +447,7 @@ function withRelaunch(job) {
     ...shown,
     packet: packetPathFor(shown),
     relaunch: relaunchFor(shown),
+    applyNext: applyNextForJob(shown),
   };
 }
 
@@ -534,7 +535,7 @@ function helpText() {
 
 Commands:
   list
-  next [--kind kind] [--repo repo] [--here] [--all] [--world] [--agent <bcId>]
+  next [id] [--job id] [--kind kind] [--repo repo] [--here] [--all] [--world] [--agent <bcId>]
   slots [--here] [--all] [--world]
   assign [--out dir]
   sync --agents path.json [--write] [--out dir]
