@@ -109,7 +109,9 @@
         "dronehive-multi-hosts-hardwire",
         "dronehive-super-llms-hardwire",
         "dronehive-work-order-open-tasks",
-        "dronehive-seed-work-order-open-tasks"
+        "dronehive-seed-work-order-open-tasks",
+        "dronehive-work-order-codex-paths",
+        "dronehive-seed-work-order-codex-paths"
       ]
     }
   ]

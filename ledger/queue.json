@@ -514,6 +514,36 @@
       "collision": "Seed open_tasks key only. Different file from configs/work_order.json. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-work-order-codex-paths",
+      "title": "Point work_order.json codex paths at host/library",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 62,
+      "status": "blocked",
+      "claim": null,
+      "notes": "configs/work_order.json codex.root / master_min / master_md / query_cli still pin F:\\\\GrokSelfLibrary. Applyable catalog patch is patches/dronehive-work-order-codex-paths.patch on main#9. Independent of portable-paths, curriculum leftover (codex_root is a different key), and doc-honesty. Leave python_default. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "configs/work_order.json codex.root is host/library/knowledge/codex and query_cli is host/library/bin/query_llm_codex.py.",
+      "files": [
+        "configs/work_order.json"
+      ],
+      "collision": "configs/work_order.json codex path keys only. Seed copy is a later leftover. Do not edit python_default. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-codex-paths",
+      "title": "Point seed work_order.json codex paths at host/library",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 63,
+      "status": "blocked",
+      "claim": null,
+      "notes": "drone/app/seed/configs/work_order.json codex path keys still pin F:\\\\GrokSelfLibrary. Applyable catalog patch is patches/dronehive-seed-work-order-codex-paths.patch on main#9. Independent of live leftover (different file). Leave python_default. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "drone/app/seed/configs/work_order.json codex.root is host/library/knowledge/codex and query_cli is host/library/bin/query_llm_codex.py.",
+      "files": [
+        "drone/app/seed/configs/work_order.json"
+      ],
+      "collision": "Seed codex path keys only. Different file from configs/work_order.json. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",

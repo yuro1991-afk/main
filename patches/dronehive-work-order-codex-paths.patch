@@ -1,0 +1,15 @@
+diff --git a/configs/work_order.json b/configs/work_order.json
+index ecac0ca..4aa2010 100644
+--- a/configs/work_order.json
++++ b/configs/work_order.json
+@@ -101,6 +101,6 @@
+     ],
+-    "root": "F:\\GrokSelfLibrary\\knowledge\\codex",
+-    "master_min": "F:\\GrokSelfLibrary\\knowledge\\codex\\CODEX.min.json",
+-    "master_md": "F:\\GrokSelfLibrary\\knowledge\\codex\\CODEX.md",
+-    "query_cli": "F:\\GrokSelfLibrary\\bin\\query_llm_codex.py",
++    "root": "host/library/knowledge/codex",
++    "master_min": "host/library/knowledge/codex/CODEX.min.json",
++    "master_md": "host/library/knowledge/codex/CODEX.md",
++    "query_cli": "host/library/bin/query_llm_codex.py",
+     "python_default": "%LOCALAPPDATA%\\Programs\\Python\\Python312\\python.exe",
