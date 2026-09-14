@@ -49,6 +49,10 @@ https://cursor.com/codebase/yuri-afk/genesis only. This pad cannot auth.
 | catalog-add-custom-entry | — | [playbook](https://app.notion.com/p/3db735da33f38189907ef132836d95bf) |
 | catalog-notion-skill-author | — | [playbook](https://app.notion.com/p/3db735da33f381c1a42ccf030628e7dc) |
 
+World-PM planes without a dedicated Notion page (do not invent packages
+here): unifier · map · generator · atmosphere · physics · spawner ·
+lattice · arena · robotics. Cite PM + layer #102 only.
+
 `node src/cli.js next` still returns `gub-inventory-tick`.
 `node src/cli.js next --world` returns `genesis-world-layer-102`.
 Idle agents: `node src/cli.js assign` (35 parked pad agents → unique

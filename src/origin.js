@@ -1,5 +1,5 @@
 import { execFile } from "node:child_process";
-import { existsSync, mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { promisify } from "node:util";
 
@@ -155,4 +155,14 @@ export function writeOriginProbe(snapshot, destPath) {
   mkdirSync(dirname(destPath), { recursive: true });
   writeFileSync(destPath, `${JSON.stringify(snapshot, null, 2)}\n`);
   return destPath;
+}
+
+/**
+ * @param {string} destPath
+ */
+export function readOriginProbe(destPath) {
+  if (!existsSync(destPath)) return null;
+  const parsed = JSON.parse(readFileSync(destPath, "utf8"));
+  if (!parsed || typeof parsed !== "object") return null;
+  return parsed;
 }

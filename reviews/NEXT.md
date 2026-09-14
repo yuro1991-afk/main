@@ -63,6 +63,11 @@ Full table: `reviews/WORLD-PHASES.md` · backlog: `reviews/genesis-backlog.md`
 | Genesis auto review | `genesis-online-portal-26` |
 | Genesis repo location | `genesis-job-organizer-37` |
 
+Notion (Yuri’s Space) has **no dedicated pages** for unifier / map /
+spawner / physics / atmosphere / generator / lattice / arena / robotics.
+Do not invent `packages/world-*` on this pad. Those cards stay Origin-only
+and start from the PM planes list.
+
 `gub-superbrain-probe` stays claimed on this pad for the probe only.
 Pad probe **2026-09-14T17:57:58Z**: `:45001` health/live **timeout=unreachable**;
 GOOSE `:8791` fetch failed. Origin CLI **logged-out** (`CURSOR_API_KEY` missing).

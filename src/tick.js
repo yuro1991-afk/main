@@ -17,10 +17,11 @@ export function defaultInventoryPath(repoRoot) {
  * @param {string} destPath
  * @param {number} nowMs
  */
-export function writeInventoryTick(ledger, destPath, nowMs) {
+export function writeInventoryTick(ledger, destPath, nowMs, extras = {}) {
   const counts = summarize(ledger, nowMs);
   const next = nextJob(ledger, { genesis: true }, nowMs) ?? nextJob(ledger, {}, nowMs);
   const worldNext = nextJob(ledger, { world: true }, nowMs);
+  const origin = extras.origin ?? null;
   const snapshot = {
     contract: INVENTORY_CONTRACT,
     at: new Date(nowMs).toISOString(),
@@ -31,6 +32,8 @@ export function writeInventoryTick(ledger, destPath, nowMs) {
     blocked: counts.blocked,
     nextId: next ? next.id : null,
     worldNextId: worldNext ? worldNext.id : null,
+    originLoggedIn: origin ? Boolean(origin.loggedIn) : null,
+    originStatus: origin ? origin.status ?? null : null,
     jobs: ledger.jobs.map((job) => inventoryJob(job, nowMs)),
   };
   mkdirSync(dirname(destPath), { recursive: true });

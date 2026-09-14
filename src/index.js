@@ -57,6 +57,7 @@ export {
   loginOriginAuth,
   parseOriginAuthStatus,
   probeOriginAuth,
+  readOriginProbe,
   resolveOriginBin,
   writeOriginProbe,
 } from "./origin.js";

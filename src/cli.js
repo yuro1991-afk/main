@@ -15,7 +15,13 @@ import {
   summarize,
 } from "./ledger.js";
 import { defaultSuperbrainPath, probeKnownLanes, writeLaneProbe } from "./probe.js";
-import { defaultOriginPath, loginOriginAuth, probeOriginAuth, writeOriginProbe } from "./origin.js";
+import {
+  defaultOriginPath,
+  loginOriginAuth,
+  probeOriginAuth,
+  readOriginProbe,
+  writeOriginProbe,
+} from "./origin.js";
 import { routeIntent } from "./routing.js";
 import { defaultInventoryPath, writeInventoryTick } from "./tick.js";
 import { buildBrief } from "./brief.js";
@@ -120,6 +126,7 @@ export async function runCli(argv, options = {}) {
       const ledger = loadLedger(ledgerPath);
       const summary = summarize(ledger, nowMs);
       summary.next = withRelaunch(nextJob(ledger, jobFilters(flags), nowMs));
+      summary.origin = readOriginProbe(defaultOriginPath(options.root ?? ROOT));
       write(JSON.stringify(summary, null, 2));
       return 0;
     }
@@ -173,7 +180,9 @@ export async function runCli(argv, options = {}) {
       const destPath = flags.out
         ? resolve(flags.out)
         : defaultInventoryPath(options.root ?? ROOT);
-      const snapshot = writeInventoryTick(ledger, destPath, nowMs);
+      const snapshot = writeInventoryTick(ledger, destPath, nowMs, {
+        origin: readOriginProbe(defaultOriginPath(options.root ?? ROOT)),
+      });
       write(JSON.stringify(snapshot, null, 2));
       return 0;
     }

@@ -8,10 +8,13 @@ import {
   loginOriginAuth,
   parseOriginAuthStatus,
   probeOriginAuth,
+  readOriginProbe,
   writeOriginProbe,
 } from "../src/origin.js";
+import { writeInventoryTick } from "../src/tick.js";
 import { firstCommands } from "../src/brief.js";
 import { runCli } from "../src/cli.js";
+import { saveLedger } from "../src/ledger.js";
 
 const NOW = Date.parse("2026-09-14T16:00:00.000Z");
 
@@ -70,6 +73,38 @@ test("writeOriginProbe persists the snapshot", () => {
   writeOriginProbe({ contract: ORIGIN_CONTRACT, loggedIn: false }, dest);
   const written = JSON.parse(readFileSync(dest, "utf8"));
   assert.equal(written.loggedIn, false);
+  assert.equal(readOriginProbe(dest).loggedIn, false);
+  assert.equal(readOriginProbe(join(dest, "missing.json")), null);
+});
+
+test("inventory tick records last Origin auth without claiming a clone", () => {
+  const dest = join(mkdtempSync(join(tmpdir(), "agent-ops-tick-origin-")), "last-inventory.json");
+  const snapshot = writeInventoryTick({ jobs: [] }, dest, NOW, {
+    origin: { loggedIn: false, status: "logged-out" },
+  });
+  assert.equal(snapshot.originLoggedIn, false);
+  assert.equal(snapshot.originStatus, "logged-out");
+});
+
+test("cli status attaches last-origin.json", async () => {
+  const root = mkdtempSync(join(tmpdir(), "agent-ops-status-origin-"));
+  saveLedger(join(root, "ledger", "queue.json"), { jobs: [] });
+  writeOriginProbe(
+    { contract: ORIGIN_CONTRACT, loggedIn: false, status: "logged-out" },
+    join(root, ".genesis", "last-origin.json"),
+  );
+  const chunks = [];
+  const code = await runCli(["status"], {
+    nowMs: NOW,
+    root,
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const summary = JSON.parse(chunks.join(""));
+  assert.equal(summary.origin.loggedIn, false);
+  assert.equal(summary.origin.status, "logged-out");
 });
 
 test("origin-slice first commands start with origin auth", () => {
