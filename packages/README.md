@@ -1,6 +1,6 @@
 # Genesis Python packages
 
-Handshake first, then the six-head suit, then the evaluation arena. Superbrain stays dark until a probe succeeds. UDP 2419 is never bound. Suit HTTP defaults to `:8802` because `:8793` is the world project manager.
+Handshake first, then the six-head suit, then the mind loop, then the evaluation arena. Superbrain stays dark until a probe succeeds. UDP 2419 is never bound. Suit HTTP defaults to `:8802` (world-PM owns `:8793`). Mind HTTP defaults to `:8803` (unifier/vision own `:8792`).
 
 ```bash
 ./scripts/install-python.sh
