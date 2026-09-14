@@ -304,6 +304,36 @@
       "collision": "configs/multi_hosts.json G: exe keys only. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-work-order-live-registry",
+      "title": "Point work_order.json live_registry G: keys at host/ai-center",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 48,
+      "status": "blocked",
+      "claim": null,
+      "notes": "configs/work_order.json live_registry cli/primary/events still pin G:\\\\AI-Center. Applyable catalog patch is patches/dronehive-work-order-live-registry.patch on main#9. Independent of portable-paths (later hunks) and fabric-root. F:\\\\ mirror leftover stays later. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "configs/work_order.json live_registry.cli/primary/events use host/ai-center.",
+      "files": [
+        "configs/work_order.json"
+      ],
+      "collision": "configs/work_order.json live_registry G: keys only. Seed copy is a later leftover. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-live-registry",
+      "title": "Point seed work_order.json live_registry G: keys at host/ai-center",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 49,
+      "status": "blocked",
+      "claim": null,
+      "notes": "drone/app/seed/configs/work_order.json live_registry cli/primary/events still pin G:\\\\AI-Center. Applyable catalog patch is patches/dronehive-seed-work-order-live-registry.patch on main#9. Independent of live configs/work_order.json leftover (different file). Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "drone/app/seed/configs/work_order.json live_registry.cli/primary/events use host/ai-center.",
+      "files": [
+        "drone/app/seed/configs/work_order.json"
+      ],
+      "collision": "Seed live_registry G: keys only. Different file from configs/work_order.json. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",

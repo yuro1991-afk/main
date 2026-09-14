@@ -3,7 +3,7 @@
   "cannotPush": true,
   "apply": "git clone https://github.com/<repo>.git work && cd work && git apply --check ../<file> && git apply ../<file>",
   "doNot": "Do not copy PR #6 npm run autofix. This catalog lists diffs only.",
-  "verifiedAt": "2026-09-14T20:24:00Z",
+  "verifiedAt": "2026-09-14T20:28:00Z",
   "patches": [
     {
       "id": "dronehive-unicode-ci",
@@ -405,6 +405,24 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "configs/multi_hosts.json supercell_muscle and everest exe use host/ai-center, not G:\\\\AI-Center. Independent of config-load-overlay (Python remap only) and future-seer-jane-honesty (different file). C:\\\\ AppData exe leftovers stay later. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-live-registry",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-live-registry.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "configs/work_order.json live_registry cli/primary/events use host/ai-center. Independent of portable-paths (later hunks) and fabric-root. F:\\\\ mirror leftover stays later. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-live-registry",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-live-registry.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "drone/app/seed/configs/work_order.json live_registry cli/primary/events use host/ai-center. Independent of live configs/work_order.json leftover (different file). Does not touch tool_agent.py."
     }
   ]
 }

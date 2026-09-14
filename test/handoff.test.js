@@ -79,6 +79,12 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
   const multiHosts = relaunchFor({ ...job, id: "dronehive-multi-hosts-exe-honesty" });
   assert.match(multiHosts.reason, /dronehive-multi-hosts-exe-honesty\.patch/);
   assert.doesNotMatch(multiHosts.reason, /npm run autofix/);
+  const liveReg = relaunchFor({ ...job, id: "dronehive-work-order-live-registry" });
+  assert.match(liveReg.reason, /dronehive-work-order-live-registry\.patch/);
+  assert.doesNotMatch(liveReg.reason, /npm run autofix/);
+  const seedLiveReg = relaunchFor({ ...job, id: "dronehive-seed-work-order-live-registry" });
+  assert.match(seedLiveReg.reason, /dronehive-seed-work-order-live-registry\.patch/);
+  assert.doesNotMatch(seedLiveReg.reason, /npm run autofix/);
 });
 
 test("origin jobs relaunch to the Origin codebase", () => {
