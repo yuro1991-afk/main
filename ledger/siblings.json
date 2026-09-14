@@ -99,7 +99,9 @@
         "dronehive-work-order-live-registry",
         "dronehive-seed-work-order-live-registry",
         "dronehive-work-order-school-root",
-        "dronehive-seed-work-order-school-root"
+        "dronehive-seed-work-order-school-root",
+        "dronehive-work-order-reference-db",
+        "dronehive-seed-work-order-reference-db"
       ]
     }
   ]

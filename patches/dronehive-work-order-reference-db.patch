@@ -1,0 +1,9 @@
+diff --git a/configs/work_order.json b/configs/work_order.json
+index ecac0ca..26e3358 100644
+--- a/configs/work_order.json
++++ b/configs/work_order.json
+@@ -215,3 +215,3 @@
+     "instai_lessons": "G:\\AI-Home\\projects\\instai\\data\\lessons",
+-    "reference_db": "G:\\AI-Center\\databases\\ai_center_reference.db",
++    "reference_db": "host/ai-center/databases/ai_center_reference.db",
+     "ai_smarts_packs": "G:\\AI-Home\\docs\\ai-smarts\\packs",
