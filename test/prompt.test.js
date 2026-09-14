@@ -46,7 +46,7 @@ test("cli prompt defaults to next Genesis card as markdown", async () => {
   });
   assert.equal(code, 0);
   const text = chunks.join("");
-  assert.match(text, /gub-inventory-tick/);
+  assert.match(text, /gub-route-intent/);
   assert.match(text, /Origin launch/);
   assert.doesNotMatch(text, /dronehive-unicode-ci/);
 });
@@ -78,6 +78,6 @@ test("cli prompt --json wraps the text", async () => {
   assert.equal(code, 0);
   const packet = JSON.parse(chunks.join(""));
   assert.equal(packet.contract, PROMPT_CONTRACT);
-  assert.equal(packet.jobId, "gub-inventory-tick");
-  assert.match(packet.text, /python3 -m gub serve/);
+  assert.equal(packet.jobId, "gub-route-intent");
+  assert.match(packet.text, /POST \/v1\/route/);
 });

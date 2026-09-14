@@ -119,7 +119,7 @@ test("cli handoff defaults to next", async () => {
     },
   });
   assert.equal(code, 0);
-  assert.match(chunks.join(""), /gub-inventory-tick/);
+  assert.match(chunks.join(""), /gub-route-intent/);
   assert.match(chunks.join(""), /yuri-afk\/genesis/);
 });
 
@@ -149,8 +149,8 @@ test("cli relaunch defaults to next Genesis card", async () => {
   });
   assert.equal(code, 0);
   const text = chunks.join("");
-  assert.match(text, /gub-inventory-tick/);
-  assert.match(text, /handoff-gub-inventory-tick/);
+  assert.match(text, /gub-route-intent/);
+  assert.match(text, /handoff-gub-route-intent/);
   assert.match(text, /yuri-afk\/genesis/);
   assert.doesNotMatch(text, /dronehive-unicode-ci/);
 });
