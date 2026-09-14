@@ -81,7 +81,8 @@
         "dronehive-app-links-host-paths",
         "bloom-ci-lint",
         "ova-voice-card-linux-honesty",
-        "faceswap-ios-readme-honesty"
+        "faceswap-ios-readme-honesty",
+        "dronehive-hive-docstring-honesty"
       ]
     }
   ]

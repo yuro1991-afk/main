@@ -154,6 +154,21 @@
       "collision": "Apply after dronehive-portable-paths. Different file from runtime-host-paths. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-hive-docstring-honesty",
+      "title": "Mark hive.py F: library path as one host example",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 34,
+      "status": "blocked",
+      "claim": null,
+      "notes": "drone/hive.py module docstring still says Connected to F:\\\\GrokSelfLibrary. Applyable catalog patch is patches/dronehive-hive-docstring-honesty.patch on main#9. Independent of config-load-overlay (import/_load_cfg hunks only). Does not need portable-paths. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "python3 -m py_compile drone/hive.py",
+      "files": [
+        "drone/hive.py"
+      ],
+      "collision": "Docstring only. Independent of config-load-overlay. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",
