@@ -1,4 +1,4 @@
-# Sibling patch catalog (verified 2026-09-14T20:06Z)
+# Sibling patch catalog (verified 2026-09-14T20:08Z)
 
 **Yuri: forget Origin.** This pad token cannot push the public GitHub
 siblings. These diffs apply clean (`git apply --check`) on current
@@ -43,6 +43,7 @@ This is **not** PR #6’s autofix runner. Do not copy `bin/autofix.js`.
 | `dronehive-seed-work-order-doc-honesty` | dronehive `d538a89` | `patches/dronehive-seed-work-order-doc-honesty.patch` | OK |
 | `dronehive-bench-goal-honesty` | dronehive `d538a89` | `patches/dronehive-bench-goal-honesty.patch` | OK |
 | `faceswap-readme-requirements-honesty` | face-swap-ios `bba7188` | `patches/faceswap-readme-requirements-honesty.patch` | OK |
+| `faceswap-readme-install-sh` | face-swap-ios `bba7188` | `patches/faceswap-readme-install-sh.patch` | OK |
 
 ## After apply
 
@@ -57,6 +58,7 @@ This is **not** PR #6’s autofix runner. Do not copy `bin/autofix.js`.
 - OVA voice card: Voice Access / Start Menu phrases stay Windows-only. Linux `pwsh` is not a Voice Access install. Independent of `ova-readme-linux-honesty`.
 - face-swap `ios/README.md`: gateway URL comes from `START.cmd` or `START.sh` (`FACESWAP_ENGINE`). Independent of `faceswap-design-honesty`.
 - face-swap README Requirements: engine is `FACESWAP_ENGINE`. Independent of `faceswap-honesty-env-paths` (footer) and `faceswap-ios-readme-honesty`.
+- face-swap README install: documents `bash START.sh`. Independent of `faceswap-start-sh` (new file) and `faceswap-readme-requirements-honesty`.
 
 ## Relaunch
 

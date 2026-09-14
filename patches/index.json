@@ -324,6 +324,15 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "README Requirements: engine is FACESWAP_ENGINE, not a Windows-only MultoModa host. Independent of honesty-env-paths (appends a footer) and ios-readme-honesty (ios/README.md)."
+    },
+    {
+      "id": "faceswap-readme-install-sh",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "file": "patches/faceswap-readme-install-sh.patch",
+      "base": "bba7188",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "README install block documents bash START.sh. Independent of start-sh (new file), honesty-env-paths (footer), and readme-requirements-honesty (Requirements bullet)."
     }
   ]
 }

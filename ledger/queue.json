@@ -1020,6 +1020,21 @@
       "collision": "README Requirements bullet only. Different hunk from honesty-env-paths footer. Do not rewrite START.cmd."
     },
     {
+      "id": "faceswap-readme-install-sh",
+      "title": "Document bash START.sh in the README install block",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "kind": "implement",
+      "priority": 39,
+      "status": "blocked",
+      "claim": null,
+      "notes": "README install still shows only START.cmd. Applyable catalog patch is patches/faceswap-readme-install-sh.patch on main#9. Independent of start-sh (new file) and readme-requirements-honesty. This token cannot push face-swap-ios.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "README install block mentions bash START.sh as the Linux/pad path.",
+      "files": [
+        "README.md"
+      ],
+      "collision": "README install block only. Different hunk from Requirements and honesty-env-paths footer. Do not rewrite START.cmd."
+    },
+    {
       "id": "ova-pwsh-syntax-ci",
       "title": "Add PowerShell syntax CI for ollama-voice-access",
       "repo": "github.com/yuro1991-afk/ollama-voice-access",
