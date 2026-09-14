@@ -185,6 +185,10 @@ function dronehiveRelaunchReason(jobId) {
       return "This token cannot push dronehive. Apply patches/dronehive-work-order-live-registry.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
     case "dronehive-seed-work-order-live-registry":
       return "This token cannot push dronehive. Apply patches/dronehive-seed-work-order-live-registry.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-work-order-school-root":
+      return "This token cannot push dronehive. Apply patches/dronehive-work-order-school-root.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-seed-work-order-school-root":
+      return "This token cannot push dronehive. Apply patches/dronehive-seed-work-order-school-root.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
     case "dronehive-rebase-packaging":
       return "This token cannot push dronehive. Rebase packaging stays blocked until dronehive#1 python-smoke is green. Do not copy PR #6 autofix.";
     default:

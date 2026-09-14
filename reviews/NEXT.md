@@ -6,11 +6,11 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-14T20:28Z**: 39 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-14T20:30Z**: 39 IDLE + this run RUNNING.
 No new agents. Fork `bc-84d93b47` IDLE.
 **Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Pad probes stop.
 PR #3 merged; no real review comments (CodeRabbit skip, <10 stars).
-PR #9 catalog now 46 diffs (newest `dronehive-seed-work-order-live-registry`).
+PR #9 catalog now 48 diffs (newest `dronehive-seed-work-order-school-root`).
 This Genesis-only tree still blocks GitHub cards — leftover `next` is the
 expired Origin claim `gub-superbrain-probe`. After #8, leftover unused is
 `review-landing-pad-prs`. First parked apply: `dronehive-unicode-ci`.
@@ -41,11 +41,13 @@ then unused `faceswap-readme-firewall-honesty` (README firewall sentence only; i
 then unused `dronehive-future-seer-jane-honesty` (future_seer.json jane keys only; independent of config-load-overlay and runtime-host-paths),
 then unused `dronehive-multi-hosts-exe-honesty` (multi_hosts.json G: exe keys only; independent of future-seer-jane and overlay),
 then unused `dronehive-work-order-live-registry` (live_registry G: keys only; independent of portable-paths and fabric-root),
-then unused `dronehive-seed-work-order-live-registry` (seed live_registry G: keys only; independent of live config).
+then unused `dronehive-seed-work-order-live-registry` (seed live_registry G: keys only; independent of live config),
+then unused `dronehive-work-order-school-root` (school_root / school_lessons_md only; independent of portable-paths and live-registry),
+then unused `dronehive-seed-work-order-school-root` (seed helper-school keys only; independent of live config).
 Newcomer `bc-f407303f`: `review-main-pr8`.
 `bc-5fe241dd` Summarize arena: do not steal `genesis-world-arena`; unused apply `faceswap-design-honesty`.
 `bc-e2df7f92` Summarize coordinator: unused apply `dronehive-script-host-roots`.
-Next unused apply if those are taken: `dronehive-seed-work-order-live-registry`.
+Next unused apply if those are taken: `dronehive-seed-work-order-school-root`.
 
 Idle agents on `yuro1991-afk/main`: do **not** inventory this pad again.
 Relaunch Origin. 35 parked agents have unique world-phase cards. The
