@@ -100,9 +100,17 @@ export function firstCommands(job, options = {}) {
         job.verify,
       ];
     case "review":
+      if (job.id === "review-main-pr10") {
+        return [
+          "Review https://github.com/yuro1991-afk/main/pull/10",
+          "Do not invent a new tree on empty main.",
+          "Do not implement head / ears / eyes / vision / bridge here",
+          job.verify,
+        ];
+      }
       return [
         "Do not invent a new tree on empty main.",
-        "Review an existing open PR listed in ledger/siblings.json.",
+        "Review an existing open PR: #8, #9, or #10. Skip conflicting #4/#5/#6. #3 is merged.",
         job.verify,
       ];
     case "origin-slice":

@@ -30,8 +30,9 @@ function job(kind) {
 
 test("siblings.json loads and maps dronehive to PR 5", () => {
   const siblings = loadSiblings(SIBLINGS);
-  assert.equal(siblings.prs.length, 6);
+  assert.equal(siblings.prs.length, 7);
   assert.equal(siblings.prs[5].number, 9);
+  assert.equal(siblings.prs[6].number, 10);
   const related = siblingsForJob(siblings, "dronehive-unicode-ci");
   assert.deepEqual(
     related.map((pr) => pr.number),
@@ -55,6 +56,18 @@ test("firstCommands is exhaustive", () => {
     const lines = firstCommands(job(kind));
     assert.ok(lines.length > 0);
   }
+});
+
+test("review firstCommands name open PRs #8/#9/#10, not siblings.json only", () => {
+  const queue = JSON.parse(readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"));
+  const landing = queue.jobs.find((item) => item.id === "review-landing-pad-prs");
+  const landingLines = firstCommands(landing);
+  assert.ok(landingLines.some((line) => line.includes("#8") && line.includes("#10")));
+  assert.ok(!landingLines.some((line) => line.includes("ledger/siblings.json")));
+  const pr10 = queue.jobs.find((item) => item.id === "review-main-pr10");
+  const pr10Lines = firstCommands(pr10);
+  assert.ok(pr10Lines.some((line) => line.includes("github.com/yuro1991-afk/main/pull/10")));
+  assert.ok(pr10Lines.some((line) => line.includes("head / ears / eyes / vision / bridge")));
 });
 
 test("cataloged sibling firstCommands use git apply, not edit", () => {

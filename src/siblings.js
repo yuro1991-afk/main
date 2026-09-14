@@ -8,6 +8,7 @@ export const SIBLING_ROLES = Object.freeze([
   "attention-and-dronehive-patch",
   "autofix-runner",
   "patch-catalog",
+  "python-arena",
 ]);
 
 /**
@@ -35,6 +36,8 @@ export function describeRole(role) {
       return "PR #6: npm run autofix -- apply <dronehive-checkout>. Do not copy that runner onto this board.";
     case "patch-catalog":
       return "Applyable sibling diffs under patches/. node src/cli.js patches lists them. Not an autofix runner.";
+    case "python-arena":
+      return "Fork Python arena/infra on main#10. Review only. Do not steal head/ears/eyes/vision/bridge.";
     default:
       return assertNeverRole(role);
   }

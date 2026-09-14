@@ -227,6 +227,16 @@
         "dronehive-seed-work-order-ai-smarts-packs",
         "bloom-grok-pwa-test-sync"
       ]
+    },
+    {
+      "number": 10,
+      "url": "https://github.com/yuro1991-afk/main/pull/10",
+      "branch": "cursor/python-arena-infra-dca0",
+      "title": "Land Python infra handshake, six-head suit, and evaluation arena",
+      "role": "python-arena",
+      "owns": [
+        "review-main-pr10"
+      ]
     }
   ]
 }
