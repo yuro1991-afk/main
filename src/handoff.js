@@ -1,3 +1,4 @@
+import { assertNeverScope, jobScope } from "./kinds.js";
 import { siblingsForJob, describeRole } from "./siblings.js";
 
 export const HANDOFF_CONTRACT = "agent-ops.handoff.v1";
@@ -39,23 +40,35 @@ export function buildHandoff(job, siblings) {
  * @param {import("./ledger.js").Job} job
  */
 export function relaunchFor(job) {
-  if (job.repo.startsWith("origin.cursor.com")) {
-    return {
-      kind: "origin",
-      url: "https://cursor.com/codebase/yuri-afk/genesis",
-      reason: "This cloud environment cannot authenticate to Origin.",
-    };
+  const scope = jobScope(job);
+  switch (scope) {
+    case "here":
+      return {
+        kind: "here",
+        url: "https://github.com/yuro1991-afk/main",
+        reason: "Stay on this checkout. Review PRs #3–#6 or extend PR #3. Do not open another queue.",
+      };
+    case "relaunch":
+      if (job.repo.startsWith("origin.cursor.com")) {
+        return {
+          kind: "origin",
+          url: "https://cursor.com/codebase/yuri-afk/genesis",
+          reason: "This cloud environment cannot authenticate to Origin.",
+        };
+      }
+      if (job.repo.includes("dronehive")) {
+        return {
+          kind: "github",
+          url: "https://github.com/yuro1991-afk/dronehive",
+          reason: "This token cannot push dronehive. Apply PR #6: npm run autofix -- apply <checkout>.",
+        };
+      }
+      return {
+        kind: "github",
+        url: `https://${job.repo}`,
+        reason: "Relaunch against the named repo. This landing-pad token cannot push it.",
+      };
+    default:
+      return assertNeverScope(scope);
   }
-  if (job.repo.includes("dronehive")) {
-    return {
-      kind: "github",
-      url: "https://github.com/yuro1991-afk/dronehive",
-      reason: "This token cannot push dronehive. Apply PR #6: npm run autofix -- apply <checkout>.",
-    };
-  }
-  return {
-    kind: "github",
-    url: `https://${job.repo}`,
-    reason: "Work on the named repo. This landing pad only holds the card.",
-  };
 }

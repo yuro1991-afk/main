@@ -52,6 +52,24 @@ test("every sibling role has a description", () => {
   }
 });
 
+test("here jobs stay on this checkout", () => {
+  const target = relaunchFor({
+    id: "review-landing-pad-prs",
+    title: "review",
+    repo: "github.com/yuro1991-afk/main",
+    kind: "review",
+    priority: 22,
+    status: "open",
+    claim: null,
+    notes: "",
+    verify: "",
+    files: [],
+    collision: "",
+  });
+  assert.equal(target.kind, "here");
+  assert.match(target.reason, /Stay on this checkout/);
+});
+
 test("cli handoff defaults to next", async () => {
   const chunks = [];
   const code = await runCli(["handoff"], {

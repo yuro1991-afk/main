@@ -16,7 +16,8 @@
     "tick": "node src/cli.js tick",
     "brief": "node src/cli.js brief",
     "siblings": "node src/cli.js siblings",
-    "handoff": "node src/cli.js handoff"
+    "handoff": "node src/cli.js handoff",
+    "playbooks": "node src/cli.js playbooks"
   },
   "engines": {
     "node": ">=20"

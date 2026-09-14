@@ -6,6 +6,7 @@ import {
   claimJob,
   completeJob,
   defaultLedgerPath,
+  listJobs,
   loadLedger,
   nextJob,
   releaseJob,
@@ -17,6 +18,7 @@ import { routeIntent } from "./routing.js";
 import { defaultInventoryPath, writeInventoryTick } from "./tick.js";
 import { buildBrief } from "./brief.js";
 import { buildHandoff } from "./handoff.js";
+import { writePlaybooks } from "./playbook.js";
 import { defaultSiblingsPath, loadSiblings } from "./siblings.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -145,6 +147,16 @@ export async function runCli(argv, options = {}) {
       write(JSON.stringify(buildHandoff(job ?? null, siblings), null, 2));
       return job ? 0 : 1;
     }
+    case "playbooks": {
+      const ledger = loadLedger(ledgerPath);
+      const dest = flags.out
+        ? resolve(flags.out)
+        : resolve(options.root ?? ROOT, "playbooks");
+      const jobs = listJobs(ledger, { status: "open", ...jobFilters(flags) }, nowMs);
+      const written = writePlaybooks(jobs, dest);
+      write(JSON.stringify({ dir: dest, count: written.length, files: written }, null, 2));
+      return 0;
+    }
     case "brief": {
       const ledger = loadLedger(ledgerPath);
       const siblings = loadSiblings(
@@ -211,6 +223,7 @@ Commands:
   siblings
   brief [id]
   handoff [id]
+  playbooks [--here] [--out dir]
 
 Do not reopen GitHub PR #1. Genesis lives on Cursor Origin.`;
 }
