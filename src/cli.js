@@ -55,6 +55,14 @@ import {
   readAgents,
   syncRoster,
 } from "./sync.js";
+import {
+  applyProposedJobs,
+  defaultCatalogMinePath,
+  defaultEntriesPath,
+  loadEntries,
+  mineCatalog,
+  writeCatalogMine,
+} from "./catalog.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -255,6 +263,44 @@ export async function runCli(argv, options = {}) {
       write(JSON.stringify({ ...packet, launches }, null, 2));
       return 0;
     }
+    case "catalog": {
+      const ledger = loadLedger(ledgerPath);
+      const entriesPath = flags.entries
+        ? resolve(flags.entries)
+        : defaultEntriesPath(options.root ?? ROOT);
+      const entries = loadEntries(entriesPath);
+      const packet = mineCatalog(entries, ledger, nowMs);
+      const added =
+        flags.write === "true" ? applyProposedJobs(ledger, packet.proposed) : [];
+      if (flags.write === "true") {
+        saveLedger(ledgerPath, ledger);
+        if (added.length > 0) {
+          const playbookDir = flags.playbooks
+            ? resolve(flags.playbooks)
+            : resolve(options.root ?? ROOT, "playbooks");
+          const packetDir = flags.packets
+            ? resolve(flags.packets)
+            : resolve(options.root ?? ROOT, "reviews");
+          const written = writePlaybooks(
+            ledger.jobs.filter((job) => added.includes(job.id)),
+            playbookDir,
+          );
+          const packets = writeHandoffPackets(
+            ledger.jobs.filter((job) => added.includes(job.id)),
+            packetDir,
+          );
+          packet.playbooks = written;
+          packet.packets = packets;
+        }
+      }
+      packet.added = added;
+      const dest = flags.out
+        ? resolve(flags.out)
+        : defaultCatalogMinePath(options.root ?? ROOT);
+      writeCatalogMine(packet, dest);
+      write(JSON.stringify(packet, null, 2));
+      return flags.write === "true" || packet.proposed.length === 0 ? 0 : 1;
+    }
     case "sync": {
       const ledger = loadLedger(ledgerPath);
       const rosterPath = flags.roster
@@ -412,6 +458,7 @@ Commands:
   slots [--here] [--all] [--world]
   assign [--out dir]
   sync --agents path.json [--write] [--out dir]
+  catalog [--entries path.json] [--write] [--out path]
   busy [--agent <bcId>] [--here] [--all] [--world]
   helpers [id]
   claim <id> --agent <bcId>

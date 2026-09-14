@@ -94,6 +94,25 @@ export {
   writeLaunchPrompts,
 } from "./dispatch.js";
 export {
+  CATALOG_CONTRACT,
+  ENTRY_JOB_ALIASES,
+  GENESIS_ENTRIES_COLLECTION,
+  ORIGIN_GENESIS_REPO,
+  applyProposedJobs,
+  defaultCatalogMinePath,
+  defaultEntriesPath,
+  jobIdForEntry,
+  jobFromEntry,
+  kindForJobId,
+  ledgerCoversEntry,
+  loadEntries,
+  mineCatalog,
+  normalizeEntries,
+  normalizeNotionUrl,
+  pageIdFromUrl,
+  writeCatalogMine,
+} from "./catalog.js";
+export {
   SYNC_CONTRACT,
   defaultAgentsPath,
   loadAgents,

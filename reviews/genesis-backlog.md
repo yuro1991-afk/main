@@ -48,6 +48,16 @@ https://cursor.com/codebase/yuri-afk/genesis only. This pad cannot auth.
 | catalog-inventory-skills | — | [playbook](https://app.notion.com/p/3db735da33f381bb9bafca916c22169f) |
 | catalog-add-custom-entry | — | [playbook](https://app.notion.com/p/3db735da33f38189907ef132836d95bf) |
 | catalog-notion-skill-author | — | [playbook](https://app.notion.com/p/3db735da33f381c1a42ccf030628e7dc) |
+| gub-route-intent | — | [playbook](https://app.notion.com/p/3db735da33f3819db32ecfc122a40c70) |
+| gub-run-playbook | — | [playbook](https://app.notion.com/p/3db735da33f381edbc43e852d28dee37) |
+| catalog-inventory-mcp | — | [playbook](https://app.notion.com/p/3db735da33f381d9805fc1058440faf2) |
+| catalog-vercel-preview-debug | — | [playbook](https://app.notion.com/p/3db735da33f38144a8ade3f6b34e92a7) |
+| catalog-context-web-research | — | [playbook](https://app.notion.com/p/3db735da33f3817190f9ffd1e8896624) |
+| catalog-hf-model-explore | — | [playbook](https://app.notion.com/p/3db735da33f38132bf44e28f87ef320d) |
+| catalog-apify-actor-extract | — | [playbook](https://app.notion.com/p/3db735da33f38110aafee4491b74569e) |
+| catalog-figma-design-to-code | — | [playbook](https://app.notion.com/p/3db735da33f38163bd33f9a970731438) |
+| catalog-pr-review-ship | — | [playbook](https://app.notion.com/p/3db735da33f381d5b8a1db2df7570f2d) |
+| catalog-compound-eng-feature | — | [playbook](https://app.notion.com/p/3db735da33f381a292e9e8e09a48adce) |
 
 World-PM planes without a dedicated Notion page (do not invent packages
 here): unifier · map · generator · atmosphere · physics · spawner ·
@@ -55,5 +65,9 @@ lattice · arena · robotics. Cite PM + layer #102 only.
 
 `node src/cli.js next` still returns `gub-inventory-tick`.
 `node src/cli.js next --world` returns `genesis-world-layer-102`.
+`node src/cli.js catalog` now diffs `ledger/catalog-entries.json`
+(Notion Genesis Entries). All 18 playbooks are carded; leftover after
+the 35 world assignments is `gub-inventory-tick`, then
+`gub-route-intent` / `gub-run-playbook`, then catalog cards.
 Idle agents: `node src/cli.js assign` (35 parked pad agents → unique
 world-phase Origin cards). `reviews/WORLD-PHASES.md`. Do not reopen main#1.

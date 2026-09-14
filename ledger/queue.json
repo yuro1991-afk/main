@@ -1013,6 +1013,147 @@
         "ledger/siblings.json"
       ],
       "collision": "Review only. Merge decisions stay with Yuri."
+    },
+    {
+      "id": "gub-route-intent",
+      "title": "Implement GUB route-intent playbook",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 10,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/gub-route-intent https://app.notion.com/p/3db735da33f3819db32ecfc122a40c70 Status active. Route a free-text intent through the Genesis engine to a playbook, skill, tools, and optional subagent. Implement on origin.cursor.com/git/yuri-afk/genesis only.",
+      "verify": "POST /v1/route persists a Genesis run. Playbooks score above skills. Do not invent LIVE lanes.",
+      "files": [
+        "gub/",
+        "data/playbooks/"
+      ],
+      "collision": "Same GUB process as gub-inventory-tick and genesis-auto-runner-41 (:8787 / :8788)."
+    },
+    {
+      "id": "gub-run-playbook",
+      "title": "Implement GUB run-playbook playbook",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "origin-slice",
+      "priority": 11,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/gub-run-playbook https://app.notion.com/p/3db735da33f381edbc43e852d28dee37 Status active. Compile a Genesis playbook into an executable plan and record the run. Implement on origin.cursor.com/git/yuri-afk/genesis only.",
+      "verify": "Dry-run writes plan + step results under .genesis/. Allowlisted gub.* operators only.",
+      "files": [
+        "gub/",
+        "data/playbooks/",
+        ".genesis/"
+      ],
+      "collision": "Coordinate with gub-route-intent and gub-inventory-tick. Do not execute unallowlisted operators."
+    },
+    {
+      "id": "catalog-inventory-mcp",
+      "title": "Inventory MCP tools into the Origin catalog",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 54,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/inventory-mcp-tools https://app.notion.com/p/3db735da33f381d9805fc1058440faf2 Status active. Enumerate dynamic MCP namespaces and tools, normalize into data/tools, and update the master catalog. Implement on origin.cursor.com/git/yuri-afk/genesis only.",
+      "verify": "scripts/inventory.py writes data/tools + catalog/stats.json. Do not invent Superbrain LIVE.",
+      "files": [
+        "scripts/inventory.py",
+        "catalog/stats.json",
+        "data/tools/"
+      ],
+      "collision": "Coordinate with catalog-inventory-skills (same inventory.py) and gub-inventory-tick."
+    },
+    {
+      "id": "catalog-vercel-preview-debug",
+      "title": "Debug a Vercel Preview Deployment (Origin catalog playbook)",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 54,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/vercel-preview-debug https://app.notion.com/p/3db735da33f38144a8ade3f6b34e92a7 Status active. Debug a Vercel preview from the Genesis catalog playbook. Implement on origin.cursor.com/git/yuri-afk/genesis only.",
+      "verify": "Origin playbook playbook/vercel-preview-debug is implemented there. Do not invent LIVE lanes or package paths on this pad.",
+      "files": [],
+      "collision": "Origin genesis only. Coordinate with catalog-notion-sync. Do not reopen yuro1991-afk/main#1."
+    },
+    {
+      "id": "catalog-context-web-research",
+      "title": "Deep Web Research with Context.dev (Origin catalog playbook)",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 55,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/context-web-research https://app.notion.com/p/3db735da33f3817190f9ffd1e8896624 Status active. Capture findings as Genesis resources or Notion pages. Implement on origin.cursor.com/git/yuri-afk/genesis only.",
+      "verify": "Origin playbook playbook/context-web-research is implemented there. Do not invent LIVE lanes or package paths on this pad.",
+      "files": [],
+      "collision": "Origin genesis only. Coordinate with catalog-notion-sync. Do not reopen yuro1991-afk/main#1."
+    },
+    {
+      "id": "catalog-hf-model-explore",
+      "title": "Explore Hugging Face Models and Spaces (Origin catalog playbook)",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 56,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/hf-model-explore https://app.notion.com/p/3db735da33f38132bf44e28f87ef320d Status active. Explore Hugging Face models and Spaces from the Genesis catalog playbook. Implement on origin.cursor.com/git/yuri-afk/genesis only.",
+      "verify": "Origin playbook playbook/hf-model-explore is implemented there. Do not invent LIVE lanes or package paths on this pad.",
+      "files": [],
+      "collision": "Origin genesis only. Coordinate with catalog-notion-sync. Do not reopen yuro1991-afk/main#1."
+    },
+    {
+      "id": "catalog-apify-actor-extract",
+      "title": "Extract Structured Data with Apify (Origin catalog playbook)",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 57,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/apify-actor-extract https://app.notion.com/p/3db735da33f38110aafee4491b74569e Status active. Extract structured data with Apify from the Genesis catalog playbook. Implement on origin.cursor.com/git/yuri-afk/genesis only.",
+      "verify": "Origin playbook playbook/apify-actor-extract is implemented there. Do not invent LIVE lanes or package paths on this pad.",
+      "files": [],
+      "collision": "Origin genesis only. Coordinate with catalog-notion-sync. Do not reopen yuro1991-afk/main#1."
+    },
+    {
+      "id": "catalog-figma-design-to-code",
+      "title": "Implement a Figma Frame in Code (Origin catalog playbook)",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 58,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/figma-design-to-code https://app.notion.com/p/3db735da33f38163bd33f9a970731438 Status active. Implement a Figma frame in code from the Genesis catalog playbook. Implement on origin.cursor.com/git/yuri-afk/genesis only.",
+      "verify": "Origin playbook playbook/figma-design-to-code is implemented there. Do not invent LIVE lanes or package paths on this pad.",
+      "files": [],
+      "collision": "Origin genesis only. Coordinate with catalog-notion-sync. Do not reopen yuro1991-afk/main#1."
+    },
+    {
+      "id": "catalog-pr-review-ship",
+      "title": "Review and Ship a Pull Request (Origin catalog playbook)",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 59,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/pr-review-ship https://app.notion.com/p/3db735da33f381d5b8a1db2df7570f2d Status active. Review and ship a pull request from the Genesis catalog playbook. Implement on origin.cursor.com/git/yuri-afk/genesis only.",
+      "verify": "Origin playbook playbook/pr-review-ship is implemented there. Do not invent LIVE lanes or package paths on this pad.",
+      "files": [],
+      "collision": "Origin genesis only. Coordinate with catalog-notion-sync. Do not reopen yuro1991-afk/main#1."
+    },
+    {
+      "id": "catalog-compound-eng-feature",
+      "title": "Ship a Feature with Compound Engineering (Origin catalog playbook)",
+      "repo": "origin.cursor.com/git/yuri-afk/genesis",
+      "kind": "catalog",
+      "priority": 60,
+      "status": "open",
+      "claim": null,
+      "notes": "Notion playbook/compound-eng-feature https://app.notion.com/p/3db735da33f381a292e9e8e09a48adce Status active. Ship a feature with Compound Engineering from the Genesis catalog playbook. Implement on origin.cursor.com/git/yuri-afk/genesis only.",
+      "verify": "Origin playbook playbook/compound-eng-feature is implemented there. Do not invent LIVE lanes or package paths on this pad.",
+      "files": [],
+      "collision": "Origin genesis only. Coordinate with catalog-notion-sync. Do not reopen yuro1991-afk/main#1."
     }
   ]
 }

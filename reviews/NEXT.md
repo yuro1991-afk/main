@@ -74,6 +74,10 @@ Pad probe **2026-09-14T18:02:09Z**: `:45001` health/live **timeout=unreachable**
 GOOSE `:8791` fetch failed. Origin CLI **logged-out** (`CURSOR_API_KEY` missing).
 Never LIVE. Origin still must implement that playbook.
 Keep-busy tick: 35 idle / 1 running. World next remains `genesis-world-layer-102`.
+`sync` leftover for a 36th idle agent: `gub-inventory-tick`, then
+`gub-route-intent` / `gub-run-playbook`, then catalog cards.
+`node src/cli.js catalog` diffs Notion Genesis Entries
+(`ledger/catalog-entries.json`) so new playbooks become cards.
 
 Do not reopen [main#1](https://github.com/yuro1991-afk/main/pull/1).
 Do not work dronehive / opensussy / face-swap / ollama-voice / bloom.

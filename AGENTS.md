@@ -20,6 +20,9 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
    Genesis Python world-phase card (no lease — dead idle agents must
    not hide `next`). `node src/cli.js sync --agents last-agents.json
    --write` maps newly idle agents onto leftover Genesis cards.
+   `node src/cli.js catalog --write` diffs
+   `ledger/catalog-entries.json` (Notion Genesis Entries) and appends
+   uncarded playbooks.
    `slots --world` / `busy --world` stay on those
    planes. Peek without claiming: `node src/cli.js relaunch` (`gub-inventory-tick`
    while the probe is claimed). Paste `node src/cli.js prompt` into an
