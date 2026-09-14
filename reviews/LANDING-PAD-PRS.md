@@ -16,7 +16,7 @@ Superbrain `:45001` health/live **timeout=unreachable**. Never LIVE.
 
 | PR | state | note |
 | --- | --- | --- |
-| [dronehive#1](https://github.com/yuro1991-afk/dronehive/pull/1) | MERGEABLE | `python-smoke` red (cp1252). |
+| [dronehive#1](https://github.com/yuro1991-afk/dronehive/pull/1) | MERGEABLE | `python-smoke` red (cp1252). Patch on main#6 applies clean to `d538a89` — see `reviews/DRONEHIVE-UNICODE-EVIDENCE.md`. |
 | [dronehive#2](https://github.com/yuro1991-afk/dronehive/pull/2) | MERGEABLE | stacked; same smoke failure. |
 
 ## Agents

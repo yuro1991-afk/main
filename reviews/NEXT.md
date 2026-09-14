@@ -15,6 +15,8 @@ Newcomer `bc-f407303f` takes `review-main-pr8`.
 
 **Peek leftover unused (no `--agent`):** `review-landing-pad-prs`  
 Written: `reviews/LANDING-PAD-PRS.md`. Merge **#8**, skip conflicting #4/#5/#6.
+DroneHive unicode patch from #6 **applies clean** on `d538a89` and stops the
+cp1252 `UnicodeEncodeError`. Evidence: `reviews/DRONEHIVE-UNICODE-EVIDENCE.md`.
 `dronehive-unicode-ci` is rostered — do not steal it.  
 `--origin` leftover is still `gub-route-intent` (opt-in only).
 Pad probe **2026-09-14T19:05Z**: `:45001` health/live **timeout=unreachable**.
