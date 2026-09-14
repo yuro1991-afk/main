@@ -39,11 +39,10 @@ node src/cli.js route "keep my agents busy"                 # leftover Origin ca
 node src/cli.js route "keep my agents busy" --agent "$CURSOR_AGENT_ID"  # your roster card
 ```
 
-`assign` maps all 35 idle pad agents onto unique Genesis Python world
-phases and writes paste-ready briefs under `reviews/launch/`.
-`busy --agent` claims **your roster card** first so those 35 agents do
-not all stampede onto leftover `gub-inventory-tick`. Unassigned agents
-take the leftover `next` card. `busy --world --agent` still stays on
+`assign` maps parked pad agents onto unique Genesis cards and writes
+paste-ready briefs under `reviews/launch/`. `busy --agent` claims
+**your roster card** first. Unassigned agents take leftover
+`gub-route-intent`. `busy --world --agent` still stays on
 world planes. `slots --world` lists the rest. Peek `next` (no `--agent`)
 is still `gub-inventory-tick` (GUB). Claim leases expire in 45 minutes.
 

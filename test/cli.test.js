@@ -75,7 +75,7 @@ test("cli next exits 1 when empty", async () => {
 test("cli route and probe", async () => {
   const routed = await capture(["route", "keep", "agents", "busy"]);
   assert.equal(routed.code, 0);
-  assert.match(routed.out, /gub-inventory-tick/);
+  assert.match(routed.out, /gub-route-intent/);
   assert.match(routed.out, /yuri-afk\/genesis/);
   const parked = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)))
     .assignments[0];

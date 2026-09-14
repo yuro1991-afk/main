@@ -68,7 +68,7 @@ lattice · arena · robotics. Cite PM + layer #102 only.
 `node src/cli.js next --world` returns `genesis-world-layer-102`.
 `node src/cli.js catalog` now diffs `ledger/catalog-entries.json`
 (Notion Genesis Entries). All 18 playbooks are carded; leftover after
-the 35 world assignments is `gub-inventory-tick`, then
-`gub-route-intent` / `gub-run-playbook`, then catalog cards.
+the 35 world assignments plus the fork's `gub-inventory-tick` is
+`gub-route-intent`, then `gub-run-playbook`, then catalog cards.
 Idle agents: `node src/cli.js assign` (35 parked pad agents → unique
 world-phase Origin cards). `reviews/WORLD-PHASES.md`. Do not reopen main#1.

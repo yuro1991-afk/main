@@ -16,7 +16,7 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
 2. `node src/cli.js busy --agent <your-bcId>` — claims **your roster
    Origin card** if `ledger/roster.json` already assigned you one
    (world-phase first). Otherwise it claims the leftover `next` card
-   (`gub-inventory-tick` today). Re-running returns the card you already
+   (`gub-route-intent` for a new unassigned agent). Re-running returns the card you already
    hold. `node src/cli.js slots` lists the rest so a second agent does
    not pile on.
    `node src/cli.js assign` maps every idle pad agent to a distinct

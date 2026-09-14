@@ -145,5 +145,5 @@ test("repo roster already covers the current idle set", () => {
   const packet = syncRoster(ledger, structuredClone(roster), agents, NOW);
   assert.equal(packet.added.length, 0);
   assert.equal(packet.uncovered.length, 0);
-  assert.equal(packet.idle, 35);
+  assert.equal(packet.idle, 36);
 });

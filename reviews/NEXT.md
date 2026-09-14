@@ -1,7 +1,8 @@
 # Next card (Genesis Python world)
 
 Idle agents on `yuro1991-afk/main`: do **not** inventory this pad again.
-Relaunch Origin. Every idle agent already has a unique world-phase card.
+Relaunch Origin. 35 parked agents have unique world-phase cards. The
+new fork takes leftover `gub-inventory-tick`.
 
 ```bash
 node src/cli.js assign
@@ -11,7 +12,7 @@ node src/cli.js busy --agent "$CURSOR_AGENT_ID"   # your roster card, not leftov
 node src/cli.js prompt --agent "$CURSOR_AGENT_ID" # same card, paste into Origin
 ```
 
-Paste-ready Origin briefs for the 35 parked agents live in
+Paste-ready Origin briefs for the 36 parked agents live in
 `reviews/launch/<jobId>.md`. Open yours, then relaunch Origin. Do not
 stay on this pad.
 
@@ -63,6 +64,7 @@ Full table: `reviews/WORLD-PHASES.md` · backlog: `reviews/genesis-backlog.md`
 | Items for attention | `genesis-live-alert-83` |
 | Genesis auto review | `genesis-online-portal-26` |
 | Genesis repo location | `genesis-job-organizer-37` |
+| Agent workload management (fork) | `gub-inventory-tick` |
 
 Notion (Yuri’s Space) has **no dedicated pages** for unifier / map /
 spawner / physics / atmosphere / generator / lattice / arena / robotics.
@@ -70,20 +72,21 @@ Do not invent `packages/world-*` on this pad. Those cards stay Origin-only
 and start from the PM planes list.
 
 `gub-superbrain-probe` stays claimed on this pad for the probe only.
-Pad probe **2026-09-14T18:20:49Z**: `:45001` health/live **timeout=unreachable**;
+Pad probe **2026-09-14T18:30:13Z**: `:45001` health/live **timeout=unreachable**;
 GOOSE `:8791` fetch failed. Origin CLI **logged-out** (`CURSOR_API_KEY` missing).
 Never LIVE. Origin still must implement that playbook.
-Keep-busy tick: 35 idle / 1 running. `busy --agent` claims the
-agent's roster Origin card first. `prompt` / `relaunch` / `brief` /
-`handoff` / `helpers --agent` peek that same card (no leftover
-`gub-inventory-tick` paste). World peek remains `genesis-world-layer-102`.
-`sync` leftover for a 36th idle agent: `gub-inventory-tick`, then
-`gub-route-intent` / `gub-run-playbook`, then catalog cards.
+Keep-busy tick: 36 idle / 1 running. New fork
+`bc-84d93b47-d0e0-4d4c-bc55-94c546b5dca0` is rostered onto
+`gub-inventory-tick` (no lease). `busy --agent` claims the agent's
+roster Origin card first. World peek remains `genesis-world-layer-102`.
+`sync` leftover for a 37th idle agent: `gub-route-intent`, then
+`gub-run-playbook`, then catalog cards.
 `node src/cli.js catalog` diffs Notion Genesis Entries
 (`ledger/catalog-entries.json`) so new playbooks become cards.
 `node src/cli.js route "keep agents busy"` without `--agent` returns
-that leftover Origin card (`gub-inventory-tick`), not this pad.
+that leftover Origin card (`gub-route-intent`), not this pad.
 With `--agent` it returns the agent's roster card. No self-hosted workers.
+Stub wake table: [PR #7](https://github.com/yuro1991-afk/main/pull/7).
 
 Do not reopen [main#1](https://github.com/yuro1991-afk/main/pull/1).
 Do not work dronehive / opensussy / face-swap / ollama-voice / bloom.

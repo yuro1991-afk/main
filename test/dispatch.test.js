@@ -145,7 +145,7 @@ test("peekBusyJob uses the roster card without claiming", () => {
   assert.equal(job.status, "open");
   assert.equal(job.claim, null);
   const leftover = peekBusyJob(ledger, "bc-brand-new", { genesis: true }, NOW, roster);
-  assert.equal(leftover.id, "gub-inventory-tick");
+  assert.equal(leftover.id, "gub-route-intent");
   assert.equal(leftover.status, "open");
 });
 
@@ -157,7 +157,7 @@ test("claimBusyJob uses the roster card instead of leftover next", () => {
   assert.equal(job.id, parked.jobId);
   assert.notEqual(job.id, "gub-inventory-tick");
   const leftoverAgent = claimBusyJob(ledger, "bc-brand-new", { genesis: true }, NOW, roster);
-  assert.equal(leftoverAgent.id, "gub-inventory-tick");
+  assert.equal(leftoverAgent.id, "gub-route-intent");
 });
 
 test("busy --agent claims the roster Origin card, not leftover next", async () => {
@@ -192,12 +192,12 @@ test("assign maps every idle pad agent to a distinct Origin world card", () => {
   const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
   const packet = buildAssign(ledger, roster, NOW);
   assert.equal(packet.contract, ASSIGN_CONTRACT);
-  assert.equal(packet.count, 35);
+  assert.equal(packet.count, 36);
   assert.equal(packet.next.jobId, "genesis-world-layer-102");
   const ids = packet.assignments.map((row) => row.jobId);
   const agents = packet.assignments.map((row) => row.bcId);
-  assert.equal(new Set(ids).size, 35);
-  assert.equal(new Set(agents).size, 35);
+  assert.equal(new Set(ids).size, 36);
+  assert.equal(new Set(agents).size, 36);
   assert.ok(packet.assignments.some((row) => row.jobId === "genesis-world-unifier"));
   assert.ok(packet.assignments.some((row) => row.jobId === "genesis-world-robotics"));
   assert.ok(packet.assignments.every((row) => row.relaunch.kind === "origin"));
@@ -205,8 +205,9 @@ test("assign maps every idle pad agent to a distinct Origin world card", () => {
   assert.ok(packet.assignments.every((row) => row.launch === `reviews/launch/${row.jobId}.md`));
   assert.ok(packet.assignments.every((row) => /Leave this pad/.test(row.prompt)));
   assert.match(packet.next.prompt, /genesis-world-layer-102/);
+  assert.ok(ids.includes("gub-inventory-tick"));
   assert.ok(!ids.includes("catalog-expand-domain"));
-  assert.ok(!ids.includes("gub-inventory-tick"));
+  assert.ok(!ids.includes("gub-route-intent"));
   assert.ok(!ids.includes("dronehive-unicode-ci"));
 });
 

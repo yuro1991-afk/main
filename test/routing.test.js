@@ -87,15 +87,15 @@ test("keep-busy with --agent routes to the roster card, not leftover next", () =
   assert.equal(route.jobId, parked.jobId);
   assert.notEqual(route.jobId, "gub-inventory-tick");
   const leftover = routeIntent("keep agents busy", { ledger, roster, nowMs: NOW });
-  assert.equal(leftover.jobId, "gub-inventory-tick");
+  assert.equal(leftover.jobId, "gub-route-intent");
 });
 
-test("seeded queue leftover after the real roster is gub-inventory-tick", () => {
+test("seeded queue leftover after the real roster is gub-route-intent", () => {
   const ledger = loadLedger(join(ROOT, "ledger", "queue.json"));
   const roster = loadRoster(join(ROOT, "ledger", "roster.json"));
   const entries = loadEntries(defaultEntriesPath(ROOT));
   const route = routeIntent("Keep my agents busy", { ledger, roster, entries, nowMs: NOW });
-  assert.equal(route.jobId, "gub-inventory-tick");
+  assert.equal(route.jobId, "gub-route-intent");
 });
 
 test("genesis routes to Origin, not GitHub PR 1", () => {
