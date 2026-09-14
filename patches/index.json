@@ -297,6 +297,15 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "docs/WORK_ORDER.md NEXT.json example codex_ref uses host/library, not F:\\\\GrokSelfLibrary. Independent of hive-docstring-honesty and config-load-overlay. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-honesty",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-doc-honesty.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "drone/app/seed/docs/WORK_ORDER.md NEXT.json example codex_ref uses host/library, not F:\\\\GrokSelfLibrary. Independent of docs/WORK_ORDER.md leftover (different file). Does not touch tool_agent.py."
     }
   ]
 }
