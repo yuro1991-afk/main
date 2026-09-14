@@ -42,7 +42,18 @@ export {
   probeLane,
   writeLaneProbe,
 } from "./probe.js";
-export { ROUTES, destinationForKind, routeIntent } from "./routing.js";
+export {
+  ROUTES,
+  ROUTE_CONTRACT,
+  defaultRoutePath,
+  destinationForKind,
+  leftoverForRoute,
+  routeFromJob,
+  routeIntent,
+  scorePlaybooks,
+  tokenizeIntent,
+  writeRoute,
+} from "./routing.js";
 export {
   INVENTORY_CONTRACT,
   defaultInventoryPath,

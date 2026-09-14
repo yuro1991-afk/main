@@ -1,4 +1,10 @@
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
 import { assertNeverKind } from "./kinds.js";
+import { jobIdForEntry } from "./catalog.js";
+import { unusedGenesisCards } from "./sync.js";
+
+export const ROUTE_CONTRACT = "agent-ops.route.v1";
 
 /**
  * Intent → destination map so idle agents stop all attaching to empty main.
@@ -6,7 +12,9 @@ import { assertNeverKind } from "./kinds.js";
  *   intent: string,
  *   destination: string,
  *   kind: string,
- *   notes: string
+ *   notes: string,
+ *   jobId?: string | null,
+ *   packet?: string | null
  * }} Route
  */
 
@@ -14,76 +22,212 @@ import { assertNeverKind } from "./kinds.js";
 export const ROUTES = Object.freeze([
   {
     intent: "keep agents busy",
-    destination: "github.com/yuro1991-afk/main (this dispatch board)",
-    kind: "implement",
-    notes: "Genesis only. Claim the next Origin card. Do not rebuild sibling stubs.",
+    destination: "origin.cursor.com/git/yuri-afk/genesis",
+    kind: "origin-slice",
+    notes: "Relaunch Origin. Take the next unused card. Do not sit on this pad.",
+    jobId: null,
+    packet: null,
   },
   {
     intent: "genesis slice / origin kernel",
     destination: "origin.cursor.com/git/yuri-afk/genesis",
     kind: "origin-slice",
     notes: "Source of truth. Do not reopen GitHub PR #1 on yuro1991-afk/main.",
+    jobId: null,
+    packet: null,
   },
   {
     intent: "auto review / coderabbit",
     destination: "an existing open PR, not empty main",
     kind: "review",
     notes: "main has no mergeable Genesis tree. Review dronehive #1/#2 or an Origin PR.",
+    jobId: null,
+    packet: null,
   },
   {
     intent: "items for attention",
     destination: "ledger next() then the named repo",
     kind: "fix",
     notes: "Highest-priority open job. Expired claims are fair game.",
+    jobId: null,
+    packet: null,
   },
   {
     intent: "dronehive ci / packaging",
     destination: "github.com/yuro1991-afk/dronehive",
     kind: "fix",
     notes: "Unstick #1 UnicodeEncodeError first, then rebase #2.",
+    jobId: null,
+    packet: null,
   },
   {
     intent: "superbrain / lanes",
     destination: "probe known lanes via agent-ops",
     kind: "probe",
     notes: "Failed probes are unreachable, never live. LANE-ETH-PEER ≠ :8791.",
+    jobId: null,
+    packet: null,
   },
   {
     intent: "catalog / notion inventory",
     destination: "Origin genesis catalog + Notion Genesis Catalog",
     kind: "catalog",
     notes: "Notion is seeded first; do not invent URLs.",
+    jobId: null,
+    packet: null,
   },
 ]);
 
+const STOP = new Set([
+  "the",
+  "and",
+  "for",
+  "with",
+  "into",
+  "from",
+  "that",
+  "this",
+  "only",
+  "keep",
+  "busy",
+  "agents",
+  "agent",
+  "my",
+]);
+
+/**
+ * @param {string} repoRoot
+ */
+export function defaultRoutePath(repoRoot) {
+  return join(repoRoot, ".genesis", "last-route.json");
+}
+
 /**
  * @param {string} text
+ * @returns {string[]}
+ */
+export function tokenizeIntent(text) {
+  return String(text ?? "")
+    .toLowerCase()
+    .split(/[^a-z0-9]+/i)
+    .filter((token) => token.length > 2 && !STOP.has(token));
+}
+
+/**
+ * Playbooks are boosted. Skills/tools/resources stay out unless they score on their own.
+ * @param {string} text
+ * @param {Array<{ entryId: string, name?: string, type?: string, description?: string, category?: string }>} entries
+ */
+export function scorePlaybooks(text, entries) {
+  const tokens = tokenizeIntent(text);
+  if (tokens.length === 0 || !Array.isArray(entries)) return [];
+  return entries
+    .filter((entry) => entry && entry.type === "playbook")
+    .map((entry) => {
+      const hay = `${entry.entryId} ${entry.name ?? ""} ${entry.description ?? ""} ${entry.category ?? ""}`.toLowerCase();
+      const hits = tokens.filter((token) => hay.includes(token)).length;
+      return { entry, score: hits + 2 };
+    })
+    .filter((row) => row.score >= 3 && tokenizeIntent(text).some((token) => `${row.entry.entryId} ${row.entry.name ?? ""}`.toLowerCase().includes(token)))
+    .sort((a, b) => b.score - a.score || a.entry.entryId.localeCompare(b.entry.entryId));
+}
+
+/**
+ * @param {{ ledger?: { jobs: object[] }, roster?: { assignments?: Array<{ jobId: string }> }, nowMs?: number }} context
+ */
+export function leftoverForRoute(context = {}) {
+  if (!context.ledger) return [];
+  const used = new Set((context.roster?.assignments ?? []).map((row) => row.jobId));
+  return unusedGenesisCards(context.ledger, used, context.nowMs ?? Date.now());
+}
+
+/**
+ * @param {string} text
+ * @param {object} job
+ * @param {string} notes
+ */
+export function routeFromJob(text, job, notes) {
+  return {
+    contract: ROUTE_CONTRACT,
+    intent: text,
+    destination: `${job.repo}#${job.id}`,
+    kind: job.kind,
+    notes,
+    jobId: job.id,
+    packet: `reviews/handoff-${job.id}.md`,
+  };
+}
+
+/**
+ * @param {string} text
+ * @param {{
+ *   ledger?: { jobs: Array<{ id: string, repo: string, kind: string }> },
+ *   roster?: { assignments?: Array<{ jobId: string }> },
+ *   entries?: object[],
+ *   nowMs?: number
+ * }} [context]
  * @returns {Route}
  */
-export function routeIntent(text) {
+export function routeIntent(text, context = {}) {
   const q = (text ?? "").toLowerCase();
-  if (includesAny(q, ["keep", "busy", "workload", "dispatch", "idle"])) {
-    return ROUTES[0];
-  }
   if (includesAny(q, ["review", "coderabbit", "code rabbit"])) {
-    return ROUTES[2];
-  }
-  if (includesAny(q, ["genesis", "origin", "sibling", "hub"])) {
-    return ROUTES[1];
-  }
-  if (includesAny(q, ["attention", "needs attention", "attend"])) {
-    return ROUTES[3];
+    return withContract(ROUTES[2], text);
   }
   if (includesAny(q, ["dronehive", "drone", "unicode", "wheel"])) {
-    return ROUTES[4];
+    return withContract(ROUTES[4], text);
   }
   if (includesAny(q, ["superbrain", "lane", "probe", "boss"])) {
-    return ROUTES[5];
+    return withContract(ROUTES[5], text);
+  }
+
+  const leftover = leftoverForRoute(context);
+  const scored = scorePlaybooks(text, context.entries ?? []);
+  const scoredJob = jobForScored(scored[0], leftover, context.ledger);
+  if (scoredJob) {
+    return routeFromJob(
+      text,
+      scoredJob,
+      `Catalog playbook ${scored[0].entry.entryId} scored ${scored[0].score}. Relaunch Origin. Do not sit on this pad.`,
+    );
+  }
+
+  if (includesAny(q, ["keep", "busy", "workload", "dispatch", "idle"])) {
+    if (leftover[0]) {
+      return routeFromJob(
+        text,
+        leftover[0],
+        "Keep-busy goes to the next unused Origin card. Do not sit on this pad.",
+      );
+    }
+    return withContract(ROUTES[0], text);
+  }
+  if (includesAny(q, ["genesis", "origin", "sibling", "hub"])) {
+    return withContract(ROUTES[1], text);
+  }
+  if (includesAny(q, ["attention", "needs attention", "attend"])) {
+    return withContract(ROUTES[3], text);
   }
   if (includesAny(q, ["catalog", "notion", "inventory"])) {
-    return ROUTES[6];
+    return withContract(ROUTES[6], text);
   }
-  return ROUTES[0];
+  if (leftover[0]) {
+    return routeFromJob(
+      text,
+      leftover[0],
+      "Unmatched intent still takes the next unused Origin card.",
+    );
+  }
+  return withContract(ROUTES[0], text);
+}
+
+/**
+ * @param {object} snapshot
+ * @param {string} destPath
+ */
+export function writeRoute(snapshot, destPath) {
+  mkdirSync(dirname(destPath), { recursive: true });
+  writeFileSync(destPath, `${JSON.stringify(snapshot, null, 2)}\n`);
+  return destPath;
 }
 
 /**
@@ -106,6 +250,41 @@ export function destinationForKind(kind) {
     default:
       return assertNeverKind(kind);
   }
+}
+
+/**
+ * @param {string} destPath
+ */
+export function routeFileExists(destPath) {
+  return existsSync(destPath);
+}
+
+/**
+ * @param {Route} route
+ * @param {string} text
+ */
+function withContract(route, text) {
+  return {
+    contract: ROUTE_CONTRACT,
+    intent: text,
+    destination: route.destination,
+    kind: route.kind,
+    notes: route.notes,
+    jobId: route.jobId ?? null,
+    packet: route.packet ?? null,
+  };
+}
+
+/**
+ * @param {{ entry: { entryId: string }, score: number } | undefined} scored
+ * @param {object[]} leftover
+ * @param {{ jobs?: object[] } | undefined} ledger
+ */
+function jobForScored(scored, leftover, ledger) {
+  if (!scored) return null;
+  const jobId = jobIdForEntry(scored.entry.entryId);
+  if (!jobId) return null;
+  return leftover.find((job) => job.id === jobId) ?? ledger?.jobs?.find((job) => job.id === jobId) ?? null;
 }
 
 /**

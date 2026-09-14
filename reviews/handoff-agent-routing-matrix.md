@@ -42,7 +42,7 @@ Collision: this GitHub board already has a seed matrix in `src/routing.js` — *
 
 | Intent (seed) | Destination (seed) | Kind | Notes already on the pad |
 | --- | --- | --- | --- |
-| keep agents busy | `github.com/yuro1991-afk/main` (this dispatch board) | implement | Genesis only. Claim the next Origin card. Do not rebuild sibling stubs. |
+| keep agents busy | `origin.cursor.com/git/yuri-afk/genesis` leftover card | origin-slice | Next unused Origin card (`gub-inventory-tick` today). Do not sit on this pad. |
 | genesis slice / origin kernel | `origin.cursor.com/git/yuri-afk/genesis` | origin-slice | Source of truth. Do not reopen GitHub PR #1. |
 | auto review / coderabbit | an existing open PR, not empty main | review | `main` has no mergeable Genesis tree. |
 | items for attention | ledger `next()` then the named repo | fix | Highest-priority open job. Expired claims are fair game. |

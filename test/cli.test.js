@@ -73,7 +73,8 @@ test("cli next exits 1 when empty", async () => {
 test("cli route and probe", async () => {
   const routed = await capture(["route", "keep", "agents", "busy"]);
   assert.equal(routed.code, 0);
-  assert.match(routed.out, /dispatch board/);
+  assert.match(routed.out, /gub-inventory-tick/);
+  assert.match(routed.out, /yuri-afk\/genesis/);
   const probed = await capture(["probe"], {
     fetchImpl: async () => ({ ok: false, status: 504 }),
     root: mkdtempSync(join(tmpdir(), "agent-ops-probe-cli-")),

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import {
@@ -22,7 +23,7 @@ import {
   readOriginProbe,
   writeOriginProbe,
 } from "./origin.js";
-import { routeIntent } from "./routing.js";
+import { defaultRoutePath, routeIntent, writeRoute } from "./routing.js";
 import { defaultInventoryPath, writeInventoryTick } from "./tick.js";
 import { buildBrief } from "./brief.js";
 import { buildPrompt } from "./prompt.js";
@@ -187,7 +188,25 @@ export async function runCli(argv, options = {}) {
     }
     case "route": {
       const intent = positionals.join(" ") || flags.intent || "";
-      write(JSON.stringify(routeIntent(intent), null, 2));
+      const roster = readRosterSafe(
+        flags.roster ? resolve(flags.roster) : defaultRosterPath(options.root ?? ROOT),
+      );
+      const entries = readEntriesSafe(
+        flags.entries
+          ? resolve(flags.entries)
+          : defaultEntriesPath(options.root ?? ROOT),
+      );
+      const packet = routeIntent(intent, {
+        ledger: loadLedger(ledgerPath),
+        roster,
+        entries,
+        nowMs,
+      });
+      writeRoute(
+        packet,
+        flags.out ? resolve(flags.out) : defaultRoutePath(options.root ?? ROOT),
+      );
+      write(JSON.stringify(packet, null, 2));
       return 0;
     }
     case "tick": {
@@ -439,6 +458,16 @@ function loadOrReadAgents(flags, options) {
     ? resolve(flags.agents)
     : defaultAgentsPath(options.root ?? ROOT);
   return loadAgents(destPath);
+}
+
+function readRosterSafe(destPath) {
+  if (!existsSync(destPath)) return { assignments: [] };
+  return loadRoster(destPath);
+}
+
+function readEntriesSafe(destPath) {
+  if (!existsSync(destPath)) return [];
+  return loadEntries(destPath);
 }
 
 function requireAgent(flags) {
