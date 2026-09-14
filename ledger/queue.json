@@ -949,6 +949,126 @@
       "collision": "TRUTH_BIND.json remappable keys only. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-package-release-v2-cargo",
+      "title": "Point package_release_v2.ps1 cargo homes at host/ai-home",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 91,
+      "status": "blocked",
+      "claim": null,
+      "notes": "scripts/package_release_v2.ps1 still pins G:\\\\AI-Home\\\\tools cargo/rustup. Applyable catalog patch is patches/dronehive-package-release-v2-cargo.patch on main#9. Independent of start-script leftovers. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "package_release_v2.ps1 cargo/rustup env uses Join-Path $Root host/ai-home/tools",
+      "files": [
+        "scripts/package_release_v2.ps1"
+      ],
+      "collision": "scripts/package_release_v2.ps1 cargo/rustup env only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-launch-cargo",
+      "title": "Point mount Launch.ps1 cargo homes at host/ai-home",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 92,
+      "status": "blocked",
+      "claim": null,
+      "notes": "apps/drone-ollama-mount/Launch.ps1 still pins G:\\\\AI-Home\\\\tools cargo/rustup. Applyable catalog patch is patches/dronehive-mount-launch-cargo.patch on main#9. Independent of mount README leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "Launch.ps1 cargo/rustup env uses host\\\\ai-home\\\\tools",
+      "files": [
+        "apps/drone-ollama-mount/Launch.ps1"
+      ],
+      "collision": "apps/drone-ollama-mount/Launch.ps1 cargo env only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-install-ollama-app-cargo",
+      "title": "Point Install-DroneOllamaApp cargo homes at host/ai-home",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 93,
+      "status": "blocked",
+      "claim": null,
+      "notes": "Install-DroneOllamaApp.ps1 still pins G:\\\\AI-Home\\\\tools cargo/rustup. Applyable catalog patch is patches/dronehive-install-ollama-app-cargo.patch on main#9. Leaves InstallRoot / mountSrc / manifest G: leftovers. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "Install-DroneOllamaApp.ps1 cargo/rustup env uses host\\\\ai-home\\\\tools",
+      "files": [
+        "apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1"
+      ],
+      "collision": "Install-DroneOllamaApp.ps1 cargo env only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-start-tui-cargo-honesty",
+      "title": "Point START_TUI_OLLAMA.bat cargo PATH at host/ai-home",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 94,
+      "status": "blocked",
+      "claim": null,
+      "notes": "START_TUI_OLLAMA.bat Build echo still pins G:\\\\AI-Home\\\\tools\\\\cargo\\\\bin. Applyable catalog patch is patches/dronehive-start-tui-cargo-honesty.patch on main#9. Independent of START_SUPER_MESH leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "START_TUI_OLLAMA.bat Build echo uses %ROOT%\\\\host\\\\ai-home\\\\tools\\\\cargo\\\\bin",
+      "files": [
+        "START_TUI_OLLAMA.bat"
+      ],
+      "collision": "START_TUI_OLLAMA.bat Build echo line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-tui-readme-cargo",
+      "title": "Point drone-ollama-tui README build at host/ai-home",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 95,
+      "status": "blocked",
+      "claim": null,
+      "notes": "apps/drone-ollama-tui/README.md build still pins G:\\\\AI-Home cargo PATH and cd. Applyable catalog patch is patches/dronehive-ollama-tui-readme-cargo.patch on main#9. Independent of START_TUI leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "drone-ollama-tui README build PATH uses host\\\\ai-home and cd apps\\\\drone-ollama-tui",
+      "files": [
+        "apps/drone-ollama-tui/README.md"
+      ],
+      "collision": "apps/drone-ollama-tui/README.md build block only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-readme-cargo",
+      "title": "Point drone-ollama-mount README build at host/ai-home",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 96,
+      "status": "blocked",
+      "claim": null,
+      "notes": "apps/drone-ollama-mount/README.md build still pins G:\\\\AI-Home cargo env and cd. Applyable catalog patch is patches/dronehive-mount-readme-cargo.patch on main#9. Independent of Launch leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "mount README build cargo env uses host\\\\ai-home and cd apps\\\\drone-ollama-mount",
+      "files": [
+        "apps/drone-ollama-mount/README.md"
+      ],
+      "collision": "apps/drone-ollama-mount/README.md build block only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-tui-readme-cargo",
+      "title": "Point dronehive-tui README cargo PATH at host/ai-home",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 97,
+      "status": "blocked",
+      "claim": null,
+      "notes": "apps/dronehive-tui/README.md build still pins G:\\\\AI-Home\\\\tools\\\\cargo\\\\bin. Applyable catalog patch is patches/dronehive-tui-readme-cargo.patch on main#9. Independent of ollama-tui README leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "dronehive-tui README build PATH uses host\\\\ai-home\\\\tools\\\\cargo\\\\bin",
+      "files": [
+        "apps/dronehive-tui/README.md"
+      ],
+      "collision": "apps/dronehive-tui/README.md PATH line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-apps-readme-cargo",
+      "title": "Point apps README Rust path at host/ai-home",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 98,
+      "status": "blocked",
+      "claim": null,
+      "notes": "apps/README.md still pins G:\\\\AI-Home\\\\tools\\\\cargo as the required Rust path. Applyable catalog patch is patches/dronehive-apps-readme-cargo.patch on main#9. Independent of per-app README leftovers. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "apps/README.md build line uses host/ai-home/tools/cargo",
+      "files": [
+        "apps/README.md"
+      ],
+      "collision": "apps/README.md build line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",

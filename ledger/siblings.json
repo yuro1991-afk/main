@@ -138,7 +138,15 @@
         "dronehive-start-multi-model-pythonpath",
         "dronehive-start-seer-pythonpath",
         "dronehive-enable-bridge-fallback",
-        "dronehive-truth-bind-paths"
+        "dronehive-truth-bind-paths",
+        "dronehive-package-release-v2-cargo",
+        "dronehive-mount-launch-cargo",
+        "dronehive-install-ollama-app-cargo",
+        "dronehive-start-tui-cargo-honesty",
+        "dronehive-ollama-tui-readme-cargo",
+        "dronehive-mount-readme-cargo",
+        "dronehive-tui-readme-cargo",
+        "dronehive-apps-readme-cargo"
       ]
     }
   ]

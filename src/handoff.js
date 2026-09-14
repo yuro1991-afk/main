@@ -267,6 +267,22 @@ function dronehiveRelaunchReason(jobId) {
       return "This token cannot push dronehive. Apply patches/dronehive-enable-bridge-fallback.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
     case "dronehive-truth-bind-paths":
       return "This token cannot push dronehive. Apply patches/dronehive-truth-bind-paths.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-package-release-v2-cargo":
+      return "This token cannot push dronehive. Apply patches/dronehive-package-release-v2-cargo.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-mount-launch-cargo":
+      return "This token cannot push dronehive. Apply patches/dronehive-mount-launch-cargo.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-install-ollama-app-cargo":
+      return "This token cannot push dronehive. Apply patches/dronehive-install-ollama-app-cargo.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-start-tui-cargo-honesty":
+      return "This token cannot push dronehive. Apply patches/dronehive-start-tui-cargo-honesty.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-ollama-tui-readme-cargo":
+      return "This token cannot push dronehive. Apply patches/dronehive-ollama-tui-readme-cargo.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-mount-readme-cargo":
+      return "This token cannot push dronehive. Apply patches/dronehive-mount-readme-cargo.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-tui-readme-cargo":
+      return "This token cannot push dronehive. Apply patches/dronehive-tui-readme-cargo.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-apps-readme-cargo":
+      return "This token cannot push dronehive. Apply patches/dronehive-apps-readme-cargo.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
     case "dronehive-rebase-packaging":
       return "This token cannot push dronehive. Rebase packaging stays blocked until dronehive#1 python-smoke is green. Do not copy PR #6 autofix.";
     default:

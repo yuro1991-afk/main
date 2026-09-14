@@ -3,7 +3,7 @@
   "cannotPush": true,
   "apply": "git clone https://github.com/<repo>.git work && cd work && git apply --check ../<file> && git apply ../<file>",
   "doNot": "Do not copy PR #6 npm run autofix. This catalog lists diffs only.",
-  "verifiedAt": "2026-09-14T21:10:00Z",
+  "verifiedAt": "2026-09-14T21:15:00Z",
   "patches": [
     {
       "id": "dronehive-unicode-ci",
@@ -792,6 +792,78 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "TRUTH_BIND.json root/universal/oath_gate/agreement use '.' and host/library. Independent of JSON work_order leftovers (different file). Leaves core_imprint F:/C: text and the C:\\\\ grok hardwire. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-package-release-v2-cargo",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-package-release-v2-cargo.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "scripts/package_release_v2.ps1 cargo/rustup env uses Join-Path $Root host/ai-home/tools. Independent of start-script leftovers (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-launch-cargo",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-mount-launch-cargo.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "apps/drone-ollama-mount/Launch.ps1 cargo/rustup env uses host\\\\ai-home\\\\tools. Independent of mount README leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-install-ollama-app-cargo",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-install-ollama-app-cargo.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "Install-DroneOllamaApp.ps1 cargo/rustup env uses host\\\\ai-home\\\\tools. Leaves InstallRoot / mountSrc / manifest G: leftovers. Independent of Launch leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-start-tui-cargo-honesty",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-start-tui-cargo-honesty.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "START_TUI_OLLAMA.bat Build echo uses %ROOT%\\\\host\\\\ai-home\\\\tools\\\\cargo\\\\bin. Independent of START_SUPER_MESH leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-tui-readme-cargo",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-ollama-tui-readme-cargo.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "apps/drone-ollama-tui/README.md build PATH + cd use host/ai-home and apps\\\\drone-ollama-tui. Independent of START_TUI leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-readme-cargo",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-mount-readme-cargo.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "apps/drone-ollama-mount/README.md build cargo env + cd use host/ai-home and apps\\\\drone-ollama-mount. Independent of Launch leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-tui-readme-cargo",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-tui-readme-cargo.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "apps/dronehive-tui/README.md build PATH uses host\\\\ai-home\\\\tools\\\\cargo\\\\bin. Leaves cd apps\\\\dronehive-tui (already relative). Independent of ollama-tui README leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-apps-readme-cargo",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-apps-readme-cargo.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "apps/README.md build line uses host/ai-home/tools/cargo; G:\\\\AI-Home is one host example. Independent of per-app README leftovers. Does not touch tool_agent.py."
     }
   ]
 }

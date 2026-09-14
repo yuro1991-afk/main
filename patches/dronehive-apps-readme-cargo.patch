@@ -1,0 +1,10 @@
+diff --git a/apps/README.md b/apps/README.md
+index 00832de..1ab7221 100644
+--- a/apps/README.md
++++ b/apps/README.md
+@@ -20,4 +20,4 @@ Install workbench:
+ powershell -NoProfile -ExecutionPolicy Bypass -File apps\drone-ollama-app\installer\Install-DroneOllamaApp.ps1
+ ```
+ 
+-Build requires Rust at `G:\AI-Home\tools\cargo` on BOSS host.
++Build requires Rust at `host/ai-home/tools/cargo` (G:\AI-Home\tools\cargo is one host example).

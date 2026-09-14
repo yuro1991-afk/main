@@ -181,6 +181,14 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
     "dronehive-start-seer-pythonpath",
     "dronehive-enable-bridge-fallback",
     "dronehive-truth-bind-paths",
+    "dronehive-package-release-v2-cargo",
+    "dronehive-mount-launch-cargo",
+    "dronehive-install-ollama-app-cargo",
+    "dronehive-start-tui-cargo-honesty",
+    "dronehive-ollama-tui-readme-cargo",
+    "dronehive-mount-readme-cargo",
+    "dronehive-tui-readme-cargo",
+    "dronehive-apps-readme-cargo",
   ]) {
     const target = relaunchFor({ ...job, id });
     assert.match(target.reason, new RegExp(`${id}\\.patch`));
