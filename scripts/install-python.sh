@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+root="$(cd "$(dirname "$0")/.." && pwd)"
+python3 -m pip install -e "$root/packages/python-infra"
+python3 -m pip install -e "$root/packages/python-arena"
+python3 -m pip install -e "$root/packages/python-suit"
+python3 -m pip install -e "$root/packages/python-mind"
+python3 -m pip install -e "$root/packages/python-ears"
+python3 -m pip install -e "$root/packages/python-head"

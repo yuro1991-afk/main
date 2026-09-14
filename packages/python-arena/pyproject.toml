@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "genesis-arena"
+version = "0.1.0"
+description = "Evaluation arena for Genesis Python agents."
+requires-python = ">=3.11"
+authors = [{ name = "Yuri" }]
+dependencies = ["genesis-infra"]
+
+[project.scripts]
+genesis-arena = "genesis_arena.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
