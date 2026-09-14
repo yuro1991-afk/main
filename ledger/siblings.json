@@ -191,7 +191,24 @@
         "dronehive-doc-app-cd",
         "dronehive-seed-doc-app-cd",
         "dronehive-doc-grok-handoff-root",
-        "dronehive-doc-grok-handoff-cd"
+        "dronehive-doc-grok-handoff-cd",
+        "dronehive-truth-honesty-root",
+        "dronehive-truth-honesty-oath-inline",
+        "dronehive-ollama-app-readme-install",
+        "dronehive-ollama-app-readme-dest",
+        "dronehive-ollama-app-crash-log",
+        "dronehive-ollama-app-ui-install-root",
+        "dronehive-ollama-app-open-out",
+        "dronehive-ollama-app-open-benchmarks",
+        "dronehive-ollama-app-open-workspace",
+        "dronehive-ollama-app-open-install",
+        "dronehive-ollama-app-open-seal",
+        "dronehive-mount-engine-out",
+        "dronehive-mount-fabric-root",
+        "dronehive-mount-smoke-seal",
+        "dronehive-mount-swarm-seal",
+        "dronehive-truth-honesty-library-list",
+        "dronehive-ollama-app-bridge-paths"
       ]
     }
   ]

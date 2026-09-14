@@ -220,6 +220,23 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
     "dronehive-seed-doc-app-cd",
     "dronehive-doc-grok-handoff-root",
     "dronehive-doc-grok-handoff-cd",
+    "dronehive-truth-honesty-root",
+    "dronehive-truth-honesty-oath-inline",
+    "dronehive-ollama-app-readme-install",
+    "dronehive-ollama-app-readme-dest",
+    "dronehive-ollama-app-crash-log",
+    "dronehive-ollama-app-ui-install-root",
+    "dronehive-ollama-app-open-out",
+    "dronehive-ollama-app-open-benchmarks",
+    "dronehive-ollama-app-open-workspace",
+    "dronehive-ollama-app-open-install",
+    "dronehive-ollama-app-open-seal",
+    "dronehive-mount-engine-out",
+    "dronehive-mount-fabric-root",
+    "dronehive-mount-smoke-seal",
+    "dronehive-mount-swarm-seal",
+    "dronehive-truth-honesty-library-list",
+    "dronehive-ollama-app-bridge-paths",
   ]) {
     const target = relaunchFor({ ...job, id });
     assert.match(target.reason, new RegExp(`${id}\\.patch`));

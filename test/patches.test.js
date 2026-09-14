@@ -41,7 +41,7 @@ test("repo index loads without duplicate ids and files exist", () => {
   const index = loadPatchIndex(defaultPatchesIndexPath(ROOT));
   assert.equal(index.contract, PATCH_CONTRACT.id);
   assert.equal(index.cannotPush, true);
-  assert.ok(index.patches.length >= 128);
+  assert.ok(index.patches.length >= 145);
   assertPatchFilesExist(index, ROOT);
   const ids = index.patches.map((row) => row.id);
   assert.equal(new Set(ids).size, ids.length);
@@ -163,6 +163,23 @@ test("repo index loads without duplicate ids and files exist", () => {
   assert.ok(ids.includes("dronehive-seed-doc-app-cd"));
   assert.ok(ids.includes("dronehive-doc-grok-handoff-root"));
   assert.ok(ids.includes("dronehive-doc-grok-handoff-cd"));
+  assert.ok(ids.includes("dronehive-truth-honesty-root"));
+  assert.ok(ids.includes("dronehive-truth-honesty-oath-inline"));
+  assert.ok(ids.includes("dronehive-ollama-app-readme-install"));
+  assert.ok(ids.includes("dronehive-ollama-app-readme-dest"));
+  assert.ok(ids.includes("dronehive-ollama-app-crash-log"));
+  assert.ok(ids.includes("dronehive-ollama-app-ui-install-root"));
+  assert.ok(ids.includes("dronehive-ollama-app-open-out"));
+  assert.ok(ids.includes("dronehive-ollama-app-open-benchmarks"));
+  assert.ok(ids.includes("dronehive-ollama-app-open-workspace"));
+  assert.ok(ids.includes("dronehive-ollama-app-open-install"));
+  assert.ok(ids.includes("dronehive-ollama-app-open-seal"));
+  assert.ok(ids.includes("dronehive-mount-engine-out"));
+  assert.ok(ids.includes("dronehive-mount-fabric-root"));
+  assert.ok(ids.includes("dronehive-mount-smoke-seal"));
+  assert.ok(ids.includes("dronehive-mount-swarm-seal"));
+  assert.ok(ids.includes("dronehive-truth-honesty-library-list"));
+  assert.ok(ids.includes("dronehive-ollama-app-bridge-paths"));
 });
 
 test("text patches start with diff --git; icons are PNGs", () => {
@@ -256,7 +273,7 @@ test("cli patches lists the catalog", async () => {
   assert.equal(code, 0);
   const parsed = JSON.parse(chunks.join(""));
   assert.equal(parsed.command, "patches");
-  assert.ok(parsed.count >= 128);
+  assert.ok(parsed.count >= 145);
   assert.equal(parsed.cannotPush, true);
   assert.match(parsed.doNot, /autofix/);
 });

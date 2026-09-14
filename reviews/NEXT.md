@@ -6,14 +6,14 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-14T21:15Z**: 39 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-14T21:30Z**: 39 IDLE + this run RUNNING.
 No new agents. Fork `bc-84d93b47` woke, shipped
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
 (`cursor/python-arena-infra-dca0`), now IDLE. Do not steal head / ears /
 eyes / vision / bridge.
 **Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Pad probes stop.
 PR #3 merged; no real review comments (CodeRabbit skip, <10 stars).
-PR #9 catalog now 128 diffs (newest `dronehive-doc-grok-handoff-cd`).
+PR #9 catalog now 145 diffs (newest `dronehive-ollama-app-bridge-paths`).
 This Genesis-only tree still blocks GitHub cards — leftover `next` is the
 expired Origin claim `gub-superbrain-probe`. After #8, leftover unused is
 `review-landing-pad-prs`. First parked apply: `dronehive-unicode-ci`.
@@ -126,11 +126,28 @@ then unused `dronehive-seed-doc-app-library` (drone/app/seed/docs/APP.md only),
 then unused `dronehive-doc-app-cd` (docs/APP.md only),
 then unused `dronehive-seed-doc-app-cd` (drone/app/seed/docs/APP.md only),
 then unused `dronehive-doc-grok-handoff-root` (docs/GROK_HANDOFF.md only),
-then unused `dronehive-doc-grok-handoff-cd` (docs/GROK_HANDOFF.md only).
+then unused `dronehive-doc-grok-handoff-cd` (docs/GROK_HANDOFF.md only),
+then unused `dronehive-truth-honesty-root` (TRUTH_AND_HONESTY.md only),
+then unused `dronehive-truth-honesty-oath-inline` (TRUTH_AND_HONESTY.md only),
+then unused `dronehive-ollama-app-readme-install` (apps/drone-ollama-app/README.md only),
+then unused `dronehive-ollama-app-readme-dest` (apps/drone-ollama-app/README.md only),
+then unused `dronehive-ollama-app-crash-log` (apps/drone-ollama-app/src/main.rs only),
+then unused `dronehive-ollama-app-ui-install-root` (apps/drone-ollama-app/src/main.rs only),
+then unused `dronehive-ollama-app-open-out` (apps/drone-ollama-app/src/main.rs only),
+then unused `dronehive-ollama-app-open-benchmarks` (apps/drone-ollama-app/src/main.rs only),
+then unused `dronehive-ollama-app-open-workspace` (apps/drone-ollama-app/src/main.rs only),
+then unused `dronehive-ollama-app-open-install` (apps/drone-ollama-app/src/main.rs only),
+then unused `dronehive-ollama-app-open-seal` (apps/drone-ollama-app/src/main.rs only),
+then unused `dronehive-mount-engine-out` (apps/drone-ollama-mount/src/engine.rs only),
+then unused `dronehive-mount-fabric-root` (apps/drone-ollama-mount/src/fabric.rs only),
+then unused `dronehive-mount-smoke-seal` (apps/drone-ollama-mount/src/main.rs only),
+then unused `dronehive-mount-swarm-seal` (apps/drone-ollama-mount/src/main.rs only),
+then unused `dronehive-truth-honesty-library-list` (TRUTH_AND_HONESTY.md only),
+then unused `dronehive-ollama-app-bridge-paths` (apps/drone-ollama-app/src/drone_bridge.rs only).
 Newcomer `bc-f407303f`: `review-main-pr10` (fork's Python arena/infra).
 `bc-5fe241dd` Summarize arena: do not steal `genesis-world-arena`; unused apply `faceswap-design-honesty`.
 `bc-e2df7f92` Summarize coordinator: unused apply `dronehive-script-host-roots`.
-Next unused apply if those are taken: `dronehive-doc-grok-handoff-cd`.
+Next unused apply if those are taken: `dronehive-ollama-app-bridge-paths`.
 After #8, leftover unused review is `review-main-pr10`, then `review-landing-pad-prs`.
 
 Idle agents on `yuro1991-afk/main`: do **not** inventory this pad again.

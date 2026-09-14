@@ -1564,6 +1564,261 @@
       "collision": "docs/GROK_HANDOFF.md cd line only. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-truth-honesty-root",
+      "title": "Point TRUTH_AND_HONESTY system root at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 132,
+      "status": "blocked",
+      "claim": null,
+      "notes": "TRUTH_AND_HONESTY.md system root still pins G:\\\\AI-Home. Applyable catalog patch is patches/dronehive-truth-honesty-root.patch on main#9. Independent of truth-bind-paths JSON leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "TRUTH_AND_HONESTY.md system root is .",
+      "files": [
+        "TRUTH_AND_HONESTY.md"
+      ],
+      "collision": "TRUTH_AND_HONESTY.md system root line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-truth-honesty-oath-inline",
+      "title": "Point TRUTH_AND_HONESTY inline oath at host/library",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 133,
+      "status": "blocked",
+      "claim": null,
+      "notes": "TRUTH_AND_HONESTY.md inline oath still pins F:\\\\GrokSelfLibrary. Applyable catalog patch is patches/dronehive-truth-honesty-oath-inline.patch on main#9. Independent of system-root leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "TRUTH_AND_HONESTY.md inline oath uses host/library",
+      "files": [
+        "TRUTH_AND_HONESTY.md"
+      ],
+      "collision": "TRUTH_AND_HONESTY.md inline Oath line only. Leave C:\\\\Users hardwire. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-app-readme-install",
+      "title": "Point drone-ollama-app README installer at repo-relative path",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 134,
+      "status": "blocked",
+      "claim": null,
+      "notes": "apps/drone-ollama-app/README.md installer still pins G:\\\\AI-Home. Applyable catalog patch is patches/dronehive-ollama-app-readme-install.patch on main#9. Independent of dest leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "drone-ollama-app README installer uses apps\\\\drone-ollama-app",
+      "files": [
+        "apps/drone-ollama-app/README.md"
+      ],
+      "collision": "apps/drone-ollama-app/README.md installer line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-app-readme-dest",
+      "title": "Point drone-ollama-app README install dest at host/ai-home",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 135,
+      "status": "blocked",
+      "claim": null,
+      "notes": "apps/drone-ollama-app/README.md install dest still pins G:\\\\AI-Home\\\\apps. Applyable catalog patch is patches/dronehive-ollama-app-readme-dest.patch on main#9. Independent of installer leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "drone-ollama-app README dest uses host\\\\ai-home\\\\apps\\\\DroneOllama",
+      "files": [
+        "apps/drone-ollama-app/README.md"
+      ],
+      "collision": "apps/drone-ollama-app/README.md dest line only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-app-crash-log",
+      "title": "Point drone-ollama-app crash log at host/ai-home",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 136,
+      "status": "blocked",
+      "claim": null,
+      "notes": "main.rs crash_log_path still pins G:\\\\AI-Home\\\\apps. Applyable catalog patch is patches/dronehive-ollama-app-crash-log.patch on main#9. Independent of UI install-root leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "main.rs crash log uses host\\\\ai-home\\\\apps\\\\DroneOllama",
+      "files": [
+        "apps/drone-ollama-app/src/main.rs"
+      ],
+      "collision": "apps/drone-ollama-app/src/main.rs crash_log_path only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-app-ui-install-root",
+      "title": "Point drone-ollama-app UI install root at host/ai-home",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 137,
+      "status": "blocked",
+      "claim": null,
+      "notes": "main.rs UI install root still pins G:\\\\AI-Home\\\\apps. Applyable catalog patch is patches/dronehive-ollama-app-ui-install-root.patch on main#9. Independent of crash-log leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "main.rs UI install root uses host\\\\ai-home",
+      "files": [
+        "apps/drone-ollama-app/src/main.rs"
+      ],
+      "collision": "apps/drone-ollama-app/src/main.rs UI install-root small() only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-app-open-out",
+      "title": "Point drone-ollama-app Open drone out at repo out/",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 138,
+      "status": "blocked",
+      "claim": null,
+      "notes": "main.rs Open drone out still pins G:\\\\AI-Home. Applyable catalog patch is patches/dronehive-ollama-app-open-out.patch on main#9. Independent of benchmarks leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "main.rs Open drone out uses out",
+      "files": [
+        "apps/drone-ollama-app/src/main.rs"
+      ],
+      "collision": "apps/drone-ollama-app/src/main.rs Open drone out only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-app-open-benchmarks",
+      "title": "Point drone-ollama-app Open benchmarks at repo out/benchmarks",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 139,
+      "status": "blocked",
+      "claim": null,
+      "notes": "main.rs Open benchmarks still pins G:\\\\AI-Home. Applyable catalog patch is patches/dronehive-ollama-app-open-benchmarks.patch on main#9. Independent of out leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "main.rs Open benchmarks uses out\\\\benchmarks",
+      "files": [
+        "apps/drone-ollama-app/src/main.rs"
+      ],
+      "collision": "apps/drone-ollama-app/src/main.rs Open benchmarks only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-app-open-workspace",
+      "title": "Point drone-ollama-app Open workspace at data/workspace",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 140,
+      "status": "blocked",
+      "claim": null,
+      "notes": "main.rs Open workspace still pins G:\\\\AI-Home. Applyable catalog patch is patches/dronehive-ollama-app-open-workspace.patch on main#9. Independent of out leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "main.rs Open workspace uses data\\\\workspace",
+      "files": [
+        "apps/drone-ollama-app/src/main.rs"
+      ],
+      "collision": "apps/drone-ollama-app/src/main.rs Open workspace only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-app-open-install",
+      "title": "Point drone-ollama-app Open install folder at host/ai-home",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 141,
+      "status": "blocked",
+      "claim": null,
+      "notes": "main.rs Open app install folder still pins G:\\\\AI-Home\\\\apps. Applyable catalog patch is patches/dronehive-ollama-app-open-install.patch on main#9. Independent of UI leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "main.rs Open install uses host\\\\ai-home",
+      "files": [
+        "apps/drone-ollama-app/src/main.rs"
+      ],
+      "collision": "apps/drone-ollama-app/src/main.rs Open app install folder only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-app-open-seal",
+      "title": "Point drone-ollama-app Open OPERATIONAL_SEAL at repo out/",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 142,
+      "status": "blocked",
+      "claim": null,
+      "notes": "main.rs Open OPERATIONAL_SEAL still pins G:\\\\AI-Home. Applyable catalog patch is patches/dronehive-ollama-app-open-seal.patch on main#9. Independent of out leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "main.rs Open OPERATIONAL_SEAL uses out\\\\OPERATIONAL_SEAL.json",
+      "files": [
+        "apps/drone-ollama-app/src/main.rs"
+      ],
+      "collision": "apps/drone-ollama-app/src/main.rs Open OPERATIONAL_SEAL only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-engine-out",
+      "title": "Point mount engine out_dir at apps/drone-ollama-mount/out",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 143,
+      "status": "blocked",
+      "claim": null,
+      "notes": "engine.rs out_dir still pins G:\\\\AI-Home. Applyable catalog patch is patches/dronehive-mount-engine-out.patch on main#9. Independent of fabric-root leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "engine.rs out_dir uses apps\\\\drone-ollama-mount\\\\out",
+      "files": [
+        "apps/drone-ollama-mount/src/engine.rs"
+      ],
+      "collision": "apps/drone-ollama-mount/src/engine.rs out_dir only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-fabric-root",
+      "title": "Point mount fabric default_drone_root at repo root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 144,
+      "status": "blocked",
+      "claim": null,
+      "notes": "fabric.rs default_drone_root still pins G:\\\\AI-Home. Applyable catalog patch is patches/dronehive-mount-fabric-root.patch on main#9. Independent of engine-out leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "fabric.rs default_drone_root is .",
+      "files": [
+        "apps/drone-ollama-mount/src/fabric.rs"
+      ],
+      "collision": "apps/drone-ollama-mount/src/fabric.rs default_drone_root only. Leave C:\\\\Python candidates. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-smoke-seal",
+      "title": "Point mount SMOKE_SEAL at apps/drone-ollama-mount/out",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 145,
+      "status": "blocked",
+      "claim": null,
+      "notes": "mount main.rs SMOKE_SEAL still pins G:\\\\AI-Home. Applyable catalog patch is patches/dronehive-mount-smoke-seal.patch on main#9. Independent of swarm-seal leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "mount main.rs SMOKE_SEAL uses apps\\\\drone-ollama-mount\\\\out",
+      "files": [
+        "apps/drone-ollama-mount/src/main.rs"
+      ],
+      "collision": "apps/drone-ollama-mount/src/main.rs SMOKE_SEAL only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-swarm-seal",
+      "title": "Point mount SWARM_SMOKE_SEAL at apps/drone-ollama-mount/out",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 146,
+      "status": "blocked",
+      "claim": null,
+      "notes": "mount main.rs SWARM_SMOKE_SEAL still pins G:\\\\AI-Home. Applyable catalog patch is patches/dronehive-mount-swarm-seal.patch on main#9. Independent of smoke-seal leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "mount main.rs SWARM_SMOKE_SEAL uses apps\\\\drone-ollama-mount\\\\out",
+      "files": [
+        "apps/drone-ollama-mount/src/main.rs"
+      ],
+      "collision": "apps/drone-ollama-mount/src/main.rs SWARM_SMOKE_SEAL only. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-truth-honesty-library-list",
+      "title": "Point TRUTH_AND_HONESTY library list at host/library",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 147,
+      "status": "blocked",
+      "claim": null,
+      "notes": "TRUTH_AND_HONESTY.md Universal/Oath/Coder list still pins F:\\\\GrokSelfLibrary. Applyable catalog patch is patches/dronehive-truth-honesty-library-list.patch on main#9. Adjacent list lines are one leftover (cannot -U1-split). Independent of system-root and inline oath leftovers. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "TRUTH_AND_HONESTY.md list Universal/Oath/Coder use host/library",
+      "files": [
+        "TRUTH_AND_HONESTY.md"
+      ],
+      "collision": "TRUTH_AND_HONESTY.md Universal/Oath/Coder list only. Leave C:\\\\Users hardwire. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-app-bridge-paths",
+      "title": "Point drone-ollama-app bridge constants at repo-relative paths",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 148,
+      "status": "blocked",
+      "claim": null,
+      "notes": "drone_bridge.rs DRONE_ROOT and MOUNT_EXE still pin G:\\\\AI-Home. Applyable catalog patch is patches/dronehive-ollama-app-bridge-paths.patch on main#9. Adjacent consts are one leftover. Independent of main.rs leftovers. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "drone_bridge.rs DRONE_ROOT is . and MOUNT_EXE uses apps\\\\drone-ollama-mount",
+      "files": [
+        "apps/drone-ollama-app/src/drone_bridge.rs"
+      ],
+      "collision": "apps/drone-ollama-app/src/drone_bridge.rs DRONE_ROOT + MOUNT_EXE only. Leave C:\\\\Python. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",

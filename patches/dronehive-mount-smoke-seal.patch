@@ -1,0 +1,13 @@
+diff --git a/apps/drone-ollama-mount/src/main.rs b/apps/drone-ollama-mount/src/main.rs
+index b82fb47..541bb1e 100644
+--- a/apps/drone-ollama-mount/src/main.rs
++++ b/apps/drone-ollama-mount/src/main.rs
+@@ -140,7 +140,7 @@ fn main() -> ExitCode {
+         }
+         Commands::Smoke => match tui_app::smoke_headless(engine, "build mount-engine smoke seal") {
+             Ok(v) => {
+-                let path = PathBuf::from(r"G:\AI-Home\projects\drone-ollama-mount\out\SMOKE_SEAL.json");
++                let path = PathBuf::from(r"apps\drone-ollama-mount\out\SMOKE_SEAL.json");
+                 let _ = std::fs::write(
+                     &path,
+                     serde_json::to_string_pretty(&v).unwrap_or_default(),

@@ -345,6 +345,40 @@ function dronehiveRelaunchReason(jobId) {
       return "This token cannot push dronehive. Apply patches/dronehive-doc-grok-handoff-root.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
     case "dronehive-doc-grok-handoff-cd":
       return "This token cannot push dronehive. Apply patches/dronehive-doc-grok-handoff-cd.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-truth-honesty-root":
+      return "This token cannot push dronehive. Apply patches/dronehive-truth-honesty-root.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-truth-honesty-oath-inline":
+      return "This token cannot push dronehive. Apply patches/dronehive-truth-honesty-oath-inline.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-ollama-app-readme-install":
+      return "This token cannot push dronehive. Apply patches/dronehive-ollama-app-readme-install.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-ollama-app-readme-dest":
+      return "This token cannot push dronehive. Apply patches/dronehive-ollama-app-readme-dest.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-ollama-app-crash-log":
+      return "This token cannot push dronehive. Apply patches/dronehive-ollama-app-crash-log.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-ollama-app-ui-install-root":
+      return "This token cannot push dronehive. Apply patches/dronehive-ollama-app-ui-install-root.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-ollama-app-open-out":
+      return "This token cannot push dronehive. Apply patches/dronehive-ollama-app-open-out.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-ollama-app-open-benchmarks":
+      return "This token cannot push dronehive. Apply patches/dronehive-ollama-app-open-benchmarks.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-ollama-app-open-workspace":
+      return "This token cannot push dronehive. Apply patches/dronehive-ollama-app-open-workspace.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-ollama-app-open-install":
+      return "This token cannot push dronehive. Apply patches/dronehive-ollama-app-open-install.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-ollama-app-open-seal":
+      return "This token cannot push dronehive. Apply patches/dronehive-ollama-app-open-seal.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-mount-engine-out":
+      return "This token cannot push dronehive. Apply patches/dronehive-mount-engine-out.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-mount-fabric-root":
+      return "This token cannot push dronehive. Apply patches/dronehive-mount-fabric-root.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-mount-smoke-seal":
+      return "This token cannot push dronehive. Apply patches/dronehive-mount-smoke-seal.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-mount-swarm-seal":
+      return "This token cannot push dronehive. Apply patches/dronehive-mount-swarm-seal.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-truth-honesty-library-list":
+      return "This token cannot push dronehive. Apply patches/dronehive-truth-honesty-library-list.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
+    case "dronehive-ollama-app-bridge-paths":
+      return "This token cannot push dronehive. Apply patches/dronehive-ollama-app-bridge-paths.patch from main#9 (`git apply --check`). Do not copy PR #6 autofix.";
     case "dronehive-rebase-packaging":
       return "This token cannot push dronehive. Rebase packaging stays blocked until dronehive#1 python-smoke is green. Do not copy PR #6 autofix.";
     default:

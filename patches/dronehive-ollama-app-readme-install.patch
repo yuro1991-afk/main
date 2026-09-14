@@ -1,0 +1,13 @@
+diff --git a/apps/drone-ollama-app/README.md b/apps/drone-ollama-app/README.md
+index 2039c2e..dae832f 100644
+--- a/apps/drone-ollama-app/README.md
++++ b/apps/drone-ollama-app/README.md
+@@ -5,7 +5,7 @@ Top-tier **installed** Windows app: **Ollama wired** + **24 worker drones** + mo
+ ## Install (BOSS)
+ 
+ ```powershell
+-powershell -NoProfile -ExecutionPolicy Bypass -File G:\AI-Home\projects\drone-ollama-app\installer\Install-DroneOllamaApp.ps1
++powershell -NoProfile -ExecutionPolicy Bypass -File apps\drone-ollama-app\installer\Install-DroneOllamaApp.ps1
+ ```
+ 
+ Creates:
