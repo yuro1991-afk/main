@@ -40,6 +40,7 @@ export {
   defaultSuperbrainPath,
   probeKnownLanes,
   probeLane,
+  refuseKnownLanes,
   writeLaneProbe,
 } from "./probe.js";
 export {

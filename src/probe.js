@@ -7,6 +7,21 @@ export const GOOSE_PC_CORE = "http://127.0.0.1:8791/health";
 
 export const DEFAULT_PROBE_TIMEOUT_MS = 2500;
 
+export const PROBE_REFUSE = Object.freeze({
+  contract: "agent-ops.probe.v1",
+  refused: true,
+  reason:
+    "Yuri: no more Superbrain. Do not probe :45001 / :8791. Do not run node src/cli.js probe.",
+  take: ["review-main-pr10", "dronehive-unicode-ci"],
+});
+
+/**
+ * Pad CLI probe stops. Unit tests may still call probeKnownLanes with a fake fetch.
+ */
+export function refuseKnownLanes() {
+  return { ...PROBE_REFUSE };
+}
+
 /**
  * @typedef {"unknown" | "live" | "unreachable"} LaneStatus
  *

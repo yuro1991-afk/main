@@ -13,7 +13,7 @@ import {
   saveLedger,
   summarize,
 } from "./ledger.js";
-import { defaultSuperbrainPath, probeKnownLanes, writeLaneProbe } from "./probe.js";
+import { refuseKnownLanes } from "./probe.js";
 import {
   defaultOriginPath,
   loginOriginAuth,
@@ -152,25 +152,8 @@ export async function runCli(argv, options = {}) {
       return 0;
     }
     case "probe": {
-      const report = await probeKnownLanes({
-        fetchImpl: options.fetchImpl,
-        timeoutMs: flags.timeout ? Number(flags.timeout) : undefined,
-        nowMs,
-      });
-      report.origin = await probeOriginAuth({
-        nowMs,
-        execImpl: options.originExecImpl,
-      });
-      const destPath = flags.out
-        ? resolve(flags.out)
-        : defaultSuperbrainPath(options.root ?? ROOT);
-      writeLaneProbe(report, destPath);
-      writeOriginProbe(
-        report.origin,
-        flags.originOut ? resolve(flags.originOut) : defaultOriginPath(options.root ?? ROOT),
-      );
-      write(JSON.stringify(report, null, 2));
-      return 0;
+      write(JSON.stringify(refuseKnownLanes(), null, 2));
+      return 1;
     }
     case "origin": {
       const destPath = flags.out
@@ -542,7 +525,7 @@ Commands:
   block <id> --agent <bcId> --reason <text>
   release <id> --agent <bcId>
   status
-  probe [--timeout ms]   Superbrain lanes + Origin CLI auth
+  probe                  Refuses Superbrain / GOOSE probes (Yuri: no more Superbrain)
   origin [--login] [--out path]
   route <intent> [--agent <bcId>]   # roster card if --agent, else leftover next
   tick [--out path]

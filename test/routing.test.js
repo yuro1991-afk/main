@@ -112,7 +112,10 @@ test("review does not target empty main", () => {
 
 test("dronehive and probe intents", () => {
   assert.equal(routeIntent("fix dronehive unicode").kind, "fix");
-  assert.equal(routeIntent("probe superbrain lanes").kind, "probe");
+  const superbrain = routeIntent("probe superbrain lanes");
+  assert.equal(superbrain.kind, "review");
+  assert.equal(superbrain.jobId, "review-main-pr10");
+  assert.match(superbrain.notes, /no more Superbrain/);
 });
 
 test("destinationForKind is exhaustive", () => {

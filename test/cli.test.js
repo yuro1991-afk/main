@@ -87,8 +87,10 @@ test("cli route and probe", async () => {
     fetchImpl: async () => ({ ok: false, status: 504 }),
     root: mkdtempSync(join(tmpdir(), "agent-ops-probe-cli-")),
   });
-  assert.equal(probed.code, 0);
-  assert.match(probed.out, /unreachable/);
+  assert.equal(probed.code, 1);
+  assert.match(probed.out, /no more Superbrain/);
+  assert.match(probed.out, /"refused": true/);
+  assert.doesNotMatch(probed.out, /169\.254\.124\.8:45001/);
 });
 
 test("cli next --here stays on this repo", async () => {

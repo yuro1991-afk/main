@@ -63,11 +63,12 @@ export const ROUTES = Object.freeze([
   },
   {
     intent: "superbrain / lanes",
-    destination: "probe known lanes via agent-ops",
-    kind: "probe",
-    notes: "Failed probes are unreachable, never live. LANE-ETH-PEER ≠ :8791.",
-    jobId: null,
-    packet: null,
+    destination: "https://github.com/yuro1991-afk/main/pull/10",
+    kind: "review",
+    notes:
+      "Yuri: no more Superbrain. Do not probe :45001 / :8791. Do not run node src/cli.js probe. Take review-main-pr10.",
+    jobId: "review-main-pr10",
+    packet: "playbooks/review-main-pr10.md",
   },
   {
     intent: "catalog / notion inventory",

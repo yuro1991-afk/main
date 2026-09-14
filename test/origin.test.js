@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { mkdtempSync, readFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import {
@@ -206,7 +206,7 @@ test("cli origin --login without a key exits 1", async () => {
   assert.match(report.detail, /CURSOR_API_KEY missing/);
 });
 
-test("cli probe attaches origin auth to the lane report", async () => {
+test("cli probe refuses Superbrain and does not write lane files", async () => {
   const chunks = [];
   const root = mkdtempSync(join(tmpdir(), "agent-ops-probe-origin-"));
   const code = await runCli(["probe"], {
@@ -222,10 +222,11 @@ test("cli probe attaches origin auth to the lane report", async () => {
       chunks.push(value);
     },
   });
-  assert.equal(code, 0);
+  assert.equal(code, 1);
   const report = JSON.parse(chunks.join(""));
-  assert.equal(report.origin.loggedIn, false);
-  assert.equal(report.origin.status, "logged-out");
-  const persisted = JSON.parse(readFileSync(join(root, ".genesis", "last-origin.json"), "utf8"));
-  assert.equal(persisted.loggedIn, false);
+  assert.equal(report.refused, true);
+  assert.match(report.reason, /no more Superbrain/);
+  assert.equal(report.origin, undefined);
+  assert.equal(existsSync(join(root, ".genesis", "last-origin.json")), false);
+  assert.equal(existsSync(join(root, ".genesis", "last-superbrain.json")), false);
 });
