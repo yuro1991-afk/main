@@ -292,6 +292,24 @@ test("non-dronehive catalog cards name the patch file", () => {
 
 test("origin jobs relaunch to the Origin codebase", () => {
   const target = relaunchFor({
+    id: "gub-inventory-tick",
+    title: "inventory",
+    repo: "origin.cursor.com/git/yuri-afk/genesis",
+    kind: "origin-slice",
+    priority: 6,
+    status: "open",
+    claim: null,
+    notes: "",
+    verify: "",
+    files: [],
+    collision: "",
+  });
+  assert.equal(target.kind, "origin");
+  assert.match(target.url, /yuri-afk\/genesis/);
+});
+
+test("gub-superbrain-probe relaunch refuses the probe", () => {
+  const target = relaunchFor({
     id: "gub-superbrain-probe",
     title: "probe",
     repo: "origin.cursor.com/git/yuri-afk/genesis",
@@ -304,8 +322,30 @@ test("origin jobs relaunch to the Origin codebase", () => {
     files: [],
     collision: "",
   });
-  assert.equal(target.kind, "origin");
-  assert.match(target.url, /yuri-afk\/genesis/);
+  assert.equal(target.kind, "here");
+  assert.equal(target.url, "https://github.com/yuro1991-afk/main/pull/10");
+  assert.match(target.reason, /no more Superbrain/);
+  assert.doesNotMatch(target.reason, /yuri-afk\/genesis/);
+  const siblings = loadSiblings(new URL("../ledger/siblings.json", import.meta.url));
+  const packet = buildRelaunch(
+    {
+      id: "gub-superbrain-probe",
+      title: "probe",
+      repo: "origin.cursor.com/git/yuri-afk/genesis",
+      kind: "origin-slice",
+      priority: 3,
+      status: "open",
+      claim: null,
+      notes: "",
+      verify: "",
+      files: [],
+      collision: "",
+    },
+    siblings,
+  );
+  assert.match(packet.action, /no more Superbrain/);
+  assert.doesNotMatch(packet.action, /Open https:\/\/cursor.com\/codebase\/yuri-afk\/genesis/);
+  assert.ok(packet.doNot.some((line) => line.includes("Do not run node src/cli.js probe")));
 });
 
 test("every sibling role has a description", () => {

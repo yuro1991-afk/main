@@ -21,6 +21,37 @@ export function packetPathFor(job) {
  * @param {import("./ledger.js").Job} job
  */
 export function renderHandoffPacket(job) {
+  if (job.id === "gub-superbrain-probe") {
+    return `# Stop Superbrain probe — ${job.id}
+
+**Yuri: no more Superbrain.** Pad probes stop. Do not hit \`:45001\` /
+\`:8791\`. Do not run \`node src/cli.js probe\`.
+
+This card is leftover \`next\` on the Genesis-only tree until #8 merges.
+Do not implement a probe here or on Origin.
+
+## Job
+
+- id: \`${job.id}\`
+- kind: origin-slice
+- repo: \`${job.repo}\`
+- playbook: \`playbooks/${job.id}.md\`
+
+## Take instead
+
+- \`review-main-pr10\` — review https://github.com/yuro1991-afk/main/pull/10. Do not steal head / ears / eyes / vision / bridge.
+- first parked apply: \`dronehive-unicode-ci\` on a sibling write checkout
+- \`node src/cli.js brief --job review-main-pr10\`
+- \`node src/cli.js patches --job dronehive-unicode-ci\`
+
+## Do not
+
+- Do not probe Superbrain or GOOSE-PC
+- Do not reopen https://github.com/yuro1991-afk/main/pull/1
+- Do not open another landing-pad queue
+- Do not copy PR #6 autofix
+`;
+  }
   const target = relaunchFor(job);
   return `# Origin relaunch packet — ${job.id}
 
@@ -103,12 +134,20 @@ export function buildHandoff(job, siblings) {
     packet: packetPathFor(job),
     relaunch: relaunchFor(job),
     related,
-    doNot: [
-      "Do not reopen yuro1991-afk/main#1.",
-      "Do not copy PR #6 autofix onto this ops board.",
-      "Do not open a fifth landing-pad queue.",
-      "Do not work dronehive / opensussy / bloom from this pad.",
-    ],
+    doNot:
+      job.id === "gub-superbrain-probe"
+        ? [
+            "Yuri: no more Superbrain. Do not probe :45001 / :8791.",
+            "Do not run node src/cli.js probe.",
+            "Do not reopen yuro1991-afk/main#1.",
+            "Do not copy PR #6 autofix onto this ops board.",
+          ]
+        : [
+            "Do not reopen yuro1991-afk/main#1.",
+            "Do not copy PR #6 autofix onto this ops board.",
+            "Do not open a fifth landing-pad queue.",
+            "Do not work dronehive / opensussy / bloom from this pad.",
+          ],
   };
 }
 
@@ -462,6 +501,14 @@ function hereRelaunchFor(job) {
  * @param {import("./ledger.js").Job} job
  */
 export function relaunchFor(job) {
+  if (job.id === "gub-superbrain-probe") {
+    return {
+      kind: "here",
+      url: "https://github.com/yuro1991-afk/main/pull/10",
+      reason:
+        "Yuri: no more Superbrain. Do not probe :45001 / :8791. Do not run node src/cli.js probe. Take review-main-pr10 or apply a catalog patch.",
+    };
+  }
   const scope = jobScope(job);
   switch (scope) {
     case "here":
