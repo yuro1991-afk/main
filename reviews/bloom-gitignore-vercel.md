@@ -41,10 +41,4 @@ node_modules/
 Also tracked: `nitro.json`, `__server.func` chunks/libs/ssr, `static/` assets.
 
 `git ls-files 'dist/**' | wc -l` → **0**. `package-lock.json` is tracked.
-
-## Open (not done here)
-
-- Add `.vercel/` and `dist/` to `.gitignore`.
-- `git rm -r --cached .vercel/` (58 files).
-- Confirm `npm run build` after untrack (not run in this pass).
-- Land on bloom-fair-yellow-charm; this token did not open a PR.
+`npm run build` not run. No PR opened.
