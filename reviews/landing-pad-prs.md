@@ -17,7 +17,7 @@ at #8. This file is the current board, including #9/#10.
 | [#6](https://github.com/yuro1991-afk/main/pull/6) | CONFLICTING | skip. Autofix runner. **Do not copy.** |
 | [#7](https://github.com/yuro1991-afk/main/pull/7) | MERGEABLE + CI green | stale Origin wake table. Prefer #8. Do not merge after #8 without rewrite. |
 | [#8](https://github.com/yuro1991-afk/main/pull/8) | MERGEABLE + CI green (`bf85360`) | **merge first** for GitHub-first defaults. |
-| [#9](https://github.com/yuro1991-afk/main/pull/9) | MERGEABLE + CI green (`3432a46`) | **merge after #8**. List-only catalog (162). Independent of #8 (branched from merged #3). Expect `siblings.json` array conflict: result should list PRs 2–10. |
+| [#9](https://github.com/yuro1991-afk/main/pull/9) | MERGEABLE + CI green | **merge after #8**. List-only catalog (162, re-proof 2026-09-14T23:16Z). Independent of #8 (branched from merged #3). Expect `siblings.json` array conflict: result should list PRs 2–10. |
 | [#10](https://github.com/yuro1991-afk/main/pull/10) | draft MERGEABLE + CI green (`82161d8`) | review only. Base is `cursor/agent-dispatch-board-108b`, not `main`. Head and ears already landed. Do not steal **eyes → vision → bridge**. See `reviews/main-pr10.md`. |
 
 ## Merge order
