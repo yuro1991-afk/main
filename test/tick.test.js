@@ -72,6 +72,7 @@ test("writeInventoryTick writes contract snapshot and creates parent dirs", () =
   assert.equal(snapshot.done, 1);
   assert.equal(snapshot.blocked, 1);
   assert.equal(snapshot.nextId, "high");
+  assert.equal(snapshot.worldNextId, null);
   assert.deepEqual(snapshot.jobs, [
     {
       id: "high",
