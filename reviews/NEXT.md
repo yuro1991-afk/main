@@ -13,8 +13,10 @@ node src/cli.js prompt --agent "$CURSOR_AGENT_ID" # same card, paste into Origin
 ```
 
 Paste-ready Origin briefs for the 36 parked agents live in
-`reviews/launch/<jobId>.md`. Open yours, then relaunch Origin. Do not
-stay on this pad.
+`reviews/launch/<jobId>.md`. Leftover unused briefs start at
+`reviews/launch/gub-route-intent.md` (then `gub-run-playbook`, then
+catalog cards). Open yours, then relaunch Origin. Do not stay on this
+pad.
 
 This pad has the Origin CLI (`/exec-daemon/tools/origin`) but is
 **not logged in**. `node src/cli.js origin` records that as `logged-out`,

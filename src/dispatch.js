@@ -133,6 +133,49 @@ export function launchPathFor(jobId) {
 }
 
 /**
+ * Unused leftover cards as writeLaunchPrompts rows.
+ * @param {import("./ledger.js").Ledger} ledger
+ * @param {{ assignments?: Array<{ jobId: string }> } | null} roster
+ * @param {number} [nowMs]
+ */
+export function leftoverLaunchRows(ledger, roster, nowMs = Date.now()) {
+  const used = new Set((roster?.assignments ?? []).map((row) => row.jobId));
+  return unusedGenesisCards(ledger, used, nowMs).map((job) => ({
+    jobId: job.id,
+    prompt: renderLeftoverLaunch(job),
+  }));
+}
+
+/**
+ * Paste-ready Origin brief for an unused leftover card.
+ * No parked agent owns it yet — the next unassigned idle agent takes it.
+ * @param {import("./ledger.js").Job | null} job
+ */
+export function renderLeftoverLaunch(job) {
+  if (!job) {
+    return `# No leftover unused Genesis card
+
+Do not open another landing-pad queue on yuro1991-afk/main.
+Do not reopen https://github.com/yuro1991-afk/main/pull/1.
+`;
+  }
+  return `# Leftover unused — ${job.id}
+
+No parked pad agent owns this card yet. The next unassigned idle agent takes it.
+
+- card: \`${job.id}\`
+- launch: \`${launchPathFor(job.id)}\`
+- Origin: ${ORIGIN_UI}
+
+Paste the brief below into a new Origin cloud agent. Do not inventory this landing pad.
+
+---
+
+${renderLaunchPrompt(job)}
+`;
+}
+
+/**
  * Paste-ready Origin brief for one parked pad agent.
  * @param {{ bcId: string, name: string, jobId: string }} row
  * @param {import("./ledger.js").Job | null} job
@@ -267,12 +310,16 @@ export function buildAssign(ledger, roster, nowMs = Date.now()) {
       prompt: renderAssignedLaunch(row, job),
     };
   });
+  const leftover = leftoverLaunchRows(ledger, roster, nowMs);
   return {
     contract: ASSIGN_CONTRACT,
     count: assignments.length,
     assignments,
+    leftover: leftover.map((row) => row.jobId),
+    leftoverNext: leftover[0]?.jobId ?? null,
+    leftoverLaunches: leftover,
     next: assignments.find((row) => row.status === "open") ?? null,
-    rule: "Every idle pad agent relaunches the listed Origin world-phase card. Do not stay on yuro1991-afk/main. Do not all peek next without claiming. Do not lease cards to agents that stay idle.",
+    rule: "Every idle pad agent relaunches the listed Origin world-phase card. A new unassigned agent takes leftoverNext. Do not stay on yuro1991-afk/main. Do not all peek next without claiming. Do not lease cards to agents that stay idle.",
   };
 }
 

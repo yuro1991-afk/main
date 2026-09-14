@@ -65,6 +65,7 @@ lattice · arena · robotics. Cite PM + layer #102 only.
 
 `node src/cli.js next` returns leftover unused `gub-route-intent`
 (does not steal the fork's `gub-inventory-tick`).
+Paste-ready leftover brief: `reviews/launch/gub-route-intent.md`.
 `node src/cli.js prompt --agent <bcId>` prints that agent's roster card.
 `node src/cli.js next --world` returns `genesis-world-layer-102`.
 `node src/cli.js catalog` now diffs `ledger/catalog-entries.json`

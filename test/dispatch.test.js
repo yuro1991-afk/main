@@ -12,8 +12,10 @@ import {
   buildAssign,
   buildSlots,
   claimBusyJob,
+  leftoverLaunchRows,
   loadRoster,
   peekBusyJob,
+  renderLeftoverLaunch,
 } from "../src/dispatch.js";
 import { runCli } from "../src/cli.js";
 
@@ -209,6 +211,11 @@ test("assign maps every idle pad agent to a distinct Origin world card", () => {
   assert.ok(!ids.includes("catalog-expand-domain"));
   assert.ok(!ids.includes("gub-route-intent"));
   assert.ok(!ids.includes("dronehive-unicode-ci"));
+  assert.equal(packet.leftoverNext, "gub-route-intent");
+  assert.equal(packet.leftover[0], "gub-route-intent");
+  assert.ok(packet.leftover.includes("gub-run-playbook"));
+  assert.ok(packet.leftover.includes("catalog-expand-domain"));
+  assert.ok(!packet.leftover.includes("gub-inventory-tick"));
 });
 
 test("cli assign writes paste-ready Origin launch files", async () => {
@@ -219,7 +226,6 @@ test("cli assign writes paste-ready Origin launch files", async () => {
   assert.match(result.out, /genesis-world-unifier/);
   assert.match(result.out, /genesis-python-infra-50/);
   assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
-  assert.doesNotMatch(result.out, /catalog-expand-domain/);
   const dest = join(out, "genesis-world-layer-102.md");
   assert.equal(existsSync(dest), true);
   const text = readFileSync(dest, "utf8");
@@ -228,6 +234,30 @@ test("cli assign writes paste-ready Origin launch files", async () => {
   assert.match(text, /origin auth status/);
   assert.match(text, /repo clone yuri-afk\/genesis/);
   assert.doesNotMatch(text, /dronehive-unicode-ci/);
+  const leftover = join(out, "gub-route-intent.md");
+  assert.equal(existsSync(leftover), true);
+  const leftoverText = readFileSync(leftover, "utf8");
+  assert.match(leftoverText, /Leftover unused — gub-route-intent/);
+  assert.match(leftoverText, /No parked pad agent owns this card yet/);
+  assert.doesNotMatch(leftoverText, /Leftover unused — gub-inventory-tick/);
+  assert.doesNotMatch(leftoverText, /Agent workload management \(fork\)/);
+  assert.match(result.out, /"leftoverNext": "gub-route-intent"/);
+});
+
+test("leftover launch rows skip rostered cards", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
+  const rows = leftoverLaunchRows(ledger, roster, NOW);
+  assert.equal(rows[0].jobId, "gub-route-intent");
+  assert.match(rows[0].prompt, /Leftover unused — gub-route-intent/);
+  assert.ok(!rows.some((row) => row.jobId === "gub-inventory-tick"));
+  assert.ok(!rows.some((row) => row.jobId === "genesis-world-layer-102"));
+  assert.match(renderLeftoverLaunch(null), /No leftover unused Genesis card/);
+  assert.ok(
+    rows.every((row) =>
+      existsSync(fileURLToPath(new URL(`../reviews/launch/${row.jobId}.md`, import.meta.url))),
+    ),
+  );
 });
 
 test("cli slots defaults to Genesis cards", async () => {

@@ -42,7 +42,7 @@ node src/cli.js route "keep my agents busy" --agent "$CURSOR_AGENT_ID"  # your r
 `assign` maps parked pad agents onto unique Genesis cards and writes
 paste-ready briefs under `reviews/launch/`. `busy --agent` claims
 **your roster card** first. Unassigned agents take leftover
-`gub-route-intent`. `busy --world --agent` still stays on
+`gub-route-intent` (`reviews/launch/gub-route-intent.md`). `busy --world --agent` still stays on
 world planes. `slots --world` lists the rest. Peek `next` (no `--agent`)
 is leftover unused `gub-route-intent` — it does not steal the fork's
 `gub-inventory-tick`. Claim leases expire in 45 minutes.

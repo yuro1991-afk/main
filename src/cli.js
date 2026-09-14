@@ -268,8 +268,12 @@ export async function runCli(argv, options = {}) {
       const dest = flags.out
         ? resolve(flags.out)
         : defaultLaunchPath(options.root ?? ROOT);
-      const launches = writeLaunchPrompts(packet.assignments, dest);
-      write(JSON.stringify({ ...packet, launches }, null, 2));
+      const launches = writeLaunchPrompts(
+        [...packet.assignments, ...packet.leftoverLaunches],
+        dest,
+      );
+      const { leftoverLaunches, ...visible } = packet;
+      write(JSON.stringify({ ...visible, launches }, null, 2));
       return 0;
     }
     case "catalog": {
@@ -323,7 +327,8 @@ export async function runCli(argv, options = {}) {
         const dest = flags.out
           ? resolve(flags.out)
           : defaultLaunchPath(options.root ?? ROOT);
-        writeLaunchPrompts(buildAssign(ledger, roster, nowMs).assignments, dest);
+        const assigned = buildAssign(ledger, roster, nowMs);
+        writeLaunchPrompts([...assigned.assignments, ...assigned.leftoverLaunches], dest);
       }
       write(JSON.stringify(packet, null, 2));
       return packet.uncovered.length === 0 ? 0 : 1;
