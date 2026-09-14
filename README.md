@@ -11,6 +11,11 @@ Genesis lives on Cursor Origin:
 - Hub: [Genesis main agent hub](https://app.notion.com/p/3db735da33f381f491eff11e350a62c1)
 - Catalog: [Genesis Catalog](https://app.notion.com/p/3db735da33f38170bab8c22bf71d6347)
 
+Parked agents: take **your** row in `AGENTS.md`, paste the Origin
+launch block, relaunch https://cursor.com/codebase/yuri-afk/genesis.
+A 37th unassigned agent takes leftover `gub-route-intent`. Do not
+steal the fork's `gub-inventory-tick` or `genesis-world-layer-102`.
+
 Do **not** reopen [PR #1](https://github.com/yuro1991-afk/main/pull/1). That draft was a closed duplicate of the Origin tree.
 
 ## Run

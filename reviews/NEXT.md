@@ -94,9 +94,10 @@ is null (do not steal `genesis-world-layer-102`).
 `node src/cli.js route "keep agents busy"` without `--agent` returns
 that leftover Origin card (`gub-route-intent`), not this pad.
 With `--agent` it returns the agent's roster card. No self-hosted workers.
-Stub wake table: [PR #7](https://github.com/yuro1991-afk/main/pull/7)
-now includes a fill-in Origin launch block plus an inline leftover
-`gub-route-intent` brief for agents that wake on stub `main`.
+[PR #3](https://github.com/yuro1991-afk/main/pull/3) is merged — this
+pad is the ops board. [PR #7](https://github.com/yuro1991-afk/main/pull/7)
+puts the parked-agent table and YOUR-CARD launch block in `AGENTS.md`
+so a waking agent can paste a card without running the CLI.
 
 Do not reopen [main#1](https://github.com/yuro1991-afk/main/pull/1).
 Do not work dronehive / opensussy / face-swap / ollama-voice / bloom.
