@@ -80,7 +80,8 @@ and start from the PM planes list.
 Pad probe **2026-09-14T18:46:15Z**: `:45001` health/live **timeout=unreachable**;
 GOOSE `:8791` fetch failed. Origin CLI **logged-out** (`CURSOR_API_KEY` missing).
 Never LIVE. Origin still must implement that playbook.
-Keep-busy tick: 36 idle / 1 running. No new agents. Catalog proposed 0. `tick` nextId is leftover
+Keep-busy tick: 36 idle / 1 running. No new agents. Catalog proposed 0.
+`tick` nextId is leftover
 `gub-route-intent` (does not steal the fork's card). New fork
 `bc-84d93b47-d0e0-4d4c-bc55-94c546b5dca0` is rostered onto
 `gub-inventory-tick` (no lease). `busy --agent` claims the agent's
