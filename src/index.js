@@ -45,7 +45,14 @@ export {
   writeInventoryTick,
 } from "./tick.js";
 export { BRIEF_CONTRACT, buildBrief, firstCommands } from "./brief.js";
-export { HANDOFF_CONTRACT, buildHandoff, relaunchFor } from "./handoff.js";
+export {
+  HANDOFF_CONTRACT,
+  RELAUNCH_CONTRACT,
+  buildHandoff,
+  buildRelaunch,
+  packetPathFor,
+  relaunchFor,
+} from "./handoff.js";
 export { playbookPath, renderPlaybook, writePlaybooks } from "./playbook.js";
 export { HELPER_CONTRACT, buildHelperPacket, planHelpers } from "./helpers.js";
 export {

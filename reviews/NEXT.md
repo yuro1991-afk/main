@@ -3,7 +3,7 @@
 Idle agents on `yuro1991-afk/main`: do **not** inventory this pad again. Relaunch Origin.
 
 ```bash
-node src/cli.js next
+node src/cli.js relaunch
 node src/cli.js helpers
 ```
 

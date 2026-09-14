@@ -17,7 +17,7 @@ import { defaultSuperbrainPath, probeKnownLanes, writeLaneProbe } from "./probe.
 import { routeIntent } from "./routing.js";
 import { defaultInventoryPath, writeInventoryTick } from "./tick.js";
 import { buildBrief } from "./brief.js";
-import { buildHandoff } from "./handoff.js";
+import { buildHandoff, buildRelaunch } from "./handoff.js";
 import { writePlaybooks } from "./playbook.js";
 import { buildHelperPacket } from "./helpers.js";
 import { defaultSiblingsPath, loadSiblings } from "./siblings.js";
@@ -150,6 +150,20 @@ export async function runCli(argv, options = {}) {
       write(JSON.stringify(buildHandoff(job ?? null, siblings), null, 2));
       return job ? 0 : 1;
     }
+    case "relaunch": {
+      const ledger = loadLedger(ledgerPath);
+      const siblings = loadSiblings(
+        flags.siblings ? resolve(flags.siblings) : defaultSiblingsPath(options.root ?? ROOT),
+      );
+      const job = positionals[0]
+        ? ledger.jobs.find((item) => item.id === positionals[0])
+        : nextJob(ledger, jobFilters(flags), nowMs);
+      if (positionals[0] && !job) {
+        throw new Error(`unknown job: ${positionals[0]}`);
+      }
+      write(JSON.stringify(buildRelaunch(job ?? null, siblings), null, 2));
+      return job ? 0 : 1;
+    }
     case "helpers": {
       const ledger = loadLedger(ledgerPath);
       const job = positionals[0]
@@ -239,6 +253,7 @@ Commands:
   siblings
   brief [id]
   handoff [id]
+  relaunch [id]
   playbooks [--here] [--out dir]
 
 Genesis only (Yuri). Pass --all to see out-of-scope cards.

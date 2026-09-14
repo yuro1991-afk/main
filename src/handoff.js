@@ -2,6 +2,14 @@ import { assertNeverScope, jobScope } from "./kinds.js";
 import { siblingsForJob, describeRole } from "./siblings.js";
 
 export const HANDOFF_CONTRACT = "agent-ops.handoff.v1";
+export const RELAUNCH_CONTRACT = "agent-ops.relaunch.v1";
+
+/**
+ * @param {import("./ledger.js").Job | null} job
+ */
+export function packetPathFor(job) {
+  return job ? `reviews/handoff-${job.id}.md` : "reviews/NEXT.md";
+}
 
 /**
  * @param {import("./ledger.js").Job | null} job
@@ -26,13 +34,46 @@ export function buildHandoff(job, siblings) {
   return {
     contract: HANDOFF_CONTRACT,
     jobId: job.id,
+    packet: packetPathFor(job),
     relaunch: relaunchFor(job),
     related,
     doNot: [
       "Do not reopen yuro1991-afk/main#1.",
       "Do not copy PR #6 autofix onto this ops board.",
       "Do not open a fifth landing-pad queue.",
+      "Do not work dronehive / opensussy / bloom from this pad.",
     ],
+  };
+}
+
+/**
+ * One screen so idle agents stop inventorying this pad.
+ * @param {import("./ledger.js").Job | null} job
+ * @param {{ prs: Array<{ owns?: string[], number: number, url: string, role: string, title: string, branch: string }> }} siblings
+ */
+export function buildRelaunch(job, siblings) {
+  const handoff = buildHandoff(job, siblings);
+  if (!job) {
+    return {
+      contract: RELAUNCH_CONTRACT,
+      board: "reviews/NEXT.md",
+      ...handoff,
+      action: "Add a Genesis card. Do not open another landing-pad queue.",
+    };
+  }
+  const target = handoff.relaunch;
+  return {
+    contract: RELAUNCH_CONTRACT,
+    board: "reviews/NEXT.md",
+    jobId: job.id,
+    packet: packetPathFor(job),
+    playbook: `playbooks/${job.id}.md`,
+    relaunch: target,
+    action:
+      target.kind === "origin"
+        ? "Open https://cursor.com/codebase/yuri-afk/genesis with Origin login. Do not implement on this GitHub pad."
+        : target.reason,
+    doNot: handoff.doNot,
   };
 }
 

@@ -8,14 +8,13 @@ This GitHub checkout is a **landing pad**, not Genesis.
 
 Source of truth for Genesis is **Cursor Origin** (`origin.cursor.com/git/yuri-afk/genesis`). This tree is the claimable ops board (`node src/cli.js`).
 
-Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another queue. `node src/cli.js brief` and `node src/cli.js handoff` print the next Origin packet and relaunch target. `node src/cli.js helpers` prints local Task fan-out for that card.
+Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another queue. `node src/cli.js relaunch` is the one-screen Origin packet. `node src/cli.js helpers` prints local Task fan-out.
 
 ## First moves
 
 1. `npm test` if you touch this repo.
-2. Read `reviews/NEXT.md`. `node src/cli.js next` — current open job is
-   `gub-inventory-tick` while probe is claimed. Relaunch Origin.
-   `node src/cli.js helpers` then spin a local Task per helper. Do not sit in inventory.
+2. `node src/cli.js relaunch` — current open job is `gub-inventory-tick`.
+   Read `reviews/NEXT.md`. Spin helpers. Do not sit in inventory.
    Optionally `node src/cli.js tick` to write `.genesis/last-inventory.json`.
    `node src/cli.js playbooks` writes one markdown card per open **Genesis** job.
 3. `node src/cli.js claim <id> --agent <your-bcId>` before you start.

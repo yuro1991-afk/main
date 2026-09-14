@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { buildHandoff, relaunchFor } from "../src/handoff.js";
+import { buildHandoff, buildRelaunch, packetPathFor, relaunchFor } from "../src/handoff.js";
 import { loadSiblings, describeRole, SIBLING_ROLES } from "../src/siblings.js";
 import { runCli } from "../src/cli.js";
 
@@ -70,6 +70,29 @@ test("here jobs stay on this checkout", () => {
   assert.match(target.reason, /Stay on this checkout/);
 });
 
+test("relaunch packet points at Origin and the handoff file", () => {
+  const siblings = loadSiblings(new URL("../ledger/siblings.json", import.meta.url));
+  const job = {
+    id: "gub-inventory-tick",
+    title: "inventory",
+    repo: "origin.cursor.com/git/yuri-afk/genesis",
+    kind: "origin-slice",
+    priority: 6,
+    status: "open",
+    claim: null,
+    notes: "",
+    verify: "",
+    files: [],
+    collision: "",
+  };
+  const packet = buildRelaunch(job, siblings);
+  assert.equal(packet.contract, "agent-ops.relaunch.v1");
+  assert.equal(packetPathFor(job), "reviews/handoff-gub-inventory-tick.md");
+  assert.equal(packet.packet, "reviews/handoff-gub-inventory-tick.md");
+  assert.match(packet.action, /yuri-afk\/genesis/);
+  assert.match(packet.relaunch.url, /yuri-afk\/genesis/);
+});
+
 test("cli handoff defaults to next", async () => {
   const chunks = [];
   const code = await runCli(["handoff"], {
@@ -81,4 +104,20 @@ test("cli handoff defaults to next", async () => {
   assert.equal(code, 0);
   assert.match(chunks.join(""), /gub-inventory-tick/);
   assert.match(chunks.join(""), /yuri-afk\/genesis/);
+});
+
+test("cli relaunch defaults to next Genesis card", async () => {
+  const chunks = [];
+  const code = await runCli(["relaunch"], {
+    nowMs: NOW,
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const text = chunks.join("");
+  assert.match(text, /gub-inventory-tick/);
+  assert.match(text, /handoff-gub-inventory-tick/);
+  assert.match(text, /yuri-afk\/genesis/);
+  assert.doesNotMatch(text, /dronehive-unicode-ci/);
 });

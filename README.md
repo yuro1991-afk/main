@@ -19,6 +19,7 @@ Do **not** reopen [PR #1](https://github.com/yuro1991-afk/main/pull/1). That dra
 npm test
 node src/cli.js status
 node src/cli.js next
+node src/cli.js relaunch
 node src/cli.js helpers
 node src/cli.js brief
 node src/cli.js handoff
