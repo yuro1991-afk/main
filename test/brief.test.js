@@ -73,6 +73,27 @@ test("review firstCommands name open PRs #8/#9/#10, not siblings.json only", () 
   assert.ok(pr10Lines.some((line) => line.includes("eyes") && line.includes("bridge")));
 });
 
+test("probe-kind firstCommands without a catalog patch refuse cli probe", () => {
+  const lines = firstCommands(
+    {
+      id: "some-lane-probe",
+      title: "probe",
+      repo: "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+      kind: "probe",
+      priority: 21,
+      status: "open",
+      claim: null,
+      notes: "",
+      verify: "Write evidence. Never upgrade a timeout to LIVE.",
+      files: [],
+      collision: "",
+    },
+    { skipCatalog: true },
+  );
+  assert.ok(lines.some((line) => line.includes("Do not run node src/cli.js probe")));
+  assert.ok(!lines.some((line) => line.startsWith("node src/cli.js probe")));
+});
+
 test("cataloged sibling firstCommands use git apply, not edit", () => {
   const queue = JSON.parse(readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"));
   const drone = queue.jobs.find((item) => item.id === "dronehive-unicode-ci");

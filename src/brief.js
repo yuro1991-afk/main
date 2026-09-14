@@ -88,8 +88,7 @@ export function firstCommands(job, options = {}) {
       }
       if (job.kind === "probe") {
         return [
-          "node src/cli.js probe",
-          "Timeouts and non-2xx stay unreachable. Never write live.",
+          "Do not run node src/cli.js probe (that hits Superbrain :45001 / :8791).",
           job.verify,
         ];
       }

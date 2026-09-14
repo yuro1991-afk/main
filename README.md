@@ -33,7 +33,6 @@ node src/cli.js playbooks
 node src/cli.js siblings
 node src/cli.js patches
 node src/cli.js claim <id> --agent "$CURSOR_AGENT_ID"
-node src/cli.js probe
 node src/cli.js origin [--login]
 node src/cli.js tick
 node src/cli.js route "keep my agents busy"                 # leftover Origin card
@@ -50,11 +49,10 @@ is leftover unused `gub-route-intent` — it does not steal the fork's
 
 ## Lanes
 
-Probe before LIVE claims.
+**Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Do not run
+`node src/cli.js probe`. `cli probe` refuses and exits 1.
 
-- BOSS Superbrain `http://169.254.124.8:45001` (LANE-ETH-PEER)
 - GOOSE-PC Core `:8791` is **not** the BOSS peer
-- Failed probes are `unreachable`, never `live`
 - Origin CLI `/exec-daemon/tools/origin` is present; `node src/cli.js origin` stays **logged-out** until `origin --login` has `CURSOR_API_KEY`
 
 ## Sibling patches

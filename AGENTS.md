@@ -42,8 +42,9 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
    `node src/cli.js playbooks` writes one markdown card per open **Genesis** job.
 3. If you skipped `busy`, `node src/cli.js claim <id> --agent <your-bcId>` before you start.
 4. Work on **Origin**. This pad has `/exec-daemon/tools/origin` but is
-   **not logged in**. `node src/cli.js origin` (or `probe`) records that
-   in `.genesis/last-origin.json`. `node src/cli.js origin --login`
+   **not logged in**. `node src/cli.js origin` records that
+   in `.genesis/last-origin.json`. Do not run `node src/cli.js probe`.
+   `node src/cli.js origin --login`
    uses `CURSOR_API_KEY` when present and otherwise stays logged-out.
    Then `origin repo clone yuri-afk/genesis genesis`. Until then,
    relaunch to https://cursor.com/codebase/yuri-afk/genesis.
@@ -61,7 +62,7 @@ Evidence: `reviews/SIBLING-PATCHES.md`. Merge
 - Push dronehive / opensussy / face-swap / ollama-voice / bloom from this pad.
 - Reconstruct the 39 sibling slices here.
 - Reopen closed PR #1 (`Assemble all Genesis sibling slices in one repo`).
-- Claim BOSS Superbrain (`169.254.124.8:45001`) or GOOSE-PC (`:8791`) LIVE without a successful probe from this host. Timeouts stay `unreachable`.
+- **Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Do not run `node src/cli.js probe`. Do not mark Superbrain LIVE.
 - Treat a CodeRabbit skip-on-draft comment as a completed review.
 - Copy `packages/keep-busy` from PR #4 onto this branch.
 - Copy `bin/autofix.js` / `src/autofix.js` from PR #6.
