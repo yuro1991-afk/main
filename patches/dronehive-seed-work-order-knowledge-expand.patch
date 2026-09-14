@@ -1,0 +1,9 @@
+diff --git a/drone/app/seed/configs/work_order.json b/drone/app/seed/configs/work_order.json
+index ecac0ca..8bb4643 100644
+--- a/drone/app/seed/configs/work_order.json
++++ b/drone/app/seed/configs/work_order.json
+@@ -218,3 +218,3 @@
+     "knowledge_pack_min": "F:\\GrokSelfLibrary\\knowledge\\PACK.min.json",
+-    "knowledge_expand": "F:\\GrokSelfLibrary\\knowledge\\expand",
++    "knowledge_expand": "host/library/knowledge/expand",
+     "core_lessons": "D:\\GrokCoreMemory\\lessons",

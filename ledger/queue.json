@@ -394,6 +394,36 @@
       "collision": "Seed reference_db key only. Different file from configs/work_order.json. Do not edit drone/pro/tool_agent.py."
     },
     {
+      "id": "dronehive-work-order-knowledge-expand",
+      "title": "Point work_order.json knowledge_expand at host/library",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 54,
+      "status": "blocked",
+      "claim": null,
+      "notes": "configs/work_order.json knowledge_expand still pins F:\\\\GrokSelfLibrary. Applyable catalog patch is patches/dronehive-work-order-knowledge-expand.patch on main#9. -U1 so context skips reference_db leftover. Independent of portable-paths, school-root, and reference-db. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "configs/work_order.json knowledge_expand is host/library/knowledge/expand.",
+      "files": [
+        "configs/work_order.json"
+      ],
+      "collision": "configs/work_order.json knowledge_expand key only. Seed copy is a later leftover. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-knowledge-expand",
+      "title": "Point seed work_order.json knowledge_expand at host/library",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "kind": "implement",
+      "priority": 55,
+      "status": "blocked",
+      "claim": null,
+      "notes": "drone/app/seed/configs/work_order.json knowledge_expand still pins F:\\\\GrokSelfLibrary. Applyable catalog patch is patches/dronehive-seed-work-order-knowledge-expand.patch on main#9. -U1 so context skips reference_db leftover. Independent of live leftover (different file). Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "drone/app/seed/configs/work_order.json knowledge_expand is host/library/knowledge/expand.",
+      "files": [
+        "drone/app/seed/configs/work_order.json"
+      ],
+      "collision": "Seed knowledge_expand key only. Different file from configs/work_order.json. Do not edit drone/pro/tool_agent.py."
+    },
+    {
       "id": "gub-superbrain-probe",
       "title": "Implement GUB Superbrain probe playbook",
       "repo": "origin.cursor.com/git/yuri-afk/genesis",

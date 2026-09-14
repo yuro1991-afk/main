@@ -101,7 +101,9 @@
         "dronehive-work-order-school-root",
         "dronehive-seed-work-order-school-root",
         "dronehive-work-order-reference-db",
-        "dronehive-seed-work-order-reference-db"
+        "dronehive-seed-work-order-reference-db",
+        "dronehive-work-order-knowledge-expand",
+        "dronehive-seed-work-order-knowledge-expand"
       ]
     }
   ]
