@@ -1,0 +1,13 @@
+{
+  "name": "yuri-main",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Claimable work queue so idle agents pick real jobs instead of colliding.",
+  "scripts": {
+    "test": "node --test packages/keep-busy/test/*.test.js",
+    "queue": "node packages/keep-busy/src/cli.js",
+    "next": "node packages/keep-busy/src/cli.js next",
+    "list": "node packages/keep-busy/src/cli.js list"
+  }
+}

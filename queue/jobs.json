@@ -1,0 +1,197 @@
+{
+  "contract": "keep-busy.lease.v1",
+  "updated": "2026-09-14T16:50:00.000Z",
+  "notes": [
+    "Do not reopen github.com/yuro1991-afk/main/pull/1 — Yuri closed that Genesis duplicate.",
+    "Do not claim yuro1991-afk/dronehive — a sibling agent already owns that lane.",
+    "Complete only with a PR URL or written evidence. Failed probes are unreachable, never live."
+  ],
+  "jobs": [
+    {
+      "id": "sync-2-0-0-docs-and-ship-json",
+      "title": "Make leftover 1.3.0 ship/docs match released OpenSussy 2.0.0",
+      "repo": "yuro1991-afk/opensussy",
+      "status": "open",
+      "priority": 10,
+      "invasiveness": "small",
+      "why": "VERSION / PRODUCT.json / csproj are 2.0.0, but SHIP.json, USER_GUIDE.md, SETUP-DESKTOP.cmd, and INSTALL.cmd still say 1.3.0.",
+      "acceptance": [
+        "SHIP.json version is 2.0.0 and release URLs use v2.0.0",
+        "docs/USER_GUIDE.md, SETUP-DESKTOP.cmd, and INSTALL.cmd generated README say 2.0.0",
+        "Repo-wide leftover product version 1.3.0 is gone except CHANGELOG history",
+        "PRODUCT.json, VERSION, and the installer csproj stay 2.0.0 and agree"
+      ],
+      "lease": null,
+      "evidence": null
+    },
+    {
+      "id": "dotnet-on-path-build-install",
+      "title": "Stop hardcoding C:\\Program Files\\dotnet\\dotnet.exe in OpenSussy scripts",
+      "repo": "yuro1991-afk/opensussy",
+      "status": "open",
+      "priority": 20,
+      "invasiveness": "small",
+      "why": "BUILD.cmd and INSTALL.cmd pin a Program Files path, so PATH / winget / user-local SDKs fail.",
+      "acceptance": [
+        "Scripts resolve dotnet from PATH first, then Program Files, then fail with a one-line SDK hint",
+        "BUILD.cmd still publishes dist\\OpenSussy.exe when dotnet is on PATH",
+        "INSTALL.cmd still copies legal files and runs --selftest / --export-linux",
+        "No admin and no permanent global PATH rewrite"
+      ],
+      "lease": null,
+      "evidence": null
+    },
+    {
+      "id": "commit-pwa-homescreen-icons",
+      "title": "Generate and commit the PWA icons the face-swap manifest already names",
+      "repo": "yuro1991-afk/face-swap-ios",
+      "status": "open",
+      "priority": 15,
+      "invasiveness": "small",
+      "why": "manifest, index.html, and sw.js require icon-192.png, icon-512.png, and apple-touch-icon.png. make_icons.py exists; the PNGs were never committed.",
+      "acceptance": [
+        "Those three PNGs exist under pwa/ at the declared sizes",
+        "START.cmd / make_icons.py can regenerate them",
+        "Serving pwa/ returns HTTP 200 for all three icon URLs",
+        "sw.js precache no longer 404s on those paths"
+      ],
+      "lease": null,
+      "evidence": null
+    },
+    {
+      "id": "dehost-start-cmd-and-honesty-paths",
+      "title": "Remove G:\\AI-Home\\... from the public face-swap start path",
+      "repo": "yuro1991-afk/face-swap-ios",
+      "status": "open",
+      "priority": 25,
+      "invasiveness": "small",
+      "why": "START.cmd health-fail text and honesty/design docs pin a lab path a clone cannot use.",
+      "acceptance": [
+        "START.cmd fail text names a generic MultoModa health URL (optional FACESWAP_ENGINE)",
+        "HONESTY.md / DESIGN.md treat G:\\... as one lab example, not the install path",
+        "START.cmd still refuses to start if :8855 is down",
+        "README requirements still say host engine :8855 and gateway :8860"
+      ],
+      "lease": null,
+      "evidence": null
+    },
+    {
+      "id": "offline-gateway-tests-and-fixtures",
+      "title": "Add offline face-swap gateway tests; stop requiring missing host photos",
+      "repo": "yuro1991-afk/face-swap-ios",
+      "status": "open",
+      "priority": 35,
+      "invasiveness": "medium",
+      "why": "prove_swap.py defaults to fixtures/portrait-*.jpg that are not in git. No test runs without MultoModa on :8855.",
+      "acceptance": [
+        "Unit tests mock the engine and cover health 200 vs 503, swap 400, fail mapping, happy path",
+        "Tiny generated or public-domain JPEGs so prove_swap.py can run against a mock",
+        "Tests do not call a real :8855 or require CUDA",
+        "fixtures/README.md matches what is actually in git"
+      ],
+      "lease": null,
+      "evidence": null
+    },
+    {
+      "id": "pester-qa-math-unit-tests",
+      "title": "Pester tests for Ollama Voice percentile / stdev / tok-s math",
+      "repo": "yuro1991-afk/ollama-voice-access",
+      "status": "open",
+      "priority": 12,
+      "invasiveness": "small",
+      "why": "README defines reliability math in lib/OllamaVoice.Common.ps1. There is no tests/ tree; live QA needs Ollama.",
+      "acceptance": [
+        "Pester tests (no network) cover empty stats, n=1 stdev 0, n=5 p50/p95, tokens/s",
+        "Tests fail if the formula drifts from the README index rule",
+        "Invoke-OllamaVoiceQA.ps1 still owns live SLO samples",
+        "README QA section points at the new test command"
+      ],
+      "lease": null,
+      "evidence": null
+    },
+    {
+      "id": "config-cuda-lane-and-install-honesty",
+      "title": "Move GPU-1 hardcode into config; fix private-package lie",
+      "repo": "yuro1991-afk/ollama-voice-access",
+      "status": "open",
+      "priority": 22,
+      "invasiveness": "small",
+      "why": "Start-OVServe pins CUDA_VISIBLE_DEVICES=1. Installer header says it does not publish while README is public MIT.",
+      "acceptance": [
+        "CUDA device comes from config/product.json, overridable by env",
+        "Installer comments match the public MIT README",
+        "Fail/log paths in Start-Ollama.ps1 match the repo logs/ layout or document the home-tree copy",
+        "Stop-Ollama.ps1 -NoUI without -Force still exits 4"
+      ],
+      "lease": null,
+      "evidence": null
+    },
+    {
+      "id": "add-omni-forge-readme",
+      "title": "Add a real Omni-Forge README (bloom-fair-yellow-charm has none)",
+      "repo": "yuro1991-afk/bloom-fair-yellow-charm",
+      "status": "open",
+      "priority": 8,
+      "invasiveness": "small",
+      "why": "GitHub README API 404. In-app copy is Omni-Forge; AGENTS.md is a sandbox contract, not user docs.",
+      "acceptance": [
+        "Root README.md states clone, npm install, npm run dev on 0.0.0.0:8080, test/typecheck/lint",
+        "Documents /, /docs, /login, and /api/v1/health",
+        "Does not claim App Store, official Grok hosting, or a missing LICENSE",
+        "GitHub README API returns 200"
+      ],
+      "lease": null,
+      "evidence": null
+    },
+    {
+      "id": "gitignore-vercel-build-output",
+      "title": "Stop shipping .vercel/output in Omni-Forge",
+      "repo": "yuro1991-afk/bloom-fair-yellow-charm",
+      "status": "open",
+      "priority": 18,
+      "invasiveness": "small",
+      "why": ".gitignore is only node_modules and env crumbs; the tree includes Nitro/Vercel build output.",
+      "acceptance": [
+        ".gitignore includes .vercel/, dist/, and common Vite/Nitro outputs",
+        "Committed .vercel/output/** is removed from git",
+        "npm run build still works; git status stays clean after a local build",
+        "package-lock.json remains tracked"
+      ],
+      "lease": null,
+      "evidence": null
+    },
+    {
+      "id": "compile-hash-tests-and-ci",
+      "title": "Unit-test Omni-Forge compileGraph / hashGraph and add CI",
+      "repo": "yuro1991-afk/bloom-fair-yellow-charm",
+      "status": "open",
+      "priority": 40,
+      "invasiveness": "medium",
+      "why": "compile.ts / hash.ts are the DAG contract. npm test only runs scripts/*.test.mjs. No workflows.",
+      "acceptance": [
+        "Tests cover empty graph, unknown type, cycle, demoGraph ok, hash ignores x/y",
+        "npm test runs them without a browser",
+        "GitHub Action runs npm ci, npm test, npm run typecheck",
+        "Existing scripts/*.test.mjs still pass"
+      ],
+      "lease": null,
+      "evidence": null
+    },
+    {
+      "id": "do-not-reopen-genesis-pr-1",
+      "title": "Leave the closed Genesis GitHub duplicate shut",
+      "repo": "yuro1991-afk/main#genesis-siblings",
+      "status": "blocked",
+      "priority": 1,
+      "invasiveness": "small",
+      "why": "Yuri closed PR #1. Origin genesis is the source of truth and was already assembled.",
+      "acceptance": [
+        "github.com/yuro1991-afk/main/pull/1 stays closed",
+        "No new PR re-lands packages/* sibling shims on this GitHub repo"
+      ],
+      "blockedReason": "User closed the duplicate. Origin genesis is already done.",
+      "lease": null,
+      "evidence": null
+    }
+  ]
+}
