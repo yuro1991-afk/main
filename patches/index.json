@@ -360,6 +360,15 @@
       "applyCheck": "ok",
       "afterApply": [],
       "notes": "configs/work_order.json fabric_root is . (app root), not G:\\\\AI-Home. Independent of portable-paths (later hunks only). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-fabric-root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-fabric-root.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [],
+      "notes": "drone/app/seed/configs/work_order.json fabric_root is . Independent of live configs/work_order.json leftover (different file). Does not touch tool_agent.py."
     }
   ]
 }
