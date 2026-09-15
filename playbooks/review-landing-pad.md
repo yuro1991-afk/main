@@ -24,6 +24,10 @@ This playbook id is leftover. Take `review-landing-pad-prs` or
 | [#17](https://github.com/yuro1991-afk/main/pull/17) | `assign --missing` |
 | [#18](https://github.com/yuro1991-afk/main/pull/18) | next parked leftover launches |
 | [#19](https://github.com/yuro1991-afk/main/pull/19) | related section in assign --job launches |
+| [#20](https://github.com/yuro1991-afk/main/pull/20) | siblings board 15–19 |
+| [#21](https://github.com/yuro1991-afk/main/pull/21) | compact patches names nextMissing |
+| [#22](https://github.com/yuro1991-afk/main/pull/22) | hive-docstring honesty leftover launches |
+| [#23](https://github.com/yuro1991-afk/main/pull/23) | faceswap-readme leftover launches |
 
 Skip conflicting #4 / #5 / #6. Do not merge #7 after #8 without a rewrite.
 Do not steal the fork’s next slices: head → ears → eyes → vision → bridge.
@@ -31,7 +35,7 @@ Do not copy `packages/keep-busy` or `bin/autofix.js` onto this board.
 
 ## Review rules
 
-- Leave a review on at least one of #8 / #9 / #10 / #11 / #12 / #13 / #14 / #15 / #16 / #17 / #18 / #19.
+- Leave a review on at least one of #8 / #9 / #10 / #11 / #12 / #13 / #14 / #15 / #16 / #17 / #18 / #19 / #20 / #21 / #22 / #23.
 - Merge decisions stay with Yuri.
 - Empty `main` is not a review target.
 - Do not reopen #1.

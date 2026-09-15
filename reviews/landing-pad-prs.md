@@ -1,4 +1,4 @@
-# Landing-pad PR review (2026-09-15T07:08Z)
+# Landing-pad PR review (2026-09-15T07:18Z)
 
 Written on this pad for `review-landing-pad-prs`. Merge stays with Yuri.
 Do not comment on GitHub unless Yuri asked. Do not open another queue.
@@ -7,7 +7,7 @@ Do not comment on GitHub unless Yuri asked. Do not open another queue.
 `node src/cli.js probe`.
 
 #8 already has a stale `reviews/LANDING-PAD-PRS.md` (19:05Z) that stops
-at #8. This file is the current board, including #9–#19.
+at #8. This file is the current board, including #9–#23.
 
 | PR | state | take? |
 | --- | --- | --- |
@@ -28,6 +28,10 @@ at #8. This file is the current board, including #9–#19.
 | [#17](https://github.com/yuro1991-afk/main/pull/17) | draft MERGEABLE + CI green | `assign --missing`. Stacked on #16. |
 | [#18](https://github.com/yuro1991-afk/main/pull/18) | draft MERGEABLE + CI green | next parked leftover launches. Stacked on #17. |
 | [#19](https://github.com/yuro1991-afk/main/pull/19) | draft MERGEABLE + CI green | related section in `assign --job` launches. Stacked on #18. |
+| [#20](https://github.com/yuro1991-afk/main/pull/20) | draft MERGEABLE + CI green | siblings board 15–19. Stacked on #19. |
+| [#21](https://github.com/yuro1991-afk/main/pull/21) | draft MERGEABLE + CI green | compact `patches` names `nextMissing`. Stacked on #20. |
+| [#22](https://github.com/yuro1991-afk/main/pull/22) | draft MERGEABLE + CI green | hive-docstring honesty leftover launches. Stacked on #21. |
+| [#23](https://github.com/yuro1991-afk/main/pull/23) | draft MERGEABLE + CI green | faceswap-readme leftover launches. Stacked on #22. |
 
 ## Merge order
 
@@ -39,11 +43,15 @@ at #8. This file is the current board, including #9–#19.
 6. Merge **#17** (`assign --missing`).
 7. Merge **#18** (next parked leftover launches).
 8. Merge **#19** (related in launch files).
-9. Review **#13**; do not steal. Independent of the #11 stack.
-10. Review **#10**; do not merge onto `main` until Yuri retargets the base.
-11. Skip #4/#5/#6.
-12. Do not merge #7 after #8/#11 unless rewritten.
-13. #8 and #9 can close after #11 lands.
+9. Merge **#20** (siblings board 15–19).
+10. Merge **#21** (compact patches nextMissing).
+11. Merge **#22** (hive-docstring honesty launches).
+12. Merge **#23** (faceswap-readme leftover launches).
+13. Review **#13**; do not steal. Independent of the #11 stack.
+14. Review **#10**; do not merge onto `main` until Yuri retargets the base.
+15. Skip #4/#5/#6.
+16. Do not merge #7 after #8/#11 unless rewritten.
+17. #8 and #9 can close after #11 lands.
 
 ## DroneHive (cannot push from this token)
 

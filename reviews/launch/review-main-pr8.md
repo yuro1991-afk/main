@@ -36,7 +36,7 @@ Do not open another dispatch board. Extend #8 or take leftover review-landing-pa
 ## First moves
 
 - Do not invent a new tree on empty main.
-- Review an existing open PR: #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, or #19. Skip conflicting #4/#5/#6. #3 is merged.
+- Review an existing open PR: #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, or #23. Skip conflicting #4/#5/#6. #3 is merged.
 - Confirm #8 stays GitHub-first (default next is a sibling card). Merge stays with Yuri.
 
 ## Do not

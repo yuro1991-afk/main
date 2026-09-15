@@ -16,15 +16,15 @@ Work on the named GitHub repo. Forget Origin.
 
 - UI: https://github.com/yuro1991-afk/main
 - Git: `github.com/yuro1991-afk/main`
-- Job: `review-landing-pad-prs` — Review existing landing-pad PRs #3 #4 #5 #6 #7 #8 #9 #10 #11 #12 #13 #14 #15 #16 #17 #18 #19
+- Job: `review-landing-pad-prs` — Review existing landing-pad PRs #3 #4 #5 #6 #7 #8 #9 #10 #11 #12 #13 #14 #15 #16 #17 #18 #19 #20 #21 #22 #23
 - Packet: `reviews/handoff-review-landing-pad-prs.md`
 - Playbook: `playbooks/review-landing-pad-prs.md`
 - Priority: 22
-- Verify: Leave a review on at least one of #8/#9/#10/#11/#12/#13/#14/#15/#16/#17/#18/#19. No new dispatch-board PR.
+- Verify: Leave a review on at least one of #8/#9/#10/#11/#12/#13/#14/#15/#16/#17/#18/#19/#20/#21/#22/#23. No new dispatch-board PR.
 
 ## Notes
 
-Idle CodeRabbit / auto-review agents: review open PRs #4–#19. #3 is merged. #11 is the resolved #8-then-#9 merge. #12 leftover Apply launches. #13 Genesis arena pointers — do not steal. #14 assign --job. #15 siblings board 11–14. #16 assign --job related JSON. #17 assign --missing. #18 next parked leftover launches. #19 related section in assign --job launches. Fork bc-84d93b47 shipped #10 (python-arena-infra). CodeRabbit skips this repo (<10 stars) unless someone checks Trigger review. Do not invent a new tree. Do not reopen #1. Do not steal the fork's next slices (head → ears → eyes → vision → bridge).
+Idle CodeRabbit / auto-review agents: review open PRs #4–#23. #3 is merged. #11 is the resolved #8-then-#9 merge. #12 leftover Apply launches. #13 Genesis arena pointers — do not steal. #14 assign --job. #15 siblings board 11–14. #16 assign --job related JSON. #17 assign --missing. #18 next parked leftover launches. #19 related section in assign --job launches. #20 siblings board 15–19. #21 compact patches nextMissing. #22 hive-docstring honesty launches. #23 faceswap-readme leftover launches. Fork bc-84d93b47 shipped #10 (python-arena-infra). CodeRabbit skips this repo (<10 stars) unless someone checks Trigger review. Do not invent a new tree. Do not reopen #1. Do not steal the fork's next slices (head → ears → eyes → vision → bridge).
 Yuri: forget Origin. Take this GitHub sibling. This pad token cannot push it — relaunch that repo.
 Blocked: Yuri scoped this landing pad to Genesis only.
 
@@ -35,9 +35,9 @@ Review only. Merge decisions stay with Yuri.
 ## First moves
 
 - Read reviews/landing-pad-prs.md.
-- Review an existing open PR: #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, or #19. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8.
+- Review an existing open PR: #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, or #23. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8.
 - Do not invent a new tree on empty main.
-- Leave a review on at least one of #8/#9/#10/#11/#12/#13/#14/#15/#16/#17/#18/#19. No new dispatch-board PR.
+- Leave a review on at least one of #8/#9/#10/#11/#12/#13/#14/#15/#16/#17/#18/#19/#20/#21/#22/#23. No new dispatch-board PR.
 
 ## Do not
 
@@ -51,4 +51,5 @@ Review only. Merge decisions stay with Yuri.
 - #8 ops-board — Landing-pad ops CLI (merged #3). GitHub-first defaults live on #8. Patch catalog is #9.
 - #11 merge-8-then-9 — Resolved #8 then #9. Prefer this product over merging #8 and #9 separately. Catalog still leads as #9.
 - #15 siblings-board — Records open landing-pad PRs on ledger/siblings.json. Lead stays catalog #9.
+- #20 siblings-board — Records open landing-pad PRs on ledger/siblings.json. Lead stays catalog #9.
 
