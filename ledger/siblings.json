@@ -672,6 +672,55 @@
         "opensussy-sec-review-target",
         "opensussy-install-sec-review-target"
       ]
+    },
+    {
+      "number": 47,
+      "url": "https://github.com/yuro1991-afk/main/pull/47",
+      "branch": "cursor/siblings-prs-43-46-108b",
+      "title": "Record landing-pad PRs 43–46 on the siblings board",
+      "role": "siblings-board",
+      "owns": [
+        "review-landing-pad-prs"
+      ]
+    },
+    {
+      "number": 48,
+      "url": "https://github.com/yuro1991-afk/main/pull/48",
+      "branch": "cursor/readme-cd-launches-108b",
+      "title": "Add Apply launches for readme-cd leftover cards",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-readme-cd",
+        "dronehive-doc-agent-loop-cd",
+        "dronehive-doc-bridge-1080-cd",
+        "dronehive-doc-code-worker-cd"
+      ]
+    },
+    {
+      "number": 49,
+      "url": "https://github.com/yuro1991-afk/main/pull/49",
+      "branch": "cursor/future-seer-cd-launches-108b",
+      "title": "Add Apply launches for future-seer-cd leftover cards",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-doc-future-seer-cd",
+        "dronehive-doc-measured-diagnostics-cd",
+        "dronehive-doc-multi-face-cd",
+        "dronehive-doc-operational-cd"
+      ]
+    },
+    {
+      "number": 50,
+      "url": "https://github.com/yuro1991-afk/main/pull/50",
+      "branch": "cursor/seed-operational-super-cd-launches-108b",
+      "title": "Add Apply launches for seed-operational and super-cd leftovers",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-seed-doc-operational-cd",
+        "dronehive-doc-pro-cd",
+        "dronehive-doc-super-llms-cd",
+        "dronehive-doc-super-mesh-cd"
+      ]
     }
   ]
 }

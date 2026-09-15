@@ -51,6 +51,10 @@ This playbook id is leftover. Take `review-landing-pad-prs` or
 | [#44](https://github.com/yuro1991-afk/main/pull/44) | apps-readme-cargo leftover launches |
 | [#45](https://github.com/yuro1991-afk/main/pull/45) | uninstall-tui-readme leftover launches |
 | [#46](https://github.com/yuro1991-afk/main/pull/46) | mount-readme and opensussy-sec leftover launches |
+| [#47](https://github.com/yuro1991-afk/main/pull/47) | siblings board 43–46 |
+| [#48](https://github.com/yuro1991-afk/main/pull/48) | readme-cd leftover launches |
+| [#49](https://github.com/yuro1991-afk/main/pull/49) | future-seer-cd leftover launches |
+| [#50](https://github.com/yuro1991-afk/main/pull/50) | seed-operational and super-cd leftover launches |
 
 Skip conflicting #4 / #5 / #6. Do not merge #7 after #8 without a rewrite.
 Do not steal the fork’s next slices: head → ears → eyes → vision → bridge.
@@ -58,7 +62,7 @@ Do not copy `packages/keep-busy` or `bin/autofix.js` onto this board.
 
 ## Review rules
 
-- Leave a review on at least one of #8 / #9 / #10 / #11 / #12 / #13 / #14 / #15 / #16 / #17 / #18 / #19 / #20 / #21 / #22 / #23 / #24 / #25 / #26 / #27 / #28 / #29 / #30 / #31 / #32 / #33 / #34 / #35 / #36 / #37 / #38 / #39 / #40 / #41 / #42 / #43 / #44 / #45 / #46.
+- Leave a review on at least one of #8 / #9 / #10 / #11 / #12 / #13 / #14 / #15 / #16 / #17 / #18 / #19 / #20 / #21 / #22 / #23 / #24 / #25 / #26 / #27 / #28 / #29 / #30 / #31 / #32 / #33 / #34 / #35 / #36 / #37 / #38 / #39 / #40 / #41 / #42 / #43 / #44 / #45 / #46 / #47 / #48 / #49 / #50.
 - Merge decisions stay with Yuri.
 - Empty `main` is not a review target.
 - Do not reopen #1.

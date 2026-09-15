@@ -1,4 +1,4 @@
-# Landing-pad PR review (2026-09-15T08:20Z)
+# Landing-pad PR review (2026-09-15T08:28Z)
 
 Written on this pad for `review-landing-pad-prs`. Merge stays with Yuri.
 Do not comment on GitHub unless Yuri asked. Do not open another queue.
@@ -7,7 +7,7 @@ Do not comment on GitHub unless Yuri asked. Do not open another queue.
 `node src/cli.js probe`.
 
 #8 already has a stale `reviews/LANDING-PAD-PRS.md` (19:05Z) that stops
-at #8. This file is the current board, including #9–#46.
+at #8. This file is the current board, including #9–#50.
 
 | PR | state | take? |
 | --- | --- | --- |
@@ -55,6 +55,10 @@ at #8. This file is the current board, including #9–#46.
 | [#44](https://github.com/yuro1991-afk/main/pull/44) | draft MERGEABLE + CI green | apps-readme-cargo leftover launches. Stacked on #43. |
 | [#45](https://github.com/yuro1991-afk/main/pull/45) | draft MERGEABLE + CI green | uninstall-tui-readme leftover launches. Stacked on #44. |
 | [#46](https://github.com/yuro1991-afk/main/pull/46) | draft MERGEABLE + CI green | mount-readme and opensussy-sec leftover launches. Stacked on #45. |
+| [#47](https://github.com/yuro1991-afk/main/pull/47) | draft MERGEABLE + CI green | siblings board 43–46. Stacked on #46. |
+| [#48](https://github.com/yuro1991-afk/main/pull/48) | draft MERGEABLE + CI green | readme-cd leftover launches. Stacked on #47. |
+| [#49](https://github.com/yuro1991-afk/main/pull/49) | draft MERGEABLE + CI green | future-seer-cd leftover launches. Stacked on #48. |
+| [#50](https://github.com/yuro1991-afk/main/pull/50) | draft MERGEABLE + CI green | seed-operational and super-cd leftover launches. Stacked on #49. |
 
 ## Merge order
 
@@ -93,11 +97,15 @@ at #8. This file is the current board, including #9–#46.
 33. Merge **#44** (apps-readme-cargo leftover launches).
 34. Merge **#45** (uninstall-tui-readme leftover launches).
 35. Merge **#46** (mount-readme and opensussy-sec leftover launches).
-36. Review **#13**; do not steal. Independent of the #11 stack.
-37. Review **#10**; do not merge onto `main` until Yuri retargets the base.
-38. Skip #4/#5/#6.
-39. Do not merge #7 after #8/#11 unless rewritten.
-40. #8 and #9 can close after #11 lands.
+36. Merge **#47** (siblings board 43–46).
+37. Merge **#48** (readme-cd leftover launches).
+38. Merge **#49** (future-seer-cd leftover launches).
+39. Merge **#50** (seed-operational and super-cd leftover launches).
+40. Review **#13**; do not steal. Independent of the #11 stack.
+41. Review **#10**; do not merge onto `main` until Yuri retargets the base.
+42. Skip #4/#5/#6.
+43. Do not merge #7 after #8/#11 unless rewritten.
+44. #8 and #9 can close after #11 lands.
 
 ## DroneHive (cannot push from this token)
 
