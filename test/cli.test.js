@@ -310,6 +310,16 @@ test("help says playbooks defaults to check and refuses in-repo write", async ()
   assert.match(result.out, /never writes or resets siblings/);
 });
 
+test("README assign --job names exhausted leftover launches", () => {
+  const text = readFileSync(new URL("../README.md", import.meta.url), "utf8");
+  assert.match(
+    text,
+    /`assign --job <id>` writes one leftover Apply launch and names\ncatalog-first related PRs in both JSON and the launch file\n\(same order as `siblings --job`\)\. Leftover launches are exhausted\./,
+  );
+  assert.match(text, /Prefer `brief --job dronehive-unicode-ci`/);
+  assert.match(text, /Do not invent leftover 163\+/);
+});
+
 test("ci uses Node 24 action runtimes and keeps project Node 20", () => {
   const yml = readFileSync(new URL("../.github/workflows/ci.yml", import.meta.url), "utf8");
   assert.match(yml, /actions\/checkout@v5/);
