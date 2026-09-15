@@ -347,6 +347,50 @@
       "title": "Write catalog-first related PRs into assign --job launches",
       "role": "assign-job",
       "owns": []
+    },
+    {
+      "number": 20,
+      "url": "https://github.com/yuro1991-afk/main/pull/20",
+      "branch": "cursor/siblings-prs-15-19-108b",
+      "title": "Record landing-pad PRs 15–19 on the siblings board",
+      "role": "siblings-board",
+      "owns": [
+        "review-landing-pad-prs"
+      ]
+    },
+    {
+      "number": 21,
+      "url": "https://github.com/yuro1991-afk/main/pull/21",
+      "branch": "cursor/patches-next-missing-108b",
+      "title": "Name nextMissing on compact patches output",
+      "role": "assign-missing",
+      "owns": []
+    },
+    {
+      "number": 22,
+      "url": "https://github.com/yuro1991-afk/main/pull/22",
+      "branch": "cursor/hive-docstring-launches-108b",
+      "title": "Add Apply launches for hive-docstring honesty leftovers",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-hive-docstring-honesty",
+        "dronehive-work-order-doc-honesty",
+        "dronehive-seed-work-order-doc-honesty",
+        "dronehive-bench-goal-honesty"
+      ]
+    },
+    {
+      "number": 23,
+      "url": "https://github.com/yuro1991-afk/main/pull/23",
+      "branch": "cursor/faceswap-readme-launches-108b",
+      "title": "Add Apply launches for faceswap-readme leftover cards",
+      "role": "leftover-launches",
+      "owns": [
+        "faceswap-readme-requirements-honesty",
+        "faceswap-readme-install-sh",
+        "dronehive-buzzer-hive-library-honesty",
+        "dronehive-seed-buzzer-hive-library-honesty"
+      ]
     }
   ]
 }
