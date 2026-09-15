@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T04:50Z**: 40 IDLE + this catalog run +
+Keep-busy tick **2026-09-15T04:55Z**: 40 IDLE + this catalog run +
 `bc-01a0a0ce` RUNNING on #7 (`cursor/stub-wake-roster-108b`). Do not
 steal #7. Newest idle is still `bc-710c5477` — assign
-`bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
-still 162. Hunt closed. Superbrain sit-out take-instead now names
-`--prove-after-apply` before apply. Do not invent leftovers.
+`bloom-grok-pwa-test-sync`. Catalog still 162. Hunt closed. Catalog
+`relaunch.reason` now appends `--prove-after-apply` once (no 162-case
+rewrite). Do not invent leftovers. Do not run writePlaybooks.
 
 | who | take this |
 | --- | --- |

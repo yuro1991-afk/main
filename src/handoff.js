@@ -570,6 +570,20 @@ function hereRelaunchFor(job) {
 }
 
 /**
+ * Catalog why lines stay apply-specific. Append the throwaway afterApply prove once.
+ * @param {import("./ledger.js").Job} job
+ * @param {{ kind: string, url: string, reason: string }} target
+ */
+function withCatalogProve(job, target) {
+  const cmd = proveAfterApplyForJob(job);
+  if (!cmd || target.reason.includes("prove-after-apply")) return target;
+  return {
+    ...target,
+    reason: `${target.reason} Then ${cmd} on throwaways (never write /tmp/siblings).`,
+  };
+}
+
+/**
  * @param {import("./ledger.js").Job} job
  */
 export function relaunchFor(job) {
@@ -594,17 +608,17 @@ export function relaunchFor(job) {
         };
       }
       if (job.repo.includes("dronehive")) {
-        return {
+        return withCatalogProve(job, {
           kind: "github",
           url: "https://github.com/yuro1991-afk/dronehive",
           reason: dronehiveRelaunchReason(job.id),
-        };
+        });
       }
-      return {
+      return withCatalogProve(job, {
         kind: "github",
         url: `https://${job.repo}`,
         reason: githubCatalogReason(job),
-      };
+      });
     default:
       return assertNeverScope(scope);
   }

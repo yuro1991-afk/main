@@ -35,6 +35,8 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
   assert.ok(handoff.doNot.some((line) => line.includes("forget Origin")));
   assert.ok(!handoff.doNot.some((line) => line.includes("Do not work dronehive")));
   assert.match(handoff.relaunch.reason, /dronehive-pro-chat-cp1252\.patch/);
+  assert.match(handoff.relaunch.reason, /prove-after-apply --job dronehive-unicode-ci/);
+  assert.match(handoff.relaunch.reason, /never write \/tmp\/siblings/);
   assert.doesNotMatch(handoff.relaunch.reason, /npm run autofix/);
   assert.ok(handoff.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
   assert.ok(handoff.applyNext.some((line) => line.startsWith("git clone https://github.com/yuro1991-afk/dronehive.git")));
