@@ -1,8 +1,10 @@
-import { mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { describeKind, jobScope } from "./kinds.js";
 import { displayNotes, firstCommands } from "./brief.js";
 import { relaunchFor } from "./handoff.js";
+
+export const PLAYBOOK_CHECK_CONTRACT = "agent-ops.playbooks.check.v1";
 
 /**
  * @param {import("./ledger.js").Job} job
@@ -60,4 +62,71 @@ export function writePlaybooks(jobs, dir) {
     writeFileSync(dest, renderPlaybook(job));
     return dest;
   });
+}
+
+/**
+ * First-command bullets under ## First commands.
+ * @param {string} markdown
+ * @returns {string[]}
+ */
+export function playbookFirstCommands(markdown) {
+  const start = markdown.indexOf("## First commands");
+  if (start < 0) return [];
+  const rest = markdown.slice(start);
+  const end = rest.indexOf("\n## ", 1);
+  const section = end === -1 ? rest : rest.slice(0, end);
+  return section
+    .split("\n")
+    .filter((line) => line.startsWith("- "))
+    .map((line) => line.slice(2));
+}
+
+/**
+ * Compare on-disk First commands to live firstCommands. Does not write.
+ * @param {import("./ledger.js").Job} job
+ * @param {string} markdown
+ */
+export function checkPlaybook(job, markdown) {
+  const expected = firstCommands(job);
+  const actual = playbookFirstCommands(markdown);
+  const missing = expected.filter((line) => !actual.includes(line));
+  return {
+    id: job.id,
+    stale: missing.length > 0,
+    missing,
+    prefer: `node src/cli.js brief --job ${job.id}`,
+  };
+}
+
+/**
+ * Read-only drift report. Never writes playbooks/.
+ * @param {import("./ledger.js").Job[]} jobs
+ * @param {string} dir
+ */
+export function checkPlaybooks(jobs, dir) {
+  const results = jobs.map((job) => {
+    const dest = playbookPath(job, dir);
+    if (!existsSync(dest)) {
+      return {
+        id: job.id,
+        stale: true,
+        status: "missing-playbook",
+        missing: firstCommands(job),
+        prefer: `node src/cli.js brief --job ${job.id}`,
+      };
+    }
+    return checkPlaybook(job, readFileSync(dest, "utf8"));
+  });
+  const stale = results.filter((row) => row.stale).length;
+  return {
+    contract: PLAYBOOK_CHECK_CONTRACT,
+    command: "playbooks",
+    check: true,
+    wrote: false,
+    doNot: "Do not run writePlaybooks over playbooks/. Prefer brief / proveAfterApplyCommand.",
+    count: results.length,
+    ok: results.length - stale,
+    stale,
+    results,
+  };
 }

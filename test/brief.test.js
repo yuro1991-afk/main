@@ -53,6 +53,7 @@ test("brief attaches sibling PR 5 to the unicode card", () => {
   assert.ok(brief.hardRules.some((rule) => rule.includes("no more Superbrain")));
   assert.ok(brief.hardRules.some((rule) => rule.includes("#8/#9/#10")));
   assert.ok(brief.hardRules.some((rule) => rule.includes("forget Origin for this card")));
+  assert.ok(brief.hardRules.some((rule) => rule.includes("Prefer brief / proveAfterApplyCommand")));
   assert.ok(!brief.hardRules.some((rule) => rule.includes("sibling cards stay blocked")));
   assert.ok(!brief.hardRules.some((rule) => rule.includes("Extend PR #3")));
   assert.equal(brief.destination, "Apply the catalog patch on github.com/yuro1991-afk/dronehive");

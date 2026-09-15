@@ -221,6 +221,7 @@ function hardRules(job) {
     return [
       ...shared,
       "Yuri: forget Origin for this card. Apply the catalog patch. Do not invent a new leftover.",
+      "On-disk playbooks/ First commands may omit --prove-after-apply. Prefer brief / proveAfterApplyCommand. Do not run writePlaybooks over playbooks/.",
     ];
   }
   return [

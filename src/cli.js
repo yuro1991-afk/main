@@ -32,7 +32,7 @@ import {
   relaunchFor,
   writeHandoffPackets,
 } from "./handoff.js";
-import { writePlaybooks } from "./playbook.js";
+import { checkPlaybooks, writePlaybooks } from "./playbook.js";
 import { buildHelperPacket } from "./helpers.js";
 import { defaultSiblingsPath, loadSiblings } from "./siblings.js";
 import {
@@ -427,6 +427,16 @@ export async function runCli(argv, options = {}) {
       const dest = flags.out
         ? resolve(flags.out)
         : resolve(options.root ?? ROOT, "playbooks");
+      if (flags.check === "true") {
+        const explicitId =
+          positionals[0] || (flags.job && flags.job !== "true" ? flags.job : "");
+        const jobs = explicitId
+          ? [resolveJob(ledger, positionals, flags, nowMs, options)].filter(Boolean)
+          : catalogCheckJobs(ledger, options);
+        const report = checkPlaybooks(jobs, dest);
+        write(JSON.stringify(report, null, 2));
+        return 0;
+      }
       const jobs = listJobs(ledger, { status: "open", ...jobFilters(flags) }, nowMs);
       const written = writePlaybooks(jobs, dest);
       const defaultReviews = resolve(options.root ?? ROOT, "reviews");
@@ -519,6 +529,13 @@ function loadOrReadAgents(flags, options) {
  * @param {number} nowMs
  * @param {{ root?: string }} options
  */
+function catalogCheckJobs(ledger, options) {
+  const index = loadPatchIndex(defaultPatchesIndexPath(options.root ?? ROOT));
+  return index.patches
+    .map((row) => ledger.jobs.find((job) => job.id === row.id))
+    .filter(Boolean);
+}
+
 function resolveJob(ledger, positionals, flags, nowMs, options) {
   const id = positionals[0] || (flags.job && flags.job !== "true" ? flags.job : "");
   if (id) {
@@ -592,11 +609,12 @@ Commands:
   tick [--out path]
   siblings
   patches [jobId] [--job id] [--repo github.com/yuro1991-afk/...] [--prove] [--prove-after-apply] [--siblings-root dir]
-  playbooks [--here] [--out dir]
+  playbooks [--check] [--job id] [--here] [--out dir]
 
 Yuri: forget Origin for sibling work. patches lists applyable GitHub diffs.
 --prove runs vanilla+stacked git apply --check and resets the checkout.
 --prove-after-apply clones --no-hardlinks throwaways and never writes siblings.
+playbooks --check compares on-disk First commands to live firstCommands and never writes.
 This token cannot push those repos. Do not copy PR #6 autofix.
 Genesis only unless you pass --all / merge the GitHub-first board.
 Do not reopen GitHub PR #1. Origin: origin.cursor.com/git/yuri-afk/genesis.`;

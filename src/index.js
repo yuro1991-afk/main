@@ -84,7 +84,7 @@ export {
   renderHandoffPacket,
   writeHandoffPackets,
 } from "./handoff.js";
-export { playbookPath, renderPlaybook, writePlaybooks } from "./playbook.js";
+export { PLAYBOOK_CHECK_CONTRACT, checkPlaybook, checkPlaybooks, playbookFirstCommands, playbookPath, renderPlaybook, writePlaybooks } from "./playbook.js";
 export { HELPER_CONTRACT, buildHelperPacket, planHelpers } from "./helpers.js";
 export {
   ASSIGN_CONTRACT,

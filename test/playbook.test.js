@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadLedger, listJobs } from "../src/ledger.js";
-import { renderPlaybook, writePlaybooks } from "../src/playbook.js";
+import { checkPlaybook, renderPlaybook, writePlaybooks } from "../src/playbook.js";
 import { defaultPatchesIndexPath, loadPatchIndex } from "../src/patches.js";
 import { runCli } from "../src/cli.js";
 
@@ -40,6 +40,7 @@ test("renderPlaybook includes collision and verify", () => {
   const md = renderPlaybook(job);
   assert.match(md, /dronehive-unicode-ci/);
   assert.match(md, /patches --prove --job dronehive-unicode-ci/);
+  assert.match(md, /patches --prove-after-apply --job dronehive-unicode-ci/);
   assert.match(md, /Collision/);
   assert.match(md, /Do not reopen/);
   assert.match(job.notes, /Blocked: Yuri scoped this landing pad to Genesis only/);
@@ -70,4 +71,35 @@ test("cli playbooks --here writes into --out", async () => {
   });
   assert.equal(code, 0);
   assert.match(chunks.join(""), /"count": 0/);
+});
+
+test("on-disk catalog playbooks are stale vs live firstCommands", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const job = ledger.jobs.find((item) => item.id === "dronehive-unicode-ci");
+  const onDisk = readFileSync(join(ROOT, "playbooks", "dronehive-unicode-ci.md"), "utf8");
+  const stale = checkPlaybook(job, onDisk);
+  assert.equal(stale.stale, true);
+  assert.ok(stale.missing.some((line) => line.includes("prove-after-apply")));
+  assert.equal(stale.prefer, "node src/cli.js brief --job dronehive-unicode-ci");
+  const fresh = checkPlaybook(job, renderPlaybook(job));
+  assert.equal(fresh.stale, false);
+  assert.deepEqual(fresh.missing, []);
+});
+
+test("cli playbooks --check does not write", async () => {
+  const chunks = [];
+  const code = await runCli(["playbooks", "--check", "--job", "dronehive-unicode-ci"], {
+    nowMs: NOW,
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.contract, "agent-ops.playbooks.check.v1");
+  assert.equal(parsed.wrote, false);
+  assert.equal(parsed.stale, 1);
+  assert.equal(parsed.results[0].id, "dronehive-unicode-ci");
+  assert.ok(parsed.results[0].missing.some((line) => line.includes("prove-after-apply")));
+  assert.match(parsed.doNot, /writePlaybooks/);
 });

@@ -6,14 +6,14 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T04:35Z**: 40 IDLE + this catalog run +
+Keep-busy tick **2026-09-15T04:40Z**: 40 IDLE + this catalog run +
 `bc-01a0a0ce` RUNNING on #7 (`cursor/stub-wake-roster-108b`). Do not
 steal #7. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
-still 162. Hunt closed. PR #10 still `82161d8`. PR #9 HEAD `3303ff6`.
-Catalog JSON now carries `proveAfterApplyCommand` next to write-checkout
-`applyNext` so `patches --job` / `slots --job` prove gates on throwaways.
-Do not invent leftovers.
+still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
+`4506bc6`. `playbooks --check` reports on-disk First commands vs live
+`brief` (catalog playbooks omit `--prove-after-apply`). Do not invent
+leftovers. Do not run writePlaybooks over playbooks/.
 
 | who | take this |
 | --- | --- |
@@ -26,6 +26,7 @@ Do not invent leftovers.
 | fork `bc-84d93b47` | **eyes → vision → bridge** (already theirs) |
 | next unused apply | `faceswap-start-sh` |
 | prove a leftover gate | `patches --prove-after-apply --job <id>` (also on `--job` JSON) |
+| check stale playbook | `playbooks --check --job <id>` then `brief --job` (do not writePlaybooks) |
 | next stacked apply | `dronehive-runtime-host-paths` (`requires` portable-paths) |
 | next unused stacked apply | `dronehive-config-load-overlay` (`requires` portable-paths) |
 | last host_paths stacked apply | `dronehive-app-links-host-paths` (`requires` portable-paths) |
