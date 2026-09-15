@@ -1429,8 +1429,10 @@
       "file": "patches/dronehive-ollama-app-readme-dest.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "apps/drone-ollama-app/README.md dest uses host\\\\ai-home. Independent of installer leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/README.md').read_text(); assert r'host\\\\ai-home\\\\apps\\\\DroneOllama' in t; assert r'G:\\\\AI-Home\\\\apps\\\\DroneOllama' not in t\""
+      ],
+      "notes": "apps/drone-ollama-app/README.md dest uses host\\\\ai-home\\\\apps\\\\DroneOllama. After apply: assert that phrase and G:\\\\AI-Home\\\\apps\\\\DroneOllama gone. Installer leftover still pins G:\\\\AI-Home\\\\projects. Do not put backticks in afterApply. Independent of installer leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-ollama-app-crash-log",

@@ -22,6 +22,7 @@ apps/drone-ollama-app/README.md dest line only. Do not edit drone/pro/tool_agent
 - git checkout -b cursor/dronehive-ollama-app-readme-dest-from-ops
 - git apply --check /path/to/main/patches/dronehive-ollama-app-readme-dest.patch
 - git apply /path/to/main/patches/dronehive-ollama-app-readme-dest.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-app/README.md').read_text(); assert r'host\\ai-home\\apps\\DroneOllama' in t; assert r'G:\\AI-Home\\apps\\DroneOllama' not in t"
 
 ## Verify
 
