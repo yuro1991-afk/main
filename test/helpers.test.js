@@ -101,6 +101,24 @@ test("cataloged sibling helpers prove then apply", () => {
   assert.ok(packet.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
 });
 
+test("stacked catalog apply helper names requires priors first", () => {
+  const stacked = job("implement", {
+    id: "dronehive-runtime-host-paths",
+    repo: "github.com/yuro1991-afk/dronehive",
+  });
+  const apply = planHelpers(stacked).find((helper) => helper.role === "apply");
+  assert.ok(apply);
+  assert.match(apply.prompt, /Write-checkout apply/);
+  assert.match(apply.prompt, /never write \/tmp\/siblings/);
+  assert.match(apply.prompt, /dronehive-portable-paths\.patch/);
+  assert.match(apply.prompt, /dronehive-runtime-host-paths\.patch/);
+  const portable = apply.prompt.indexOf("git apply /path/to/main/patches/dronehive-portable-paths.patch");
+  const runtime = apply.prompt.indexOf("git apply /path/to/main/patches/dronehive-runtime-host-paths.patch");
+  assert.ok(portable >= 0 && runtime > portable);
+  assert.doesNotMatch(apply.prompt, /patches --prove-after-apply --job/);
+  assert.doesNotMatch(apply.prompt, /npm run autofix/);
+});
+
 test("cli helpers defaults to next Genesis card", async () => {
   const chunks = [];
   const code = await runCli(["helpers"], {

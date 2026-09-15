@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { applyNextForJob, catalogPatchFor, displayCollision, displayNotes, proveAfterApplyForJob } from "./brief.js";
+import { applyNextForJob, catalogPatchFor, catalogPatchSummary, catalogRequires, displayCollision, displayNotes, proveAfterApplyForJob } from "./brief.js";
 import { assertNeverScope, jobScope } from "./kinds.js";
 import { siblingsForJob, describeRole } from "./siblings.js";
 import { defaultPatchesIndexPath, loadPatchIndex, patchForJob } from "./patches.js";
@@ -72,7 +72,7 @@ Yuri: forget Origin for this card. Apply the catalog patch on a sibling write ch
 - priority: ${job.priority}
 - repo: \`${job.repo}\`
 - Sibling: https://${job.repo}
-- Patch: \`${patch.file}\`
+${catalogPatchSummary(patch)}
 - Prove: \`node src/cli.js patches --prove --job ${job.id}\`
 - Prove afterApply: \`${proveAfterApplyForJob(job)}\` (throwaways; never write /tmp/siblings)${after}
 - playbook: \`playbooks/${job.id}.md\` (First commands may omit --prove-after-apply; prefer brief)
@@ -265,7 +265,8 @@ function githubCatalogReason(job) {
       const patch = patchForJob(loadPatchIndex(indexPath), job.id);
       if (patch) {
         const name = job.repo.replace(/^github\.com\//, "");
-        return `This token cannot push ${name}. Apply ${patch.file} from main#9 (\`git apply --check\`). Do not copy PR #6 autofix.`;
+        const files = [...catalogRequires(patch), patch.file].join(" then ");
+        return `This token cannot push ${name}. Apply ${files} from main#9 (\`git apply --check\`). Do not copy PR #6 autofix.`;
       }
     } catch {
       // fall through to the generic relaunch line

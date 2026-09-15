@@ -1,4 +1,4 @@
-import { applyNextForJob, catalogPatchFor, displayCollision, displayNotes, firstCommands, proveAfterApplyForJob } from "./brief.js";
+import { applyNextForJob, catalogPatchFor, catalogPatchSummary, displayCollision, displayNotes, firstCommands, proveAfterApplyForJob } from "./brief.js";
 import { packetPathFor, relaunchFor } from "./handoff.js";
 
 export const PROMPT_CONTRACT = "agent-ops.prompt.v1";
@@ -31,7 +31,7 @@ Yuri: forget Origin for this card. Apply the catalog patch on a sibling write ch
 
 - Sibling: https://${job.repo}
 - Relaunch: ${target.url}
-- Patch: \`${patch.file}\`
+${catalogPatchSummary(patch)}
 - Job: \`${job.id}\` — ${job.title}
 - Playbook: \`playbooks/${job.id}.md\` (First commands may omit --prove-after-apply; prefer brief)
 - Prove: \`node src/cli.js patches --prove --job ${job.id}\`

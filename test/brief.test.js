@@ -4,7 +4,7 @@ import { mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { JOB_KINDS } from "../src/kinds.js";
-import { applyNextForJob, buildBrief, displayCollision, displayNotes, firstCommands, proveAfterApplyForJob } from "../src/brief.js";
+import { applyNextForJob, buildBrief, catalogPatchFor, catalogPatchSummary, catalogRequires, displayCollision, displayNotes, firstCommands, proveAfterApplyForJob } from "../src/brief.js";
 import { describeRole, loadSiblings, siblingsForJob } from "../src/siblings.js";
 import { saveLedger } from "../src/ledger.js";
 import { runCli } from "../src/cli.js";
@@ -150,6 +150,22 @@ test("probe-kind firstCommands without a catalog patch refuse cli probe", () => 
   );
   assert.ok(lines.some((line) => line.includes("Do not run node src/cli.js probe")));
   assert.ok(!lines.some((line) => line.startsWith("node src/cli.js probe")));
+});
+
+test("catalogPatchSummary lists the leftover and names requires priors", () => {
+  const stacked = catalogPatchFor({ id: "dronehive-runtime-host-paths" });
+  assert.deepEqual(catalogRequires(stacked), ["patches/dronehive-portable-paths.patch"]);
+  const summary = catalogPatchSummary(stacked);
+  assert.match(summary, /Patch: `patches\/dronehive-runtime-host-paths\.patch`/);
+  assert.match(summary, /Requires \(apply first\): `patches\/dronehive-portable-paths\.patch`/);
+  const portable = summary.indexOf("dronehive-portable-paths.patch");
+  const runtime = summary.indexOf("dronehive-runtime-host-paths.patch");
+  assert.ok(portable > runtime);
+
+  const single = catalogPatchFor({ id: "dronehive-unicode-ci" });
+  assert.deepEqual(catalogRequires(single), []);
+  assert.equal(catalogPatchSummary(single), "- Patch: `patches/dronehive-pro-chat-cp1252.patch`");
+  assert.doesNotMatch(catalogPatchSummary(single), /Requires/);
 });
 
 test("cataloged sibling firstCommands use git apply, not edit", () => {

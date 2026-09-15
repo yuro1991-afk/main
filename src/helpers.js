@@ -30,6 +30,20 @@ function catalogApplyKind(kind) {
   }
 }
 
+/**
+ * Write-checkout apply Task. Uses applyNext so stacked leftovers name
+ * requires priors. Not --prove-after-apply (throwaways only).
+ * @param {import("./ledger.js").Job} job
+ * @param {{ file: string }} patch
+ */
+function catalogApplyPrompt(job, patch) {
+  const steps = applyNextForJob(job);
+  const apply = steps?.length
+    ? steps.join("; ")
+    : `git apply --check /path/to/main/${patch.file} && git apply /path/to/main/${patch.file}`;
+  return `Write-checkout apply for ${job.id} (not --prove-after-apply; never write /tmp/siblings): ${apply}. Gate: ${job.verify}. If this token cannot push, relaunch there. Do not inventory the pad again. Do not copy PR #6 autofix.`;
+}
+
 export function planHelpers(job) {
   if (!job) return [];
   const scope = jobScope(job);
@@ -42,9 +56,6 @@ export function planHelpers(job) {
   ];
   const patch = catalogPatchFor(job);
   if (patch && catalogApplyKind(job.kind)) {
-    const after = (patch.afterApply ?? []).length
-      ? ` Then: ${patch.afterApply.join("; ")}.`
-      : "";
     return [
       {
         role: "prove",
@@ -59,7 +70,7 @@ export function planHelpers(job) {
       {
         role: "apply",
         title: `Apply ${job.id}`,
-        prompt: `On a write checkout of ${job.repo}: git apply --check /path/to/main/${patch.file} && git apply /path/to/main/${patch.file}.${after} Gate: ${job.verify}. If this token cannot push, relaunch there. Do not inventory the pad again.`,
+        prompt: catalogApplyPrompt(job, patch),
       },
     ];
   }

@@ -143,6 +143,30 @@ export function catalogPatchFor(job, options = {}) {
 }
 
 /**
+ * Prior patch files that must apply before the leftover.
+ * @param {{ requires?: string[] } | null | undefined} patch
+ * @returns {string[]}
+ */
+export function catalogRequires(patch) {
+  return Array.isArray(patch?.requires)
+    ? patch.requires.filter((file) => typeof file === "string" && file.startsWith("patches/"))
+    : [];
+}
+
+/**
+ * Human-readable catalog patch + priors for prompt / handoff.
+ * @param {{ file: string, requires?: string[] } | null | undefined} patch
+ */
+export function catalogPatchSummary(patch) {
+  if (!patch?.file) return "";
+  const priors = catalogRequires(patch);
+  const requireLine = priors.length
+    ? `\n- Requires (apply first): ${priors.map((file) => `\`${file}\``).join(", ")}`
+    : "";
+  return `- Patch: \`${patch.file}\`${requireLine}`;
+}
+
+/**
  * @param {import("./ledger.js").Job} job
  * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { file: string, afterApply?: string[] } | null }} [options]
  * @returns {string[]}

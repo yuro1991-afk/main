@@ -81,6 +81,26 @@ test("cataloged sibling prompt is apply, not Origin launch", () => {
   assert.doesNotMatch(text, /Do not work dronehive/);
 });
 
+test("stacked catalog prompt names requires priors", () => {
+  const text = renderLaunchPrompt({
+    id: "dronehive-runtime-host-paths",
+    title: "Wrap leftover dronehive runtime Path()",
+    repo: "github.com/yuro1991-afk/dronehive",
+    kind: "implement",
+    priority: 25,
+    status: "blocked",
+    claim: null,
+    notes: "After portable-paths",
+    verify: "python3 -m py_compile drone/grok_handoff.py",
+    files: [],
+    collision: "Apply after dronehive-portable-paths.",
+  });
+  assert.match(text, /Apply dronehive-runtime-host-paths/);
+  assert.match(text, /Requires \(apply first\): `patches\/dronehive-portable-paths\.patch`/);
+  assert.match(text, /Patch: `patches\/dronehive-runtime-host-paths\.patch`/);
+  assert.match(text, /git apply \/path\/to\/main\/patches\/dronehive-portable-paths\.patch/);
+});
+
 test("cataloged sibling prompt notes drop the Genesis-only blocked line", () => {
   const queue = JSON.parse(
     readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"),
