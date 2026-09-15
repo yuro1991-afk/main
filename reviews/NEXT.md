@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T01:53Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T01:54Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`2c06713`. Shipped this interval: `dronehive-start-tui-cargo-honesty`
-START_TUI_OLLAMA Build echo afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`97eea38`. Shipped this interval: `dronehive-ollama-tui-readme-cargo`
+drone-ollama-tui README afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -90,7 +90,8 @@ START_TUI_OLLAMA Build echo afterApply. Leftover `next` stays alone. Do not inve
 | next unused mount-launch-cargo apply | `dronehive-mount-launch-cargo` (Launch.ps1 afterApply wired) |
 | next unused install-ollama-app-cargo apply | `dronehive-install-ollama-app-cargo` (installer cargo afterApply wired) |
 | next unused start-tui-cargo-honesty apply | `dronehive-start-tui-cargo-honesty` (START_TUI_OLLAMA afterApply wired) |
-| next afterApply to wire | `dronehive-ollama-tui-readme-cargo` (drone-ollama-tui README build only) |
+| next unused ollama-tui-readme-cargo apply | `dronehive-ollama-tui-readme-cargo` (tui README afterApply wired) |
+| next afterApply to wire | `dronehive-mount-readme-cargo` (mount README build only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -264,7 +265,9 @@ Face-swap README honesty leftovers are exhausted.
 (cargo env uses `host\\ai-home\\tools\\cargo`; G:\\AI-Home\\tools\\cargo is gone).
 `dronehive-start-tui-cargo-honesty` afterApply asserts START_TUI_OLLAMA.bat
 (Build echo uses `%ROOT%\\host\\ai-home\\tools\\cargo\\bin`; G:\\AI-Home\\tools\\cargo\\bin is gone).
-Next afterApply to wire is `dronehive-ollama-tui-readme-cargo`.
+`dronehive-ollama-tui-readme-cargo` afterApply asserts drone-ollama-tui README.md
+(build PATH uses `host\\ai-home\\tools\\cargo\\bin`; cd is `apps\\drone-ollama-tui`).
+Next afterApply to wire is `dronehive-mount-readme-cargo`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -359,7 +362,7 @@ then unused `dronehive-package-release-v2-cargo` (package_release_v2 cargo env o
 then unused `dronehive-mount-launch-cargo` (Launch.ps1 cargo env only; afterApply wired; independent of mount README leftover),
 then unused `dronehive-install-ollama-app-cargo` (installer cargo env only; afterApply wired; independent of Launch leftover),
 then unused `dronehive-start-tui-cargo-honesty` (START_TUI_OLLAMA Build echo only; afterApply wired; independent of START_SUPER_MESH leftover),
-then unused `dronehive-ollama-tui-readme-cargo` (drone-ollama-tui README build only),
+then unused `dronehive-ollama-tui-readme-cargo` (drone-ollama-tui README build only; afterApply wired; independent of START_TUI leftover),
 then unused `dronehive-mount-readme-cargo` (mount README build only),
 then unused `dronehive-tui-readme-cargo` (dronehive-tui README PATH only),
 then unused `dronehive-apps-readme-cargo` (apps/README.md Rust path only),

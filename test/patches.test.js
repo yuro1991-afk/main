@@ -435,6 +435,19 @@ test("cli patches --job dronehive-work-order-doc-cd includes the docs swarm entr
   assert.ok(parsed.applyNext.some((line) => line.includes("docs/WORK_ORDER.md") && line.includes("cd .") && line.includes("ai-worker-drone-0.5b")));
 });
 
+test("cli patches --job dronehive-ollama-tui-readme-cargo includes the drone-ollama-tui README afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-ollama-tui-readme-cargo"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-ollama-tui-readme-cargo");
+  assert.ok(parsed.applyNext.some((line) => line.includes("README.md") && line.includes("host\\\\ai-home\\\\tools\\\\cargo\\\\bin") && line.includes("cd apps\\\\drone-ollama-tui")));
+});
+
 test("cli patches --job dronehive-start-tui-cargo-honesty includes the START_TUI_OLLAMA.bat afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-start-tui-cargo-honesty"], {

@@ -22,6 +22,7 @@ apps/drone-ollama-tui/README.md build block only. Do not edit drone/pro/tool_age
 - git checkout -b cursor/dronehive-ollama-tui-readme-cargo-from-ops
 - git apply --check /path/to/main/patches/dronehive-ollama-tui-readme-cargo.patch
 - git apply /path/to/main/patches/dronehive-ollama-tui-readme-cargo.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-tui/README.md').read_text(); assert r'host\\ai-home\\tools\\cargo\\bin' in t; assert r'cd apps\\drone-ollama-tui' in t; assert r'G:\\AI-Home\\tools\\cargo\\bin' not in t"
 
 ## Verify
 
