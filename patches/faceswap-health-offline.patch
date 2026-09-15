@@ -1,0 +1,62 @@
+diff --git a/gateway.py b/gateway.py
+index a7ba19f..c4548e1 100644
+--- a/gateway.py
++++ b/gateway.py
+@@ -112,7 +112,7 @@ class Handler(SimpleHTTPRequestHandler):
+             self._send_json(
+                 200 if code == 200 else 503,
+                 {
+-                    "status": "ok" if code == 200 else "degraded",
++                    "status": "ok" if code == 200 else "red",
+                     "product": "Face Swap iOS",
+                     "gateway": {"host": HOST, "port": PORT, "lan_urls": [f"http://{ip}:{PORT}" for ip in ips]},
+                     "engine": {"url": ENGINE, "http": code, "body": engine},
+diff --git a/tests/test_health_offline.py b/tests/test_health_offline.py
+new file mode 100644
+index 0000000..339cef5
+--- /dev/null
++++ b/tests/test_health_offline.py
+@@ -0,0 +1,43 @@
++"""Gateway health is not ok when the engine port is closed."""
++from __future__ import annotations
++
++import json
++import os
++import sys
++import threading
++import urllib.request
++from http.server import ThreadingHTTPServer
++from pathlib import Path
++
++ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(ROOT))
++os.environ["FACESWAP_ENGINE"] = "http://127.0.0.1:9"
++os.environ["FACESWAP_IOS_PORT"] = "18860"
++os.environ["FACESWAP_IOS_HOST"] = "127.0.0.1"
++
++import gateway  # noqa: E402
++
++
++def main() -> int:
++    httpd = ThreadingHTTPServer(("127.0.0.1", 18860), gateway.Handler)
++    thread = threading.Thread(target=httpd.serve_forever, daemon=True)
++    thread.start()
++    try:
++        raw = urllib.request.urlopen("http://127.0.0.1:18860/api/ios/health", timeout=8).read()
++        raise SystemExit(f"expected HTTP error, got {raw[:200]!r}")
++    except urllib.error.HTTPError as err:
++        payload = json.loads(err.read().decode())
++        if payload.get("status") in ("ok", "GREEN", "green"):
++            print("RED health claimed ok with engine down:", payload)
++            return 2
++        if payload.get("status") != "red":
++            print("RED expected status red:", payload)
++            return 2
++        print(json.dumps({"false_green": 0, "status": payload.get("status"), "http": err.code}, indent=2))
++        return 0
++    finally:
++        httpd.shutdown()
++
++
++if __name__ == "__main__":
++    sys.exit(main())

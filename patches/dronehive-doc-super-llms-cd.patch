@@ -1,0 +1,13 @@
+diff --git a/docs/SUPER_LLMS.md b/docs/SUPER_LLMS.md
+index 1a0df41..5726163 100644
+--- a/docs/SUPER_LLMS.md
++++ b/docs/SUPER_LLMS.md
+@@ -38,7 +38,7 @@ START_SUPER_LLMS.bat
+ Or:
+ 
+ ```powershell
+-cd G:\AI-Home\projects\ai-worker-drone-0.5b
++cd .
+ $py = "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe"
+ & $py -m drone super-llms status
+ & $py -m drone super-llms list

@@ -13,7 +13,7 @@ import {
   saveLedger,
   summarize,
 } from "./ledger.js";
-import { defaultSuperbrainPath, probeKnownLanes, writeLaneProbe } from "./probe.js";
+import { refuseKnownLanes } from "./probe.js";
 import {
   defaultOriginPath,
   loginOriginAuth,
@@ -23,7 +23,7 @@ import {
 } from "./origin.js";
 import { defaultRoutePath, routeIntent, writeRoute } from "./routing.js";
 import { defaultInventoryPath, writeInventoryTick } from "./tick.js";
-import { buildBrief } from "./brief.js";
+import { TAKE_INSTEAD_CATALOG_ID, applyNextForJob, buildBrief, jobForDisplay, proveAfterApplyForJob, takeInsteadFields } from "./brief.js";
 import { buildPrompt } from "./prompt.js";
 import {
   buildHandoff,
@@ -32,13 +32,14 @@ import {
   relaunchFor,
   writeHandoffPackets,
 } from "./handoff.js";
-import { writePlaybooks } from "./playbook.js";
+import { checkPlaybooks, writePlaybooks } from "./playbook.js";
 import { buildHelperPacket } from "./helpers.js";
-import { defaultSiblingsPath, loadSiblings } from "./siblings.js";
+import { SIBLINGS_CONTRACT, buildSiblingsBoard, defaultSiblingsPath, loadSiblings, relatedForJob } from "./siblings.js";
 import {
   buildAssign,
   buildBusy,
   buildSlots,
+  buildSlotsForJob,
   claimBusyJob,
   peekBusyJob,
   defaultDispatchPath,
@@ -64,6 +65,14 @@ import {
   mineCatalog,
   writeCatalogMine,
 } from "./catalog.js";
+import {
+  buildPatchCatalog,
+  defaultPatchesIndexPath,
+  defaultSiblingsRoot,
+  loadPatchIndex,
+  proveAfterApply,
+  provePatches,
+} from "./patches.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -95,12 +104,22 @@ export async function runCli(argv, options = {}) {
   switch (command) {
     case "list": {
       const ledger = loadLedger(ledgerPath);
-      write(JSON.stringify(listJobs(ledger, jobFilters(flags), nowMs), null, 2));
+      const explicitId =
+        positionals[0] || (flags.job && flags.job !== "true" ? flags.job : "");
+      if (explicitId) {
+        const job = resolveJob(ledger, positionals, flags, nowMs, options);
+        write(JSON.stringify(job ? [withRelaunch(job)] : [], null, 2));
+        return job ? 0 : 1;
+      }
+      const jobs = listJobs(ledger, jobFilters(flags), nowMs).map((job) =>
+        jobForDisplay(job),
+      );
+      write(JSON.stringify(jobs, null, 2));
       return 0;
     }
     case "next": {
       const ledger = loadLedger(ledgerPath);
-      const job = peekDefaultJob(ledger, flags, nowMs, options);
+      const job = resolveJob(ledger, positionals, flags, nowMs, options);
       write(JSON.stringify(withRelaunch(job), null, 2));
       return job ? 0 : 1;
     }
@@ -142,30 +161,18 @@ export async function runCli(argv, options = {}) {
       const ledger = loadLedger(ledgerPath);
       const summary = summarize(ledger, nowMs);
       summary.next = withRelaunch(peekDefaultJob(ledger, flags, nowMs, options));
+      const explicitId =
+        positionals[0] || (flags.job && flags.job !== "true" ? flags.job : "");
+      if (explicitId) {
+        summary.job = withRelaunch(resolveJob(ledger, positionals, flags, nowMs, options));
+      }
       summary.origin = readOriginProbe(defaultOriginPath(options.root ?? ROOT));
       write(JSON.stringify(summary, null, 2));
       return 0;
     }
     case "probe": {
-      const report = await probeKnownLanes({
-        fetchImpl: options.fetchImpl,
-        timeoutMs: flags.timeout ? Number(flags.timeout) : undefined,
-        nowMs,
-      });
-      report.origin = await probeOriginAuth({
-        nowMs,
-        execImpl: options.originExecImpl,
-      });
-      const destPath = flags.out
-        ? resolve(flags.out)
-        : defaultSuperbrainPath(options.root ?? ROOT);
-      writeLaneProbe(report, destPath);
-      writeOriginProbe(
-        report.origin,
-        flags.originOut ? resolve(flags.originOut) : defaultOriginPath(options.root ?? ROOT),
-      );
-      write(JSON.stringify(report, null, 2));
-      return 0;
+      write(JSON.stringify(refuseKnownLanes(), null, 2));
+      return 1;
     }
     case "origin": {
       const destPath = flags.out
@@ -232,8 +239,71 @@ export async function runCli(argv, options = {}) {
       const siblings = loadSiblings(
         flags.siblings ? resolve(flags.siblings) : defaultSiblingsPath(options.root ?? ROOT),
       );
-      write(JSON.stringify(siblings, null, 2));
+      const jobId = positionals[0] || (flags.job && flags.job !== "true" ? flags.job : "");
+      if (!jobId) {
+        write(JSON.stringify(buildSiblingsBoard(siblings), null, 2));
+        return 0;
+      }
+      const ledger = loadLedger(ledgerPath);
+      const job = ledger.jobs.find((item) => item.id === jobId);
+      if (!job) {
+        throw new Error(`unknown job: ${jobId}`);
+      }
+      const related = relatedForJob(siblings, jobId);
+      write(
+        JSON.stringify(
+          {
+            contract: SIBLINGS_CONTRACT,
+            job: jobId,
+            related,
+            prefer: `node src/cli.js brief --job ${jobId}`,
+          },
+          null,
+          2,
+        ),
+      );
       return 0;
+    }
+    case "patches": {
+      const index = loadPatchIndex(
+        flags.index
+          ? resolve(flags.index)
+          : defaultPatchesIndexPath(options.root ?? ROOT),
+      );
+      if (flags["prove-after-apply"] === "true") {
+        const proof = proveAfterApply(index, {
+          repoRoot: options.root ?? ROOT,
+          siblingsRoot: flags["siblings-root"]
+            ? resolve(flags["siblings-root"])
+            : defaultSiblingsRoot(),
+          id: positionals[0] || flags.job,
+          repo: flags.repo,
+          runGit: options.runGit,
+        });
+        write(JSON.stringify(proof, null, 2));
+        return proof.failed === 0 && proof.skipped === 0 ? 0 : 1;
+      }
+      if (flags.prove === "true") {
+        const proof = provePatches(index, {
+          repoRoot: options.root ?? ROOT,
+          siblingsRoot: flags["siblings-root"]
+            ? resolve(flags["siblings-root"])
+            : defaultSiblingsRoot(),
+          id: positionals[0] || flags.job,
+          repo: flags.repo,
+          runGit: options.runGit,
+        });
+        write(JSON.stringify(proof, null, 2));
+        return proof.failed === 0 && proof.skipped === 0 ? 0 : 1;
+      }
+      const explicitId = positionals[0] || flags.job;
+      const catalog = buildPatchCatalog(index, {
+        id: explicitId,
+        repo: flags.repo,
+        compact: !explicitId,
+      });
+      write(JSON.stringify(catalog, null, 2));
+      return catalog.count > 0 ? 0 : 1;
     }
     case "handoff": {
       const ledger = loadLedger(ledgerPath);
@@ -288,22 +358,31 @@ export async function runCli(argv, options = {}) {
       if (flags.write === "true") {
         saveLedger(ledgerPath, ledger);
         if (added.length > 0) {
+          const addedJobs = ledger.jobs.filter((job) => added.includes(job.id));
+          const landingPlaybooks = resolve(ROOT, "playbooks");
+          const landingReviews = resolve(ROOT, "reviews");
           const playbookDir = flags.playbooks
             ? resolve(flags.playbooks)
             : resolve(options.root ?? ROOT, "playbooks");
           const packetDir = flags.packets
             ? resolve(flags.packets)
             : resolve(options.root ?? ROOT, "reviews");
-          const written = writePlaybooks(
-            ledger.jobs.filter((job) => added.includes(job.id)),
-            playbookDir,
-          );
-          const packets = writeHandoffPackets(
-            ledger.jobs.filter((job) => added.includes(job.id)),
-            packetDir,
-          );
-          packet.playbooks = written;
-          packet.packets = packets;
+          if (playbookDir === landingPlaybooks) {
+            packet.playbooks = [];
+            packet.playbooksWrote = false;
+            packet.doNot = "Do not run writePlaybooks over playbooks/. Prefer brief / proveAfterApplyCommand.";
+            packet.prefer = `node src/cli.js brief --job ${TAKE_INSTEAD_CATALOG_ID}`;
+          } else {
+            packet.playbooks = writePlaybooks(addedJobs, playbookDir);
+            packet.playbooksWrote = true;
+          }
+          if (packetDir === landingReviews) {
+            packet.packets = [];
+            packet.packetsWrote = false;
+          } else {
+            packet.packets = writeHandoffPackets(addedJobs, packetDir);
+            packet.packetsWrote = true;
+          }
         }
       }
       packet.added = added;
@@ -335,6 +414,13 @@ export async function runCli(argv, options = {}) {
     }
     case "slots": {
       const ledger = loadLedger(ledgerPath);
+      const explicitId =
+        positionals[0] || (flags.job && flags.job !== "true" ? flags.job : "");
+      if (explicitId) {
+        const job = resolveJob(ledger, positionals, flags, nowMs, options);
+        write(JSON.stringify(buildSlotsForJob(job), null, 2));
+        return job ? 0 : 1;
+      }
       write(JSON.stringify(buildSlots(ledger, jobFilters(flags), nowMs), null, 2));
       return 0;
     }
@@ -348,14 +434,20 @@ export async function runCli(argv, options = {}) {
       const roster = readRosterSafe(
         flags.roster ? resolve(flags.roster) : defaultRosterPath(options.root ?? ROOT),
       );
-      const job = agentId
-        ? claimBusyJob(ledger, agentId, filters, nowMs, roster)
-        : peekBusyJob(ledger, undefined, filters, nowMs, roster);
-      if (agentId) {
+      const explicitId =
+        positionals[0] || (flags.job && flags.job !== "true" ? flags.job : "");
+      const job = explicitId
+        ? resolveJob(ledger, positionals, flags, nowMs, options)
+        : agentId
+          ? claimBusyJob(ledger, agentId, filters, nowMs, roster)
+          : peekBusyJob(ledger, undefined, filters, nowMs, roster);
+      if (agentId && !explicitId) {
         saveLedger(ledgerPath, ledger);
       }
       const slots = listSlots(ledger, filters, nowMs);
-      const snapshot = buildBusy(job, siblings, slots, { reserved: Boolean(agentId && job) });
+      const snapshot = buildBusy(job, siblings, slots, {
+        reserved: Boolean(agentId && job && !explicitId),
+      });
       const destPath = flags.out
         ? resolve(flags.out)
         : defaultDispatchPath(options.root ?? ROOT);
@@ -365,26 +457,56 @@ export async function runCli(argv, options = {}) {
     }
     case "playbooks": {
       const ledger = loadLedger(ledgerPath);
-      const dest = flags.out
-        ? resolve(flags.out)
-        : resolve(options.root ?? ROOT, "playbooks");
-      const jobs = listJobs(ledger, { status: "open", ...jobFilters(flags) }, nowMs);
-      const written = writePlaybooks(jobs, dest);
-      const defaultReviews = resolve(options.root ?? ROOT, "reviews");
-      const defaultPlaybooks = resolve(options.root ?? ROOT, "playbooks");
-      const packetDir = flags.packets
-        ? resolve(flags.packets)
-        : dest === defaultPlaybooks
-          ? defaultReviews
-          : dest;
-      const packets = writeHandoffPackets(jobs, packetDir);
-      write(
-        JSON.stringify(
-          { dir: dest, count: written.length, files: written, packets },
-          null,
-          2,
-        ),
-      );
+      const repoPlaybooks = resolve(options.root ?? ROOT, "playbooks");
+      const dest = flags.out ? resolve(flags.out) : repoPlaybooks;
+      const wantWrite = flags.write === "true";
+      const wantCheck = flags.check === "true";
+      if (wantWrite && wantCheck) {
+        write("playbooks: pass --check or --write, not both");
+        return 2;
+      }
+      if (wantWrite) {
+        if (dest === repoPlaybooks) {
+          write(
+            JSON.stringify(
+              {
+                command: "playbooks",
+                wrote: false,
+                error: "playbooks --write refuses the in-repo playbooks/ directory",
+                doNot: "Do not run writePlaybooks over playbooks/. Prefer brief / proveAfterApplyCommand.",
+                prefer: "node src/cli.js brief --job <id>",
+                hint: "pass --out <dir> to write a throwaway copy",
+              },
+              null,
+              2,
+            ),
+          );
+          return 2;
+        }
+        const explicitId =
+          positionals[0] || (flags.job && flags.job !== "true" ? flags.job : "");
+        const jobs = explicitId
+          ? [resolveJob(ledger, positionals, flags, nowMs, options)].filter(Boolean)
+          : listJobs(ledger, { status: "open", ...jobFilters(flags) }, nowMs);
+        const written = writePlaybooks(jobs, dest);
+        const packetDir = flags.packets ? resolve(flags.packets) : dest;
+        const packets = writeHandoffPackets(jobs, packetDir);
+        write(
+          JSON.stringify(
+            { dir: dest, count: written.length, files: written, packets, wrote: true },
+            null,
+            2,
+          ),
+        );
+        return 0;
+      }
+      const explicitId =
+        positionals[0] || (flags.job && flags.job !== "true" ? flags.job : "");
+      const jobs = explicitId
+        ? [resolveJob(ledger, positionals, flags, nowMs, options)].filter(Boolean)
+        : catalogCheckJobs(ledger, options);
+      const report = checkPlaybooks(jobs, dest, { compact: !explicitId });
+      write(JSON.stringify(report, null, 2));
       return 0;
     }
     case "prompt": {
@@ -417,10 +539,14 @@ export async function runCli(argv, options = {}) {
 
 function withRelaunch(job) {
   if (!job) return null;
+  const shown = jobForDisplay(job);
   return {
-    ...job,
-    packet: packetPathFor(job),
-    relaunch: relaunchFor(job),
+    ...shown,
+    packet: packetPathFor(shown),
+    relaunch: relaunchFor(shown),
+    applyNext: applyNextForJob(shown),
+    proveAfterApplyCommand: proveAfterApplyForJob(shown),
+    ...takeInsteadFields(shown),
   };
 }
 
@@ -429,7 +555,11 @@ export function jobFilters(flags) {
     kind: flags.kind,
     repo: flags.repo,
     scope: flags.here === "true" ? "here" : undefined,
-    genesis: flags.all === "true" ? undefined : true,
+    github:
+      flags.all === "true" || flags.origin === "true" || flags.genesis === "true" || flags.world === "true"
+        ? undefined
+        : true,
+    genesis: flags.origin === "true" || flags.genesis === "true" || flags.world === "true" ? true : undefined,
     world: flags.world === "true" ? true : undefined,
   };
 }
@@ -457,11 +587,19 @@ function loadOrReadAgents(flags, options) {
  * @param {number} nowMs
  * @param {{ root?: string }} options
  */
+function catalogCheckJobs(ledger, options) {
+  const index = loadPatchIndex(defaultPatchesIndexPath(options.root ?? ROOT));
+  return index.patches
+    .map((row) => ledger.jobs.find((job) => job.id === row.id))
+    .filter(Boolean);
+}
+
 function resolveJob(ledger, positionals, flags, nowMs, options) {
-  if (positionals[0]) {
-    const job = ledger.jobs.find((item) => item.id === positionals[0]);
+  const id = positionals[0] || (flags.job && flags.job !== "true" ? flags.job : "");
+  if (id) {
+    const job = ledger.jobs.find((item) => item.id === id);
     if (!job) {
-      throw new Error(`unknown job: ${positionals[0]}`);
+      throw new Error(`unknown job: ${id}`);
     }
     return job;
   }
@@ -506,32 +644,40 @@ function helpText() {
   return `agent-ops — claim work so agents stay busy
 
 Commands:
-  list
-  next [--kind kind] [--repo repo] [--here] [--all] [--world] [--agent <bcId>]
-  slots [--here] [--all] [--world]
+  list [--job id] [--kind kind] [--repo repo] [--here] [--all] [--origin] [--world]  # --job is that card + applyNext
+  next [id] [--job id] [--kind kind] [--repo repo] [--here] [--all] [--origin] [--world] [--agent <bcId>]
+  slots [--job id] [--here] [--all] [--origin] [--world]  # --job peeks that card + applyNext
   assign [--out dir]
   sync --agents path.json [--write] [--out dir]
   catalog [--entries path.json] [--write] [--out path]
-  busy [--agent <bcId>] [--here] [--all] [--world]   # roster card first, then leftover next
-  helpers [id] [--agent <bcId>]
-  prompt [id] [--agent <bcId>] [--json]
-  brief [id] [--agent <bcId>]
-  handoff [id] [--agent <bcId>]
-  relaunch [id] [--agent <bcId>]
+  busy [id] [--job id] [--agent <bcId>] [--here] [--all] [--origin] [--world]   # --job peeks; else roster then leftover next
+  helpers [id] [--job id] [--agent <bcId>]
+  prompt [id] [--job id] [--agent <bcId>] [--json]
+  brief [id] [--job id] [--agent <bcId>]
+  handoff [id] [--job id] [--agent <bcId>]
+  relaunch [id] [--job id] [--agent <bcId>]
   claim <id> --agent <bcId>
   complete <id> --agent <bcId>
   block <id> --agent <bcId> --reason <text>
   release <id> --agent <bcId>
-  status
-  probe [--timeout ms]   Superbrain lanes + Origin CLI auth
+  status [--job id]   # leftover next stays; Superbrain leftover attaches take-instead applyNext / proveAfterApplyCommand; --job attaches that card + applyNext / proveAfterApplyCommand
+  probe                  Refuses Superbrain / GOOSE probes (Yuri: no more Superbrain)
   origin [--login] [--out path]
   route <intent> [--agent <bcId>]   # roster card if --agent, else leftover next
   tick [--out path]
-  siblings
-  playbooks [--here] [--out dir]
+  siblings [--job id]  # bare names nextApply + lead #9; --job is catalog-first related; prefer brief --job
+  patches [jobId] [--job id] [--repo github.com/yuro1991-afk/...] [--prove] [--prove-after-apply] [--siblings-root dir]
+  playbooks [--check] [--write] [--job id] [--here] [--out dir]
 
-Genesis only (Yuri). Pass --world for Python world planes. Pass --all to see out-of-scope cards.
-Do not reopen GitHub PR #1. Origin: origin.cursor.com/git/yuri-afk/genesis.`;
+GitHub siblings first (Yuri: forget Origin). Pass --origin for Genesis cards. Pass --all for both.
+patches lists applyable GitHub diffs. No --job is compact (nextApply dronehive-unicode-ci + id/file). Prefer brief --job.
+--prove clones --no-hardlinks throwaways, runs vanilla+stacked git apply --check, and never writes or resets siblings.
+--prove-after-apply clones --no-hardlinks throwaways and never writes or resets siblings.
+playbooks defaults to --check: compares First commands, reports missingRequires, never writes. No --job is compact (nextApply dronehive-unicode-ci + counts). Prefer brief --job.
+playbooks --write requires --out and refuses the in-repo playbooks/ directory.
+catalog --write updates the ledger only; it refuses the in-repo playbooks/ and reviews/ directories.
+This token cannot push those repos. Do not copy PR #6 autofix.
+Do not reopen GitHub PR #1. Sibling push still needs that repo's token.`;
 }
 
 const isDirect = process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1]);

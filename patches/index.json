@@ -1,0 +1,1809 @@
+{
+  "contract": "agent-ops.patches.v1",
+  "cannotPush": true,
+  "apply": "git clone https://github.com/<repo>.git work && cd work && git apply --check ../<file> && git apply ../<file>",
+  "doNot": "Do not copy PR #6 npm run autofix. This catalog lists diffs only.",
+  "verifiedAt": "2026-09-14T23:16:00Z",
+  "patches": [
+    {
+      "id": "dronehive-unicode-ci",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-pro-chat-cp1252.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "PYTHONPATH=. python3 -c \"import io,sys; from drone.pro.tool_agent import _chat; sys.stdout=type('S',(),{'encoding':'cp1252','buffer':io.BytesIO(),'write':lambda self,s:s.encode('cp1252'),'flush':lambda self:None})(); _chat('sys','ok \u2713')\"",
+        "python3 -c \"from pathlib import Path; t=Path('.github/workflows/ci.yml').read_text(); assert 'PYTHONUTF8' in t; assert 'actions/checkout@v5' in t; assert 'actions/setup-python@v6' in t\""
+      ],
+      "notes": "Copied from main#6. PYTHONUTF8 plus _chat cp1252 replace. CI actions are checkout@v5 / setup-python@v6. After apply: force cp1252 stdout and print ✓; assert PYTHONUTF8 and those actions. This token cannot push dronehive."
+    },
+    {
+      "id": "bloom-gitignore-vercel",
+      "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+      "file": "patches/bloom-gitignore-vercel.patch",
+      "base": "288a484",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('.gitignore').read_text(); assert '.vercel/' in t; assert 'dist/' in t; assert '.output/' in t; assert '.nitro/' in t\""
+      ],
+      "notes": "Ignore rule only. After apply: assert .gitignore has .vercel/ dist/ .output/ .nitro/. Unpatched has none of those. Do not git rm as afterApply (mutates the checkout; 58 tracked .vercel/output files are a later write-checkout step). Do not put dollar signs in afterApply. Do not put backticks in afterApply. Keep package-lock.json."
+    },
+    {
+      "id": "bloom-readme-honest-export",
+      "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+      "file": "patches/bloom-readme-honest-export.patch",
+      "base": "288a484",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('README.md').read_text(); assert 'Grok Build' in t; assert 'Cursor Origin Genesis' in t; assert 'yuro1991-afk/main' in t; assert 'OMNI-FORGE' in t\""
+      ],
+      "notes": "Honest README: Grok Build export, not Origin Genesis, not this landing pad. After apply: assert README.md has those phrases. Unpatched has no README.md. Do not put backticks in afterApply."
+    },
+    {
+      "id": "bloom-ci-typecheck",
+      "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+      "file": "patches/bloom-ci-typecheck.patch",
+      "base": "288a484",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('.github/workflows/ci.yml').read_text(); assert 'name: ci' in t; assert 'actions/checkout@v5' in t; assert 'actions/setup-node@v5' in t; assert 'npm test' in t; assert 'npm run typecheck' in t\""
+      ],
+      "notes": "ubuntu-latest npm ci / test / typecheck. After apply: assert .github/workflows/ci.yml has those runs. Unpatched has no ci.yml. lint.yml leftover stays absent. Do not fold lint into typecheck. Do not put backticks in afterApply."
+    },
+    {
+      "id": "bloom-health-probe",
+      "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+      "file": "patches/bloom-health-probe.patch",
+      "base": "288a484",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('scripts/probe-health.mjs').read_text(); assert 'unreachable' in t; assert 'live: false' in t; assert '45001' in t\""
+      ],
+      "notes": "scripts/probe-health.mjs. After apply: assert timeout stays unreachable and live is false. Unpatched has no probe script. Do not run the probe. Do not hit :45001. Do not put backticks in afterApply."
+    },
+    {
+      "id": "opensussy-ship-json-2-0-0",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "file": "patches/opensussy-ship-json-2-0-0.patch",
+      "base": "d4b2949",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; s=json.loads(Path('SHIP.json').read_text()); assert s['version']=='2.0.0'; assert s['usb_zip_bytes']==1113129; i=json.loads(Path('install/SHIP.json').read_text()); assert i['version']=='2.0.0'; assert '## 1.3.0' in Path('CHANGELOG.md').read_text()\""
+      ],
+      "notes": "User-facing 1.3.0 \u2192 2.0.0. After apply: assert SHIP.json and install/SHIP.json version 2.0.0; usb_zip_bytes stays; CHANGELOG ## 1.3.0 stays. Superpowers specs left alone. Do not put dollar signs in afterApply. Do not put backticks in afterApply."
+    },
+    {
+      "id": "opensussy-agama-honesty",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "file": "patches/opensussy-agama-honesty.patch",
+      "base": "d4b2949",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; files=['install/linux/HOW_TO_RUN.txt','install/linux/leap/HOW_TO_RUN.txt','install/linux/tumbleweed/HOW_TO_RUN.txt']; assert all('AGAMA / Leap 16 HONESTY' in Path(p).read_text() and 'Agama JSON is unsupported' in Path(p).read_text() and 'export-only' in Path(p).read_text() for p in files)\""
+      ],
+      "notes": "One-screen Agama vs AutoYaST warning on linux HOW_TO files. After apply: assert all three HOW_TO files have the honesty block. Three files are one leftover. No new Agama JSON. No wipe-flag edits. Do not put backticks in afterApply."
+    },
+    {
+      "id": "faceswap-honesty-env-paths",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "file": "patches/faceswap-honesty-env-paths.patch",
+      "base": "bba7188",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; h=Path('HONESTY.md').read_text(); r=Path('README.md').read_text(); s=Path('START.cmd').read_text(); env=h.split('## Env contract',1)[1]; assert 'one host example' in env; assert 'FACESWAP_ENGINE' in env; assert 'FACESWAP_IOS_PORT' in env; assert 'FACESWAP_IOS_HOST' in env; assert '## Engine contract (env, not G: paths)' in r; assert 'if not defined FACESWAP_ENGINE' in s\""
+      ],
+      "notes": "Document FACESWAP_ENGINE / HOST / PORT. G: paths are one host example. START.cmd honors the env var. After apply: assert HONESTY Env contract lists the three vars, README Engine contract heading, and START.cmd honors FACESWAP_ENGINE. Do not assert G: gone. Do not vendor InsightFace weights. Do not put backticks in afterApply. Independent of located-paths leftover."
+    },
+    {
+      "id": "faceswap-commit-pwa-icons",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "file": "patches/faceswap-commit-pwa-icons.patch",
+      "base": "bba7188",
+      "applyCheck": "ok",
+      "assets": [
+        "patches/faceswap-pwa-icons/apple-touch-icon.png",
+        "patches/faceswap-pwa-icons/icon-192.png",
+        "patches/faceswap-pwa-icons/icon-512.png"
+      ],
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; files=['pwa/apple-touch-icon.png','pwa/icon-192.png','pwa/icon-512.png']; assert all(Path(p).is_file() and Path(p).stat().st_size>0 and Path(p).read_bytes()[:8]==bytes([137,80,78,71,13,10,26,10]) for p in files)\""
+      ],
+      "notes": "Solid-color Home Screen PNGs matching manifest names. Copy from patches/faceswap-pwa-icons/ if git apply --binary is awkward. After apply: assert the three pwa/ PNGs exist with PNG magic. Unpatched has none. Do not start a server. Do not put backticks in afterApply. Independent of faceswap-mock-engine-ci."
+    },
+    {
+      "id": "ova-pwsh-syntax-ci",
+      "repo": "github.com/yuro1991-afk/ollama-voice-access",
+      "file": "patches/ova-pwsh-syntax-ci.patch",
+      "base": "074bad0",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('.github/workflows/pwsh-syntax.yml').read_text(); assert 'name: pwsh-syntax' in t; assert 'actions/checkout@v5' in t; assert 'Parse PowerShell without talking to Ollama' in t; assert 'Parser]::ParseFile' in t; assert 'ubuntu-latest' in t\""
+      ],
+      "notes": "Parser/AST check only. Does not hit :11434 and does not stop Ollama. After apply: assert .github/workflows/pwsh-syntax.yml has those phrases. Unpatched has no .github. Do not run pwsh. Do not put dollar signs in afterApply. Do not put backticks in afterApply. Independent of ova-api-host-override and ova-stop-noui-guard."
+    },
+    {
+      "id": "ova-api-host-override",
+      "repo": "github.com/yuro1991-afk/ollama-voice-access",
+      "file": "patches/ova-api-host-override.patch",
+      "base": "074bad0",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; r=Path('README.md').read_text(); s=Path('SECURITY.md').read_text(); p=Path('lib/OllamaVoice.Common.ps1').read_text(); assert '## Local API override' in r; assert 'Non-loopback hosts are' in r; assert '## Loopback API override' in s; assert 'LAN/WAN values are rejected' in s; assert 'function Test-OVLoopbackApiBase' in p; assert 'Rejected non-loopback API override' in p\""
+      ],
+      "notes": "OV_API_BASE / OLLAMA_HOST accepted only for loopback. LAN/WAN rejected. After apply: assert README Local API override, SECURITY Loopback API override, and Test-OVLoopbackApiBase. Do not run pwsh. Do not hit :11434. Do not put dollar signs in afterApply. Do not put backticks in afterApply. Independent of ova-pwsh-syntax-ci and ova-stop-noui-guard."
+    },
+    {
+      "id": "opensussy-linux-syntax-ci",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "file": "patches/opensussy-linux-syntax-ci.patch",
+      "base": "d4b2949",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('.github/workflows/linux-syntax.yml').read_text(); assert 'name: linux-syntax' in t; assert 'actions/checkout@v5' in t; assert 'Syntax-check OpenSussy shell wrappers only' in t; assert 'install/linux/tumbleweed/OpenSussy-deep.sh' in t; assert 'OK syntax. Did not execute AutoYaST' in t\""
+      ],
+      "notes": "ubuntu-latest bash -n on six wrappers. Does not execute AutoYaST or format disks. After apply: assert .github/workflows/linux-syntax.yml has those phrases. Unpatched has no .github. Do not run the wrappers. Do not put dollar signs in afterApply. Do not put backticks in afterApply. Independent of opensussy-agama-honesty and opensussy-sec-residuals-catalog."
+    },
+    {
+      "id": "opensussy-sec-residuals-catalog",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "file": "patches/opensussy-sec-residuals-catalog.patch",
+      "base": "d4b2949",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('reviews/SEC_REVIEW_2_0_0.md').read_text(); assert 'SEC_REVIEW residuals vs current tree' in t; assert 'false_green: 0' in t; assert 'LinuxPayload.cs' in t; assert 'Sanitizer.cs' in t; assert 'Do not implement nuclear AutoYaST or LUKS' in t\""
+      ],
+      "notes": "R1\u2013R10 still open on 2.0.0 tree. Pins LinuxPayload.cs / Sanitizer.cs. false_green 0. After apply: assert reviews/SEC_REVIEW_2_0_0.md has those phrases. Unpatched has SEC_REVIEW.md only. Do not invent CVEs. Do not implement nuclear AutoYaST. Do not put backticks in afterApply. Independent of opensussy-linux-syntax-ci and opensussy-agama-honesty."
+    },
+    {
+      "id": "faceswap-health-offline",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "file": "patches/faceswap-health-offline.patch",
+      "base": "bba7188",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; g=Path('gateway.py').read_text(); line=next(x for x in g.splitlines() if 'if code == 200 else' in x and 'status' in x); assert 'red' in line; assert 'degraded' not in line; assert 'timeout=5.0' in g; t=Path('tests/test_health_offline.py').read_text(); assert 'engine port is closed' in t; assert 'false_green' in t\""
+      ],
+      "notes": "Health status is red (not ok) when the engine port is closed. 5s timeout unchanged. After apply: assert gateway.py status line is red not degraded, timeout=5.0 stays, and tests/test_health_offline.py exists. Do not run the offline test. Do not put backticks in afterApply. Independent of faceswap-mock-engine-ci."
+    },
+    {
+      "id": "faceswap-mock-engine-ci",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "file": "patches/faceswap-mock-engine-ci.patch",
+      "base": "bba7188",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; w=Path('.github/workflows/gateway-smoke.yml').read_text(); assert 'name: gateway-smoke' in w; assert 'actions/checkout@v5' in w; assert 'actions/setup-python@v6' in w; assert 'Mock engine + gateway health (no InsightFace)' in w; assert 'false_green' in w; m=Path('mock_engine.py').read_text(); assert 'No InsightFace, CUDA, or Jane' in m; assert 'local_only' in m\""
+      ],
+      "notes": "stdlib mock_engine.py + gateway-smoke workflow. No InsightFace/CUDA/Jane. After apply: assert gateway-smoke.yml and mock_engine.py have those phrases. Unpatched has neither file. Do not run the mock engine. Do not put dollar signs in afterApply. Do not put backticks in afterApply. Independent of faceswap-health-offline."
+    },
+    {
+      "id": "ova-stop-noui-guard",
+      "repo": "github.com/yuro1991-afk/ollama-voice-access",
+      "file": "patches/ova-stop-noui-guard.patch",
+      "base": "074bad0",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('tests/assert-stop-noui.ps1').read_text(); assert 'Prove -NoUI without -Force exits 4 and does not call Stop-Process.' in t; assert 'OK Stop-Ollama -NoUI exit 4 (no -Force)' in t; assert 'RED expected exit 4' in t\""
+      ],
+      "notes": "tests/assert-stop-noui.ps1 expects exit 4 without -Force. Does not add default -Force. After apply: assert that file has those phrases. Unpatched has no tests/. Do not run the script. Do not stop Ollama. Do not put dollar signs in afterApply. Do not put backticks in afterApply. Independent of ova-pester-qa-math and ova-api-host-override."
+    },
+    {
+      "id": "ova-pester-qa-math",
+      "repo": "github.com/yuro1991-afk/ollama-voice-access",
+      "file": "patches/ova-pester-qa-math.patch",
+      "base": "074bad0",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; w=Path('.github/workflows/math-unit.yml').read_text(); assert 'name: math-unit' in w; assert 'actions/checkout@v5' in w; assert 'Percentile / stdev / tok-s without Ollama' in w; t=Path('tests/OllamaVoice.Math.Tests.ps1').read_text(); assert 'No network. Unit-test percentile / stdev / empty stats.' in t; assert 'OK math unit tests (no network)' in t; assert 'tokens/s 50' in t\""
+      ],
+      "notes": "No-network math script + math-unit workflow. Empty / n=1 / n=5 / tok-s. After apply: assert math-unit.yml and OllamaVoice.Math.Tests.ps1 have those phrases. Unpatched has neither. Do not run pwsh. Do not hit :11434. Do not put dollar signs in afterApply. Do not put backticks in afterApply. Independent of ova-stop-noui-guard and ova-pwsh-syntax-ci."
+    },
+    {
+      "id": "dronehive-ubuntu-smoke",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-ubuntu-smoke.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "requires": [
+        "patches/dronehive-pro-chat-cp1252.patch"
+      ],
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('.github/workflows/ci.yml').read_text(); assert 'python-smoke-ubuntu:' in t; assert 'actions/checkout@v5' in t; assert 'actions/setup-python@v6' in t; assert 'Pro agent (no ollama)' in t; assert 'ci pro write ci_ok.txt' in t; assert 'Work order show' in t\""
+      ],
+      "notes": "Adds ubuntu-latest python-smoke alongside windows-latest. requires unicode-ci so applyNext applies patches/dronehive-pro-chat-cp1252.patch first. After apply: assert ci.yml has python-smoke-ubuntu and those steps. Unpatched windows-latest python-smoke stays. Do not run the smoke. Do not put backticks in afterApply. Independent of dronehive-portable-paths. Do not edit drone/pro/tool_agent.py."
+    },
+    {
+      "id": "dronehive-portable-paths",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-portable-paths.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; h=Path('drone/host_paths.py').read_text(); assert 'Resolve BOSS Windows host paths via env / app_root.' in h; assert 'not the Linux contract' in h; assert 'def resolve_host_path' in h; e=Path('.env.example').read_text(); assert 'Host path overlay (Linux / this pad)' in e; assert 'DRONEHIVE_LIBRARY_ROOT' in e; w=Path('configs/work_order.json').read_text(); assert 'path_overlay' in w; assert 'Linux uses env or app_root()/host.' in w\""
+      ],
+      "notes": "Env overlay or app_root/host/. Wraps leftover knowledge_imprint F: mirror. Does not touch drone/pro/tool_agent.py. Stacks with unicode + ubuntu-smoke. After apply: assert host_paths.py, .env.example overlay, and work_order path_overlay. Do not assert G: gone. Do not recatalog CHANNEL_META. Do not run work-order-show. Do not put backticks in afterApply. Independent of ubuntu-smoke and per-key JSON remaps."
+    },
+    {
+      "id": "dronehive-script-host-roots",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-script-host-roots.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; fs=('scripts/bench_vs_helpers.py','scripts/smoke_delegate_wire.py','scripts/stress_ai_bus_hive.py'); assert all('Path(__file__).resolve().parents[1]' in Path(f).read_text() and r'G:\\\\AI-Home' not in Path(f).read_text() for f in fs)\""
+      ],
+      "notes": "scripts/*.py ROOT = Path(__file__).parents[1]. After apply: assert those three scripts use __file__ and drop G:\\\\AI-Home. Unpatched ROOT is G:\\\\AI-Home. Do not py_compile as afterApply (passes unpatched). Independent of portable-paths. Does not touch drone/pro/tool_agent.py."
+    },
+    {
+      "id": "faceswap-start-sh",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "file": "patches/faceswap-start-sh.patch",
+      "base": "bba7188",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('START.sh').read_text(); assert 'Face Swap iOS gateway' in t; assert 'RED: engine is not reachable at' in t; assert 'set FACESWAP_ENGINE to its health base URL' in t; assert 'exec python3 ./gateway.py' in t\""
+      ],
+      "notes": "Linux START.sh fail-closed on FACESWAP_ENGINE like START.cmd. After apply: assert START.sh has those phrases. Unpatched has no START.sh. Do not run START.sh. Do not put dollar signs in afterApply. Do not put backticks in afterApply. New file; stacks with honesty-env-paths and health-offline."
+    },
+    {
+      "id": "dronehive-runtime-host-paths",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-runtime-host-paths.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "requires": [
+        "patches/dronehive-portable-paths.patch"
+      ],
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/grok_handoff.py').read_text(); line=next(x for x in t.splitlines() if x.startswith('DEFAULT_ROOT =')); assert 'resolve_host_path' in line\""
+      ],
+      "notes": "Wraps leftover Path() in grok_handoff / future_seer / tools / operational. requires portable-paths so drone/host_paths.py exists. After apply: assert DEFAULT_ROOT uses resolve_host_path. Unpatched uses Path(). Do not assert G: gone. Do not import DEFAULT_ROOT as afterApply (passes unpatched). Do not put dollar signs in afterApply. Do not put backticks in afterApply. Does not touch tool_agent.py."
+    },
+    {
+      "id": "faceswap-design-honesty",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "file": "patches/faceswap-design-honesty.patch",
+      "base": "bba7188",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('DESIGN.md').read_text(); assert 'FACESWAP_ENGINE' in t and 'one host example' in t and 'not the contract' in t\""
+      ],
+      "notes": "DESIGN.md: FACESWAP_ENGINE is the contract; G: MultoModa path is one host example. After apply: assert those phrases. Independent of honesty-env-paths (README/HONESTY/START.cmd)."
+    },
+    {
+      "id": "dronehive-config-load-overlay",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-config-load-overlay.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "requires": [
+        "patches/dronehive-portable-paths.patch"
+      ],
+      "afterApply": [
+        "python3 -c \"from drone.config_overlay import remap_host_strings\""
+      ],
+      "notes": "Adds drone/config_overlay.py remap_host_strings and wraps JSON loaders. requires portable-paths so drone/host_paths.py exists. After apply: import remap_host_strings. Independent of runtime-host-paths. Does not touch tool_agent.py."
+    },
+    {
+      "id": "ova-readme-linux-honesty",
+      "repo": "github.com/yuro1991-afk/ollama-voice-access",
+      "file": "patches/ova-readme-linux-honesty.patch",
+      "base": "074bad0",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('README.md').read_text(); assert 'Windows 11 Voice Access' in t and 'syntax/math CI only' in t and 'not** a Voice Access install' in t\""
+      ],
+      "notes": "README: Voice Access is Windows-only; Linux pwsh is syntax/math CI. After apply: assert those phrases. Independent of api-host-override (License appendix)."
+    },
+    {
+      "id": "dronehive-icons-manifest-relative",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-icons-manifest-relative.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; k=json.loads(Path('assets/icons/ICONS_MANIFEST.json').read_text())['icon_root']; assert k=='assets/icons'; assert r'G:\\\\AI-Home' not in k\""
+      ],
+      "notes": "ICONS_MANIFEST icon_root is assets/icons, not G:\\AI-Home\\projects\\ai-worker-drone-0.5b\\assets\\icons. Desktop C: paths left as one host example. After apply: assert icon_root is assets/icons. Do not assert C: gone. Do not put backticks in afterApply. Independent of portable-paths. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-app-links-host-paths",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-app-links-host-paths.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "requires": [
+        "patches/dronehive-portable-paths.patch"
+      ],
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/links.py').read_text(); line=next(x for x in t.splitlines() if 'uri' in x and 'GrokSelfLibrary' in x); assert 'resolve_host_path' in line\""
+      ],
+      "notes": "drone/app/links.py catalog URIs use resolve_host_path. requires portable-paths so drone/host_paths.py exists. After apply: assert the library uri line uses resolve_host_path. Unpatched uses a raw F: string. Do not assert F:/D: gone. Do not import LinkRegistry as afterApply (passes unpatched). Do not put dollar signs in afterApply. Do not put backticks in afterApply. Independent of runtime-host-paths and config-load-overlay. Does not touch tool_agent.py."
+    },
+    {
+      "id": "bloom-ci-lint",
+      "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+      "file": "patches/bloom-ci-lint.patch",
+      "base": "288a484",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('.github/workflows/lint.yml').read_text(); assert 'name: lint' in t; assert 'actions/checkout@v5' in t; assert 'actions/setup-node@v5' in t; assert 'npm ci' in t; assert 'npm run lint' in t\""
+      ],
+      "notes": "New-file .github/workflows/lint.yml runs npm ci && npm run lint. Independent of bloom-ci-typecheck (ci.yml). eslint . is 0 errors / 2 warnings on 288a484. After apply: assert lint.yml has those runs. Unpatched has no lint.yml. ci.yml leftover stays absent. Do not fold lint into typecheck. Do not run npm. Do not put backticks in afterApply."
+    },
+    {
+      "id": "ova-voice-card-linux-honesty",
+      "repo": "github.com/yuro1991-afk/ollama-voice-access",
+      "file": "patches/ova-voice-card-linux-honesty.patch",
+      "base": "074bad0",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('VOICE-ACCESS.md').read_text(); assert 'Windows Voice Access / Start Menu only' in t and 'install/QA scripts' in t and 'not** a Voice Access install' in t\""
+      ],
+      "notes": "VOICE-ACCESS.md: Voice Access / Start Menu are Windows-only. After apply: assert those phrases. Independent of ova-readme-linux-honesty (README) and ova-api-host-override."
+    },
+    {
+      "id": "faceswap-ios-readme-honesty",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "file": "patches/faceswap-ios-readme-honesty.patch",
+      "base": "bba7188",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('ios/README.md').read_text(); assert 'FACESWAP_ENGINE' in t and 'START.sh' in t and 'one example, not the contract' in t\""
+      ],
+      "notes": "ios/README.md: gateway URL from START.cmd or START.sh (FACESWAP_ENGINE). After apply: assert those phrases. Independent of design-honesty (DESIGN.md) and start-sh (new file)."
+    },
+    {
+      "id": "dronehive-hive-docstring-honesty",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-hive-docstring-honesty.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/hive.py').read_text(); assert 'one host example' in t and 'the library + continuous OPEN_TASKS overlay' in t\""
+      ],
+      "notes": "drone/hive.py module docstring: F:\\\\GrokSelfLibrary is one host example. After apply: assert those phrases. Independent of config-load-overlay. Does not need portable-paths. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-honesty",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-doc-honesty.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert 'host/library/knowledge/codex/CODEX.min.json' in t and 'host/library' in t\""
+      ],
+      "notes": "docs/WORK_ORDER.md NEXT.json example codex_ref uses host/library, not F:\\\\GrokSelfLibrary. After apply: assert those phrases. Independent of hive-docstring-honesty and config-load-overlay. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-honesty",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-doc-honesty.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); assert 'host/library/knowledge/codex/CODEX.min.json' in t and 'host/library' in t\""
+      ],
+      "notes": "drone/app/seed/docs/WORK_ORDER.md NEXT.json example codex_ref uses host/library, not F:\\\\GrokSelfLibrary. After apply: assert those phrases. Independent of docs/WORK_ORDER.md leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-bench-goal-honesty",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-bench-goal-honesty.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('scripts/bench_vs_helpers.py').read_text(); assert 'under host/' in t and 'one host example' in t\""
+      ],
+      "notes": "scripts/bench_vs_helpers.py GOAL string: G:\\\\AI-Home is one host example. After apply: assert those phrases. Independent of script-host-roots (ROOT/MUSCLE/out_dir hunks only). Does not touch tool_agent.py."
+    },
+    {
+      "id": "faceswap-readme-requirements-honesty",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "file": "patches/faceswap-readme-requirements-honesty.patch",
+      "base": "bba7188",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('README.md').read_text(); assert 'Engine healthy at' in t and 'FACESWAP_ENGINE' in t and 'one example, not the contract' in t\""
+      ],
+      "notes": "README Requirements: engine is FACESWAP_ENGINE. After apply: assert those phrases. Independent of honesty-env-paths (footer) and ios-readme-honesty (ios/README.md)."
+    },
+    {
+      "id": "faceswap-readme-install-sh",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "file": "patches/faceswap-readme-install-sh.patch",
+      "base": "bba7188",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('README.md').read_text(); assert 'bash START.sh' in t and 'Linux / this pad' in t and 'fail-closed contract' in t\""
+      ],
+      "notes": "README install block documents bash START.sh. After apply: assert those phrases. Independent of start-sh (new file) and readme-requirements-honesty (Requirements bullet)."
+    },
+    {
+      "id": "dronehive-buzzer-hive-library-honesty",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-buzzer-hive-library-honesty.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('configs/buzzer_hive.json').read_text(); assert 'host/library' in t and 'host/continuous/OPEN_TASKS.json' in t\""
+      ],
+      "notes": "configs/buzzer_hive.json library.root / continuous_tasks use host/library and host/continuous. After apply: assert those phrases. Independent of config-load-overlay (Python remap only). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-buzzer-hive-library-honesty",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-buzzer-hive-library-honesty.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/configs/buzzer_hive.json').read_text(); assert 'host/library' in t and 'host/continuous/OPEN_TASKS.json' in t\""
+      ],
+      "notes": "drone/app/seed/configs/buzzer_hive.json library.root / continuous_tasks use host/. After apply: assert those phrases. Independent of live configs/buzzer_hive.json leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-fabric-root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-fabric-root.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; d=json.loads(Path('configs/work_order.json').read_text()); assert d['fabric_root'] == '.'\""
+      ],
+      "notes": "configs/work_order.json fabric_root is . (app root), not G:\\\\AI-Home. After apply: assert fabric_root == '.'. Independent of portable-paths (later hunks only). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-fabric-root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-fabric-root.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; d=json.loads(Path('drone/app/seed/configs/work_order.json').read_text()); assert d['fabric_root'] == '.'\""
+      ],
+      "notes": "drone/app/seed/configs/work_order.json fabric_root is . After apply: assert fabric_root == '.'. Independent of live configs/work_order.json leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "faceswap-readme-swift-honesty",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "file": "patches/faceswap-readme-swift-honesty.patch",
+      "base": "bba7188",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('README.md').read_text(); assert 'Windows, Linux, or this pad' in t and 'only on a Mac with Xcode' in t\""
+      ],
+      "notes": "README Swift section: IPA is Mac/Xcode only. After apply: assert those phrases. Independent of honesty-env-paths (footer), requirements, and install-sh hunks."
+    },
+    {
+      "id": "faceswap-readme-firewall-honesty",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "file": "patches/faceswap-readme-firewall-honesty.patch",
+      "base": "bba7188",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('README.md').read_text(); assert 'inbound TCP' in t and 'Windows Firewall is one host example' in t\""
+      ],
+      "notes": "README: inbound TCP 8860; Windows Firewall is one host example. After apply: assert those phrases. Independent of install-sh, requirements, and swift leftovers."
+    },
+    {
+      "id": "dronehive-future-seer-jane-honesty",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-future-seer-jane-honesty.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; d=json.loads(Path('configs/future_seer.json').read_text()); assert d['jane']['super_cell'] == 'host/ai-center/agents/super-cell-4' and d['jane']['pythonpath_ai_center'] == 'host/ai-center'\""
+      ],
+      "notes": "configs/future_seer.json jane.* uses host/ai-center, not G:\\\\AI-Center. After apply: assert jane.super_cell and pythonpath_ai_center. Independent of config-load-overlay (Python remap only) and runtime-host-paths (future_seer.py Path wraps). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-multi-hosts-exe-honesty",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-multi-hosts-exe-honesty.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; hosts=json.loads(Path('configs/multi_hosts.json').read_text())['hosts']; by={h['id']:h for h in hosts}; assert by['supercell_muscle']['exe']=='host/ai-center/agents/super-cell-4/bridges/muscle_dispatch.py' and by['everest']['exe']=='host/ai-center/bridge/everest/cli.py'\""
+      ],
+      "notes": "configs/multi_hosts.json supercell_muscle and everest exe use host/ai-center, not G:\\\\AI-Center. After apply: assert those exe paths. Independent of config-load-overlay (Python remap only) and future-seer-jane-honesty (different file). C:\\\\ AppData exe leftovers stay later. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-live-registry",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-live-registry.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; r=json.loads(Path('configs/work_order.json').read_text())['live_registry']; assert r['cli']=='host/ai-center/agents/super-cell-4/bridges/live_registry.py' and r['primary']=='host/ai-center/agents/super-cell-4/registry' and r['events']=='host/ai-center/agents/super-cell-4/registry/events.jsonl'\""
+      ],
+      "notes": "configs/work_order.json live_registry cli/primary/events use host/ai-center, not G:\\\\AI-Center. After apply: assert those live_registry keys. Independent of portable-paths (later hunks) and fabric-root. F:\\\\ mirror leftover stays later. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-live-registry",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-live-registry.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; r=json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['live_registry']; assert r['cli']=='host/ai-center/agents/super-cell-4/bridges/live_registry.py' and r['primary']=='host/ai-center/agents/super-cell-4/registry' and r['events']=='host/ai-center/agents/super-cell-4/registry/events.jsonl'\""
+      ],
+      "notes": "drone/app/seed/configs/work_order.json live_registry cli/primary/events use host/ai-center, not G:\\\\AI-Center. After apply: assert those seed live_registry keys. Independent of live configs/work_order.json leftover (different file). F:\\\\ mirror leftover stays later. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-school-root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-school-root.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; k=json.loads(Path('configs/work_order.json').read_text())['knowledge_imprint']; assert k['school_root']=='host/ai-center/helper-school' and k['school_lessons_md']=='host/ai-center/helper-school/library/lessons'\""
+      ],
+      "notes": "configs/work_order.json knowledge_imprint school_root / school_lessons_md use host/ai-center/helper-school, not G:\\\\AI-Center. After apply: assert those keys. Independent of portable-paths (codex_extra hunk) and live-registry. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-school-root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-school-root.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; k=json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['knowledge_imprint']; assert k['school_root']=='host/ai-center/helper-school' and k['school_lessons_md']=='host/ai-center/helper-school/library/lessons'\""
+      ],
+      "notes": "drone/app/seed/configs/work_order.json knowledge_imprint school_root / school_lessons_md use host/ai-center/helper-school, not G:\\\\AI-Center. After apply: assert those seed keys. Independent of live leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-reference-db",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-reference-db.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; k=json.loads(Path('configs/work_order.json').read_text())['knowledge_imprint']; assert k['reference_db']=='host/ai-center/databases/ai_center_reference.db'\""
+      ],
+      "notes": "configs/work_order.json knowledge_imprint.reference_db uses host/ai-center/databases, not G:\\\\AI-Center. After apply: assert that key. -U1 so context skips school leftover. Independent of portable-paths, live-registry, and school-root. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-reference-db",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-reference-db.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; k=json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['knowledge_imprint']; assert k['reference_db']=='host/ai-center/databases/ai_center_reference.db'\""
+      ],
+      "notes": "drone/app/seed/configs/work_order.json knowledge_imprint.reference_db uses host/ai-center/databases, not G:\\\\AI-Center. After apply: assert that seed key. -U1 so context skips school leftover. Independent of live leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-knowledge-expand",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-knowledge-expand.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; k=json.loads(Path('configs/work_order.json').read_text())['knowledge_imprint']; assert k['knowledge_expand']=='host/library/knowledge/expand'\""
+      ],
+      "notes": "configs/work_order.json knowledge_imprint.knowledge_expand uses host/library, not F:\\\\GrokSelfLibrary. After apply: assert that key. -U1 so context skips reference_db leftover. Independent of portable-paths, school-root, and reference-db. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-knowledge-expand",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-knowledge-expand.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; k=json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['knowledge_imprint']; assert k['knowledge_expand']=='host/library/knowledge/expand'\""
+      ],
+      "notes": "drone/app/seed/configs/work_order.json knowledge_imprint.knowledge_expand uses host/library, not F:\\\\GrokSelfLibrary. After apply: assert that seed key. -U1 so context skips reference_db leftover. Independent of live leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-curriculum-root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-curriculum-root.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; k=json.loads(Path('configs/work_order.json').read_text())['knowledge_imprint']; assert k['curriculum_root']=='host/ai-center/learning-curriculum' and k['curriculum_json']=='host/ai-center/learning-curriculum/CURRICULUM.json'\""
+      ],
+      "notes": "configs/work_order.json knowledge_imprint curriculum_root / curriculum_json use host/ai-center/learning-curriculum, not G:\\\\AI-Center. After apply: assert those keys. -U1 so context is codex_root / curriculum_fts and skips school leftover. Independent of portable-paths, school-root, and knowledge-expand. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-curriculum-root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-curriculum-root.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; k=json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['knowledge_imprint']; assert k['curriculum_root']=='host/ai-center/learning-curriculum' and k['curriculum_json']=='host/ai-center/learning-curriculum/CURRICULUM.json'\""
+      ],
+      "notes": "drone/app/seed/configs/work_order.json knowledge_imprint curriculum_root / curriculum_json use host/ai-center/learning-curriculum, not G:\\\\AI-Center. After apply: assert those seed keys. -U1 so context is codex_root / curriculum_fts. Independent of live leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-multi-hosts-hardwire",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-multi-hosts-hardwire.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; d=json.loads(Path('configs/multi_hosts.json').read_text()); assert d['super_mesh']['hardwire']=='data/super_mesh/HARDWIRE.json'\""
+      ],
+      "notes": "configs/multi_hosts.json super_mesh.hardwire uses data/super_mesh/HARDWIRE.json (repo-relative; same G:\\\\AI-Home project as fabric_root). After apply: assert that key. Independent of multi-hosts-exe-honesty (exe keys) and super-llms-hardwire (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-super-llms-hardwire",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-super-llms-hardwire.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; d=json.loads(Path('configs/super_llms.json').read_text()); assert d['super_mesh']['hardwire']=='data/super_mesh/HARDWIRE.json'\""
+      ],
+      "notes": "configs/super_llms.json super_mesh.hardwire uses data/super_mesh/HARDWIRE.json. After apply: assert that key. Independent of multi-hosts-hardwire (different file) and config-load-overlay (Python remap only). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-open-tasks",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-open-tasks.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; assert json.loads(Path('configs/work_order.json').read_text())['ai_laws']['rank_5']['open_tasks']=='host/continuous/OPEN_TASKS.json'\""
+      ],
+      "notes": "configs/work_order.json ai_laws.rank_5.open_tasks uses host/continuous/OPEN_TASKS.json, not D:\\\\GrokCoreMemory. After apply: assert that key. Independent of portable-paths, fabric-root, and buzzer leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-open-tasks",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-open-tasks.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; assert json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['ai_laws']['rank_5']['open_tasks']=='host/continuous/OPEN_TASKS.json'\""
+      ],
+      "notes": "drone/app/seed/configs/work_order.json ai_laws.rank_5.open_tasks uses host/continuous/OPEN_TASKS.json, not D:\\\\GrokCoreMemory. After apply: assert that seed key. Independent of live leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-codex-paths",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-codex-paths.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; c=json.loads(Path('configs/work_order.json').read_text())['codex']; assert c['root']=='host/library/knowledge/codex' and c['master_min']=='host/library/knowledge/codex/CODEX.min.json' and c['master_md']=='host/library/knowledge/codex/CODEX.md' and c['query_cli']=='host/library/bin/query_llm_codex.py'\""
+      ],
+      "notes": "configs/work_order.json codex.root / master_min / master_md / query_cli use host/library, not F:\\\\GrokSelfLibrary. After apply: assert those keys. Independent of portable-paths, curriculum leftover (codex_root is a different key), and doc-honesty. Leaves python_default. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-codex-paths",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-codex-paths.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; c=json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['codex']; assert c['root']=='host/library/knowledge/codex' and c['master_min']=='host/library/knowledge/codex/CODEX.min.json' and c['master_md']=='host/library/knowledge/codex/CODEX.md' and c['query_cli']=='host/library/bin/query_llm_codex.py'\""
+      ],
+      "notes": "drone/app/seed/configs/work_order.json codex.root / master_min / master_md / query_cli use host/library, not F:\\\\GrokSelfLibrary. After apply: assert those seed keys. Independent of live leftover (different file). Leaves python_default. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-law-truth",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-law-truth.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; assert 'host/library/LAW_TRUTH.md' in json.loads(Path('configs/work_order.json').read_text())['ai_laws']['rank_0']['paths']\""
+      ],
+      "notes": "configs/work_order.json ai_laws.rank_0.paths LAW_TRUTH.md uses host/library, not F:\\\\GrokSelfLibrary. After apply: assert that path. Applies on vanilla. If stacking with portable-paths, apply portable-paths first (it uses this line as context). Leaves the C:\\\\ grok rules path. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-law-truth",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-law-truth.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; assert 'host/library/LAW_TRUTH.md' in json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['ai_laws']['rank_0']['paths']\""
+      ],
+      "notes": "drone/app/seed/configs/work_order.json ai_laws.rank_0.paths LAW_TRUTH.md uses host/library, not F:\\\\GrokSelfLibrary. After apply: assert that seed path. Independent of live leftover (different file). Leaves the C:\\\\ grok rules path. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-law-truth",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-doc-law-truth.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); line=next(x for x in t.splitlines() if x.startswith('Library law:')); assert 'host/library/LAW_TRUTH.md' in line; assert 'GrokSelfLibrary' not in line\""
+      ],
+      "notes": "docs/WORK_ORDER.md Library law uses host/library/LAW_TRUTH.md, not F:\\\\GrokSelfLibrary. After apply: assert that line. Independent of work-order-doc-honesty (NEXT.json) and the JSON law-truth leftover. Leaves the C:\\\\ host-law line. Do not put backticks in afterApply. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-law-truth",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-doc-law-truth.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); line=next(x for x in t.splitlines() if x.startswith('Library law:')); assert 'host/library/LAW_TRUTH.md' in line; assert 'GrokSelfLibrary' not in line\""
+      ],
+      "notes": "drone/app/seed/docs/WORK_ORDER.md Library law uses host/library/LAW_TRUTH.md, not F:\\\\GrokSelfLibrary. After apply: assert that line. Independent of live leftover (different file) and seed-work-order-doc-honesty (NEXT.json). Do not put backticks in afterApply. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-fabric-root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-doc-fabric-root.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); line=next(x for x in t.splitlines() if x.startswith('**Host:**')); assert 'fabric' in line; assert 'AI-Home' not in line\""
+      ],
+      "notes": "docs/WORK_ORDER.md header fabric uses repo-relative '.', not G:\\\\AI-Home. After apply: assert that Host line. Independent of work-order-doc-honesty (NEXT.json), work-order-doc-law-truth (Library law), and the JSON fabric-root leftover. Do not put backticks in afterApply. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-fabric-root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-doc-fabric-root.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); line=next(x for x in t.splitlines() if x.startswith('**Host:**')); assert 'fabric' in line; assert 'AI-Home' not in line\""
+      ],
+      "notes": "drone/app/seed/docs/WORK_ORDER.md header fabric uses repo-relative '.', not G:\\\\AI-Home. After apply: assert that Host line. Independent of live leftover (different file) and seed-work-order-doc-honesty (NEXT.json). Do not put backticks in afterApply. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-imprints",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-doc-imprints.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert 'host/library/knowledge/indexes/drone_imprints.jsonl' in t\""
+      ],
+      "notes": "docs/WORK_ORDER.md imprint table uses host/library/knowledge/indexes/drone_imprints.jsonl, not F:\\\\GrokSelfLibrary. After apply: assert that path. Independent of header fabric, Library law, NEXT.json, and live-registry docs leftovers. No seed copy of this row. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-live-registry",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-doc-live-registry.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert 'host/ai-center/agents/super-cell-4/registry/' in t; assert 'host/library/registry/' in t; assert 'host/ai-center/agents/super-cell-4/bridges/live_registry.py' in t\""
+      ],
+      "notes": "docs/WORK_ORDER.md live-registry table + $reg use host/ai-center and host/library, not G:\\\\AI-Center / F:\\\\GrokSelfLibrary. After apply: assert Primary, Mirror, and CLI/reg paths. Independent of JSON live-registry leftover and other docs leftovers. Leaves Events/HOT relative. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-live-registry",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-doc-live-registry.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); assert 'host/ai-center/agents/super-cell-4/registry/' in t; assert 'host/library/registry/' in t; assert 'host/ai-center/agents/super-cell-4/bridges/live_registry.py' in t\""
+      ],
+      "notes": "drone/app/seed/docs/WORK_ORDER.md live-registry table + $reg use host/ai-center and host/library, not G:\\\\AI-Center / F:\\\\GrokSelfLibrary. After apply: assert Primary, Mirror, and CLI/reg paths. Independent of live leftover (different file). Leaves Events/HOT relative. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-codex-paths",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-doc-codex-paths.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert 'host/library/knowledge/codex/CODEX.md' in t; assert 'host/library/knowledge/codex/models/catalog.min.json' in t; assert 'host/library/bin/query_llm_codex.py' in t; assert 'host/library/bin/build_llm_codex.py' in t\""
+      ],
+      "notes": "docs/WORK_ORDER.md codex table uses host/library, not F:\\\\GrokSelfLibrary. After apply: assert CODEX.md, models catalog, query CLI, and rebuild paths. Independent of JSON codex-paths leftover and the CLI-example leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-codex-paths",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-doc-codex-paths.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); assert 'host/library/knowledge/codex/CODEX.md' in t; assert 'host/library/knowledge/codex/models/catalog.min.json' in t; assert 'host/library/bin/query_llm_codex.py' in t; assert 'host/library/bin/build_llm_codex.py' in t\""
+      ],
+      "notes": "drone/app/seed/docs/WORK_ORDER.md codex table uses host/library, not F:\\\\GrokSelfLibrary. After apply: assert CODEX.md, models catalog, query CLI, and rebuild paths. Independent of live leftover (different file) and seed CLI-example leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-codex-cli",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-doc-codex-cli.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert 'host/library/bin/query_llm_codex.py stats' in t; assert 'host/library/bin/query_llm_codex.py use coding' in t; assert 'host/library/bin/query_llm_codex.py vram' in t\""
+      ],
+      "notes": "docs/WORK_ORDER.md query_llm_codex.py examples use host/library/bin, not F:\\\\GrokSelfLibrary. After apply: assert stats, use coding, and vram examples. Independent of the table leftover (does not touch Query CLI row). Leaves recall.py leftovers. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-codex-cli",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-doc-codex-cli.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); assert 'host/library/bin/query_llm_codex.py stats' in t; assert 'host/library/bin/query_llm_codex.py use coding' in t; assert 'host/library/bin/query_llm_codex.py vram' in t\""
+      ],
+      "notes": "drone/app/seed/docs/WORK_ORDER.md query_llm_codex.py examples use host/library/bin, not F:\\\\GrokSelfLibrary. After apply: assert stats, use coding, and vram examples. Independent of live leftover (different file) and seed table leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-recall-router",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-doc-recall-router.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert 'host/library/bin/recall.py get knowledge_pack' in t; assert 'host/ai-home/docs/ai-smarts/runtime/ai_smarts_router.py route' in t\""
+      ],
+      "notes": "docs/WORK_ORDER.md recall.py and ai_smarts_router.py examples use host/library and host/ai-home, not F:\\\\GrokSelfLibrary / G:\\\\AI-Home. After apply: assert recall.py get knowledge_pack and ai_smarts_router.py route. Independent of CLI leftover and models leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-recall-router",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-doc-recall-router.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); assert 'host/library/bin/recall.py get knowledge_pack' in t; assert 'host/ai-home/docs/ai-smarts/runtime/ai_smarts_router.py route' in t\""
+      ],
+      "notes": "drone/app/seed/docs/WORK_ORDER.md recall.py and ai_smarts_router.py examples use host/library and host/ai-home, not F:\\\\GrokSelfLibrary / G:\\\\AI-Home. After apply: assert recall.py get knowledge_pack and ai_smarts_router.py route. Independent of live leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-memory-recycle",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-doc-memory-recycle.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert 'data/hive/memory_recycle/' in t; assert r'G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b\\\\data\\\\hive\\\\memory_recycle' not in t\""
+      ],
+      "notes": "docs/WORK_ORDER.md memory_recycle path uses repo-relative data/hive/memory_recycle/, not G:\\\\AI-Home. After apply: assert the repo-relative path and that the G: project path is gone. Independent of header fabric leftover and live-registry leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-memory-recycle",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-doc-memory-recycle.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); assert 'data/hive/memory_recycle/' in t; assert r'G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b\\\\data\\\\hive\\\\memory_recycle' not in t\""
+      ],
+      "notes": "drone/app/seed/docs/WORK_ORDER.md memory_recycle path uses repo-relative data/hive/memory_recycle/, not G:\\\\AI-Home. After apply: assert the repo-relative path and that the G: project path is gone. Independent of live leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-models",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-doc-models.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert 'host/ai-home/models' in t\""
+      ],
+      "notes": "docs/WORK_ORDER.md install-proof models path uses host/ai-home/models, not G:\\\\AI-Home\\\\models. After apply: assert host/ai-home/models. Independent of CLI leftover and recall leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-models",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-doc-models.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); assert 'host/ai-home/models' in t\""
+      ],
+      "notes": "drone/app/seed/docs/WORK_ORDER.md install-proof models path uses host/ai-home/models, not G:\\\\AI-Home\\\\models. After apply: assert host/ai-home/models. Independent of live leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-doc-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert '\\ncd .\\n' in t; assert r'cd G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "docs/WORK_ORDER.md swarm entry cd uses repo-relative '.', not G:\\\\AI-Home. After apply: assert a standalone cd . line and that the G: project cd is gone. Independent of NEXT.json leftover and header fabric leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-doc-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); assert '\\ncd .\\n' in t; assert r'cd G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "drone/app/seed/docs/WORK_ORDER.md swarm entry cd uses repo-relative '.', not G:\\\\AI-Home. After apply: assert a standalone cd . line and that the G: project cd is gone. Independent of live leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-spec-relative",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-spec-relative.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('DroneHive.spec').read_text(); assert \\\"['drone/app/desktop.py']\\\" in t; assert \\\"pathex=['.']\\\" in t\""
+      ],
+      "notes": "DroneHive.spec Analysis script/pathex use drone/app/desktop.py and '.', not G:/AI-Home. After apply: assert ['drone/app/desktop.py'] and pathex=['.']. Independent of portable-paths and start-script leftovers (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-start-super-mesh-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-start-super-mesh-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('START_SUPER_MESH.bat').read_text(); assert 'cd /d \\\"%~dp0\\\"' in t; assert r'cd /d G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "START_SUPER_MESH.bat cds to %~dp0 like the other start scripts, not G:\\\\AI-Home. After apply: assert cd /d \"%~dp0\" and that the G: project cd is gone. Independent of spec leftover and PYTHONPATH leftovers (different files). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-start-multi-model-pythonpath",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-start-multi-model-pythonpath.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('START_MULTI_MODEL.bat').read_text(); assert r'%ROOT%\\\\host\\\\ai-center' in t; assert r'PYTHONPATH=%ROOT%;G:\\\\AI-Center' not in t\""
+      ],
+      "notes": "START_MULTI_MODEL.bat PYTHONPATH uses %ROOT%\\\\host\\\\ai-center, not G:\\\\AI-Center. After apply: assert host/ai-center PYTHONPATH and that G:\\\\AI-Center is gone from that line. Independent of START_SEER leftover (different file) and super-mesh cd leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-start-seer-pythonpath",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-start-seer-pythonpath.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('START_SEER.bat').read_text(); assert r'%ROOT%\\\\host\\\\ai-center' in t; assert r'PYTHONPATH=%ROOT%;G:\\\\AI-Center' not in t\""
+      ],
+      "notes": "START_SEER.bat PYTHONPATH uses %ROOT%\\\\host\\\\ai-center, not G:\\\\AI-Center. After apply: assert host/ai-center PYTHONPATH and that G:\\\\AI-Center is gone from that line. Independent of START_MULTI_MODEL leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-enable-bridge-fallback",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-enable-bridge-fallback.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('scripts/Enable-Bridge1080-Admin.ps1').read_text(); assert t.count('Split-Path')>=3; assert r'G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "scripts/Enable-Bridge1080-Admin.ps1 fallback root is Split-Path PSScriptRoot -Parent, not G:\\\\AI-Home. After apply: assert Split-Path count >= 3 and G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b is gone (no dollar signs in the gate). Independent of start-script leftovers (different file). Leaves the double-parent probe line. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-truth-bind-paths",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-truth-bind-paths.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"import json; d=json.load(open('TRUTH_BIND.json')); assert d['root']=='.'; assert d['universal']=='host/library/truth/UNIVERSAL_TRUTH.md'; assert d['oath_gate']=='host/library/bin/truth_oath_gate.py'; assert d['agreement']=='host/library/oath/CURRENT_AGREEMENT.json'\""
+      ],
+      "notes": "TRUTH_BIND.json root/universal/oath_gate/agreement use '.' and host/library. After apply: assert those four remappable keys. Independent of JSON work_order leftovers (different file). Leaves core_imprint F:/C: text and the C:\\\\ grok hardwire. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-package-release-v2-cargo",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-package-release-v2-cargo.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('scripts/package_release_v2.ps1').read_text(); assert r'host\\\\ai-home\\\\tools\\\\cargo' in t; assert r'G:\\\\AI-Home\\\\tools\\\\cargo' not in t\""
+      ],
+      "notes": "scripts/package_release_v2.ps1 cargo/rustup env uses Join-Path Root host/ai-home/tools. After apply: assert host/ai-home/tools/cargo and that G:\\\\AI-Home\\\\tools\\\\cargo is gone. Independent of start-script leftovers (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-launch-cargo",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-mount-launch-cargo.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-mount/Launch.ps1').read_text(); assert r'host\\\\ai-home\\\\tools\\\\cargo' in t; assert r'G:\\\\AI-Home\\\\tools\\\\cargo' not in t\""
+      ],
+      "notes": "apps/drone-ollama-mount/Launch.ps1 cargo/rustup env uses host\\\\ai-home\\\\tools. After apply: assert host/ai-home/tools/cargo and that G:\\\\AI-Home\\\\tools\\\\cargo is gone. Independent of mount README leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-install-ollama-app-cargo",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-install-ollama-app-cargo.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1').read_text(); assert r'host\\\\ai-home\\\\tools\\\\cargo' in t; assert r'G:\\\\AI-Home\\\\tools\\\\cargo' not in t\""
+      ],
+      "notes": "Install-DroneOllamaApp.ps1 cargo/rustup env uses host\\\\ai-home\\\\tools. After apply: assert host/ai-home/tools/cargo and that G:\\\\AI-Home\\\\tools\\\\cargo is gone. Leaves InstallRoot / mountSrc / manifest G: leftovers. Independent of Launch leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-start-tui-cargo-honesty",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-start-tui-cargo-honesty.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('START_TUI_OLLAMA.bat').read_text(); assert r'%ROOT%\\\\host\\\\ai-home\\\\tools\\\\cargo\\\\bin' in t; assert r'G:\\\\AI-Home\\\\tools\\\\cargo\\\\bin' not in t\""
+      ],
+      "notes": "START_TUI_OLLAMA.bat Build echo uses %ROOT%\\\\host\\\\ai-home\\\\tools\\\\cargo\\\\bin. After apply: assert that PATH and that G:\\\\AI-Home\\\\tools\\\\cargo\\\\bin is gone. Independent of START_SUPER_MESH leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-tui-readme-cargo",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-ollama-tui-readme-cargo.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-tui/README.md').read_text(); assert r'host\\\\ai-home\\\\tools\\\\cargo\\\\bin' in t; assert r'cd apps\\\\drone-ollama-tui' in t; assert r'G:\\\\AI-Home\\\\tools\\\\cargo\\\\bin' not in t\""
+      ],
+      "notes": "apps/drone-ollama-tui/README.md build PATH + cd use host/ai-home and apps\\\\drone-ollama-tui. After apply: assert host/ai-home cargo PATH, cd apps\\\\drone-ollama-tui, and G:\\\\AI-Home\\\\tools\\\\cargo\\\\bin gone. Independent of START_TUI leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-readme-cargo",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-mount-readme-cargo.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-mount/README.md').read_text(); assert r'host\\\\ai-home\\\\tools\\\\cargo' in t; assert r'cd apps\\\\drone-ollama-mount' in t; assert r'G:\\\\AI-Home\\\\tools\\\\cargo' not in t\""
+      ],
+      "notes": "apps/drone-ollama-mount/README.md build cargo env + cd use host/ai-home and apps\\\\drone-ollama-mount. After apply: assert host/ai-home cargo, cd apps\\\\drone-ollama-mount, and G:\\\\AI-Home\\\\tools\\\\cargo gone. Independent of Launch leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-tui-readme-cargo",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-tui-readme-cargo.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/dronehive-tui/README.md').read_text(); assert r'host\\\\ai-home\\\\tools\\\\cargo\\\\bin' in t; assert r'G:\\\\AI-Home\\\\tools\\\\cargo\\\\bin' not in t\""
+      ],
+      "notes": "apps/dronehive-tui/README.md build PATH uses host\\\\ai-home\\\\tools\\\\cargo\\\\bin. After apply: assert that PATH and that G:\\\\AI-Home\\\\tools\\\\cargo\\\\bin is gone. Leaves cd apps\\\\dronehive-tui (already relative). Independent of ollama-tui README leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-apps-readme-cargo",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-apps-readme-cargo.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/README.md').read_text(); assert 'host/ai-home/tools/cargo' in t; assert 'one host example' in t\""
+      ],
+      "notes": "apps/README.md build line uses host/ai-home/tools/cargo; G:\\\\AI-Home is one host example. After apply: assert host/ai-home/tools/cargo and one host example. Independent of per-app README leftovers. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-install-ollama-app-root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-install-ollama-app-root.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1').read_text(); assert r\\\"InstallRoot = 'host\\\\ai-home\\\\apps\\\\DroneOllama'\\\" in t\""
+      ],
+      "notes": "Install-DroneOllamaApp.ps1 InstallRoot uses host\\\\ai-home\\\\apps\\\\DroneOllama. After apply: assert InstallRoot = 'host\\\\ai-home\\\\apps\\\\DroneOllama'. Leaves uninstall here-string (do not assert G:\\\\AI-Home\\\\apps\\\\DroneOllama gone). -U1 so context skips the cargo leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-install-ollama-app-mount",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-install-ollama-app-mount.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1').read_text(); assert r\\\"mountSrc = 'apps\\\\drone-ollama-mount\\\\target\\\\release\\\\drone-ollama-mount.exe'\\\" in t\""
+      ],
+      "notes": "Install-DroneOllamaApp.ps1 mountSrc uses apps\\\\drone-ollama-mount. After apply: assert mountSrc = 'apps\\\\drone-ollama-mount\\\\target\\\\release\\\\drone-ollama-mount.exe'. Leaves manifest mount_exe (do not assert G:\\\\AI-Home\\\\projects\\\\drone-ollama-mount gone). Independent of cargo leftover and InstallRoot leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-install-ollama-app-manifest",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-install-ollama-app-manifest.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1').read_text(); assert \\\"drone_root       = '.'\\\" in t; assert r\\\"mount_exe        = 'apps\\\\drone-ollama-mount\\\\target\\\\release\\\\drone-ollama-mount.exe'\\\" in t\""
+      ],
+      "notes": "Install-DroneOllamaApp.ps1 manifest drone_root / mount_exe use '.' and apps\\\\drone-ollama-mount. After apply: assert drone_root       = '.' and mount_exe = 'apps\\\\drone-ollama-mount\\\\target\\\\release\\\\drone-ollama-mount.exe'. Do not assert G: project paths gone (other leftovers keep them). Independent of mountSrc leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-install-ollama-uninstall-root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-install-ollama-uninstall-root.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1').read_text(); assert r'InstallRoot = \\\"host\\\\ai-home\\\\apps\\\\DroneOllama\\\"' in t\""
+      ],
+      "notes": "Install-DroneOllamaApp.ps1 uninstall here-string uses double-quoted host\\\\ai-home\\\\apps\\\\DroneOllama. After apply: assert InstallRoot = \\\"host\\\\ai-home\\\\apps\\\\DroneOllama\\\". Leaves live single-quoted G: InstallRoot (do not assert G:\\\\AI-Home\\\\apps\\\\DroneOllama gone). Independent of live InstallRoot leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-tui-readme-root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-tui-readme-root.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/dronehive-tui/README.md').read_text(); assert 'dronehive-tui.exe --root .' in t; assert r'G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "apps/dronehive-tui/README.md --root uses '.'. After apply: assert dronehive-tui.exe --root . and G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b gone. Leaves cargo PATH G: leftover. Independent of tui-readme-cargo (PATH line only). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-tui-readme-install",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-ollama-tui-readme-install.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-tui/README.md').read_text(); assert r'host\\\\ai-home\\\\apps\\\\DroneOllama\\\\START_TUI.cmd' in t; assert r'G:\\\\AI-Home\\\\apps\\\\DroneOllama\\\\START_TUI.cmd' not in t\""
+      ],
+      "notes": "apps/drone-ollama-tui/README.md installed START_TUI.cmd uses host\\\\ai-home\\\\apps\\\\DroneOllama. After apply: assert host\\\\ai-home\\\\apps\\\\DroneOllama\\\\START_TUI.cmd and G:\\\\AI-Home\\\\apps\\\\DroneOllama\\\\START_TUI.cmd gone. Leaves cargo PATH and G: cd leftovers. Independent of ollama-tui-readme-cargo (Build block). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-readme-layout",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-mount-readme-layout.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-mount/README.md').read_text(); assert r'apps\\\\drone-ollama-mount\\\\                      ← this engine' in t; assert r'.\\\\                                            ← 24 drones' in t; assert r'G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "apps/drone-ollama-mount/README.md layout uses apps\\\\drone-ollama-mount and '.'. After apply: assert apps\\\\drone-ollama-mount\\\\ this engine, .\\\\ 24 drones, and G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b gone. Do not assert G:\\\\AI-Home\\\\projects\\\\drone-ollama-mount gone (cd / Launch leftovers keep it). Independent of mount-readme-cargo (Build block). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-readme-launch",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-mount-readme-launch.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-mount/README.md').read_text(); assert r'File apps\\\\drone-ollama-mount\\\\Launch.ps1' in t; assert r'File G:\\\\AI-Home\\\\projects\\\\drone-ollama-mount\\\\Launch.ps1' not in t\""
+      ],
+      "notes": "apps/drone-ollama-mount/README.md Launch.ps1 path uses apps\\\\drone-ollama-mount. After apply: assert File apps\\\\drone-ollama-mount\\\\Launch.ps1 and File G:\\\\AI-Home\\\\projects\\\\drone-ollama-mount\\\\Launch.ps1 gone. Do not assert G:\\\\AI-Home\\\\projects\\\\drone-ollama-mount gone (cd leftover). Independent of mount-readme-cargo and layout leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-readme-related",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-mount-readme-related.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-mount/README.md').read_text(); assert 'host/ai-home/projects/ollama-rust-ui' in t; assert 'one host example' in t; assert r'G:\\\\AI-Home\\\\projects\\\\ollama-rust-ui' not in t\""
+      ],
+      "notes": "apps/drone-ollama-mount/README.md related uses host/ai-home/projects/ollama-rust-ui; G:\\\\AI-Home is one host example. After apply: assert host/ai-home/projects/ollama-rust-ui, one host example, and G:\\\\AI-Home\\\\projects\\\\ollama-rust-ui gone. Do not assert G:\\\\AI-Home gone. Independent of layout and launch leftovers. Does not touch tool_agent.py."
+    },
+    {
+      "id": "opensussy-sec-review-target",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "file": "patches/opensussy-sec-review-target.patch",
+      "base": "d4b2949",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('reviews/SEC_REVIEW.md').read_text(); assert 'one host example' in t; assert r'G:\\\\AI-Home\\\\projects\\\\opensussy' in t\""
+      ],
+      "notes": "reviews/SEC_REVIEW.md Target uses '.' ; G:\\\\AI-Home\\\\projects\\\\opensussy is one host example. After apply: assert one host example and G:\\\\AI-Home\\\\projects\\\\opensussy (stays). Do not assert G: gone. Avoid backticks (Target is `.`). Independent of ship-json-2-0-0 and sec-residuals-catalog (new file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "opensussy-install-sec-review-target",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "file": "patches/opensussy-install-sec-review-target.patch",
+      "base": "d4b2949",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('install/docs/SEC_REVIEW.md').read_text(); assert 'one host example' in t; assert r'G:\\\\AI-Home\\\\projects\\\\opensussy' in t\""
+      ],
+      "notes": "install/docs/SEC_REVIEW.md Target uses '.' ; G:\\\\AI-Home\\\\projects\\\\opensussy is one host example. After apply: assert one host example and G:\\\\AI-Home\\\\projects\\\\opensussy (stays). Do not assert G: gone. Avoid backticks (Target is `.`). Independent of reviews/SEC_REVIEW.md leftover (different file) and ship-json-2-0-0."
+    },
+    {
+      "id": "dronehive-readme-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-readme-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('README.md').read_text(); assert 'cd .   # or your clone path' in t; assert r'cd G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "README.md quick-start cd uses 'cd .   # or your clone path'. After apply: assert that comment line and that the G: project cd is gone. Do not assert a standalone cd . line (False; the comment shares the line). Independent of work-order-doc-cd. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-agent-loop-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-agent-loop-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/AGENT_LOOP.md').read_text(); assert '\\ncd .\\n' in t; assert r'cd G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "docs/AGENT_LOOP.md CLI cd uses a standalone cd . line. After apply: assert that line and that the G: project cd is gone. Independent of work-order-doc-cd and readme-cd. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-bridge-1080-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-bridge-1080-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/BRIDGE_1080.md').read_text(); assert '\\ncd .\\n' in t; assert r'cd G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "docs/BRIDGE_1080.md Commands cd uses a standalone cd . line. After apply: assert that line and that the G: project cd is gone. Independent of work-order-doc-cd and doc-agent-loop-cd. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-code-worker-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-code-worker-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/CODE_WORKER_8B.md').read_text(); assert '\\ncd .\\n' in t; assert r'cd G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "docs/CODE_WORKER_8B.md Smoke cd uses a standalone cd . line. After apply: assert that line and that the G: project cd is gone. Independent of work-order-doc-cd and doc-bridge-1080-cd. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-future-seer-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-future-seer-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/FUTURE_SEER.md').read_text(); assert '\\ncd .\\n' in t; assert r'cd G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "docs/FUTURE_SEER.md cd uses a standalone cd . line. After apply: assert that line and that the G: project cd is gone. Do not put dollar signs in afterApply. Independent of work-order-doc-cd and start-seer-pythonpath. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-measured-diagnostics-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-measured-diagnostics-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/MEASURED_DIAGNOSTICS.md').read_text(); assert '\\ncd .\\n' in t; assert r'cd G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "docs/MEASURED_DIAGNOSTICS.md Smoke cd uses a standalone cd . line. After apply: assert that line and that the G: project cd is gone. Independent of work-order-doc-cd and doc-code-worker-cd. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-multi-face-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-multi-face-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/MULTI_FACE.md').read_text(); assert '\\ncd .\\n' in t; assert r'cd G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "docs/MULTI_FACE.md CLI cd uses a standalone cd . line. After apply: assert that line and that the G: project cd is gone. Do not put dollar signs in afterApply. Independent of work-order-doc-cd and multi-face-pythonpath. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-operational-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-operational-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/OPERATIONAL.md').read_text(); assert '\\ncd .\\n' in t; assert r'cd G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "docs/OPERATIONAL.md One command cd uses a standalone cd . line. After apply: assert that line and that the G: project cd is gone. Independent of seed OPERATIONAL leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-doc-operational-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-doc-operational-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/docs/OPERATIONAL.md').read_text(); assert '\\ncd .\\n' in t; assert r'cd G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "seed OPERATIONAL.md One command cd uses a standalone cd . line. After apply: assert that line and that the G: project cd is gone. Independent of live docs leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-pro-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-pro-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/PRO.md').read_text(); assert '\\ncd .\\n' in t; assert r'cd G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "docs/PRO.md Run cd uses a standalone cd . line. After apply: assert that line and that the G: project cd is gone. Independent of work-order-doc-cd and tui-readme leftovers. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-super-llms-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-super-llms-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/SUPER_LLMS.md').read_text(); assert '\\ncd .\\n' in t; assert r'cd G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "docs/SUPER_LLMS.md cd uses a standalone cd . line. After apply: assert that line and that the G: project cd is gone. Independent of work-order-doc-cd and start-super-llms leftovers. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-super-mesh-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-super-mesh-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/SUPER_MESH.md').read_text(); assert '\\ncd .\\n' in t; assert r'cd G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "docs/SUPER_MESH.md Commands cd uses a standalone cd . line. After apply: assert that line and that the G: project cd is gone. Independent of start-super-mesh-cd leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-synaptic-loop-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-synaptic-loop-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/SYNAPTIC_LOOP.md').read_text(); assert '\\ncd .\\n' in t; assert r'cd G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "docs/SYNAPTIC_LOOP.md CLI cd uses a standalone cd . line. After apply: assert that line and that the G: project cd is gone. Independent of work-order-doc-cd leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-super-kernel-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-super-kernel-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/SUPER_KERNEL.md').read_text(); assert '\\nSet-Location .\\n' in t; assert r'Set-Location G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "docs/SUPER_KERNEL.md uses a standalone Set-Location . line. After apply: assert that line and that the G: project Set-Location is gone. Independent of work-order-doc-cd leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-honesty-library",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-honesty-library.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/HONESTY.md').read_text(); assert 'host/library' in t; assert r'F:\\\\GrokSelfLibrary' not in t\""
+      ],
+      "notes": "docs/HONESTY.md library row uses host/library. After apply: assert that phrase and that F: GrokSelfLibrary is gone. Independent of hive-docstring-honesty and seed HONESTY leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-doc-honesty-library",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-doc-honesty-library.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/docs/HONESTY.md').read_text(); assert 'host/library' in t; assert r'F:\\\\GrokSelfLibrary' not in t\""
+      ],
+      "notes": "seed HONESTY.md library row uses host/library. After apply: assert that phrase and that F: GrokSelfLibrary is gone. Independent of live docs leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-app-library",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-app-library.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/APP.md').read_text(); assert 'host/library' in t; assert r'F:\\\\GrokSelfLibrary' not in t\""
+      ],
+      "notes": "docs/APP.md Library row uses host/library. After apply: assert that phrase and that F: GrokSelfLibrary is gone. Independent of APP.md cd leftover and seed APP leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-doc-app-library",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-doc-app-library.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/docs/APP.md').read_text(); assert 'host/library' in t; assert r'F:\\\\GrokSelfLibrary' not in t\""
+      ],
+      "notes": "seed APP.md Library row uses host/library. After apply: assert that phrase and that F: GrokSelfLibrary is gone. Independent of live APP leftover and seed APP.md cd leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-app-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-app-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/APP.md').read_text(); assert '\\ncd .\\n' in t; assert r'cd G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "docs/APP.md cd uses a standalone cd . line. After apply: assert that line and that the G: project cd is gone. Independent of Library row leftover and seed APP cd leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-doc-app-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-doc-app-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/docs/APP.md').read_text(); assert '\\ncd .\\n' in t; assert r'cd G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "seed APP.md cd uses a standalone cd . line. After apply: assert that line and that the G: project cd is gone. Independent of live APP cd leftover and seed Library leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-grok-handoff-root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-grok-handoff-root.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/GROK_HANDOFF.md').read_text(); root=t.split('## Project root',1)[1].split('##',1)[0]; assert r'G:\\\\AI-Home' not in root; assert '0.5b' not in root\""
+      ],
+      "notes": "docs/GROK_HANDOFF.md Project root section no longer pins G: or 0.5b. After apply: assert those phrases in that section only. Whole-file G: cd leftover stays. Do not put backticks in afterApply. Independent of CLI cd leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-doc-grok-handoff-cd",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-doc-grok-handoff-cd.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/GROK_HANDOFF.md').read_text(); assert '\\ncd .\\n' in t; assert r'cd G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "docs/GROK_HANDOFF.md CLI cd uses a standalone cd . line. After apply: assert that line and that the G: project cd is gone. Project root leftover still pins G: without cd. Independent of project-root leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-truth-honesty-root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-truth-honesty-root.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('TRUTH_AND_HONESTY.md').read_text(); line=next(x for x in t.splitlines() if x.startswith('**System root:**')); assert r'G:\\\\AI-Home' not in line; assert '0.5b' not in line\""
+      ],
+      "notes": "TRUTH_AND_HONESTY.md System root line no longer pins G: or 0.5b. After apply: assert those phrases on that line only. Oath and library-list leftovers stay. Do not put backticks in afterApply. Independent of TRUTH_BIND.json leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-truth-honesty-oath-inline",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-truth-honesty-oath-inline.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('TRUTH_AND_HONESTY.md').read_text(); line=next(x for x in t.splitlines() if x.startswith('Oath: python')); assert 'host/library' in line; assert r'F:\\\\GrokSelfLibrary' not in line\""
+      ],
+      "notes": "TRUTH_AND_HONESTY.md inline Oath: python line uses host/library. After apply: assert that line only. Full-law list leftover still pins F:. Leaves C:\\\\Users hardwire. Independent of system-root leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-app-readme-install",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-ollama-app-readme-install.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/README.md').read_text(); assert r'File apps\\\\drone-ollama-app\\\\installer\\\\Install-DroneOllamaApp.ps1' in t; assert r'File G:\\\\AI-Home\\\\projects\\\\drone-ollama-app\\\\installer\\\\Install-DroneOllamaApp.ps1' not in t\""
+      ],
+      "notes": "apps/drone-ollama-app/README.md installer uses apps\\\\drone-ollama-app. After apply: assert File apps\\\\drone-ollama-app\\\\installer and File G:\\\\AI-Home\\\\projects\\\\drone-ollama-app\\\\installer gone. Dest leftover still pins G:\\\\AI-Home\\\\apps\\\\DroneOllama. Independent of dest leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-app-readme-dest",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-ollama-app-readme-dest.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/README.md').read_text(); assert r'host\\\\ai-home\\\\apps\\\\DroneOllama' in t; assert r'G:\\\\AI-Home\\\\apps\\\\DroneOllama' not in t\""
+      ],
+      "notes": "apps/drone-ollama-app/README.md dest uses host\\\\ai-home\\\\apps\\\\DroneOllama. After apply: assert that phrase and G:\\\\AI-Home\\\\apps\\\\DroneOllama gone. Installer leftover still pins G:\\\\AI-Home\\\\projects. Do not put backticks in afterApply. Independent of installer leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-app-crash-log",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-ollama-app-crash-log.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/src/main.rs').read_text(); assert r'host\\\\ai-home\\\\apps\\\\DroneOllama\\\\logs\\\\crash.log' in t; assert r'G:\\\\AI-Home\\\\apps\\\\DroneOllama\\\\logs\\\\crash.log' not in t\""
+      ],
+      "notes": "main.rs crash_log_path uses host\\\\ai-home\\\\apps\\\\DroneOllama\\\\logs\\\\crash.log. After apply: assert that path and G: crash.log gone. UI and open leftovers still pin G:. Independent of UI leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-app-ui-install-root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-ollama-app-ui-install-root.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/src/main.rs').read_text(); line=next(x for x in t.splitlines() if x.strip().startswith('ui.small') and 'DroneOllama' in x); assert r'host\\\\ai-home' in line; assert r'G:\\\\AI-Home' not in line\""
+      ],
+      "notes": "main.rs UI install-root ui.small line uses host\\\\ai-home. After apply: assert that line only. open_path and crash.log leftovers still pin G:. Independent of crash-log leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-app-open-out",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-ollama-app-open-out.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/src/main.rs').read_text(); assert any(x.strip() == 'r'+chr(34)+'out'+chr(34)+',' for x in t.splitlines()); assert r'ai-worker-drone-0.5b\\\\out'+chr(34) not in t\""
+      ],
+      "notes": "main.rs Open drone out argument is out. After apply: assert a stripped r+quote+out+quote+, line and that 0.5b\\\\out+quote is gone. Benchmarks and seal leftovers still pin 0.5b\\\\out\\\\. Independent of benchmarks leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-app-open-benchmarks",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-ollama-app-open-benchmarks.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/src/main.rs').read_text(); assert any(x.strip() == 'r'+chr(34)+'out'+chr(92)+'benchmarks'+chr(34)+',' for x in t.splitlines()); assert '0.5b'+chr(92)+'out'+chr(92)+'benchmarks' not in t\""
+      ],
+      "notes": "main.rs Open benchmarks argument is out\\\\benchmarks. After apply: assert a stripped r+quote+out+backslash+benchmarks line and that 0.5b\\\\out\\\\benchmarks is gone. Seal leftover still pins 0.5b\\\\out\\\\OPERATIONAL_SEAL. Independent of out leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-app-open-workspace",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-ollama-app-open-workspace.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/src/main.rs').read_text(); assert any(x.strip() == 'r'+chr(34)+'data'+chr(92)+'workspace'+chr(34)+',' for x in t.splitlines()); assert '0.5b'+chr(92)+'data'+chr(92)+'workspace' not in t\""
+      ],
+      "notes": "main.rs Open workspace argument is data\\\\workspace. After apply: assert a stripped r+quote+data+backslash+workspace line and that 0.5b\\\\data\\\\workspace is gone. Out leftovers stay. Independent of out leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-app-open-install",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-ollama-app-open-install.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/src/main.rs').read_text(); assert 'open_path(r'+chr(34)+'host'+chr(92)+'ai-home'+chr(92)+'apps'+chr(92)+'DroneOllama'+chr(34)+')' in t; assert 'open_path(r'+chr(34)+'G:'+chr(92)+'AI-Home'+chr(92)+'apps'+chr(92)+'DroneOllama'+chr(34)+')' not in t\""
+      ],
+      "notes": "main.rs Open install open_path uses host\\\\ai-home\\\\apps\\\\DroneOllama. After apply: assert that open_path and the G: open_path gone. ui.small and crash.log leftovers still pin G:. Independent of UI leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-app-open-seal",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-ollama-app-open-seal.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/src/main.rs').read_text(); assert any(x.strip() == 'r'+chr(34)+'out'+chr(92)+'OPERATIONAL_SEAL.json'+chr(34)+',' for x in t.splitlines()); assert '0.5b'+chr(92)+'out'+chr(92)+'OPERATIONAL_SEAL.json' not in t\""
+      ],
+      "notes": "main.rs Open OPERATIONAL_SEAL argument is out\\\\OPERATIONAL_SEAL.json. After apply: assert that stripped line and that 0.5b\\\\out\\\\OPERATIONAL_SEAL.json is gone. Out and benchmarks leftovers stay. Independent of out leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-engine-out",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-mount-engine-out.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-mount/src/engine.rs').read_text(); assert 'apps'+chr(92)+'drone-ollama-mount'+chr(92)+'out' in t; assert 'G:'+chr(92)+'AI-Home'+chr(92)+'projects'+chr(92)+'drone-ollama-mount'+chr(92)+'out' not in t\""
+      ],
+      "notes": "engine.rs out_dir uses apps\\\\drone-ollama-mount\\\\out. After apply: assert that phrase and G:\\\\AI-Home\\\\projects\\\\drone-ollama-mount\\\\out gone. Do not assert the folder substring alone (unpatched G: contains it). Independent of fabric leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-fabric-root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-mount-fabric-root.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-mount/src/fabric.rs').read_text(); fn=t.split('fn default_drone_root',1)[1].split('}',1)[0]; assert r'G:\\\\AI-Home' not in fn; assert '0.5b' not in fn\""
+      ],
+      "notes": "fabric.rs default_drone_root no longer pins G: or 0.5b. After apply: assert those phrases in that function only. Leaves C:\\\\Python. Do not put backticks in afterApply. Independent of engine-out leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-smoke-seal",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-mount-smoke-seal.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-mount/src/main.rs').read_text(); assert 'apps'+chr(92)+'drone-ollama-mount'+chr(92)+'out'+chr(92)+'SMOKE_SEAL.json' in t; assert 'G:'+chr(92)+'AI-Home'+chr(92)+'projects'+chr(92)+'drone-ollama-mount'+chr(92)+'out'+chr(92)+'SMOKE_SEAL.json' not in t\""
+      ],
+      "notes": "mount main.rs SMOKE_SEAL uses apps\\\\drone-ollama-mount\\\\out\\\\SMOKE_SEAL.json. After apply: assert that path and the G: SMOKE_SEAL path gone. Swarm leftover still pins SWARM_SMOKE_SEAL. Do not match SMOKE_SEAL as a substring of SWARM. Independent of swarm leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-mount-swarm-seal",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-mount-swarm-seal.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-mount/src/main.rs').read_text(); assert 'apps'+chr(92)+'drone-ollama-mount'+chr(92)+'out'+chr(92)+'SWARM_SMOKE_SEAL.json' in t; assert 'G:'+chr(92)+'AI-Home'+chr(92)+'projects'+chr(92)+'drone-ollama-mount'+chr(92)+'out'+chr(92)+'SWARM_SMOKE_SEAL.json' not in t\""
+      ],
+      "notes": "mount main.rs SWARM_SMOKE_SEAL uses apps\\\\drone-ollama-mount\\\\out\\\\SWARM_SMOKE_SEAL.json. After apply: assert that path and the G: SWARM path gone. Smoke leftover still pins G: SMOKE_SEAL. Independent of smoke leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-truth-honesty-library-list",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-truth-honesty-library-list.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('TRUTH_AND_HONESTY.md').read_text(); law=t.split('## Full law',1)[1].split('##',1)[0]; assert 'host/library' in law; assert r'F:\\\\GrokSelfLibrary' not in law\""
+      ],
+      "notes": "TRUTH_AND_HONESTY.md Full law list Universal/Oath/Coder use host/library. After apply: assert those phrases in that section only. Inline oath leftover still pins F:. Leaves C:\\\\Users hardwire. Do not put backticks in afterApply. Adjacent lines kept as one leftover. Independent of system-root leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-ollama-app-bridge-paths",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-ollama-app-bridge-paths.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/src/drone_bridge.rs').read_text(); root=next(x for x in t.splitlines() if 'DRONE_ROOT' in x and 'const' in x); assert r'G:\\\\AI-Home' not in root; assert '0.5b' not in root; assert 'apps'+chr(92)+'drone-ollama-mount'+chr(92)+'target'+chr(92)+'release'+chr(92)+'drone-ollama-mount.exe' in t; assert 'G:'+chr(92)+'AI-Home'+chr(92)+'projects'+chr(92)+'drone-ollama-mount'+chr(92)+'target' not in t\""
+      ],
+      "notes": "drone_bridge.rs DRONE_ROOT no longer pins G: or 0.5b; MOUNT_EXE uses apps\\\\drone-ollama-mount\\\\target\\\\release. After apply: assert the const DRONE_ROOT line and the apps\\\\ exe path. Leaves C:\\\\Python. Do not put backticks in afterApply. Adjacent consts kept as one leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-doc-board",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-doc-board.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); line=next(x for x in t.splitlines() if x.startswith('- Board:')); assert 'host/continuous' in line; assert r'D:\\\\GrokCoreMemory' not in line\""
+      ],
+      "notes": "docs/WORK_ORDER.md Board line uses host/continuous. After apply: assert that line only. Seed Board leftover still pins D:. Do not put backticks in afterApply. Independent of JSON open-tasks leftover (different file) and other WORK_ORDER.md leftovers. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-doc-board",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-doc-board.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); line=next(x for x in t.splitlines() if x.startswith('- Board:')); assert 'host/continuous' in line; assert r'D:\\\\GrokCoreMemory' not in line\""
+      ],
+      "notes": "seed WORK_ORDER.md Board line uses host/continuous. After apply: assert that line only. Live Board leftover still pins D:. Do not put backticks in afterApply. Independent of live leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "opensussy-superpowers-lab-plan",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "file": "patches/opensussy-superpowers-lab-plan.patch",
+      "base": "d4b2949",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/superpowers/plans/2026-08-16-opensussy-lab.md').read_text(); block=t.split('Plan complete and saved to:',1)[1].split('**Two execution options:**',1)[0]; assert 'docs/superpowers/plans/2026-08-16-opensussy-lab.md' in block; assert 'one host example' in block\""
+      ],
+      "notes": "Historical lab plan save-path uses docs/superpowers/plans/... ; G:\\\\AI-Home is one host example. After apply: assert the save-to block has the repo-relative path and one host example. Do not assert G: gone. Do not put backticks in afterApply. Independent of SEC_REVIEW leftovers and ship-json-2-0-0."
+    },
+    {
+      "id": "opensussy-superpowers-lab-design",
+      "repo": "github.com/yuro1991-afk/opensussy",
+      "file": "patches/opensussy-superpowers-lab-design.patch",
+      "base": "d4b2949",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/superpowers/specs/2026-08-16-opensussy-lab-design.md').read_text(); line=next(x for x in t.splitlines() if x.startswith('**Base codebase:**')); assert 'one host example' in line; assert 'OpenSussy 1.3.0' in line\""
+      ],
+      "notes": "Historical lab design Base codebase uses '.' ; G:\\\\AI-Home is one host example. After apply: assert that line has one host example. Do not assert G: gone. Do not put backticks in afterApply. Independent of the plan leftover (different file) and SEC_REVIEW leftovers."
+    },
+    {
+      "id": "faceswap-honesty-located-paths",
+      "repo": "github.com/yuro1991-afk/face-swap-ios",
+      "file": "patches/faceswap-honesty-located-paths.patch",
+      "base": "bba7188",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('HONESTY.md').read_text(); path=next(x for x in t.splitlines() if x.startswith('- Path:')); models=next(x for x in t.splitlines() if x.startswith('- Models:')); assert 'one host example' in path; assert 'FACESWAP_ENGINE' in path; assert 'one host example' in models; assert 'weights stay off git' in models\""
+      ],
+      "notes": "HONESTY.md Located Path/Models mark G: as one host example; contract is FACESWAP_ENGINE. After apply: assert Path and Models lines. Do not assert G: gone. Do not put backticks in afterApply. Adjacent Located lines are one leftover. Independent of honesty-env-paths footer."
+    },
+    {
+      "id": "dronehive-work-order-registry-cli",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-registry-cli.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/work_order.py').read_text(); line=next(x for x in t.splitlines() if 'or r' in x and 'live_registry.py' in x); assert 'host/ai-center' in line; assert r'G:\\\\AI-Center' not in line\""
+      ],
+      "notes": "work_order.py live_registry CLI fallback uses host/ai-center. After apply: assert that fallback line only. Do not put backticks in afterApply. Independent of portable-paths query_codex wraps and JSON live-registry leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-grok-handoff-clone-dest",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-grok-handoff-clone-dest.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/grok_handoff.py').read_text(); dests=[x for x in t.splitlines() if 'dest = r' in x]; assert len(dests)==2; assert all('host/ai-home/projects/dronehive-clone-test' in x for x in dests); assert all(r'G:\\\\AI-Home' not in x for x in dests)\""
+      ],
+      "notes": "grok_handoff.py clone dest defaults use host/ai-home. After apply: assert both dest = r lines. Two dest assignments are one leftover. DEFAULT_ROOT leftover and G: goal regex stay. Do not put backticks in afterApply. Independent of runtime-host-paths DEFAULT_ROOT wrap. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-multi-face-pythonpath",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-multi-face-pythonpath.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/multi_face.py').read_text(); paths=[x for x in t.splitlines() if 'PYTHONPATH' in x and 'env[' in x]; assert len(paths)==2; assert all('host/ai-center' in x for x in paths); assert all(r'G:\\\\AI-Center' not in x for x in paths)\""
+      ],
+      "notes": "multi_face.py PYTHONPATH fallbacks use host/ai-center. After apply: assert both env PYTHONPATH lines. Two sites are one leftover. Do not put backticks in afterApply. Independent of config-load-overlay JSON remap. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-future-seer-pythonpath",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-future-seer-pythonpath.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/future_seer.py').read_text(); paths=[x for x in t.splitlines() if 'pythonpath_ai_center' in x and 'PYTHONPATH' in x]; assert len(paths)==3; assert all('host/ai-center' in x for x in paths); assert all(r'G:\\\\AI-Center' not in x for x in paths)\""
+      ],
+      "notes": "future_seer.py PYTHONPATH jane fallbacks use host/ai-center. After apply: assert those three lines. Outbox leftover still pins G:. Three sites are one leftover. Do not put backticks in afterApply. Independent of jane JSON leftover and runtime outbox wrap. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-ai-bus-packs-root",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-ai-bus-packs-root.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/ai_bus.py').read_text(); line=next(x for x in t.splitlines() if 'packs_root' in x); assert 'host/ai-home/docs/ai-smarts/packs' in line; assert r'G:\\\\AI-Home' not in line\""
+      ],
+      "notes": "ai_bus.py _write_ai_smarts packs_root uses host/ai-home. After apply: assert that packs_root line only. g_mirror leftover still pins G:. Do not put backticks in afterApply. Independent of portable-paths g_mirror wrap (different line). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-live-mirror",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-live-mirror.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; r=json.loads(Path('configs/work_order.json').read_text())['live_registry']; assert r['mirror']=='host/library/registry'\""
+      ],
+      "notes": "live_registry.mirror uses host/library. After apply: assert that key only. cli/primary/events leftovers still pin G:. -U1 trailing kind so it stacks after live-registry leftover. Independent of that leftover (mirror was context). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-live-mirror",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-live-mirror.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; r=json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['live_registry']; assert r['mirror']=='host/library/registry'\""
+      ],
+      "notes": "seed live_registry.mirror uses host/library. After apply: assert that key only. Live configs leftover still pins F:. -U1 trailing kind. Independent of configs leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-core-lessons",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-core-lessons.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; k=json.loads(Path('configs/work_order.json').read_text())['knowledge_imprint']; assert k['core_lessons']=='host/core-memory/lessons'\""
+      ],
+      "notes": "knowledge_imprint.core_lessons uses host/core-memory. After apply: assert that key only. knowledge_expand leftover still pins F:. Seed leftover still pins D:. -U1 trailing cache_rel so it stacks after knowledge-expand leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-core-lessons",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-core-lessons.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; k=json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['knowledge_imprint']; assert k['core_lessons']=='host/core-memory/lessons'\""
+      ],
+      "notes": "seed knowledge_imprint.core_lessons uses host/core-memory. After apply: assert that key only. Live leftover still pins D:. -U1 trailing cache_rel. Independent of configs leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-work-order-ai-smarts-packs",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-work-order-ai-smarts-packs.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; k=json.loads(Path('configs/work_order.json').read_text())['knowledge_imprint']; assert k['ai_smarts_packs']=='host/ai-home/docs/ai-smarts/packs'\""
+      ],
+      "notes": "knowledge_imprint.ai_smarts_packs uses host/ai-home. After apply: assert that key only. knowledge_pack_min leftover still pins F:. Seed leftover still pins G:. -U1 trailing knowledge_pack_min so it stacks after reference-db leftover. Does not touch tool_agent.py."
+    },
+    {
+      "id": "dronehive-seed-work-order-ai-smarts-packs",
+      "repo": "github.com/yuro1991-afk/dronehive",
+      "file": "patches/dronehive-seed-work-order-ai-smarts-packs.patch",
+      "base": "d538a89",
+      "applyCheck": "ok",
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; k=json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['knowledge_imprint']; assert k['ai_smarts_packs']=='host/ai-home/docs/ai-smarts/packs'\""
+      ],
+      "notes": "seed knowledge_imprint.ai_smarts_packs uses host/ai-home. After apply: assert that key only. Live leftover still pins G:. -U1 trailing knowledge_pack_min. Independent of configs leftover (different file). Does not touch tool_agent.py."
+    },
+    {
+      "id": "bloom-grok-pwa-test-sync",
+      "repo": "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+      "file": "patches/bloom-grok-pwa-test-sync.patch",
+      "base": "288a484",
+      "applyCheck": "ok",
+      "afterApply": [
+        "node --test scripts/grok-pwa-plugin.test.mjs scripts/brand-check.test.mjs"
+      ],
+      "notes": "scripts/grok-pwa-plugin.test.mjs calls GrokHeadContext. Independent of bloom-ci-typecheck (ci.yml). After apply: 43/43 (unpatched 7 fail). Does not copy PR #6 autofix."
+    }
+  ]
+}

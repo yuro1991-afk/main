@@ -1,0 +1,13 @@
+diff --git a/scripts/bench_vs_helpers.py b/scripts/bench_vs_helpers.py
+index 210305c..19192f0 100644
+--- a/scripts/bench_vs_helpers.py
++++ b/scripts/bench_vs_helpers.py
+@@ -30,7 +30,7 @@ OUT = ROOT / "out" / "benchmarks"
+ PY = sys.executable
+ 
+ GOAL = (
+-    "List three concrete file paths under G:\\AI-Home for continuous work "
++    "List three concrete file paths under host/ (G:\\AI-Home is one host example) "
+     "and one next action for the workshop hand-sculpt task. Keep under 120 words."
+ )
+ 

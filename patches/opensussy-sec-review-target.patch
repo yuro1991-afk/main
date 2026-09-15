@@ -1,0 +1,9 @@
+diff --git a/reviews/SEC_REVIEW.md b/reviews/SEC_REVIEW.md
+index c9c05ab..6471e8d 100644
+--- a/reviews/SEC_REVIEW.md
++++ b/reviews/SEC_REVIEW.md
+@@ -2,3 +2,3 @@
+ 
+-Target: `G:\AI-Home\projects\opensussy`  
++Target: `.` (`G:\AI-Home\projects\opensussy` is one host example)  
+ Axes: defensive host review (no payloads) + former openSUSE/YaST engineer pass.  

@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { mkdtempSync, readFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import {
@@ -125,6 +125,28 @@ test("origin-slice first commands start with origin auth", () => {
   assert.ok(lines.some((line) => line.includes("repo clone yuri-afk/genesis")));
 });
 
+test("gub-superbrain-probe firstCommands refuse the probe", () => {
+  const lines = firstCommands({
+    id: "gub-superbrain-probe",
+    title: "probe",
+    repo: "origin.cursor.com/git/yuri-afk/genesis",
+    kind: "origin-slice",
+    priority: 3,
+    status: "claimed",
+    claim: null,
+    notes: "",
+    verify: "Failed probe stays unreachable. GOOSE-PC :8791 is not the BOSS peer.",
+    files: [],
+    collision: "",
+  });
+  assert.ok(lines.some((line) => line.includes("no more Superbrain")));
+  assert.ok(lines.some((line) => line.includes("Do not run node src/cli.js probe")));
+  assert.ok(lines.some((line) => line.includes("patches --prove") && line.includes("prove-after-apply")));
+  assert.ok(!lines.some((line) => line.includes("origin auth")));
+  assert.ok(!lines.some((line) => line.startsWith("node src/cli.js probe")));
+  assert.ok(!lines.some((line) => line.includes("GET") && line.includes("45001")));
+});
+
 test("loginOriginAuth without a key stays logged-out and never clones", async () => {
   const calls = [];
   const report = await loginOriginAuth({
@@ -185,7 +207,7 @@ test("cli origin --login without a key exits 1", async () => {
   assert.match(report.detail, /CURSOR_API_KEY missing/);
 });
 
-test("cli probe attaches origin auth to the lane report", async () => {
+test("cli probe refuses Superbrain and does not write lane files", async () => {
   const chunks = [];
   const root = mkdtempSync(join(tmpdir(), "agent-ops-probe-origin-"));
   const code = await runCli(["probe"], {
@@ -201,10 +223,11 @@ test("cli probe attaches origin auth to the lane report", async () => {
       chunks.push(value);
     },
   });
-  assert.equal(code, 0);
+  assert.equal(code, 1);
   const report = JSON.parse(chunks.join(""));
-  assert.equal(report.origin.loggedIn, false);
-  assert.equal(report.origin.status, "logged-out");
-  const persisted = JSON.parse(readFileSync(join(root, ".genesis", "last-origin.json"), "utf8"));
-  assert.equal(persisted.loggedIn, false);
+  assert.equal(report.refused, true);
+  assert.match(report.reason, /no more Superbrain/);
+  assert.equal(report.origin, undefined);
+  assert.equal(existsSync(join(root, ".genesis", "last-origin.json")), false);
+  assert.equal(existsSync(join(root, ".genesis", "last-superbrain.json")), false);
 });

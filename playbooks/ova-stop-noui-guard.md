@@ -5,7 +5,7 @@
 - scope: relaunch
 - repo: github.com/yuro1991-afk/ollama-voice-access
 - relaunch: https://github.com/yuro1991-afk/ollama-voice-access
-- why: Relaunch against the named repo. This landing-pad token cannot push it.
+- why: This token cannot push ollama-voice-access. Apply `patches/ova-stop-noui-guard.patch` from [main#9](https://github.com/yuro1991-afk/main/pull/9). Do not copy PR #6 autofix.
 
 ## Notes
 
@@ -17,10 +17,12 @@ Safety default stays refuse. Do not point api.baseUrl at untrusted hosts.
 
 ## First commands
 
+- node src/cli.js patches --prove --job ova-stop-noui-guard
 - git clone https://github.com/yuro1991-afk/ollama-voice-access.git work && cd work
 - git checkout -b cursor/ova-stop-noui-guard-from-ops
-- edit: Stop-Ollama.ps1, lib/OllamaVoice.Common.ps1, SECURITY.md
-- pwsh -File Stop-Ollama.ps1 -NoUI exits 4; no ollama processes signaled.
+- git apply --check /path/to/main/patches/ova-stop-noui-guard.patch
+- git apply /path/to/main/patches/ova-stop-noui-guard.patch
+- python3 -c "from pathlib import Path; t=Path('tests/assert-stop-noui.ps1').read_text(); assert 'Prove -NoUI without -Force exits 4 and does not call Stop-Process.' in t; assert 'OK Stop-Ollama -NoUI exit 4 (no -Force)' in t; assert 'RED expected exit 4' in t"
 
 ## Verify
 

@@ -140,7 +140,7 @@ test("repo queue validates", () => {
   );
   assert.equal(
     ledger.jobs.find((job) => job.id === "dronehive-unicode-ci").status,
-    "blocked",
+    "open",
   );
 });
 

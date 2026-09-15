@@ -1,0 +1,11 @@
+diff --git a/apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1 b/apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1
+index 8e76cd2..bdfd503 100644
+--- a/apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1
++++ b/apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1
+@@ -105,4 +105,4 @@ $manifest = @{
+     ollama_host      = 'http://127.0.0.1:11434'
+-    drone_root       = 'G:\AI-Home\projects\ai-worker-drone-0.5b'
+-    mount_exe        = 'G:\AI-Home\projects\drone-ollama-mount\target\release\drone-ollama-mount.exe'
++    drone_root       = '.'
++    mount_exe        = 'apps\drone-ollama-mount\target\release\drone-ollama-mount.exe'
+     false_green      = 0

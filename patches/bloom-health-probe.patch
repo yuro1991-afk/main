@@ -1,0 +1,42 @@
+diff --git a/scripts/probe-health.mjs b/scripts/probe-health.mjs
+new file mode 100644
+index 0000000..95964d2
+--- /dev/null
++++ b/scripts/probe-health.mjs
+@@ -0,0 +1,36 @@
++#!/usr/bin/env node
++// Short-timeout OMNI-FORGE health probe. Timeouts stay unreachable, never live.
++const url = process.env.BLOOM_HEALTH_URL ?? "http://127.0.0.1:8080/api/v1/health";
++const timeoutMs = Number(process.env.BLOOM_HEALTH_TIMEOUT_MS ?? 1500);
++const ac = new AbortController();
++const timer = setTimeout(() => ac.abort(), timeoutMs);
++const out = {
++  url,
++  timeoutMs,
++  status: "unreachable",
++  live: false,
++  note: "This is not BOSS Superbrain :45001 and not GOOSE-PC :8791.",
++};
++try {
++  const res = await fetch(url, { signal: ac.signal });
++  const body = await res.text();
++  let json = null;
++  try {
++    json = JSON.parse(body);
++  } catch {
++    json = null;
++  }
++  const ok = res.ok && json && json.ok === true;
++  out.httpStatus = res.status;
++  out.body = json ?? body.slice(0, 200);
++  out.status = ok ? "ok" : "unreachable";
++  out.live = false;
++} catch (error) {
++  out.error = error instanceof Error ? error.name : "error";
++  out.status = "unreachable";
++  out.live = false;
++} finally {
++  clearTimeout(timer);
++}
++process.stdout.write(`${JSON.stringify(out, null, 2)}\n`);
++process.exit(out.status === "ok" ? 0 : 1);

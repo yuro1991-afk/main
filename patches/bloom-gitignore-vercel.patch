@@ -1,0 +1,12 @@
+diff --git a/.gitignore b/.gitignore
+index d218143..7af4942 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -3,3 +3,7 @@ node_modules/
+ .github_repo
+ .env
+ .env.*
++.vercel/
++dist/
++.output/
++.nitro/

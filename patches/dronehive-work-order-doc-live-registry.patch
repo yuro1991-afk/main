@@ -1,0 +1,26 @@
+diff --git a/docs/WORK_ORDER.md b/docs/WORK_ORDER.md
+index 55c4bce..8b68e83 100644
+--- a/docs/WORK_ORDER.md
++++ b/docs/WORK_ORDER.md
+@@ -335,17 +335,17 @@ Order is fixed:
+ 
+ | Role | Path |
+ |------|------|
+-| Primary | `G:\AI-Center\agents\super-cell-4\registry\` |
++| Primary | `host/ai-center/agents/super-cell-4/registry/` |
+ | Events | `...\registry\events.jsonl` |
+ | HOT | `...\registry\HOT.json` · `HOT.min.json` |
+-| Mirror | `F:\GrokSelfLibrary\registry\` |
+-| CLI | `python G:\AI-Center\agents\super-cell-4\bridges\live_registry.py` |
++| Mirror | `host/library/registry/` |
++| CLI | `python host/ai-center/agents/super-cell-4/bridges/live_registry.py` |
+ 
+ ### 5.2 Commands
+ 
+ ```powershell
+ $py = "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe"
+-$reg = "G:\AI-Center\agents\super-cell-4\bridges\live_registry.py"
++$reg = "host/ai-center/agents/super-cell-4/bridges/live_registry.py"
+ 
+ # Status
+ & $py $reg status

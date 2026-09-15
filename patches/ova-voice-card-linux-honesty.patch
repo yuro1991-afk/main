@@ -1,0 +1,13 @@
+diff --git a/VOICE-ACCESS.md b/VOICE-ACCESS.md
+index 23f64d9..3739aba 100644
+--- a/VOICE-ACCESS.md
++++ b/VOICE-ACCESS.md
+@@ -2,6 +2,8 @@
+ 
+ Full docs: [README.md](README.md)
+ 
++Windows Voice Access / Start Menu only. Linux `pwsh` can parse the install/QA scripts; that is **not** a Voice Access install.
++
+ | Say | Action |
+ |-----|--------|
+ | Open Ollama | Ensure API + launch menu |

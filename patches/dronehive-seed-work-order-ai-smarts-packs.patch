@@ -1,0 +1,8 @@
+diff --git a/drone/app/seed/configs/work_order.json b/drone/app/seed/configs/work_order.json
+index ecac0ca..7d2be14 100644
+--- a/drone/app/seed/configs/work_order.json
++++ b/drone/app/seed/configs/work_order.json
+@@ -217,2 +217,2 @@
+-    "ai_smarts_packs": "G:\\AI-Home\\docs\\ai-smarts\\packs",
++    "ai_smarts_packs": "host/ai-home/docs/ai-smarts/packs",
+     "knowledge_pack_min": "F:\\GrokSelfLibrary\\knowledge\\PACK.min.json",

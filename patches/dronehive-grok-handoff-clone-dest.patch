@@ -1,0 +1,21 @@
+diff --git a/drone/grok_handoff.py b/drone/grok_handoff.py
+index 6e05948..af1c631 100644
+--- a/drone/grok_handoff.py
++++ b/drone/grok_handoff.py
+@@ -424,14 +424,14 @@ class GrokDroneHandoff:
+             # Direct drone toolkit clone of full DroneHive app (e2e cowork test)
+             from drone.tools import DroneToolkit
+ 
+-            dest = r"G:\AI-Home\projects\dronehive-clone-test"
++            dest = r"host/ai-home/projects/dronehive-clone-test"
+             m = re.search(
+                 r"(G:\\AI-Home\\projects\\[\w\-\\]+|G:/AI-Home/projects/[\w\-/]+)",
+                 pkt.goal,
+             )
+             # prefer explicit clone-test path in goal
+             if "dronehive-clone-test" in pkt.goal:
+-                dest = r"G:\AI-Home\projects\dronehive-clone-test"
++                dest = r"host/ai-home/projects/dronehive-clone-test"
+             elif m:
+                 cand = m.group(1).replace("/", "\\")
+                 if "clone" in cand.lower():

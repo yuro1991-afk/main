@@ -1,0 +1,54 @@
+diff --git a/install/linux/HOW_TO_RUN.txt b/install/linux/HOW_TO_RUN.txt
+index 0c08854..d6ee496 100644
+--- a/install/linux/HOW_TO_RUN.txt
++++ b/install/linux/HOW_TO_RUN.txt
+@@ -1,6 +1,13 @@
+ OpenSussy v2 — Leap + Tumbleweed
+ Yuri Livarchuk / 23 Productions
+ 
++AGAMA / Leap 16 HONESTY
++  AutoYaST 1.0 XML (autoinst-*.xml) is export-only.
++  Leap 16 / Agama-first media will NOT eat these XML files silently.
++  Agama JSON is unsupported. Do not invent Agama profiles.
++  Never treat an unattended XML copy as GREEN on Agama media.
++
++
+ This folder has two openSUSE packs (when exported with flavor Both):
+ 
+   tumbleweed/   rolling openSUSE Tumbleweed
+diff --git a/install/linux/leap/HOW_TO_RUN.txt b/install/linux/leap/HOW_TO_RUN.txt
+index f495b86..0e5dd07 100644
+--- a/install/linux/leap/HOW_TO_RUN.txt
++++ b/install/linux/leap/HOW_TO_RUN.txt
+@@ -1,6 +1,13 @@
+ OpenSussy — Leap 15.6 pack
+ Yuri Livarchuk / 23 Productions
+ 
++AGAMA / Leap 16 HONESTY
++  AutoYaST 1.0 XML (autoinst-*.xml) is export-only.
++  Leap 16 / Agama-first media will NOT eat these XML files silently.
++  Agama JSON is unsupported. Do not invent Agama profiles.
++  Never treat an unattended XML copy as GREEN on Agama media.
++
++
+ Target: openSUSE Leap 15.6 (UEFI x86_64)
+ Overlay scripts do NOT format disks.
+ 
+diff --git a/install/linux/tumbleweed/HOW_TO_RUN.txt b/install/linux/tumbleweed/HOW_TO_RUN.txt
+index 55b968b..ca0ef3b 100644
+--- a/install/linux/tumbleweed/HOW_TO_RUN.txt
++++ b/install/linux/tumbleweed/HOW_TO_RUN.txt
+@@ -1,6 +1,13 @@
+ OpenSussy — Tumbleweed pack
+ Yuri Livarchuk / 23 Productions
+ 
++AGAMA / Leap 16 HONESTY
++  AutoYaST 1.0 XML (autoinst-*.xml) is export-only.
++  Leap 16 / Agama-first media will NOT eat these XML files silently.
++  Agama JSON is unsupported. Do not invent Agama profiles.
++  Never treat an unattended XML copy as GREEN on Agama media.
++
++
+ Target: openSUSE Tumbleweed (UEFI x86_64)
+ Overlay scripts do NOT format disks.
+ 

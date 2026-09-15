@@ -1,0 +1,9 @@
+diff --git a/apps/drone-ollama-mount/README.md b/apps/drone-ollama-mount/README.md
+index 4c4d8a7..06024dd 100644
+--- a/apps/drone-ollama-mount/README.md
++++ b/apps/drone-ollama-mount/README.md
+@@ -35,3 +35,3 @@ cargo build --release
+ ```powershell
+-powershell -NoProfile -ExecutionPolicy Bypass -File G:\AI-Home\projects\drone-ollama-mount\Launch.ps1
++powershell -NoProfile -ExecutionPolicy Bypass -File apps\drone-ollama-mount\Launch.ps1
+ ```

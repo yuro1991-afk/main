@@ -74,6 +74,8 @@ test("writeInventoryTick writes contract snapshot and creates parent dirs", () =
   assert.equal(snapshot.done, 1);
   assert.equal(snapshot.blocked, 1);
   assert.equal(snapshot.nextId, "high");
+  assert.equal(snapshot.takeInsteadId, null);
+  assert.equal(snapshot.proveAfterApplyCommand, null);
   assert.equal(snapshot.worldNextId, null);
   assert.equal(snapshot.originLoggedIn, null);
   assert.equal(snapshot.originStatus, null);
@@ -178,9 +180,25 @@ test("writeInventoryTick nextId skips rostered cards", () => {
   const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
   const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
   const snapshot = writeInventoryTick(ledger, dest, NOW, { roster });
-  assert.equal(snapshot.nextId, "gub-route-intent");
+  assert.equal(snapshot.nextId, "review-landing-pad-prs");
+  assert.equal(snapshot.takeInsteadId, null);
+  assert.equal(snapshot.proveAfterApplyCommand, null);
+  assert.notEqual(snapshot.nextId, "dronehive-unicode-ci");
   assert.notEqual(snapshot.nextId, "gub-inventory-tick");
-  assert.equal(snapshot.worldNextId, null);
+  assert.equal(snapshot.worldNextId, "genesis-world-layer-102");
+});
+
+test("live leftover tick Superbrain exposes take-instead prove", () => {
+  const dir = mkdtempSync(join(tmpdir(), "agent-ops-tick-superbrain-"));
+  const dest = join(dir, "last-inventory.json");
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
+  const snapshot = writeInventoryTick(ledger, dest, Date.parse("2026-09-14T19:00:00.000Z"), {
+    roster,
+  });
+  assert.equal(snapshot.nextId, "review-landing-pad-prs");
+  assert.equal(snapshot.takeInsteadId, null);
+  assert.equal(snapshot.proveAfterApplyCommand, null);
 });
 
 test("cli tick nextId is leftover unused, not the fork's card", async () => {
@@ -194,6 +212,6 @@ test("cli tick nextId is leftover unused, not the fork's card", async () => {
   });
   assert.equal(code, 0);
   const printed = JSON.parse(chunks.join(""));
-  assert.equal(printed.nextId, "gub-route-intent");
-  assert.notEqual(printed.nextId, "gub-inventory-tick");
+  assert.equal(printed.nextId, "review-landing-pad-prs");
+  assert.notEqual(printed.nextId, "dronehive-unicode-ci");
 });

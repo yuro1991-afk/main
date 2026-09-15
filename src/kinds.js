@@ -63,8 +63,7 @@ export function jobScope(job) {
 }
 
 /**
- * Yuri scoped this landing pad to Genesis. Other GitHub siblings stay
- * on the ledger as blocked history; they are not default work.
+ * Cursor Origin / Genesis cards. Pass `--origin` to see these.
  * @param {{ kind?: string, repo?: string } | null | undefined} job
  */
 export function isGenesisJob(job) {
@@ -72,6 +71,17 @@ export function isGenesisJob(job) {
   if (job.kind === "origin-slice") return true;
   const repo = typeof job.repo === "string" ? job.repo : "";
   return repo.includes("yuri-afk/genesis") || repo.includes("origin.cursor.com");
+}
+
+/**
+ * Local GitHub siblings this pad can name (push still needs that repo's token).
+ * Default `next` / `busy` / `route` stay on these. Forget Origin.
+ * @param {{ kind?: string, repo?: string } | null | undefined} job
+ */
+export function isGithubJob(job) {
+  if (!job || isGenesisJob(job)) return false;
+  const repo = typeof job.repo === "string" ? job.repo : "";
+  return repo.includes("github.com/yuro1991-afk");
 }
 
 /** World-PM planes plus the Python body that occupies the world. */
@@ -102,7 +112,7 @@ export function describeScope(scope) {
     case "here":
       return "This landing-pad token can finish the card.";
     case "relaunch":
-      return "Relaunch against the named repo or Origin.";
+      return "Relaunch against the named GitHub repo. This pad token cannot push siblings.";
     default:
       return assertNeverScope(scope);
   }

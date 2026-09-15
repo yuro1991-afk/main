@@ -1,0 +1,21 @@
+diff --git a/START.sh b/START.sh
+new file mode 100755
+index 0000000..4b0d66d
+--- /dev/null
++++ b/START.sh
+@@ -0,0 +1,15 @@
++#!/usr/bin/env bash
++set -euo pipefail
++cd "$(dirname "$0")"
++ENGINE="${FACESWAP_ENGINE:-http://127.0.0.1:8855}"
++ENGINE="${ENGINE%/}"
++echo "Face Swap iOS gateway"
++echo "Engine must already be healthy at ${ENGINE}/api/health"
++echo "Gateway does not start GPU work."
++if ! python3 -c "import os,urllib.request,sys; u=os.environ.get('FACESWAP_ENGINE','http://127.0.0.1:8855').rstrip('/')+'/api/health'; r=urllib.request.urlopen(u, timeout=5); sys.exit(0 if r.status==200 else 1)" 2>/dev/null; then
++  echo "RED: engine is not reachable at ${ENGINE}"
++  echo "Start the local engine, or set FACESWAP_ENGINE to its health base URL."
++  exit 1
++fi
++echo "engine health: OK"
++exec python3 ./gateway.py

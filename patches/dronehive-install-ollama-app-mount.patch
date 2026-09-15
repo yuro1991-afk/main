@@ -1,0 +1,9 @@
+diff --git a/apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1 b/apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1
+index 8e76cd2..9b2f3e7 100644
+--- a/apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1
++++ b/apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1
+@@ -34,3 +34,3 @@ Copy-Item -Force $exeSrc (Join-Path $BinDir 'drone-ollama-app.exe')
+ # Also copy/link mount helper if present
+-$mountSrc = 'G:\AI-Home\projects\drone-ollama-mount\target\release\drone-ollama-mount.exe'
++$mountSrc = 'apps\drone-ollama-mount\target\release\drone-ollama-mount.exe'
+ if (Test-Path $mountSrc) {

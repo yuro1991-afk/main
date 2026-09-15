@@ -1,0 +1,57 @@
+diff --git a/drone/app/seed/docs/WORK_ORDER.md b/drone/app/seed/docs/WORK_ORDER.md
+index 3789067..a3753f3 100644
+--- a/drone/app/seed/docs/WORK_ORDER.md
++++ b/drone/app/seed/docs/WORK_ORDER.md
+@@ -145,37 +145,37 @@ $py = "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe"
+ 
+ ```powershell
+ # Coverage / stats
+-& $py F:\GrokSelfLibrary\bin\query_llm_codex.py stats
++& $py host/library/bin/query_llm_codex.py stats
+ 
+ # Models by use-case (coding, reasoning, vision, embedding, tools, thinking, tiny_edge, frontier_open, audio)
+-& $py F:\GrokSelfLibrary\bin\query_llm_codex.py use coding
+-& $py F:\GrokSelfLibrary\bin\query_llm_codex.py use reasoning
+-& $py F:\GrokSelfLibrary\bin\query_llm_codex.py use tiny_edge
++& $py host/library/bin/query_llm_codex.py use coding
++& $py host/library/bin/query_llm_codex.py use reasoning
++& $py host/library/bin/query_llm_codex.py use tiny_edge
+ 
+ # Family / name search
+-& $py F:\GrokSelfLibrary\bin\query_llm_codex.py model qwen
+-& $py F:\GrokSelfLibrary\bin\query_llm_codex.py model llama
+-& $py F:\GrokSelfLibrary\bin\query_llm_codex.py search "coder 7b"
++& $py host/library/bin/query_llm_codex.py model qwen
++& $py host/library/bin/query_llm_codex.py model llama
++& $py host/library/bin/query_llm_codex.py search "coder 7b"
+ 
+ # Free-text search across codex
+-& $py F:\GrokSelfLibrary\bin\query_llm_codex.py search "vllm"
+-& $py F:\GrokSelfLibrary\bin\query_llm_codex.py search "quant Q4"
++& $py host/library/bin/query_llm_codex.py search "vllm"
++& $py host/library/bin/query_llm_codex.py search "quant Q4"
+ 
+ # Build recipes (stack / quant / deploy patterns)
+-& $py F:\GrokSelfLibrary\bin\query_llm_codex.py recipe
++& $py host/library/bin/query_llm_codex.py recipe
+ 
+ # Inference engines
+-& $py F:\GrokSelfLibrary\bin\query_llm_codex.py engines
++& $py host/library/bin/query_llm_codex.py engines
+ 
+ # Frameworks catalog
+-& $py F:\GrokSelfLibrary\bin\query_llm_codex.py frameworks
++& $py host/library/bin/query_llm_codex.py frameworks
+ 
+ # Cloud provider slice
+-& $py F:\GrokSelfLibrary\bin\query_llm_codex.py cloud openai
+-& $py F:\GrokSelfLibrary\bin\query_llm_codex.py cloud anthropic
++& $py host/library/bin/query_llm_codex.py cloud openai
++& $py host/library/bin/query_llm_codex.py cloud anthropic
+ 
+ # VRAM / fit guidance when available
+-& $py F:\GrokSelfLibrary\bin\query_llm_codex.py vram
++& $py host/library/bin/query_llm_codex.py vram
+ ```
+ 
+ ### 2.4 Decision tree (mandatory for model/stack tasks)

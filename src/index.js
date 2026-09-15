@@ -8,6 +8,7 @@ export {
   describeKind,
   describeScope,
   isGenesisJob,
+  isGithubJob,
   isWorldPhaseJob,
   WORLD_PHASE_IDS,
   isJobKind,
@@ -40,6 +41,7 @@ export {
   defaultSuperbrainPath,
   probeKnownLanes,
   probeLane,
+  refuseKnownLanes,
   writeLaneProbe,
 } from "./probe.js";
 export {
@@ -59,7 +61,7 @@ export {
   defaultInventoryPath,
   writeInventoryTick,
 } from "./tick.js";
-export { BRIEF_CONTRACT, buildBrief, firstCommands } from "./brief.js";
+export { BRIEF_CONTRACT, SUPERBRAIN_SITOUT_ID, TAKE_INSTEAD_CATALOG_ID, applyNextForJob, buildBrief, catalogPatchFor, catalogPatchSummary, catalogRequires, displayCollision, displayNotes, displayVerify, firstCommands, jobForDisplay, proveAfterApplyForJob, takeInsteadCatalogId, takeInsteadCatalogPatch, takeInsteadFields } from "./brief.js";
 export {
   DEFAULT_ORIGIN_BIN,
   ORIGIN_CONTRACT,
@@ -83,7 +85,7 @@ export {
   renderHandoffPacket,
   writeHandoffPackets,
 } from "./handoff.js";
-export { playbookPath, renderPlaybook, writePlaybooks } from "./playbook.js";
+export { PLAYBOOK_CHECK_CONTRACT, checkPlaybook, checkPlaybooks, playbookFirstCommands, playbookPath, renderPlaybook, writePlaybooks } from "./playbook.js";
 export { HELPER_CONTRACT, buildHelperPacket, planHelpers } from "./helpers.js";
 export {
   ASSIGN_CONTRACT,
@@ -92,6 +94,7 @@ export {
   buildAssign,
   buildBusy,
   buildSlots,
+  buildSlotsForJob,
   claimBusyJob,
   peekBusyJob,
   defaultDispatchPath,
@@ -135,13 +138,37 @@ export {
   readAgents,
   syncRoster,
   unusedGenesisCards,
+  unusedGithubCards,
   writeAgents,
 } from "./sync.js";
 export {
+  FIRST_PARKED_APPLY,
   SIBLING_ROLES,
+  SIBLINGS_CONTRACT,
   assertNeverRole,
+  buildSiblingsBoard,
   defaultSiblingsPath,
   describeRole,
   loadSiblings,
+  relatedForJob,
   siblingsForJob,
 } from "./siblings.js";
+export {
+  DEFAULT_SIBLINGS_ROOT,
+  PATCH_CONTRACT,
+  SIBLING_CHECKOUT_ALIASES,
+  applyNextFor,
+  assertPatchFilesExist,
+  buildPatchCatalog,
+  defaultGitRunner,
+  defaultPatchesIndexPath,
+  defaultSiblingsRoot,
+  listPatches,
+  loadPatchIndex,
+  patchForJob,
+  proveAfterApply,
+  proveAfterApplyCommand,
+  provePatches,
+  resolveSiblingCheckout,
+  validatePatchEntry,
+} from "./patches.js";

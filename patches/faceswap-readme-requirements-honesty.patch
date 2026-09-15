@@ -1,0 +1,13 @@
+diff --git a/README.md b/README.md
+index a1eee5d..f769755 100644
+--- a/README.md
++++ b/README.md
+@@ -8,7 +8,7 @@ This is **not** an App Store IPA. Apple does not allow “git clone, tap, instal
+ 
+ ## Requirements
+ 
+-- Windows host with MultoModa Face Studio healthy at `http://127.0.0.1:8855/api/health`
++- Engine healthy at `FACESWAP_ENGINE` (default `http://127.0.0.1:8855/api/health`). A Windows host with MultoModa is one example, not the contract.
+ - iPhone on the **same Wi-Fi**
+ - Python 3.10+ on the host (stdlib only for the gateway)
+ 

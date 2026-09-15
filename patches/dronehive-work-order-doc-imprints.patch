@@ -1,0 +1,13 @@
+diff --git a/docs/WORK_ORDER.md b/docs/WORK_ORDER.md
+index 55c4bce..1983a88 100644
+--- a/docs/WORK_ORDER.md
++++ b/docs/WORK_ORDER.md
+@@ -49,7 +49,7 @@ IMPRINT (+ slim school/codex knowledge pack)
+ | Imprint **multi-source** pack at birth: curriculum FTS, **instai** (222 peer lessons), AI Smarts packs, F: PACK+expand, core GCM lessons, reference FTS, in-process codex (+vram) | Run `python -m school daily` per buzzer |
+ | Cap bodies (default 5 lessons × ~2.4 KB) + disk cache | Load full curriculum / full ref DB into RAM |
+ | **Do lessons** via `do_lesson` with real evidence → `data/hive/school_progress/` | Claim GREEN without source + notes/evidence |
+-| Wire seals to hive outbox + `F:\GrokSelfLibrary\knowledge\indexes\drone_imprints.jsonl` | Fake ontology codex writes |
++| Wire seals to hive outbox + `host/library/knowledge/indexes/drone_imprints.jsonl` | Fake ontology codex writes |
+ | Prefer in-process codex (~0–2 ms) | Spawn CLI every unit unless verifying |
+ | Local registry jsonl first | Block Super Cell CLI every death unless `registry_sync_cli` |
+ 

@@ -1,0 +1,13 @@
+diff --git a/drone/hive.py b/drone/hive.py
+index a019e16..ceee2e4 100644
+--- a/drone/hive.py
++++ b/drone/hive.py
+@@ -5,7 +5,7 @@ Loop:
+   fan-out N buzzers at once → each runs task → writes hive memory → dies
+   as slots free → immediately spawn next fresh buzzer (Fresh Agent Evolution)
+ 
+-Connected to F:\\GrokSelfLibrary + continuous OPEN_TASKS + dual-hemisphere fabric.
++Connected to the library + continuous OPEN_TASKS overlay (F:\\GrokSelfLibrary is one host example) + dual-hemisphere fabric.
+ 
+ Honesty:
+   - Parallel controllable workers, NOT N full LLM loads

@@ -1,6 +1,6 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { isGenesisJob, isWorldPhaseJob, jobScope } from "./kinds.js";
+import { isGenesisJob, isGithubJob, isWorldPhaseJob, jobScope } from "./kinds.js";
 import {
   claimedByAgent,
   claimJob,
@@ -8,10 +8,11 @@ import {
   listJobs,
   nextJob,
 } from "./ledger.js";
-import { unusedGenesisCards } from "./sync.js";
+import { applyNextForJob, jobForDisplay, proveAfterApplyForJob, takeInsteadFields } from "./brief.js";
+import { unusedGenesisCards, unusedGithubCards } from "./sync.js";
 import { buildHelperPacket } from "./helpers.js";
 import { buildRelaunch, packetPathFor, relaunchFor } from "./handoff.js";
-import { ORIGIN_UI, renderLaunchPrompt } from "./prompt.js";
+import { renderLaunchPrompt } from "./prompt.js";
 
 export const BUSY_CONTRACT = "agent-ops.busy.v1";
 export const SLOTS_CONTRACT = "agent-ops.slots.v1";
@@ -29,6 +30,8 @@ export function defaultDispatchPath(repoRoot) {
  * @param {number} rank
  */
 export function slotFor(job, rank) {
+  const applyNext = applyNextForJob(job);
+  const proveAfterApplyCommand = proveAfterApplyForJob(job);
   return {
     rank,
     id: job.id,
@@ -37,6 +40,46 @@ export function slotFor(job, rank) {
     packet: packetPathFor(job),
     playbook: `playbooks/${job.id}.md`,
     relaunch: relaunchFor(job),
+    ...(applyNext ? { applyNext } : {}),
+    ...(proveAfterApplyCommand ? { proveAfterApplyCommand } : {}),
+    ...takeInsteadFields(job),
+  };
+}
+
+/**
+ * Peek one card as a slots packet. Blocked catalog leftovers are
+ * allowed — this does not claim.
+ * @param {import("./ledger.js").Job | null} job
+ */
+export function buildSlotsForJob(job) {
+  if (!job) {
+    return {
+      contract: SLOTS_CONTRACT,
+      count: 0,
+      claimed: [],
+      slots: [],
+      rule: "Unknown card.",
+    };
+  }
+  const shown = jobForDisplay(job);
+  return {
+    contract: SLOTS_CONTRACT,
+    count: 1,
+    claimed: shown.claim
+      ? [
+          {
+            id: shown.id,
+            agentId: shown.claim.agentId ?? null,
+            leaseUntil: shown.claim.leaseUntil ?? null,
+            packet: packetPathFor(shown),
+          },
+        ]
+      : [],
+    slots: [slotFor(shown, 1)],
+    applyNext: applyNextForJob(shown),
+    proveAfterApplyCommand: proveAfterApplyForJob(shown),
+    ...takeInsteadFields(shown),
+    rule: "Peek the named card. Do not claim a blocked catalog leftover. Apply on a sibling write checkout.",
   };
 }
 
@@ -101,10 +144,13 @@ export function buildBusy(job, siblings, slots, options = {}) {
     jobId: job.id,
     packet: packetPathFor(job),
     playbook: `playbooks/${job.id}.md`,
-    job,
+    job: jobForDisplay(job),
     relaunch: relaunch.relaunch,
     prompt: renderLaunchPrompt(job),
     helpers: buildHelperPacket(job).helpers,
+    applyNext: applyNextForJob(job),
+    proveAfterApplyCommand: proveAfterApplyForJob(job),
+    ...takeInsteadFields(job),
     remaining: slots.filter((slot) => slot.id !== job.id),
     action: relaunch.action,
     doNot: relaunch.doNot,
@@ -138,36 +184,61 @@ export function launchPathFor(jobId) {
  * @param {{ assignments?: Array<{ jobId: string }> } | null} roster
  * @param {number} [nowMs]
  */
-export function leftoverLaunchRows(ledger, roster, nowMs = Date.now()) {
+export function leftoverLaunchRows(ledger, roster, nowMs = Date.now(), filters = { github: true }) {
   const used = new Set((roster?.assignments ?? []).map((row) => row.jobId));
-  return unusedGenesisCards(ledger, used, nowMs).map((job) => ({
+  return unusedCardsForFilters(ledger, used, filters, nowMs).map((job) => ({
     jobId: job.id,
     prompt: renderLeftoverLaunch(job),
+    applyNext: applyNextForJob(job),
+    proveAfterApplyCommand: proveAfterApplyForJob(job),
+    ...takeInsteadFields(job),
   }));
 }
 
 /**
- * Paste-ready Origin brief for an unused leftover card.
- * No parked agent owns it yet — the next unassigned idle agent takes it.
+ * Paste-ready brief for an unused leftover card.
+ * Superbrain leftover refuses Origin paste and names take-instead apply.
+ * Default leftover is a GitHub sibling card.
  * @param {import("./ledger.js").Job | null} job
  */
 export function renderLeftoverLaunch(job) {
   if (!job) {
-    return `# No leftover unused Genesis card
+    return `# No leftover unused GitHub card
 
-Do not open another landing-pad queue on yuro1991-afk/main.
-Do not reopen https://github.com/yuro1991-afk/main/pull/1.
+Every GitHub sibling card is already assigned. Review an open PR.
+Do not invent Origin work. Do not reopen https://github.com/yuro1991-afk/main/pull/1.
 `;
   }
+  if (job.id === "gub-superbrain-probe") {
+    const prove = proveAfterApplyForJob(job);
+    return `# Leftover unused — ${job.id}
+
+Yuri: no more Superbrain. Do not probe :45001 / :8791. Do not run node src/cli.js probe.
+
+No parked pad agent owns this card yet. Take review-main-pr10, or apply first parked catalog leftover dronehive-unicode-ci on a sibling write checkout.
+
+- card: \`${job.id}\`
+- take instead: \`dronehive-unicode-ci\`
+- prove: \`node src/cli.js patches --prove --job dronehive-unicode-ci\`
+- prove afterApply: \`${prove}\`
+
+Do not paste this into an Origin cloud agent. Do not inventory this landing pad.
+
+---
+
+${renderLaunchPrompt(job)}
+`;
+  }
+  const target = relaunchFor(job);
   return `# Leftover unused — ${job.id}
 
 No parked pad agent owns this card yet. The next unassigned idle agent takes it.
 
 - card: \`${job.id}\`
 - launch: \`${launchPathFor(job.id)}\`
-- Origin: ${ORIGIN_UI}
+- GitHub: ${target.url}
 
-Paste the brief below into a new Origin cloud agent. Do not inventory this landing pad.
+Relaunch the named GitHub repo. This pad token cannot push siblings. Forget Origin.
 
 ---
 
@@ -181,6 +252,28 @@ ${renderLaunchPrompt(job)}
  * @param {import("./ledger.js").Job | null} job
  */
 export function renderAssignedLaunch(row, job) {
+  if (job?.id === "gub-superbrain-probe") {
+    const prove = proveAfterApplyForJob(job);
+    return `# Idle-agent relaunch — ${row.name}
+
+Yuri: no more Superbrain. Do not probe :45001 / :8791. Do not run node src/cli.js probe.
+
+You were assigned leftover Superbrain. Take review-main-pr10, or apply first parked catalog leftover dronehive-unicode-ci on a sibling write checkout.
+
+- agent: ${row.name}
+- bcId: \`${row.bcId}\`
+- card: \`${row.jobId}\`
+- take instead: \`dronehive-unicode-ci\`
+- prove: \`node src/cli.js patches --prove --job dronehive-unicode-ci\`
+- prove afterApply: \`${prove}\`
+
+Do not paste this into an Origin cloud agent. Do not inventory this landing pad.
+
+---
+
+${renderLaunchPrompt(job)}
+`;
+  }
   const body = job
     ? renderLaunchPrompt(job)
     : "Unknown job. Do not invent a fifth landing-pad queue.";
@@ -192,9 +285,9 @@ You are parked on github.com/yuro1991-afk/main. Leave this pad.
 - bcId: \`${row.bcId}\`
 - card: \`${row.jobId}\`
 - launch: \`${launchPathFor(row.jobId)}\`
-- Origin: ${ORIGIN_UI}
+- GitHub: ${job ? relaunchFor(job).url : "https://github.com/yuro1991-afk"}
 
-Paste the brief below into a new Origin cloud agent. Do not inventory this landing pad.
+Relaunch the named GitHub repo. Forget Origin. Do not inventory this pad for another queue.
 
 ---
 
@@ -251,7 +344,7 @@ export function peekBusyJob(ledger, agentId, filters = {}, nowMs = Date.now(), r
       .filter((row) => !agentId || row.bcId !== agentId)
       .map((row) => row.jobId),
   );
-  const leftover = unusedGenesisCards(ledger, used, nowMs).filter((job) =>
+  const leftover = unusedCardsForFilters(ledger, used, filters, nowMs).filter((job) =>
     jobPassesBusyFilters(job, filters, nowMs),
   );
   if (leftover[0]) return leftover[0];
@@ -289,8 +382,22 @@ function jobPassesBusyFilters(job, filters, nowMs) {
   if (filters.repo && job.repo !== filters.repo) return false;
   if (filters.scope && jobScope(job) !== filters.scope) return false;
   if (filters.genesis === true && !isGenesisJob(job)) return false;
+  if (filters.github === true && !isGithubJob(job)) return false;
   if (filters.world === true && !isWorldPhaseJob(job)) return false;
   return true;
+}
+
+/**
+ * @param {import("./ledger.js").Ledger} ledger
+ * @param {Set<string>} used
+ * @param {{ genesis?: boolean, github?: boolean, world?: boolean }} filters
+ * @param {number} nowMs
+ */
+function unusedCardsForFilters(ledger, used, filters, nowMs) {
+  if (filters.world === true || filters.genesis === true) {
+    return unusedGenesisCards(ledger, used, nowMs);
+  }
+  return unusedGithubCards(ledger, used, nowMs);
 }
 
 /**
@@ -315,15 +422,19 @@ export function buildAssign(ledger, roster, nowMs = Date.now()) {
     };
   });
   const leftover = leftoverLaunchRows(ledger, roster, nowMs);
+  const first = leftover[0];
   return {
     contract: ASSIGN_CONTRACT,
     count: assignments.length,
     assignments,
     leftover: leftover.map((row) => row.jobId),
-    leftoverNext: leftover[0]?.jobId ?? null,
+    leftoverNext: first?.jobId ?? null,
+    leftoverTakeInstead: first?.takeInstead,
+    leftoverApplyNext: first?.applyNext,
+    leftoverProveAfterApplyCommand: first?.proveAfterApplyCommand,
     leftoverLaunches: leftover,
     next: assignments.find((row) => row.status === "open") ?? null,
-    rule: "Every idle pad agent relaunches the listed Origin world-phase card. A new unassigned agent takes leftoverNext. Do not stay on yuro1991-afk/main. Do not all peek next without claiming. Do not lease cards to agents that stay idle.",
+    rule: "Every idle pad agent takes a unique GitHub sibling card. A new unassigned agent takes leftoverNext. Superbrain leftover attaches take-instead apply. Forget Origin. Do not all peek next without claiming. Do not lease cards to agents that stay idle.",
   };
 }
 

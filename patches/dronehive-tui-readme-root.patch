@@ -1,0 +1,9 @@
+diff --git a/apps/dronehive-tui/README.md b/apps/dronehive-tui/README.md
+index 212411d..b12bd53 100644
+--- a/apps/dronehive-tui/README.md
++++ b/apps/dronehive-tui/README.md
+@@ -31,3 +31,3 @@ or:
+ ```bat
+-apps\dronehive-tui\target\release\dronehive-tui.exe --root G:\AI-Home\projects\ai-worker-drone-0.5b
++apps\dronehive-tui\target\release\dronehive-tui.exe --root .
+ ```

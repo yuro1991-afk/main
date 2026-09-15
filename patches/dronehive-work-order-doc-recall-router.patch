@@ -1,0 +1,15 @@
+diff --git a/docs/WORK_ORDER.md b/docs/WORK_ORDER.md
+index 55c4bce..67b3a76 100644
+--- a/docs/WORK_ORDER.md
++++ b/docs/WORK_ORDER.md
+@@ -257,8 +257,8 @@ Ollama endpoint: `http://127.0.0.1:11434` only.
+ ### 2.6 Related knowledge packs (optional after codex)
+ 
+ ```powershell
+-& $py F:\GrokSelfLibrary\bin\recall.py get knowledge_pack
+-& $py G:\AI-Home\docs\ai-smarts\runtime\ai_smarts_router.py route --goal "<your goal>"
++& $py host/library/bin/recall.py get knowledge_pack
++& $py host/ai-home/docs/ai-smarts/runtime/ai_smarts_router.py route --goal "<your goal>"
+ ```
+ 
+ ---

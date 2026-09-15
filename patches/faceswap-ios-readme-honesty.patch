@@ -1,0 +1,13 @@
+diff --git a/ios/README.md b/ios/README.md
+index 039d6f3..aef4d30 100644
+--- a/ios/README.md
++++ b/ios/README.md
+@@ -6,7 +6,7 @@ This Windows host cannot compile it. On a Mac:
+ 
+ 1. Create a new iOS App in Xcode (SwiftUI).
+ 2. Replace the app files with `FaceSwap/*.swift` and `Info.plist`.
+-3. Set the gateway URL to the Windows LAN address printed by `START.cmd`.
++3. Set the gateway URL from `START.cmd` or `START.sh` (`FACESWAP_ENGINE`). The Windows LAN / G: host is one example, not the contract.
+ 4. Sign with your personal Apple ID and run on a plugged-in iPhone (free provisioning, 7 days).
+ 
+ The product that already installs on any iPhone is the PWA in `../pwa` via Safari → Add to Home Screen.

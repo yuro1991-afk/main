@@ -1,0 +1,11 @@
+diff --git a/apps/drone-ollama-mount/src/fabric.rs b/apps/drone-ollama-mount/src/fabric.rs
+index f7065be..ac9d067 100644
+--- a/apps/drone-ollama-mount/src/fabric.rs
++++ b/apps/drone-ollama-mount/src/fabric.rs
+@@ -253,5 +253,5 @@ fn parse_json_blob(s: &str) -> Option<serde_json::Value> {
+ }
+ 
+ pub fn default_drone_root() -> PathBuf {
+-    PathBuf::from(r"G:\AI-Home\projects\ai-worker-drone-0.5b")
++    PathBuf::from(r".")
+ }

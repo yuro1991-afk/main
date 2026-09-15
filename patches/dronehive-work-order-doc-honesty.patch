@@ -1,0 +1,13 @@
+diff --git a/docs/WORK_ORDER.md b/docs/WORK_ORDER.md
+index 55c4bce..b359375 100644
+--- a/docs/WORK_ORDER.md
++++ b/docs/WORK_ORDER.md
+@@ -451,7 +451,7 @@ data\hive\imprints\
+   "ready": true,
+   "task": { "task_id": "...", "goal": "...", "next_action": "..." },
+   "laws_ref": "docs/WORK_ORDER.md",
+-  "codex_ref": "F:\\GrokSelfLibrary\\knowledge\\codex\\CODEX.min.json",
++  "codex_ref": "host/library/knowledge/codex/CODEX.min.json",
+   "utc": "..."
+ }
+ ```

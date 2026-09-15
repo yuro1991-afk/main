@@ -1,0 +1,89 @@
+diff --git a/drone/future_seer.py b/drone/future_seer.py
+index 5b804cd..baa5c7a 100644
+--- a/drone/future_seer.py
++++ b/drone/future_seer.py
+@@ -29,6 +29,7 @@ import urllib.request
+ import uuid
+ from concurrent.futures import ThreadPoolExecutor, as_completed
+ from pathlib import Path
++from .host_paths import resolve_host_path
+ from typing import Any, Callable
+ 
+ 
+@@ -363,7 +364,7 @@ class FutureSeer:
+                 env=env,
+                 cwd=str(md.parent),
+             )
+-            outbox = Path(r"G:\AI-Center\agents\super-cell-4\parallel-runs") / rid
++            outbox = resolve_host_path(r"G:\AI-Center\agents\super-cell-4\parallel-runs") / rid
+             seal = {
+                 "status": "GREEN" if p.returncode == 0 else "PARTIAL",
+                 "false_green": 0,
+diff --git a/drone/grok_handoff.py b/drone/grok_handoff.py
+index 6e05948..89a6019 100644
+--- a/drone/grok_handoff.py
++++ b/drone/grok_handoff.py
+@@ -17,12 +17,13 @@ import urllib.error
+ import urllib.request
+ from dataclasses import asdict, dataclass, field
+ from pathlib import Path
++from .host_paths import resolve_host_path
+ from typing import Any
+ 
+ 
+ SCHEMA = "grok.drone.cowork.handoff.v1"
+ MODES = frozenset({"fast", "full", "hive", "brain", "pro", "inbox", "clone"})
+-DEFAULT_ROOT = Path(r"G:\AI-Home\projects\ai-worker-drone-0.5b")
++DEFAULT_ROOT = resolve_host_path(r"G:\AI-Home\projects\ai-worker-drone-0.5b")
+ OLLAMA_HOST = "http://127.0.0.1:11434"
+ APP_HOST = "http://127.0.0.1:8765"
+ 
+diff --git a/drone/operational.py b/drone/operational.py
+index 9e8b3c8..42825ca 100644
+--- a/drone/operational.py
++++ b/drone/operational.py
+@@ -18,6 +18,7 @@ import json
+ import subprocess
+ import time
+ from pathlib import Path
++from .host_paths import resolve_host_path
+ from typing import Any
+ 
+ 
+@@ -162,7 +163,7 @@ def _run_hive_mini(root: Path) -> dict[str, Any]:
+ 
+ 
+ def _run_rust_mount() -> dict[str, Any]:
+-    exe = Path(r"G:\AI-Home\projects\drone-ollama-mount\target\release\drone-ollama-mount.exe")
++    exe = resolve_host_path(r"G:\AI-Home\projects\drone-ollama-mount\target\release\drone-ollama-mount.exe")
+     if not exe.is_file():
+         return {"ok": False, "skipped": True, "error": f"missing {exe}"}
+     try:
+diff --git a/drone/tools.py b/drone/tools.py
+index 2dda891..d4eaef5 100644
+--- a/drone/tools.py
++++ b/drone/tools.py
+@@ -19,6 +19,7 @@ import subprocess
+ import threading
+ import time
+ from pathlib import Path
++from .host_paths import resolve_host_path
+ from typing import Any, Callable
+ 
+ from .locks import root_lock
+@@ -347,13 +348,13 @@ class DroneToolkit:
+                     dest_path = dest_path.resolve()
+             else:
+                 dest_path = (
+-                    Path(r"G:\AI-Home\projects\dronehive-clone-test")
++                    resolve_host_path(r"G:\AI-Home\projects\dronehive-clone-test")
+                 ).resolve()
+ 
+             # Allow dest under project OR dedicated clone project path
+             allowed_prefixes = [
+                 str(src_root),
+-                str(Path(r"G:\AI-Home\projects\dronehive-clone-test").resolve()),
++                str(resolve_host_path(r"G:\AI-Home\projects\dronehive-clone-test").resolve()),
+                 str((src_root / "out" / "dronehive-app-clone").resolve()),
+             ]
+             dest_s = str(dest_path)

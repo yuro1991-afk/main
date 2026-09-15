@@ -7,6 +7,7 @@ import {
   assertNotFalseLive,
   probeKnownLanes,
   probeLane,
+  refuseKnownLanes,
   writeLaneProbe,
 } from "../src/probe.js";
 
@@ -102,6 +103,13 @@ test("writeLaneProbe persists unreachable and rejects forged live", () => {
       ),
     /unreachable/,
   );
+});
+
+test("refuseKnownLanes does not hit Superbrain", () => {
+  const report = refuseKnownLanes();
+  assert.equal(report.refused, true);
+  assert.match(report.reason, /no more Superbrain/);
+  assert.ok(report.take.includes("review-main-pr10"));
 });
 
 test("assertNotFalseLive rejects a forged live timeout", () => {

@@ -1,5 +1,6 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { proveAfterApplyForJob, takeInsteadCatalogId } from "./brief.js";
 import { peekBusyJob } from "./dispatch.js";
 import { assertNeverStatus } from "./kinds.js";
 import { effectiveStatus, nextJob, summarize } from "./ledger.js";
@@ -22,10 +23,9 @@ export function writeInventoryTick(ledger, destPath, nowMs, extras = {}) {
   const counts = summarize(ledger, nowMs);
   const roster = extras.roster?.assignments?.length ? extras.roster : null;
   const leftover = roster
-    ? peekBusyJob(ledger, extras.agentId, { genesis: true }, nowMs, roster)
-    : null;
-  const next =
-    leftover ?? nextJob(ledger, { genesis: true }, nowMs) ?? nextJob(ledger, {}, nowMs);
+    ? peekBusyJob(ledger, extras.agentId, { github: true }, nowMs, roster)
+    : nextJob(ledger, { github: true }, nowMs);
+  const next = leftover;
   const worldNext = roster
     ? peekBusyJob(ledger, extras.agentId, { world: true }, nowMs, roster)
     : nextJob(ledger, { world: true }, nowMs);
@@ -39,6 +39,8 @@ export function writeInventoryTick(ledger, destPath, nowMs, extras = {}) {
     done: counts.done,
     blocked: counts.blocked,
     nextId: next ? next.id : null,
+    takeInsteadId: takeInsteadCatalogId(next) ?? null,
+    proveAfterApplyCommand: proveAfterApplyForJob(next) ?? null,
     worldNextId: worldNext ? worldNext.id : null,
     originLoggedIn: origin ? Boolean(origin.loggedIn) : null,
     originStatus: origin ? origin.status ?? null : null,

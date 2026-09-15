@@ -1,0 +1,182 @@
+diff --git a/INSTALL.cmd b/INSTALL.cmd
+index 139a825..8241e2a 100644
+--- a/INSTALL.cmd
++++ b/INSTALL.cmd
+@@ -36,7 +36,7 @@ if exist "%ROOT%reviews\SEC_REVIEW.md" copy /Y "%ROOT%reviews\SEC_REVIEW.md" "%I
+ >>"%INST%\START.cmd" echo start "" "%%~dp0OpenSussy.exe"
+ 
+ > "%INST%\README.txt" (
+-  echo OpenSussy OS Upgrade 1.3.0
++  echo OpenSussy OS Upgrade 2.0.0
+   echo Author: Yuri Livarchuk
+   echo Publisher: 23 Productions
+   echo.
+diff --git a/LICENSE b/LICENSE
+index 827eebe..7e0e734 100644
+--- a/LICENSE
++++ b/LICENSE
+@@ -37,4 +37,4 @@ PROPRIETARY SOFTWARE LICENSE (23 Productions)
+ 7. Contact
+    Author: Yuri Livarchuk
+    Publisher: 23 Productions
+-   Product: OpenSussy OS Upgrade 1.3.0
++   Product: OpenSussy OS Upgrade 2.0.0
+diff --git a/NOTICE b/NOTICE
+index 045749f..60d652d 100644
+--- a/NOTICE
++++ b/NOTICE
+@@ -1,4 +1,4 @@
+-OpenSussy 1.3.0 — THIRD-PARTY AND TRADEMARK NOTICE
++OpenSussy 2.0.0 — THIRD-PARTY AND TRADEMARK NOTICE
+ © 2026 Yuri Livarchuk / 23 Productions. All rights reserved.
+ 
+ === Trademarks (not affiliated) ===
+diff --git a/SETUP-DESKTOP.cmd b/SETUP-DESKTOP.cmd
+index 49c85e8..cdf946e 100644
+--- a/SETUP-DESKTOP.cmd
++++ b/SETUP-DESKTOP.cmd
+@@ -10,13 +10,13 @@ if not exist "%INST%\OpenSussy.exe" (
+   exit /b 1
+ )
+ 
+-set DEST=%DESK%\v1.3.0
++set DEST=%DESK%\v2.0.0
+ if not exist "%DEST%" mkdir "%DEST%"
+ xcopy /E /Y /Q "%INST%\*" "%DEST%\" >nul
+ xcopy /E /Y /Q "%INST%\*" "%DESK%\" >nul
+ 
+ powershell -NoProfile -Command ^
+-  "$w=New-Object -ComObject WScript.Shell; $l=$w.CreateShortcut([Environment]::GetFolderPath('Desktop')+'\OpenSussy.lnk'); $l.TargetPath='%DEST%\OpenSussy.exe'; $l.WorkingDirectory='%DEST%'; $l.Description='OpenSussy OS Upgrade 1.3.0 — Yuri Livarchuk / 23 Productions'; $l.Save()"
++  "$w=New-Object -ComObject WScript.Shell; $l=$w.CreateShortcut([Environment]::GetFolderPath('Desktop')+'\OpenSussy.lnk'); $l.TargetPath='%DEST%\OpenSussy.exe'; $l.WorkingDirectory='%DEST%'; $l.Description='OpenSussy OS Upgrade 2.0.0 — Yuri Livarchuk / 23 Productions'; $l.Save()"
+ 
+ echo Desktop ship: %DEST%
+ echo Shortcut: Desktop\OpenSussy.lnk
+diff --git a/SHIP.json b/SHIP.json
+index 979e599..5913109 100644
+--- a/SHIP.json
++++ b/SHIP.json
+@@ -5,10 +5,10 @@
+   "publisher": "23 Productions",
+   "false_green": 0,
+   "github": "https://github.com/yuro1991-afk/opensussy",
+-  "usb_zip": "https://github.com/yuro1991-afk/opensussy/releases/download/v1.3.0/OpenSussy-USB.zip",
+-  "version": "1.3.0",
++  "usb_zip": "https://github.com/yuro1991-afk/opensussy/releases/download/v2.0.0/OpenSussy-USB.zip",
++  "version": "2.0.0",
+   "product": "OpenSussy",
+-  "release": "https://github.com/yuro1991-afk/opensussy/releases/tag/v1.3.0",
++  "release": "https://github.com/yuro1991-afk/opensussy/releases/tag/v2.0.0",
+   "usb_zip_bytes": 1113129,
+   "utc": "2026-08-16T06:56:34.9001829Z"
+ }
+diff --git a/docs/ENGINEER_PASS.md b/docs/ENGINEER_PASS.md
+index cdd7aba..7c9bfc5 100644
+--- a/docs/ENGINEER_PASS.md
++++ b/docs/ENGINEER_PASS.md
+@@ -1,4 +1,4 @@
+-# OpenSussy 1.3.0 — openSUSE / installer engineer pass
++# OpenSussy 2.0.0 — openSUSE / installer engineer pass
+ 
+ **Role:** master openSUSE (AutoYaST / Tumbleweed) engineer + Windows installer engineer  
+ **Author product:** Yuri Livarchuk / 23 Productions  
+@@ -74,7 +74,7 @@ sudo bash OpenSussy-deep.sh
+ 
+ ```
+ false_green: 0
+-product: OpenSussy OS Upgrade 1.3.0
++product: OpenSussy OS Upgrade 2.0.0
+ author: Yuri Livarchuk
+ publisher: 23 Productions
+ status: GREEN (Windows ship + script/XML quality); PARTIAL (unattended Linux install unproven on metal)
+diff --git a/docs/USER_GUIDE.md b/docs/USER_GUIDE.md
+index 110862c..1ab49c3 100644
+--- a/docs/USER_GUIDE.md
++++ b/docs/USER_GUIDE.md
+@@ -1,6 +1,6 @@
+ # OpenSussy OS Upgrade — User Guide
+ 
+-**Yuri Livarchuk · 23 Productions · v1.3.0**
++**Yuri Livarchuk · 23 Productions · v2.0.0**
+ 
+ ## Install folder
+ 
+diff --git a/install/LICENSE.txt b/install/LICENSE.txt
+index 827eebe..7e0e734 100644
+--- a/install/LICENSE.txt
++++ b/install/LICENSE.txt
+@@ -37,4 +37,4 @@ PROPRIETARY SOFTWARE LICENSE (23 Productions)
+ 7. Contact
+    Author: Yuri Livarchuk
+    Publisher: 23 Productions
+-   Product: OpenSussy OS Upgrade 1.3.0
++   Product: OpenSussy OS Upgrade 2.0.0
+diff --git a/install/NOTICE.txt b/install/NOTICE.txt
+index 045749f..60d652d 100644
+--- a/install/NOTICE.txt
++++ b/install/NOTICE.txt
+@@ -1,4 +1,4 @@
+-OpenSussy 1.3.0 — THIRD-PARTY AND TRADEMARK NOTICE
++OpenSussy 2.0.0 — THIRD-PARTY AND TRADEMARK NOTICE
+ © 2026 Yuri Livarchuk / 23 Productions. All rights reserved.
+ 
+ === Trademarks (not affiliated) ===
+diff --git a/install/README.txt b/install/README.txt
+index a6a4804..127ac33 100644
+--- a/install/README.txt
++++ b/install/README.txt
+@@ -1,4 +1,4 @@
+-OpenSussy OS Upgrade 1.3.0
++OpenSussy OS Upgrade 2.0.0
+ Author: Yuri Livarchuk
+ Publisher: 23 Productions
+ 
+diff --git a/install/SHIP.json b/install/SHIP.json
+index 6772b30..c1d61d1 100644
+--- a/install/SHIP.json
++++ b/install/SHIP.json
+@@ -2,12 +2,12 @@
+   "false_green": 0,
+   "product": "OpenSussy",
+   "full_title": "OpenSussy OS Upgrade — 23 Productions",
+-  "version": "1.3.0",
++  "version": "2.0.0",
+   "author": "Yuri Livarchuk",
+   "publisher": "23 Productions",
+   "motto": "Dont be a pussy, open up your Sussy",
+   "install_folder": "G:\\AI-Home\\projects\\opensussy\\install",
+-  "desktop": "C:\\Users\\yuro1\\OneDrive\\Desktop\\OpenSussy\\v1.3.0",
++  "desktop": "C:\\Users\\yuro1\\OneDrive\\Desktop\\OpenSussy\\v2.0.0",
+   "click": "Desktop OpenSussy.lnk",
+   "selftest": "GREEN",
+   "live_gui": true,
+diff --git a/install/docs/ENGINEER_PASS.md b/install/docs/ENGINEER_PASS.md
+index cdd7aba..7c9bfc5 100644
+--- a/install/docs/ENGINEER_PASS.md
++++ b/install/docs/ENGINEER_PASS.md
+@@ -1,4 +1,4 @@
+-# OpenSussy 1.3.0 — openSUSE / installer engineer pass
++# OpenSussy 2.0.0 — openSUSE / installer engineer pass
+ 
+ **Role:** master openSUSE (AutoYaST / Tumbleweed) engineer + Windows installer engineer  
+ **Author product:** Yuri Livarchuk / 23 Productions  
+@@ -74,7 +74,7 @@ sudo bash OpenSussy-deep.sh
+ 
+ ```
+ false_green: 0
+-product: OpenSussy OS Upgrade 1.3.0
++product: OpenSussy OS Upgrade 2.0.0
+ author: Yuri Livarchuk
+ publisher: 23 Productions
+ status: GREEN (Windows ship + script/XML quality); PARTIAL (unattended Linux install unproven on metal)
+diff --git a/install/docs/USER_GUIDE.md b/install/docs/USER_GUIDE.md
+index 110862c..1ab49c3 100644
+--- a/install/docs/USER_GUIDE.md
++++ b/install/docs/USER_GUIDE.md
+@@ -1,6 +1,6 @@
+ # OpenSussy OS Upgrade — User Guide
+ 
+-**Yuri Livarchuk · 23 Productions · v1.3.0**
++**Yuri Livarchuk · 23 Productions · v2.0.0**
+ 
+ ## Install folder
+ 

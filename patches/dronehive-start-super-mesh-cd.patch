@@ -1,0 +1,12 @@
+diff --git a/START_SUPER_MESH.bat b/START_SUPER_MESH.bat
+index 23fb517..fe840c6 100644
+--- a/START_SUPER_MESH.bat
++++ b/START_SUPER_MESH.bat
+@@ -1,6 +1,6 @@
+ @echo off
+ setlocal
+-cd /d G:\AI-Home\projects\ai-worker-drone-0.5b
++cd /d "%~dp0"
+ set OLLAMA_EXE=%LOCALAPPDATA%\Programs\Ollama\ollama.exe
+ set PY=%LOCALAPPDATA%\Programs\Python\Python312\python.exe
+ if not exist "%PY%" set PY=python

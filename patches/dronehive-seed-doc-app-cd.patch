@@ -1,0 +1,13 @@
+diff --git a/drone/app/seed/docs/APP.md b/drone/app/seed/docs/APP.md
+index 4e767d9..fb889c0 100644
+--- a/drone/app/seed/docs/APP.md
++++ b/drone/app/seed/docs/APP.md
+@@ -44,7 +44,7 @@ Primary UI is a **native CustomTkinter window** (`python -m drone app desktop`).
+ HTTP `app serve` is optional glue for universal links only — not the main app.
+ 
+ ```powershell
+-cd G:\AI-Home\projects\ai-worker-drone-0.5b
++cd .
+ $py = "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe"
+ & $py -m drone app desktop          # native window
+ & $py -m drone app commission

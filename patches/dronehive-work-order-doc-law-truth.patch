@@ -1,0 +1,9 @@
+diff --git a/docs/WORK_ORDER.md b/docs/WORK_ORDER.md
+index 55c4bce..871714c 100644
+--- a/docs/WORK_ORDER.md
++++ b/docs/WORK_ORDER.md
+@@ -133,3 +133,3 @@ status: GREEN|PARTIAL|RED
+ Host law file: `C:\Users\yuro1\.grok\rules\00-00-absolute-truth.md`  
+-Library law: `F:\GrokSelfLibrary\LAW_TRUTH.md`
++Library law: `host/library/LAW_TRUTH.md`
+ 

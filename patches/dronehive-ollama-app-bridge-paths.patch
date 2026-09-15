@@ -1,0 +1,16 @@
+diff --git a/apps/drone-ollama-app/src/drone_bridge.rs b/apps/drone-ollama-app/src/drone_bridge.rs
+index b50b149..6115836 100644
+--- a/apps/drone-ollama-app/src/drone_bridge.rs
++++ b/apps/drone-ollama-app/src/drone_bridge.rs
+@@ -4,9 +4,9 @@ use serde_json::Value;
+ use std::path::{Path, PathBuf};
+ use std::process::Command;
+ 
+-pub const DRONE_ROOT: &str = r"G:\AI-Home\projects\ai-worker-drone-0.5b";
++pub const DRONE_ROOT: &str = r".";
+ pub const MOUNT_EXE: &str =
+-    r"G:\AI-Home\projects\drone-ollama-mount\target\release\drone-ollama-mount.exe";
++    r"apps\drone-ollama-mount\target\release\drone-ollama-mount.exe";
+ 
+ fn python() -> PathBuf {
+     let cands = [

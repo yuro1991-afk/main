@@ -1,0 +1,31 @@
+diff --git a/drone/app/seed/docs/WORK_ORDER.md b/drone/app/seed/docs/WORK_ORDER.md
+index 3789067..7d5645f 100644
+--- a/drone/app/seed/docs/WORK_ORDER.md
++++ b/drone/app/seed/docs/WORK_ORDER.md
+@@ -122,16 +122,16 @@ When the task involves models, quants, frameworks, inference engines, VRAM fit,
+ 
+ | Asset | Path |
+ |-------|------|
+-| Master (min) | `F:\GrokSelfLibrary\knowledge\codex\CODEX.min.json` |
+-| Human index | `F:\GrokSelfLibrary\knowledge\codex\CODEX.md` |
+-| Models catalog | `F:\GrokSelfLibrary\knowledge\codex\models\catalog.min.json` |
+-| Flat family index | `F:\GrokSelfLibrary\knowledge\codex\models\flat_index.min.json` |
+-| By use | `F:\GrokSelfLibrary\knowledge\codex\models\by_use.min.json` |
+-| Frameworks | `F:\GrokSelfLibrary\knowledge\codex\frameworks\catalog.min.json` |
+-| Inference engines | `F:\GrokSelfLibrary\knowledge\codex\inference\engines.min.json` |
+-| Build recipes | `F:\GrokSelfLibrary\knowledge\codex\builds\recipes.min.json` |
+-| Query CLI | `python F:\GrokSelfLibrary\bin\query_llm_codex.py` |
+-| Rebuild | `python F:\GrokSelfLibrary\bin\build_llm_codex.py` |
++| Master (min) | `host/library/knowledge/codex/CODEX.min.json` |
++| Human index | `host/library/knowledge/codex/CODEX.md` |
++| Models catalog | `host/library/knowledge/codex/models/catalog.min.json` |
++| Flat family index | `host/library/knowledge/codex/models/flat_index.min.json` |
++| By use | `host/library/knowledge/codex/models/by_use.min.json` |
++| Frameworks | `host/library/knowledge/codex/frameworks/catalog.min.json` |
++| Inference engines | `host/library/knowledge/codex/inference/engines.min.json` |
++| Build recipes | `host/library/knowledge/codex/builds/recipes.min.json` |
++| Query CLI | `python host/library/bin/query_llm_codex.py` |
++| Rebuild | `python host/library/bin/build_llm_codex.py` |
+ 
+ **Ontology = knowledge map.** Not proof that every weight is loaded in silicon on this host.
+ 

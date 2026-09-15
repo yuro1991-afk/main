@@ -1,0 +1,13 @@
+diff --git a/drone/app/seed/docs/OPERATIONAL.md b/drone/app/seed/docs/OPERATIONAL.md
+index 80df7a2..659fa4a 100644
+--- a/drone/app/seed/docs/OPERATIONAL.md
++++ b/drone/app/seed/docs/OPERATIONAL.md
+@@ -3,7 +3,7 @@
+ ## One command
+ 
+ ```powershell
+-cd G:\AI-Home\projects\ai-worker-drone-0.5b
++cd .
+ python -m drone go-live
+ ```
+ 
