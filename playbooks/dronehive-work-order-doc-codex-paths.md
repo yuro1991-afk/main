@@ -22,6 +22,7 @@ docs/WORK_ORDER.md codex table only. Do not edit the & $py CLI examples. Do not 
 - git checkout -b cursor/dronehive-work-order-doc-codex-paths-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-doc-codex-paths.patch
 - git apply /path/to/main/patches/dronehive-work-order-doc-codex-paths.patch
+- python3 -c "from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert 'host/library/knowledge/codex/CODEX.md' in t; assert 'host/library/knowledge/codex/models/catalog.min.json' in t; assert 'host/library/bin/query_llm_codex.py' in t; assert 'host/library/bin/build_llm_codex.py' in t"
 
 ## Verify
 
