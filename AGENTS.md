@@ -20,8 +20,8 @@ prints local Task fan-out.
 
 1. `npm test` if you touch this repo.
 2. `node src/cli.js busy --agent <your-bcId>` — claims **your roster
-   GitHub card**. A new unassigned agent gets leftover
-   `review-landing-pad-prs`. Leftover catalog launches are exhausted
+   GitHub card**. Leftover unused peek is exhausted (`next` / `busy`
+   without `--agent` exit 1). Leftover catalog launches are exhausted
    (`assign --missing` / compact `patches` `nextMissing` is null).
    Prefer `brief --job dronehive-unicode-ci`. Do not invent leftover
    163+. `node src/cli.js slots` lists the rest so a second agent does
@@ -64,7 +64,8 @@ prints local Task fan-out.
 | Summarize review transcripts | `bloom-health-probe` |
 | Extract arena assignment | `review-main-pr8` |
 
-A 22nd unassigned agent takes leftover `review-landing-pad-prs`.
+Leftover unused peek is exhausted. Prefer
+`brief --job dronehive-unicode-ci`. Do not invent leftover unused next.
 Newest idle `bc-710c5477` takes `bloom-grok-pwa-test-sync`, then
 `bloom-ci-lint`. First parked apply is `dronehive-unicode-ci` on a
 dronehive write checkout. Do not invent leftover 163+. Do not invent

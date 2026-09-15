@@ -46,8 +46,9 @@ Prefer `brief --job dronehive-unicode-ci`. Do not invent leftover 163+.
 `assign --missing` lists catalog leftovers with no launch file and
 never writes. Leftover launches are exhausted (`nextMissing` null).
 Prefer `brief --job dronehive-unicode-ci`. Do not invent leftover 163+.
-`busy --agent` claims **your roster card** first. Leftover unused is
-`review-landing-pad-prs`. `next --world` / `--origin` are opt-in.
+`busy --agent` claims **your roster card** first. Leftover unused peek
+is exhausted (`next` / `busy` without `--agent` exit 1). Prefer
+`brief --job dronehive-unicode-ci`. `next --world` / `--origin` are opt-in.
 
 ## Lanes
 

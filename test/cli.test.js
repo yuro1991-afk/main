@@ -325,6 +325,18 @@ test("README assign --job names exhausted leftover launches", () => {
   assert.match(text, /Do not invent leftover 163\+/);
 });
 
+test("leftover unused peek docs name leftover unused exhausted", () => {
+  const readme = readFileSync(new URL("../README.md", import.meta.url), "utf8");
+  assert.match(readme, /Leftover unused peek\nis exhausted/);
+  assert.doesNotMatch(readme, /Leftover unused is\n`review-landing-pad-prs`/);
+  const agents = readFileSync(new URL("../AGENTS.md", import.meta.url), "utf8");
+  assert.match(agents, /Leftover unused peek is exhausted/);
+  assert.doesNotMatch(agents, /A 22nd unassigned agent takes leftover `review-landing-pad-prs`/);
+  const next = readFileSync(new URL("../reviews/NEXT.md", import.meta.url), "utf8");
+  assert.match(next, /Peek leftover unused \(no `--agent`\):\*\* leftover unused exhausted/);
+  assert.doesNotMatch(next, /Peek leftover unused \(no `--agent`\):\*\* `review-landing-pad-prs`/);
+});
+
 test("ci uses Node 24 action runtimes and keeps project Node 20", () => {
   const yml = readFileSync(new URL("../.github/workflows/ci.yml", import.meta.url), "utf8");
   assert.match(yml, /actions\/checkout@v5/);
