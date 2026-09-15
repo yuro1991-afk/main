@@ -1,4 +1,4 @@
-# Landing-pad PR review (2026-09-15T07:30Z)
+# Landing-pad PR review (2026-09-15T07:40Z)
 
 Written on this pad for `review-landing-pad-prs`. Merge stays with Yuri.
 Do not comment on GitHub unless Yuri asked. Do not open another queue.
@@ -7,7 +7,7 @@ Do not comment on GitHub unless Yuri asked. Do not open another queue.
 `node src/cli.js probe`.
 
 #8 already has a stale `reviews/LANDING-PAD-PRS.md` (19:05Z) that stops
-at #8. This file is the current board, including #9–#26.
+at #8. This file is the current board, including #9–#30.
 
 | PR | state | take? |
 | --- | --- | --- |
@@ -35,6 +35,10 @@ at #8. This file is the current board, including #9–#26.
 | [#24](https://github.com/yuro1991-afk/main/pull/24) | draft MERGEABLE + CI green | siblings board 20–23. Stacked on #23. |
 | [#25](https://github.com/yuro1991-afk/main/pull/25) | draft MERGEABLE + CI green | fabric-root leftover launches. Stacked on #24. |
 | [#26](https://github.com/yuro1991-afk/main/pull/26) | draft MERGEABLE + CI green | future-seer leftover launches. Stacked on #25. |
+| [#27](https://github.com/yuro1991-afk/main/pull/27) | draft MERGEABLE + CI green | siblings board 24–26. Stacked on #26. |
+| [#28](https://github.com/yuro1991-afk/main/pull/28) | draft MERGEABLE + CI green | school-root leftover launches. Stacked on #27. |
+| [#29](https://github.com/yuro1991-afk/main/pull/29) | draft MERGEABLE + CI green | knowledge-expand leftover launches. Stacked on #28. |
+| [#30](https://github.com/yuro1991-afk/main/pull/30) | draft MERGEABLE + CI green | hardwire leftover launches. Stacked on #29. |
 
 ## Merge order
 
@@ -53,11 +57,15 @@ at #8. This file is the current board, including #9–#26.
 13. Merge **#24** (siblings board 20–23).
 14. Merge **#25** (fabric-root leftover launches).
 15. Merge **#26** (future-seer leftover launches).
-16. Review **#13**; do not steal. Independent of the #11 stack.
-17. Review **#10**; do not merge onto `main` until Yuri retargets the base.
-18. Skip #4/#5/#6.
-19. Do not merge #7 after #8/#11 unless rewritten.
-20. #8 and #9 can close after #11 lands.
+16. Merge **#27** (siblings board 24–26).
+17. Merge **#28** (school-root leftover launches).
+18. Merge **#29** (knowledge-expand leftover launches).
+19. Merge **#30** (hardwire leftover launches).
+20. Review **#13**; do not steal. Independent of the #11 stack.
+21. Review **#10**; do not merge onto `main` until Yuri retargets the base.
+22. Skip #4/#5/#6.
+23. Do not merge #7 after #8/#11 unless rewritten.
+24. #8 and #9 can close after #11 lands.
 
 ## DroneHive (cannot push from this token)
 

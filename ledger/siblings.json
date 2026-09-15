@@ -427,6 +427,55 @@
         "dronehive-work-order-live-registry",
         "dronehive-seed-work-order-live-registry"
       ]
+    },
+    {
+      "number": 27,
+      "url": "https://github.com/yuro1991-afk/main/pull/27",
+      "branch": "cursor/siblings-prs-24-26-108b",
+      "title": "Record landing-pad PRs 24–26 on the siblings board",
+      "role": "siblings-board",
+      "owns": [
+        "review-landing-pad-prs"
+      ]
+    },
+    {
+      "number": 28,
+      "url": "https://github.com/yuro1991-afk/main/pull/28",
+      "branch": "cursor/school-root-launches-108b",
+      "title": "Add Apply launches for school-root leftover cards",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-work-order-school-root",
+        "dronehive-seed-work-order-school-root",
+        "dronehive-work-order-reference-db",
+        "dronehive-seed-work-order-reference-db"
+      ]
+    },
+    {
+      "number": 29,
+      "url": "https://github.com/yuro1991-afk/main/pull/29",
+      "branch": "cursor/knowledge-expand-launches-108b",
+      "title": "Add Apply launches for knowledge-expand leftover cards",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-work-order-knowledge-expand",
+        "dronehive-seed-work-order-knowledge-expand",
+        "dronehive-work-order-curriculum-root",
+        "dronehive-seed-work-order-curriculum-root"
+      ]
+    },
+    {
+      "number": 30,
+      "url": "https://github.com/yuro1991-afk/main/pull/30",
+      "branch": "cursor/hardwire-launches-108b",
+      "title": "Add Apply launches for hardwire leftover cards",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-multi-hosts-hardwire",
+        "dronehive-super-llms-hardwire",
+        "dronehive-work-order-open-tasks",
+        "dronehive-seed-work-order-open-tasks"
+      ]
     }
   ]
 }

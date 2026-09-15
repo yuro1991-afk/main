@@ -31,6 +31,10 @@ This playbook id is leftover. Take `review-landing-pad-prs` or
 | [#24](https://github.com/yuro1991-afk/main/pull/24) | siblings board 20–23 |
 | [#25](https://github.com/yuro1991-afk/main/pull/25) | fabric-root leftover launches |
 | [#26](https://github.com/yuro1991-afk/main/pull/26) | future-seer leftover launches |
+| [#27](https://github.com/yuro1991-afk/main/pull/27) | siblings board 24–26 |
+| [#28](https://github.com/yuro1991-afk/main/pull/28) | school-root leftover launches |
+| [#29](https://github.com/yuro1991-afk/main/pull/29) | knowledge-expand leftover launches |
+| [#30](https://github.com/yuro1991-afk/main/pull/30) | hardwire leftover launches |
 
 Skip conflicting #4 / #5 / #6. Do not merge #7 after #8 without a rewrite.
 Do not steal the fork’s next slices: head → ears → eyes → vision → bridge.
@@ -38,7 +42,7 @@ Do not copy `packages/keep-busy` or `bin/autofix.js` onto this board.
 
 ## Review rules
 
-- Leave a review on at least one of #8 / #9 / #10 / #11 / #12 / #13 / #14 / #15 / #16 / #17 / #18 / #19 / #20 / #21 / #22 / #23 / #24 / #25 / #26.
+- Leave a review on at least one of #8 / #9 / #10 / #11 / #12 / #13 / #14 / #15 / #16 / #17 / #18 / #19 / #20 / #21 / #22 / #23 / #24 / #25 / #26 / #27 / #28 / #29 / #30.
 - Merge decisions stay with Yuri.
 - Empty `main` is not a review target.
 - Do not reopen #1.
