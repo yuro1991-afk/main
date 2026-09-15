@@ -417,8 +417,10 @@
       "file": "patches/dronehive-seed-work-order-fabric-root.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "drone/app/seed/configs/work_order.json fabric_root is . Independent of live configs/work_order.json leftover (different file). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; d=json.loads(Path('drone/app/seed/configs/work_order.json').read_text()); assert d['fabric_root'] == '.'\""
+      ],
+      "notes": "drone/app/seed/configs/work_order.json fabric_root is . After apply: assert fabric_root == '.'. Independent of live configs/work_order.json leftover (different file). Does not touch tool_agent.py."
     },
     {
       "id": "faceswap-readme-swift-honesty",

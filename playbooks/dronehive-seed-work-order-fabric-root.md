@@ -22,6 +22,7 @@ Seed fabric_root key only. Different file from configs/work_order.json. Do not e
 - git checkout -b cursor/dronehive-seed-work-order-fabric-root-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-fabric-root.patch
 - git apply /path/to/main/patches/dronehive-seed-work-order-fabric-root.patch
+- python3 -c "from pathlib import Path; import json; d=json.loads(Path('drone/app/seed/configs/work_order.json').read_text()); assert d['fabric_root'] == '.'"
 
 ## Verify
 
