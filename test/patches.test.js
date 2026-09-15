@@ -207,6 +207,18 @@ test("repo index loads without duplicate ids and files exist", () => {
   assert.ok(ids.includes("bloom-grok-pwa-test-sync"));
 });
 
+test("catalog leftover patches do not add checkout@v4 or setup-node@v4", () => {
+  const index = loadPatchIndex(defaultPatchesIndexPath(ROOT));
+  for (const row of index.patches) {
+    const text = readFileSync(join(ROOT, row.file), "utf8");
+    for (const line of text.split("\n")) {
+      if (!line.startsWith("+") || line.startsWith("+++")) continue;
+      assert.doesNotMatch(line, /actions\/checkout@v4/, row.id);
+      assert.doesNotMatch(line, /actions\/setup-node@v4/, row.id);
+    }
+  }
+});
+
 test("catalog afterApply commands have no dollar signs or backticks", () => {
   const index = loadPatchIndex(defaultPatchesIndexPath(ROOT));
   for (const row of index.patches) {

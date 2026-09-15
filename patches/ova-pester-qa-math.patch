@@ -15,7 +15,7 @@ index 0000000..c62c886
 +  math:
 +    runs-on: ubuntu-latest
 +    steps:
-+      - uses: actions/checkout@v4
++      - uses: actions/checkout@v5
 +      - name: Percentile / stdev / tok-s without Ollama
 +        shell: pwsh
 +        run: pwsh -NoProfile -File tests/OllamaVoice.Math.Tests.ps1

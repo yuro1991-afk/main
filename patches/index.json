@@ -12,9 +12,10 @@
       "base": "d538a89",
       "applyCheck": "ok",
       "afterApply": [
-        "PYTHONPATH=. python3 -c \"import io,sys; from drone.pro.tool_agent import _chat; sys.stdout=type('S',(),{'encoding':'cp1252','buffer':io.BytesIO(),'write':lambda self,s:s.encode('cp1252'),'flush':lambda self:None})(); _chat('sys','ok \u2713')\""
+        "PYTHONPATH=. python3 -c \"import io,sys; from drone.pro.tool_agent import _chat; sys.stdout=type('S',(),{'encoding':'cp1252','buffer':io.BytesIO(),'write':lambda self,s:s.encode('cp1252'),'flush':lambda self:None})(); _chat('sys','ok \u2713')\"",
+        "python3 -c \"from pathlib import Path; t=Path('.github/workflows/ci.yml').read_text(); assert 'PYTHONUTF8' in t; assert 'actions/checkout@v5' in t; assert 'actions/setup-python@v6' in t\""
       ],
-      "notes": "Copied from main#6. PYTHONUTF8 plus _chat cp1252 replace. After apply: force cp1252 stdout and print ✓. This token cannot push dronehive."
+      "notes": "Copied from main#6. PYTHONUTF8 plus _chat cp1252 replace. CI actions are checkout@v5 / setup-python@v6. After apply: force cp1252 stdout and print ✓; assert PYTHONUTF8 and those actions. This token cannot push dronehive."
     },
     {
       "id": "bloom-gitignore-vercel",
@@ -45,7 +46,7 @@
       "base": "288a484",
       "applyCheck": "ok",
       "afterApply": [
-        "python3 -c \"from pathlib import Path; t=Path('.github/workflows/ci.yml').read_text(); assert 'name: ci' in t; assert 'npm test' in t; assert 'npm run typecheck' in t\""
+        "python3 -c \"from pathlib import Path; t=Path('.github/workflows/ci.yml').read_text(); assert 'name: ci' in t; assert 'actions/checkout@v5' in t; assert 'actions/setup-node@v5' in t; assert 'npm test' in t; assert 'npm run typecheck' in t\""
       ],
       "notes": "ubuntu-latest npm ci / test / typecheck. After apply: assert .github/workflows/ci.yml has those runs. Unpatched has no ci.yml. lint.yml leftover stays absent. Do not fold lint into typecheck. Do not put backticks in afterApply."
     },
@@ -116,7 +117,7 @@
       "base": "074bad0",
       "applyCheck": "ok",
       "afterApply": [
-        "python3 -c \"from pathlib import Path; t=Path('.github/workflows/pwsh-syntax.yml').read_text(); assert 'name: pwsh-syntax' in t; assert 'Parse PowerShell without talking to Ollama' in t; assert 'Parser]::ParseFile' in t; assert 'ubuntu-latest' in t\""
+        "python3 -c \"from pathlib import Path; t=Path('.github/workflows/pwsh-syntax.yml').read_text(); assert 'name: pwsh-syntax' in t; assert 'actions/checkout@v5' in t; assert 'Parse PowerShell without talking to Ollama' in t; assert 'Parser]::ParseFile' in t; assert 'ubuntu-latest' in t\""
       ],
       "notes": "Parser/AST check only. Does not hit :11434 and does not stop Ollama. After apply: assert .github/workflows/pwsh-syntax.yml has those phrases. Unpatched has no .github. Do not run pwsh. Do not put dollar signs in afterApply. Do not put backticks in afterApply. Independent of ova-api-host-override and ova-stop-noui-guard."
     },
@@ -138,7 +139,7 @@
       "base": "d4b2949",
       "applyCheck": "ok",
       "afterApply": [
-        "python3 -c \"from pathlib import Path; t=Path('.github/workflows/linux-syntax.yml').read_text(); assert 'name: linux-syntax' in t; assert 'Syntax-check OpenSussy shell wrappers only' in t; assert 'install/linux/tumbleweed/OpenSussy-deep.sh' in t; assert 'OK syntax. Did not execute AutoYaST' in t\""
+        "python3 -c \"from pathlib import Path; t=Path('.github/workflows/linux-syntax.yml').read_text(); assert 'name: linux-syntax' in t; assert 'actions/checkout@v5' in t; assert 'Syntax-check OpenSussy shell wrappers only' in t; assert 'install/linux/tumbleweed/OpenSussy-deep.sh' in t; assert 'OK syntax. Did not execute AutoYaST' in t\""
       ],
       "notes": "ubuntu-latest bash -n on six wrappers. Does not execute AutoYaST or format disks. After apply: assert .github/workflows/linux-syntax.yml has those phrases. Unpatched has no .github. Do not run the wrappers. Do not put dollar signs in afterApply. Do not put backticks in afterApply. Independent of opensussy-agama-honesty and opensussy-sec-residuals-catalog."
     },
@@ -171,7 +172,7 @@
       "base": "bba7188",
       "applyCheck": "ok",
       "afterApply": [
-        "python3 -c \"from pathlib import Path; w=Path('.github/workflows/gateway-smoke.yml').read_text(); assert 'name: gateway-smoke' in w; assert 'Mock engine + gateway health (no InsightFace)' in w; assert 'false_green' in w; m=Path('mock_engine.py').read_text(); assert 'No InsightFace, CUDA, or Jane' in m; assert 'local_only' in m\""
+        "python3 -c \"from pathlib import Path; w=Path('.github/workflows/gateway-smoke.yml').read_text(); assert 'name: gateway-smoke' in w; assert 'actions/checkout@v5' in w; assert 'actions/setup-python@v6' in w; assert 'Mock engine + gateway health (no InsightFace)' in w; assert 'false_green' in w; m=Path('mock_engine.py').read_text(); assert 'No InsightFace, CUDA, or Jane' in m; assert 'local_only' in m\""
       ],
       "notes": "stdlib mock_engine.py + gateway-smoke workflow. No InsightFace/CUDA/Jane. After apply: assert gateway-smoke.yml and mock_engine.py have those phrases. Unpatched has neither file. Do not run the mock engine. Do not put dollar signs in afterApply. Do not put backticks in afterApply. Independent of faceswap-health-offline."
     },
@@ -193,7 +194,7 @@
       "base": "074bad0",
       "applyCheck": "ok",
       "afterApply": [
-        "python3 -c \"from pathlib import Path; w=Path('.github/workflows/math-unit.yml').read_text(); assert 'name: math-unit' in w; assert 'Percentile / stdev / tok-s without Ollama' in w; t=Path('tests/OllamaVoice.Math.Tests.ps1').read_text(); assert 'No network. Unit-test percentile / stdev / empty stats.' in t; assert 'OK math unit tests (no network)' in t; assert 'tokens/s 50' in t\""
+        "python3 -c \"from pathlib import Path; w=Path('.github/workflows/math-unit.yml').read_text(); assert 'name: math-unit' in w; assert 'actions/checkout@v5' in w; assert 'Percentile / stdev / tok-s without Ollama' in w; t=Path('tests/OllamaVoice.Math.Tests.ps1').read_text(); assert 'No network. Unit-test percentile / stdev / empty stats.' in t; assert 'OK math unit tests (no network)' in t; assert 'tokens/s 50' in t\""
       ],
       "notes": "No-network math script + math-unit workflow. Empty / n=1 / n=5 / tok-s. After apply: assert math-unit.yml and OllamaVoice.Math.Tests.ps1 have those phrases. Unpatched has neither. Do not run pwsh. Do not hit :11434. Do not put dollar signs in afterApply. Do not put backticks in afterApply. Independent of ova-stop-noui-guard and ova-pwsh-syntax-ci."
     },
@@ -207,7 +208,7 @@
         "patches/dronehive-pro-chat-cp1252.patch"
       ],
       "afterApply": [
-        "python3 -c \"from pathlib import Path; t=Path('.github/workflows/ci.yml').read_text(); assert 'python-smoke-ubuntu:' in t; assert 'Pro agent (no ollama)' in t; assert 'ci pro write ci_ok.txt' in t; assert 'Work order show' in t\""
+        "python3 -c \"from pathlib import Path; t=Path('.github/workflows/ci.yml').read_text(); assert 'python-smoke-ubuntu:' in t; assert 'actions/checkout@v5' in t; assert 'actions/setup-python@v6' in t; assert 'Pro agent (no ollama)' in t; assert 'ci pro write ci_ok.txt' in t; assert 'Work order show' in t\""
       ],
       "notes": "Adds ubuntu-latest python-smoke alongside windows-latest. requires unicode-ci so applyNext applies patches/dronehive-pro-chat-cp1252.patch first. After apply: assert ci.yml has python-smoke-ubuntu and those steps. Unpatched windows-latest python-smoke stays. Do not run the smoke. Do not put backticks in afterApply. Independent of dronehive-portable-paths. Do not edit drone/pro/tool_agent.py."
     },
@@ -326,7 +327,7 @@
       "base": "288a484",
       "applyCheck": "ok",
       "afterApply": [
-        "python3 -c \"from pathlib import Path; t=Path('.github/workflows/lint.yml').read_text(); assert 'name: lint' in t; assert 'npm ci' in t; assert 'npm run lint' in t\""
+        "python3 -c \"from pathlib import Path; t=Path('.github/workflows/lint.yml').read_text(); assert 'name: lint' in t; assert 'actions/checkout@v5' in t; assert 'actions/setup-node@v5' in t; assert 'npm ci' in t; assert 'npm run lint' in t\""
       ],
       "notes": "New-file .github/workflows/lint.yml runs npm ci && npm run lint. Independent of bloom-ci-typecheck (ci.yml). eslint . is 0 errors / 2 warnings on 288a484. After apply: assert lint.yml has those runs. Unpatched has no lint.yml. ci.yml leftover stays absent. Do not fold lint into typecheck. Do not run npm. Do not put backticks in afterApply."
     },
