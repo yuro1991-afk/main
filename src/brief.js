@@ -100,11 +100,13 @@ export function displayCollision(job, options = {}) {
  */
 /**
  * Verify text that firstCommands / helpers may run. Dollar idents expand
- * empty in bash (same class as afterApply).
+ * empty in bash; backticks are command substitution (same class as afterApply).
  * @param {import("./ledger.js").Job | null | undefined} job
  */
 export function displayVerify(job) {
-  return String(job?.verify ?? "").replace(/\$([A-Za-z_][A-Za-z0-9_]*)/g, "$1");
+  return String(job?.verify ?? "")
+    .replace(/\$([A-Za-z_][A-Za-z0-9_]*)/g, "$1")
+    .replace(/`/g, "");
 }
 
 export function jobForDisplay(job, options = {}) {
