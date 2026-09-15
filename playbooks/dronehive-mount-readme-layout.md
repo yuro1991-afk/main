@@ -22,6 +22,7 @@ apps/drone-ollama-mount/README.md layout block only. Do not edit drone/pro/tool_
 - git checkout -b cursor/dronehive-mount-readme-layout-from-ops
 - git apply --check /path/to/main/patches/dronehive-mount-readme-layout.patch
 - git apply /path/to/main/patches/dronehive-mount-readme-layout.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-mount/README.md').read_text(); assert r'apps\\drone-ollama-mount\\                      ← this engine' in t; assert r'.\\                                            ← 24 drones' in t; assert r'G:\\AI-Home\\projects\\ai-worker-drone-0.5b' not in t"
 
 ## Verify
 

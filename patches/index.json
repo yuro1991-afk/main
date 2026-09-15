@@ -1099,8 +1099,10 @@
       "file": "patches/dronehive-mount-readme-layout.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "apps/drone-ollama-mount/README.md layout uses apps\\\\drone-ollama-mount and '.'. Independent of mount-readme-cargo (Build block). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-mount/README.md').read_text(); assert r'apps\\\\drone-ollama-mount\\\\                      ← this engine' in t; assert r'.\\\\                                            ← 24 drones' in t; assert r'G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "apps/drone-ollama-mount/README.md layout uses apps\\\\drone-ollama-mount and '.'. After apply: assert apps\\\\drone-ollama-mount\\\\ this engine, .\\\\ 24 drones, and G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b gone. Do not assert G:\\\\AI-Home\\\\projects\\\\drone-ollama-mount gone (cd / Launch leftovers keep it). Independent of mount-readme-cargo (Build block). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-mount-readme-launch",
