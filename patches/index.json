@@ -1462,8 +1462,10 @@
       "file": "patches/dronehive-ollama-app-open-out.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "main.rs Open drone out uses out. Independent of benchmarks leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/src/main.rs').read_text(); assert any(x.strip() == 'r'+chr(34)+'out'+chr(34)+',' for x in t.splitlines()); assert r'ai-worker-drone-0.5b\\\\out'+chr(34) not in t\""
+      ],
+      "notes": "main.rs Open drone out argument is out. After apply: assert a stripped r+quote+out+quote+, line and that 0.5b\\\\out+quote is gone. Benchmarks and seal leftovers still pin 0.5b\\\\out\\\\. Independent of benchmarks leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-ollama-app-open-benchmarks",
