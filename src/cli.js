@@ -274,9 +274,11 @@ export async function runCli(argv, options = {}) {
         write(JSON.stringify(proof, null, 2));
         return proof.failed === 0 && proof.skipped === 0 ? 0 : 1;
       }
+      const explicitId = positionals[0] || flags.job;
       const catalog = buildPatchCatalog(index, {
-        id: positionals[0] || flags.job,
+        id: explicitId,
         repo: flags.repo,
+        compact: !explicitId,
       });
       write(JSON.stringify(catalog, null, 2));
       return catalog.count > 0 ? 0 : 1;
@@ -641,7 +643,7 @@ Commands:
   patches [jobId] [--job id] [--repo github.com/yuro1991-afk/...] [--prove] [--prove-after-apply] [--siblings-root dir]
   playbooks [--check] [--write] [--job id] [--here] [--out dir]
 
-Yuri: forget Origin for sibling work. patches lists applyable GitHub diffs.
+Yuri: forget Origin for sibling work. patches lists applyable GitHub diffs. No --job is compact (nextApply dronehive-unicode-ci + id/file). Prefer brief --job.
 --prove clones --no-hardlinks throwaways, runs vanilla+stacked git apply --check, and never writes or resets siblings.
 --prove-after-apply clones --no-hardlinks throwaways and never writes or resets siblings.
 playbooks defaults to --check: compares First commands, reports missingRequires, never writes. No --job is compact (nextApply dronehive-unicode-ci + counts). Prefer brief --job.

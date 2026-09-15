@@ -585,14 +585,34 @@ export function assertPatchFilesExist(index, repoRoot) {
 }
 
 /**
+ * Bare `patches` dumps 162 applyNext lists. Compact keeps id/file/requires
+ * plus nextApply so a waking agent can see the first parked card.
+ * @param {PatchEntry} row
+ */
+function compactPatchRow(row) {
+  const out = {
+    id: row.id,
+    repo: row.repo,
+    file: row.file,
+    base: row.base,
+  };
+  if (Array.isArray(row.requires) && row.requires.length > 0) {
+    out.requires = row.requires;
+  }
+  return out;
+}
+
+/**
  * @param {PatchIndex} index
- * @param {{ id?: string, repo?: string }} [filters]
+ * @param {{ id?: string, repo?: string, compact?: boolean }} [filters]
  */
 export function buildPatchCatalog(index, filters = {}) {
-  const patches = listPatches(index, filters).map((row) => ({
-    ...row,
-    ...catalogApplyFields(row),
-  }));
+  const selected = listPatches(index, filters);
+  const compact = filters.compact === true;
+  const patches = selected.map((row) =>
+    compact ? compactPatchRow(row) : { ...row, ...catalogApplyFields(row) },
+  );
+  const nextApply = selected.length === 1 ? selected[0].id : (index.patches[0]?.id ?? null);
   return {
     contract: PATCH_CONTRACT.id,
     command: PATCH_CONTRACT.command,
@@ -600,10 +620,13 @@ export function buildPatchCatalog(index, filters = {}) {
     apply: index.apply,
     doNot: index.doNot,
     verifiedAt: index.verifiedAt ?? null,
+    compact,
+    nextApply,
+    prefer: nextApply ? `node src/cli.js brief --job ${nextApply}` : undefined,
     count: patches.length,
-    applyNext: patches.length === 1 ? patches[0].applyNext : undefined,
+    applyNext: !compact && patches.length === 1 ? patches[0].applyNext : undefined,
     proveAfterApplyCommand:
-      patches.length === 1 ? patches[0].proveAfterApplyCommand : undefined,
+      !compact && patches.length === 1 ? patches[0].proveAfterApplyCommand : undefined,
     patches,
   };
 }

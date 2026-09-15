@@ -53,7 +53,7 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
 ## Sibling patches (GitHub)
 
 **Yuri: forget Origin** for these cards. `node src/cli.js patches` lists
-applyable diffs under `patches/`. `patches --prove` re-checks them on a `--no-hardlinks` throwaway
+applyable diffs under `patches/` (compact: `nextApply` + id/file; `--job` for applyNext). `patches --prove` re-checks them on a `--no-hardlinks` throwaway
 and never writes or resets `/tmp/siblings`. This token **cannot push**
 those repos — clone and relaunch there. Do not copy PR #6’s autofix runner.
 Evidence: `reviews/SIBLING-PATCHES.md`. Merge

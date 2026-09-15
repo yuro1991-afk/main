@@ -341,6 +341,14 @@ test("cli patches lists the catalog", async () => {
   assert.ok(parsed.count >= 162);
   assert.equal(parsed.cannotPush, true);
   assert.match(parsed.doNot, /autofix/);
+  assert.equal(parsed.compact, true);
+  assert.equal(parsed.nextApply, "dronehive-unicode-ci");
+  assert.equal(parsed.prefer, "node src/cli.js brief --job dronehive-unicode-ci");
+  assert.equal(parsed.applyNext, undefined);
+  assert.equal(parsed.patches[0].id, "dronehive-unicode-ci");
+  assert.equal(parsed.patches[0].applyNext, undefined);
+  assert.ok(parsed.patches[0].file);
+  assert.ok(Buffer.byteLength(chunks.join(""), "utf8") < 80_000);
 });
 
 test("cli patches --job filters one card", async () => {
@@ -353,6 +361,8 @@ test("cli patches --job filters one card", async () => {
   assert.equal(code, 0);
   const parsed = JSON.parse(chunks.join(""));
   assert.equal(parsed.count, 1);
+  assert.equal(parsed.compact, false);
+  assert.equal(parsed.nextApply, "dronehive-unicode-ci");
   assert.equal(parsed.patches[0].id, "dronehive-unicode-ci");
   assert.ok(
     parsed.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")),
