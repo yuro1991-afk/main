@@ -354,8 +354,10 @@
       "file": "patches/faceswap-readme-requirements-honesty.patch",
       "base": "bba7188",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "README Requirements: engine is FACESWAP_ENGINE, not a Windows-only MultoModa host. Independent of honesty-env-paths (appends a footer) and ios-readme-honesty (ios/README.md)."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('README.md').read_text(); assert 'Engine healthy at' in t and 'FACESWAP_ENGINE' in t and 'one example, not the contract' in t\""
+      ],
+      "notes": "README Requirements: engine is FACESWAP_ENGINE. After apply: assert those phrases. Independent of honesty-env-paths (footer) and ios-readme-honesty (ios/README.md)."
     },
     {
       "id": "faceswap-readme-install-sh",

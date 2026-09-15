@@ -22,6 +22,7 @@ README Requirements bullet only. Different hunk from honesty-env-paths footer. D
 - git checkout -b cursor/faceswap-readme-requirements-honesty-from-ops
 - git apply --check /path/to/main/patches/faceswap-readme-requirements-honesty.patch
 - git apply /path/to/main/patches/faceswap-readme-requirements-honesty.patch
+- python3 -c "from pathlib import Path; t=Path('README.md').read_text(); assert 'Engine healthy at' in t and 'FACESWAP_ENGINE' in t and 'one example, not the contract' in t"
 
 ## Verify
 

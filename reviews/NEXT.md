@@ -10,8 +10,8 @@ Keep-busy tick **2026-09-15T00:15Z** still holds: 40 IDLE + this run
 RUNNING. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`3c12e2a`. Shipped this interval: `faceswap-ios-readme-honesty`
-ios/README.md afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`3c12e2a`. Shipped this interval: `faceswap-readme-requirements-honesty`
+README Requirements afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -29,7 +29,8 @@ ios/README.md afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused honesty apply | `ova-readme-linux-honesty` (README afterApply wired) |
 | next unused voice-card apply | `ova-voice-card-linux-honesty` (VOICE-ACCESS.md afterApply wired) |
 | next unused ios-readme apply | `faceswap-ios-readme-honesty` (ios/README.md afterApply wired) |
-| next afterApply to wire | `faceswap-readme-requirements-honesty` (README Requirements only) |
+| next unused requirements apply | `faceswap-readme-requirements-honesty` (README afterApply wired) |
+| next afterApply to wire | `faceswap-readme-install-sh` (README install block only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -80,7 +81,9 @@ Voice Access (`Windows 11 Voice Access` / `syntax/math CI only` /
 `not** a Voice Access install`).
 `faceswap-ios-readme-honesty` afterApply asserts ios/README.md
 (`FACESWAP_ENGINE` / `START.sh` / `one example, not the contract`).
-Next afterApply to wire is `faceswap-readme-requirements-honesty`.
+`faceswap-readme-requirements-honesty` afterApply asserts README
+(`Engine healthy at` / `FACESWAP_ENGINE` / `one example, not the contract`).
+Next afterApply to wire is `faceswap-readme-install-sh`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -118,7 +121,7 @@ then unused `dronehive-hive-docstring-honesty` (hive.py docstring only; independ
 then unused `dronehive-work-order-doc-honesty` (docs/WORK_ORDER.md only; independent of hive.py),
 then unused `dronehive-seed-work-order-doc-honesty` (seed WORK_ORDER.md only; independent of docs/WORK_ORDER.md),
 then unused `dronehive-bench-goal-honesty` (GOAL string only; independent of script-host-roots ROOT hunks),
-then unused `faceswap-readme-requirements-honesty` (README Requirements bullet only; independent of honesty-env-paths footer),
+then unused `faceswap-readme-requirements-honesty` (README Requirements bullet only; afterApply wired; independent of honesty-env-paths footer),
 then unused `faceswap-readme-install-sh` (README install block only; independent of start-sh new file),
 then unused `dronehive-buzzer-hive-library-honesty` (buzzer_hive.json library keys only; independent of config-load-overlay),
 then unused `dronehive-seed-buzzer-hive-library-honesty` (seed buzzer_hive.json only; independent of live config),
