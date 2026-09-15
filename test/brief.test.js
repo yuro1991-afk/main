@@ -32,7 +32,7 @@ test("siblings.json loads and maps dronehive to PR 5", () => {
   const siblings = loadSiblings(SIBLINGS);
   assert.deepEqual(
     siblings.prs.map((pr) => pr.number),
-    [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84],
+    [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88],
   );
   assert.equal(siblings.prs[7].number, 9);
   assert.equal(siblings.prs[8].number, 10);
@@ -90,7 +90,7 @@ test("siblings.json loads and maps dronehive to PR 5", () => {
   );
   assert.deepEqual(
     siblingsForJob(siblings, "review-landing-pad-prs").map((pr) => pr.number),
-    [8, 11, 15, 20, 24, 27, 31, 35, 39, 43, 47, 51, 55, 59, 63, 66, 69, 73, 77, 81],
+    [8, 11, 15, 20, 24, 27, 31, 35, 39, 43, 47, 51, 55, 59, 63, 66, 69, 73, 77, 81, 85],
   );
   assert.deepEqual(
     siblingsForJob(siblings, "dronehive-seed-work-order-doc-codex-paths").map((pr) => pr.number),
@@ -235,7 +235,7 @@ test("brief attaches sibling PR 5 to the unicode card", () => {
   assert.equal(brief.related[0].number, 9);
   assert.match(brief.related[0].meaning, /patches\//);
   assert.ok(brief.hardRules.some((rule) => rule.includes("no more Superbrain")));
-  assert.ok(brief.hardRules.some((rule) => rule.includes("#8/#9/#10/#11/#12/#13/#14/#15/#16/#17/#18/#19/#20/#21/#22/#23/#24/#25/#26/#27/#28/#29/#30/#31/#32/#33/#34/#35/#36/#37/#38/#39/#40/#41/#42/#43/#44/#45/#46/#47/#48/#49/#50/#51/#52/#53/#54/#55/#56/#57/#58/#59/#60/#61/#62/#63/#64/#65/#66/#67/#68/#69/#70/#71/#72/#73/#74/#75/#76/#77/#78/#79/#80/#81/#82/#83/#84")));
+  assert.ok(brief.hardRules.some((rule) => rule.includes("#8/#9/#10/#11/#12/#13/#14/#15/#16/#17/#18/#19/#20/#21/#22/#23/#24/#25/#26/#27/#28/#29/#30/#31/#32/#33/#34/#35/#36/#37/#38/#39/#40/#41/#42/#43/#44/#45/#46/#47/#48/#49/#50/#51/#52/#53/#54/#55/#56/#57/#58/#59/#60/#61/#62/#63/#64/#65/#66/#67/#68/#69/#70/#71/#72/#73/#74/#75/#76/#77/#78/#79/#80/#81/#82/#83/#84/#85/#86/#87/#88")));
   assert.ok(brief.hardRules.some((rule) => rule.includes("forget Origin for this card")));
   assert.ok(brief.hardRules.some((rule) => rule.includes("Prefer brief / proveAfterApplyCommand")));
   assert.ok(!brief.hardRules.some((rule) => rule.includes("sibling cards stay blocked")));
@@ -569,7 +569,7 @@ test("cli brief defaults to leftover unused exhausted", async () => {
   assert.equal(board.lead.role, "patch-catalog");
   assert.deepEqual(
     board.prs.map((pr) => pr.number),
-    [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84],
+    [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88],
   );
   assert.match(listed.join(""), /keep-busy-queue/);
   assert.match(listed.join(""), /patch-catalog/);
