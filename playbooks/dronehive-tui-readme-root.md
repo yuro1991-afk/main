@@ -22,6 +22,7 @@ apps/dronehive-tui/README.md --root line only. Do not edit drone/pro/tool_agent.
 - git checkout -b cursor/dronehive-tui-readme-root-from-ops
 - git apply --check /path/to/main/patches/dronehive-tui-readme-root.patch
 - git apply /path/to/main/patches/dronehive-tui-readme-root.patch
+- python3 -c "from pathlib import Path; t=Path('apps/dronehive-tui/README.md').read_text(); assert 'dronehive-tui.exe --root .' in t; assert r'G:\\AI-Home\\projects\\ai-worker-drone-0.5b' not in t"
 
 ## Verify
 

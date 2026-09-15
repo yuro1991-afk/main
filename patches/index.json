@@ -1077,8 +1077,10 @@
       "file": "patches/dronehive-tui-readme-root.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "apps/dronehive-tui/README.md --root uses '.'. Independent of tui-readme-cargo (PATH line only). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/dronehive-tui/README.md').read_text(); assert 'dronehive-tui.exe --root .' in t; assert r'G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "apps/dronehive-tui/README.md --root uses '.'. After apply: assert dronehive-tui.exe --root . and G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b gone. Leaves cargo PATH G: leftover. Independent of tui-readme-cargo (PATH line only). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-ollama-tui-readme-install",
