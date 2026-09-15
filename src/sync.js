@@ -1,7 +1,11 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { isWorldPhaseJob } from "./kinds.js";
 import { effectiveStatus, listJobs } from "./ledger.js";
+import { applyNextFor, defaultPatchesIndexPath, loadPatchIndex, patchForJob, proveAfterApplyCommand } from "./patches.js";
+
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
 export const SYNC_CONTRACT = "agent-ops.sync.v1";
 
@@ -110,10 +114,11 @@ export function syncRoster(ledger, roster, agents, nowMs = Date.now()) {
     const row = { bcId: agent.bcId, name: agent.name, jobId: job.id };
     roster.assignments.push(row);
     usedJobIds.add(job.id);
-    added.push(row);
+    added.push({ ...row, ...takeInsteadSyncFields(job) });
   }
   const uncovered = newcomers.filter((agent) => !roster.assignments.some((row) => row.bcId === agent.bcId));
   const gone = roster.assignments.filter((row) => !idle.some((agent) => agent.bcId === row.bcId));
+  const leftoverTake = leftover[0] ? takeInsteadSyncFields(leftover[0]) : {};
   return {
     contract: SYNC_CONTRACT,
     idle: idle.length,
@@ -123,6 +128,29 @@ export function syncRoster(ledger, roster, agents, nowMs = Date.now()) {
     uncovered,
     gone,
     leftover: leftover.map((job) => job.id),
-    rule: "New idle pad agents get the next unused Genesis card. Existing assignments stay. No 45-minute leases.",
+    leftoverTakeInstead: leftoverTake.takeInstead,
+    leftoverApplyNext: leftoverTake.applyNext,
+    leftoverProveAfterApplyCommand: leftoverTake.proveAfterApplyCommand,
+    rule: "New idle pad agents get the next unused Genesis card. Superbrain leftover attaches take-instead apply. Existing assignments stay. No 45-minute leases.",
   };
+}
+
+/**
+ * Leftover Superbrain sit-out keeps jobId. Attach first parked catalog
+ * apply so sync does not retarget keep-busy (#8).
+ * @param {{ id?: string } | null | undefined} job
+ */
+function takeInsteadSyncFields(job) {
+  if (job?.id !== "gub-superbrain-probe") return {};
+  try {
+    const patch = patchForJob(loadPatchIndex(defaultPatchesIndexPath(ROOT)), "dronehive-unicode-ci");
+    if (!patch) return {};
+    return {
+      takeInstead: "dronehive-unicode-ci",
+      applyNext: applyNextFor(patch),
+      proveAfterApplyCommand: proveAfterApplyCommand(patch.id),
+    };
+  } catch {
+    return {};
+  }
 }

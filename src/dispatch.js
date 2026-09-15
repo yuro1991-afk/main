@@ -251,6 +251,28 @@ ${renderLaunchPrompt(job)}
  * @param {import("./ledger.js").Job | null} job
  */
 export function renderAssignedLaunch(row, job) {
+  if (job?.id === "gub-superbrain-probe") {
+    const prove = proveAfterApplyForJob(job);
+    return `# Idle-agent relaunch — ${row.name}
+
+Yuri: no more Superbrain. Do not probe :45001 / :8791. Do not run node src/cli.js probe.
+
+You were assigned leftover Superbrain. Take review-main-pr10, or apply first parked catalog leftover dronehive-unicode-ci on a sibling write checkout.
+
+- agent: ${row.name}
+- bcId: \`${row.bcId}\`
+- card: \`${row.jobId}\`
+- take instead: \`dronehive-unicode-ci\`
+- prove: \`node src/cli.js patches --prove --job dronehive-unicode-ci\`
+- prove afterApply: \`${prove}\`
+
+Do not paste this into an Origin cloud agent. Do not inventory this landing pad.
+
+---
+
+${renderLaunchPrompt(job)}
+`;
+  }
   const body = job
     ? renderLaunchPrompt(job)
     : "Unknown job. Do not invent a fifth landing-pad queue.";

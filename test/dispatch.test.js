@@ -17,6 +17,7 @@ import {
   leftoverLaunchRows,
   loadRoster,
   peekBusyJob,
+  renderAssignedLaunch,
   renderLeftoverLaunch,
 } from "../src/dispatch.js";
 import { loadSiblings } from "../src/siblings.js";
@@ -330,6 +331,19 @@ test("leftover launch rows skip rostered cards", () => {
       existsSync(fileURLToPath(new URL(`../reviews/launch/${row.jobId}.md`, import.meta.url))),
     ),
   );
+});
+
+test("assigned Superbrain launch refuses Origin paste", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const sitout = ledger.jobs.find((item) => item.id === "gub-superbrain-probe");
+  const text = renderAssignedLaunch(
+    { bcId: "bc-brand-new-sync", name: "New leftover", jobId: "gub-superbrain-probe" },
+    sitout,
+  );
+  assert.match(text, /no more Superbrain/);
+  assert.match(text, /take instead: `dronehive-unicode-ci`/);
+  assert.match(text, /Do not paste this into an Origin cloud agent/);
+  assert.doesNotMatch(text, /Paste the brief below into a new Origin cloud agent/);
 });
 
 test("live leftover Superbrain assign attaches take-instead apply pair", () => {
