@@ -306,3 +306,12 @@ test("unknown command is a usage error", async () => {
   const result = await capture(["explode"]);
   assert.equal(result.code, 2);
 });
+
+test("help says playbooks defaults to check and refuses in-repo write", async () => {
+  const result = await capture(["help"]);
+  assert.equal(result.code, 0);
+  assert.match(result.out, /playbooks defaults to --check/);
+  assert.match(result.out, /missingRequires/);
+  assert.match(result.out, /Prefer brief --job/);
+  assert.match(result.out, /refuses the in-repo playbooks\/ directory/);
+});

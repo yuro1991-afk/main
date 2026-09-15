@@ -424,36 +424,56 @@ export async function runCli(argv, options = {}) {
     }
     case "playbooks": {
       const ledger = loadLedger(ledgerPath);
-      const dest = flags.out
-        ? resolve(flags.out)
-        : resolve(options.root ?? ROOT, "playbooks");
-      if (flags.check === "true") {
+      const repoPlaybooks = resolve(options.root ?? ROOT, "playbooks");
+      const dest = flags.out ? resolve(flags.out) : repoPlaybooks;
+      const wantWrite = flags.write === "true";
+      const wantCheck = flags.check === "true";
+      if (wantWrite && wantCheck) {
+        write("playbooks: pass --check or --write, not both");
+        return 2;
+      }
+      if (wantWrite) {
+        if (dest === repoPlaybooks) {
+          write(
+            JSON.stringify(
+              {
+                command: "playbooks",
+                wrote: false,
+                error: "playbooks --write refuses the in-repo playbooks/ directory",
+                doNot: "Do not run writePlaybooks over playbooks/. Prefer brief / proveAfterApplyCommand.",
+                prefer: "node src/cli.js brief --job <id>",
+                hint: "pass --out <dir> to write a throwaway copy",
+              },
+              null,
+              2,
+            ),
+          );
+          return 2;
+        }
         const explicitId =
           positionals[0] || (flags.job && flags.job !== "true" ? flags.job : "");
         const jobs = explicitId
           ? [resolveJob(ledger, positionals, flags, nowMs, options)].filter(Boolean)
-          : catalogCheckJobs(ledger, options);
-        const report = checkPlaybooks(jobs, dest);
-        write(JSON.stringify(report, null, 2));
+          : listJobs(ledger, { status: "open", ...jobFilters(flags) }, nowMs);
+        const written = writePlaybooks(jobs, dest);
+        const packetDir = flags.packets ? resolve(flags.packets) : dest;
+        const packets = writeHandoffPackets(jobs, packetDir);
+        write(
+          JSON.stringify(
+            { dir: dest, count: written.length, files: written, packets, wrote: true },
+            null,
+            2,
+          ),
+        );
         return 0;
       }
-      const jobs = listJobs(ledger, { status: "open", ...jobFilters(flags) }, nowMs);
-      const written = writePlaybooks(jobs, dest);
-      const defaultReviews = resolve(options.root ?? ROOT, "reviews");
-      const defaultPlaybooks = resolve(options.root ?? ROOT, "playbooks");
-      const packetDir = flags.packets
-        ? resolve(flags.packets)
-        : dest === defaultPlaybooks
-          ? defaultReviews
-          : dest;
-      const packets = writeHandoffPackets(jobs, packetDir);
-      write(
-        JSON.stringify(
-          { dir: dest, count: written.length, files: written, packets },
-          null,
-          2,
-        ),
-      );
+      const explicitId =
+        positionals[0] || (flags.job && flags.job !== "true" ? flags.job : "");
+      const jobs = explicitId
+        ? [resolveJob(ledger, positionals, flags, nowMs, options)].filter(Boolean)
+        : catalogCheckJobs(ledger, options);
+      const report = checkPlaybooks(jobs, dest);
+      write(JSON.stringify(report, null, 2));
       return 0;
     }
     case "prompt": {
@@ -610,12 +630,13 @@ Commands:
   tick [--out path]
   siblings
   patches [jobId] [--job id] [--repo github.com/yuro1991-afk/...] [--prove] [--prove-after-apply] [--siblings-root dir]
-  playbooks [--check] [--job id] [--here] [--out dir]
+  playbooks [--check] [--write] [--job id] [--here] [--out dir]
 
 Yuri: forget Origin for sibling work. patches lists applyable GitHub diffs.
 --prove runs vanilla+stacked git apply --check and resets the checkout.
 --prove-after-apply clones --no-hardlinks throwaways and never writes siblings.
-playbooks --check compares on-disk First commands to live firstCommands and never writes.
+playbooks defaults to --check: compares First commands, reports missingRequires, never writes. Prefer brief --job.
+playbooks --write requires --out and refuses the in-repo playbooks/ directory.
 This token cannot push those repos. Do not copy PR #6 autofix.
 Genesis only unless you pass --all / merge the GitHub-first board.
 Do not reopen GitHub PR #1. Origin: origin.cursor.com/git/yuri-afk/genesis.`;

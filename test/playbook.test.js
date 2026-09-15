@@ -60,17 +60,71 @@ test("writePlaybooks writes one file per job", () => {
   assert.match(world, /origin auth status/);
 });
 
-test("cli playbooks --here writes into --out", async () => {
+test("cli playbooks --write --here writes into --out", async () => {
   const dir = mkdtempSync(join(tmpdir(), "agent-ops-playbooks-cli-"));
   const chunks = [];
-  const code = await runCli(["playbooks", "--here", "--out", dir], {
+  const code = await runCli(["playbooks", "--write", "--here", "--out", dir], {
     nowMs: NOW,
     write: (value) => {
       chunks.push(value);
     },
   });
   assert.equal(code, 0);
-  assert.match(chunks.join(""), /"count": 0/);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.count, 0);
+  assert.equal(parsed.wrote, true);
+});
+
+test("cli playbooks defaults to --check and never writes", async () => {
+  const dest = join(ROOT, "playbooks", "dronehive-ubuntu-smoke.md");
+  const before = readFileSync(dest, "utf8");
+  const chunks = [];
+  const code = await runCli(["playbooks", "--job", "dronehive-ubuntu-smoke"], {
+    nowMs: NOW,
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.contract, "agent-ops.playbooks.check.v1");
+  assert.equal(parsed.wrote, false);
+  assert.deepEqual(parsed.results[0].missingRequires, ["patches/dronehive-pro-chat-cp1252.patch"]);
+  assert.match(parsed.doNot, /writePlaybooks/);
+  assert.equal(readFileSync(dest, "utf8"), before);
+});
+
+test("cli playbooks --write refuses the in-repo playbooks directory", async () => {
+  const dest = join(ROOT, "playbooks", "dronehive-unicode-ci.md");
+  const before = readFileSync(dest, "utf8");
+  const chunks = [];
+  const code = await runCli(["playbooks", "--write"], {
+    nowMs: NOW,
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 2);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.wrote, false);
+  assert.match(parsed.error, /refuses the in-repo playbooks/);
+  assert.match(parsed.prefer, /brief --job/);
+  assert.equal(readFileSync(dest, "utf8"), before);
+});
+
+test("cli playbooks --check --write is a usage error", async () => {
+  const dest = join(ROOT, "playbooks", "dronehive-unicode-ci.md");
+  const before = readFileSync(dest, "utf8");
+  const chunks = [];
+  const code = await runCli(["playbooks", "--check", "--write", "--out", mkdtempSync(join(tmpdir(), "agent-ops-playbooks-both-"))], {
+    nowMs: NOW,
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 2);
+  assert.match(chunks.join(""), /pass --check or --write, not both/);
+  assert.equal(readFileSync(dest, "utf8"), before);
 });
 
 test("on-disk catalog playbooks are stale vs live firstCommands", () => {

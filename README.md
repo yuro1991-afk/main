@@ -29,7 +29,7 @@ node src/cli.js relaunch
 node src/cli.js helpers
 node src/cli.js brief
 node src/cli.js handoff
-node src/cli.js playbooks
+node src/cli.js playbooks                 # check; never writes playbooks/
 node src/cli.js siblings
 node src/cli.js patches
 node src/cli.js claim <id> --agent "$CURSOR_AGENT_ID"

@@ -25,7 +25,7 @@ Do not copy PR #6 autofix. Do not retarget keep-busy (that is #8).
 | fork `bc-84d93b47` | **eyes → vision → bridge** (already theirs) |
 | next unused apply | `faceswap-start-sh` |
 | prove a leftover gate | `patches --prove-after-apply --job <id>` (also on `--job` JSON) |
-| check stale playbook | `playbooks --check --job <id>` then `brief --job` (do not writePlaybooks) |
+| check stale playbook | `playbooks --job <id>` (defaults to --check; reports `missingRequires`) then `brief --job`. `--write` refuses in-repo `playbooks/` |
 | next stacked apply | `dronehive-runtime-host-paths` (`requires` portable-paths) |
 | next unused stacked apply | `dronehive-config-load-overlay` (`requires` portable-paths) |
 | last host_paths stacked apply | `dronehive-app-links-host-paths` (`requires` portable-paths) |
@@ -253,8 +253,9 @@ then asserts ci.yml has python-smoke-ubuntu. Do not run the smoke.
 the leftover file (ubuntu-smoke names unicode-ci first).
 `displayNotes` for those cards names the same apply chain (or
 `Requires (apply first)` when notes already mention the leftover file).
-`playbooks --check --job dronehive-ubuntu-smoke` reports that prior as
-`missingRequires`. Prefer `brief --job`. Do not run writePlaybooks.
+`playbooks --job dronehive-ubuntu-smoke` (defaults to `--check`) reports
+that prior as `missingRequires`. Prefer `brief --job`. Bare `playbooks`
+never writes. `--write` refuses in-repo `playbooks/`.
 `dronehive-ubuntu-smoke` verify / firstCommands last line is a ci.yml
 phrase gate. Do not run the smoke.
 `dronehive-portable-paths` / `dronehive-script-host-roots` /
