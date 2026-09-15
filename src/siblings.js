@@ -47,11 +47,11 @@ export function describeRole(role) {
     case "merge-8-then-9":
       return "Resolved #8 then #9. Prefer this product over merging #8 and #9 separately. Catalog still leads as #9.";
     case "leftover-launches":
-      return "Apply launch packets for parked leftover catalog cards. Not a second catalog. Catalog still leads as #9.";
+      return "Apply launch packets for parked leftover catalog cards. Not a second catalog. Catalog still leads as #9. Leftover launches are exhausted (nextMissing null). Prefer brief --job dronehive-unicode-ci. Do not invent leftover 163+.";
     case "genesis-arena-paths":
       return "Live Genesis pointer at D:\\\\Wilderness\\\\Genesis. Review only. Do not steal. Do not invent a second arena.";
     case "assign-job":
-      return "assign --job writes one leftover Apply launch with catalog-first related. Stacked on leftover-launches #12.";
+      return "assign --job writes one leftover Apply launch with catalog-first related. Stacked on leftover-launches #12. Leftover launches are exhausted. Prefer brief --job dronehive-unicode-ci. Do not invent leftover 163+.";
     case "siblings-board":
       return "Records open landing-pad PRs on ledger/siblings.json. Lead stays catalog #9.";
     case "assign-missing":

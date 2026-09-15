@@ -65,8 +65,14 @@ test("siblings.json loads and maps dronehive to PR 5", () => {
   assert.match(describeRole("autofix-runner"), /Do not copy/);
   assert.match(describeRole("merge-8-then-9"), /Resolved #8 then #9/);
   assert.match(describeRole("leftover-launches"), /Not a second catalog/);
+  assert.match(describeRole("leftover-launches"), /Leftover launches are exhausted/);
+  assert.match(describeRole("leftover-launches"), /dronehive-unicode-ci/);
+  assert.match(describeRole("leftover-launches"), /163\+/);
   assert.match(describeRole("genesis-arena-paths"), /Wilderness/);
   assert.match(describeRole("assign-job"), /assign --job/);
+  assert.match(describeRole("assign-job"), /Leftover launches are exhausted/);
+  assert.match(describeRole("assign-job"), /dronehive-unicode-ci/);
+  assert.match(describeRole("assign-job"), /163\+/);
   assert.match(describeRole("siblings-board"), /siblings\.json/);
   assert.match(describeRole("assign-missing"), /never writes/);
   assert.match(describeRole("assign-missing"), /Leftover launches are exhausted/);
