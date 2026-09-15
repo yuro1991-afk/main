@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T03:49Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T03:50Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`783525f`. Shipped this interval: `ova-api-host-override`
-loopback-override afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`371f5d4`. Shipped this interval: `opensussy-linux-syntax-ci`
+linux-syntax afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -169,7 +169,8 @@ loopback-override afterApply. Leftover `next` stays alone. Do not invent leftove
 | next unused commit-pwa-icons apply | `faceswap-commit-pwa-icons` (Home Screen PNGs afterApply wired) |
 | next unused pwsh-syntax-ci apply | `ova-pwsh-syntax-ci` (pwsh-syntax.yml afterApply wired) |
 | next unused api-host-override apply | `ova-api-host-override` (loopback OV_API_BASE afterApply wired) |
-| next early afterApply to wire | `opensussy-linux-syntax-ci` (bash -n wrappers only) |
+| next unused linux-syntax-ci apply | `opensussy-linux-syntax-ci` (linux-syntax.yml afterApply wired) |
+| next early afterApply to wire | `opensussy-sec-residuals-catalog` (R1-R10 catalog only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -501,7 +502,9 @@ the three pwa/ Home Screen PNGs exist with PNG magic (unpatched has none).
 .github/workflows/pwsh-syntax.yml is parser-only and never talks to Ollama.
 `ova-api-host-override` afterApply asserts
 README Local API override, SECURITY Loopback API override, and Test-OVLoopbackApiBase.
-Next early afterApply to wire is `opensussy-linux-syntax-ci`. Do not invent leftovers.
+`opensussy-linux-syntax-ci` afterApply asserts
+.github/workflows/linux-syntax.yml is bash -n only and never executes AutoYaST.
+Next early afterApply to wire is `opensussy-sec-residuals-catalog`. Do not invent leftovers.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -670,8 +673,9 @@ then unused `bloom-grok-pwa-test-sync` (grok-pwa-plugin.test.mjs only; afterAppl
 then unused `faceswap-honesty-env-paths` (HONESTY.md env footer only; afterApply wired),
 then unused `faceswap-commit-pwa-icons` (Home Screen PNGs only; afterApply wired),
 then unused `ova-pwsh-syntax-ci` (pwsh-syntax.yml only; afterApply wired),
-then unused `ova-api-host-override` (loopback OV_API_BASE only; afterApply wired).
-Early empty afterApply next: `opensussy-linux-syntax-ci` (bash -n wrappers only).
+then unused `ova-api-host-override` (loopback OV_API_BASE only; afterApply wired),
+then unused `opensussy-linux-syntax-ci` (linux-syntax.yml only; afterApply wired).
+Early empty afterApply next: `opensussy-sec-residuals-catalog` (R1-R10 catalog only).
 Newcomer `bc-710c5477` Hunt sibling: unused apply `bloom-grok-pwa-test-sync`.
 `bc-f407303f`: `review-main-pr10` (fork's Python arena/infra).
 `bc-5fe241dd` Summarize arena: do not steal `genesis-world-arena`; unused apply `faceswap-design-honesty`.

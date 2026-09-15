@@ -137,8 +137,10 @@
       "file": "patches/opensussy-linux-syntax-ci.patch",
       "base": "d4b2949",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "ubuntu-latest bash -n on six wrappers. Does not execute AutoYaST or format disks."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('.github/workflows/linux-syntax.yml').read_text(); assert 'name: linux-syntax' in t; assert 'Syntax-check OpenSussy shell wrappers only' in t; assert 'install/linux/tumbleweed/OpenSussy-deep.sh' in t; assert 'OK syntax. Did not execute AutoYaST' in t\""
+      ],
+      "notes": "ubuntu-latest bash -n on six wrappers. Does not execute AutoYaST or format disks. After apply: assert .github/workflows/linux-syntax.yml has those phrases. Unpatched has no .github. Do not run the wrappers. Do not put dollar signs in afterApply. Do not put backticks in afterApply. Independent of opensussy-agama-honesty and opensussy-sec-residuals-catalog."
     },
     {
       "id": "opensussy-sec-residuals-catalog",

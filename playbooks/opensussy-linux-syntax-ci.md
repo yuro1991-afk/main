@@ -22,7 +22,7 @@ Do not edit Windows WPF / LinuxPayload.cs wipe path. Do not collide dronehive CI
 - git checkout -b cursor/opensussy-linux-syntax-ci-from-ops
 - git apply --check /path/to/main/patches/opensussy-linux-syntax-ci.patch
 - git apply /path/to/main/patches/opensussy-linux-syntax-ci.patch
-- Workflow parses the six shell wrappers; job must not execute autoinst-deep.xml or format disks.
+- python3 -c "from pathlib import Path; t=Path('.github/workflows/linux-syntax.yml').read_text(); assert 'name: linux-syntax' in t; assert 'Syntax-check OpenSussy shell wrappers only' in t; assert 'install/linux/tumbleweed/OpenSussy-deep.sh' in t; assert 'OK syntax. Did not execute AutoYaST' in t"
 
 ## Verify
 
