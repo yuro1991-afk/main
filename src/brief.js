@@ -274,14 +274,14 @@ export function firstCommands(job, options = {}) {
       if (job.id === "review-landing-pad-prs") {
         return [
           "Read reviews/landing-pad-prs.md.",
-          "Review an existing open PR: #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, or #46. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8.",
+          "Review an existing open PR: #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, or #50. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8.",
           "Do not invent a new tree on empty main.",
           displayVerify(job),
         ];
       }
       return [
         "Do not invent a new tree on empty main.",
-        "Review an existing open PR: #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, or #46. Skip conflicting #4/#5/#6. #3 is merged.",
+        "Review an existing open PR: #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, or #50. Skip conflicting #4/#5/#6. #3 is merged.",
         displayVerify(job),
       ];
     case "origin-slice":
@@ -311,7 +311,7 @@ export function firstCommands(job, options = {}) {
 function hardRules(job) {
   const shared = [
     "Do not reopen https://github.com/yuro1991-afk/main/pull/1.",
-    "Do not open another landing-pad queue. Review #8/#9/#10/#11/#12/#13/#14/#15/#16/#17/#18/#19/#20/#21/#22/#23/#24/#25/#26/#27/#28/#29/#30/#31/#32/#33/#34/#35/#36/#37/#38/#39/#40/#41/#42/#43/#44/#45/#46 or apply a catalog patch.",
+    "Do not open another landing-pad queue. Review #8/#9/#10/#11/#12/#13/#14/#15/#16/#17/#18/#19/#20/#21/#22/#23/#24/#25/#26/#27/#28/#29/#30/#31/#32/#33/#34/#35/#36/#37/#38/#39/#40/#41/#42/#43/#44/#45/#46/#47/#48/#49/#50 or apply a catalog patch.",
     "Do not copy packages/keep-busy from PR #4 onto this branch.",
     "Yuri: forget Origin. Default work is local GitHub siblings. This token cannot push them.",
     "Yuri: no more Superbrain. Do not probe :45001 / :8791. Do not run node src/cli.js probe.",

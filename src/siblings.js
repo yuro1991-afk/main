@@ -123,7 +123,7 @@ export const SIBLINGS_CONTRACT = "agent-ops.siblings.v1";
 export const FIRST_PARKED_APPLY = "dronehive-unicode-ci";
 
 /**
- * Bare `siblings` dump. Keeps file order on `prs` (union 2–46).
+ * Bare `siblings` dump. Keeps file order on `prs` (union 2–50).
  * `lead` / `nextApply` name the catalog so agents do not take #5 first.
  *
  * @param {{ prs: Array<{ owns?: string[], number: number, url: string, role: string, title: string, branch: string }> }} siblings
