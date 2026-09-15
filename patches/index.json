@@ -1286,8 +1286,10 @@
       "file": "patches/dronehive-doc-synaptic-loop-cd.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "docs/SYNAPTIC_LOOP.md cd uses '.'. Independent of work-order-doc-cd. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/SYNAPTIC_LOOP.md').read_text(); assert '\\ncd .\\n' in t; assert r'cd G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "docs/SYNAPTIC_LOOP.md CLI cd uses a standalone cd . line. After apply: assert that line and that the G: project cd is gone. Independent of work-order-doc-cd leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-doc-super-kernel-cd",

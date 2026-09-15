@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T02:46Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T02:48Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`fe12f5f`. Shipped this interval: `dronehive-doc-super-mesh-cd`
-Commands cd afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`1b5c571`. Shipped this interval: `dronehive-doc-synaptic-loop-cd`
+CLI cd afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -117,7 +117,8 @@ Commands cd afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused doc-pro-cd apply | `dronehive-doc-pro-cd` (PRO.md Run cd afterApply wired) |
 | next unused doc-super-llms-cd apply | `dronehive-doc-super-llms-cd` (SUPER_LLMS.md cd afterApply wired) |
 | next unused doc-super-mesh-cd apply | `dronehive-doc-super-mesh-cd` (SUPER_MESH.md Commands cd afterApply wired) |
-| next afterApply to wire | `dronehive-doc-synaptic-loop-cd` (docs/SYNAPTIC_LOOP.md cd only) |
+| next unused doc-synaptic-loop-cd apply | `dronehive-doc-synaptic-loop-cd` (SYNAPTIC_LOOP.md CLI cd afterApply wired) |
+| next afterApply to wire | `dronehive-doc-super-kernel-cd` (docs/SUPER_KERNEL.md Set-Location only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -345,7 +346,9 @@ Face-swap README honesty leftovers are exhausted.
 (standalone `cd .` line; G: project cd is gone).
 `dronehive-doc-super-mesh-cd` afterApply asserts docs/SUPER_MESH.md
 (standalone `cd .` line; G: project cd is gone).
-Next afterApply to wire is `dronehive-doc-synaptic-loop-cd`.
+`dronehive-doc-synaptic-loop-cd` afterApply asserts docs/SYNAPTIC_LOOP.md
+(standalone `cd .` line; G: project cd is gone).
+Next afterApply to wire is `dronehive-doc-super-kernel-cd`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -467,7 +470,7 @@ then unused `dronehive-seed-doc-operational-cd` (drone/app/seed/docs/OPERATIONAL
 then unused `dronehive-doc-pro-cd` (docs/PRO.md only; afterApply wired),
 then unused `dronehive-doc-super-llms-cd` (docs/SUPER_LLMS.md only; afterApply wired),
 then unused `dronehive-doc-super-mesh-cd` (docs/SUPER_MESH.md only; afterApply wired),
-then unused `dronehive-doc-synaptic-loop-cd` (docs/SYNAPTIC_LOOP.md only),
+then unused `dronehive-doc-synaptic-loop-cd` (docs/SYNAPTIC_LOOP.md only; afterApply wired),
 then unused `dronehive-doc-super-kernel-cd` (docs/SUPER_KERNEL.md only),
 then unused `dronehive-doc-honesty-library` (docs/HONESTY.md only),
 then unused `dronehive-seed-doc-honesty-library` (drone/app/seed/docs/HONESTY.md only),
