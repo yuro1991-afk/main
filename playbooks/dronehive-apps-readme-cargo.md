@@ -22,6 +22,7 @@ apps/README.md build line only. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-apps-readme-cargo-from-ops
 - git apply --check /path/to/main/patches/dronehive-apps-readme-cargo.patch
 - git apply /path/to/main/patches/dronehive-apps-readme-cargo.patch
+- python3 -c "from pathlib import Path; t=Path('apps/README.md').read_text(); assert 'host/ai-home/tools/cargo' in t; assert 'one host example' in t"
 
 ## Verify
 
