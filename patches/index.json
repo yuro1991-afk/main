@@ -55,8 +55,10 @@
       "file": "patches/bloom-health-probe.patch",
       "base": "288a484",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "scripts/probe-health.mjs. Timeout stays unreachable, never live. Not Superbrain :45001."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('scripts/probe-health.mjs').read_text(); assert 'unreachable' in t; assert 'live: false' in t; assert '45001' in t\""
+      ],
+      "notes": "scripts/probe-health.mjs. After apply: assert timeout stays unreachable and live is false. Unpatched has no probe script. Do not run the probe. Do not hit :45001. Do not put backticks in afterApply."
     },
     {
       "id": "opensussy-ship-json-2-0-0",

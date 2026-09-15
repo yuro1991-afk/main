@@ -22,7 +22,7 @@ Do not probe or relabel Superbrain from this card. Do not bind :8787/:8788 Origi
 - git checkout -b cursor/bloom-health-probe-from-ops
 - git apply --check /path/to/main/patches/bloom-health-probe.patch
 - git apply /path/to/main/patches/bloom-health-probe.patch
-- Write a small evidence JSON (status ok | unreachable). Never upgrade a timeout to LIVE. Optional: npm run preview if build already exists.
+- python3 -c "from pathlib import Path; t=Path('scripts/probe-health.mjs').read_text(); assert 'unreachable' in t; assert 'live: false' in t; assert '45001' in t"
 
 ## Verify
 

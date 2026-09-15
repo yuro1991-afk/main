@@ -1111,6 +1111,19 @@ test("cli patches --job bloom-ci-typecheck includes the ci.yml afterApply", asyn
   assert.ok(parsed.applyNext.some((line) => line.includes(".github/workflows/ci.yml") && line.includes("name: ci") && line.includes("npm run typecheck")));
 });
 
+test("cli patches --job bloom-health-probe includes the probe afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "bloom-health-probe"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "bloom-health-probe");
+  assert.ok(parsed.applyNext.some((line) => line.includes("scripts/probe-health.mjs") && line.includes("unreachable") && line.includes("live: false")));
+});
+
 test("cli patches --job dronehive-ollama-app-bridge-paths includes the bridge consts afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-ollama-app-bridge-paths"], {
