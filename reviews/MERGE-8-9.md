@@ -16,8 +16,8 @@ Do not invent leftovers. Do not copy PR #6 autofix.
 
 ## Conflict
 
-`ledger/siblings.json` will conflict. #8 lists PRs **2–8**. #9 lists
-**2–6, 9, 10**. Take the union: **2–10**.
+`ledger/siblings.json` will conflict. #8 lists PRs **2–8**. #9 now lists
+the union **2–10**. Prefer #9’s array (keep #9’s catalog `owns` on #9).
 
 | number | role after merge | owns |
 | --- | --- | --- |
