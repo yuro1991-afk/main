@@ -22,6 +22,7 @@ TRUTH_AND_HONESTY.md system root line only. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-truth-honesty-root-from-ops
 - git apply --check /path/to/main/patches/dronehive-truth-honesty-root.patch
 - git apply /path/to/main/patches/dronehive-truth-honesty-root.patch
+- python3 -c "from pathlib import Path; t=Path('TRUTH_AND_HONESTY.md').read_text(); line=next(x for x in t.splitlines() if x.startswith('**System root:**')); assert r'G:\\AI-Home' not in line; assert '0.5b' not in line"
 
 ## Verify
 

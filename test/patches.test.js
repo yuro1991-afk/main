@@ -864,6 +864,19 @@ test("cli patches --job dronehive-doc-grok-handoff-root includes the GROK_HANDOF
   assert.ok(parsed.applyNext.some((line) => line.includes("docs/GROK_HANDOFF.md") && line.includes("Project root") && line.includes("0.5b")));
 });
 
+test("cli patches --job dronehive-truth-honesty-root includes the System root afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-truth-honesty-root"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-truth-honesty-root");
+  assert.ok(parsed.applyNext.some((line) => line.includes("TRUTH_AND_HONESTY.md") && line.includes("**System root:**") && line.includes("0.5b")));
+});
+
 test("cli patches --job dronehive-doc-grok-handoff-cd includes the GROK_HANDOFF cd afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-doc-grok-handoff-cd"], {

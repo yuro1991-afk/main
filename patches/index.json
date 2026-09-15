@@ -1396,8 +1396,10 @@
       "file": "patches/dronehive-truth-honesty-root.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "TRUTH_AND_HONESTY.md system root uses '.'. Independent of TRUTH_BIND.json leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('TRUTH_AND_HONESTY.md').read_text(); line=next(x for x in t.splitlines() if x.startswith('**System root:**')); assert r'G:\\\\AI-Home' not in line; assert '0.5b' not in line\""
+      ],
+      "notes": "TRUTH_AND_HONESTY.md System root line no longer pins G: or 0.5b. After apply: assert those phrases on that line only. Oath and library-list leftovers stay. Do not put backticks in afterApply. Independent of TRUTH_BIND.json leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-truth-honesty-oath-inline",
