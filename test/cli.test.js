@@ -312,6 +312,8 @@ test("help says playbooks defaults to check and refuses in-repo write", async ()
   assert.equal(result.code, 0);
   assert.match(result.out, /playbooks defaults to --check/);
   assert.match(result.out, /missingRequires/);
+  assert.match(result.out, /nextApply dronehive-unicode-ci/);
   assert.match(result.out, /Prefer brief --job/);
   assert.match(result.out, /refuses the in-repo playbooks\/ directory/);
+  assert.match(result.out, /catalog --write updates the ledger only/);
 });

@@ -25,7 +25,8 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
    --write` maps newly idle agents onto leftover Genesis cards.
    `node src/cli.js catalog --write` diffs
    `ledger/catalog-entries.json` (Notion Genesis Entries) and appends
-   uncarded playbooks.
+   uncarded ledger jobs. It refuses the in-repo `playbooks/` and
+   `reviews/` directories. Prefer `brief --job`.
    `slots --world` lists world cards. `busy --world` without an unused
    world leftover peeks/claims nothing (do not steal
    `genesis-world-layer-102`). Peek leftover next (no `--agent`): `node src/cli.js next`

@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { describeKind, jobScope } from "./kinds.js";
-import { catalogPatchFor, catalogRequires, displayCollision, displayNotes, displayVerify, firstCommands } from "./brief.js";
+import { TAKE_INSTEAD_CATALOG_ID, catalogPatchFor, catalogRequires, displayCollision, displayNotes, displayVerify, firstCommands } from "./brief.js";
 import { relaunchFor } from "./handoff.js";
 
 export const PLAYBOOK_CHECK_CONTRACT = "agent-ops.playbooks.check.v1";
@@ -135,15 +135,19 @@ export function checkPlaybooks(jobs, dir) {
     return checkPlaybook(job, readFileSync(dest, "utf8"));
   });
   const stale = results.filter((row) => row.stale).length;
+  const nextApply = jobs.length === 1 ? jobs[0].id : TAKE_INSTEAD_CATALOG_ID;
   return {
     contract: PLAYBOOK_CHECK_CONTRACT,
     command: "playbooks",
     check: true,
     wrote: false,
     doNot: "Do not run writePlaybooks over playbooks/. Prefer brief / proveAfterApplyCommand.",
+    prefer: `node src/cli.js brief --job ${nextApply}`,
+    nextApply,
     count: results.length,
     ok: results.length - stale,
     stale,
+    missingRequiresJobs: results.filter((row) => row.missingRequires.length > 0).map((row) => row.id),
     results,
   };
 }

@@ -75,6 +75,26 @@ test("cli playbooks --write --here writes into --out", async () => {
   assert.equal(parsed.wrote, true);
 });
 
+test("cli playbooks without --job names first parked apply", async () => {
+  const dest = join(ROOT, "playbooks", "dronehive-unicode-ci.md");
+  const before = readFileSync(dest, "utf8");
+  const chunks = [];
+  const code = await runCli(["playbooks"], {
+    nowMs: NOW,
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.wrote, false);
+  assert.equal(parsed.nextApply, "dronehive-unicode-ci");
+  assert.equal(parsed.prefer, "node src/cli.js brief --job dronehive-unicode-ci");
+  assert.ok(parsed.missingRequiresJobs.includes("dronehive-ubuntu-smoke"));
+  assert.ok(parsed.count >= 162);
+  assert.equal(readFileSync(dest, "utf8"), before);
+});
+
 test("cli playbooks defaults to --check and never writes", async () => {
   const dest = join(ROOT, "playbooks", "dronehive-ubuntu-smoke.md");
   const before = readFileSync(dest, "utf8");
@@ -90,6 +110,8 @@ test("cli playbooks defaults to --check and never writes", async () => {
   assert.equal(parsed.contract, "agent-ops.playbooks.check.v1");
   assert.equal(parsed.wrote, false);
   assert.deepEqual(parsed.results[0].missingRequires, ["patches/dronehive-pro-chat-cp1252.patch"]);
+  assert.equal(parsed.nextApply, "dronehive-ubuntu-smoke");
+  assert.equal(parsed.prefer, "node src/cli.js brief --job dronehive-ubuntu-smoke");
   assert.match(parsed.doNot, /writePlaybooks/);
   assert.equal(readFileSync(dest, "utf8"), before);
 });
@@ -164,6 +186,7 @@ test("playbooks --check names missing stacked requires without rewriting", async
   assert.equal(code, 0);
   const parsed = JSON.parse(chunks.join(""));
   assert.equal(parsed.wrote, false);
+  assert.equal(parsed.nextApply, "dronehive-ubuntu-smoke");
   assert.deepEqual(parsed.results[0].missingRequires, ["patches/dronehive-pro-chat-cp1252.patch"]);
   assert.match(parsed.doNot, /writePlaybooks/);
 });

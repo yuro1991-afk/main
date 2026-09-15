@@ -23,7 +23,7 @@ import {
 } from "./origin.js";
 import { defaultRoutePath, routeIntent, writeRoute } from "./routing.js";
 import { defaultInventoryPath, writeInventoryTick } from "./tick.js";
-import { applyNextForJob, buildBrief, jobForDisplay, proveAfterApplyForJob, takeInsteadFields } from "./brief.js";
+import { TAKE_INSTEAD_CATALOG_ID, applyNextForJob, buildBrief, jobForDisplay, proveAfterApplyForJob, takeInsteadFields } from "./brief.js";
 import { buildPrompt } from "./prompt.js";
 import {
   buildHandoff,
@@ -334,22 +334,31 @@ export async function runCli(argv, options = {}) {
       if (flags.write === "true") {
         saveLedger(ledgerPath, ledger);
         if (added.length > 0) {
+          const addedJobs = ledger.jobs.filter((job) => added.includes(job.id));
+          const landingPlaybooks = resolve(ROOT, "playbooks");
+          const landingReviews = resolve(ROOT, "reviews");
           const playbookDir = flags.playbooks
             ? resolve(flags.playbooks)
             : resolve(options.root ?? ROOT, "playbooks");
           const packetDir = flags.packets
             ? resolve(flags.packets)
             : resolve(options.root ?? ROOT, "reviews");
-          const written = writePlaybooks(
-            ledger.jobs.filter((job) => added.includes(job.id)),
-            playbookDir,
-          );
-          const packets = writeHandoffPackets(
-            ledger.jobs.filter((job) => added.includes(job.id)),
-            packetDir,
-          );
-          packet.playbooks = written;
-          packet.packets = packets;
+          if (playbookDir === landingPlaybooks) {
+            packet.playbooks = [];
+            packet.playbooksWrote = false;
+            packet.doNot = "Do not run writePlaybooks over playbooks/. Prefer brief / proveAfterApplyCommand.";
+            packet.prefer = `node src/cli.js brief --job ${TAKE_INSTEAD_CATALOG_ID}`;
+          } else {
+            packet.playbooks = writePlaybooks(addedJobs, playbookDir);
+            packet.playbooksWrote = true;
+          }
+          if (packetDir === landingReviews) {
+            packet.packets = [];
+            packet.packetsWrote = false;
+          } else {
+            packet.packets = writeHandoffPackets(addedJobs, packetDir);
+            packet.packetsWrote = true;
+          }
         }
       }
       packet.added = added;
@@ -635,8 +644,9 @@ Commands:
 Yuri: forget Origin for sibling work. patches lists applyable GitHub diffs.
 --prove runs vanilla+stacked git apply --check and resets the checkout.
 --prove-after-apply clones --no-hardlinks throwaways and never writes siblings.
-playbooks defaults to --check: compares First commands, reports missingRequires, never writes. Prefer brief --job.
+playbooks defaults to --check: compares First commands, reports missingRequires, never writes. No --job names nextApply dronehive-unicode-ci. Prefer brief --job.
 playbooks --write requires --out and refuses the in-repo playbooks/ directory.
+catalog --write updates the ledger only; it refuses the in-repo playbooks/ and reviews/ directories.
 This token cannot push those repos. Do not copy PR #6 autofix.
 Genesis only unless you pass --all / merge the GitHub-first board.
 Do not reopen GitHub PR #1. Origin: origin.cursor.com/git/yuri-afk/genesis.`;
