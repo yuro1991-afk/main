@@ -6,13 +6,14 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-14T23:46Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T00:00Z**: 40 IDLE + this run RUNNING.
 No new agents. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Do not inventory the pad again.
 Sibling `main` SHAs unchanged (`288a484` / `d4b2949` / `bba7188` /
 `074bad0` / `d538a89`). Catalog still 162. Hunt closed. PR #10 still
-`82161d8`. Shipped this interval: `dronehive-unicode-ci` afterApply
-proves `_chat` under cp1252. Do not invent leftovers.
+`82161d8`. Shipped this interval: `status --job` peeks the named
+catalog card + `applyNext` and leaves leftover `next` alone. Do not
+invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -43,6 +44,8 @@ write-checkout steps. Catalog `brief` / `helpers` / `handoff` /
 `relaunch` / `busy` JSON now include the same `applyNext` array.
 `busy --job <catalog-id>` and `next --job <catalog-id>` peek that card
 (do not claim leftover next). `next --job` JSON includes `applyNext`.
+`status --job <catalog-id>` attaches that card + `applyNext` as
+`summary.job` and leaves leftover `next` as the expired Origin claim.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.

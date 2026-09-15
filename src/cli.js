@@ -152,6 +152,11 @@ export async function runCli(argv, options = {}) {
       const ledger = loadLedger(ledgerPath);
       const summary = summarize(ledger, nowMs);
       summary.next = withRelaunch(peekDefaultJob(ledger, flags, nowMs, options));
+      const explicitId =
+        positionals[0] || (flags.job && flags.job !== "true" ? flags.job : "");
+      if (explicitId) {
+        summary.job = withRelaunch(resolveJob(ledger, positionals, flags, nowMs, options));
+      }
       summary.origin = readOriginProbe(defaultOriginPath(options.root ?? ROOT));
       write(JSON.stringify(summary, null, 2));
       return 0;
@@ -550,7 +555,7 @@ Commands:
   complete <id> --agent <bcId>
   block <id> --agent <bcId> --reason <text>
   release <id> --agent <bcId>
-  status
+  status [--job id]   # leftover next stays; --job attaches that card + applyNext
   probe                  Refuses Superbrain / GOOSE probes (Yuri: no more Superbrain)
   origin [--login] [--out path]
   route <intent> [--agent <bcId>]   # roster card if --agent, else leftover next

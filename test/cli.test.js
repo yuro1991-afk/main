@@ -117,6 +117,25 @@ test("cli next --job peeks the named catalog card", async () => {
   assert.notEqual(parsed.id, "gub-route-intent");
 });
 
+test("cli status --job attaches the named catalog card without replacing leftover next", async () => {
+  const result = await capture(["status", "--job", "dronehive-unicode-ci"]);
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.job.id, "dronehive-unicode-ci");
+  assert.ok(parsed.job.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.notEqual(parsed.next.id, "dronehive-unicode-ci");
+  assert.match(parsed.next.id, /^gub-/);
+});
+
+test("cli status without --job leaves leftover next and omits job", async () => {
+  const result = await capture(["status"]);
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.job, undefined);
+  assert.ok(parsed.next);
+  assert.match(parsed.next.id, /^gub-/);
+});
+
 test("cli next --world is empty when every world card is rostered", async () => {
   const result = await capture(["next", "--world"]);
   assert.equal(result.code, 1);
