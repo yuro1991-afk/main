@@ -780,7 +780,10 @@ node src/cli.js prompt --agent "$CURSOR_AGENT_ID"
 Newcomer `bc-f407303f` takes `review-main-pr8`.
 
 **Peek leftover unused (no `--agent`):** leftover unused exhausted
-(`next` / `busy` exit 1). Prefer `brief --job dronehive-unicode-ci`.
+(`next` / `busy` exit 1). Empty leftover unused peek (`brief` /
+`handoff` / `helpers` / `prompt` / `relaunch` without `--job`) names
+leftover unused exhausted. Do not add a card to `ledger/queue.json`.
+Prefer `brief --job dronehive-unicode-ci`.
 Do not invent leftover unused next. Review leftover is still
 `review-landing-pad-prs` (`brief --job review-landing-pad-prs`).
 Written: `reviews/LANDING-PAD-PRS.md`. Skip conflicting #4/#5/#6. Review
