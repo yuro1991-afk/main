@@ -358,6 +358,21 @@ test("gub-superbrain-probe relaunch refuses the probe", () => {
   assert.match(packet.action, /no more Superbrain/);
   assert.doesNotMatch(packet.action, /Open https:\/\/cursor.com\/codebase\/yuri-afk\/genesis/);
   assert.ok(packet.doNot.some((line) => line.includes("Do not run node src/cli.js probe")));
+  const text = renderHandoffPacket({
+    id: "gub-superbrain-probe",
+    title: "probe",
+    repo: "origin.cursor.com/git/yuri-afk/genesis",
+    kind: "origin-slice",
+    priority: 3,
+    status: "open",
+    claim: null,
+    notes: "",
+    verify: "",
+    files: [],
+    collision: "",
+  });
+  assert.match(text, /patches --prove --job dronehive-unicode-ci/);
+  assert.match(text, /patches --prove-after-apply --job dronehive-unicode-ci/);
 });
 
 test("every sibling role has a description", () => {
