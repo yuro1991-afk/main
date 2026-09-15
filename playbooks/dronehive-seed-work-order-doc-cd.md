@@ -22,6 +22,7 @@ Seed WORK_ORDER.md section 8 cd line only. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-seed-work-order-doc-cd-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-doc-cd.patch
 - git apply /path/to/main/patches/dronehive-seed-work-order-doc-cd.patch
+- python3 -c "from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); assert '\ncd .\n' in t; assert r'cd G:\\AI-Home\\projects\\ai-worker-drone-0.5b' not in t"
 
 ## Verify
 
