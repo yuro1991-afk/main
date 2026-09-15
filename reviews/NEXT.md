@@ -6,14 +6,14 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T04:15Z**: 40 IDLE + this run RUNNING.
-Newest idle is still `bc-710c5477` — assign
+Keep-busy tick **2026-09-15T04:16Z**: 40 IDLE + this catalog run +
+`bc-01a0a0ce` RUNNING on #7 (`cursor/stub-wake-roster-108b`). Do not
+steal #7. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`14316f9`. Shipped this interval: drop py_compile from
-dronehive-script-host-roots afterApply (it passed unpatched).
-Early empty afterApply catalog is done. Leftover `next` stays alone.
-Do not invent leftovers.
+`f9be5f4`. Queue has no `next` pointer. Unpatched afterApply scan is
+clean. Playbook first-commands now share the no-$, no-backtick,
+no-`git rm` invariant. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |

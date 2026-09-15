@@ -216,6 +216,27 @@ test("catalog afterApply commands have no dollar signs or backticks", () => {
   }
 });
 
+test("playbook first-commands have no dollar signs, backticks, or git rm", () => {
+  const index = loadPatchIndex(defaultPatchesIndexPath(ROOT));
+  for (const row of index.patches) {
+    const body = readFileSync(join(ROOT, "playbooks", `${row.id}.md`), "utf8");
+    const start = body.indexOf("## First commands");
+    assert.ok(start >= 0, `${row.id} playbook missing First commands`);
+    const rest = body.slice(start);
+    const end = rest.indexOf("\n## ", 1);
+    const section = end === -1 ? rest : rest.slice(0, end);
+    for (const line of section.split("\n")) {
+      if (!line.startsWith("- ")) {
+        continue;
+      }
+      const cmd = line.slice(2);
+      assert.equal(cmd.includes("$"), false, `${row.id} first-command has $`);
+      assert.equal(cmd.includes("`"), false, `${row.id} first-command has backtick`);
+      assert.equal(cmd.includes("git rm"), false, `${row.id} first-command has git rm`);
+    }
+  }
+});
+
 test("text patches start with diff --git; icons are PNGs", () => {
   const index = loadPatchIndex(defaultPatchesIndexPath(ROOT));
   for (const row of index.patches) {
