@@ -139,17 +139,19 @@ function catalogApplyFields(row) {
 }
 
 /**
- * Vanilla + stacked `git apply --check` in catalog order. Applies priors
- * only to prove the next hunk, then `reset --hard` + `clean -fd`.
- * Does not leave diffs and does not push. Not PR #6 autofix.
+ * Vanilla + stacked `git apply --check` in catalog order on a
+ * `--no-hardlinks` throwaway. Never writes the sibling source
+ * (including `/tmp/siblings` and the dronehive symlink). Not PR #6 autofix.
  *
  * @param {PatchIndex} index
  * @param {{
  *   repoRoot: string,
  *   siblingsRoot?: string,
+ *   throwawayRoot?: string,
  *   id?: string,
  *   repo?: string,
  *   runGit?: (cwd: string, args: string[]) => { status?: number | null, stdout?: string, stderr?: string },
+ *   cloneRepo?: (source: string, dest: string) => { status?: number | null, stdout?: string, stderr?: string },
  * }} options
  */
 export function provePatches(index, options) {
@@ -159,8 +161,11 @@ export function provePatches(index, options) {
   const repoRoot = options.repoRoot;
   const siblingsRoot = options.siblingsRoot ?? defaultSiblingsRoot();
   const runner = options.runGit ?? defaultGitRunner;
+  const cloneRepo = options.cloneRepo ?? defaultCloneThrowaway;
   const selected = listPatches(index, { id: options.id, repo: options.repo });
   const selectedIds = new Set(selected.map((row) => row.id));
+  const ownThrowaway = options.throwawayRoot === undefined;
+  const throwawayParent = options.throwawayRoot ?? mkdtempSync(join(tmpdir(), "prove-"));
 
   /** @type {Map<string, PatchEntry[]>} */
   const byRepo = new Map();
@@ -178,60 +183,73 @@ export function provePatches(index, options) {
       repo: row.repo,
       file: row.file,
       ...catalogApplyFields(row),
+      throwaway: true,
       ...extra,
     });
   };
 
-  for (const [repo, rows] of byRepo) {
-    const wanted = rows.filter((row) => selectedIds.has(row.id));
-    if (wanted.length === 0) {
-      continue;
+  try {
+    for (const [repo, rows] of byRepo) {
+      const wanted = rows.filter((row) => selectedIds.has(row.id));
+      if (wanted.length === 0) {
+        continue;
+      }
+      const source = resolveSiblingCheckout(repo, siblingsRoot);
+      if (!source) {
+        for (const row of wanted) {
+          record(row, { status: "missing-checkout", checkout: null, throwaway: false });
+        }
+        continue;
+      }
+      const dest = join(throwawayParent, repo.split("/").pop() ?? "sibling");
+      const cloned = cloneRepo(source, dest);
+      if ((cloned.status ?? 1) !== 0) {
+        for (const row of wanted) {
+          record(row, {
+            status: "fail",
+            checkout: source,
+            error: `${String(cloned.stderr ?? "")}\n${String(cloned.stdout ?? "")}`.trim(),
+          });
+        }
+        continue;
+      }
+      try {
+        let blocked = /** @type {string | null} */ (null);
+        for (let i = 0; i < rows.length; i += 1) {
+          const row = rows[i];
+          const patchPath = join(repoRoot, row.file);
+          if (blocked) {
+            if (selectedIds.has(row.id)) {
+              record(row, { status: "fail", checkout: source, error: blocked });
+            }
+            continue;
+          }
+          const check = runGit(runner, dest, ["apply", "--check", patchPath]);
+          if (!check.ok) {
+            blocked = `git apply --check failed for ${row.id}: ${gitOutput(check)}`;
+            if (selectedIds.has(row.id)) {
+              record(row, { status: "fail", checkout: source, error: blocked });
+            }
+            continue;
+          }
+          if (selectedIds.has(row.id)) {
+            record(row, { status: "ok", checkout: source, stacked: i > 0 });
+          }
+          const apply = runGit(runner, dest, ["apply", patchPath]);
+          if (!apply.ok) {
+            blocked = `git apply failed after --check for ${row.id}: ${gitOutput(apply)}`;
+            if (selectedIds.has(row.id)) {
+              record(row, { status: "fail", checkout: source, error: blocked });
+            }
+          }
+        }
+      } finally {
+        rmSync(dest, { recursive: true, force: true });
+      }
     }
-    const checkout = resolveSiblingCheckout(repo, siblingsRoot);
-    if (!checkout) {
-      for (const row of wanted) {
-        record(row, { status: "missing-checkout", checkout: null });
-      }
-      continue;
-    }
-
-    let dirty = false;
-    try {
-      let blocked = /** @type {string | null} */ (null);
-      for (let i = 0; i < rows.length; i += 1) {
-        const row = rows[i];
-        const patchPath = join(repoRoot, row.file);
-        if (blocked) {
-          if (selectedIds.has(row.id)) {
-            record(row, { status: "fail", checkout, error: blocked });
-          }
-          continue;
-        }
-        const check = runGit(runner, checkout, ["apply", "--check", patchPath]);
-        if (!check.ok) {
-          blocked = `git apply --check failed for ${row.id}: ${gitOutput(check)}`;
-          if (selectedIds.has(row.id)) {
-            record(row, { status: "fail", checkout, error: blocked });
-          }
-          continue;
-        }
-        if (selectedIds.has(row.id)) {
-          record(row, { status: "ok", checkout, stacked: i > 0 });
-        }
-        const apply = runGit(runner, checkout, ["apply", patchPath]);
-        dirty = true;
-        if (!apply.ok) {
-          blocked = `git apply failed after --check for ${row.id}: ${gitOutput(apply)}`;
-          if (selectedIds.has(row.id)) {
-            record(row, { status: "fail", checkout, error: blocked });
-          }
-        }
-      }
-    } finally {
-      if (dirty) {
-        runGit(runner, checkout, ["reset", "--hard", "HEAD"]);
-        runGit(runner, checkout, ["clean", "-fd"]);
-      }
+  } finally {
+    if (ownThrowaway) {
+      rmSync(throwawayParent, { recursive: true, force: true });
     }
   }
 
@@ -256,7 +274,7 @@ export function provePatches(index, options) {
     prove: true,
     cannotPush: index.cannotPush,
     doNot:
-      "Do not copy PR #6 npm run autofix. --prove runs git apply --check only and resets the checkout. applyNext is the write-checkout apply, not a leftover hunt.",
+      "Do not copy PR #6 npm run autofix. --prove clones --no-hardlinks throwaways and never writes /tmp/siblings. applyNext is the write-checkout apply, not a leftover hunt.",
     siblingsRoot,
     applyNext: results.length === 1 ? results[0].applyNext : undefined,
     proveAfterApplyCommand: results.length === 1 ? results[0].proveAfterApplyCommand : undefined,

@@ -2596,6 +2596,7 @@ test("provePatches reports missing checkout", () => {
   assert.deepEqual(proof.applyNext, proof.results[0].applyNext);
   assert.match(proof.doNot, /autofix/);
   assert.match(proof.doNot, /applyNext/);
+  assert.match(proof.doNot, /never writes \/tmp\/siblings/);
 });
 
 test("provePatches stacked apply-check then resets", () => {
@@ -2631,6 +2632,7 @@ test("provePatches stacked apply-check then resets", () => {
 
   gitOk(checkout, ["reset", "--hard", "HEAD~2"]);
   assert.equal(readFileSync(join(checkout, "note.txt"), "utf8"), "line1\n");
+  writeFileSync(join(checkout, "SENTINEL"), "do-not-clean\n");
 
   writeFileSync(
     join(pad, "patches", "index.json"),
@@ -2660,6 +2662,9 @@ test("provePatches stacked apply-check then resets", () => {
   assert.equal(proof.ok, 2);
   assert.equal(proof.results[0].stacked, false);
   assert.equal(proof.results[1].stacked, true);
+  assert.equal(proof.results[0].throwaway, true);
+  assert.equal(proof.results[1].throwaway, true);
+  assert.equal(readFileSync(join(checkout, "SENTINEL"), "utf8"), "do-not-clean\n");
 
   const onlyTwo = provePatches(index, {
     repoRoot: pad,
@@ -2731,6 +2736,8 @@ test("cli patches --prove stacked then resets", async () => {
   assert.equal(parsed.prove, true);
   assert.equal(parsed.ok, 1);
   assert.equal(parsed.failed, 0);
+  assert.equal(parsed.results[0].throwaway, true);
+  assert.match(parsed.doNot, /never writes \/tmp\/siblings/);
   assert.equal(readFileSync(join(checkout, "note.txt"), "utf8"), "line1\n");
 });
 

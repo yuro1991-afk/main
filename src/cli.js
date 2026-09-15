@@ -642,7 +642,7 @@ Commands:
   playbooks [--check] [--write] [--job id] [--here] [--out dir]
 
 Yuri: forget Origin for sibling work. patches lists applyable GitHub diffs.
---prove runs vanilla+stacked git apply --check and resets the checkout.
+--prove clones --no-hardlinks throwaways, runs vanilla+stacked git apply --check, and never writes siblings.
 --prove-after-apply clones --no-hardlinks throwaways and never writes siblings.
 playbooks defaults to --check: compares First commands, reports missingRequires, never writes. No --job names nextApply dronehive-unicode-ci. Prefer brief --job.
 playbooks --write requires --out and refuses the in-repo playbooks/ directory.

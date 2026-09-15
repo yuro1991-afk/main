@@ -195,7 +195,8 @@ PR #3 merged; no real review comments (CodeRabbit skip, <10 stars).
 PR #9 catalog still 162 diffs (newest `bloom-grok-pwa-test-sync`).
 Re-proof 2026-09-14T23:16Z: 162/162 vanilla + stacked `git apply --check`
 on sibling `main` (no `-U0`). Repeat with
-`node src/cli.js patches --prove --siblings-root /tmp/siblings`.
+`node src/cli.js patches --prove --siblings-root /tmp/siblings`
+(throwaway clone; never writes those checkouts).
 `node src/cli.js patches --prove-after-apply --job <id>` clones throwaways.
 Catalog leftover firstCommands now start with `--prove --job`.
 `patches --prove --job` and `patches --job` JSON include `applyNext`
