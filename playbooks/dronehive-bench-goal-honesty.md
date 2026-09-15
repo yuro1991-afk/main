@@ -22,6 +22,7 @@ GOAL string only. Same file as script-host-roots but different hunks. Do not edi
 - git checkout -b cursor/dronehive-bench-goal-honesty-from-ops
 - git apply --check /path/to/main/patches/dronehive-bench-goal-honesty.patch
 - git apply /path/to/main/patches/dronehive-bench-goal-honesty.patch
+- python3 -c "from pathlib import Path; t=Path('scripts/bench_vs_helpers.py').read_text(); assert 'under host/' in t and 'one host example' in t"
 
 ## Verify
 

@@ -370,6 +370,19 @@ test("cli patches --job dronehive-runtime-host-paths applies portable-paths firs
   assert.ok(lines.some((line) => line.includes("from drone.grok_handoff import DEFAULT_ROOT")));
 });
 
+test("cli patches --job dronehive-bench-goal-honesty includes the GOAL afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-bench-goal-honesty"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-bench-goal-honesty");
+  assert.ok(parsed.applyNext.some((line) => line.includes("scripts/bench_vs_helpers.py") && line.includes("one host example")));
+});
+
 test("cli patches --job dronehive-seed-work-order-doc-honesty includes the seed WORK_ORDER.md afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-seed-work-order-doc-honesty"], {

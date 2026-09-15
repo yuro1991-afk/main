@@ -10,8 +10,8 @@ Keep-busy tick **2026-09-15T00:34Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`9ee27f6`. Shipped this interval: `dronehive-seed-work-order-doc-honesty`
-seed WORK_ORDER.md afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`9ee27f6`. Shipped this interval: `dronehive-bench-goal-honesty`
+GOAL string afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -36,7 +36,8 @@ seed WORK_ORDER.md afterApply. Leftover `next` stays alone. Do not invent leftov
 | next unused hive docstring apply | `dronehive-hive-docstring-honesty` (hive.py afterApply wired) |
 | next unused work-order-doc apply | `dronehive-work-order-doc-honesty` (docs/WORK_ORDER.md afterApply wired) |
 | next unused seed work-order apply | `dronehive-seed-work-order-doc-honesty` (seed WORK_ORDER.md afterApply wired) |
-| next afterApply to wire | `dronehive-bench-goal-honesty` (GOAL string only) |
+| next unused bench-goal apply | `dronehive-bench-goal-honesty` (GOAL string afterApply wired) |
+| next afterApply to wire | `dronehive-buzzer-hive-library-honesty` (buzzer_hive.json only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -102,7 +103,9 @@ Face-swap README honesty leftovers are exhausted.
 (`host/library/knowledge/codex/CODEX.min.json` / `host/library`).
 `dronehive-seed-work-order-doc-honesty` afterApply asserts seed WORK_ORDER.md
 (`host/library/knowledge/codex/CODEX.min.json` / `host/library`).
-Next afterApply to wire is `dronehive-bench-goal-honesty`.
+`dronehive-bench-goal-honesty` afterApply asserts bench GOAL
+(`under host/` / `one host example`).
+Next afterApply to wire is `dronehive-buzzer-hive-library-honesty`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -139,7 +142,7 @@ then unused `faceswap-ios-readme-honesty` (ios/README.md only; afterApply wired;
 then unused `dronehive-hive-docstring-honesty` (hive.py docstring only; afterApply wired; independent of config-load-overlay),
 then unused `dronehive-work-order-doc-honesty` (docs/WORK_ORDER.md only; afterApply wired; independent of hive.py),
 then unused `dronehive-seed-work-order-doc-honesty` (seed WORK_ORDER.md only; afterApply wired; independent of docs/WORK_ORDER.md),
-then unused `dronehive-bench-goal-honesty` (GOAL string only; independent of script-host-roots ROOT hunks),
+then unused `dronehive-bench-goal-honesty` (GOAL string only; afterApply wired; independent of script-host-roots ROOT hunks),
 then unused `faceswap-readme-requirements-honesty` (README Requirements bullet only; afterApply wired; independent of honesty-env-paths footer),
 then unused `faceswap-readme-install-sh` (README install block only; afterApply wired; independent of start-sh new file),
 then unused `dronehive-buzzer-hive-library-honesty` (buzzer_hive.json library keys only; independent of config-load-overlay),

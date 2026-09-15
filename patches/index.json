@@ -351,8 +351,10 @@
       "file": "patches/dronehive-bench-goal-honesty.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "scripts/bench_vs_helpers.py GOAL string: G:\\\\AI-Home is one host example. Independent of script-host-roots (ROOT/MUSCLE/out_dir hunks only). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('scripts/bench_vs_helpers.py').read_text(); assert 'under host/' in t and 'one host example' in t\""
+      ],
+      "notes": "scripts/bench_vs_helpers.py GOAL string: G:\\\\AI-Home is one host example. After apply: assert those phrases. Independent of script-host-roots (ROOT/MUSCLE/out_dir hunks only). Does not touch tool_agent.py."
     },
     {
       "id": "faceswap-readme-requirements-honesty",
