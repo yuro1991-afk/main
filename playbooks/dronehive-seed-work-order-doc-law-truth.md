@@ -22,6 +22,7 @@ Seed WORK_ORDER.md Library law line only. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-seed-work-order-doc-law-truth-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-doc-law-truth.patch
 - git apply /path/to/main/patches/dronehive-seed-work-order-doc-law-truth.patch
+- python3 -c "from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); assert 'Library law: `host/library/LAW_TRUTH.md`' in t"
 
 ## Verify
 

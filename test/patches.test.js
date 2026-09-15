@@ -370,6 +370,19 @@ test("cli patches --job dronehive-runtime-host-paths applies portable-paths firs
   assert.ok(lines.some((line) => line.includes("from drone.grok_handoff import DEFAULT_ROOT")));
 });
 
+test("cli patches --job dronehive-seed-work-order-doc-law-truth includes the seed Library law afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-seed-work-order-doc-law-truth"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-seed-work-order-doc-law-truth");
+  assert.ok(parsed.applyNext.some((line) => line.includes("drone/app/seed/docs/WORK_ORDER.md") && line.includes("Library law") && line.includes("host/library/LAW_TRUTH.md")));
+});
+
 test("cli patches --job dronehive-work-order-doc-law-truth includes the Library law afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-work-order-doc-law-truth"], {

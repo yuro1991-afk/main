@@ -681,8 +681,10 @@
       "file": "patches/dronehive-seed-work-order-doc-law-truth.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "drone/app/seed/docs/WORK_ORDER.md Library law uses host/library. Independent of live leftover (different file) and seed-work-order-doc-honesty (NEXT.json). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); assert 'Library law: `host/library/LAW_TRUTH.md`' in t\""
+      ],
+      "notes": "drone/app/seed/docs/WORK_ORDER.md Library law uses host/library/LAW_TRUTH.md, not F:\\\\GrokSelfLibrary. After apply: assert that line. Independent of live leftover (different file) and seed-work-order-doc-honesty (NEXT.json). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-work-order-doc-fabric-root",
