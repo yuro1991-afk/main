@@ -32,7 +32,7 @@ test("siblings.json loads and maps dronehive to PR 5", () => {
   const siblings = loadSiblings(SIBLINGS);
   assert.deepEqual(
     siblings.prs.map((pr) => pr.number),
-    [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58],
+    [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62],
   );
   assert.equal(siblings.prs[7].number, 9);
   assert.equal(siblings.prs[8].number, 10);
@@ -49,6 +49,7 @@ test("siblings.json loads and maps dronehive to PR 5", () => {
   assert.equal(siblings.prs[48].number, 50);
   assert.equal(siblings.prs[52].number, 54);
   assert.equal(siblings.prs[56].number, 58);
+  assert.equal(siblings.prs[60].number, 62);
   const related = siblingsForJob(siblings, "dronehive-unicode-ci");
   assert.deepEqual(
     related.map((pr) => pr.number),
@@ -76,7 +77,7 @@ test("siblings.json loads and maps dronehive to PR 5", () => {
   );
   assert.deepEqual(
     siblingsForJob(siblings, "review-landing-pad-prs").map((pr) => pr.number),
-    [8, 11, 15, 20, 24, 27, 31, 35, 39, 43, 47, 51, 55],
+    [8, 11, 15, 20, 24, 27, 31, 35, 39, 43, 47, 51, 55, 59],
   );
   assert.deepEqual(
     siblingsForJob(siblings, "dronehive-seed-work-order-doc-codex-paths").map((pr) => pr.number),
@@ -151,6 +152,18 @@ test("siblings.json loads and maps dronehive to PR 5", () => {
     [9, 58],
   );
   assert.deepEqual(
+    siblingsForJob(siblings, "dronehive-mount-swarm-seal").map((pr) => pr.number),
+    [9, 60],
+  );
+  assert.deepEqual(
+    siblingsForJob(siblings, "dronehive-seed-work-order-doc-board").map((pr) => pr.number),
+    [9, 61],
+  );
+  assert.deepEqual(
+    siblingsForJob(siblings, "dronehive-work-order-registry-cli").map((pr) => pr.number),
+    [9, 62],
+  );
+  assert.deepEqual(
     siblingsForJob(siblings, "dronehive-work-order-codex-paths").map((pr) => pr.number),
     [9, 32],
   );
@@ -201,7 +214,7 @@ test("brief attaches sibling PR 5 to the unicode card", () => {
   assert.equal(brief.related[0].number, 9);
   assert.match(brief.related[0].meaning, /patches\//);
   assert.ok(brief.hardRules.some((rule) => rule.includes("no more Superbrain")));
-  assert.ok(brief.hardRules.some((rule) => rule.includes("#8/#9/#10/#11/#12/#13/#14/#15/#16/#17/#18/#19/#20/#21/#22/#23/#24/#25/#26/#27/#28/#29/#30/#31/#32/#33/#34/#35/#36/#37/#38/#39/#40/#41/#42/#43/#44/#45/#46/#47/#48/#49/#50/#51/#52/#53/#54/#55/#56/#57/#58")));
+  assert.ok(brief.hardRules.some((rule) => rule.includes("#8/#9/#10/#11/#12/#13/#14/#15/#16/#17/#18/#19/#20/#21/#22/#23/#24/#25/#26/#27/#28/#29/#30/#31/#32/#33/#34/#35/#36/#37/#38/#39/#40/#41/#42/#43/#44/#45/#46/#47/#48/#49/#50/#51/#52/#53/#54/#55/#56/#57/#58/#59/#60/#61/#62")));
   assert.ok(brief.hardRules.some((rule) => rule.includes("forget Origin for this card")));
   assert.ok(brief.hardRules.some((rule) => rule.includes("Prefer brief / proveAfterApplyCommand")));
   assert.ok(!brief.hardRules.some((rule) => rule.includes("sibling cards stay blocked")));
@@ -534,7 +547,7 @@ test("cli brief defaults to next and siblings lists PRs", async () => {
   assert.equal(board.lead.role, "patch-catalog");
   assert.deepEqual(
     board.prs.map((pr) => pr.number),
-    [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58],
+    [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62],
   );
   assert.match(listed.join(""), /keep-busy-queue/);
   assert.match(listed.join(""), /patch-catalog/);
