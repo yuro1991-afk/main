@@ -72,8 +72,9 @@ Yuri: forget Origin for this card. Apply the catalog patch on a sibling write ch
 - repo: \`${job.repo}\`
 - Sibling: https://${job.repo}
 - Patch: \`${patch.file}\`
-- Prove: \`node src/cli.js patches --prove --job ${job.id}\`${after}
-- playbook: \`playbooks/${job.id}.md\`
+- Prove: \`node src/cli.js patches --prove --job ${job.id}\`
+- Prove afterApply: \`${proveAfterApplyForJob(job)}\` (throwaways; never write /tmp/siblings)${after}
+- playbook: \`playbooks/${job.id}.md\` (First commands may omit --prove-after-apply; prefer brief)
 
 ## Why apply
 
@@ -96,6 +97,7 @@ ${job.verify}
 - Do not reopen https://github.com/yuro1991-afk/main/pull/1
 - Do not copy PR #6 autofix
 - Do not invent a new leftover
+- Do not run writePlaybooks over playbooks/
 - Do not probe :45001 / :8791
 - Do not run node src/cli.js probe
 - This pad token cannot push ${job.repo} — apply there

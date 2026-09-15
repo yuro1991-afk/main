@@ -423,6 +423,9 @@ test("cataloged sibling handoff is apply, not Origin relaunch", () => {
   assert.match(text, /Apply dronehive-unicode-ci/);
   assert.match(text, /forget Origin/);
   assert.match(text, /patches --prove --job dronehive-unicode-ci/);
+  assert.match(text, /patches --prove-after-apply --job dronehive-unicode-ci/);
+  assert.match(text, /never write \/tmp\/siblings/);
+  assert.match(text, /prefer brief/);
   assert.match(text, /dronehive-pro-chat-cp1252\.patch/);
   assert.doesNotMatch(text, /Origin relaunch packet/);
   assert.doesNotMatch(text, /Do not work dronehive/);

@@ -69,6 +69,9 @@ test("cataloged sibling prompt is apply, not Origin launch", () => {
   });
   assert.match(text, /Apply dronehive-unicode-ci/);
   assert.match(text, /patches --prove --job dronehive-unicode-ci/);
+  assert.match(text, /patches --prove-after-apply --job dronehive-unicode-ci/);
+  assert.match(text, /never write \/tmp\/siblings/);
+  assert.match(text, /prefer brief/);
   assert.match(text, /dronehive-pro-chat-cp1252\.patch/);
   assert.match(text, /forget Origin/);
   assert.doesNotMatch(text, /Origin launch/);
@@ -87,10 +90,34 @@ test("cataloged sibling prompt notes drop the Genesis-only blocked line", () => 
   assert.doesNotMatch(text, /Blocked: Yuri scoped this landing pad to Genesis only/);
 });
 
+test("cataloged sibling prompt JSON includes proveAfterApplyCommand", () => {
+  const packet = buildPrompt({
+    id: "dronehive-unicode-ci",
+    title: "Fix dronehive python-smoke UnicodeEncodeError",
+    repo: "github.com/yuro1991-afk/dronehive",
+    kind: "fix",
+    priority: 8,
+    status: "blocked",
+    claim: null,
+    notes: "cp1252",
+    verify: "python -m drone app pro",
+    files: [],
+    collision: "tool_agent.py",
+  });
+  assert.equal(
+    packet.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  assert.ok(packet.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.doesNotMatch(packet.applyNext.join("\n"), /prove-after-apply/);
+});
+
 test("empty prompt refuses a fifth queue", () => {
   const packet = buildPrompt(null);
   assert.equal(packet.contract, PROMPT_CONTRACT);
   assert.equal(packet.url, ORIGIN_UI);
+  assert.equal(packet.applyNext, undefined);
+  assert.equal(packet.proveAfterApplyCommand, undefined);
   assert.match(packet.text, /Do not open another landing-pad queue/);
 });
 
