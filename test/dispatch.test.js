@@ -292,6 +292,12 @@ test("cli assign --job writes one leftover Apply launch", async () => {
     parsed.proveAfterApplyCommand,
     "node src/cli.js patches --prove-after-apply --job bloom-grok-pwa-test-sync",
   );
+  assert.equal(parsed.prefer, "node src/cli.js brief --job bloom-grok-pwa-test-sync");
+  assert.deepEqual(
+    parsed.related.map((pr) => pr.number),
+    [9, 12],
+  );
+  assert.equal(parsed.related[0].role, "patch-catalog");
   assert.equal(existsSync(join(out, "dronehive-unicode-ci.md")), false);
   const dest = join(out, "bloom-grok-pwa-test-sync.md");
   assert.equal(existsSync(dest), true);
@@ -299,6 +305,19 @@ test("cli assign --job writes one leftover Apply launch", async () => {
   assert.match(text, /# Leftover unused — bloom-grok-pwa-test-sync/);
   assert.match(text, /# Apply bloom-grok-pwa-test-sync/);
   assert.doesNotMatch(text, /npm run autofix/);
+});
+
+test("cli assign --job names catalog-first related for unicode-ci", async () => {
+  const out = mkdtempSync(join(tmpdir(), "agent-ops-assign-related-"));
+  const result = await capture(["assign", "--job", "dronehive-unicode-ci", "--out", out]);
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.deepEqual(
+    parsed.related.map((pr) => pr.number),
+    [9, 5, 6],
+  );
+  assert.equal(parsed.related[0].role, "patch-catalog");
+  assert.equal(parsed.prefer, "node src/cli.js brief --job dronehive-unicode-ci");
 });
 
 test("cli assign --job unknown id fails closed", async () => {
