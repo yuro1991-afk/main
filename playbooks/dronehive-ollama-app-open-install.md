@@ -22,6 +22,7 @@ apps/drone-ollama-app/src/main.rs Open app install folder only. Do not edit dron
 - git checkout -b cursor/dronehive-ollama-app-open-install-from-ops
 - git apply --check /path/to/main/patches/dronehive-ollama-app-open-install.patch
 - git apply /path/to/main/patches/dronehive-ollama-app-open-install.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-app/src/main.rs').read_text(); assert 'open_path(r'+chr(34)+'host'+chr(92)+'ai-home'+chr(92)+'apps'+chr(92)+'DroneOllama'+chr(34)+')' in t; assert 'open_path(r'+chr(34)+'G:'+chr(92)+'AI-Home'+chr(92)+'apps'+chr(92)+'DroneOllama'+chr(34)+')' not in t"
 
 ## Verify
 

@@ -1495,8 +1495,10 @@
       "file": "patches/dronehive-ollama-app-open-install.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "main.rs Open install uses host\\\\ai-home. Independent of UI leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/src/main.rs').read_text(); assert 'open_path(r'+chr(34)+'host'+chr(92)+'ai-home'+chr(92)+'apps'+chr(92)+'DroneOllama'+chr(34)+')' in t; assert 'open_path(r'+chr(34)+'G:'+chr(92)+'AI-Home'+chr(92)+'apps'+chr(92)+'DroneOllama'+chr(34)+')' not in t\""
+      ],
+      "notes": "main.rs Open install open_path uses host\\\\ai-home\\\\apps\\\\DroneOllama. After apply: assert that open_path and the G: open_path gone. ui.small and crash.log leftovers still pin G:. Independent of UI leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-ollama-app-open-seal",
