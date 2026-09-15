@@ -90,7 +90,7 @@
       "status": "blocked",
       "claim": null,
       "notes": "After portable-paths, grok_handoff / future_seer / tools / operational still hardcode G: Path(). Apply portable-paths first, then patches/dronehive-runtime-host-paths.patch from main#9. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
-      "verify": "python3 -m py_compile drone/grok_handoff.py drone/future_seer.py drone/tools.py drone/operational.py",
+      "verify": "DEFAULT_ROOT uses resolve_host_path. Do not py_compile.",
       "files": [
         "drone/grok_handoff.py",
         "drone/future_seer.py",
@@ -108,7 +108,7 @@
       "status": "blocked",
       "claim": null,
       "notes": "After Path() wraps, hive / future_seer / multi_hosts / work_order / super_llms JSON still leak F:/D:/G: on load. Apply portable-paths first, then patches/dronehive-config-load-overlay.patch from main#9. Independent of runtime-host-paths. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
-      "verify": "python3 -m py_compile drone/config_overlay.py drone/hive.py drone/future_seer.py drone/multi_face.py drone/model_clones.py drone/super_mesh.py drone/super_llms.py drone/work_order.py drone/knowledge_imprint.py drone/__main__.py",
+      "verify": "drone/config_overlay.py has remap_host_strings. Do not py_compile.",
       "files": [
         "drone/config_overlay.py",
         "drone/hive.py",
@@ -147,7 +147,7 @@
       "status": "blocked",
       "claim": null,
       "notes": "drone/app/links.py list_links still hardcodes F:\\\\GrokSelfLibrary and D:\\\\GrokCoreMemory\\\\continuous\\\\OPEN_TASKS.json. Apply portable-paths first, then patches/dronehive-app-links-host-paths.patch from main#9. Independent of runtime-host-paths and config-load-overlay. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
-      "verify": "python3 -m py_compile drone/app/links.py",
+      "verify": "drone/app/links.py library uri uses resolve_host_path. Do not py_compile.",
       "files": [
         "drone/app/links.py"
       ],
@@ -162,7 +162,7 @@
       "status": "blocked",
       "claim": null,
       "notes": "drone/hive.py module docstring still says Connected to F:\\\\GrokSelfLibrary. Applyable catalog patch is patches/dronehive-hive-docstring-honesty.patch on main#9. Independent of config-load-overlay (import/_load_cfg hunks only). Does not need portable-paths. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
-      "verify": "python3 -m py_compile drone/hive.py",
+      "verify": "drone/hive.py docstring names one host example. Do not py_compile.",
       "files": [
         "drone/hive.py"
       ],

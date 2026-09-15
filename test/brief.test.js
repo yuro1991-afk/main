@@ -217,6 +217,10 @@ test("catalog leftover firstCommands do not run forbidden afterApply commands", 
     ["faceswap-start-sh", /\.\/START\.sh/, /Do not run START\.sh/],
     ["ova-stop-noui-guard", /pwsh -File Stop-Ollama/, /Do not run Stop-Ollama/],
     ["bloom-ci-lint", /npm run lint exits 0/, /Do not run npm/],
+    ["dronehive-runtime-host-paths", /python3 -m py_compile drone\/grok_handoff/, /Do not py_compile/],
+    ["dronehive-config-load-overlay", /python3 -m py_compile drone\/config_overlay/, /Do not py_compile/],
+    ["dronehive-app-links-host-paths", /python3 -m py_compile drone\/app\/links/, /Do not py_compile/],
+    ["dronehive-hive-docstring-honesty", /python3 -m py_compile drone\/hive/, /Do not py_compile/],
   ];
   for (const [id, forbidden, gate] of cases) {
     const job = queue.jobs.find((item) => item.id === id);
