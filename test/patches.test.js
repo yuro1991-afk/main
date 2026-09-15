@@ -981,6 +981,19 @@ test("cli patches --job dronehive-multi-face-pythonpath includes the PYTHONPATH 
   assert.ok(parsed.applyNext.some((line) => line.includes("drone/multi_face.py") && line.includes("PYTHONPATH") && line.includes("host/ai-center")));
 });
 
+test("cli patches --job dronehive-future-seer-pythonpath includes the jane PYTHONPATH afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-future-seer-pythonpath"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-future-seer-pythonpath");
+  assert.ok(parsed.applyNext.some((line) => line.includes("drone/future_seer.py") && line.includes("pythonpath_ai_center") && line.includes("host/ai-center")));
+});
+
 test("cli patches --job dronehive-ollama-app-bridge-paths includes the bridge consts afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-ollama-app-bridge-paths"], {

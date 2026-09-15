@@ -22,6 +22,7 @@ drone/future_seer.py PYTHONPATH jane fallbacks only. Do not edit drone/pro/tool_
 - git checkout -b cursor/dronehive-future-seer-pythonpath-from-ops
 - git apply --check /path/to/main/patches/dronehive-future-seer-pythonpath.patch
 - git apply /path/to/main/patches/dronehive-future-seer-pythonpath.patch
+- python3 -c "from pathlib import Path; t=Path('drone/future_seer.py').read_text(); paths=[x for x in t.splitlines() if 'pythonpath_ai_center' in x and 'PYTHONPATH' in x]; assert len(paths)==3; assert all('host/ai-center' in x for x in paths); assert all(r'G:\\AI-Center' not in x for x in paths)"
 
 ## Verify
 

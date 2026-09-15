@@ -1671,8 +1671,10 @@
       "file": "patches/dronehive-future-seer-pythonpath.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "future_seer.py PYTHONPATH jane fallbacks use host/ai-center. Three sites are one leftover. Independent of jane JSON leftover and runtime outbox wrap. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/future_seer.py').read_text(); paths=[x for x in t.splitlines() if 'pythonpath_ai_center' in x and 'PYTHONPATH' in x]; assert len(paths)==3; assert all('host/ai-center' in x for x in paths); assert all(r'G:\\\\AI-Center' not in x for x in paths)\""
+      ],
+      "notes": "future_seer.py PYTHONPATH jane fallbacks use host/ai-center. After apply: assert those three lines. Outbox leftover still pins G:. Three sites are one leftover. Do not put backticks in afterApply. Independent of jane JSON leftover and runtime outbox wrap. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-ai-bus-packs-root",
