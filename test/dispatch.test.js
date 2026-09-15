@@ -245,6 +245,9 @@ test("assign maps every idle pad agent to a distinct Origin world card", () => {
   assert.ok(!ids.includes("gub-route-intent"));
   assert.ok(!ids.includes("dronehive-unicode-ci"));
   assert.equal(packet.leftoverNext, "gub-route-intent");
+  assert.equal(packet.leftoverTakeInstead, undefined);
+  assert.equal(packet.leftoverApplyNext, undefined);
+  assert.equal(packet.leftoverProveAfterApplyCommand, undefined);
   assert.equal(packet.leftover[0], "gub-route-intent");
   assert.ok(packet.leftover.includes("gub-run-playbook"));
   assert.ok(packet.leftover.includes("catalog-expand-domain"));
@@ -275,6 +278,28 @@ test("cli assign writes paste-ready Origin launch files", async () => {
   assert.doesNotMatch(leftoverText, /Leftover unused — gub-inventory-tick/);
   assert.doesNotMatch(leftoverText, /Agent workload management \(fork\)/);
   assert.match(result.out, /"leftoverNext": "gub-route-intent"/);
+  assert.doesNotMatch(result.out, /leftoverTakeInstead/);
+});
+
+test("cli assign leftover Superbrain attaches take-instead apply pair", async () => {
+  const out = mkdtempSync(join(tmpdir(), "agent-ops-launch-superbrain-"));
+  const result = await capture(["assign", "--out", out], {
+    nowMs: Date.parse("2026-09-14T19:00:00.000Z"),
+  });
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.leftoverNext, "gub-superbrain-probe");
+  assert.equal(parsed.leftoverTakeInstead, "dronehive-unicode-ci");
+  assert.ok(parsed.leftoverApplyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    parsed.leftoverProveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  assert.equal(parsed.leftoverLaunches, undefined);
+  const leftover = readFileSync(join(out, "gub-superbrain-probe.md"), "utf8");
+  assert.match(leftover, /no more Superbrain/);
+  assert.match(leftover, /Do not paste this into an Origin cloud agent/);
+  assert.doesNotMatch(leftover, /Paste the brief below into a new Origin cloud agent/);
 });
 
 test("peekBusyJob --world does not steal a rostered world card", () => {
@@ -295,6 +320,8 @@ test("leftover launch rows skip rostered cards", () => {
   const rows = leftoverLaunchRows(ledger, roster, NOW);
   assert.equal(rows[0].jobId, "gub-route-intent");
   assert.match(rows[0].prompt, /Leftover unused — gub-route-intent/);
+  assert.equal(rows[0].takeInstead, undefined);
+  assert.equal(rows[0].applyNext, undefined);
   assert.ok(!rows.some((row) => row.jobId === "gub-inventory-tick"));
   assert.ok(!rows.some((row) => row.jobId === "genesis-world-layer-102"));
   assert.match(renderLeftoverLaunch(null), /No leftover unused Genesis card/);
@@ -303,6 +330,33 @@ test("leftover launch rows skip rostered cards", () => {
       existsSync(fileURLToPath(new URL(`../reviews/launch/${row.jobId}.md`, import.meta.url))),
     ),
   );
+});
+
+test("live leftover Superbrain assign attaches take-instead apply pair", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
+  const afterLease = Date.parse("2026-09-14T19:00:00.000Z");
+  const sitout = ledger.jobs.find((item) => item.id === "gub-superbrain-probe");
+  const text = renderLeftoverLaunch(sitout);
+  assert.match(text, /no more Superbrain/);
+  assert.match(text, /take instead: `dronehive-unicode-ci`/);
+  assert.match(text, /patches --prove --job dronehive-unicode-ci/);
+  assert.match(text, /patches --prove-after-apply --job dronehive-unicode-ci/);
+  assert.match(text, /Do not paste this into an Origin cloud agent/);
+  assert.doesNotMatch(text, /Paste the brief below into a new Origin cloud agent/);
+  const rows = leftoverLaunchRows(ledger, roster, afterLease);
+  assert.equal(rows[0].jobId, "gub-superbrain-probe");
+  assert.equal(rows[0].takeInstead, "dronehive-unicode-ci");
+  assert.ok(rows[0].applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    rows[0].proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  const packet = buildAssign(ledger, roster, afterLease);
+  assert.equal(packet.leftoverNext, "gub-superbrain-probe");
+  assert.equal(packet.leftoverTakeInstead, "dronehive-unicode-ci");
+  assert.deepEqual(packet.leftoverApplyNext, rows[0].applyNext);
+  assert.equal(packet.leftoverProveAfterApplyCommand, rows[0].proveAfterApplyCommand);
 });
 
 test("slots --job peeks a blocked catalog card with applyNext", () => {

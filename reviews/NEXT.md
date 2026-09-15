@@ -209,10 +209,13 @@ and `proveAfterApplyCommand`.
 `status --job <catalog-id>` attaches that card + `applyNext` /
 `proveAfterApplyCommand` as `summary.job` and leaves leftover `next`
 as the expired Origin claim. Leftover Superbrain `next` / `status` /
-`tick` keep id `gub-superbrain-probe` and attach take-instead
+`tick` / `assign` keep id `gub-superbrain-probe` and attach take-instead
 `dronehive-unicode-ci` `applyNext` / `proveAfterApplyCommand` (`tick`
-exposes `takeInsteadId` + the prove command only). Do not retarget
-keep-busy (that is #8).
+exposes `takeInsteadId` + the prove command only; `assign` exposes
+`leftoverTakeInstead` / `leftoverApplyNext` /
+`leftoverProveAfterApplyCommand` because `leftoverLaunches` is stripped
+from CLI JSON). Leftover Superbrain launch text refuses Origin paste.
+Do not retarget keep-busy (that is #8).
 `list --job <catalog-id>` returns that one card + `applyNext` /
 `proveAfterApplyCommand` and bypasses the Genesis-only filter (bare
 `list` stays Genesis-only).
