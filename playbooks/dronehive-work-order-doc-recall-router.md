@@ -22,6 +22,7 @@ docs/WORK_ORDER.md section 2.6 examples only. Do not edit drone/pro/tool_agent.p
 - git checkout -b cursor/dronehive-work-order-doc-recall-router-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-doc-recall-router.patch
 - git apply /path/to/main/patches/dronehive-work-order-doc-recall-router.patch
+- python3 -c "from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert 'host/library/bin/recall.py get knowledge_pack' in t; assert 'host/ai-home/docs/ai-smarts/runtime/ai_smarts_router.py route' in t"
 
 ## Verify
 

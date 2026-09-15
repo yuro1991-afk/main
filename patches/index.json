@@ -791,8 +791,10 @@
       "file": "patches/dronehive-work-order-doc-recall-router.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "docs/WORK_ORDER.md recall.py and ai_smarts_router.py examples use host/library and host/ai-home. Independent of CLI leftover and models leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert 'host/library/bin/recall.py get knowledge_pack' in t; assert 'host/ai-home/docs/ai-smarts/runtime/ai_smarts_router.py route' in t\""
+      ],
+      "notes": "docs/WORK_ORDER.md recall.py and ai_smarts_router.py examples use host/library and host/ai-home, not F:\\\\GrokSelfLibrary / G:\\\\AI-Home. After apply: assert recall.py get knowledge_pack and ai_smarts_router.py route. Independent of CLI leftover and models leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-seed-work-order-doc-recall-router",
