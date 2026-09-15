@@ -1469,8 +1469,10 @@
       "file": "patches/bloom-grok-pwa-test-sync.patch",
       "base": "288a484",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "scripts/grok-pwa-plugin.test.mjs calls GrokHeadContext. Independent of bloom-ci-typecheck (ci.yml). Proven 43/43 on 288a484. Does not copy PR #6 autofix."
+      "afterApply": [
+        "node --test scripts/grok-pwa-plugin.test.mjs scripts/brand-check.test.mjs"
+      ],
+      "notes": "scripts/grok-pwa-plugin.test.mjs calls GrokHeadContext. Independent of bloom-ci-typecheck (ci.yml). After apply: 43/43 (unpatched 7 fail). Does not copy PR #6 autofix."
     }
   ]
 }

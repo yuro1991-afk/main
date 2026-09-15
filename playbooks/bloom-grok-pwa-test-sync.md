@@ -22,6 +22,7 @@ scripts/grok-pwa-plugin.test.mjs only. Independent of bloom-ci-typecheck and blo
 - git checkout -b cursor/bloom-grok-pwa-test-sync-from-ops
 - git apply --check /path/to/main/patches/bloom-grok-pwa-test-sync.patch
 - git apply /path/to/main/patches/bloom-grok-pwa-test-sync.patch
+- node --test scripts/grok-pwa-plugin.test.mjs scripts/brand-check.test.mjs
 
 ## Verify
 

@@ -322,6 +322,23 @@ test("cli patches --job filters one card", async () => {
   );
 });
 
+test("cli patches --job bloom-grok-pwa-test-sync includes the node --test afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "bloom-grok-pwa-test-sync"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "bloom-grok-pwa-test-sync");
+  assert.ok(
+    parsed.applyNext.some((line) =>
+      line.includes("node --test scripts/grok-pwa-plugin.test.mjs"),
+    ),
+  );
+});
+
 test("cli patches unknown job exits 1", async () => {
   const chunks = [];
   const code = await runCli(["patches", "no-such-card"], {
