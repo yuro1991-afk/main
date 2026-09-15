@@ -191,8 +191,11 @@
       "file": "patches/dronehive-script-host-roots.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "scripts/*.py ROOT = Path(__file__).parents[1]. Independent of portable-paths. Does not touch drone/pro/tool_agent.py."
+      "afterApply": [
+        "python3 -m py_compile scripts/bench_vs_helpers.py scripts/smoke_delegate_wire.py scripts/stress_ai_bus_hive.py",
+        "python3 -c \"from pathlib import Path; fs=('scripts/bench_vs_helpers.py','scripts/smoke_delegate_wire.py','scripts/stress_ai_bus_hive.py'); assert all('Path(__file__).resolve().parents[1]' in Path(f).read_text() and r'G:\\\\AI-Home' not in Path(f).read_text() for f in fs)\""
+      ],
+      "notes": "scripts/*.py ROOT = Path(__file__).parents[1]. After apply: py_compile + no G:\\AI-Home leftover. Independent of portable-paths. Does not touch drone/pro/tool_agent.py."
     },
     {
       "id": "faceswap-start-sh",
