@@ -659,8 +659,10 @@
       "file": "patches/dronehive-seed-work-order-law-truth.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "drone/app/seed/configs/work_order.json LAW_TRUTH.md uses host/library. Independent of live leftover (different file). Leaves the C:\\\\ grok rules path. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; assert 'host/library/LAW_TRUTH.md' in json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['ai_laws']['rank_0']['paths']\""
+      ],
+      "notes": "drone/app/seed/configs/work_order.json ai_laws.rank_0.paths LAW_TRUTH.md uses host/library, not F:\\\\GrokSelfLibrary. After apply: assert that seed path. Independent of live leftover (different file). Leaves the C:\\\\ grok rules path. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-work-order-doc-law-truth",

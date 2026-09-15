@@ -22,6 +22,7 @@ Seed LAW_TRUTH.md path only. Different file from configs/work_order.json. Do not
 - git checkout -b cursor/dronehive-seed-work-order-law-truth-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-law-truth.patch
 - git apply /path/to/main/patches/dronehive-seed-work-order-law-truth.patch
+- python3 -c "from pathlib import Path; import json; assert 'host/library/LAW_TRUTH.md' in json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['ai_laws']['rank_0']['paths']"
 
 ## Verify
 
