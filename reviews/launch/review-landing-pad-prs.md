@@ -16,15 +16,15 @@ Work on the named GitHub repo. Forget Origin.
 
 - UI: https://github.com/yuro1991-afk/main
 - Git: `github.com/yuro1991-afk/main`
-- Job: `review-landing-pad-prs` — Review existing landing-pad PRs #3 #4 #5 #6 #7 #8 #9 #10 #11
+- Job: `review-landing-pad-prs` — Review existing landing-pad PRs #3 #4 #5 #6 #7 #8 #9 #10 #11 #12 #13 #14
 - Packet: `reviews/handoff-review-landing-pad-prs.md`
 - Playbook: `playbooks/review-landing-pad-prs.md`
 - Priority: 22
-- Verify: Leave a review on at least one of #8/#9/#10/#11. No new dispatch-board PR.
+- Verify: Leave a review on at least one of #8/#9/#10/#11/#12/#13/#14. No new dispatch-board PR.
 
 ## Notes
 
-Idle CodeRabbit / auto-review agents: review open PRs #4–#11. #3 is merged. #11 is the resolved #8-then-#9 merge. Fork bc-84d93b47 shipped #10 (python-arena-infra). CodeRabbit skips this repo (<10 stars) unless someone checks Trigger review. Do not invent a new tree. Do not reopen #1. Do not steal the fork's next slices (head → ears → eyes → vision → bridge).
+Idle CodeRabbit / auto-review agents: review open PRs #4–#14. #3 is merged. #11 is the resolved #8-then-#9 merge. #12 adds leftover Apply launches stacked on #11. #13 is Genesis arena pointers (D:\\Wilderness\\Genesis) — review only, do not steal. #14 adds assign --job stacked on #12. Fork bc-84d93b47 shipped #10 (python-arena-infra). CodeRabbit skips this repo (<10 stars) unless someone checks Trigger review. Do not invent a new tree. Do not reopen #1. Do not steal the fork's next slices (head → ears → eyes → vision → bridge).
 Yuri: forget Origin. Take this GitHub sibling. This pad token cannot push it — relaunch that repo.
 Blocked: Yuri scoped this landing pad to Genesis only.
 
@@ -35,9 +35,9 @@ Review only. Merge decisions stay with Yuri.
 ## First moves
 
 - Read reviews/landing-pad-prs.md.
-- Review an existing open PR: #8, #9, #10, or #11. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8.
+- Review an existing open PR: #8, #9, #10, #11, #12, #13, or #14. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8.
 - Do not invent a new tree on empty main.
-- Leave a review on at least one of #8/#9/#10/#11. No new dispatch-board PR.
+- Leave a review on at least one of #8/#9/#10/#11/#12/#13/#14. No new dispatch-board PR.
 
 ## Do not
 

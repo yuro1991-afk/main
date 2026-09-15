@@ -257,6 +257,49 @@
       "owns": [
         "review-main-pr10"
       ]
+    },
+    {
+      "number": 11,
+      "url": "https://github.com/yuro1991-afk/main/pull/11",
+      "branch": "cursor/merge-8-then-9-108b",
+      "title": "Merge GitHub-first dispatch (#8) with the sibling patch catalog (#9)",
+      "role": "merge-8-then-9",
+      "owns": [
+        "review-landing-pad-prs"
+      ]
+    },
+    {
+      "number": 12,
+      "url": "https://github.com/yuro1991-afk/main/pull/12",
+      "branch": "cursor/leftover-apply-launches-108b",
+      "title": "Add Apply launch packets for parked leftover catalog cards",
+      "role": "leftover-launches",
+      "owns": [
+        "bloom-grok-pwa-test-sync",
+        "dronehive-script-host-roots",
+        "faceswap-design-honesty",
+        "faceswap-start-sh",
+        "ova-readme-linux-honesty",
+        "dronehive-runtime-host-paths",
+        "dronehive-config-load-overlay",
+        "dronehive-app-links-host-paths"
+      ]
+    },
+    {
+      "number": 13,
+      "url": "https://github.com/yuro1991-afk/main/pull/13",
+      "branch": "cursor/genesis-arena-paths-cffd",
+      "title": "Point the live Genesis arena at D:\\Wilderness\\Genesis",
+      "role": "genesis-arena-paths",
+      "owns": []
+    },
+    {
+      "number": 14,
+      "url": "https://github.com/yuro1991-afk/main/pull/14",
+      "branch": "cursor/assign-job-launch-108b",
+      "title": "Add assign --job to write one leftover Apply launch",
+      "role": "assign-job",
+      "owns": []
     }
   ]
 }
