@@ -1031,6 +1031,40 @@
       "title": "Skip leftover unused cards that already have repo launches",
       "role": "leftover-launches",
       "owns": []
+    },
+    {
+      "number": 81,
+      "url": "https://github.com/yuro1991-afk/main/pull/81",
+      "branch": "cursor/siblings-prs-77-80-108b",
+      "title": "Record landing-pad PRs 77–80 on the siblings board",
+      "role": "siblings-board",
+      "owns": [
+        "review-landing-pad-prs"
+      ]
+    },
+    {
+      "number": 82,
+      "url": "https://github.com/yuro1991-afk/main/pull/82",
+      "branch": "cursor/next-merge-through-81-108b",
+      "title": "Point leftover unused at the #11 through #81 merge stack",
+      "role": "pointers",
+      "owns": []
+    },
+    {
+      "number": 83,
+      "url": "https://github.com/yuro1991-afk/main/pull/83",
+      "branch": "cursor/leftover-unused-empty-honesty-108b",
+      "title": "Tell leftover unused empty that leftover unused is exhausted",
+      "role": "leftover-launches",
+      "owns": []
+    },
+    {
+      "number": 84,
+      "url": "https://github.com/yuro1991-afk/main/pull/84",
+      "branch": "cursor/leftover-unused-peek-skip-launched-108b",
+      "title": "Skip leftover unused peek cards that already have launches",
+      "role": "leftover-launches",
+      "owns": []
     }
   ]
 }
