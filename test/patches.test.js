@@ -1150,6 +1150,19 @@ test("cli patches --job opensussy-agama-honesty includes the HOW_TO afterApply",
   assert.ok(parsed.applyNext.some((line) => line.includes("install/linux/HOW_TO_RUN.txt") && line.includes("AGAMA / Leap 16 HONESTY") && line.includes("Agama JSON is unsupported")));
 });
 
+test("cli patches --job opensussy-sec-residuals-catalog includes the residuals-table afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "opensussy-sec-residuals-catalog"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "opensussy-sec-residuals-catalog");
+  assert.ok(parsed.applyNext.some((line) => line.includes("reviews/SEC_REVIEW_2_0_0.md") && line.includes("false_green: 0") && line.includes("LinuxPayload.cs") && line.includes("Sanitizer.cs")));
+});
+
 test("cli patches --job opensussy-linux-syntax-ci includes the linux-syntax afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "opensussy-linux-syntax-ci"], {

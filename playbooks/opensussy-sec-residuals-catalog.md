@@ -22,7 +22,7 @@ Read-only review of wipe/sanitize behavior. Do not implement nuclear AutoYaST or
 - git checkout -b cursor/opensussy-sec-residuals-catalog-from-ops
 - git apply --check /path/to/main/patches/opensussy-sec-residuals-catalog.patch
 - git apply /path/to/main/patches/opensussy-sec-residuals-catalog.patch
-- Each residual cites a current path or is marked closed with a file pin. false_green stays 0.
+- python3 -c "from pathlib import Path; t=Path('reviews/SEC_REVIEW_2_0_0.md').read_text(); assert 'SEC_REVIEW residuals vs current tree' in t; assert 'false_green: 0' in t; assert 'LinuxPayload.cs' in t; assert 'Sanitizer.cs' in t; assert 'Do not implement nuclear AutoYaST or LUKS' in t"
 
 ## Verify
 

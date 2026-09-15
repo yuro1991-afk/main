@@ -148,8 +148,10 @@
       "file": "patches/opensussy-sec-residuals-catalog.patch",
       "base": "d4b2949",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "R1\u2013R10 still open on 2.0.0 tree. Pins LinuxPayload.cs / Sanitizer.cs. false_green 0."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('reviews/SEC_REVIEW_2_0_0.md').read_text(); assert 'SEC_REVIEW residuals vs current tree' in t; assert 'false_green: 0' in t; assert 'LinuxPayload.cs' in t; assert 'Sanitizer.cs' in t; assert 'Do not implement nuclear AutoYaST or LUKS' in t\""
+      ],
+      "notes": "R1\u2013R10 still open on 2.0.0 tree. Pins LinuxPayload.cs / Sanitizer.cs. false_green 0. After apply: assert reviews/SEC_REVIEW_2_0_0.md has those phrases. Unpatched has SEC_REVIEW.md only. Do not invent CVEs. Do not implement nuclear AutoYaST. Do not put backticks in afterApply. Independent of opensussy-linux-syntax-ci and opensussy-agama-honesty."
     },
     {
       "id": "faceswap-health-offline",
