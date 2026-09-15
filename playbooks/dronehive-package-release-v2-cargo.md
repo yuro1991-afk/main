@@ -22,6 +22,7 @@ scripts/package_release_v2.ps1 cargo/rustup env only. Do not edit drone/pro/tool
 - git checkout -b cursor/dronehive-package-release-v2-cargo-from-ops
 - git apply --check /path/to/main/patches/dronehive-package-release-v2-cargo.patch
 - git apply /path/to/main/patches/dronehive-package-release-v2-cargo.patch
+- python3 -c "from pathlib import Path; t=Path('scripts/package_release_v2.ps1').read_text(); assert r'host\\ai-home\\tools\\cargo' in t; assert r'G:\\AI-Home\\tools\\cargo' not in t"
 
 ## Verify
 

@@ -945,8 +945,10 @@
       "file": "patches/dronehive-package-release-v2-cargo.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "scripts/package_release_v2.ps1 cargo/rustup env uses Join-Path $Root host/ai-home/tools. Independent of start-script leftovers (different file). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('scripts/package_release_v2.ps1').read_text(); assert r'host\\\\ai-home\\\\tools\\\\cargo' in t; assert r'G:\\\\AI-Home\\\\tools\\\\cargo' not in t\""
+      ],
+      "notes": "scripts/package_release_v2.ps1 cargo/rustup env uses Join-Path Root host/ai-home/tools. After apply: assert host/ai-home/tools/cargo and that G:\\\\AI-Home\\\\tools\\\\cargo is gone. Independent of start-script leftovers (different file). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-mount-launch-cargo",
