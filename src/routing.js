@@ -43,10 +43,10 @@ export const ROUTES = Object.freeze([
   },
   {
     intent: "auto review / coderabbit",
-    destination: "an existing open PR: #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, or #54 — never empty main",
+    destination: "an existing open PR: #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, or #58 — never empty main",
     kind: "review",
     notes:
-      "Review #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, or #54. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8. Do not steal eyes / vision / bridge on #10. Do not steal Genesis arena pointers on #13.",
+      "Review #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, or #58. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8. Do not steal eyes / vision / bridge on #10. Do not steal Genesis arena pointers on #13.",
     jobId: "review-landing-pad-prs",
     packet: "playbooks/review-landing-pad-prs.md",
   },
@@ -211,7 +211,7 @@ export function routeIntent(text, context = {}) {
       return routeFromJob(
         text,
         review,
-        "Review open PRs #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, or #54. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8. Do not steal eyes / vision / bridge on #10. Do not steal Genesis arena pointers on #13.",
+        "Review open PRs #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, or #58. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8. Do not steal eyes / vision / bridge on #10. Do not steal Genesis arena pointers on #13.",
       );
     }
     return withContract(ROUTES[2], text);
