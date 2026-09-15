@@ -22,6 +22,7 @@ Seed live_registry G: keys only. Different file from configs/work_order.json. Do
 - git checkout -b cursor/dronehive-seed-work-order-live-registry-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-live-registry.patch
 - git apply /path/to/main/patches/dronehive-seed-work-order-live-registry.patch
+- python3 -c "from pathlib import Path; import json; r=json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['live_registry']; assert r['cli']=='host/ai-center/agents/super-cell-4/bridges/live_registry.py' and r['primary']=='host/ai-center/agents/super-cell-4/registry' and r['events']=='host/ai-center/agents/super-cell-4/registry/events.jsonl'"
 
 ## Verify
 
