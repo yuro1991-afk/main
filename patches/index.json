@@ -593,8 +593,10 @@
       "file": "patches/dronehive-super-llms-hardwire.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "configs/super_llms.json super_mesh.hardwire uses data/super_mesh/HARDWIRE.json. Independent of multi-hosts-hardwire (different file) and config-load-overlay (Python remap only). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; d=json.loads(Path('configs/super_llms.json').read_text()); assert d['super_mesh']['hardwire']=='data/super_mesh/HARDWIRE.json'\""
+      ],
+      "notes": "configs/super_llms.json super_mesh.hardwire uses data/super_mesh/HARDWIRE.json. After apply: assert that key. Independent of multi-hosts-hardwire (different file) and config-load-overlay (Python remap only). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-work-order-open-tasks",

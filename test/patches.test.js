@@ -370,6 +370,19 @@ test("cli patches --job dronehive-runtime-host-paths applies portable-paths firs
   assert.ok(lines.some((line) => line.includes("from drone.grok_handoff import DEFAULT_ROOT")));
 });
 
+test("cli patches --job dronehive-super-llms-hardwire includes the hardwire afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-super-llms-hardwire"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-super-llms-hardwire");
+  assert.ok(parsed.applyNext.some((line) => line.includes("configs/super_llms.json") && line.includes("data/super_mesh/HARDWIRE.json")));
+});
+
 test("cli patches --job dronehive-multi-hosts-hardwire includes the hardwire afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-multi-hosts-hardwire"], {

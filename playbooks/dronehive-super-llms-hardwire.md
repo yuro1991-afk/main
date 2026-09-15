@@ -22,6 +22,7 @@ configs/super_llms.json super_mesh.hardwire key only. Do not edit drone/pro/tool
 - git checkout -b cursor/dronehive-super-llms-hardwire-from-ops
 - git apply --check /path/to/main/patches/dronehive-super-llms-hardwire.patch
 - git apply /path/to/main/patches/dronehive-super-llms-hardwire.patch
+- python3 -c "from pathlib import Path; import json; d=json.loads(Path('configs/super_llms.json').read_text()); assert d['super_mesh']['hardwire']=='data/super_mesh/HARDWIRE.json'"
 
 ## Verify
 
