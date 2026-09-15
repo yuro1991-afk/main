@@ -22,6 +22,7 @@ apps/drone-ollama-mount/README.md build block only. Do not edit drone/pro/tool_a
 - git checkout -b cursor/dronehive-mount-readme-cargo-from-ops
 - git apply --check /path/to/main/patches/dronehive-mount-readme-cargo.patch
 - git apply /path/to/main/patches/dronehive-mount-readme-cargo.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-mount/README.md').read_text(); assert r'host\\ai-home\\tools\\cargo' in t; assert r'cd apps\\drone-ollama-mount' in t; assert r'G:\\AI-Home\\tools\\cargo' not in t"
 
 ## Verify
 
