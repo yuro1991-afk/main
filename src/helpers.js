@@ -60,7 +60,7 @@ export function planHelpers(job) {
       {
         role: "prove",
         title: `Prove ${job.id}`,
-        prompt: `Run node src/cli.js patches --prove --job ${job.id}. Do not copy PR #6 autofix. Do not invent a new leftover.`,
+        prompt: `Run node src/cli.js patches --prove --job ${job.id}. Clones --no-hardlinks throwaways. Never write /tmp/siblings. Do not copy PR #6 autofix. Do not invent a new leftover.`,
       },
       {
         role: "prove-after-apply",

@@ -96,7 +96,10 @@ test("cataloged sibling helpers prove then apply", () => {
   assert.ok(plans.some((helper) => helper.role === "prove"));
   assert.ok(plans.some((helper) => helper.role === "prove-after-apply"));
   assert.ok(plans.some((helper) => helper.role === "apply"));
-  assert.match(text, /patches --prove --job dronehive-unicode-ci/);
+  const prove = plans.find((helper) => helper.role === "prove");
+  assert.match(prove.prompt, /patches --prove --job dronehive-unicode-ci/);
+  assert.match(prove.prompt, /Clones --no-hardlinks throwaways/);
+  assert.match(prove.prompt, /Never write \/tmp\/siblings/);
   assert.match(text, /patches --prove-after-apply --job dronehive-unicode-ci/);
   assert.match(text, /Never write \/tmp\/siblings/);
   assert.match(text, /dronehive-pro-chat-cp1252\.patch/);

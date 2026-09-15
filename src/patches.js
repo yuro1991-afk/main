@@ -100,8 +100,9 @@ function gitOutput(result) {
 }
 
 /**
- * Write-checkout steps after a successful --prove. Prove itself resets.
- * Not a leftover hunt. Does not run --prove-after-apply (throwaways only).
+ * Write-checkout steps after a successful --prove. Prove uses throwaways
+ * and does not reset siblings. Not a leftover hunt. Does not run
+ * --prove-after-apply (throwaways only).
  * @param {PatchEntry} row
  * @returns {string[]}
  */
