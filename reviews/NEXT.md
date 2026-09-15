@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T04:14Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T04:16Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`62b464d`. Shipped this interval: `bloom-readme-honest-export`
-README afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`59fd9a3`. Shipped this interval: `bloom-ci-typecheck`
+ci.yml afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -161,7 +161,8 @@ README afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused work-order-ai-smarts-packs apply | `dronehive-work-order-ai-smarts-packs` (work_order.json ai_smarts_packs afterApply wired) |
 | next unused seed-work-order-ai-smarts-packs apply | `dronehive-seed-work-order-ai-smarts-packs` (seed ai_smarts_packs afterApply wired) |
 | next unused apply (afterApply already wired) | `bloom-grok-pwa-test-sync` |
-| next early afterApply to wire | `bloom-ci-typecheck` (ci.yml typecheck only) |
+| next unused bloom-ci-typecheck apply | `bloom-ci-typecheck` (ci.yml afterApply wired) |
+| next early afterApply to wire | `bloom-health-probe` (scripts/probe-health.mjs only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -477,7 +478,9 @@ knowledge_imprint.ai_smarts_packs is host/ai-home/docs/ai-smarts/packs (pack_min
 seed knowledge_imprint.ai_smarts_packs is host/ai-home/docs/ai-smarts/packs (live leftover stays).
 Unused afterApply tail is done. `bloom-readme-honest-export` afterApply asserts
 README.md has Grok Build / Origin / landing-pad phrases (unpatched has no README).
-Next early afterApply to wire is `bloom-ci-typecheck`. Do not invent leftovers.
+`bloom-ci-typecheck` afterApply asserts
+.github/workflows/ci.yml has npm test and typecheck (lint.yml leftover stays).
+Next early afterApply to wire is `bloom-health-probe`. Do not invent leftovers.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -643,7 +646,7 @@ then unused `dronehive-seed-work-order-core-lessons` (seed core_lessons only; af
 then unused `dronehive-work-order-ai-smarts-packs` (work_order.json ai_smarts_packs only; -U1; afterApply wired),
 then unused `dronehive-seed-work-order-ai-smarts-packs` (seed ai_smarts_packs only; afterApply wired),
 then unused `bloom-grok-pwa-test-sync` (grok-pwa-plugin.test.mjs only; afterApply wired).
-Early empty afterApply next: `bloom-ci-typecheck` (ci.yml typecheck only).
+Early empty afterApply next: `bloom-health-probe` (scripts/probe-health.mjs only).
 Newcomer `bc-710c5477` Hunt sibling: unused apply `bloom-grok-pwa-test-sync`.
 `bc-f407303f`: `review-main-pr10` (fork's Python arena/infra).
 `bc-5fe241dd` Summarize arena: do not steal `genesis-world-arena`; unused apply `faceswap-design-honesty`.

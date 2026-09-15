@@ -44,8 +44,10 @@
       "file": "patches/bloom-ci-typecheck.patch",
       "base": "288a484",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "ubuntu-latest npm ci / test / typecheck. Fix only errors that workflow surfaces after relaunch."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('.github/workflows/ci.yml').read_text(); assert 'name: ci' in t; assert 'npm test' in t; assert 'npm run typecheck' in t\""
+      ],
+      "notes": "ubuntu-latest npm ci / test / typecheck. After apply: assert .github/workflows/ci.yml has those runs. Unpatched has no ci.yml. lint.yml leftover stays absent. Do not fold lint into typecheck. Do not put backticks in afterApply."
     },
     {
       "id": "bloom-health-probe",

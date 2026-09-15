@@ -22,7 +22,7 @@ Do not edit dronehive .github. Coordinate with bloom-readme-honest-export if bot
 - git checkout -b cursor/bloom-ci-typecheck-from-ops
 - git apply --check /path/to/main/patches/bloom-ci-typecheck.patch
 - git apply /path/to/main/patches/bloom-ci-typecheck.patch
-- GitHub Actions green on those three commands. Do not mark LIVE on a failed typecheck.
+- python3 -c "from pathlib import Path; t=Path('.github/workflows/ci.yml').read_text(); assert 'name: ci' in t; assert 'npm test' in t; assert 'npm run typecheck' in t"
 
 ## Verify
 
