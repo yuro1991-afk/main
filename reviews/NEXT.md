@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T02:38Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T02:40Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`7e5fc70`. Shipped this interval: `dronehive-doc-operational-cd`
-One command cd afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`882c9f8`. Shipped this interval: `dronehive-seed-doc-operational-cd`
+seed One command cd afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -113,7 +113,8 @@ One command cd afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused doc-measured-diagnostics-cd apply | `dronehive-doc-measured-diagnostics-cd` (MEASURED_DIAGNOSTICS.md Smoke cd afterApply wired) |
 | next unused doc-multi-face-cd apply | `dronehive-doc-multi-face-cd` (MULTI_FACE.md CLI cd afterApply wired) |
 | next unused doc-operational-cd apply | `dronehive-doc-operational-cd` (OPERATIONAL.md One command cd afterApply wired) |
-| next afterApply to wire | `dronehive-seed-doc-operational-cd` (seed OPERATIONAL.md cd only) |
+| next unused seed-doc-operational-cd apply | `dronehive-seed-doc-operational-cd` (seed OPERATIONAL.md One command cd afterApply wired) |
+| next afterApply to wire | `dronehive-doc-pro-cd` (docs/PRO.md cd only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -333,7 +334,9 @@ Face-swap README honesty leftovers are exhausted.
 (standalone `cd .` line; G: project cd is gone).
 `dronehive-doc-operational-cd` afterApply asserts docs/OPERATIONAL.md
 (standalone `cd .` line; G: project cd is gone).
-Next afterApply to wire is `dronehive-seed-doc-operational-cd`.
+`dronehive-seed-doc-operational-cd` afterApply asserts seed OPERATIONAL.md
+(standalone `cd .` line; G: project cd is gone).
+Next afterApply to wire is `dronehive-doc-pro-cd`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -451,7 +454,7 @@ then unused `dronehive-doc-future-seer-cd` (docs/FUTURE_SEER.md only; afterApply
 then unused `dronehive-doc-measured-diagnostics-cd` (docs/MEASURED_DIAGNOSTICS.md only; afterApply wired),
 then unused `dronehive-doc-multi-face-cd` (docs/MULTI_FACE.md only; afterApply wired),
 then unused `dronehive-doc-operational-cd` (docs/OPERATIONAL.md only; afterApply wired),
-then unused `dronehive-seed-doc-operational-cd` (drone/app/seed/docs/OPERATIONAL.md only),
+then unused `dronehive-seed-doc-operational-cd` (drone/app/seed/docs/OPERATIONAL.md only; afterApply wired),
 then unused `dronehive-doc-pro-cd` (docs/PRO.md only),
 then unused `dronehive-doc-super-llms-cd` (docs/SUPER_LLMS.md only),
 then unused `dronehive-doc-super-mesh-cd` (docs/SUPER_MESH.md only),

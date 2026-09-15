@@ -22,10 +22,11 @@ drone/app/seed/docs/OPERATIONAL.md cd line only. Do not edit drone/pro/tool_agen
 - git checkout -b cursor/dronehive-seed-doc-operational-cd-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-doc-operational-cd.patch
 - git apply /path/to/main/patches/dronehive-seed-doc-operational-cd.patch
+- python3 -c "from pathlib import Path; t=Path('drone/app/seed/docs/OPERATIONAL.md').read_text(); assert '\ncd .\n' in t; assert r'cd G:\\AI-Home\\projects\\ai-worker-drone-0.5b' not in t"
 
 ## Verify
 
-seed OPERATIONAL.md cd is .
+seed OPERATIONAL.md One command cd is a standalone cd . line
 
 Do not reopen https://github.com/yuro1991-afk/main/pull/1.
 Do not open another landing-pad queue.
