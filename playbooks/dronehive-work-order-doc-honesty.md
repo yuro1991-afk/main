@@ -22,6 +22,7 @@ Docs only. Different file from hive.py. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-work-order-doc-honesty-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-doc-honesty.patch
 - git apply /path/to/main/patches/dronehive-work-order-doc-honesty.patch
+- python3 -c "from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert 'host/library/knowledge/codex/CODEX.min.json' in t and 'host/library' in t"
 
 ## Verify
 
