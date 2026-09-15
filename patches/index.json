@@ -115,8 +115,10 @@
       "file": "patches/ova-pwsh-syntax-ci.patch",
       "base": "074bad0",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "Parser/AST check only. Does not hit :11434 and does not stop Ollama."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('.github/workflows/pwsh-syntax.yml').read_text(); assert 'name: pwsh-syntax' in t; assert 'Parse PowerShell without talking to Ollama' in t; assert 'Parser]::ParseFile' in t; assert 'ubuntu-latest' in t\""
+      ],
+      "notes": "Parser/AST check only. Does not hit :11434 and does not stop Ollama. After apply: assert .github/workflows/pwsh-syntax.yml has those phrases. Unpatched has no .github. Do not run pwsh. Do not put dollar signs in afterApply. Do not put backticks in afterApply. Independent of ova-api-host-override and ova-stop-noui-guard."
     },
     {
       "id": "ova-api-host-override",

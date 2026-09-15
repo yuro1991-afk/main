@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T03:46Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T03:47Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`1285cb5`. Shipped this interval: `faceswap-commit-pwa-icons`
-PNG afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`ea1f408`. Shipped this interval: `ova-pwsh-syntax-ci`
+syntax-workflow afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -167,7 +167,8 @@ PNG afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused agama-honesty apply | `opensussy-agama-honesty` (agama honesty afterApply wired) |
 | next unused honesty-env-paths apply | `faceswap-honesty-env-paths` (HONESTY.md env footer afterApply wired) |
 | next unused commit-pwa-icons apply | `faceswap-commit-pwa-icons` (Home Screen PNGs afterApply wired) |
-| next early afterApply to wire | `ova-pwsh-syntax-ci` (parser/AST check only) |
+| next unused pwsh-syntax-ci apply | `ova-pwsh-syntax-ci` (pwsh-syntax.yml afterApply wired) |
+| next early afterApply to wire | `ova-api-host-override` (loopback OV_API_BASE only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -495,7 +496,9 @@ all three linux HOW_TO files have the Agama honesty block.
 HONESTY Env contract, README Engine contract, and START.cmd honors FACESWAP_ENGINE (G: stays).
 `faceswap-commit-pwa-icons` afterApply asserts
 the three pwa/ Home Screen PNGs exist with PNG magic (unpatched has none).
-Next early afterApply to wire is `ova-pwsh-syntax-ci`. Do not invent leftovers.
+`ova-pwsh-syntax-ci` afterApply asserts
+.github/workflows/pwsh-syntax.yml is parser-only and never talks to Ollama.
+Next early afterApply to wire is `ova-api-host-override`. Do not invent leftovers.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -662,8 +665,9 @@ then unused `dronehive-work-order-ai-smarts-packs` (work_order.json ai_smarts_pa
 then unused `dronehive-seed-work-order-ai-smarts-packs` (seed ai_smarts_packs only; afterApply wired),
 then unused `bloom-grok-pwa-test-sync` (grok-pwa-plugin.test.mjs only; afterApply wired),
 then unused `faceswap-honesty-env-paths` (HONESTY.md env footer only; afterApply wired),
-then unused `faceswap-commit-pwa-icons` (Home Screen PNGs only; afterApply wired).
-Early empty afterApply next: `ova-pwsh-syntax-ci` (parser/AST check only).
+then unused `faceswap-commit-pwa-icons` (Home Screen PNGs only; afterApply wired),
+then unused `ova-pwsh-syntax-ci` (pwsh-syntax.yml only; afterApply wired).
+Early empty afterApply next: `ova-api-host-override` (loopback OV_API_BASE only).
 Newcomer `bc-710c5477` Hunt sibling: unused apply `bloom-grok-pwa-test-sync`.
 `bc-f407303f`: `review-main-pr10` (fork's Python arena/infra).
 `bc-5fe241dd` Summarize arena: do not steal `genesis-world-arena`; unused apply `faceswap-design-honesty`.

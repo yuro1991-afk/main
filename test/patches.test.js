@@ -1150,6 +1150,19 @@ test("cli patches --job opensussy-agama-honesty includes the HOW_TO afterApply",
   assert.ok(parsed.applyNext.some((line) => line.includes("install/linux/HOW_TO_RUN.txt") && line.includes("AGAMA / Leap 16 HONESTY") && line.includes("Agama JSON is unsupported")));
 });
 
+test("cli patches --job ova-pwsh-syntax-ci includes the syntax-workflow afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "ova-pwsh-syntax-ci"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "ova-pwsh-syntax-ci");
+  assert.ok(parsed.applyNext.some((line) => line.includes(".github/workflows/pwsh-syntax.yml") && line.includes("name: pwsh-syntax") && line.includes("Parse PowerShell without talking to Ollama") && line.includes("Parser]::ParseFile")));
+});
+
 test("cli patches --job faceswap-commit-pwa-icons includes the PNG afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "faceswap-commit-pwa-icons"], {

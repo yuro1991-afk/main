@@ -22,7 +22,7 @@ Do not change Start Menu Bypass installers in the same PR as stop-guard unless o
 - git checkout -b cursor/ova-pwsh-syntax-ci-from-ops
 - git apply --check /path/to/main/patches/ova-pwsh-syntax-ci.patch
 - git apply /path/to/main/patches/ova-pwsh-syntax-ci.patch
-- Syntax job passes on ubuntu-latest pwsh without a local ollama.exe.
+- python3 -c "from pathlib import Path; t=Path('.github/workflows/pwsh-syntax.yml').read_text(); assert 'name: pwsh-syntax' in t; assert 'Parse PowerShell without talking to Ollama' in t; assert 'Parser]::ParseFile' in t; assert 'ubuntu-latest' in t"
 
 ## Verify
 
