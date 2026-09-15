@@ -13,6 +13,7 @@ import { unusedGenesisCards, unusedGithubCards } from "./sync.js";
 import { buildHelperPacket } from "./helpers.js";
 import { buildRelaunch, packetPathFor, relaunchFor } from "./handoff.js";
 import { renderLaunchPrompt } from "./prompt.js";
+import { FIRST_PARKED_APPLY } from "./siblings.js";
 
 export const BUSY_CONTRACT = "agent-ops.busy.v1";
 export const SLOTS_CONTRACT = "agent-ops.slots.v1";
@@ -234,7 +235,7 @@ export function buildMissingLaunches(ledger, launchDir) {
     next: missing.slice(0, MISSING_LAUNCH_PREVIEW).map((row) => row.jobId),
     prefer: nextMissing
       ? `node src/cli.js assign --job ${nextMissing} --out /tmp/launches`
-      : "node src/cli.js assign --job <id> --out /tmp/launches",
+      : `node src/cli.js brief --job ${FIRST_PARKED_APPLY}`,
     wrote: false,
   };
 }

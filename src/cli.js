@@ -736,7 +736,7 @@ Commands:
   playbooks [--check] [--write] [--job id] [--here] [--out dir]
 
 GitHub siblings first (Yuri: forget Origin). Pass --origin for Genesis cards. Pass --all for both.
-patches lists applyable GitHub diffs. No --job is compact (nextApply dronehive-unicode-ci + id/file + nextMissing). Prefer brief --job or assign --job <nextMissing> --out /tmp/launches.
+patches lists applyable GitHub diffs. No --job is compact (nextApply dronehive-unicode-ci + id/file + nextMissing). Prefer brief --job dronehive-unicode-ci when leftover launches are exhausted. Do not invent leftover 163+.
 --prove clones --no-hardlinks throwaways, runs vanilla+stacked git apply --check, and never writes or resets siblings.
 --prove-after-apply clones --no-hardlinks throwaways and never writes or resets siblings.
 playbooks defaults to --check: compares First commands, reports missingRequires, never writes. No --job is compact (nextApply dronehive-unicode-ci + counts). Prefer brief --job.

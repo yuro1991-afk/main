@@ -43,7 +43,8 @@ node src/cli.js tick
 catalog-first related PRs in both JSON and the launch file
 (same order as `siblings --job`).
 `assign --missing` lists catalog leftovers with no launch file and
-never writes. Prefer `assign --job <id> --out /tmp/launches`.
+never writes. Leftover launches are exhausted (`nextMissing` null).
+Prefer `brief --job dronehive-unicode-ci`. Do not invent leftover 163+.
 `busy --agent` claims **your roster card** first. Leftover unused is
 `review-landing-pad-prs`. `next --world` / `--origin` are opt-in.
 

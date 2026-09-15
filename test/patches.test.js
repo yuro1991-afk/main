@@ -360,7 +360,7 @@ test("cli patches lists the catalog", async () => {
   assert.equal(parsed.missingLaunches, 0);
   assert.equal(
     parsed.preferMissing,
-    "node src/cli.js assign --job <id> --out /tmp/launches",
+    "node src/cli.js brief --job dronehive-unicode-ci",
   );
   assert.equal(parsed.applyNext, undefined);
   assert.equal(parsed.patches[0].id, "dronehive-unicode-ci");
