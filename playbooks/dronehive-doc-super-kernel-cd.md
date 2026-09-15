@@ -22,10 +22,11 @@ docs/SUPER_KERNEL.md Set-Location line only. Do not edit drone/pro/tool_agent.py
 - git checkout -b cursor/dronehive-doc-super-kernel-cd-from-ops
 - git apply --check /path/to/main/patches/dronehive-doc-super-kernel-cd.patch
 - git apply /path/to/main/patches/dronehive-doc-super-kernel-cd.patch
+- python3 -c "from pathlib import Path; t=Path('docs/SUPER_KERNEL.md').read_text(); assert '\nSet-Location .\n' in t; assert r'Set-Location G:\\AI-Home\\projects\\ai-worker-drone-0.5b' not in t"
 
 ## Verify
 
-docs/SUPER_KERNEL.md Set-Location is .
+docs/SUPER_KERNEL.md Set-Location is a standalone Set-Location . line
 
 Do not reopen https://github.com/yuro1991-afk/main/pull/1.
 Do not open another landing-pad queue.

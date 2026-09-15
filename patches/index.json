@@ -1297,8 +1297,10 @@
       "file": "patches/dronehive-doc-super-kernel-cd.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "docs/SUPER_KERNEL.md Set-Location uses '.'. Independent of work-order-doc-cd. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/SUPER_KERNEL.md').read_text(); assert '\\nSet-Location .\\n' in t; assert r'Set-Location G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "docs/SUPER_KERNEL.md uses a standalone Set-Location . line. After apply: assert that line and that the G: project Set-Location is gone. Independent of work-order-doc-cd leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-doc-honesty-library",
