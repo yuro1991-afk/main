@@ -142,7 +142,7 @@ test("review does not target empty main", () => {
   const route = routeIntent("Have code rabbit auto review genesis");
   assert.equal(route.kind, "review");
   assert.match(route.destination, /existing open PR/);
-  assert.match(route.notes, /#8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, or #42/);
+  assert.match(route.notes, /#8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, or #46/);
   assert.doesNotMatch(route.notes, /Origin PR/);
   assert.doesNotMatch(route.notes, /dronehive #1/);
 });
@@ -157,7 +157,7 @@ test("review intent with ledger parks on landing-pad PRs, not Origin", () => {
   });
   assert.equal(route.jobId, "review-landing-pad-prs");
   assert.match(route.destination, /main#review-landing-pad-prs/);
-  assert.match(route.notes, /#8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, or #42/);
+  assert.match(route.notes, /#8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, or #46/);
   assert.doesNotMatch(route.notes, /Relaunch Origin/);
   assert.doesNotMatch(route.notes, /dronehive #1/);
 });
@@ -303,7 +303,7 @@ test("merge / landing-pad intents park on review PRs, not leftover Superbrain", 
   for (const intent of ["merge #8 then #9", "review the landing pad", "landing-pad merge order"]) {
     const route = routeIntent(intent, { ledger, roster, nowMs: afterLease });
     assert.equal(route.jobId, "review-landing-pad-prs", intent);
-    assert.match(route.notes, /#8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, or #42/);
+    assert.match(route.notes, /#8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, or #46/);
     assert.doesNotMatch(route.destination, /gub-superbrain-probe/);
   }
   const keep = routeIntent("keep agents busy", { ledger, roster, nowMs: NOW });

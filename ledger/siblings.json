@@ -623,6 +623,55 @@
         "dronehive-mount-readme-cargo",
         "dronehive-tui-readme-cargo"
       ]
+    },
+    {
+      "number": 43,
+      "url": "https://github.com/yuro1991-afk/main/pull/43",
+      "branch": "cursor/siblings-prs-39-42-108b",
+      "title": "Record landing-pad PRs 39–42 on the siblings board",
+      "role": "siblings-board",
+      "owns": [
+        "review-landing-pad-prs"
+      ]
+    },
+    {
+      "number": 44,
+      "url": "https://github.com/yuro1991-afk/main/pull/44",
+      "branch": "cursor/apps-readme-cargo-launches-108b",
+      "title": "Add Apply launches for apps-readme-cargo leftover cards",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-apps-readme-cargo",
+        "dronehive-install-ollama-app-root",
+        "dronehive-install-ollama-app-mount",
+        "dronehive-install-ollama-app-manifest"
+      ]
+    },
+    {
+      "number": 45,
+      "url": "https://github.com/yuro1991-afk/main/pull/45",
+      "branch": "cursor/uninstall-tui-readme-launches-108b",
+      "title": "Add Apply launches for uninstall-tui-readme leftover cards",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-install-ollama-uninstall-root",
+        "dronehive-tui-readme-root",
+        "dronehive-ollama-tui-readme-install",
+        "dronehive-mount-readme-layout"
+      ]
+    },
+    {
+      "number": 46,
+      "url": "https://github.com/yuro1991-afk/main/pull/46",
+      "branch": "cursor/mount-readme-sec-launches-108b",
+      "title": "Add Apply launches for mount-readme and opensussy-sec leftovers",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-mount-readme-launch",
+        "dronehive-mount-readme-related",
+        "opensussy-sec-review-target",
+        "opensussy-install-sec-review-target"
+      ]
     }
   ]
 }
