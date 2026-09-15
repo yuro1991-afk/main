@@ -355,8 +355,8 @@ test("cli assign --missing lists catalog leftovers with no launch and never writ
   assert.equal(result.code, 0);
   const parsed = JSON.parse(result.out);
   assert.equal(parsed.wrote, false);
-  assert.equal(parsed.nextMissing, "dronehive-work-order-knowledge-expand");
-  assert.ok(parsed.next.includes("dronehive-work-order-knowledge-expand"));
+  assert.equal(parsed.nextMissing, "dronehive-multi-hosts-hardwire");
+  assert.ok(parsed.next.includes("dronehive-multi-hosts-hardwire"));
   assert.ok(parsed.missing > parsed.next.length);
   assert.equal(readdirSync(onDisk).length, before);
 });
@@ -546,6 +546,10 @@ test("unused leftover launch packets exist for parked next cards", () => {
     "dronehive-seed-work-order-school-root",
     "dronehive-work-order-reference-db",
     "dronehive-seed-work-order-reference-db",
+    "dronehive-work-order-knowledge-expand",
+    "dronehive-seed-work-order-knowledge-expand",
+    "dronehive-work-order-curriculum-root",
+    "dronehive-seed-work-order-curriculum-root",
   ];
   for (const id of ids) {
     const text = readFileSync(new URL(`../reviews/launch/${id}.md`, import.meta.url), "utf8");
