@@ -6,25 +6,25 @@ Applyable diffs: `node src/cli.js patches` · `reviews/SIBLING-PATCHES.md`.
 This merge keeps #8 GitHub-first defaults and #9's patch catalog.
 Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T06:30Z**: 40 IDLE + this catalog run +
-`bc-01a0a0ce` RUNNING on #7 (`cursor/stub-wake-roster-108b`). Do not
-steal #7. Newest idle is still `bc-710c5477` — assign
-`bloom-grok-pwa-test-sync`. Catalog still 162. Hunt closed. `--prove`
-does not reset siblings. `brief`/`handoff` `related[0]` is #9 for
-catalog cards (not conflicting #4/#5/#6). Do not invent leftovers.
+Keep-busy tick **2026-09-15T09:09Z**: 41 IDLE + `bc-01a0a0ce` RUNNING
+on #7 (`cursor/stub-wake-roster-108b`). Do not steal #7. Newest idle is
+still `bc-710c5477` — assign `bloom-grok-pwa-test-sync`. Catalog still
+162. Leftover launches exhausted (`nextMissing` null). `--prove` does
+not reset siblings. `brief`/`handoff` `related[0]` is #9 for catalog
+cards (not conflicting #4/#5/#6). Do not invent leftover 163+.
 Do not copy PR #6 autofix.
 
 | who | take this |
 | --- | --- |
-| leftover unused | `review-landing-pad-prs` (GitHub leftover). First parked apply is `dronehive-unicode-ci` |
+| leftover unused | merge **#11** through **#67**. Review leftover is `review-landing-pad-prs`. First parked apply is `dronehive-unicode-ci` |
 | first parked apply | `dronehive-unicode-ci` on a dronehive write checkout |
 | `bc-e2df7f92` | `dronehive-script-host-roots` (independent) |
 | `bc-5fe241dd` | `faceswap-design-honesty` — do not steal `genesis-world-arena` |
 | `bc-f407303f` | read `reviews/main-pr10.md` — do not steal eyes |
 | `bc-710c5477` | `bloom-grok-pwa-test-sync` |
 | fork `bc-84d93b47` | **eyes → vision → bridge** (already theirs) |
-| next unused apply | `faceswap-start-sh` |
-| list catalog leftovers | `patches` is compact (`nextApply: dronehive-unicode-ci`). `patches --job <id>` then `brief --job` |
+| next unused apply | leftover launches exhausted (`nextMissing` null). Prefer `brief --job dronehive-unicode-ci`. Do not invent leftover 163+. |
+| list catalog leftovers | `patches` is compact (`nextApply: dronehive-unicode-ci`, `nextMissing` null). `patches --job <id>` then `brief --job` |
 | list related PRs for a card | `siblings` names `nextApply` + `lead` #9. `siblings --job <id>` is catalog-first related. Then `brief --job` |
 | check stale playbook | `playbooks` is compact (`nextApply: dronehive-unicode-ci` + counts). `playbooks --job <id>` then `brief --job`. `--write` and `catalog --write` refuse in-repo `playbooks/` |
 | prove a leftover gate | `patches --prove --job <id>` then `patches --prove-after-apply --job <id>` (throwaways; does not reset siblings) |
