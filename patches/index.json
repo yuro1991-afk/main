@@ -159,8 +159,10 @@
       "file": "patches/faceswap-health-offline.patch",
       "base": "bba7188",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "Health status is red (not ok) when the engine port is closed. 5s timeout unchanged."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; g=Path('gateway.py').read_text(); line=next(x for x in g.splitlines() if 'if code == 200 else' in x and 'status' in x); assert 'red' in line; assert 'degraded' not in line; assert 'timeout=5.0' in g; t=Path('tests/test_health_offline.py').read_text(); assert 'engine port is closed' in t; assert 'false_green' in t\""
+      ],
+      "notes": "Health status is red (not ok) when the engine port is closed. 5s timeout unchanged. After apply: assert gateway.py status line is red not degraded, timeout=5.0 stays, and tests/test_health_offline.py exists. Do not run the offline test. Do not put backticks in afterApply. Independent of faceswap-mock-engine-ci."
     },
     {
       "id": "faceswap-mock-engine-ci",

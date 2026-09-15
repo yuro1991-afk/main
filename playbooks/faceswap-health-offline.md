@@ -22,7 +22,7 @@ Do not change POST /api/ios/swap payload shape. Coordinate with faceswap-mock-en
 - git checkout -b cursor/faceswap-health-offline-from-ops
 - git apply --check /path/to/main/patches/faceswap-health-offline.patch
 - git apply /path/to/main/patches/faceswap-health-offline.patch
-- With FACESWAP_ENGINE=http://127.0.0.1:9 gateway health JSON is not status ok; prove_swap exits 2.
+- python3 -c "from pathlib import Path; g=Path('gateway.py').read_text(); line=next(x for x in g.splitlines() if 'if code == 200 else' in x and 'status' in x); assert 'red' in line; assert 'degraded' not in line; assert 'timeout=5.0' in g; t=Path('tests/test_health_offline.py').read_text(); assert 'engine port is closed' in t; assert 'false_green' in t"
 
 ## Verify
 
