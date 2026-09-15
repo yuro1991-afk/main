@@ -62,6 +62,6 @@ lists applyable diffs (DroneHive unicode, bloom ignore/README/CI, OpenSussy
 2.0.0 leftovers, face-swap icons/env, Ollama Voice syntax + loopback API).
 `node src/cli.js patches --prove --siblings-root /tmp/siblings` re-checks
 vanilla+stacked `git apply --check` on a `--no-hardlinks` throwaway and
-never writes those checkouts. This pad token
+never writes or resets those checkouts. This pad token
 cannot push those repos. Do **not** copy PR #6’s autofix runner.
 See `reviews/SIBLING-PATCHES.md`.

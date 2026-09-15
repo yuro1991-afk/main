@@ -367,6 +367,7 @@ applying these diffs on a sibling write checkout.
 - patches --prove throwaway (2026-09-15T05:50Z): `patches --prove` clones `--no-hardlinks` throwaways like `--prove-after-apply`. It no longer `git apply` / `reset --hard` / `clean -fd` the sibling source (dronehive is a symlink). Never write `/tmp/siblings`. Keep-busy stays Origin (#8).
 - helpers prove throwaway (2026-09-15T05:53Z): catalog helpers `prove` Task names throwaways / never write `/tmp/siblings` like `prove-after-apply`. Keep-busy stays Origin (#8).
 - prove JSON source (2026-09-15T05:57Z): `--prove` / `--prove-after-apply` report `source` (read-only sibling) plus `checkout: null` / `wrote: false`. They no longer name `/tmp/siblings/dronehive` as checkout. Keep-busy stays Origin (#8).
+- prove does not reset (2026-09-15T06:00Z): relaunch docs say `--prove does not reset siblings`. Prove JSON is top-level `wrote: false`. Missing-checkout rows include `source: null` / `wrote: false`. Keep-busy stays Origin (#8).
 - prompt/handoff prove-after-apply (2026-09-15T04:45Z): live `prompt` / `renderHandoffPacket` catalog text list `--prove-after-apply` after `--prove`. `prompt --json` carries `proveAfterApplyCommand` next to `applyNext`. Do not rewrite on-disk `reviews/handoff-*.md` or `playbooks/`.
 - bloom gitignore-vercel (2026-09-15T04:08Z): after apply, assert .gitignore has .vercel/ dist/ .output/ .nitro/. Unpatched has none of those. Do not git rm as afterApply (mutates; 58 tracked files stay a later write-checkout step). Do not invent an untrack leftover. Do not put dollar signs or backticks in afterApply. Independent of bloom-ci-lint.
 - face-swap `DESIGN.md`: `FACESWAP_ENGINE` is the contract; G: is one host example. After apply (2026-09-15T00:12Z): assert `FACESWAP_ENGINE`, `one host example`, and `not the contract`. Unpatched DESIGN.md has none of those. Independent of `faceswap-honesty-env-paths`.
@@ -386,7 +387,7 @@ applying these diffs on a sibling write checkout.
 ```bash
 node src/cli.js patches --prove --job "$JOB_ID" --siblings-root /tmp/siblings
 node src/cli.js patches --prove-after-apply --job "$JOB_ID" --siblings-root /tmp/siblings
-# JSON applyNext is the write-checkout apply. --prove itself resets.
+# JSON applyNext is the write-checkout apply. --prove does not reset siblings.
 # JSON proveAfterApplyCommand is the throwaway afterApply prove. Never write siblings.
 git clone "https://github.com/yuro1991-afk/<sibling>.git" work && cd work
 git apply --check /path/to/main/<patch>

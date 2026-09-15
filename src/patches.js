@@ -275,7 +275,8 @@ export function provePatches(index, options) {
         file: row.file,
         ...catalogApplyFields(row),
         status: "missing-checkout",
-        checkout: null,
+        throwaway: false,
+        ...siblingSourceFields(null),
       }
     );
   });
@@ -286,9 +287,10 @@ export function provePatches(index, options) {
     contract: PATCH_CONTRACT.id,
     command: PATCH_CONTRACT.command,
     prove: true,
+    wrote: false,
     cannotPush: index.cannotPush,
     doNot:
-      "Do not copy PR #6 npm run autofix. --prove clones --no-hardlinks throwaways and never writes /tmp/siblings. applyNext is the write-checkout apply, not a leftover hunt.",
+      "Do not copy PR #6 npm run autofix. --prove clones --no-hardlinks throwaways and never writes /tmp/siblings. It does not reset siblings. applyNext is the write-checkout apply, not a leftover hunt.",
     siblingsRoot,
     applyNext: results.length === 1 ? results[0].applyNext : undefined,
     proveAfterApplyCommand: results.length === 1 ? results[0].proveAfterApplyCommand : undefined,
@@ -421,9 +423,9 @@ export function proveAfterApply(index, options) {
         repo: row.repo,
         file: row.file,
         ...catalogApplyFields(row),
-        throwaway: true,
+        throwaway: false,
         status: "missing-checkout",
-        checkout: null,
+        ...siblingSourceFields(null),
       }
     );
   });
@@ -441,9 +443,10 @@ export function proveAfterApply(index, options) {
     contract: PATCH_CONTRACT.id,
     command: PATCH_CONTRACT.command,
     proveAfterApply: true,
+    wrote: false,
     cannotPush: index.cannotPush,
     doNot:
-      "Do not copy PR #6 npm run autofix. --prove-after-apply clones --no-hardlinks throwaways and never writes /tmp/siblings. afterApply must fail unpatched and pass patched.",
+      "Do not copy PR #6 npm run autofix. --prove-after-apply clones --no-hardlinks throwaways and never writes /tmp/siblings. It does not reset siblings. afterApply must fail unpatched and pass patched.",
     siblingsRoot,
     applyNext: results.length === 1 ? results[0].applyNext : undefined,
     proveAfterApplyCommand: results.length === 1 ? results[0].proveAfterApplyCommand : undefined,

@@ -54,7 +54,7 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
 
 **Yuri: forget Origin** for these cards. `node src/cli.js patches` lists
 applyable diffs under `patches/`. `patches --prove` re-checks them on a `--no-hardlinks` throwaway
-and never writes `/tmp/siblings`. This token **cannot push**
+and never writes or resets `/tmp/siblings`. This token **cannot push**
 those repos — clone and relaunch there. Do not copy PR #6’s autofix runner.
 Evidence: `reviews/SIBLING-PATCHES.md`. Merge
 [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first defaults.

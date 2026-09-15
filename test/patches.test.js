@@ -2587,6 +2587,10 @@ test("provePatches reports missing checkout", () => {
   assert.equal(proof.skipped, 1);
   assert.equal(proof.failed, 0);
   assert.equal(proof.results[0].status, "missing-checkout");
+  assert.equal(proof.wrote, false);
+  assert.equal(proof.results[0].wrote, false);
+  assert.equal(proof.results[0].checkout, null);
+  assert.equal(proof.results[0].source, null);
   assert.deepEqual(proof.results[0].applyNext, [
     "git clone https://github.com/yuro1991-afk/dronehive.git work && cd work",
     "git checkout -b cursor/one-from-ops",
@@ -2597,9 +2601,10 @@ test("provePatches reports missing checkout", () => {
   assert.match(proof.doNot, /autofix/);
   assert.match(proof.doNot, /applyNext/);
   assert.match(proof.doNot, /never writes \/tmp\/siblings/);
+  assert.match(proof.doNot, /does not reset siblings/);
 });
 
-test("provePatches stacked apply-check then resets", () => {
+test("provePatches stacked apply-check never writes the sibling", () => {
   const pad = mkdtempSync(join(tmpdir(), "agent-ops-prove-stack-"));
   const siblings = join(pad, "siblings");
   const checkout = join(siblings, "dronehive");
@@ -2664,6 +2669,7 @@ test("provePatches stacked apply-check then resets", () => {
   assert.equal(proof.results[1].stacked, true);
   assert.equal(proof.results[0].throwaway, true);
   assert.equal(proof.results[1].throwaway, true);
+  assert.equal(proof.wrote, false);
   assert.equal(proof.results[0].wrote, false);
   assert.equal(proof.results[0].checkout, null);
   assert.equal(proof.results[0].source, checkout);
@@ -2687,7 +2693,7 @@ test("provePatches stacked apply-check then resets", () => {
   assert.equal(status.stdout, "?? SENTINEL\n");
 });
 
-test("cli patches --prove stacked then resets", async () => {
+test("cli patches --prove stacked never writes the sibling", async () => {
   const pad = mkdtempSync(join(tmpdir(), "agent-ops-prove-cli-"));
   const siblings = join(pad, "siblings");
   const checkout = join(siblings, "dronehive");
@@ -2740,10 +2746,12 @@ test("cli patches --prove stacked then resets", async () => {
   assert.equal(parsed.ok, 1);
   assert.equal(parsed.failed, 0);
   assert.equal(parsed.results[0].throwaway, true);
+  assert.equal(parsed.wrote, false);
   assert.equal(parsed.results[0].wrote, false);
   assert.equal(parsed.results[0].checkout, null);
   assert.equal(parsed.results[0].source, checkout);
   assert.match(parsed.doNot, /never writes \/tmp\/siblings/);
+  assert.match(parsed.doNot, /does not reset siblings/);
   assert.equal(readFileSync(join(checkout, "note.txt"), "utf8"), "line1\n");
 });
 
@@ -2822,6 +2830,7 @@ test("proveAfterApply fails unpatched, passes patched, and leaves the sibling so
   const index = loadPatchIndex(join(patchesDir, "index.json"));
   const proof = proveAfterApply(index, { repoRoot: pad, siblingsRoot: siblings });
   assert.equal(proof.proveAfterApply, true);
+  assert.equal(proof.wrote, false);
   assert.equal(proof.ok, 1, JSON.stringify(proof.results, null, 2));
   assert.equal(proof.failed, 0);
   assert.equal(proof.results[0].status, "ok");
@@ -2942,6 +2951,15 @@ test("cli patches --prove-after-apply uses throwaways", async () => {
   assert.equal(code, 0);
   const parsed = JSON.parse(chunks.join(""));
   assert.equal(parsed.proveAfterApply, true);
+  assert.equal(parsed.wrote, false);
   assert.equal(parsed.ok, 1);
+  assert.match(parsed.doNot, /does not reset siblings/);
   assert.equal(readFileSync(join(checkout, "note.txt"), "utf8"), "line1\n");
+});
+
+test("sibling patch relaunch docs do not say prove resets", () => {
+  const body = readFileSync(join(ROOT, "reviews", "SIBLING-PATCHES.md"), "utf8");
+  const relaunch = body.slice(body.indexOf("## Relaunch"));
+  assert.doesNotMatch(relaunch, /prove itself resets/i);
+  assert.match(relaunch, /--prove does not reset siblings/);
 });
