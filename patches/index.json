@@ -33,8 +33,10 @@
       "file": "patches/bloom-readme-honest-export.patch",
       "base": "288a484",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "Honest README: Grok Build export, not Origin Genesis, not this landing pad."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('README.md').read_text(); assert 'Grok Build' in t; assert 'Cursor Origin Genesis' in t; assert 'yuro1991-afk/main' in t; assert 'OMNI-FORGE' in t\""
+      ],
+      "notes": "Honest README: Grok Build export, not Origin Genesis, not this landing pad. After apply: assert README.md has those phrases. Unpatched has no README.md. Do not put backticks in afterApply."
     },
     {
       "id": "bloom-ci-typecheck",

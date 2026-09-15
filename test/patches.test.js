@@ -1085,6 +1085,19 @@ test("cli patches --job dronehive-seed-work-order-ai-smarts-packs includes the s
   assert.ok(parsed.applyNext.some((line) => line.includes("drone/app/seed/configs/work_order.json") && line.includes("knowledge_imprint") && line.includes("host/ai-home/docs/ai-smarts/packs")));
 });
 
+test("cli patches --job bloom-readme-honest-export includes the README afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "bloom-readme-honest-export"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "bloom-readme-honest-export");
+  assert.ok(parsed.applyNext.some((line) => line.includes("README.md") && line.includes("Grok Build") && line.includes("Cursor Origin Genesis") && line.includes("OMNI-FORGE")));
+});
+
 test("cli patches --job dronehive-ollama-app-bridge-paths includes the bridge consts afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-ollama-app-bridge-paths"], {

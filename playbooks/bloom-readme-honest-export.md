@@ -22,7 +22,7 @@ Docs only. Do not copy Genesis onto this tree. Do not reopen main#1.
 - git checkout -b cursor/bloom-readme-honest-export-from-ops
 - git apply --check /path/to/main/patches/bloom-readme-honest-export.patch
 - git apply /path/to/main/patches/bloom-readme-honest-export.patch
-- README.md exists; does not claim Superbrain LIVE or duplicate sibling stubs.
+- python3 -c "from pathlib import Path; t=Path('README.md').read_text(); assert 'Grok Build' in t; assert 'Cursor Origin Genesis' in t; assert 'yuro1991-afk/main' in t; assert 'OMNI-FORGE' in t"
 
 ## Verify
 
