@@ -22,6 +22,7 @@ apps/drone-ollama-app/src/main.rs crash_log_path only. Do not edit drone/pro/too
 - git checkout -b cursor/dronehive-ollama-app-crash-log-from-ops
 - git apply --check /path/to/main/patches/dronehive-ollama-app-crash-log.patch
 - git apply /path/to/main/patches/dronehive-ollama-app-crash-log.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-app/src/main.rs').read_text(); assert r'host\\ai-home\\apps\\DroneOllama\\logs\\crash.log' in t; assert r'G:\\AI-Home\\apps\\DroneOllama\\logs\\crash.log' not in t"
 
 ## Verify
 

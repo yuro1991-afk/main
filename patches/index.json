@@ -1440,8 +1440,10 @@
       "file": "patches/dronehive-ollama-app-crash-log.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "main.rs crash log uses host\\\\ai-home. Independent of UI leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/src/main.rs').read_text(); assert r'host\\\\ai-home\\\\apps\\\\DroneOllama\\\\logs\\\\crash.log' in t; assert r'G:\\\\AI-Home\\\\apps\\\\DroneOllama\\\\logs\\\\crash.log' not in t\""
+      ],
+      "notes": "main.rs crash_log_path uses host\\\\ai-home\\\\apps\\\\DroneOllama\\\\logs\\\\crash.log. After apply: assert that path and G: crash.log gone. UI and open leftovers still pin G:. Independent of UI leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-ollama-app-ui-install-root",
