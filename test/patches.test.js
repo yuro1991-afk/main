@@ -669,6 +669,19 @@ test("cli patches --job dronehive-doc-measured-diagnostics-cd includes the MEASU
   assert.ok(parsed.applyNext.some((line) => line.includes("docs/MEASURED_DIAGNOSTICS.md") && line.includes("cd .") && line.includes("ai-worker-drone-0.5b")));
 });
 
+test("cli patches --job dronehive-doc-multi-face-cd includes the MULTI_FACE cd afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-doc-multi-face-cd"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-doc-multi-face-cd");
+  assert.ok(parsed.applyNext.some((line) => line.includes("docs/MULTI_FACE.md") && line.includes("cd .") && line.includes("ai-worker-drone-0.5b")));
+});
+
 test("cli patches --job dronehive-tui-readme-cargo includes the dronehive-tui README afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-tui-readme-cargo"], {
