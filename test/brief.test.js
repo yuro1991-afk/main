@@ -542,7 +542,7 @@ test("cli siblings --job lists catalog-first related PRs", async () => {
   );
 });
 
-test("cli brief defaults to next and siblings lists PRs", async () => {
+test("cli brief defaults to leftover unused exhausted", async () => {
   const chunks = [];
   const code = await runCli(["brief"], {
     nowMs: NOW,
@@ -550,8 +550,9 @@ test("cli brief defaults to next and siblings lists PRs", async () => {
       chunks.push(value);
     },
   });
-  assert.equal(code, 0);
-  assert.match(chunks.join(""), /review-landing-pad-prs/);
+  assert.equal(code, 1);
+  assert.match(chunks.join(""), /No open job/);
+  assert.doesNotMatch(chunks.join(""), /review-landing-pad-prs/);
   assert.doesNotMatch(chunks.join(""), /sibling cards stay blocked/);
   const listed = [];
   const siblingsCode = await runCli(["siblings"], {

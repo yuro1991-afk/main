@@ -128,7 +128,7 @@ test("stacked catalog apply helper names requires priors first", () => {
   assert.doesNotMatch(apply.prompt, /npm run autofix/);
 });
 
-test("cli helpers defaults to next Genesis card", async () => {
+test("cli helpers defaults to leftover unused exhausted", async () => {
   const chunks = [];
   const code = await runCli(["helpers"], {
     nowMs: NOW,
@@ -136,7 +136,8 @@ test("cli helpers defaults to next Genesis card", async () => {
       chunks.push(value);
     },
   });
-  assert.equal(code, 0);
-  assert.match(chunks.join(""), /review-landing-pad-prs/);
+  assert.equal(code, 1);
+  assert.match(chunks.join(""), /No open job/);
+  assert.doesNotMatch(chunks.join(""), /review-landing-pad-prs/);
   assert.doesNotMatch(chunks.join(""), /gub-route-intent/);
 });
