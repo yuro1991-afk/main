@@ -384,8 +384,10 @@
       "file": "patches/dronehive-buzzer-hive-library-honesty.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "configs/buzzer_hive.json library.root / continuous_tasks use host/library and host/continuous. Independent of config-load-overlay (Python remap only). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('configs/buzzer_hive.json').read_text(); assert 'host/library' in t and 'host/continuous/OPEN_TASKS.json' in t\""
+      ],
+      "notes": "configs/buzzer_hive.json library.root / continuous_tasks use host/library and host/continuous. After apply: assert those phrases. Independent of config-load-overlay (Python remap only). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-seed-buzzer-hive-library-honesty",
