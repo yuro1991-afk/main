@@ -22,6 +22,7 @@ Seed WORK_ORDER.md section 6.2 path only. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-seed-work-order-doc-memory-recycle-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-doc-memory-recycle.patch
 - git apply /path/to/main/patches/dronehive-seed-work-order-doc-memory-recycle.patch
+- python3 -c "from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); assert 'data/hive/memory_recycle/' in t; assert r'G:\\AI-Home\\projects\\ai-worker-drone-0.5b\\data\\hive\\memory_recycle' not in t"
 
 ## Verify
 
