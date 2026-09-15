@@ -22,6 +22,7 @@ Seed knowledge_expand key only. Different file from configs/work_order.json. Do 
 - git checkout -b cursor/dronehive-seed-work-order-knowledge-expand-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-knowledge-expand.patch
 - git apply /path/to/main/patches/dronehive-seed-work-order-knowledge-expand.patch
+- python3 -c "from pathlib import Path; import json; k=json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['knowledge_imprint']; assert k['knowledge_expand']=='host/library/knowledge/expand'"
 
 ## Verify
 
