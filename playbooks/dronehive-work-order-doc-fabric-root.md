@@ -22,6 +22,7 @@ docs/WORK_ORDER.md header fabric line only. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-work-order-doc-fabric-root-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-doc-fabric-root.patch
 - git apply /path/to/main/patches/dronehive-work-order-doc-fabric-root.patch
+- python3 -c "from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert '**Host:** BOSS (Windows) · fabric `.`' in t"
 
 ## Verify
 

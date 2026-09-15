@@ -692,8 +692,10 @@
       "file": "patches/dronehive-work-order-doc-fabric-root.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "docs/WORK_ORDER.md header fabric uses repo-relative '.'. Independent of work-order-doc-honesty (NEXT.json), work-order-doc-law-truth (Library law), and the JSON fabric-root leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert '**Host:** BOSS (Windows) · fabric `.`' in t\""
+      ],
+      "notes": "docs/WORK_ORDER.md header fabric uses repo-relative '.', not G:\\\\AI-Home. After apply: assert that line. Independent of work-order-doc-honesty (NEXT.json), work-order-doc-law-truth (Library law), and the JSON fabric-root leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-seed-work-order-doc-fabric-root",
