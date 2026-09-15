@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { assertNeverKind, describeKind } from "./kinds.js";
 import { destinationForKind } from "./routing.js";
 import { relatedForJob } from "./siblings.js";
+import { leftoverUnusedExhaustedPeek } from "./sitout.js";
 import { applyNextFor, defaultPatchesIndexPath, loadPatchIndex, patchForJob, proveAfterApplyCommand } from "./patches.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -24,7 +25,7 @@ export function buildBrief(job, siblings, options = {}) {
       contract: BRIEF_CONTRACT,
       job: null,
       hardRules: hardRules(null),
-      message: "No open job. Add a card to ledger/queue.json instead of opening another board.",
+      message: `No open job. ${leftoverUnusedExhaustedPeek()}`,
     };
   }
   const related = relatedForJob(siblings, job.id);

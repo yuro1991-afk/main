@@ -535,6 +535,9 @@ test("cli handoff defaults to leftover unused exhausted", async () => {
   });
   assert.equal(code, 1);
   assert.match(chunks.join(""), /No open job/);
+  assert.match(chunks.join(""), /Leftover unused is exhausted/);
+  assert.match(chunks.join(""), /brief --job dronehive-unicode-ci/);
+  assert.doesNotMatch(chunks.join(""), /Add a card/);
   assert.doesNotMatch(chunks.join(""), /review-landing-pad-prs/);
 });
 
@@ -565,6 +568,9 @@ test("cli relaunch defaults to leftover unused exhausted", async () => {
   assert.equal(code, 1);
   const text = chunks.join("");
   assert.match(text, /No open job/);
+  assert.match(text, /Leftover unused is exhausted/);
+  assert.match(text, /brief --job dronehive-unicode-ci/);
+  assert.doesNotMatch(text, /Add a GitHub sibling card/);
   assert.doesNotMatch(text, /review-landing-pad-prs/);
   assert.doesNotMatch(text, /gub-route-intent/);
 });

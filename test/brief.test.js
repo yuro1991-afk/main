@@ -552,6 +552,9 @@ test("cli brief defaults to leftover unused exhausted", async () => {
   });
   assert.equal(code, 1);
   assert.match(chunks.join(""), /No open job/);
+  assert.match(chunks.join(""), /Leftover unused is exhausted/);
+  assert.match(chunks.join(""), /brief --job dronehive-unicode-ci/);
+  assert.doesNotMatch(chunks.join(""), /Add a card to ledger/);
   assert.doesNotMatch(chunks.join(""), /review-landing-pad-prs/);
   assert.doesNotMatch(chunks.join(""), /sibling cards stay blocked/);
   const listed = [];

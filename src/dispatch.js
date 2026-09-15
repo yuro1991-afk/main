@@ -14,9 +14,9 @@ import { buildHelperPacket } from "./helpers.js";
 import { buildRelaunch, packetPathFor, relaunchFor } from "./handoff.js";
 import { renderLaunchPrompt } from "./prompt.js";
 import { FIRST_PARKED_APPLY } from "./siblings.js";
-import { SITOUT_JOB_IDS, isSitOutJob, sitOutAssignError } from "./sitout.js";
+import { leftoverUnusedExhaustedPeek, SITOUT_JOB_IDS, isSitOutJob, sitOutAssignError } from "./sitout.js";
 
-export { SITOUT_JOB_IDS, isSitOutJob, sitOutAssignError };
+export { leftoverUnusedExhaustedPeek, SITOUT_JOB_IDS, isSitOutJob, sitOutAssignError };
 
 export const BUSY_CONTRACT = "agent-ops.busy.v1";
 export const SLOTS_CONTRACT = "agent-ops.slots.v1";

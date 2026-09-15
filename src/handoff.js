@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { applyNextForJob, catalogPatchFor, catalogPatchSummary, catalogRequires, displayCollision, displayNotes, displayVerify, proveAfterApplyForJob, takeInsteadFields } from "./brief.js";
 import { assertNeverScope, jobScope } from "./kinds.js";
 import { relatedForJob } from "./siblings.js";
+import { leftoverUnusedExhaustedPeek } from "./sitout.js";
 import { defaultPatchesIndexPath, loadPatchIndex, patchForJob } from "./patches.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -169,7 +170,7 @@ export function buildHandoff(job, siblings) {
       contract: HANDOFF_CONTRACT,
       job: null,
       relaunch: null,
-      message: "No open job. Add a card; do not open another landing-pad queue.",
+      message: `No open job. ${leftoverUnusedExhaustedPeek()}`,
     };
   }
   const related = relatedForJob(siblings, job.id);
@@ -229,7 +230,7 @@ export function buildRelaunch(job, siblings) {
       contract: RELAUNCH_CONTRACT,
       board: "reviews/NEXT.md",
       ...handoff,
-      action: "Add a GitHub sibling card. Do not open another landing-pad queue.",
+      action: leftoverUnusedExhaustedPeek(),
     };
   }
   const target = handoff.relaunch;

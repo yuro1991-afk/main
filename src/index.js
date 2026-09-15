@@ -102,6 +102,7 @@ export {
   defaultRosterPath,
   launchPathFor,
   leftoverLaunchRows,
+  leftoverUnusedExhaustedPeek,
   leftoverUnusedExhaustedRule,
   LEFTOVER_UNUSED_RULE,
   launchedJobIds,

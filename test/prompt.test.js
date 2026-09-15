@@ -174,6 +174,9 @@ test("cli prompt defaults to leftover unused exhausted", async () => {
   assert.equal(code, 1);
   const text = chunks.join("");
   assert.match(text, /No open GitHub card/);
+  assert.match(text, /Leftover unused is exhausted/);
+  assert.match(text, /brief --job dronehive-unicode-ci/);
+  assert.doesNotMatch(text, /Review an existing PR/);
   assert.doesNotMatch(text, /review-landing-pad-prs/);
   assert.doesNotMatch(text, /gub-route-intent/);
 });
@@ -207,4 +210,7 @@ test("cli prompt --json wraps leftover unused exhausted", async () => {
   assert.equal(packet.contract, PROMPT_CONTRACT);
   assert.equal(packet.jobId, null);
   assert.match(packet.text, /No open GitHub card/);
+  assert.match(packet.text, /Leftover unused is exhausted/);
+  assert.match(packet.text, /brief --job dronehive-unicode-ci/);
+  assert.doesNotMatch(packet.text, /Review an existing PR/);
 });
