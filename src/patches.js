@@ -101,6 +101,7 @@ function gitOutput(result) {
 
 /**
  * Write-checkout steps after a successful --prove. Prove itself resets.
+ * Not a leftover hunt. Does not run --prove-after-apply (throwaways only).
  * @param {PatchEntry} row
  * @returns {string[]}
  */
@@ -117,6 +118,24 @@ export function applyNextFor(row) {
     `git apply /path/to/main/${row.file}`,
     ...(Array.isArray(row.afterApply) ? row.afterApply : []),
   ];
+}
+
+/**
+ * Throwaway afterApply prove. Not a write-checkout step.
+ * @param {string} id
+ */
+export function proveAfterApplyCommand(id) {
+  return `node src/cli.js patches --prove-after-apply --job ${id}`;
+}
+
+/**
+ * @param {PatchEntry} row
+ */
+function catalogApplyFields(row) {
+  return {
+    applyNext: applyNextFor(row),
+    proveAfterApplyCommand: proveAfterApplyCommand(row.id),
+  };
 }
 
 /**
@@ -158,7 +177,7 @@ export function provePatches(index, options) {
       id: row.id,
       repo: row.repo,
       file: row.file,
-      applyNext: applyNextFor(row),
+      ...catalogApplyFields(row),
       ...extra,
     });
   };
@@ -222,7 +241,7 @@ export function provePatches(index, options) {
         id: row.id,
         repo: row.repo,
         file: row.file,
-        applyNext: applyNextFor(row),
+        ...catalogApplyFields(row),
         status: "missing-checkout",
         checkout: null,
       }
@@ -240,6 +259,7 @@ export function provePatches(index, options) {
       "Do not copy PR #6 npm run autofix. --prove runs git apply --check only and resets the checkout. applyNext is the write-checkout apply, not a leftover hunt.",
     siblingsRoot,
     applyNext: results.length === 1 ? results[0].applyNext : undefined,
+    proveAfterApplyCommand: results.length === 1 ? results[0].proveAfterApplyCommand : undefined,
     count: results.length,
     ok,
     failed,
@@ -284,7 +304,7 @@ export function proveAfterApply(index, options) {
       id: row.id,
       repo: row.repo,
       file: row.file,
-      applyNext: applyNextFor(row),
+      ...catalogApplyFields(row),
       throwaway: true,
       ...extra,
     });
@@ -368,7 +388,7 @@ export function proveAfterApply(index, options) {
         id: row.id,
         repo: row.repo,
         file: row.file,
-        applyNext: applyNextFor(row),
+        ...catalogApplyFields(row),
         throwaway: true,
         status: "missing-checkout",
         checkout: null,
@@ -394,6 +414,7 @@ export function proveAfterApply(index, options) {
       "Do not copy PR #6 npm run autofix. --prove-after-apply clones --no-hardlinks throwaways and never writes /tmp/siblings. afterApply must fail unpatched and pass patched.",
     siblingsRoot,
     applyNext: results.length === 1 ? results[0].applyNext : undefined,
+    proveAfterApplyCommand: results.length === 1 ? results[0].proveAfterApplyCommand : undefined,
     count: results.length,
     ok,
     failed,
@@ -535,7 +556,7 @@ export function assertPatchFilesExist(index, repoRoot) {
 export function buildPatchCatalog(index, filters = {}) {
   const patches = listPatches(index, filters).map((row) => ({
     ...row,
-    applyNext: applyNextFor(row),
+    ...catalogApplyFields(row),
   }));
   return {
     contract: PATCH_CONTRACT.id,
@@ -546,6 +567,8 @@ export function buildPatchCatalog(index, filters = {}) {
     verifiedAt: index.verifiedAt ?? null,
     count: patches.length,
     applyNext: patches.length === 1 ? patches[0].applyNext : undefined,
+    proveAfterApplyCommand:
+      patches.length === 1 ? patches[0].proveAfterApplyCommand : undefined,
     patches,
   };
 }

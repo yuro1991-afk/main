@@ -1,4 +1,4 @@
-import { applyNextForJob, catalogPatchFor } from "./brief.js";
+import { applyNextForJob, catalogPatchFor, proveAfterApplyForJob } from "./brief.js";
 import { assertNeverKind, jobScope } from "./kinds.js";
 
 export const HELPER_CONTRACT = "agent-ops.helpers.v1";
@@ -50,6 +50,11 @@ export function planHelpers(job) {
         role: "prove",
         title: `Prove ${job.id}`,
         prompt: `Run node src/cli.js patches --prove --job ${job.id}. Do not copy PR #6 autofix. Do not invent a new leftover.`,
+      },
+      {
+        role: "prove-after-apply",
+        title: `Prove afterApply ${job.id}`,
+        prompt: `Run node src/cli.js patches --prove-after-apply --job ${job.id}. Clones --no-hardlinks throwaways. Never write /tmp/siblings. afterApply must fail unpatched and pass patched. Do not copy PR #6 autofix. Do not invent a new leftover.`,
       },
       {
         role: "apply",
@@ -168,6 +173,7 @@ export function buildHelperPacket(job) {
     scope: jobScope(job),
     helpers: planHelpers(job),
     applyNext: applyNextForJob(job),
+    proveAfterApplyCommand: proveAfterApplyForJob(job),
     rule: "Spin every helper as a local Task. Do not wait in inventory.",
   };
 }

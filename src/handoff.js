@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { applyNextForJob, catalogPatchFor, displayNotes } from "./brief.js";
+import { applyNextForJob, catalogPatchFor, displayNotes, proveAfterApplyForJob } from "./brief.js";
 import { assertNeverScope, jobScope } from "./kinds.js";
 import { siblingsForJob, describeRole } from "./siblings.js";
 import { defaultPatchesIndexPath, loadPatchIndex, patchForJob } from "./patches.js";
@@ -183,6 +183,7 @@ export function buildHandoff(job, siblings) {
     relaunch: relaunchFor(job),
     related,
     applyNext: applyNextForJob(job),
+    proveAfterApplyCommand: proveAfterApplyForJob(job),
     doNot: handoffDoNot(job),
   };
 }
@@ -241,6 +242,7 @@ export function buildRelaunch(job, siblings) {
     playbook: `playbooks/${job.id}.md`,
     relaunch: target,
     applyNext: applyNextForJob(job),
+    proveAfterApplyCommand: proveAfterApplyForJob(job),
     action:
       target.kind === "origin"
         ? "Open https://cursor.com/codebase/yuri-afk/genesis with Origin login. Do not implement on this GitHub pad."

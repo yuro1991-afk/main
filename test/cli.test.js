@@ -114,6 +114,10 @@ test("cli next --job peeks the named catalog card", async () => {
   const parsed = JSON.parse(result.out);
   assert.equal(parsed.id, "dronehive-unicode-ci");
   assert.ok(parsed.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    parsed.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
   assert.notEqual(parsed.id, "gub-route-intent");
 });
 
@@ -123,6 +127,10 @@ test("cli status --job attaches the named catalog card without replacing leftove
   const parsed = JSON.parse(result.out);
   assert.equal(parsed.job.id, "dronehive-unicode-ci");
   assert.ok(parsed.job.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    parsed.job.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
   assert.notEqual(parsed.next.id, "dronehive-unicode-ci");
   assert.match(parsed.next.id, /^gub-/);
 });
@@ -167,6 +175,10 @@ test("cli busy --job peeks the named catalog card", async () => {
   assert.equal(parsed.jobId, "dronehive-unicode-ci");
   assert.equal(parsed.reserved, false);
   assert.ok(parsed.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    parsed.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
   assert.notEqual(parsed.jobId, "gub-route-intent");
 });
 
@@ -204,6 +216,10 @@ test("cli list --job peeks the named catalog card", async () => {
   assert.equal(parsed.length, 1);
   assert.equal(parsed[0].id, "dronehive-unicode-ci");
   assert.ok(parsed[0].applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    parsed[0].proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
   assert.doesNotMatch(parsed[0].notes, /Blocked: Yuri scoped this landing pad to Genesis only/);
 });
 

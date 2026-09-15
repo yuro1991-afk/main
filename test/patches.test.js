@@ -17,6 +17,7 @@ import {
   patchForJob,
   applyNextFor,
   proveAfterApply,
+  proveAfterApplyCommand,
   provePatches,
   resolveSiblingCheckout,
   validatePatchEntry,
@@ -319,6 +320,12 @@ test("buildPatchCatalog is list-only", () => {
   assert.equal(catalog.patches[0].id, "bloom-gitignore-vercel");
   assert.ok(catalog.patches[0].applyNext.some((line) => line.includes(".gitignore") && line.includes(".vercel/") && line.includes("dist/")));
   assert.deepEqual(catalog.applyNext, catalog.patches[0].applyNext);
+  assert.equal(
+    catalog.proveAfterApplyCommand,
+    proveAfterApplyCommand("bloom-gitignore-vercel"),
+  );
+  assert.equal(catalog.patches[0].proveAfterApplyCommand, catalog.proveAfterApplyCommand);
+  assert.doesNotMatch(catalog.applyNext.join("\n"), /prove-after-apply/);
 });
 
 test("cli patches lists the catalog", async () => {
@@ -353,6 +360,11 @@ test("cli patches --job filters one card", async () => {
   assert.ok(
     parsed.applyNext.some((line) => line.includes("cp1252") && line.includes("_chat")),
   );
+  assert.equal(
+    parsed.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  assert.doesNotMatch(parsed.applyNext.join("\n"), /prove-after-apply/);
 });
 
 test("cli patches --job dronehive-app-links-host-paths applies portable-paths first", async () => {
@@ -2536,6 +2548,11 @@ test("applyNextFor is the write-checkout apply, not a leftover hunt", () => {
   assert.ok(lines.some((line) => line.includes(".gitignore") && line.includes(".vercel/") && line.includes("dist/")));
   assert.doesNotMatch(lines.join("\n"), /Origin/);
   assert.doesNotMatch(lines.join("\n"), /autofix/);
+  assert.doesNotMatch(lines.join("\n"), /prove-after-apply/);
+  assert.equal(
+    proveAfterApplyCommand("bloom-gitignore-vercel"),
+    "node src/cli.js patches --prove-after-apply --job bloom-gitignore-vercel",
+  );
 });
 
 test("provePatches reports missing checkout", () => {

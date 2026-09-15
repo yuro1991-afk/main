@@ -6,13 +6,14 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T04:25Z**: 40 IDLE + this catalog run +
+Keep-busy tick **2026-09-15T04:35Z**: 40 IDLE + this catalog run +
 `bc-01a0a0ce` RUNNING on #7 (`cursor/stub-wake-roster-108b`). Do not
 steal #7. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
-still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`fc2b5d6`. Catalog firstCommands now run `--prove-after-apply` after
-`--prove` so briefs prove gates on throwaways. Do not invent leftovers.
+still 162. Hunt closed. PR #10 still `82161d8`. PR #9 HEAD `3303ff6`.
+Catalog JSON now carries `proveAfterApplyCommand` next to write-checkout
+`applyNext` so `patches --job` / `slots --job` prove gates on throwaways.
+Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -24,6 +25,7 @@ still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
 | `bc-710c5477` | `bloom-grok-pwa-test-sync` |
 | fork `bc-84d93b47` | **eyes → vision → bridge** (already theirs) |
 | next unused apply | `faceswap-start-sh` |
+| prove a leftover gate | `patches --prove-after-apply --job <id>` (also on `--job` JSON) |
 | next stacked apply | `dronehive-runtime-host-paths` (`requires` portable-paths) |
 | next unused stacked apply | `dronehive-config-load-overlay` (`requires` portable-paths) |
 | last host_paths stacked apply | `dronehive-app-links-host-paths` (`requires` portable-paths) |
@@ -197,16 +199,22 @@ on sibling `main` (no `-U0`). Repeat with
 `node src/cli.js patches --prove-after-apply --job <id>` clones throwaways.
 Catalog leftover firstCommands now start with `--prove --job`.
 `patches --prove --job` and `patches --job` JSON include `applyNext`
-write-checkout steps. Catalog `brief` / `helpers` / `handoff` /
-`relaunch` / `busy` JSON now include the same `applyNext` array.
+write-checkout steps plus `proveAfterApplyCommand` (throwaway
+`--prove-after-apply --job`). Catalog `brief` / `helpers` / `handoff` /
+`relaunch` / `busy` JSON now include the same pair. Helpers add a
+`prove-after-apply` Task. `applyNext` does not contain that CLI line.
 `busy --job <catalog-id>` and `next --job <catalog-id>` peek that card
-(do not claim leftover next). `next --job` JSON includes `applyNext`.
-`status --job <catalog-id>` attaches that card + `applyNext` as
-`summary.job` and leaves leftover `next` as the expired Origin claim.
-`list --job <catalog-id>` returns that one card + `applyNext` and
-bypasses the Genesis-only filter (bare `list` stays Genesis-only).
-`slots --job <catalog-id>` peeks that card + `applyNext` even when
-the leftover is blocked. Catalog slot rows carry `applyNext`.
+(do not claim leftover next). `next --job` JSON includes `applyNext`
+and `proveAfterApplyCommand`.
+`status --job <catalog-id>` attaches that card + `applyNext` /
+`proveAfterApplyCommand` as `summary.job` and leaves leftover `next`
+as the expired Origin claim.
+`list --job <catalog-id>` returns that one card + `applyNext` /
+`proveAfterApplyCommand` and bypasses the Genesis-only filter (bare
+`list` stays Genesis-only).
+`slots --job <catalog-id>` peeks that card + `applyNext` /
+`proveAfterApplyCommand` even when the leftover is blocked. Catalog
+slot rows carry both.
 `bloom-grok-pwa-test-sync` afterApply is
 `node --test scripts/grok-pwa-plugin.test.mjs scripts/brand-check.test.mjs`
 (43/43 after apply; 7 fail unpatched).

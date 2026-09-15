@@ -338,6 +338,7 @@ applying these diffs on a sibling write checkout.
 - playbook first-commands sanitizer (2026-09-15T04:16Z): playbook First commands must not contain dollar signs, backticks, or git rm. Catalog afterApply already had the invariant; playbooks now match. Do not run writePlaybooks over playbooks/.
 - prove-after-apply (2026-09-15T04:20Z): `node src/cli.js patches --prove-after-apply --job <id>` clones --no-hardlinks throwaways. afterApply must fail unpatched and pass patched. Never write `/tmp/siblings`. 162/162 proven 2026-09-15T04:20Z.
 - firstCommands prove-after-apply (2026-09-15T04:25Z): catalog briefs/helpers/prompts run `--prove-after-apply --job` after `--prove --job`. Do not run writePlaybooks over playbooks/.
+- proveAfterApplyCommand JSON (2026-09-15T04:35Z): `patches --job` / `slots --job` / `brief` / `helpers` / `handoff` / `relaunch` / `busy` / `next --job` / `status --job` / `list --job` / named `route` carry `proveAfterApplyCommand` as a sibling of `applyNext`. `applyNext` stays the write-checkout apply (no leftover hunt). Helpers add a `prove-after-apply` Task. Do not put `--prove-after-apply` inside `applyNext`. Do not run writePlaybooks over playbooks/.
 - bloom gitignore-vercel (2026-09-15T04:08Z): after apply, assert .gitignore has .vercel/ dist/ .output/ .nitro/. Unpatched has none of those. Do not git rm as afterApply (mutates; 58 tracked files stay a later write-checkout step). Do not invent an untrack leftover. Do not put dollar signs or backticks in afterApply. Independent of bloom-ci-lint.
 - face-swap `DESIGN.md`: `FACESWAP_ENGINE` is the contract; G: is one host example. After apply (2026-09-15T00:12Z): assert `FACESWAP_ENGINE`, `one host example`, and `not the contract`. Unpatched DESIGN.md has none of those. Independent of `faceswap-honesty-env-paths`.
 - OVA README (2026-09-15T00:21Z): Voice Access is Windows-only; Linux `pwsh` is syntax/math CI. After apply: assert `Windows 11 Voice Access`, `syntax/math CI only`, and `not** a Voice Access install`. Unpatched README has none of those. Independent of `ova-api-host-override`.
@@ -357,7 +358,7 @@ applying these diffs on a sibling write checkout.
 node src/cli.js patches --prove --job "$JOB_ID" --siblings-root /tmp/siblings
 node src/cli.js patches --prove-after-apply --job "$JOB_ID" --siblings-root /tmp/siblings
 # JSON applyNext is the write-checkout apply. --prove itself resets.
-# --prove-after-apply clones --no-hardlinks throwaways. Never write siblings.
+# JSON proveAfterApplyCommand is the throwaway afterApply prove. Never write siblings.
 git clone "https://github.com/yuro1991-afk/<sibling>.git" work && cd work
 git apply --check /path/to/main/<patch>
 git apply /path/to/main/<patch>

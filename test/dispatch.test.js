@@ -91,6 +91,11 @@ test("busy JSON for a cataloged job includes applyNext", () => {
   assert.ok(job);
   assert.ok(packet.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
   assert.ok(packet.applyNext.some((line) => line.startsWith("git clone https://github.com/yuro1991-afk/dronehive.git")));
+  assert.equal(
+    packet.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  assert.doesNotMatch(packet.applyNext.join("\n"), /prove-after-apply/);
 });
 
 test("busy without agent peeks and does not claim", async () => {
@@ -295,6 +300,11 @@ test("slots --job peeks a blocked catalog card with applyNext", () => {
   assert.equal(packet.slots[0].id, "dronehive-unicode-ci");
   assert.ok(packet.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
   assert.deepEqual(packet.slots[0].applyNext, packet.applyNext);
+  assert.equal(
+    packet.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  assert.equal(packet.slots[0].proveAfterApplyCommand, packet.proveAfterApplyCommand);
 });
 
 test("cli slots --job peeks the named catalog card", async () => {
@@ -303,6 +313,10 @@ test("cli slots --job peeks the named catalog card", async () => {
   const parsed = JSON.parse(result.out);
   assert.equal(parsed.slots[0].id, "dronehive-unicode-ci");
   assert.ok(parsed.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    parsed.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
   assert.doesNotMatch(result.out, /gub-inventory-tick/);
 });
 

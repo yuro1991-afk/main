@@ -8,7 +8,7 @@ import {
   listJobs,
   nextJob,
 } from "./ledger.js";
-import { applyNextForJob, jobForDisplay } from "./brief.js";
+import { applyNextForJob, jobForDisplay, proveAfterApplyForJob } from "./brief.js";
 import { unusedGenesisCards } from "./sync.js";
 import { buildHelperPacket } from "./helpers.js";
 import { buildRelaunch, packetPathFor, relaunchFor } from "./handoff.js";
@@ -31,6 +31,7 @@ export function defaultDispatchPath(repoRoot) {
  */
 export function slotFor(job, rank) {
   const applyNext = applyNextForJob(job);
+  const proveAfterApplyCommand = proveAfterApplyForJob(job);
   return {
     rank,
     id: job.id,
@@ -40,6 +41,7 @@ export function slotFor(job, rank) {
     playbook: `playbooks/${job.id}.md`,
     relaunch: relaunchFor(job),
     ...(applyNext ? { applyNext } : {}),
+    ...(proveAfterApplyCommand ? { proveAfterApplyCommand } : {}),
   };
 }
 
@@ -74,6 +76,7 @@ export function buildSlotsForJob(job) {
       : [],
     slots: [slotFor(shown, 1)],
     applyNext: applyNextForJob(shown),
+    proveAfterApplyCommand: proveAfterApplyForJob(shown),
     rule: "Peek the named card. Do not claim a blocked catalog leftover. Apply on a sibling write checkout.",
   };
 }
@@ -144,6 +147,7 @@ export function buildBusy(job, siblings, slots, options = {}) {
     prompt: renderLaunchPrompt(job),
     helpers: buildHelperPacket(job).helpers,
     applyNext: applyNextForJob(job),
+    proveAfterApplyCommand: proveAfterApplyForJob(job),
     remaining: slots.filter((slot) => slot.id !== job.id),
     action: relaunch.action,
     doNot: relaunch.doNot,

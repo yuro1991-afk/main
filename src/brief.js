@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { assertNeverKind, describeKind } from "./kinds.js";
 import { destinationForKind } from "./routing.js";
 import { describeRole, siblingsForJob } from "./siblings.js";
-import { applyNextFor, defaultPatchesIndexPath, loadPatchIndex, patchForJob } from "./patches.js";
+import { applyNextFor, defaultPatchesIndexPath, loadPatchIndex, patchForJob, proveAfterApplyCommand } from "./patches.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -41,6 +41,7 @@ export function buildBrief(job, siblings, options = {}) {
     related,
     firstCommands: firstCommands(job, { root: options.root }),
     applyNext: applyNextForJob(job, { root: options.root }),
+    proveAfterApplyCommand: proveAfterApplyForJob(job, { root: options.root }),
     hardRules: hardRules(job),
   };
 }
@@ -92,6 +93,20 @@ export function applyNextForJob(job, options = {}) {
   });
 }
 
+/**
+ * Throwaway afterApply prove for a cataloged card. Undefined when the
+ * card is not in the patch catalog. Not a write-checkout step.
+ * @param {import("./ledger.js").Job | null} job
+ * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { id?: string } | null }} [options]
+ * @returns {string | undefined}
+ */
+export function proveAfterApplyForJob(job, options = {}) {
+  if (!job) return undefined;
+  const patch = catalogPatchFor(job, options);
+  if (!patch) return undefined;
+  return proveAfterApplyCommand(patch.id ?? job.id);
+}
+
 export function catalogPatchFor(job, options = {}) {
   if (options.patch) return options.patch;
   if (options.skipCatalog) return null;
@@ -119,7 +134,7 @@ export function firstCommands(job, options = {}) {
       if (patch) {
         return [
           `node src/cli.js patches --prove --job ${job.id}`,
-          `node src/cli.js patches --prove-after-apply --job ${job.id}`,
+          proveAfterApplyCommand(job.id),
           ...applyNextFor({
             id: patch.id ?? job.id,
             repo: patch.repo ?? job.repo,

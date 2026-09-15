@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { JOB_KINDS } from "../src/kinds.js";
-import { applyNextForJob } from "../src/brief.js";
+import { applyNextForJob, proveAfterApplyForJob } from "../src/brief.js";
 import { buildHelperPacket, planHelpers } from "../src/helpers.js";
 import { runCli } from "../src/cli.js";
 
@@ -87,12 +87,16 @@ test("cataloged sibling helpers prove then apply", () => {
   const packet = buildHelperPacket(cataloged);
   const text = plans.map((helper) => helper.prompt).join("\n");
   assert.ok(plans.some((helper) => helper.role === "prove"));
+  assert.ok(plans.some((helper) => helper.role === "prove-after-apply"));
   assert.ok(plans.some((helper) => helper.role === "apply"));
   assert.match(text, /patches --prove --job dronehive-unicode-ci/);
+  assert.match(text, /patches --prove-after-apply --job dronehive-unicode-ci/);
+  assert.match(text, /Never write \/tmp\/siblings/);
   assert.match(text, /dronehive-pro-chat-cp1252\.patch/);
   assert.doesNotMatch(text, /write a precise patch plan/);
   assert.doesNotMatch(text, /Do not invent Superbrain LIVE/);
   assert.deepEqual(packet.applyNext, applyNextForJob(cataloged));
+  assert.equal(packet.proveAfterApplyCommand, proveAfterApplyForJob(cataloged));
   assert.ok(packet.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
 });
 

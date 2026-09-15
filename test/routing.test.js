@@ -131,6 +131,11 @@ test("named catalog job id routes to apply, not leftover Origin", () => {
   assert.match(route.notes, /forget Origin/);
   assert.match(route.notes, /dronehive-pro-chat-cp1252\.patch/);
   assert.ok(route.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    route.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  assert.doesNotMatch(route.applyNext.join("\n"), /prove-after-apply/);
   assert.notEqual(route.jobId, "gub-route-intent");
   const keep = routeIntent("keep agents busy", { ledger, roster, nowMs: NOW });
   assert.equal(keep.jobId, "gub-route-intent");

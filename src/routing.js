@@ -5,7 +5,7 @@ import { assertNeverKind } from "./kinds.js";
 import { jobIdForEntry } from "./catalog.js";
 import { unusedGenesisCards } from "./sync.js";
 import { peekBusyJob } from "./dispatch.js";
-import { applyNextFor, defaultPatchesIndexPath, loadPatchIndex, patchForJob } from "./patches.js";
+import { applyNextFor, defaultPatchesIndexPath, loadPatchIndex, patchForJob, proveAfterApplyCommand } from "./patches.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -162,6 +162,7 @@ export function routeFromJob(text, job, notes, extras = {}) {
     jobId: job.id,
     packet: `reviews/handoff-${job.id}.md`,
     applyNext: extras.applyNext,
+    proveAfterApplyCommand: extras.proveAfterApplyCommand,
   };
 }
 
@@ -193,7 +194,10 @@ export function routeIntent(text, context = {}) {
       patch
         ? `Yuri: forget Origin for this card. Apply ${patch.file}. Do not invent a leftover.`
         : `Take ${named.id}. Do not invent a leftover.`,
-      { applyNext: patch ? applyNextFor(patch) : undefined },
+      {
+        applyNext: patch ? applyNextFor(patch) : undefined,
+        proveAfterApplyCommand: patch ? proveAfterApplyCommand(patch.id) : undefined,
+      },
     );
   }
   if (includesAny(q, ["dronehive", "drone", "unicode", "wheel"])) {
