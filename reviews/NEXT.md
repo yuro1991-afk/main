@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T01:33Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T01:35Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`008eae4`. Shipped this interval: `dronehive-work-order-doc-recall-router`
-docs recall/router afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`8ca6632`. Shipped this interval: `dronehive-seed-work-order-doc-recall-router`
+seed recall/router afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -73,7 +73,8 @@ docs recall/router afterApply. Leftover `next` stays alone. Do not invent leftov
 | next unused doc-codex-cli apply | `dronehive-work-order-doc-codex-cli` (docs query_llm_codex afterApply wired) |
 | next unused seed doc-codex-cli apply | `dronehive-seed-work-order-doc-codex-cli` (seed query_llm_codex afterApply wired) |
 | next unused doc-recall-router apply | `dronehive-work-order-doc-recall-router` (docs recall/router afterApply wired) |
-| next afterApply to wire | `dronehive-seed-work-order-doc-recall-router` (seed recall.py + ai_smarts_router.py only) |
+| next unused seed doc-recall-router apply | `dronehive-seed-work-order-doc-recall-router` (seed recall/router afterApply wired) |
+| next afterApply to wire | `dronehive-work-order-doc-memory-recycle` (docs memory_recycle path only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -213,7 +214,9 @@ Face-swap README honesty leftovers are exhausted.
 (query_llm_codex examples use `host/library/bin` for stats, use coding, vram).
 `dronehive-work-order-doc-recall-router` afterApply asserts docs/WORK_ORDER.md
 (recall.py get knowledge_pack and ai_smarts_router.py route use host paths).
-Next afterApply to wire is `dronehive-seed-work-order-doc-recall-router`.
+`dronehive-seed-work-order-doc-recall-router` afterApply asserts seed WORK_ORDER.md
+(recall.py get knowledge_pack and ai_smarts_router.py route use host paths).
+Next afterApply to wire is `dronehive-work-order-doc-memory-recycle`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -291,7 +294,7 @@ then unused `dronehive-seed-work-order-doc-codex-paths` (seed docs codex table o
 then unused `dronehive-work-order-doc-codex-cli` (docs query_llm_codex examples only; afterApply wired; independent of table leftover),
 then unused `dronehive-seed-work-order-doc-codex-cli` (seed docs query_llm_codex examples only; afterApply wired; independent of live docs),
 then unused `dronehive-work-order-doc-recall-router` (docs recall.py + ai_smarts_router.py only; afterApply wired; independent of CLI leftover),
-then unused `dronehive-seed-work-order-doc-recall-router` (seed recall/router only),
+then unused `dronehive-seed-work-order-doc-recall-router` (seed recall/router only; afterApply wired; independent of live docs),
 then unused `dronehive-work-order-doc-memory-recycle` (docs memory_recycle path only),
 then unused `dronehive-seed-work-order-doc-memory-recycle` (seed memory_recycle only),
 then unused `dronehive-work-order-doc-models` (docs install-proof models path only),

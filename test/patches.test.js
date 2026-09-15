@@ -396,6 +396,19 @@ test("cli patches --job dronehive-work-order-doc-recall-router includes the docs
   assert.ok(parsed.applyNext.some((line) => line.includes("docs/WORK_ORDER.md") && line.includes("recall.py get knowledge_pack") && line.includes("ai_smarts_router.py route")));
 });
 
+test("cli patches --job dronehive-seed-work-order-doc-recall-router includes the seed docs recall and router afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-seed-work-order-doc-recall-router"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-seed-work-order-doc-recall-router");
+  assert.ok(parsed.applyNext.some((line) => line.includes("drone/app/seed/docs/WORK_ORDER.md") && line.includes("recall.py get knowledge_pack") && line.includes("ai_smarts_router.py route")));
+});
+
 test("cli patches --job dronehive-seed-work-order-doc-codex-cli includes the seed docs query_llm_codex afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-seed-work-order-doc-codex-cli"], {
