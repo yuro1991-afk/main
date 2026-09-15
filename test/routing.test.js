@@ -29,9 +29,11 @@ function job(id, extras = {}) {
 
 test("keep-busy routes to GitHub siblings, not Origin", () => {
   const route = routeIntent("Keep my agents busy");
-  assert.match(route.destination, /GitHub sibling/);
+  assert.match(route.destination, /leftover unused review is review-landing-pad-prs/);
   assert.equal(route.kind, "fix");
-  assert.match(route.notes, /Forget Origin/);
+  assert.match(route.notes, /Do not invent leftover unused next/);
+  assert.doesNotMatch(route.notes, /Take a unique GitHub card/);
+  assert.doesNotMatch(route.destination, /next unused GitHub sibling/);
 });
 
 test("keep-busy with roster leftover picks the unused GitHub card", () => {
