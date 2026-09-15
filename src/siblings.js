@@ -83,3 +83,20 @@ export function siblingsForJob(siblings, jobId) {
       return left.number - right.number;
     });
 }
+
+/**
+ * Brief/handoff/cli `related` rows. Catalog leads.
+ *
+ * @param {{ prs: Array<{ owns?: string[], number: number, url: string, role: string, title: string, branch: string }> }} siblings
+ * @param {string} jobId
+ */
+export function relatedForJob(siblings, jobId) {
+  return siblingsForJob(siblings, jobId).map((pr) => ({
+    number: pr.number,
+    url: pr.url,
+    role: pr.role,
+    title: pr.title,
+    branch: pr.branch,
+    meaning: describeRole(pr.role),
+  }));
+}

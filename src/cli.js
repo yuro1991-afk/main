@@ -34,7 +34,7 @@ import {
 } from "./handoff.js";
 import { checkPlaybooks, writePlaybooks } from "./playbook.js";
 import { buildHelperPacket } from "./helpers.js";
-import { defaultSiblingsPath, loadSiblings } from "./siblings.js";
+import { defaultSiblingsPath, loadSiblings, relatedForJob } from "./siblings.js";
 import {
   buildAssign,
   buildBusy,
@@ -239,7 +239,24 @@ export async function runCli(argv, options = {}) {
       const siblings = loadSiblings(
         flags.siblings ? resolve(flags.siblings) : defaultSiblingsPath(options.root ?? ROOT),
       );
-      write(JSON.stringify(siblings, null, 2));
+      const jobId = positionals[0] || (flags.job && flags.job !== "true" ? flags.job : "");
+      if (!jobId) {
+        write(JSON.stringify(siblings, null, 2));
+        return 0;
+      }
+      const related = relatedForJob(siblings, jobId);
+      write(
+        JSON.stringify(
+          {
+            contract: "agent-ops.siblings.v1",
+            job: jobId,
+            related,
+            prefer: `node src/cli.js brief --job ${jobId}`,
+          },
+          null,
+          2,
+        ),
+      );
       return 0;
     }
     case "patches": {
@@ -639,7 +656,7 @@ Commands:
   origin [--login] [--out path]
   route <intent> [--agent <bcId>]   # roster card if --agent, else leftover next
   tick [--out path]
-  siblings
+  siblings [--job id]  # --job is catalog-first related PRs; prefer brief --job
   patches [jobId] [--job id] [--repo github.com/yuro1991-afk/...] [--prove] [--prove-after-apply] [--siblings-root dir]
   playbooks [--check] [--write] [--job id] [--here] [--out dir]
 

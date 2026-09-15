@@ -25,6 +25,7 @@ Do not copy PR #6 autofix. Do not retarget keep-busy (that is #8).
 | fork `bc-84d93b47` | **eyes → vision → bridge** (already theirs) |
 | next unused apply | `faceswap-start-sh` |
 | list catalog leftovers | `patches` is compact (`nextApply: dronehive-unicode-ci`). `patches --job <id>` then `brief --job` |
+| list related PRs for a card | `siblings --job <id>` (`related[0]` is #9 for catalog cards). Then `brief --job` |
 | check stale playbook | `playbooks` is compact (`nextApply: dronehive-unicode-ci` + counts). `playbooks --job <id>` then `brief --job`. `--write` and `catalog --write` refuse in-repo `playbooks/` |
 | prove a leftover gate | `patches --prove --job <id>` then `patches --prove-after-apply --job <id>` (throwaways; does not reset siblings) |
 | next stacked apply | `dronehive-runtime-host-paths` (`requires` portable-paths) |

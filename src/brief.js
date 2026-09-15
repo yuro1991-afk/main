@@ -3,7 +3,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { assertNeverKind, describeKind } from "./kinds.js";
 import { destinationForKind } from "./routing.js";
-import { describeRole, siblingsForJob } from "./siblings.js";
+import { relatedForJob } from "./siblings.js";
 import { applyNextFor, defaultPatchesIndexPath, loadPatchIndex, patchForJob, proveAfterApplyCommand } from "./patches.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -27,14 +27,7 @@ export function buildBrief(job, siblings, options = {}) {
       message: "No open job. Add a card to ledger/queue.json instead of opening another board.",
     };
   }
-  const related = siblingsForJob(siblings, job.id).map((pr) => ({
-    number: pr.number,
-    url: pr.url,
-    role: pr.role,
-    title: pr.title,
-    branch: pr.branch,
-    meaning: describeRole(pr.role),
-  }));
+  const related = relatedForJob(siblings, job.id);
   return {
     contract: BRIEF_CONTRACT,
     job: jobForDisplay(job, { root: options.root }),

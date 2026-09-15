@@ -333,6 +333,38 @@ test("Superbrain leftover attaches take-instead unicode-ci apply pair", () => {
   assert.equal(proveAfterApplyForJob(other), undefined);
 });
 
+test("cli siblings --job lists catalog-first related PRs", async () => {
+  const chunks = [];
+  const code = await runCli(["siblings", "--job", "dronehive-unicode-ci"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.contract, "agent-ops.siblings.v1");
+  assert.equal(parsed.job, "dronehive-unicode-ci");
+  assert.deepEqual(
+    parsed.related.map((pr) => pr.number),
+    [9, 5, 6],
+  );
+  assert.equal(parsed.related[0].role, "patch-catalog");
+  assert.match(parsed.related[0].meaning, /patches\//);
+  assert.equal(parsed.prefer, "node src/cli.js brief --job dronehive-unicode-ci");
+
+  const dual = [];
+  const dualCode = await runCli(["siblings", "--job", "bloom-readme-honest-export"], {
+    write: (value) => {
+      dual.push(value);
+    },
+  });
+  assert.equal(dualCode, 0);
+  assert.deepEqual(
+    JSON.parse(dual.join("")).related.map((pr) => pr.number),
+    [9, 4],
+  );
+});
+
 test("cli brief defaults to next and siblings lists PRs", async () => {
   const chunks = [];
   const code = await runCli(["brief"], {

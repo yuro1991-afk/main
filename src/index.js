@@ -145,6 +145,7 @@ export {
   defaultSiblingsPath,
   describeRole,
   loadSiblings,
+  relatedForJob,
   siblingsForJob,
 } from "./siblings.js";
 export {

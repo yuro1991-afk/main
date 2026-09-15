@@ -3,7 +3,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { applyNextForJob, catalogPatchFor, catalogPatchSummary, catalogRequires, displayCollision, displayNotes, displayVerify, proveAfterApplyForJob, takeInsteadFields } from "./brief.js";
 import { assertNeverScope, jobScope } from "./kinds.js";
-import { siblingsForJob, describeRole } from "./siblings.js";
+import { relatedForJob } from "./siblings.js";
 import { defaultPatchesIndexPath, loadPatchIndex, patchForJob } from "./patches.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -172,13 +172,7 @@ export function buildHandoff(job, siblings) {
       message: "No open job. Add a card; do not open another landing-pad queue.",
     };
   }
-  const related = siblingsForJob(siblings, job.id).map((pr) => ({
-    number: pr.number,
-    url: pr.url,
-    role: pr.role,
-    title: pr.title,
-    meaning: describeRole(pr.role),
-  }));
+  const related = relatedForJob(siblings, job.id);
   return {
     contract: HANDOFF_CONTRACT,
     jobId: job.id,
