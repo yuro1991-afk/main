@@ -1715,8 +1715,10 @@
       "file": "patches/dronehive-work-order-core-lessons.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "knowledge_imprint.core_lessons uses host/core-memory. -U1 trailing cache_rel so it stacks after knowledge-expand leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; k=json.loads(Path('configs/work_order.json').read_text())['knowledge_imprint']; assert k['core_lessons']=='host/core-memory/lessons'\""
+      ],
+      "notes": "knowledge_imprint.core_lessons uses host/core-memory. After apply: assert that key only. knowledge_expand leftover still pins F:. Seed leftover still pins D:. -U1 trailing cache_rel so it stacks after knowledge-expand leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-seed-work-order-core-lessons",
