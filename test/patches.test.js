@@ -812,6 +812,19 @@ test("cli patches --job dronehive-doc-app-library includes the APP library after
   assert.ok(parsed.applyNext.some((line) => line.includes("docs/APP.md") && line.includes("host/library") && line.includes("GrokSelfLibrary")));
 });
 
+test("cli patches --job dronehive-seed-doc-app-library includes the seed APP library afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-seed-doc-app-library"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-seed-doc-app-library");
+  assert.ok(parsed.applyNext.some((line) => line.includes("drone/app/seed/docs/APP.md") && line.includes("host/library") && line.includes("GrokSelfLibrary")));
+});
+
 test("cli patches --job dronehive-tui-readme-cargo includes the dronehive-tui README afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-tui-readme-cargo"], {
