@@ -22,6 +22,7 @@ Seed WORK_ORDER.md & $py query_llm_codex.py examples only. Do not edit drone/pro
 - git checkout -b cursor/dronehive-seed-work-order-doc-codex-cli-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-doc-codex-cli.patch
 - git apply /path/to/main/patches/dronehive-seed-work-order-doc-codex-cli.patch
+- python3 -c "from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); assert 'host/library/bin/query_llm_codex.py stats' in t; assert 'host/library/bin/query_llm_codex.py use coding' in t; assert 'host/library/bin/query_llm_codex.py vram' in t"
 
 ## Verify
 
