@@ -1,0 +1,25 @@
+{
+  "contract": "agent-ops.arena.v1",
+  "note": "One live Boss-metal arena. Do not invent a second. This GitHub pad is ops only.",
+  "live": {
+    "host": "boss-metal",
+    "root": "D:\\Wilderness\\Genesis",
+    "relativeRoot": ".",
+    "kind": "boss-checkout"
+  },
+  "dead": [
+    {
+      "root": "C:\\Workspace\\.agentsroom\\Genesis",
+      "reason": "dead agentsroom path; not the live arena"
+    },
+    {
+      "root": "C:\\Workspace\\.agentsroom",
+      "reason": "dead agentsroom parent; not the live arena"
+    },
+    {
+      "root": "C:\\Workspace\\python-arena",
+      "reason": "dead Workspace arena; not a second Genesis"
+    }
+  ],
+  "sourceOfTruth": "origin.cursor.com/git/yuri-afk/genesis"
+}

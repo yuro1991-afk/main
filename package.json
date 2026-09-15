@@ -18,6 +18,7 @@
     "busy": "node src/cli.js busy",
     "helpers": "node src/cli.js helpers",
     "status": "node src/cli.js status",
+    "arena": "node src/cli.js arena",
     "probe": "node src/cli.js probe",
     "origin": "node src/cli.js origin",
     "tick": "node src/cli.js tick",

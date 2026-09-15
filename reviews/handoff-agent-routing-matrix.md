@@ -96,7 +96,7 @@ If a lane has not been probed successfully from the Origin host, the matrix may 
 | `gub-inventory-tick` | 6 | Wave 4 inventory. Port `:8787`. |
 | `catalog-notion-sync` | 8 | `catalog/notion_map.json` — fill empty Genesis Entries URLs only. |
 | `genesis-hub-24` | 10 | Origin PR genesis#24 is the roster SoT. |
-| `genesis-local-repo` | 9 | Stand up the Origin checkout. This GitHub tree stays the ops pad. |
+| `genesis-local-repo` | 9 | Boss checkout is `D:\Wilderness\Genesis`. This GitHub tree stays the ops pad. |
 
 ## Do not
 
