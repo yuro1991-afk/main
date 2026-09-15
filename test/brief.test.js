@@ -213,7 +213,7 @@ test("displayVerify strips dollar idents so firstCommands are bash-safe", () => 
   assert.equal(displayVerify({ verify: "Split-Path $PSScriptRoot -Parent" }), "Split-Path PSScriptRoot -Parent");
   assert.equal(displayVerify({ verify: "& $py query_llm_codex.py" }), "& py query_llm_codex.py");
   assert.equal(displayVerify({ verify: "ci.yml has python-smoke-ubuntu:. Do not run the smoke." }), "ci.yml has python-smoke-ubuntu:. Do not run the smoke.");
-  assert.equal(displayVerify({ verify: "header fabric is `.`." }), "header fabric is . .");
+  assert.equal(displayVerify({ verify: "header fabric is `.`." }), "header fabric is ..");
   const queue = JSON.parse(readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"));
   for (const job of queue.jobs) {
     assert.doesNotMatch(displayVerify(job), /\$[A-Za-z_]/, job.id);
