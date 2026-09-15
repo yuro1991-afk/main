@@ -22,6 +22,7 @@ docs/WORK_ORDER.md live-registry table + $reg only. Do not edit drone/pro/tool_a
 - git checkout -b cursor/dronehive-work-order-doc-live-registry-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-doc-live-registry.patch
 - git apply /path/to/main/patches/dronehive-work-order-doc-live-registry.patch
+- python3 -c "from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert 'host/ai-center/agents/super-cell-4/registry/' in t; assert 'host/library/registry/' in t; assert 'host/ai-center/agents/super-cell-4/bridges/live_registry.py' in t"
 
 ## Verify
 

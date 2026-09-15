@@ -725,8 +725,10 @@
       "file": "patches/dronehive-work-order-doc-live-registry.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "docs/WORK_ORDER.md live-registry table + $reg use host/ai-center and host/library. Independent of JSON live-registry leftover and other docs leftovers. Leaves Events/HOT relative. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert 'host/ai-center/agents/super-cell-4/registry/' in t; assert 'host/library/registry/' in t; assert 'host/ai-center/agents/super-cell-4/bridges/live_registry.py' in t\""
+      ],
+      "notes": "docs/WORK_ORDER.md live-registry table + $reg use host/ai-center and host/library, not G:\\\\AI-Center / F:\\\\GrokSelfLibrary. After apply: assert Primary, Mirror, and CLI/reg paths. Independent of JSON live-registry leftover and other docs leftovers. Leaves Events/HOT relative. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-seed-work-order-doc-live-registry",
