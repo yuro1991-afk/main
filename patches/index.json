@@ -126,8 +126,10 @@
       "file": "patches/ova-api-host-override.patch",
       "base": "074bad0",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "OV_API_BASE / OLLAMA_HOST accepted only for loopback. LAN/WAN rejected."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; r=Path('README.md').read_text(); s=Path('SECURITY.md').read_text(); p=Path('lib/OllamaVoice.Common.ps1').read_text(); assert '## Local API override' in r; assert 'Non-loopback hosts are' in r; assert '## Loopback API override' in s; assert 'LAN/WAN values are rejected' in s; assert 'function Test-OVLoopbackApiBase' in p; assert 'Rejected non-loopback API override' in p\""
+      ],
+      "notes": "OV_API_BASE / OLLAMA_HOST accepted only for loopback. LAN/WAN rejected. After apply: assert README Local API override, SECURITY Loopback API override, and Test-OVLoopbackApiBase. Do not run pwsh. Do not hit :11434. Do not put dollar signs in afterApply. Do not put backticks in afterApply. Independent of ova-pwsh-syntax-ci and ova-stop-noui-guard."
     },
     {
       "id": "opensussy-linux-syntax-ci",

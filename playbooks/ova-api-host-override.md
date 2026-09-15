@@ -22,7 +22,7 @@ Local Ollama only. Do not add cloud inference. Do not collide ova-stop-noui-guar
 - git checkout -b cursor/ova-api-host-override-from-ops
 - git apply --check /path/to/main/patches/ova-api-host-override.patch
 - git apply /path/to/main/patches/ova-api-host-override.patch
-- OV_API_BASE=http://127.0.0.1:11434 works; http://example.com is rejected. Existing launchers still resolve Voice Access names.
+- python3 -c "from pathlib import Path; r=Path('README.md').read_text(); s=Path('SECURITY.md').read_text(); p=Path('lib/OllamaVoice.Common.ps1').read_text(); assert '## Local API override' in r; assert 'Non-loopback hosts are' in r; assert '## Loopback API override' in s; assert 'LAN/WAN values are rejected' in s; assert 'function Test-OVLoopbackApiBase' in p; assert 'Rejected non-loopback API override' in p"
 
 ## Verify
 

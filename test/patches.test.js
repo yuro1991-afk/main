@@ -1150,6 +1150,19 @@ test("cli patches --job opensussy-agama-honesty includes the HOW_TO afterApply",
   assert.ok(parsed.applyNext.some((line) => line.includes("install/linux/HOW_TO_RUN.txt") && line.includes("AGAMA / Leap 16 HONESTY") && line.includes("Agama JSON is unsupported")));
 });
 
+test("cli patches --job ova-api-host-override includes the loopback-override afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "ova-api-host-override"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "ova-api-host-override");
+  assert.ok(parsed.applyNext.some((line) => line.includes("## Local API override") && line.includes("## Loopback API override") && line.includes("function Test-OVLoopbackApiBase") && line.includes("LAN/WAN values are rejected")));
+});
+
 test("cli patches --job ova-pwsh-syntax-ci includes the syntax-workflow afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "ova-pwsh-syntax-ci"], {
