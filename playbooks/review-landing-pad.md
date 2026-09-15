@@ -70,6 +70,9 @@ This playbook id is leftover. Take `review-landing-pad-prs` or
 | [#63](https://github.com/yuro1991-afk/main/pull/63) | siblings board 59–62 |
 | [#64](https://github.com/yuro1991-afk/main/pull/64) | ai-bus packs, live-mirror, and core-lessons leftover launches |
 | [#65](https://github.com/yuro1991-afk/main/pull/65) | last three catalog leftover launches |
+| [#66](https://github.com/yuro1991-afk/main/pull/66) | siblings board 63–65 |
+| [#67](https://github.com/yuro1991-afk/main/pull/67) | exhausted leftover-launch prefer |
+| [#68](https://github.com/yuro1991-afk/main/pull/68) | leftover-exhausted AGENTS honesty |
 
 Skip conflicting #4 / #5 / #6. Do not merge #7 after #8 without a rewrite.
 Do not steal the fork’s next slices: head → ears → eyes → vision → bridge.
@@ -77,7 +80,7 @@ Do not copy `packages/keep-busy` or `bin/autofix.js` onto this board.
 
 ## Review rules
 
-- Leave a review on at least one of #8 / #9 / #10 / #11 / #12 / #13 / #14 / #15 / #16 / #17 / #18 / #19 / #20 / #21 / #22 / #23 / #24 / #25 / #26 / #27 / #28 / #29 / #30 / #31 / #32 / #33 / #34 / #35 / #36 / #37 / #38 / #39 / #40 / #41 / #42 / #43 / #44 / #45 / #46 / #47 / #48 / #49 / #50 / #51 / #52 / #53 / #54 / #55 / #56 / #57 / #58 / #59 / #60 / #61 / #62 / #63 / #64 / #65.
+- Leave a review on at least one of #8 / #9 / #10 / #11 / #12 / #13 / #14 / #15 / #16 / #17 / #18 / #19 / #20 / #21 / #22 / #23 / #24 / #25 / #26 / #27 / #28 / #29 / #30 / #31 / #32 / #33 / #34 / #35 / #36 / #37 / #38 / #39 / #40 / #41 / #42 / #43 / #44 / #45 / #46 / #47 / #48 / #49 / #50 / #51 / #52 / #53 / #54 / #55 / #56 / #57 / #58 / #59 / #60 / #61 / #62 / #63 / #64 / #65 / #66 / #67 / #68.
 - Merge decisions stay with Yuri.
 - Empty `main` is not a review target.
 - Do not reopen #1.
