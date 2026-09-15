@@ -30,6 +30,7 @@ export function defaultDispatchPath(repoRoot) {
  * @param {number} rank
  */
 export function slotFor(job, rank) {
+  const applyNext = applyNextForJob(job);
   return {
     rank,
     id: job.id,
@@ -38,6 +39,42 @@ export function slotFor(job, rank) {
     packet: packetPathFor(job),
     playbook: `playbooks/${job.id}.md`,
     relaunch: relaunchFor(job),
+    ...(applyNext ? { applyNext } : {}),
+  };
+}
+
+/**
+ * Peek one card as a slots packet. Blocked catalog leftovers are
+ * allowed — this does not claim.
+ * @param {import("./ledger.js").Job | null} job
+ */
+export function buildSlotsForJob(job) {
+  if (!job) {
+    return {
+      contract: SLOTS_CONTRACT,
+      count: 0,
+      claimed: [],
+      slots: [],
+      rule: "Unknown card.",
+    };
+  }
+  const shown = jobForDisplay(job);
+  return {
+    contract: SLOTS_CONTRACT,
+    count: 1,
+    claimed: shown.claim
+      ? [
+          {
+            id: shown.id,
+            agentId: shown.claim.agentId ?? null,
+            leaseUntil: shown.claim.leaseUntil ?? null,
+            packet: packetPathFor(shown),
+          },
+        ]
+      : [],
+    slots: [slotFor(shown, 1)],
+    applyNext: applyNextForJob(shown),
+    rule: "Peek the named card. Do not claim a blocked catalog leftover. Apply on a sibling write checkout.",
   };
 }
 

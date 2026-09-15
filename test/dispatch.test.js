@@ -12,6 +12,7 @@ import {
   buildAssign,
   buildBusy,
   buildSlots,
+  buildSlotsForJob,
   claimBusyJob,
   leftoverLaunchRows,
   loadRoster,
@@ -282,6 +283,27 @@ test("leftover launch rows skip rostered cards", () => {
       existsSync(fileURLToPath(new URL(`../reviews/launch/${row.jobId}.md`, import.meta.url))),
     ),
   );
+});
+
+test("slots --job peeks a blocked catalog card with applyNext", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const job = ledger.jobs.find((item) => item.id === "dronehive-unicode-ci");
+  assert.ok(job);
+  const packet = buildSlotsForJob(job);
+  assert.equal(packet.contract, SLOTS_CONTRACT);
+  assert.equal(packet.count, 1);
+  assert.equal(packet.slots[0].id, "dronehive-unicode-ci");
+  assert.ok(packet.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.deepEqual(packet.slots[0].applyNext, packet.applyNext);
+});
+
+test("cli slots --job peeks the named catalog card", async () => {
+  const result = await capture(["slots", "--job", "dronehive-unicode-ci"]);
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.slots[0].id, "dronehive-unicode-ci");
+  assert.ok(parsed.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.doesNotMatch(result.out, /gub-inventory-tick/);
 });
 
 test("cli slots defaults to Genesis cards", async () => {

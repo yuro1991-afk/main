@@ -40,7 +40,7 @@ CLI (#3 merged, #8 GitHub-first) — not “this PR”.
 also conflict. Prefer **#8’s GitHub-first defaults**, then keep #9’s
 catalog, Superbrain refuse, prove/`applyNext` apply path (including
 `applyNext` on `brief` / `helpers` / `handoff` / `relaunch` / `busy` /
-`status --job` / `list --job`, `busy --job` / `next --job` peek, named-id `route` apply),
+`status --job` / `list --job` / `slots --job`, `busy --job` / `next --job` peek, named-id `route` apply),
 `displayNotes` / `jobForDisplay`, and review files (`reviews/main-pr10.md`,
 `reviews/landing-pad-prs.md`).
 

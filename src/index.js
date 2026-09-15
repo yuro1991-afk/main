@@ -93,6 +93,7 @@ export {
   buildAssign,
   buildBusy,
   buildSlots,
+  buildSlotsForJob,
   claimBusyJob,
   peekBusyJob,
   defaultDispatchPath,
