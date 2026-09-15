@@ -1319,8 +1319,10 @@
       "file": "patches/dronehive-seed-doc-honesty-library.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "seed HONESTY.md library row uses host/library. Independent of live docs leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/docs/HONESTY.md').read_text(); assert 'host/library' in t; assert r'F:\\\\GrokSelfLibrary' not in t\""
+      ],
+      "notes": "seed HONESTY.md library row uses host/library. After apply: assert that phrase and that F: GrokSelfLibrary is gone. Independent of live docs leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-doc-app-library",

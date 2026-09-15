@@ -22,10 +22,11 @@ drone/app/seed/docs/HONESTY.md library row only. Do not edit drone/pro/tool_agen
 - git checkout -b cursor/dronehive-seed-doc-honesty-library-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-doc-honesty-library.patch
 - git apply /path/to/main/patches/dronehive-seed-doc-honesty-library.patch
+- python3 -c "from pathlib import Path; t=Path('drone/app/seed/docs/HONESTY.md').read_text(); assert 'host/library' in t; assert r'F:\\GrokSelfLibrary' not in t"
 
 ## Verify
 
-seed HONESTY.md library row uses host/library
+seed HONESTY.md library row uses host/library and F: GrokSelfLibrary is gone
 
 Do not reopen https://github.com/yuro1991-afk/main/pull/1.
 Do not open another landing-pad queue.
