@@ -355,8 +355,8 @@ test("cli assign --missing lists catalog leftovers with no launch and never writ
   assert.equal(result.code, 0);
   const parsed = JSON.parse(result.out);
   assert.equal(parsed.wrote, false);
-  assert.equal(parsed.nextMissing, "dronehive-install-ollama-uninstall-root");
-  assert.ok(parsed.next.includes("dronehive-install-ollama-uninstall-root"));
+  assert.equal(parsed.nextMissing, "dronehive-mount-readme-launch");
+  assert.ok(parsed.next.includes("dronehive-mount-readme-launch"));
   assert.ok(parsed.missing > parsed.next.length);
   assert.equal(readdirSync(onDisk).length, before);
 });
@@ -602,6 +602,10 @@ test("unused leftover launch packets exist for parked next cards", () => {
     "dronehive-install-ollama-app-root",
     "dronehive-install-ollama-app-mount",
     "dronehive-install-ollama-app-manifest",
+    "dronehive-install-ollama-uninstall-root",
+    "dronehive-tui-readme-root",
+    "dronehive-ollama-tui-readme-install",
+    "dronehive-mount-readme-layout",
   ];
   for (const id of ids) {
     const text = readFileSync(new URL(`../reviews/launch/${id}.md`, import.meta.url), "utf8");
