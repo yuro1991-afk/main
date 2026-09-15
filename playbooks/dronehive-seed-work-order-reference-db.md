@@ -22,6 +22,7 @@ Seed reference_db key only. Different file from configs/work_order.json. Do not 
 - git checkout -b cursor/dronehive-seed-work-order-reference-db-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-reference-db.patch
 - git apply /path/to/main/patches/dronehive-seed-work-order-reference-db.patch
+- python3 -c "from pathlib import Path; import json; k=json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['knowledge_imprint']; assert k['reference_db']=='host/ai-center/databases/ai_center_reference.db'"
 
 ## Verify
 

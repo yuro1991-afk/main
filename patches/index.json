@@ -527,8 +527,10 @@
       "file": "patches/dronehive-seed-work-order-reference-db.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "drone/app/seed/configs/work_order.json reference_db uses host/ai-center. -U1 so context skips school leftover. Independent of live leftover (different file). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; k=json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['knowledge_imprint']; assert k['reference_db']=='host/ai-center/databases/ai_center_reference.db'\""
+      ],
+      "notes": "drone/app/seed/configs/work_order.json knowledge_imprint.reference_db uses host/ai-center/databases, not G:\\\\AI-Center. After apply: assert that seed key. -U1 so context skips school leftover. Independent of live leftover (different file). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-work-order-knowledge-expand",
