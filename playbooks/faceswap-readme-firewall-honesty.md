@@ -22,6 +22,7 @@ README firewall sentence only. Different hunk from install, Requirements, and Sw
 - git checkout -b cursor/faceswap-readme-firewall-honesty-from-ops
 - git apply --check /path/to/main/patches/faceswap-readme-firewall-honesty.patch
 - git apply /path/to/main/patches/faceswap-readme-firewall-honesty.patch
+- python3 -c "from pathlib import Path; t=Path('README.md').read_text(); assert 'inbound TCP' in t and 'Windows Firewall is one host example' in t"
 
 ## Verify
 

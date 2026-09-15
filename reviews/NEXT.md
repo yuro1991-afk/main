@@ -10,8 +10,9 @@ Keep-busy tick **2026-09-15T00:15Z** still holds: 40 IDLE + this run
 RUNNING. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`3c12e2a`. Shipped this interval: `faceswap-readme-swift-honesty`
-README Swift afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`3c12e2a`. Shipped this interval: `faceswap-readme-firewall-honesty`
+README firewall afterApply. Face-swap README honesty leftovers
+are exhausted. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -32,7 +33,8 @@ README Swift afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused requirements apply | `faceswap-readme-requirements-honesty` (README afterApply wired) |
 | next unused install apply | `faceswap-readme-install-sh` (README install afterApply wired) |
 | next unused swift apply | `faceswap-readme-swift-honesty` (README Swift afterApply wired) |
-| next afterApply to wire | `faceswap-readme-firewall-honesty` (README firewall sentence only) |
+| last faceswap README apply | `faceswap-readme-firewall-honesty` (README firewall afterApply wired) |
+| next afterApply to wire | `dronehive-hive-docstring-honesty` (hive.py docstring only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -89,7 +91,10 @@ Voice Access (`Windows 11 Voice Access` / `syntax/math CI only` /
 (`bash START.sh` / `Linux / this pad` / `fail-closed contract`).
 `faceswap-readme-swift-honesty` afterApply asserts README
 (`Windows, Linux, or this pad` / `only on a Mac with Xcode`).
-Next afterApply to wire is `faceswap-readme-firewall-honesty`.
+`faceswap-readme-firewall-honesty` afterApply asserts README
+(`inbound TCP` / `Windows Firewall is one host example`).
+Face-swap README honesty leftovers are exhausted. Next afterApply
+to wire is `dronehive-hive-docstring-honesty`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -134,7 +139,7 @@ then unused `dronehive-seed-buzzer-hive-library-honesty` (seed buzzer_hive.json 
 then unused `dronehive-work-order-fabric-root` (fabric_root key only; independent of portable-paths later hunks),
 then unused `dronehive-seed-work-order-fabric-root` (seed fabric_root only; independent of live config),
 then unused `faceswap-readme-swift-honesty` (README Swift paragraph only; afterApply wired; independent of Requirements and install),
-then unused `faceswap-readme-firewall-honesty` (README firewall sentence only; independent of install/Requirements/Swift),
+then unused `faceswap-readme-firewall-honesty` (README firewall sentence only; afterApply wired; independent of install/Requirements/Swift),
 then unused `dronehive-future-seer-jane-honesty` (future_seer.json jane keys only; independent of config-load-overlay and runtime-host-paths),
 then unused `dronehive-multi-hosts-exe-honesty` (multi_hosts.json G: exe keys only; independent of future-seer-jane and overlay),
 then unused `dronehive-work-order-live-registry` (live_registry G: keys only; independent of portable-paths and fabric-root),

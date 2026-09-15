@@ -423,8 +423,10 @@
       "file": "patches/faceswap-readme-firewall-honesty.patch",
       "base": "bba7188",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "README: inbound TCP 8860; Windows Firewall is one host example. Independent of install-sh, requirements, and swift leftovers."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('README.md').read_text(); assert 'inbound TCP' in t and 'Windows Firewall is one host example' in t\""
+      ],
+      "notes": "README: inbound TCP 8860; Windows Firewall is one host example. After apply: assert those phrases. Independent of install-sh, requirements, and swift leftovers."
     },
     {
       "id": "dronehive-future-seer-jane-honesty",
