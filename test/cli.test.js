@@ -310,6 +310,14 @@ test("help says playbooks defaults to check and refuses in-repo write", async ()
   assert.match(result.out, /never writes or resets siblings/);
 });
 
+test("NEXT leftover unused merges the stack through the siblings-board tip", () => {
+  const text = readFileSync(new URL("../reviews/NEXT.md", import.meta.url), "utf8");
+  assert.match(text, /merge \*\*#11\*\* through \*\*#73\*\*/);
+  assert.match(text, /Sibling board tip is \*\*#73\*\*/);
+  assert.match(text, /Leftover launches exhausted/);
+  assert.doesNotMatch(text, /through \*\*#67\*\*/);
+});
+
 test("README assign --job names exhausted leftover launches", () => {
   const text = readFileSync(new URL("../README.md", import.meta.url), "utf8");
   assert.match(
