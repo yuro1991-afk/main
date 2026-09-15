@@ -2681,7 +2681,7 @@ test("provePatches stacked apply-check then resets", () => {
     cwd: checkout,
     encoding: "utf8",
   });
-  assert.equal(status.stdout, "");
+  assert.equal(status.stdout, "?? SENTINEL\n");
 });
 
 test("cli patches --prove stacked then resets", async () => {
