@@ -1150,6 +1150,19 @@ test("cli patches --job opensussy-agama-honesty includes the HOW_TO afterApply",
   assert.ok(parsed.applyNext.some((line) => line.includes("install/linux/HOW_TO_RUN.txt") && line.includes("AGAMA / Leap 16 HONESTY") && line.includes("Agama JSON is unsupported")));
 });
 
+test("cli patches --job faceswap-commit-pwa-icons includes the PNG afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "faceswap-commit-pwa-icons"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "faceswap-commit-pwa-icons");
+  assert.ok(parsed.applyNext.some((line) => line.includes("pwa/apple-touch-icon.png") && line.includes("pwa/icon-192.png") && line.includes("pwa/icon-512.png") && line.includes("137,80,78,71")));
+});
+
 test("cli patches --job faceswap-honesty-env-paths includes the env-footer afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "faceswap-honesty-env-paths"], {

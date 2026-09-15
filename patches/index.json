@@ -104,8 +104,10 @@
         "patches/faceswap-pwa-icons/icon-192.png",
         "patches/faceswap-pwa-icons/icon-512.png"
       ],
-      "afterApply": [],
-      "notes": "Solid-color Home Screen PNGs matching manifest names. Copy from patches/faceswap-pwa-icons/ if git apply --binary is awkward."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; files=['pwa/apple-touch-icon.png','pwa/icon-192.png','pwa/icon-512.png']; assert all(Path(p).is_file() and Path(p).stat().st_size>0 and Path(p).read_bytes()[:8]==bytes([137,80,78,71,13,10,26,10]) for p in files)\""
+      ],
+      "notes": "Solid-color Home Screen PNGs matching manifest names. Copy from patches/faceswap-pwa-icons/ if git apply --binary is awkward. After apply: assert the three pwa/ PNGs exist with PNG magic. Unpatched has none. Do not start a server. Do not put backticks in afterApply. Independent of faceswap-mock-engine-ci."
     },
     {
       "id": "ova-pwsh-syntax-ci",
