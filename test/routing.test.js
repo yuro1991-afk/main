@@ -86,6 +86,9 @@ test("generic ship intent does not score a Compound Engineering playbook", () =>
   const route = routeIntent("ship something useful", { ledger, roster, entries, nowMs: NOW });
   assert.notEqual(route.jobId, "catalog-compound-eng-feature");
   assert.doesNotMatch(route.notes ?? "", /compound-eng-feature/);
+  assert.equal(route.jobId, "review-landing-pad-prs");
+  assert.match(route.notes, /Unmatched leftover unused review is review-landing-pad-prs/);
+  assert.doesNotMatch(route.notes, /next unused GitHub sibling card/);
 });
 
 test("catalog playbook intent scores onto the matching leftover card", () => {
