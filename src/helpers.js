@@ -109,7 +109,7 @@ export function planHelpers(job) {
         {
           role: "review",
           title: `Review ${job.id}`,
-          prompt: `Review the open PRs named on ${job.id}. Prefer #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, or #23. #3 is merged. Skip conflicting #4/#5/#6. Do not steal head/ears/eyes/vision/bridge. Do not steal Genesis arena pointers on #13. Write findings locally. Do not comment on GitHub unless Yuri asked.`,
+          prompt: `Review the open PRs named on ${job.id}. Prefer #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, or #26. #3 is merged. Skip conflicting #4/#5/#6. Do not steal head/ears/eyes/vision/bridge. Do not steal Genesis arena pointers on #13. Write findings locally. Do not comment on GitHub unless Yuri asked.`,
         },
         {
           role: "verify",
