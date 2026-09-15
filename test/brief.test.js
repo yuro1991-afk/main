@@ -4,7 +4,7 @@ import { mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { JOB_KINDS } from "../src/kinds.js";
-import { applyNextForJob, buildBrief, firstCommands, proveAfterApplyForJob } from "../src/brief.js";
+import { applyNextForJob, buildBrief, displayCollision, displayNotes, firstCommands, proveAfterApplyForJob } from "../src/brief.js";
 import { describeRole, loadSiblings, siblingsForJob } from "../src/siblings.js";
 import { saveLedger } from "../src/ledger.js";
 import { runCli } from "../src/cli.js";
@@ -68,6 +68,38 @@ test("brief attaches sibling PR 5 to the unicode card", () => {
   assert.doesNotMatch(brief.applyNext.join("\n"), /prove-after-apply/);
   assert.match(drone.notes, /Blocked: Yuri scoped this landing pad to Genesis only/);
   assert.doesNotMatch(brief.job.notes, /Blocked: Yuri scoped this landing pad to Genesis only/);
+  assert.doesNotMatch(brief.job.notes, /npm run autofix/);
+  assert.doesNotMatch(brief.job.notes, /PR #5/);
+  assert.doesNotMatch(brief.job.collision, /pull\/5/);
+  assert.doesNotMatch(brief.job.collision, /npm run autofix -- apply/);
+  assert.match(brief.job.notes, /dronehive-pro-chat-cp1252\.patch/);
+});
+
+test("catalog displayNotes drop PR #5 / autofix apply runner", () => {
+  const stale = {
+    id: "dronehive-unicode-ci",
+    title: "Fix unicode",
+    repo: "github.com/yuro1991-afk/dronehive",
+    kind: "fix",
+    priority: 1,
+    status: "blocked",
+    claim: null,
+    notes:
+      "cp1252. Patch is on landing-pad PR #5; verified apply runner is PR #6 (`npm run autofix -- apply <checkout>`). Relaunch.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+    verify: "true",
+    files: [],
+    collision:
+      "Checkout dronehive, apply github.com/yuro1991-afk/main/pull/5 patch, push on cursor/setup-dev-environment-2e0b.",
+  };
+  const notes = displayNotes(stale);
+  const collision = displayCollision(stale);
+  assert.doesNotMatch(notes, /npm run autofix/);
+  assert.doesNotMatch(notes, /PR #5/);
+  assert.doesNotMatch(notes, /Blocked: Yuri scoped this landing pad to Genesis only/);
+  assert.match(notes, /dronehive-pro-chat-cp1252\.patch/);
+  assert.doesNotMatch(collision, /pull\/5/);
+  assert.doesNotMatch(collision, /setup-dev-environment/);
+  assert.match(collision, /Do not copy PR #6 autofix/);
 });
 
 test("firstCommands is exhaustive", () => {

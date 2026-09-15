@@ -48,19 +48,41 @@ export function buildBrief(job, siblings, options = {}) {
 
 const BLOCKED_GENESIS_ONLY =
   /\nBlocked: Yuri scoped this landing pad to Genesis only\.\s*$/;
+const AUTOFIX_RUNNER =
+  /Patch is on landing-pad PR #5; verified apply runner is PR #6 \(`npm run autofix -- apply <checkout>`\)\.\s*/g;
+const PULL5_APPLY =
+  /Checkout dronehive, apply github\.com\/yuro1991-afk\/main\/pull\/5 patch, push on cursor\/setup-dev-environment-2e0b\.\s*/gi;
 
 /**
  * Cataloged sibling cards stay status=blocked on this Genesis-only tree,
- * but --job apply text must not tell the agent to sit out.
+ * but --job apply text must not tell the agent to sit out or copy PR #6.
  * @param {import("./ledger.js").Job} job
  * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { file: string, afterApply?: string[] } | null }} [options]
  */
 export function displayNotes(job, options = {}) {
   const notes = job.notes ?? "";
-  if (catalogPatchFor(job, options)) {
-    return notes.replace(BLOCKED_GENESIS_ONLY, "").trimEnd();
+  const patch = catalogPatchFor(job, options);
+  if (!patch) return notes;
+  let shown = notes.replace(BLOCKED_GENESIS_ONLY, "").replace(AUTOFIX_RUNNER, "");
+  if (patch.file && !shown.includes(patch.file)) {
+    shown = `${shown.trim()} Applyable catalog patch is ${patch.file} on main#9. Do not copy PR #6 autofix.`;
   }
-  return notes;
+  return shown.replace(/\n{3,}/g, "\n\n").trimEnd();
+}
+
+/**
+ * Catalog collisions must not send the agent to PR #5 or npm run autofix.
+ * @param {import("./ledger.js").Job} job
+ * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { file: string, afterApply?: string[] } | null }} [options]
+ */
+export function displayCollision(job, options = {}) {
+  const collision = job.collision ?? "";
+  if (!catalogPatchFor(job, options)) return collision;
+  const cleaned = collision.replace(PULL5_APPLY, "").trim();
+  if (!cleaned || /pull\/5|npm run autofix/i.test(cleaned)) {
+    return "Avoid rewriting the patched files while this card is claimed. Apply the catalog patch on a sibling write checkout. Do not copy PR #6 autofix.";
+  }
+  return cleaned;
 }
 
 /**
@@ -69,8 +91,9 @@ export function displayNotes(job, options = {}) {
  */
 export function jobForDisplay(job, options = {}) {
   const notes = displayNotes(job, options);
-  if (notes === (job.notes ?? "")) return job;
-  return { ...job, notes };
+  const collision = displayCollision(job, options);
+  if (notes === (job.notes ?? "") && collision === (job.collision ?? "")) return job;
+  return { ...job, notes, collision };
 }
 
 /**

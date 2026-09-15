@@ -75,6 +75,8 @@ test("cataloged sibling prompt is apply, not Origin launch", () => {
   assert.match(text, /prefer brief/);
   assert.match(text, /dronehive-pro-chat-cp1252\.patch/);
   assert.match(text, /forget Origin/);
+  assert.doesNotMatch(text, /npm run autofix -- apply/);
+  assert.doesNotMatch(text, /pull\/5/);
   assert.doesNotMatch(text, /Origin launch/);
   assert.doesNotMatch(text, /Do not work dronehive/);
 });

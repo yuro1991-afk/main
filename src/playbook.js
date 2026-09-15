@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { describeKind, jobScope } from "./kinds.js";
-import { displayNotes, firstCommands } from "./brief.js";
+import { displayCollision, displayNotes, firstCommands } from "./brief.js";
 import { relaunchFor } from "./handoff.js";
 
 export const PLAYBOOK_CHECK_CONTRACT = "agent-ops.playbooks.check.v1";
@@ -36,7 +36,7 @@ ${displayNotes(job)}
 
 ## Collision
 
-${job.collision}
+${displayCollision(job)}
 
 ## First commands
 

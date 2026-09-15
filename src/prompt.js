@@ -1,4 +1,4 @@
-import { applyNextForJob, catalogPatchFor, displayNotes, firstCommands, proveAfterApplyForJob } from "./brief.js";
+import { applyNextForJob, catalogPatchFor, displayCollision, displayNotes, firstCommands, proveAfterApplyForJob } from "./brief.js";
 import { packetPathFor, relaunchFor } from "./handoff.js";
 
 export const PROMPT_CONTRACT = "agent-ops.prompt.v1";
@@ -43,7 +43,7 @@ ${displayNotes(job)}
 
 ## Collision
 
-${job.collision}
+${displayCollision(job)}
 
 ## First moves
 
@@ -77,7 +77,7 @@ ${displayNotes(job)}
 
 ## Collision
 
-${job.collision}
+${displayCollision(job)}
 
 ## First moves
 
@@ -111,7 +111,7 @@ ${displayNotes(job)}
 
 ## Collision
 
-${job.collision}
+${displayCollision(job)}
 
 ## First moves
 

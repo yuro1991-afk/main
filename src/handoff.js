@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { applyNextForJob, catalogPatchFor, displayNotes, proveAfterApplyForJob } from "./brief.js";
+import { applyNextForJob, catalogPatchFor, displayCollision, displayNotes, proveAfterApplyForJob } from "./brief.js";
 import { assertNeverScope, jobScope } from "./kinds.js";
 import { siblingsForJob, describeRole } from "./siblings.js";
 import { defaultPatchesIndexPath, loadPatchIndex, patchForJob } from "./patches.js";
@@ -87,7 +87,7 @@ ${displayNotes(job)}
 
 ## Collision
 
-${job.collision}
+${displayCollision(job)}
 
 ## Verify
 
@@ -129,7 +129,7 @@ ${displayNotes(job)}
 
 ## Collision
 
-${job.collision}
+${displayCollision(job)}
 
 ## Verify
 
