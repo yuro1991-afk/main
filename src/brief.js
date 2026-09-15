@@ -274,14 +274,14 @@ export function firstCommands(job, options = {}) {
       if (job.id === "review-landing-pad-prs") {
         return [
           "Read reviews/landing-pad-prs.md.",
-          "Review an existing open PR: #8, #9, or #10. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8.",
+          "Review an existing open PR: #8, #9, #10, or #11. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8.",
           "Do not invent a new tree on empty main.",
           displayVerify(job),
         ];
       }
       return [
         "Do not invent a new tree on empty main.",
-        "Review an existing open PR: #8, #9, or #10. Skip conflicting #4/#5/#6. #3 is merged.",
+        "Review an existing open PR: #8, #9, #10, or #11. Skip conflicting #4/#5/#6. #3 is merged.",
         displayVerify(job),
       ];
     case "origin-slice":
@@ -311,7 +311,7 @@ export function firstCommands(job, options = {}) {
 function hardRules(job) {
   const shared = [
     "Do not reopen https://github.com/yuro1991-afk/main/pull/1.",
-    "Do not open another landing-pad queue. Review #8/#9/#10 or apply a catalog patch.",
+    "Do not open another landing-pad queue. Review #8/#9/#10/#11 or apply a catalog patch.",
     "Do not copy packages/keep-busy from PR #4 onto this branch.",
     "Yuri: forget Origin. Default work is local GitHub siblings. This token cannot push them.",
     "Yuri: no more Superbrain. Do not probe :45001 / :8791. Do not run node src/cli.js probe.",

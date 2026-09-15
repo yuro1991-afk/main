@@ -27,6 +27,7 @@ Work on the named GitHub repo. Forget Origin.
 ## Notes
 
 Newcomer card. Read https://github.com/yuro1991-afk/main/pull/8. CI is green. Do not copy #4/#6. Do not reopen #1.
+Yuri: forget Origin. Take this GitHub sibling. This pad token cannot push it — relaunch that repo.
 
 ## Collision
 
@@ -35,7 +36,7 @@ Do not open another dispatch board. Extend #8 or take leftover review-landing-pa
 ## First moves
 
 - Do not invent a new tree on empty main.
-- Review an existing open PR listed in ledger/siblings.json.
+- Review an existing open PR: #8, #9, #10, or #11. Skip conflicting #4/#5/#6. #3 is merged.
 - Confirm #8 stays GitHub-first (default next is a sibling card). Merge stays with Yuri.
 
 ## Do not

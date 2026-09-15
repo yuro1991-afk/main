@@ -3160,14 +3160,14 @@
     },
     {
       "id": "review-landing-pad-prs",
-      "title": "Review existing landing-pad PRs #3 #4 #5 #6 #7 #8 #9 #10",
+      "title": "Review existing landing-pad PRs #3 #4 #5 #6 #7 #8 #9 #10 #11",
       "repo": "github.com/yuro1991-afk/main",
       "kind": "review",
       "priority": 22,
       "status": "open",
       "claim": null,
-      "notes": "Idle CodeRabbit / auto-review agents: review open PRs #4\u2013#10. #3 is merged. Fork bc-84d93b47 shipped #10 (python-arena-infra). CodeRabbit skips this repo (<10 stars) unless someone checks Trigger review. Do not invent a new tree. Do not reopen #1. Do not steal the fork's next slices (head \u2192 ears \u2192 eyes \u2192 vision \u2192 bridge).\nYuri: forget Origin. Take this GitHub sibling. This pad token cannot push it — relaunch that repo.\nBlocked: Yuri scoped this landing pad to Genesis only.",
-      "verify": "Leave a review on at least one of #8/#9/#10. No new dispatch-board PR.",
+      "notes": "Idle CodeRabbit / auto-review agents: review open PRs #4\u2013#11. #3 is merged. #11 is the resolved #8-then-#9 merge. Fork bc-84d93b47 shipped #10 (python-arena-infra). CodeRabbit skips this repo (<10 stars) unless someone checks Trigger review. Do not invent a new tree. Do not reopen #1. Do not steal the fork's next slices (head \u2192 ears \u2192 eyes \u2192 vision \u2192 bridge).\nYuri: forget Origin. Take this GitHub sibling. This pad token cannot push it — relaunch that repo.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+      "verify": "Leave a review on at least one of #8/#9/#10/#11. No new dispatch-board PR.",
       "files": [
         "ledger/siblings.json"
       ],

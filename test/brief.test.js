@@ -58,7 +58,7 @@ test("brief attaches sibling PR 5 to the unicode card", () => {
   assert.equal(brief.related[0].number, 9);
   assert.match(brief.related[0].meaning, /patches\//);
   assert.ok(brief.hardRules.some((rule) => rule.includes("no more Superbrain")));
-  assert.ok(brief.hardRules.some((rule) => rule.includes("#8/#9/#10")));
+  assert.ok(brief.hardRules.some((rule) => rule.includes("#8/#9/#10/#11")));
   assert.ok(brief.hardRules.some((rule) => rule.includes("forget Origin for this card")));
   assert.ok(brief.hardRules.some((rule) => rule.includes("Prefer brief / proveAfterApplyCommand")));
   assert.ok(!brief.hardRules.some((rule) => rule.includes("sibling cards stay blocked")));

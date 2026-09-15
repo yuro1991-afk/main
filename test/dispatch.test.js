@@ -391,3 +391,16 @@ test("cli slots --world hides GUB inventory and catalog cards", async () => {
   assert.doesNotMatch(result.out, /catalog-expand-domain/);
   assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
 });
+
+test("on-disk unicode launch is an Apply brief, not PR #5 autofix", () => {
+  const text = readFileSync(new URL("../reviews/launch/dronehive-unicode-ci.md", import.meta.url), "utf8");
+  assert.match(text, /# Apply dronehive-unicode-ci/);
+  assert.match(text, /patches --prove --job dronehive-unicode-ci/);
+  assert.doesNotMatch(text, /npm run autofix/);
+  assert.doesNotMatch(text, /pull\/5/);
+  const leftover = readFileSync(
+    new URL("../reviews/launch/review-landing-pad-prs.md", import.meta.url),
+    "utf8",
+  );
+  assert.match(leftover, /#11/);
+});

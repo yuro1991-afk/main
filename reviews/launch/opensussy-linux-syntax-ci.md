@@ -12,22 +12,23 @@ Relaunch the named GitHub repo. Forget Origin. Do not inventory this pad for ano
 
 ---
 
-# GitHub launch — opensussy-linux-syntax-ci
+# Apply opensussy-linux-syntax-ci
 
-Work on the named GitHub repo. Forget Origin.
+Yuri: forget Origin for this card. Apply the catalog patch on a sibling write checkout.
 
-- UI: https://github.com/yuro1991-afk/opensussy
-- Git: `github.com/yuro1991-afk/opensussy`
+- Sibling: https://github.com/yuro1991-afk/opensussy
+- Relaunch: https://github.com/yuro1991-afk/opensussy
+- Patch: `patches/opensussy-linux-syntax-ci.patch`
 - Job: `opensussy-linux-syntax-ci` — Add non-nuclear Linux syntax CI for OpenSussy packs
-- Packet: `reviews/handoff-opensussy-linux-syntax-ci.md`
-- Playbook: `playbooks/opensussy-linux-syntax-ci.md`
-- Priority: 10
-- Verify: Workflow parses the six shell wrappers; job must not execute autoinst-deep.xml or format disks.
+- Playbook: `playbooks/opensussy-linux-syntax-ci.md` (First commands may omit --prove-after-apply; prefer brief)
+- Prove: `node src/cli.js patches --prove --job opensussy-linux-syntax-ci`
+- Prove afterApply: `node src/cli.js patches --prove-after-apply --job opensussy-linux-syntax-ci` (throwaways; never write /tmp/siblings)
+- After apply: python3 -c "from pathlib import Path; t=Path('.github/workflows/linux-syntax.yml').read_text(); assert 'name: linux-syntax' in t; assert 'actions/checkout@v5' in t; assert 'Syntax-check OpenSussy shell wrappers only' in t; assert 'install/linux/tumbleweed/OpenSussy-deep.sh' in t; assert 'OK syntax. Did not execute AutoYaST' in t"
 
 ## Notes
 
 No open issues/PRs. Repo has no .github/workflows. Add ubuntu-latest bash -n (and optional shellcheck) on install/linux/OpenSussy-light.sh, OpenSussy-deep.sh, and leap/tumbleweed copies. Never apply AutoYaST, never run deep wipe, never touch /dev/nvme0n1. Residual R2: confirm=false + initialize=true is nuclear.
-Yuri: forget Origin. Take this GitHub sibling. This pad token cannot push it — relaunch that repo.
+Yuri: forget Origin. Take this GitHub sibling. This pad token cannot push it — relaunch that repo. Applyable catalog patch is patches/opensussy-linux-syntax-ci.patch on main#9. Do not copy PR #6 autofix.
 
 ## Collision
 
@@ -35,16 +36,23 @@ Do not edit Windows WPF / LinuxPayload.cs wipe path. Do not collide dronehive CI
 
 ## First moves
 
+- node src/cli.js patches --prove --job opensussy-linux-syntax-ci
+- node src/cli.js patches --prove-after-apply --job opensussy-linux-syntax-ci
 - git clone https://github.com/yuro1991-afk/opensussy.git work && cd work
 - git checkout -b cursor/opensussy-linux-syntax-ci-from-ops
-- edit: .github/workflows/linux-syntax.yml, install/linux/OpenSussy-light.sh, install/linux/OpenSussy-deep.sh, install/linux/leap/OpenSussy-light.sh, install/linux/tumbleweed/OpenSussy-light.sh
+- git apply --check /path/to/main/patches/opensussy-linux-syntax-ci.patch
+- git apply /path/to/main/patches/opensussy-linux-syntax-ci.patch
+- python3 -c "from pathlib import Path; t=Path('.github/workflows/linux-syntax.yml').read_text(); assert 'name: linux-syntax' in t; assert 'actions/checkout@v5' in t; assert 'Syntax-check OpenSussy shell wrappers only' in t; assert 'install/linux/tumbleweed/OpenSussy-deep.sh' in t; assert 'OK syntax. Did not execute AutoYaST' in t"
 - Workflow parses the six shell wrappers; job must not execute autoinst-deep.xml or format disks.
 
 ## Do not
 
 - Do not reopen https://github.com/yuro1991-afk/main/pull/1
-- Do not open another landing-pad queue
-- Do not mark Superbrain LIVE without a successful probe
-- This pad token cannot push sibling GitHub repos — relaunch there or apply a verified patch
+- Do not copy PR #6 autofix
+- Do not invent a new leftover
+- Do not run writePlaybooks over playbooks/
+- Do not probe :45001 / :8791
+- Do not run node src/cli.js probe
+- This pad token cannot push github.com/yuro1991-afk/opensussy — apply there
 
 

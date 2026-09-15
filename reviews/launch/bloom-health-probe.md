@@ -12,22 +12,23 @@ Relaunch the named GitHub repo. Forget Origin. Do not inventory this pad for ano
 
 ---
 
-# GitHub launch — bloom-health-probe
+# Apply bloom-health-probe
 
-Work on the named GitHub repo. Forget Origin.
+Yuri: forget Origin for this card. Apply the catalog patch on a sibling write checkout.
 
-- UI: https://github.com/yuro1991-afk/bloom-fair-yellow-charm
-- Git: `github.com/yuro1991-afk/bloom-fair-yellow-charm`
+- Sibling: https://github.com/yuro1991-afk/bloom-fair-yellow-charm
+- Relaunch: https://github.com/yuro1991-afk/bloom-fair-yellow-charm
+- Patch: `patches/bloom-health-probe.patch`
 - Job: `bloom-health-probe` — Probe OMNI-FORGE /api/v1/health without claiming LIVE
-- Packet: `reviews/handoff-bloom-health-probe.md`
-- Playbook: `playbooks/bloom-health-probe.md`
-- Priority: 21
-- Verify: Write a small evidence JSON (status ok | unreachable). Never upgrade a timeout to LIVE. Optional: npm run preview if build already exists.
+- Playbook: `playbooks/bloom-health-probe.md` (First commands may omit --prove-after-apply; prefer brief)
+- Prove: `node src/cli.js patches --prove --job bloom-health-probe`
+- Prove afterApply: `node src/cli.js patches --prove-after-apply --job bloom-health-probe` (throwaways; never write /tmp/siblings)
+- After apply: python3 -c "from pathlib import Path; t=Path('scripts/probe-health.mjs').read_text(); assert 'unreachable' in t; assert 'live: false' in t; assert '45001' in t"
 
 ## Notes
 
 src/routes/api/v1/health.ts plus docs: GET /api/v1/health (liveness, catalog size, agent flag). After npm run dev -- --host 0.0.0.0 --port 8080, GET health with a short timeout. Timeouts/connection errors are unreachable, never live. This is not BOSS Superbrain :45001 and not GOOSE-PC :8791.
-Yuri: forget Origin. Take this GitHub sibling. This pad token cannot push it — relaunch that repo.
+Yuri: forget Origin. Take this GitHub sibling. This pad token cannot push it — relaunch that repo. Applyable catalog patch is patches/bloom-health-probe.patch on main#9. Do not copy PR #6 autofix.
 
 ## Collision
 
@@ -35,15 +36,23 @@ Do not probe or relabel Superbrain from this card. Do not bind :8787/:8788 Origi
 
 ## First moves
 
-- node src/cli.js probe
-- Timeouts and non-2xx stay unreachable. Never write live.
+- node src/cli.js patches --prove --job bloom-health-probe
+- node src/cli.js patches --prove-after-apply --job bloom-health-probe
+- git clone https://github.com/yuro1991-afk/bloom-fair-yellow-charm.git work && cd work
+- git checkout -b cursor/bloom-health-probe-from-ops
+- git apply --check /path/to/main/patches/bloom-health-probe.patch
+- git apply /path/to/main/patches/bloom-health-probe.patch
+- python3 -c "from pathlib import Path; t=Path('scripts/probe-health.mjs').read_text(); assert 'unreachable' in t; assert 'live: false' in t; assert '45001' in t"
 - Write a small evidence JSON (status ok | unreachable). Never upgrade a timeout to LIVE. Optional: npm run preview if build already exists.
 
 ## Do not
 
 - Do not reopen https://github.com/yuro1991-afk/main/pull/1
-- Do not open another landing-pad queue
-- Do not mark Superbrain LIVE without a successful probe
-- This pad token cannot push sibling GitHub repos — relaunch there or apply a verified patch
+- Do not copy PR #6 autofix
+- Do not invent a new leftover
+- Do not run writePlaybooks over playbooks/
+- Do not probe :45001 / :8791
+- Do not run node src/cli.js probe
+- This pad token cannot push github.com/yuro1991-afk/bloom-fair-yellow-charm — apply there
 
 

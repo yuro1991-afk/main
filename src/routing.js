@@ -43,10 +43,10 @@ export const ROUTES = Object.freeze([
   },
   {
     intent: "auto review / coderabbit",
-    destination: "an existing open PR: #8, #9, or #10 — never empty main",
+    destination: "an existing open PR: #8, #9, #10, or #11 — never empty main",
     kind: "review",
     notes:
-      "Review #8, #9, or #10. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8. Do not steal eyes / vision / bridge on #10.",
+      "Review #8, #9, #10, or #11. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8. Do not steal eyes / vision / bridge on #10.",
     jobId: "review-landing-pad-prs",
     packet: "playbooks/review-landing-pad-prs.md",
   },
@@ -211,7 +211,7 @@ export function routeIntent(text, context = {}) {
       return routeFromJob(
         text,
         review,
-        "Review open PRs #8, #9, or #10. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8. Do not steal eyes / vision / bridge on #10.",
+        "Review open PRs #8, #9, #10, or #11. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8. Do not steal eyes / vision / bridge on #10.",
       );
     }
     return withContract(ROUTES[2], text);
