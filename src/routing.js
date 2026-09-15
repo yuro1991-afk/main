@@ -137,7 +137,11 @@ export function scorePlaybooks(text, entries) {
       const hits = tokens.filter((token) => hay.includes(token)).length;
       return { entry, score: hits + 2 };
     })
-    .filter((row) => row.score >= 3 && tokenizeIntent(text).some((token) => `${row.entry.entryId} ${row.entry.name ?? ""}`.toLowerCase().includes(token)))
+    .filter((row) => {
+      const idName = `${row.entry.entryId} ${row.entry.name ?? ""}`.toLowerCase();
+      const nameHits = tokens.filter((token) => idName.includes(token)).length;
+      return row.score >= 3 && nameHits >= 2;
+    })
     .sort((a, b) => b.score - a.score || a.entry.entryId.localeCompare(b.entry.entryId));
 }
 

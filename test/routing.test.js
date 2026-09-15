@@ -52,6 +52,16 @@ test("keep-busy with roster leftover picks the unused Origin card", () => {
   assert.equal(route.packet, "reviews/handoff-gub-inventory-tick.md");
 });
 
+test("generic ship intent does not score a Compound Engineering playbook", () => {
+  const ledger = loadLedger(join(ROOT, "ledger", "queue.json"));
+  const roster = loadRoster(join(ROOT, "ledger", "roster.json"));
+  const entries = loadEntries(defaultEntriesPath(ROOT));
+  assert.equal(scorePlaybooks("ship something useful", entries).length, 0);
+  const route = routeIntent("ship something useful", { ledger, roster, entries, nowMs: NOW });
+  assert.notEqual(route.jobId, "catalog-compound-eng-feature");
+  assert.doesNotMatch(route.notes ?? "", /compound-eng-feature/);
+});
+
 test("catalog playbook intent scores onto the matching leftover card", () => {
   const ledger = {
     jobs: [
