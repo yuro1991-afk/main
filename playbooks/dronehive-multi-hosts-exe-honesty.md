@@ -22,6 +22,7 @@ configs/multi_hosts.json G: exe keys only. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-multi-hosts-exe-honesty-from-ops
 - git apply --check /path/to/main/patches/dronehive-multi-hosts-exe-honesty.patch
 - git apply /path/to/main/patches/dronehive-multi-hosts-exe-honesty.patch
+- python3 -c "from pathlib import Path; import json; hosts=json.loads(Path('configs/multi_hosts.json').read_text())['hosts']; by={h['id']:h for h in hosts}; assert by['supercell_muscle']['exe']=='host/ai-center/agents/super-cell-4/bridges/muscle_dispatch.py' and by['everest']['exe']=='host/ai-center/bridge/everest/cli.py'"
 
 ## Verify
 

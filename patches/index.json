@@ -461,8 +461,10 @@
       "file": "patches/dronehive-multi-hosts-exe-honesty.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "configs/multi_hosts.json supercell_muscle and everest exe use host/ai-center, not G:\\\\AI-Center. Independent of config-load-overlay (Python remap only) and future-seer-jane-honesty (different file). C:\\\\ AppData exe leftovers stay later. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; hosts=json.loads(Path('configs/multi_hosts.json').read_text())['hosts']; by={h['id']:h for h in hosts}; assert by['supercell_muscle']['exe']=='host/ai-center/agents/super-cell-4/bridges/muscle_dispatch.py' and by['everest']['exe']=='host/ai-center/bridge/everest/cli.py'\""
+      ],
+      "notes": "configs/multi_hosts.json supercell_muscle and everest exe use host/ai-center, not G:\\\\AI-Center. After apply: assert those exe paths. Independent of config-load-overlay (Python remap only) and future-seer-jane-honesty (different file). C:\\\\ AppData exe leftovers stay later. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-work-order-live-registry",
