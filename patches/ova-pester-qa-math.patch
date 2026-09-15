@@ -1,0 +1,60 @@
+diff --git a/.github/workflows/math-unit.yml b/.github/workflows/math-unit.yml
+new file mode 100644
+index 0000000..c62c886
+--- /dev/null
++++ b/.github/workflows/math-unit.yml
+@@ -0,0 +1,15 @@
++name: math-unit
++
++on:
++  push:
++    branches: ["**"]
++  pull_request:
++
++jobs:
++  math:
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v5
++      - name: Percentile / stdev / tok-s without Ollama
++        shell: pwsh
++        run: pwsh -NoProfile -File tests/OllamaVoice.Math.Tests.ps1
+diff --git a/tests/OllamaVoice.Math.Tests.ps1 b/tests/OllamaVoice.Math.Tests.ps1
+new file mode 100644
+index 0000000..39ae83c
+--- /dev/null
++++ b/tests/OllamaVoice.Math.Tests.ps1
+@@ -0,0 +1,33 @@
++#Requires -Version 5.1
++# No network. Unit-test percentile / stdev / empty stats.
++$ErrorActionPreference = "Stop"
++Set-StrictMode -Version Latest
++$root = Split-Path -Parent $PSScriptRoot
++. (Join-Path $root "lib\OllamaVoice.Common.ps1")
++
++$failed = 0
++function Assert-True($cond, $msg) {
++  if (-not $cond) { Write-Host "RED $msg"; $script:failed++ } else { Write-Host "OK $msg" }
++}
++
++$empty = Get-OVStats -Values @()
++Assert-True ($empty.Count -eq 0) "empty Count 0"
++Assert-True ($null -eq $empty.Stdev) "empty Stdev null"
++
++$one = Get-OVStats -Values @(7)
++Assert-True ($one.Count -eq 1) "n=1 Count"
++Assert-True ($one.Stdev -eq 0) "n=1 Stdev 0"
++Assert-True ($one.P50 -eq 7) "n=1 P50"
++
++$five = Get-OVStats -Values @(1,2,3,4,5)
++Assert-True ($five.Count -eq 5) "n=5 Count"
++Assert-True ($five.P50 -eq 3) "n=5 P50"
++Assert-True ($five.P95 -eq 5) "n=5 P95"
++Assert-True ($five.Stdev -gt 0) "n=5 Stdev > 0"
++
++$tps = [math]::Round(100 / 2.0, 3)
++Assert-True ($tps -eq 50) "tokens/s 50"
++
++if ($failed -gt 0) { exit 1 }
++Write-Host "OK math unit tests (no network)"
++exit 0

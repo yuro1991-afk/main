@@ -1,0 +1,601 @@
+diff --git a/.env.example b/.env.example
+index b2e104b..641e8d0 100644
+--- a/.env.example
++++ b/.env.example
+@@ -14,3 +14,9 @@
+ # Optional Gemini cloud (secondary; prefer SpaceXAI for Grok features)
+ # GEMINI_API_KEY=
+ # DRONE_GEMINI_MODEL=gemini-2.0-flash
++
++# Host path overlay (Linux / this pad). Windows F:/D:/G: are examples only.
++# DRONEHIVE_LIBRARY_ROOT=/path/to/library
++# DRONEHIVE_CONTINUOUS_ROOT=/path/to/continuous
++# DRONEHIVE_AI_HOME=/path/to/ai-home
++# DRONEHIVE_AI_CENTER=/path/to/ai-center
+diff --git a/configs/work_order.json b/configs/work_order.json
+index ecac0ca..5c38809 100644
+--- a/configs/work_order.json
++++ b/configs/work_order.json
+@@ -11,8 +11,16 @@
+       "id": "buzzer_hive",
+       "module": "drone.hive.BuzzerHive",
+       "unit": "buzzer",
+-      "cli": ["hive", "hive-smoke", "swarm", "swarm-smoke"],
+-      "launchers": ["RUN_HIVE.bat", "RUN_SWARM.bat"],
++      "cli": [
++        "hive",
++        "hive-smoke",
++        "swarm",
++        "swarm-smoke"
++      ],
++      "launchers": [
++        "RUN_HIVE.bat",
++        "RUN_SWARM.bat"
++      ],
+       "meaning": "Parallel clean-slate buzzers; each dies and free slot respawns fresh unit with next task",
+       "memory": "data/hive/*",
+       "not": "Not N full LLM loads"
+@@ -21,7 +29,10 @@
+       "id": "fabric_swarm",
+       "module": "drone.swarm.DroneSwarm",
+       "unit": "fabric_swarm_unit",
+-      "cli": ["fabric-swarm", "fabric-swarm-smoke"],
++      "cli": [
++        "fabric-swarm",
++        "fabric-swarm-smoke"
++      ],
+       "meaning": "Multi-goal fan-out of 24 controllable drones with L||R hemispheres per goal",
+       "memory": "data/builds + data/skills + data/experience",
+       "not": "Not 24 independent LLMs; not the buzzer clean-slate pool"
+@@ -40,7 +51,7 @@
+   "ai_laws": {
+     "rank_0": {
+       "id": "absolute_truth",
+-      "title": "Absolute Truth · Zero-Fabrication · no false greens",
++      "title": "Absolute Truth \u00b7 Zero-Fabrication \u00b7 no false greens",
+       "paths": [
+         "C:\\Users\\yuro1\\.grok\\rules\\00-00-absolute-truth.md",
+         "F:\\GrokSelfLibrary\\LAW_TRUTH.md"
+@@ -52,7 +63,13 @@
+         "simulated_progress",
+         "gaslight"
+       ],
+-      "status_vocab": ["GREEN", "PARTIAL", "RED", "RUNNING", "NOT_STARTED"],
++      "status_vocab": [
++        "GREEN",
++        "PARTIAL",
++        "RED",
++        "RUNNING",
++        "NOT_STARTED"
++      ],
+       "seal_required": true
+     },
+     "rank_1": {
+@@ -137,7 +154,11 @@
+     "next_action": "",
+     "source": "explicit",
+     "domain": "build",
+-    "skill_tags": ["work_order", "hive", "buzzer"],
++    "skill_tags": [
++      "work_order",
++      "hive",
++      "buzzer"
++    ],
+     "codex_required": false,
+     "codex_query": "",
+     "evidence_paths_expected": [],
+@@ -204,7 +225,9 @@
+     "use_core_lessons": true,
+     "use_knowledge_pack": true,
+     "use_expand": true,
+-    "codex_extra": ["vram"],
++    "codex_extra": [
++      "vram"
++    ],
+     "registry_sync_cli": false,
+     "codex_root": "F:\\GrokSelfLibrary\\knowledge\\codex",
+     "curriculum_root": "G:\\AI-Center\\learning-curriculum",
+@@ -257,9 +280,26 @@
+   "packet_recycle": {
+     "enabled": true,
+     "root_rel": "data/hive/packet_recycle",
+-    "fast_packs": ["write", "code", "default"],
+-    "full_packs": ["diag", "knowledge", "ops"],
++    "fast_packs": [
++      "write",
++      "code",
++      "default"
++    ],
++    "full_packs": [
++      "diag",
++      "knowledge",
++      "ops"
++    ],
+     "law": "Deposit slim tools+cold-refs after GREEN; claim on next unit. Light packs use 5-node fast lane. Work still re-executes. false_green:0"
+   },
+-  "agreement": "I am a clean-slate drone. I am imprinted with AI laws, a task, exact tools, and cold knowledge refs (packet recycle when hit). Light work uses fast lane. I execute, write live registry, dump memory recycle, die, and a fresh drone is written with the next task — ready to swarm again. false_green: 0."
++  "agreement": "I am a clean-slate drone. I am imprinted with AI laws, a task, exact tools, and cold knowledge refs (packet recycle when hit). Light work uses fast lane. I execute, write live registry, dump memory recycle, die, and a fresh drone is written with the next task \u2014 ready to swarm again. false_green: 0.",
++  "path_overlay": {
++    "note": "F:/D:/G: values below are one Windows host example. Linux uses env or app_root()/host.",
++    "DRONEHIVE_LIBRARY_ROOT": "overrides F:\\\\GrokSelfLibrary",
++    "DRONEHIVE_CONTINUOUS_ROOT": "overrides D:\\\\GrokCoreMemory\\\\continuous",
++    "DRONEHIVE_CORE_MEMORY": "overrides D:\\\\GrokCoreMemory",
++    "DRONEHIVE_AI_HOME": "overrides G:\\\\AI-Home",
++    "DRONEHIVE_AI_CENTER": "overrides G:\\\\AI-Center",
++    "DRONE_HIVE_ROOT": "already selects app_root()"
++  }
+ }
+diff --git a/drone/ai_bus.py b/drone/ai_bus.py
+index 0009c85..1be6217 100644
+--- a/drone/ai_bus.py
++++ b/drone/ai_bus.py
+@@ -21,6 +21,7 @@ import time
+ from pathlib import Path
+ from typing import Any, Callable
+ 
++from .host_paths import resolve_host_path
+ from .locks import root_lock
+ 
+ 
+@@ -109,6 +110,14 @@ CHANNEL_META: dict[str, dict[str, Any]] = {
+ }
+ 
+ 
++
++for _meta in CHANNEL_META.values():
++    for _key in ("root", "primary"):
++        _val = _meta.get(_key)
++        if isinstance(_val, str) and len(_val) >= 2 and _val[1] == ":":
++            _meta[_key] = str(resolve_host_path(_val))
++
++
+ class AIBus:
+     """Direct two-way connection hub for drone fabric ↔ host AI stores."""
+ 
+@@ -213,35 +222,35 @@ class AIBus:
+ 
+     def _write_target(self, channel: str) -> dict[str, Any]:
+         if channel == "self_library":
+-            p = Path(r"F:\GrokSelfLibrary\knowledge\indexes\drone_imprints.jsonl")
++            p = resolve_host_path(r"F:\GrokSelfLibrary\knowledge\indexes\drone_imprints.jsonl")
+             outbox = self.root / "data" / "hive" / "library_outbox"
+             return {
+-                "ready": p.parent.is_dir() or Path(r"F:\GrokSelfLibrary").is_dir(),
++                "ready": p.parent.is_dir() or resolve_host_path(r"F:\GrokSelfLibrary").is_dir(),
+                 "paths": [str(p), str(outbox)],
+             }
+         if channel == "continuous":
+-            cli = Path(r"D:\GrokCoreMemory\continuous\update_continuous.py")
+-            ledger = Path(r"D:\GrokCoreMemory\continuous\LEDGER.jsonl")
++            cli = resolve_host_path(r"D:\GrokCoreMemory\continuous\update_continuous.py")
++            ledger = resolve_host_path(r"D:\GrokCoreMemory\continuous\LEDGER.jsonl")
+             return {
+-                "ready": cli.is_file() or Path(r"D:\GrokCoreMemory\continuous").is_dir(),
++                "ready": cli.is_file() or resolve_host_path(r"D:\GrokCoreMemory\continuous").is_dir(),
+                 "paths": [str(cli), str(ledger)],
+             }
+         if channel == "codex":
+-            p = Path(r"F:\GrokSelfLibrary\knowledge\indexes\drone_codex_events.jsonl")
++            p = resolve_host_path(r"F:\GrokSelfLibrary\knowledge\indexes\drone_codex_events.jsonl")
+             return {
+-                "ready": Path(r"F:\GrokSelfLibrary\knowledge").is_dir(),
++                "ready": resolve_host_path(r"F:\GrokSelfLibrary\knowledge").is_dir(),
+                 "paths": [str(p)],
+             }
+         if channel == "curriculum":
+             p = self.root / "data" / "hive" / "school_progress"
+             return {"ready": True, "paths": [str(p)]}
+         if channel == "instai":
+-            p = Path(r"G:\AI-Home\projects\instai\data\learn_log")
+-            return {"ready": p.is_dir() or Path(r"G:\AI-Home\projects\instai\data").is_dir(), "paths": [str(p)]}
++            p = resolve_host_path(r"G:\AI-Home\projects\instai\data\learn_log")
++            return {"ready": p.is_dir() or resolve_host_path(r"G:\AI-Home\projects\instai\data").is_dir(), "paths": [str(p)]}
+         if channel == "helper_school":
+-            p = Path(r"G:\AI-Center\helper-school\data\contributions\pending")
++            p = resolve_host_path(r"G:\AI-Center\helper-school\data\contributions\pending")
+             return {
+-                "ready": p.is_dir() or Path(r"G:\AI-Center\helper-school").is_dir(),
++                "ready": p.is_dir() or resolve_host_path(r"G:\AI-Center\helper-school").is_dir(),
+                 "paths": [str(p)],
+             }
+         if channel == "hive_memory":
+@@ -255,17 +264,17 @@ class AIBus:
+             return {"ready": True, "paths": [str(p)]}
+         if channel == "ai_smarts":
+             p = self.root / "data" / "hive" / "ai_bus" / "outbox" / "ai_smarts"
+-            return {"ready": Path(r"G:\AI-Home\docs\ai-smarts").is_dir(), "paths": [str(p)]}
++            return {"ready": resolve_host_path(r"G:\AI-Home\docs\ai-smarts").is_dir(), "paths": [str(p)]}
+         if channel == "reference":
+             p = self.root / "data" / "hive" / "ai_bus" / "mirrors" / "reference_hits.jsonl"
+             return {
+-                "ready": Path(r"G:\AI-Center\databases\ai_center_reference.db").is_file(),
++                "ready": resolve_host_path(r"G:\AI-Center\databases\ai_center_reference.db").is_file(),
+                 "paths": [str(p)],
+             }
+         if channel == "work_experience":
+-            p = Path(r"D:\GrokCoreMemory\work-experience\LEDGER.jsonl")
++            p = resolve_host_path(r"D:\GrokCoreMemory\work-experience\LEDGER.jsonl")
+             return {
+-                "ready": Path(r"D:\GrokCoreMemory\work-experience").is_dir(),
++                "ready": resolve_host_path(r"D:\GrokCoreMemory\work-experience").is_dir(),
+                 "paths": [str(p)],
+             }
+         return {"ready": False, "paths": []}
+@@ -326,7 +335,7 @@ class AIBus:
+             return err
+ 
+     def _read_self_library(self, *, query: str, key: str, probe: bool) -> dict[str, Any]:
+-        root = Path(r"F:\GrokSelfLibrary")
++        root = resolve_host_path(r"F:\GrokSelfLibrary")
+         hot = root / "HOT.min.json"
+         pack = root / "knowledge" / "PACK.min.json"
+         if probe:
+@@ -373,7 +382,7 @@ class AIBus:
+         }
+ 
+     def _read_continuous(self, *, limit: int, probe: bool) -> dict[str, Any]:
+-        path = Path(r"D:\GrokCoreMemory\continuous\OPEN_TASKS.json")
++        path = resolve_host_path(r"D:\GrokCoreMemory\continuous\OPEN_TASKS.json")
+         if probe:
+             return {"ok": path.is_file(), "probe_ok": path.parent.is_dir(), "path": str(path)}
+         from .library_bridge import LibraryBridge
+@@ -382,7 +391,7 @@ class AIBus:
+         return {"ok": bool(hit.get("ok")), "path": str(path), "data": hit}
+ 
+     def _read_codex(self, *, query: str, probe: bool) -> dict[str, Any]:
+-        root = Path(r"F:\GrokSelfLibrary\knowledge\codex")
++        root = resolve_host_path(r"F:\GrokSelfLibrary\knowledge\codex")
+         if probe:
+             return {
+                 "ok": (root / "CODEX.min.json").is_file(),
+@@ -395,7 +404,7 @@ class AIBus:
+         return {"ok": bool(hit.get("ok")), "path": hit.get("path") or str(root), "data": hit}
+ 
+     def _read_curriculum(self, *, query: str, limit: int, probe: bool) -> dict[str, Any]:
+-        fts = Path(r"G:\AI-Center\learning-curriculum\index\curriculum_fts.db")
++        fts = resolve_host_path(r"G:\AI-Center\learning-curriculum\index\curriculum_fts.db")
+         if probe:
+             return {"ok": fts.is_file(), "probe_ok": fts.is_file(), "path": str(fts)}
+         from .knowledge_imprint import search_lessons_fts
+@@ -405,7 +414,7 @@ class AIBus:
+         return {"ok": True, "path": str(fts), "data": {"hits": hits, "count": len(hits), "query": q}}
+ 
+     def _read_instai(self, *, query: str, limit: int, probe: bool) -> dict[str, Any]:
+-        lessons = Path(r"G:\AI-Home\projects\instai\data\lessons")
++        lessons = resolve_host_path(r"G:\AI-Home\projects\instai\data\lessons")
+         if probe:
+             n = len(list(lessons.glob("*.json"))) if lessons.is_dir() else 0
+             return {"ok": lessons.is_dir(), "probe_ok": lessons.is_dir(), "path": str(lessons), "count": n}
+@@ -415,7 +424,7 @@ class AIBus:
+         return {"ok": True, "path": str(lessons), "data": {"hits": hits, "count": len(hits)}}
+ 
+     def _read_helper_school(self, *, query: str, probe: bool) -> dict[str, Any]:
+-        root = Path(r"G:\AI-Center\helper-school")
++        root = resolve_host_path(r"G:\AI-Center\helper-school")
+         idx = root / "library" / "UNIVERSAL-INDEX.json"
+         if probe:
+             return {"ok": root.is_dir(), "probe_ok": root.is_dir(), "path": str(root), "index": idx.is_file()}
+@@ -481,7 +490,7 @@ class AIBus:
+ 
+     def _read_live_registry(self, *, limit: int, probe: bool) -> dict[str, Any]:
+         local = self.root / "data" / "hive" / "registry_local_events.jsonl"
+-        primary = Path(r"G:\AI-Center\agents\super-cell-4\registry\events.jsonl")
++        primary = resolve_host_path(r"G:\AI-Center\agents\super-cell-4\registry\events.jsonl")
+         if probe:
+             return {
+                 "ok": local.is_file() or primary.is_file() or True,
+@@ -509,7 +518,7 @@ class AIBus:
+         }
+ 
+     def _read_ai_smarts(self, *, query: str, probe: bool) -> dict[str, Any]:
+-        packs = Path(r"G:\AI-Home\docs\ai-smarts\packs")
++        packs = resolve_host_path(r"G:\AI-Home\docs\ai-smarts\packs")
+         if probe:
+             return {
+                 "ok": packs.is_dir(),
+@@ -528,7 +537,7 @@ class AIBus:
+         return {"ok": packs.is_dir(), "path": str(packs), "data": {"packs": hits}}
+ 
+     def _read_reference(self, *, query: str, limit: int, probe: bool) -> dict[str, Any]:
+-        db = Path(r"G:\AI-Center\databases\ai_center_reference.db")
++        db = resolve_host_path(r"G:\AI-Center\databases\ai_center_reference.db")
+         if probe:
+             return {"ok": db.is_file(), "probe_ok": db.is_file(), "path": str(db)}
+         from .knowledge_imprint import search_reference_db
+@@ -537,7 +546,7 @@ class AIBus:
+         return {"ok": bool(hit.get("ok")), "path": str(db), "data": hit}
+ 
+     def _read_work_experience(self, *, limit: int, probe: bool) -> dict[str, Any]:
+-        ledger = Path(r"D:\GrokCoreMemory\work-experience\LEDGER.jsonl")
++        ledger = resolve_host_path(r"D:\GrokCoreMemory\work-experience\LEDGER.jsonl")
+         if probe:
+             return {
+                 "ok": ledger.parent.is_dir(),
+@@ -646,7 +655,7 @@ class AIBus:
+         }
+ 
+     def _write_continuous(self, payload: dict[str, Any], *, unit_id: str, goal: str) -> dict[str, Any]:
+-        cont = Path(r"D:\GrokCoreMemory\continuous")
++        cont = resolve_host_path(r"D:\GrokCoreMemory\continuous")
+         ledger = cont / "LEDGER.jsonl"
+         entry = {
+             "schema": "ai.worker.drone.continuous_note.v1",
+@@ -695,7 +704,7 @@ class AIBus:
+ 
+     def _write_codex(self, payload: dict[str, Any], *, unit_id: str, goal: str) -> dict[str, Any]:
+         # Never mutate master catalogs — write index events only
+-        path = Path(r"F:\GrokSelfLibrary\knowledge\indexes\drone_codex_events.jsonl")
++        path = resolve_host_path(r"F:\GrokSelfLibrary\knowledge\indexes\drone_codex_events.jsonl")
+         path.parent.mkdir(parents=True, exist_ok=True)
+         row = {
+             "schema": "ai.worker.drone.codex_event.v1",
+@@ -726,7 +735,7 @@ class AIBus:
+         # If no concrete lesson path, bind a real curriculum file when available
+         # so progress can be PARTIAL/GREEN honestly (not false RED on missing path).
+         if not lesson.get("path") and not lesson.get("md_path"):
+-            tracks = Path(r"G:\AI-Center\learning-curriculum\tracks")
++            tracks = resolve_host_path(r"G:\AI-Center\learning-curriculum\tracks")
+             if tracks.is_dir():
+                 for p in tracks.rglob("*.md"):
+                     lesson["path"] = str(p)
+@@ -756,7 +765,7 @@ class AIBus:
+         }
+ 
+     def _write_instai(self, payload: dict[str, Any], *, unit_id: str, goal: str) -> dict[str, Any]:
+-        log_dir = Path(r"G:\AI-Home\projects\instai\data\learn_log")
++        log_dir = resolve_host_path(r"G:\AI-Home\projects\instai\data\learn_log")
+         log_dir.mkdir(parents=True, exist_ok=True)
+         path = log_dir / f"drone_{int(time.time())}_{unit_id or 'x'}.json"
+         blob = {
+@@ -772,7 +781,7 @@ class AIBus:
+         return {"ok": path.is_file(), "path": str(path)}
+ 
+     def _write_helper_school(self, payload: dict[str, Any], *, unit_id: str, goal: str) -> dict[str, Any]:
+-        pending = Path(r"G:\AI-Center\helper-school\data\contributions\pending")
++        pending = resolve_host_path(r"G:\AI-Center\helper-school\data\contributions\pending")
+         pending.mkdir(parents=True, exist_ok=True)
+         path = pending / f"drone_{int(time.time())}_{unit_id or 'x'}.json"
+         blob = {
+@@ -868,7 +877,7 @@ class AIBus:
+         }
+         path.write_text(json.dumps(blob, indent=2), encoding="utf-8")
+         # also mirror under G if writable
+-        g_mirror = Path(r"G:\AI-Home\docs\ai-smarts\runtime\drone_notes.jsonl")
++        g_mirror = resolve_host_path(r"G:\AI-Home\docs\ai-smarts\runtime\drone_notes.jsonl")
+         try:
+             g_mirror.parent.mkdir(parents=True, exist_ok=True)
+             with g_mirror.open("a", encoding="utf-8") as f:
+@@ -901,7 +910,7 @@ class AIBus:
+         return {"ok": path.is_file(), "path": str(path)}
+ 
+     def _write_work_experience(self, payload: dict[str, Any], *, unit_id: str, goal: str) -> dict[str, Any]:
+-        ledger = Path(r"D:\GrokCoreMemory\work-experience\LEDGER.jsonl")
++        ledger = resolve_host_path(r"D:\GrokCoreMemory\work-experience\LEDGER.jsonl")
+         ledger.parent.mkdir(parents=True, exist_ok=True)
+         row = {
+             "schema": "work_experience.drone.v1",
+@@ -917,7 +926,7 @@ class AIBus:
+         }
+         with ledger.open("a", encoding="utf-8") as f:
+             f.write(json.dumps(row, ensure_ascii=False) + "\n")
+-        mirror = Path(r"G:\MASTER-CORE\memory\work-experience\LEDGER.jsonl")
++        mirror = resolve_host_path(r"G:\MASTER-CORE\memory\work-experience\LEDGER.jsonl")
+         try:
+             mirror.parent.mkdir(parents=True, exist_ok=True)
+             with mirror.open("a", encoding="utf-8") as f:
+diff --git a/drone/clean_slate.py b/drone/clean_slate.py
+index 0e92320..8db73ef 100644
+--- a/drone/clean_slate.py
++++ b/drone/clean_slate.py
+@@ -14,6 +14,8 @@ false_green: 0
+ 
+ from __future__ import annotations
+ 
++from .host_paths import resolve_host_path
++
+ import json
+ import time
+ import uuid
+@@ -264,8 +266,8 @@ def build_passport(
+             "data/hive/vector_docs.jsonl",
+             "data/skills/*",
+             "data/experience/ledger.jsonl",
+-            "F:/GrokSelfLibrary",
+-            "D:/GrokCoreMemory/continuous/OPEN_TASKS.json",
++            str(resolve_host_path(r"F:\GrokSelfLibrary")),
++            str(resolve_host_path(r"D:\GrokCoreMemory\continuous\OPEN_TASKS.json")),
+         ],
+         "clean_slate": True,
+         "false_green": 0,
+diff --git a/drone/host_paths.py b/drone/host_paths.py
+new file mode 100644
+index 0000000..a8261bf
+--- /dev/null
++++ b/drone/host_paths.py
+@@ -0,0 +1,78 @@
++"""Resolve BOSS Windows host paths via env / app_root.
++
++F:\\GrokSelfLibrary, D:\\GrokCoreMemory, and G:\\AI-Home are one
++Windows host example, not the Linux contract. Unset env + missing drive
++falls back under app_root()/host so cwd does not pretend F: exists.
++"""
++from __future__ import annotations
++
++import os
++from pathlib import Path
++
++_WIN_PREFIXES = (
++    ("F:/GrokSelfLibrary", "library_root"),
++    ("D:/GrokCoreMemory/continuous", "continuous_root"),
++    ("D:/GrokCoreMemory", "core_memory_root"),
++    ("G:/AI-Home", "ai_home"),
++    ("G:/AI-Center", "ai_center"),
++    ("G:/MASTER-CORE", "master_core"),
++)
++
++
++def _env_path(*names: str) -> Path | None:
++    for name in names:
++        raw = (os.environ.get(name) or "").strip()
++        if raw:
++            return Path(raw)
++    return None
++
++
++def _app_root() -> Path:
++    from drone.app.config import app_root
++
++    return app_root()
++
++
++def _win_or_host(win: Path, *env_names: str, rel: str) -> Path:
++    override = _env_path(*env_names)
++    if override is not None:
++        return override
++    if win.exists():
++        return win
++    return _app_root() / "host" / rel
++
++
++def library_root() -> Path:
++    return _win_or_host(Path(r"F:\GrokSelfLibrary"), "DRONEHIVE_LIBRARY_ROOT", "GROK_SELF_LIBRARY", rel="library")
++
++
++def continuous_root() -> Path:
++    return _win_or_host(Path(r"D:\GrokCoreMemory") / "continuous", "DRONEHIVE_CONTINUOUS_ROOT", rel="continuous")
++
++
++def core_memory_root() -> Path:
++    return _win_or_host(Path(r"D:\GrokCoreMemory"), "DRONEHIVE_CORE_MEMORY", rel="core-memory")
++
++
++def ai_home() -> Path:
++    return _win_or_host(Path(r"G:\AI-Home"), "DRONEHIVE_AI_HOME", "AI_HOME", rel="ai-home")
++
++
++def ai_center() -> Path:
++    return _win_or_host(Path(r"G:\AI-Center"), "DRONEHIVE_AI_CENTER", "AI_CENTER", rel="ai-center")
++
++
++def master_core() -> Path:
++    return _win_or_host(Path(r"G:\MASTER-CORE"), "DRONEHIVE_MASTER_CORE", rel="master-core")
++
++
++def resolve_host_path(raw: str | Path) -> Path:
++    """Map a hardcoded BOSS path onto env / app_root overlay."""
++    text = str(raw).replace("\\", "/")
++    for prefix, getter_name in _WIN_PREFIXES:
++        if text.lower().startswith(prefix.lower()):
++            getter = globals()[getter_name]
++            rest = text[len(prefix) :].lstrip("/")
++            base = getter()
++            return base.joinpath(*rest.split("/")) if rest else base
++    return Path(raw)
+diff --git a/drone/knowledge_imprint.py b/drone/knowledge_imprint.py
+index 136b032..cac9bc1 100644
+--- a/drone/knowledge_imprint.py
++++ b/drone/knowledge_imprint.py
+@@ -16,6 +16,8 @@ false_green: 0 — only real paths / real bytes.
+ 
+ from __future__ import annotations
+ 
++from .host_paths import resolve_host_path
++
+ import hashlib
+ import json
+ import re
+@@ -66,19 +68,19 @@ DEFAULTS = {
+     "use_expand": True,
+     "codex_extra": ["vram"],
+     "registry_sync_cli": False,
+-    "codex_root": r"F:\GrokSelfLibrary\knowledge\codex",
+-    "curriculum_root": r"G:\AI-Center\learning-curriculum",
+-    "curriculum_json": r"G:\AI-Center\learning-curriculum\CURRICULUM.json",
+-    "curriculum_fts": r"G:\AI-Center\learning-curriculum\index\curriculum_fts.db",
+-    "school_root": r"G:\AI-Center\helper-school",
+-    "school_lessons_md": r"G:\AI-Center\helper-school\library\lessons",
+-    "school_world_kb": r"G:\AI-Center\helper-school\library\world-kb",
+-    "instai_lessons": r"G:\AI-Home\projects\instai\data\lessons",
+-    "reference_db": r"G:\AI-Center\databases\ai_center_reference.db",
+-    "ai_smarts_packs": r"G:\AI-Home\docs\ai-smarts\packs",
+-    "knowledge_pack_min": r"F:\GrokSelfLibrary\knowledge\PACK.min.json",
+-    "knowledge_expand": r"F:\GrokSelfLibrary\knowledge\expand",
+-    "core_lessons": r"D:\GrokCoreMemory\lessons",
++    "codex_root": str(resolve_host_path(r"F:\GrokSelfLibrary\knowledge\codex")),
++    "curriculum_root": str(resolve_host_path(r"G:\AI-Center\learning-curriculum")),
++    "curriculum_json": str(resolve_host_path(r"G:\AI-Center\learning-curriculum\CURRICULUM.json")),
++    "curriculum_fts": str(resolve_host_path(r"G:\AI-Center\learning-curriculum\index\curriculum_fts.db")),
++    "school_root": str(resolve_host_path(r"G:\AI-Center\helper-school")),
++    "school_lessons_md": str(resolve_host_path(r"G:\AI-Center\helper-school\library\lessons")),
++    "school_world_kb": str(resolve_host_path(r"G:\AI-Center\helper-school\library\world-kb")),
++    "instai_lessons": str(resolve_host_path(r"G:\AI-Home\projects\instai\data\lessons")),
++    "reference_db": str(resolve_host_path(r"G:\AI-Center\databases\ai_center_reference.db")),
++    "ai_smarts_packs": str(resolve_host_path(r"G:\AI-Home\docs\ai-smarts\packs")),
++    "knowledge_pack_min": str(resolve_host_path(r"F:\GrokSelfLibrary\knowledge\PACK.min.json")),
++    "knowledge_expand": str(resolve_host_path(r"F:\GrokSelfLibrary\knowledge\expand")),
++    "core_lessons": str(resolve_host_path(r"D:\GrokCoreMemory\lessons")),
+     "cache_rel": "data/hive/knowledge_cache",
+     "progress_rel": "data/hive/school_progress",
+     "library_outbox_rel": "data/hive/library_outbox",
+@@ -1134,7 +1136,7 @@ def write_knowledge_to_library(
+         path = outbox / f"knowledge_{int(time.time())}_{buzzer_id or 'x'}.json"
+         path.write_text(json.dumps(slim, indent=2), encoding="utf-8")
+     # also try F: mirror under GrokSelfLibrary if present
+-    f_mirror = Path(r"F:\GrokSelfLibrary\knowledge\indexes\drone_imprints.jsonl")
++    f_mirror = resolve_host_path(r"F:\GrokSelfLibrary\knowledge\indexes\drone_imprints.jsonl")
+     try:
+         f_mirror.parent.mkdir(parents=True, exist_ok=True)
+         with f_mirror.open("a", encoding="utf-8") as f:
+diff --git a/drone/library_bridge.py b/drone/library_bridge.py
+index 13ab7a4..bfa033c 100644
+--- a/drone/library_bridge.py
++++ b/drone/library_bridge.py
+@@ -16,14 +16,16 @@ import time
+ from pathlib import Path
+ from typing import Any
+ 
++from .host_paths import library_root, resolve_host_path
++
+ 
+ def _utc() -> str:
+     return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+ 
+ 
+ # Host defaults (BOSS Windows)
+-DEFAULT_LIBRARY_ROOT = Path(r"F:\GrokSelfLibrary")
+-DEFAULT_CONTINUOUS_TASKS = Path(r"D:\GrokCoreMemory\continuous\OPEN_TASKS.json")
++DEFAULT_LIBRARY_ROOT = library_root()
++DEFAULT_CONTINUOUS_TASKS = resolve_host_path(r"D:\GrokCoreMemory\continuous\OPEN_TASKS.json")
+ DEFAULT_PYTHON = Path(
+     os.environ.get(
+         "DRONE_PYTHON",
+diff --git a/drone/work_order.py b/drone/work_order.py
+index 8b3a2f9..33a5df9 100644
+--- a/drone/work_order.py
++++ b/drone/work_order.py
+@@ -19,6 +19,7 @@ import uuid
+ from pathlib import Path
+ from typing import Any
+ 
++from .host_paths import resolve_host_path
+ from .locks import root_lock
+ 
+ 
+@@ -250,7 +251,7 @@ def query_codex(
+ 
+             hit = query_codex_fast(
+                 q,
+-                codex_root=Path(codex.get("root") or r"F:\GrokSelfLibrary\knowledge\codex"),
++                codex_root=resolve_host_path(codex.get("root") or r"F:\GrokSelfLibrary\knowledge\codex"),
+             )
+             hit["attempted"] = True
+             hit["mode"] = hit.get("mode") or "in_process"
+@@ -261,7 +262,7 @@ def query_codex(
+     else:
+         fallback_err = ""
+ 
+-    cli = Path(codex.get("query_cli") or r"F:\GrokSelfLibrary\bin\query_llm_codex.py")
++    cli = resolve_host_path(codex.get("query_cli") or r"F:\GrokSelfLibrary\bin\query_llm_codex.py")
+     py = _default_python()
+     if not cli.is_file():
+         return {

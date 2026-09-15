@@ -1,0 +1,13 @@
+diff --git a/drone/app/seed/docs/WORK_ORDER.md b/drone/app/seed/docs/WORK_ORDER.md
+index 3789067..c5fa4d2 100644
+--- a/drone/app/seed/docs/WORK_ORDER.md
++++ b/drone/app/seed/docs/WORK_ORDER.md
+@@ -395,7 +395,7 @@ data\hive\imprints\
+   "ready": true,
+   "task": { "task_id": "...", "goal": "...", "next_action": "..." },
+   "laws_ref": "docs/WORK_ORDER.md",
+-  "codex_ref": "F:\\GrokSelfLibrary\\knowledge\\codex\\CODEX.min.json",
++  "codex_ref": "host/library/knowledge/codex/CODEX.min.json",
+   "utc": "..."
+ }
+ ```

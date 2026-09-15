@@ -7,6 +7,8 @@ export const SIBLING_ROLES = Object.freeze([
   "keep-busy-queue",
   "attention-and-dronehive-patch",
   "autofix-runner",
+  "patch-catalog",
+  "python-arena",
 ]);
 
 /**
@@ -25,13 +27,17 @@ export function describeRole(role) {
     case "pointers":
       return "README/AGENTS only. Do not treat as a second queue.";
     case "ops-board":
-      return "This PR. Claim jobs with node src/cli.js.";
+      return "Landing-pad ops CLI (merged #3). GitHub-first defaults live on #8. Patch catalog is #9.";
     case "keep-busy-queue":
       return "Sibling lease queue. Do not copy packages/keep-busy here.";
     case "attention-and-dronehive-patch":
       return "Holds patches/dronehive-pro-chat-cp1252.patch. Apply it on dronehive, not here.";
     case "autofix-runner":
-      return "PR #6: npm run autofix -- apply <dronehive-checkout>. Do not copy that runner onto this board.";
+      return "CONFLICTING PR #6 is an autofix runner. Do not copy it. Apply the catalog patch from main#9 instead.";
+    case "patch-catalog":
+      return "Applyable sibling diffs under patches/. node src/cli.js patches lists them. Not an autofix runner.";
+    case "python-arena":
+      return "Fork Python arena/infra on main#10. Review only. Head/ears landed. Do not steal eyes/vision/bridge.";
     default:
       return assertNeverRole(role);
   }
@@ -61,9 +67,56 @@ export function loadSiblings(siblingsPath) {
 }
 
 /**
+ * Related PRs for a job. The patch catalog leads so brief/handoff
+ * `related[0]` is applyable #9, not conflicting #4/#5/#6.
+ *
  * @param {{ prs: Array<{ owns?: string[], number: number, url: string, role: string, title: string, branch: string }> }} siblings
  * @param {string} jobId
  */
 export function siblingsForJob(siblings, jobId) {
-  return siblings.prs.filter((pr) => Array.isArray(pr.owns) && pr.owns.includes(jobId));
+  return siblings.prs
+    .filter((pr) => Array.isArray(pr.owns) && pr.owns.includes(jobId))
+    .sort((left, right) => {
+      const leftCatalog = left.role === "patch-catalog" ? 0 : 1;
+      const rightCatalog = right.role === "patch-catalog" ? 0 : 1;
+      if (leftCatalog !== rightCatalog) return leftCatalog - rightCatalog;
+      return left.number - right.number;
+    });
+}
+
+/**
+ * Brief/handoff/cli `related` rows. Catalog leads.
+ *
+ * @param {{ prs: Array<{ owns?: string[], number: number, url: string, role: string, title: string, branch: string }> }} siblings
+ * @param {string} jobId
+ */
+export function relatedForJob(siblings, jobId) {
+  return siblingsForJob(siblings, jobId).map((pr) => ({
+    number: pr.number,
+    url: pr.url,
+    role: pr.role,
+    title: pr.title,
+    branch: pr.branch,
+    meaning: describeRole(pr.role),
+  }));
+}
+
+export const SIBLINGS_CONTRACT = "agent-ops.siblings.v1";
+export const FIRST_PARKED_APPLY = "dronehive-unicode-ci";
+
+/**
+ * Bare `siblings` dump. Keeps file order on `prs` (merge union 2–10).
+ * `lead` / `nextApply` name the catalog so agents do not take #5 first.
+ *
+ * @param {{ prs: Array<{ owns?: string[], number: number, url: string, role: string, title: string, branch: string }> }} siblings
+ */
+export function buildSiblingsBoard(siblings) {
+  const related = relatedForJob(siblings, FIRST_PARKED_APPLY);
+  return {
+    contract: SIBLINGS_CONTRACT,
+    nextApply: FIRST_PARKED_APPLY,
+    prefer: `node src/cli.js siblings --job ${FIRST_PARKED_APPLY}`,
+    lead: related[0] ?? null,
+    prs: siblings.prs,
+  };
 }

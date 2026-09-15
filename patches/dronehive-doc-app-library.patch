@@ -1,0 +1,13 @@
+diff --git a/docs/APP.md b/docs/APP.md
+index 275e9b2..fbe05a5 100644
+--- a/docs/APP.md
++++ b/docs/APP.md
+@@ -30,7 +30,7 @@
+ | **Super LLMs** | `python -m drone super-llms` / `START_SUPER_LLMS.bat` — all safe full models one app |
+ | **Future Seer** | `python -m drone seer` / `START_SEER.bat` — typeahead multi-model speculate + Jane taps |
+ | **Multi FACE** | `python -m drone face` — Hermes/OpenClaw/OpenCode/Ollama/Drones → one speaker only |
+-| **Library** | `F:\GrokSelfLibrary` via LibraryBridge |
++| **Library** | `host/library` via LibraryBridge |
+ | **Continuous** | `OPEN_TASKS.json` pull |
+ | **Ollama** | Shared top model `127.0.0.1:11434` (default local muscle) |
+ | **SpaceXAI (cloud)** | Default cloud provider — `XAI_API_KEY` → `https://api.x.ai/v1` · model `grok-4.5` (`DRONE_XAI_MODEL`) · controller kinds `spacexai`/`xai`/`grok` |

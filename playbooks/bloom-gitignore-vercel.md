@@ -5,7 +5,7 @@
 - scope: relaunch
 - repo: github.com/yuro1991-afk/bloom-fair-yellow-charm
 - relaunch: https://github.com/yuro1991-afk/bloom-fair-yellow-charm
-- why: Relaunch against the named repo. This landing-pad token cannot push it.
+- why: This token cannot push bloom-fair-yellow-charm. Apply `patches/bloom-gitignore-vercel.patch` from [main#9](https://github.com/yuro1991-afk/main/pull/9). Do not copy PR #6 autofix.
 
 ## Notes
 
@@ -17,10 +17,12 @@ Same as keep-busy gitignore-vercel-build-output. Keep package-lock.json tracked.
 
 ## First commands
 
+- node src/cli.js patches --prove --job bloom-gitignore-vercel
 - git clone https://github.com/yuro1991-afk/bloom-fair-yellow-charm.git work && cd work
 - git checkout -b cursor/bloom-gitignore-vercel-from-ops
-- edit: .gitignore, .vercel/
-- .gitignore includes .vercel/ and dist/; committed output is removed; npm run build still works.
+- git apply --check /path/to/main/patches/bloom-gitignore-vercel.patch
+- git apply /path/to/main/patches/bloom-gitignore-vercel.patch
+- python3 -c "from pathlib import Path; t=Path('.gitignore').read_text(); assert '.vercel/' in t; assert 'dist/' in t; assert '.output/' in t; assert '.nitro/' in t"
 
 ## Verify
 

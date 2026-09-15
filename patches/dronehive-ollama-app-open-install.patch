@@ -1,0 +1,9 @@
+diff --git a/apps/drone-ollama-app/src/main.rs b/apps/drone-ollama-app/src/main.rs
+index c4dda69..bd58def 100644
+--- a/apps/drone-ollama-app/src/main.rs
++++ b/apps/drone-ollama-app/src/main.rs
+@@ -745,3 +745,3 @@ impl App {
+         if ui.button("Open app install folder").clicked() {
+-            drone_bridge::open_path(r"G:\AI-Home\apps\DroneOllama");
++            drone_bridge::open_path(r"host\ai-home\apps\DroneOllama");
+         }

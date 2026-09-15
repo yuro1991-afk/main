@@ -1,0 +1,31 @@
+diff --git a/drone/future_seer.py b/drone/future_seer.py
+index 5b804cd..2c412c2 100644
+--- a/drone/future_seer.py
++++ b/drone/future_seer.py
+@@ -264,7 +264,7 @@ class FutureSeer:
+             return {"ok": False, "error": "muscle_dispatch missing", "path": str(md)}
+         try:
+             env = os.environ.copy()
+-            env["PYTHONPATH"] = str(jane.get("pythonpath_ai_center") or r"G:\AI-Center")
++            env["PYTHONPATH"] = str(jane.get("pythonpath_ai_center") or r"host/ai-center")
+             p = subprocess.run(
+                 [self._py(), str(md), "--lanes"],
+                 capture_output=True,
+@@ -310,7 +310,7 @@ class FutureSeer:
+             return {"ok": False, "error": "everest cli missing", "optional": True}
+         try:
+             env = os.environ.copy()
+-            env["PYTHONPATH"] = str(jane.get("pythonpath_ai_center") or r"G:\AI-Center")
++            env["PYTHONPATH"] = str(jane.get("pythonpath_ai_center") or r"host/ai-center")
+             p = subprocess.run(
+                 [self._py(), str(cli), "health"],
+                 capture_output=True,
+@@ -345,7 +345,7 @@ class FutureSeer:
+             expert = "probe"
+         try:
+             env = os.environ.copy()
+-            env["PYTHONPATH"] = str(jane.get("pythonpath_ai_center") or r"G:\AI-Center")
++            env["PYTHONPATH"] = str(jane.get("pythonpath_ai_center") or r"host/ai-center")
+             p = subprocess.run(
+                 [
+                     self._py(),

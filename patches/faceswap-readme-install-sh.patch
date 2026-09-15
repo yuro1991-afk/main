@@ -1,0 +1,13 @@
+diff --git a/README.md b/README.md
+index a1eee5d..617e44f 100644
+--- a/README.md
++++ b/README.md
+@@ -22,6 +22,8 @@ cd face-swap-ios
+ START.cmd
+ ```
+ 
++Linux / this pad: `bash START.sh` (same fail-closed contract as `START.cmd`).
++
+ 2. Read the printed URL, for example `http://192.168.1.102:8860`
+ 3. On the iPhone, open that URL in **Safari** (not Chrome).
+ 4. Tap Share → **Add to Home Screen** → Add.

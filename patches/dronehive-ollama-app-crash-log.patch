@@ -1,0 +1,13 @@
+diff --git a/apps/drone-ollama-app/src/main.rs b/apps/drone-ollama-app/src/main.rs
+index c4dda69..abfab3f 100644
+--- a/apps/drone-ollama-app/src/main.rs
++++ b/apps/drone-ollama-app/src/main.rs
+@@ -15,7 +15,7 @@ use std::thread;
+ use std::time::{Duration, Instant};
+ 
+ fn crash_log_path() -> PathBuf {
+-    PathBuf::from(r"G:\AI-Home\apps\DroneOllama\logs\crash.log")
++    PathBuf::from(r"host\ai-home\apps\DroneOllama\logs\crash.log")
+ }
+ 
+ fn write_crash(msg: &str) {

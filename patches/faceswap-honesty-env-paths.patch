@@ -1,0 +1,63 @@
+diff --git a/HONESTY.md b/HONESTY.md
+index 5c48a2b..b74b6d1 100644
+--- a/HONESTY.md
++++ b/HONESTY.md
+@@ -25,3 +25,15 @@ The fully working **local** face swap on this host is **MultoModa Face Studio**:
+ ## GPU
+ 
+ Gateway has **no CUDA**. It only HTTP-proxies to the already-running MultoModa daemon. It does not start Jane, Ollama, or a second InsightFace process.
++
++## Env contract
++
++`G:\AI-Home\projects\multomoda-face-studio` and
++`G:\AI-Home\models\insightface` are **one host example**. The runtime
++contract is:
++
++- `FACESWAP_ENGINE` (default `http://127.0.0.1:8855`)
++- `FACESWAP_IOS_PORT` (default `8860`)
++- `FACESWAP_IOS_HOST` (default `0.0.0.0`)
++
++A Linux agent does not need those G: paths. Weights are not in git.
+diff --git a/README.md b/README.md
+index a1eee5d..29859ec 100644
+--- a/README.md
++++ b/README.md
+@@ -51,3 +51,16 @@ If the page does not load, allow Windows Firewall for TCP **8860**, and confirm
+ ## License
+ 
+ Apache-2.0 for original files in this repo. InsightFace weights stay on the host and are **not** in git.
++
++## Engine contract (env, not G: paths)
++
++The gateway talks to whatever URL these env vars name. `G:\AI-Home\...`
++is one Windows host example, not the contract. Weights stay off git.
++
++| Variable | Default | Meaning |
++|----------|---------|---------|
++| `FACESWAP_ENGINE` | `http://127.0.0.1:8855` | MultoModa / InsightFace health + swap |
++| `FACESWAP_IOS_HOST` | `0.0.0.0` | Gateway bind |
++| `FACESWAP_IOS_PORT` | `8860` | Gateway port |
++
++Linux / this pad: set the three vars. Do not require a `G:` drive.
+diff --git a/START.cmd b/START.cmd
+index 0cb8ef9..8963d8e 100644
+--- a/START.cmd
++++ b/START.cmd
+@@ -2,12 +2,13 @@
+ setlocal
+ cd /d "%~dp0"
+ echo Face Swap iOS gateway
+-echo Engine must already be healthy at http://127.0.0.1:8855/api/health
++if not defined FACESWAP_ENGINE set FACESWAP_ENGINE=http://127.0.0.1:8855
++echo Engine must already be healthy at %FACESWAP_ENGINE%/api/health
+ echo Gateway does not start GPU work and does not touch the 3060.
+-python -c "import urllib.request,sys; r=urllib.request.urlopen('http://127.0.0.1:8855/api/health', timeout=5); sys.exit(0 if r.status==200 else 1)" 2>nul
++python -c "import os,urllib.request,sys; u=os.environ.get('FACESWAP_ENGINE','http://127.0.0.1:8855').rstrip('/')+'/api/health'; r=urllib.request.urlopen(u, timeout=5); sys.exit(0 if r.status==200 else 1)" 2>nul
+ if errorlevel 1 (
+-  echo RED: MultoModa is not reachable on 127.0.0.1:8855
+-  echo Start it first: G:\AI-Home\projects\multomoda-face-studio\START-RUNTIME.vbs
++  echo RED: engine is not reachable at %FACESWAP_ENGINE%
++  echo Start the local engine, or set FACESWAP_ENGINE to its health base URL.
+   exit /b 1
+ )
+ echo MultoModa health: OK

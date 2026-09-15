@@ -8,7 +8,9 @@ This GitHub checkout is a **landing pad**, not Genesis.
 
 Source of truth for Genesis is **Cursor Origin** (`origin.cursor.com/git/yuri-afk/genesis`). This tree is the claimable ops board (`node src/cli.js`).
 
-Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another queue. `node src/cli.js relaunch` is the one-screen Origin packet. `node src/cli.js helpers` prints local Task fan-out.
+Sibling landing-pad PRs: `node src/cli.js siblings` (names `nextApply` +
+`lead` #9). `siblings --job <id>` lists catalog-first related PRs.
+Prefer `brief --job`. Do **not** open another queue. `node src/cli.js relaunch` is the one-screen Origin packet. `node src/cli.js helpers` prints local Task fan-out.
 
 ## First moves
 
@@ -25,7 +27,8 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
    --write` maps newly idle agents onto leftover Genesis cards.
    `node src/cli.js catalog --write` diffs
    `ledger/catalog-entries.json` (Notion Genesis Entries) and appends
-   uncarded playbooks.
+   uncarded ledger jobs. It refuses the in-repo `playbooks/` and
+   `reviews/` directories. Prefer `brief --job`.
    `slots --world` lists world cards. `busy --world` without an unused
    world leftover peeks/claims nothing (do not steal
    `genesis-world-layer-102`). Peek leftover next (no `--agent`): `node src/cli.js next`
@@ -39,23 +42,34 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
    (no `--agent`). Read `reviews/WORLD-PHASES.md` and your
    `reviews/launch/<jobId>.md`. Do not sit in inventory.
    Optionally `node src/cli.js tick` to write `.genesis/last-inventory.json`.
-   `node src/cli.js playbooks` writes one markdown card per open **Genesis** job.
+   `node src/cli.js playbooks` checks on-disk catalog playbooks (compact: `nextApply` + counts; never writes). Prefer `brief --job`. `--write` refuses the in-repo `playbooks/` directory.
 3. If you skipped `busy`, `node src/cli.js claim <id> --agent <your-bcId>` before you start.
 4. Work on **Origin**. This pad has `/exec-daemon/tools/origin` but is
-   **not logged in**. `node src/cli.js origin` (or `probe`) records that
-   in `.genesis/last-origin.json`. `node src/cli.js origin --login`
+   **not logged in**. `node src/cli.js origin` records that
+   in `.genesis/last-origin.json`. Do not run `node src/cli.js probe`.
+   `node src/cli.js origin --login`
    uses `CURSOR_API_KEY` when present and otherwise stays logged-out.
    Then `origin repo clone yuri-afk/genesis genesis`. Until then,
    relaunch to https://cursor.com/codebase/yuri-afk/genesis.
 
+## Sibling patches (GitHub)
+
+**Yuri: forget Origin** for these cards. `node src/cli.js patches` lists
+applyable diffs under `patches/` (compact: `nextApply` + id/file; `--job` for applyNext). `patches --prove` re-checks them on a `--no-hardlinks` throwaway
+and never writes or resets `/tmp/siblings`. This token **cannot push**
+those repos — clone and relaunch there. Do not copy PR #6’s autofix runner.
+Evidence: `reviews/SIBLING-PATCHES.md`. Merge
+[main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first defaults.
+
 ## Do not
 
-- Work dronehive / opensussy / face-swap / ollama-voice / bloom from this pad.
+- Push dronehive / opensussy / face-swap / ollama-voice / bloom from this pad.
 - Reconstruct the 39 sibling slices here.
 - Reopen closed PR #1 (`Assemble all Genesis sibling slices in one repo`).
-- Claim BOSS Superbrain (`169.254.124.8:45001`) or GOOSE-PC (`:8791`) LIVE without a successful probe from this host. Timeouts stay `unreachable`.
+- **Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Do not run `node src/cli.js probe`. Do not mark Superbrain LIVE.
 - Treat a CodeRabbit skip-on-draft comment as a completed review.
 - Copy `packages/keep-busy` from PR #4 onto this branch.
+- Copy `bin/autofix.js` / `src/autofix.js` from PR #6.
 
 ## If the user asks for Genesis work
 

@@ -1,0 +1,15 @@
+diff --git a/configs/buzzer_hive.json b/configs/buzzer_hive.json
+index 20232af..cd47364 100644
+--- a/configs/buzzer_hive.json
++++ b/configs/buzzer_hive.json
+@@ -19,8 +19,8 @@
+   "tools_enabled": true,
+   "fresh_after_each_task": true,
+   "library": {
+-    "root": "F:\\GrokSelfLibrary",
+-    "continuous_tasks": "D:\\GrokCoreMemory\\continuous\\OPEN_TASKS.json",
++    "root": "host/library",
++    "continuous_tasks": "host/continuous/OPEN_TASKS.json",
+     "pull_open_tasks": true,
+     "outbox": "data/hive/library_outbox"
+   },

@@ -1,0 +1,13 @@
+diff --git a/docs/AGENT_LOOP.md b/docs/AGENT_LOOP.md
+index 2c37226..b6ade70 100644
+--- a/docs/AGENT_LOOP.md
++++ b/docs/AGENT_LOOP.md
+@@ -11,7 +11,7 @@ PLAN (LLM JSON) → ACT (DroneToolkit) → OBSERVE → GATE → … → FACE (us
+ ## CLI
+ 
+ ```powershell
+-cd G:\AI-Home\projects\ai-worker-drone-0.5b
++cd .
+ $py = "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe"
+ 
+ & $py -m drone agent seal

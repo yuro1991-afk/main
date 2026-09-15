@@ -203,4 +203,50 @@ test("cli catalog --write appends uncarded playbooks", async () => {
   assert.ok(saved.jobs.some((item) => item.id === "gub-route-intent"));
   const mine = JSON.parse(readFileSync(join(dir, "mine.json"), "utf8"));
   assert.equal(mine.proposed.length, packet.proposed.length);
+  assert.equal(packet.playbooksWrote, true);
+  assert.equal(packet.packetsWrote, true);
+});
+
+test("cli catalog --write refuses in-repo playbooks and reviews", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "agent-ops-catalog-refuse-"));
+  const ledgerPath = join(dir, "queue.json");
+  saveLedger(ledgerPath, {
+    jobs: [
+      job("gub-inventory-tick", {
+        kind: "origin-slice",
+        notes: "Notion playbook/gub-inventory-tick",
+      }),
+    ],
+  });
+  const playbook = join(ROOT, "playbooks", "gub-route-intent.md");
+  const packet = join(ROOT, "reviews", "handoff-gub-route-intent.md");
+  const beforePlaybook = readFileSync(playbook, "utf8");
+  const beforePacket = readFileSync(packet, "utf8");
+  const chunks = [];
+  const code = await runCli(
+    [
+      "catalog",
+      "--ledger",
+      ledgerPath,
+      "--entries",
+      defaultEntriesPath(ROOT),
+      "--write",
+      "--out",
+      join(dir, "mine.json"),
+    ],
+    {
+      nowMs: NOW,
+      write: (value) => chunks.push(value),
+    },
+  );
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.ok(parsed.added.includes("gub-route-intent"));
+  assert.equal(parsed.playbooksWrote, false);
+  assert.equal(parsed.packetsWrote, false);
+  assert.deepEqual(parsed.playbooks, []);
+  assert.deepEqual(parsed.packets, []);
+  assert.match(parsed.doNot, /writePlaybooks/);
+  assert.equal(readFileSync(playbook, "utf8"), beforePlaybook);
+  assert.equal(readFileSync(packet, "utf8"), beforePacket);
 });

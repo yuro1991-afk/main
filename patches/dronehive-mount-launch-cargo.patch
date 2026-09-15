@@ -1,0 +1,17 @@
+diff --git a/apps/drone-ollama-mount/Launch.ps1 b/apps/drone-ollama-mount/Launch.ps1
+index 2595df8..c5b3b53 100644
+--- a/apps/drone-ollama-mount/Launch.ps1
++++ b/apps/drone-ollama-mount/Launch.ps1
+@@ -1,9 +1,9 @@
+ #Requires -Version 5.1
+ # Launch drone-ollama-mount TUI; start Ollama if needed.
+ $ErrorActionPreference = 'Continue'
+-$env:CARGO_HOME = 'G:\AI-Home\tools\cargo'
+-$env:RUSTUP_HOME = 'G:\AI-Home\tools\rustup'
+-$env:Path = "G:\AI-Home\tools\cargo\bin;$env:Path"
++$env:CARGO_HOME = 'host\ai-home\tools\cargo'
++$env:RUSTUP_HOME = 'host\ai-home\tools\rustup'
++$env:Path = "host\ai-home\tools\cargo\bin;$env:Path"
+ 
+ $root = Split-Path -Parent $MyInvocation.MyCommand.Path
+ $exe = Join-Path $root 'target\release\drone-ollama-mount.exe'

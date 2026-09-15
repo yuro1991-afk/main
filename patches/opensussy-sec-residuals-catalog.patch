@@ -1,0 +1,31 @@
+diff --git a/reviews/SEC_REVIEW_2_0_0.md b/reviews/SEC_REVIEW_2_0_0.md
+new file mode 100644
+index 0000000..701aed6
+--- /dev/null
++++ b/reviews/SEC_REVIEW_2_0_0.md
+@@ -0,0 +1,25 @@
++# OpenSussy 2.0.0 — SEC_REVIEW residuals vs current tree
++
++Read-only catalog. No CVEs invented. No wipe procedures added.
++PRODUCT.json version: **2.0.0**. `reviews/SEC_REVIEW.md` is still labeled 1.1 PARTIAL.
++
++```
++false_green: 0
++```
++
++| ID | 1.1 residual | Still true on 2.0.0? | Current pin |
++| --- | --- | --- | --- |
++| R1 | Device selectable; default `/dev/nvme0n1`; nuclear if wrong disk | **open** | `src/OpenSussy.Installer/Engine/LinuxPayload.cs` `NormalizeDevice` defaults `/dev/nvme0n1` |
++| R2 | `confirm=false` + `initialize=true` is unattended wipe | **open** | same file: deep AutoYaST template `confirm=false` (~L458) + `initialize=true` (~L506) |
++| R3 | No LUKS | **open** | `LinuxPayload.cs` — no LUKS nodes. Do not implement in a docs card. |
++| R4 | AutoYaST 1.0 XML ≠ Agama JSON | **open** | `LinuxPayload.cs` still writes `autoinst-*.xml`. HOW_TO files say Agama unsupported. |
++| R5 | Deep deletes Windows Temp / Prefetch / WER as admin | **open** | `src/OpenSussy.Installer/Engine/Sanitizer.cs` Deep scrub comment + admin Windows dir wipe |
++| R6 | winget accept + no hash pin | **open** | `DevInstall.cs` (unchanged theme; not re-audited line-by-line here) |
++| R7 | Hibernate off | **open** | `Tweaks.cs` |
++| R8 | WindowsApps enumerate Access Denied | **open** | `Host.FindWinget` |
++| R9 | Unsigned WinExe / SmartScreen | **open** | product still WinExe |
++| R10 | `cipher /w` unused clusters | **open** | unused-cluster wipe still documented as slow |
++
++Leap 15.6 + Tumbleweed packs in `PRODUCT.json` do **not** close R1–R10. They add flavor copies of the same AutoYaST shape.
++
++Do not implement nuclear AutoYaST or LUKS in this card.

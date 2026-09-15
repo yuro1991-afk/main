@@ -134,6 +134,41 @@ test("cli sync --write persists a new assignment and launch file", async () => {
   assert.match(body, /origin auth status/);
 });
 
+test("live leftover Superbrain sync attaches take-instead apply pair", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const roster = structuredClone(
+    loadRoster(new URL("../ledger/roster.json", import.meta.url)),
+  );
+  const afterLease = Date.parse("2026-09-14T19:00:00.000Z");
+  const parked = roster.assignments.map((row) => ({
+    bcId: row.bcId,
+    name: row.name,
+    status: "IDLE",
+  }));
+  const leftoverOnly = syncRoster(ledger, structuredClone(roster), parked, afterLease);
+  assert.equal(leftoverOnly.added.length, 0);
+  assert.equal(leftoverOnly.leftover[0], "gub-superbrain-probe");
+  assert.equal(leftoverOnly.leftoverTakeInstead, "dronehive-unicode-ci");
+  assert.ok(
+    leftoverOnly.leftoverApplyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")),
+  );
+  assert.equal(
+    leftoverOnly.leftoverProveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  const withNewcomer = syncRoster(
+    ledger,
+    roster,
+    [...parked, { bcId: "bc-brand-new-sync", name: "New leftover", status: "IDLE" }],
+    afterLease,
+  );
+  assert.equal(withNewcomer.added[0].jobId, "gub-superbrain-probe");
+  assert.equal(withNewcomer.added[0].takeInstead, "dronehive-unicode-ci");
+  assert.ok(withNewcomer.added[0].applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.notEqual(withNewcomer.leftover[0], "gub-superbrain-probe");
+  assert.equal(withNewcomer.leftoverTakeInstead, undefined);
+});
+
 test("repo roster already covers the current idle set", () => {
   const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
   const roster = loadRoster(new URL("../ledger/roster.json", import.meta.url));

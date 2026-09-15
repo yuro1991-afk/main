@@ -1,0 +1,15 @@
+diff --git a/DroneHive.spec b/DroneHive.spec
+index a604e21..7b46bf1 100644
+--- a/DroneHive.spec
++++ b/DroneHive.spec
+@@ -9,8 +9,8 @@ datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
+ 
+ 
+ a = Analysis(
+-    ['G:/AI-Home/projects/ai-worker-drone-0.5b/drone/app/desktop.py'],
+-    pathex=['G:/AI-Home/projects/ai-worker-drone-0.5b'],
++    ['drone/app/desktop.py'],
++    pathex=['.'],
+     binaries=binaries,
+     datas=datas,
+     hiddenimports=hiddenimports,

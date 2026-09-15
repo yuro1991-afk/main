@@ -1,0 +1,50 @@
+diff --git a/scripts/bench_vs_helpers.py b/scripts/bench_vs_helpers.py
+index 210305c..7e53370 100644
+--- a/scripts/bench_vs_helpers.py
++++ b/scripts/bench_vs_helpers.py
+@@ -24,8 +24,8 @@ import urllib.request
+ from pathlib import Path
+ from typing import Any, Callable
+ 
+-ROOT = Path(r"G:\AI-Home\projects\ai-worker-drone-0.5b")
+-MUSCLE = Path(r"G:\AI-Center\agents\super-cell-4\bridges\muscle_dispatch.py")
++ROOT = Path(__file__).resolve().parents[1]
++MUSCLE = Path(os.environ.get("DRONEHIVE_MUSCLE_DISPATCH", str(ROOT / "host" / "ai-center" / "agents" / "super-cell-4" / "bridges" / "muscle_dispatch.py")))
+ OUT = ROOT / "out" / "benchmarks"
+ PY = sys.executable
+ 
+@@ -135,7 +135,7 @@ def arm_muscle(expert: str, model: str, rounds: int = 2, timeout: int = 40) -> d
+         timeout=timeout * rounds + 30,
+         check=False,
+     )
+-    out_dir = Path(r"G:\AI-Center\agents\super-cell-4\parallel-runs") / run_id
++    out_dir = Path(os.environ.get("DRONEHIVE_PARALLEL_RUNS", str(ROOT / "host" / "ai-center" / "agents" / "super-cell-4" / "parallel-runs"))) / run_id
+     evidence = []
+     if out_dir.is_dir():
+         evidence = [str(p) for p in sorted(out_dir.rglob("*")) if p.is_file()][:30]
+diff --git a/scripts/smoke_delegate_wire.py b/scripts/smoke_delegate_wire.py
+index 45f1616..c526c11 100644
+--- a/scripts/smoke_delegate_wire.py
++++ b/scripts/smoke_delegate_wire.py
+@@ -9,7 +9,7 @@ import time
+ import urllib.request
+ from pathlib import Path
+ 
+-ROOT = Path(r"G:\AI-Home\projects\ai-worker-drone-0.5b")
++ROOT = Path(__file__).resolve().parents[1]
+ HOST = os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434").rstrip("/")
+ GOAL = sys.argv[1] if len(sys.argv) > 1 else "package a short worker seal note under tools"
+ 
+diff --git a/scripts/stress_ai_bus_hive.py b/scripts/stress_ai_bus_hive.py
+index 8cbc25b..59b6b12 100644
+--- a/scripts/stress_ai_bus_hive.py
++++ b/scripts/stress_ai_bus_hive.py
+@@ -14,7 +14,7 @@ import traceback
+ from concurrent.futures import ThreadPoolExecutor, as_completed
+ from pathlib import Path
+ 
+-ROOT = Path(r"G:\AI-Home\projects\ai-worker-drone-0.5b")
++ROOT = Path(__file__).resolve().parents[1]
+ sys.path.insert(0, str(ROOT))
+ 
+ 

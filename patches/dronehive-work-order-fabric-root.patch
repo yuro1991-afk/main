@@ -1,0 +1,13 @@
+diff --git a/configs/work_order.json b/configs/work_order.json
+index ecac0ca..afab45a 100644
+--- a/configs/work_order.json
++++ b/configs/work_order.json
+@@ -4,7 +4,7 @@
+   "version": 1,
+   "docs": "docs/WORK_ORDER.md",
+   "host": "BOSS",
+-  "fabric_root": "G:\\AI-Home\\projects\\ai-worker-drone-0.5b",
++  "fabric_root": ".",
+   "false_green": 0,
+   "swarm_systems": {
+     "buzzer_hive": {

@@ -1,0 +1,13 @@
+diff --git a/apps/dronehive-tui/README.md b/apps/dronehive-tui/README.md
+index 212411d..c8f9245 100644
+--- a/apps/dronehive-tui/README.md
++++ b/apps/dronehive-tui/README.md
+@@ -15,7 +15,7 @@ CustomTkinter desktop crashed / was heavy. This console:
+ ## Build
+ 
+ ```bat
+-set PATH=G:\AI-Home\tools\cargo\bin;%PATH%
++set PATH=host\ai-home\tools\cargo\bin;%PATH%
+ cd apps\dronehive-tui
+ cargo build --release
+ ```

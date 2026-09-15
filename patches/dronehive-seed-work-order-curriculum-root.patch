@@ -1,0 +1,11 @@
+diff --git a/drone/app/seed/configs/work_order.json b/drone/app/seed/configs/work_order.json
+index ecac0ca..02b3e05 100644
+--- a/drone/app/seed/configs/work_order.json
++++ b/drone/app/seed/configs/work_order.json
+@@ -209,4 +209,4 @@
+     "codex_root": "F:\\GrokSelfLibrary\\knowledge\\codex",
+-    "curriculum_root": "G:\\AI-Center\\learning-curriculum",
+-    "curriculum_json": "G:\\AI-Center\\learning-curriculum\\CURRICULUM.json",
++    "curriculum_root": "host/ai-center/learning-curriculum",
++    "curriculum_json": "host/ai-center/learning-curriculum/CURRICULUM.json",
+     "curriculum_fts": "G:\\AI-Center\\learning-curriculum\\index\\curriculum_fts.db",

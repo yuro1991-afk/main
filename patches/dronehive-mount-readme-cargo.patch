@@ -1,0 +1,19 @@
+diff --git a/apps/drone-ollama-mount/README.md b/apps/drone-ollama-mount/README.md
+index 4c4d8a7..818deac 100644
+--- a/apps/drone-ollama-mount/README.md
++++ b/apps/drone-ollama-mount/README.md
+@@ -23,10 +23,10 @@ http://127.0.0.1:11434                      ← Ollama parent controller
+ ## Build (this machine)
+ 
+ ```powershell
+-$env:CARGO_HOME = 'G:\AI-Home\tools\cargo'
+-$env:RUSTUP_HOME = 'G:\AI-Home\tools\rustup'
+-$env:Path = "G:\AI-Home\tools\cargo\bin;$env:Path"
+-cd G:\AI-Home\projects\drone-ollama-mount
++$env:CARGO_HOME = 'host\ai-home\tools\cargo'
++$env:RUSTUP_HOME = 'host\ai-home\tools\rustup'
++$env:Path = "host\ai-home\tools\cargo\bin;$env:Path"
++cd apps\drone-ollama-mount
+ cargo build --release
+ ```
+ 

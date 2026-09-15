@@ -1,0 +1,13 @@
+diff --git a/docs/SUPER_MESH.md b/docs/SUPER_MESH.md
+index ac4418c..fb9eb6d 100644
+--- a/docs/SUPER_MESH.md
++++ b/docs/SUPER_MESH.md
+@@ -28,7 +28,7 @@
+ ## Commands (Windows / BOSS)
+ 
+ ```powershell
+-cd G:\AI-Home\projects\ai-worker-drone-0.5b
++cd .
+ $env:OLLAMA_EXE = "$env:LOCALAPPDATA\Programs\Ollama\ollama.exe"
+ $py = "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe"
+ 

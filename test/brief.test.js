@@ -4,8 +4,8 @@ import { mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { JOB_KINDS } from "../src/kinds.js";
-import { buildBrief, firstCommands } from "../src/brief.js";
-import { describeRole, loadSiblings, siblingsForJob } from "../src/siblings.js";
+import { TAKE_INSTEAD_CATALOG_ID, applyNextForJob, buildBrief, catalogPatchFor, catalogPatchSummary, catalogRequires, displayCollision, displayNotes, displayVerify, firstCommands, proveAfterApplyForJob, takeInsteadCatalogId, takeInsteadCatalogPatch, takeInsteadFields } from "../src/brief.js";
+import { FIRST_PARKED_APPLY, SIBLINGS_CONTRACT, buildSiblingsBoard, describeRole, loadSiblings, siblingsForJob } from "../src/siblings.js";
 import { saveLedger } from "../src/ledger.js";
 import { runCli } from "../src/cli.js";
 
@@ -30,13 +30,23 @@ function job(kind) {
 
 test("siblings.json loads and maps dronehive to PR 5", () => {
   const siblings = loadSiblings(SIBLINGS);
-  assert.equal(siblings.prs.length, 5);
+  assert.deepEqual(
+    siblings.prs.map((pr) => pr.number),
+    [2, 3, 4, 5, 6, 7, 8, 9, 10],
+  );
+  assert.equal(siblings.prs[7].number, 9);
+  assert.equal(siblings.prs[8].number, 10);
   const related = siblingsForJob(siblings, "dronehive-unicode-ci");
   assert.deepEqual(
     related.map((pr) => pr.number),
-    [5, 6],
+    [9, 5, 6],
   );
   assert.match(describeRole("attention-and-dronehive-patch"), /dronehive/);
+  assert.match(describeRole("ops-board"), /GitHub-first defaults live on #8/);
+  assert.match(describeRole("ops-board"), /Patch catalog is #9/);
+  assert.doesNotMatch(describeRole("ops-board"), /This PR is the patch catalog/);
+  assert.doesNotMatch(describeRole("autofix-runner"), /npm run autofix -- apply/);
+  assert.match(describeRole("autofix-runner"), /Do not copy/);
 });
 
 test("brief attaches sibling PR 5 to the unicode card", () => {
@@ -45,8 +55,94 @@ test("brief attaches sibling PR 5 to the unicode card", () => {
   const drone = queue.jobs.find((item) => item.id === "dronehive-unicode-ci");
   const brief = buildBrief(drone, siblings);
   assert.equal(brief.contract, "agent-ops.brief.v1");
-  assert.equal(brief.related[0].number, 5);
-  assert.ok(brief.hardRules.some((rule) => rule.includes("fourth")));
+  assert.equal(brief.related[0].number, 9);
+  assert.match(brief.related[0].meaning, /patches\//);
+  assert.ok(brief.hardRules.some((rule) => rule.includes("no more Superbrain")));
+  assert.ok(brief.hardRules.some((rule) => rule.includes("#8/#9/#10")));
+  assert.ok(brief.hardRules.some((rule) => rule.includes("forget Origin for this card")));
+  assert.ok(brief.hardRules.some((rule) => rule.includes("Prefer brief / proveAfterApplyCommand")));
+  assert.ok(!brief.hardRules.some((rule) => rule.includes("sibling cards stay blocked")));
+  assert.ok(!brief.hardRules.some((rule) => rule.includes("Extend PR #3")));
+  assert.equal(brief.destination, "Apply the catalog patch on github.com/yuro1991-afk/dronehive");
+  assert.doesNotMatch(brief.destination, /Notion/);
+  assert.ok(brief.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.deepEqual(brief.applyNext, applyNextForJob(drone));
+  assert.equal(brief.proveAfterApplyCommand, proveAfterApplyForJob(drone));
+  assert.equal(
+    brief.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  assert.doesNotMatch(brief.applyNext.join("\n"), /prove-after-apply/);
+  assert.match(drone.notes, /Blocked: Yuri scoped this landing pad to Genesis only/);
+  assert.doesNotMatch(brief.job.notes, /Blocked: Yuri scoped this landing pad to Genesis only/);
+  assert.doesNotMatch(brief.job.notes, /npm run autofix/);
+  assert.doesNotMatch(brief.job.notes, /PR #5/);
+  assert.doesNotMatch(brief.job.collision, /pull\/5/);
+  assert.doesNotMatch(brief.job.collision, /npm run autofix -- apply/);
+  assert.match(brief.job.notes, /dronehive-pro-chat-cp1252\.patch/);
+  assert.ok(brief.related.some((pr) => pr.number === 6));
+  assert.ok(
+    brief.related
+      .filter((pr) => pr.number === 6)
+      .every((pr) => !/npm run autofix -- apply/.test(pr.meaning)),
+  );
+});
+
+test("siblingsForJob lists the catalog before conflicting keep-busy owners", () => {
+  const siblings = loadSiblings(SIBLINGS);
+  for (const id of [
+    "bloom-readme-honest-export",
+    "faceswap-mock-engine-ci",
+    "opensussy-linux-syntax-ci",
+  ]) {
+    const related = siblingsForJob(siblings, id);
+    assert.deepEqual(
+      related.map((pr) => pr.number),
+      [9, 4],
+      id,
+    );
+    assert.equal(related[0].role, "patch-catalog");
+  }
+});
+
+test("catalog displayNotes drop PR #5 / autofix apply runner", () => {
+  const stale = {
+    id: "dronehive-unicode-ci",
+    title: "Fix unicode",
+    repo: "github.com/yuro1991-afk/dronehive",
+    kind: "fix",
+    priority: 1,
+    status: "blocked",
+    claim: null,
+    notes:
+      "cp1252. Patch is on landing-pad PR #5; verified apply runner is PR #6 (`npm run autofix -- apply <checkout>`). Relaunch.\nBlocked: Yuri scoped this landing pad to Genesis only.",
+    verify: "true",
+    files: [],
+    collision:
+      "Checkout dronehive, apply github.com/yuro1991-afk/main/pull/5 patch, push on cursor/setup-dev-environment-2e0b.",
+  };
+  const notes = displayNotes(stale);
+  const collision = displayCollision(stale);
+  assert.doesNotMatch(notes, /npm run autofix/);
+  assert.doesNotMatch(notes, /PR #5/);
+  assert.doesNotMatch(notes, /Blocked: Yuri scoped this landing pad to Genesis only/);
+  assert.match(notes, /dronehive-pro-chat-cp1252\.patch/);
+  assert.doesNotMatch(collision, /pull\/5/);
+  assert.doesNotMatch(collision, /setup-dev-environment/);
+  assert.match(collision, /Do not copy PR #6 autofix/);
+});
+
+test("stacked catalog displayNotes name requires priors before the leftover", () => {
+  const queue = JSON.parse(readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"));
+  const ubuntu = queue.jobs.find((item) => item.id === "dronehive-ubuntu-smoke");
+  const ubuntuNotes = displayNotes(ubuntu);
+  assert.match(ubuntuNotes, /dronehive-pro-chat-cp1252\.patch then patches\/dronehive-ubuntu-smoke\.patch/);
+  assert.doesNotMatch(ubuntuNotes, /Blocked: Yuri scoped this landing pad to Genesis only/);
+
+  const runtime = queue.jobs.find((item) => item.id === "dronehive-runtime-host-paths");
+  const runtimeNotes = displayNotes(runtime);
+  assert.match(runtimeNotes, /Requires \(apply first\): patches\/dronehive-portable-paths\.patch/);
+  assert.match(runtimeNotes, /patches\/dronehive-runtime-host-paths\.patch/);
 });
 
 test("firstCommands is exhaustive", () => {
@@ -56,8 +152,217 @@ test("firstCommands is exhaustive", () => {
   }
 });
 
+test("review firstCommands name open PRs #8/#9/#10, not siblings.json only", () => {
+  const queue = JSON.parse(readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"));
+  const landing = queue.jobs.find((item) => item.id === "review-landing-pad-prs");
+  const landingLines = firstCommands(landing);
+  assert.ok(landingLines.some((line) => line.includes("reviews/landing-pad-prs.md")));
+  assert.ok(landingLines.some((line) => line.includes("#8") && line.includes("#10")));
+  assert.ok(!landingLines.some((line) => line.includes("ledger/siblings.json")));
+  const pr10 = queue.jobs.find((item) => item.id === "review-main-pr10");
+  const pr10Lines = firstCommands(pr10);
+  assert.ok(pr10Lines.some((line) => line.includes("github.com/yuro1991-afk/main/pull/10")));
+  assert.ok(pr10Lines.some((line) => line.includes("reviews/main-pr10.md")));
+  assert.ok(pr10Lines.some((line) => line.includes("eyes") && line.includes("bridge")));
+});
+
+test("probe-kind firstCommands without a catalog patch refuse cli probe", () => {
+  const lines = firstCommands(
+    {
+      id: "some-lane-probe",
+      title: "probe",
+      repo: "github.com/yuro1991-afk/bloom-fair-yellow-charm",
+      kind: "probe",
+      priority: 21,
+      status: "open",
+      claim: null,
+      notes: "",
+      verify: "Write evidence. Never upgrade a timeout to LIVE.",
+      files: [],
+      collision: "",
+    },
+    { skipCatalog: true },
+  );
+  assert.ok(lines.some((line) => line.includes("Do not run node src/cli.js probe")));
+  assert.ok(!lines.some((line) => line.startsWith("node src/cli.js probe")));
+});
+
+test("catalogPatchSummary lists the leftover and names requires priors", () => {
+  const stacked = catalogPatchFor({ id: "dronehive-runtime-host-paths" });
+  assert.deepEqual(catalogRequires(stacked), ["patches/dronehive-portable-paths.patch"]);
+  const summary = catalogPatchSummary(stacked);
+  assert.match(summary, /Patch: `patches\/dronehive-runtime-host-paths\.patch`/);
+  assert.match(summary, /Requires \(apply first\): `patches\/dronehive-portable-paths\.patch`/);
+  const portable = summary.indexOf("dronehive-portable-paths.patch");
+  const runtime = summary.indexOf("dronehive-runtime-host-paths.patch");
+  assert.ok(portable > runtime);
+
+  const single = catalogPatchFor({ id: "dronehive-unicode-ci" });
+  assert.deepEqual(catalogRequires(single), []);
+  assert.equal(catalogPatchSummary(single), "- Patch: `patches/dronehive-pro-chat-cp1252.patch`");
+  assert.doesNotMatch(catalogPatchSummary(single), /Requires/);
+});
+
+test("cataloged sibling firstCommands use git apply, not edit", () => {
+  const queue = JSON.parse(readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"));
+  const drone = queue.jobs.find((item) => item.id === "dronehive-unicode-ci");
+  const lines = firstCommands(drone);
+  assert.equal(lines[0], "node src/cli.js patches --prove --job dronehive-unicode-ci");
+  assert.equal(lines[1], "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci");
+  assert.ok(lines.some((line) => line.includes("git apply --check") && line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.ok(lines.some((line) => line.startsWith("git apply /path/to/main/patches/dronehive-pro-chat-cp1252.patch")));
+  assert.ok(!lines.some((line) => line.startsWith("edit:")));
+  const honesty = queue.jobs.find((item) => item.id === "faceswap-honesty-env-paths");
+  const honestyLines = firstCommands(honesty);
+  assert.ok(honestyLines.some((line) => line.includes("faceswap-honesty-env-paths.patch")));
+  assert.ok(!honestyLines.some((line) => line.includes("Notion")));
+  const gitignore = queue.jobs.find((item) => item.id === "bloom-gitignore-vercel");
+  const gitignoreLines = firstCommands(gitignore);
+  assert.ok(gitignoreLines.some((line) => line.includes(".gitignore") && line.includes(".vercel/") && line.includes("dist/")));
+});
+
+test("ubuntu-smoke firstCommands do not run the smoke", () => {
+  const queue = JSON.parse(readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"));
+  const job = queue.jobs.find((item) => item.id === "dronehive-ubuntu-smoke");
+  assert.match(job.verify, /Do not run the smoke/);
+  assert.doesNotMatch(job.verify, /Same four python-smoke/);
+  const lines = firstCommands(job);
+  assert.equal(lines.at(-1), "ci.yml has python-smoke-ubuntu:. Do not run the smoke.");
+  assert.ok(!lines.some((line) => /Same four python-smoke/.test(line)));
+});
+
+test("displayVerify strips dollar idents so firstCommands are bash-safe", () => {
+  assert.equal(displayVerify({ verify: "Split-Path $PSScriptRoot -Parent" }), "Split-Path PSScriptRoot -Parent");
+  assert.equal(displayVerify({ verify: "& $py query_llm_codex.py" }), "& py query_llm_codex.py");
+  assert.equal(displayVerify({ verify: "ci.yml has python-smoke-ubuntu:. Do not run the smoke." }), "ci.yml has python-smoke-ubuntu:. Do not run the smoke.");
+  assert.equal(displayVerify({ verify: "header fabric is `.`." }), "header fabric is ..");
+  const queue = JSON.parse(readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"));
+  for (const job of queue.jobs) {
+    assert.doesNotMatch(displayVerify(job), /\$[A-Za-z_]/, job.id);
+    assert.doesNotMatch(displayVerify(job), /`/, job.id);
+    if (job.id.startsWith("gub-") || job.kind === "origin-slice") continue;
+    const lines = firstCommands(job);
+    assert.ok(
+      !lines.some((line) => /\$[A-Za-z_]/.test(line) && !line.includes("CURSOR_API_KEY")),
+      job.id,
+    );
+  }
+});
+
+test("catalog leftover firstCommands do not run forbidden afterApply commands", () => {
+  const queue = JSON.parse(readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"));
+  const cases = [
+    ["dronehive-portable-paths", /python -m drone work-order-show/, /Do not run work-order-show/],
+    ["dronehive-script-host-roots", /python3 -m py_compile/, /Do not py_compile/],
+    ["faceswap-start-sh", /\.\/START\.sh/, /Do not run START\.sh/],
+    ["ova-stop-noui-guard", /pwsh -File Stop-Ollama/, /Do not run Stop-Ollama/],
+    ["bloom-ci-lint", /npm run lint exits 0/, /Do not run npm/],
+    ["dronehive-runtime-host-paths", /python3 -m py_compile drone\/grok_handoff/, /Do not py_compile/],
+    ["dronehive-config-load-overlay", /python3 -m py_compile drone\/config_overlay/, /Do not py_compile/],
+    ["dronehive-app-links-host-paths", /python3 -m py_compile drone\/app\/links/, /Do not py_compile/],
+    ["dronehive-hive-docstring-honesty", /python3 -m py_compile drone\/hive/, /Do not py_compile/],
+  ];
+  for (const [id, forbidden, gate] of cases) {
+    const job = queue.jobs.find((item) => item.id === id);
+    assert.match(job.verify, gate, id);
+    const lines = firstCommands(job);
+    assert.match(lines.at(-1), gate, id);
+    assert.ok(!lines.some((line) => forbidden.test(line)), id);
+  }
+});
+
+test("catalog-kind sibling brief destination is apply, not Notion", () => {
+  const siblings = loadSiblings(SIBLINGS);
+  const queue = JSON.parse(readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"));
+  const honesty = queue.jobs.find((item) => item.id === "faceswap-honesty-env-paths");
+  const brief = buildBrief(honesty, siblings);
+  assert.equal(brief.destination, "Apply the catalog patch on github.com/yuro1991-afk/face-swap-ios");
+  assert.doesNotMatch(brief.destination, /Notion/);
+  assert.ok(brief.hardRules.some((rule) => rule.includes("forget Origin for this card")));
+});
+
 test("unknown sibling role fails closed", () => {
   assert.throws(() => describeRole("spawn-extra-board"));
+});
+
+function superbrainJob() {
+  return {
+    id: "gub-superbrain-probe",
+    title: "probe",
+    repo: "origin.cursor.com/git/yuri-afk/genesis",
+    kind: "origin-slice",
+    priority: 3,
+    status: "claimed",
+    claim: null,
+    notes: "",
+    verify: "Failed probe stays unreachable.",
+    files: [],
+    collision: "",
+  };
+}
+
+test("Superbrain leftover attaches take-instead unicode-ci apply pair", () => {
+  const sitout = superbrainJob();
+  const other = {
+    ...sitout,
+    id: "gub-inventory-tick",
+    title: "inventory",
+  };
+  assert.equal(catalogPatchFor(sitout), null);
+  assert.equal(takeInsteadCatalogId(sitout), TAKE_INSTEAD_CATALOG_ID);
+  assert.deepEqual(takeInsteadFields(sitout), { takeInstead: "dronehive-unicode-ci" });
+  const patch = takeInsteadCatalogPatch(sitout);
+  assert.equal(patch.id, "dronehive-unicode-ci");
+  assert.match(patch.file, /dronehive-pro-chat-cp1252\.patch/);
+  const apply = applyNextForJob(sitout);
+  assert.ok(apply.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.ok(apply.some((line) => line.startsWith("git clone https://github.com/yuro1991-afk/dronehive.git")));
+  assert.doesNotMatch(apply.join("\n"), /prove-after-apply/);
+  assert.equal(
+    proveAfterApplyForJob(sitout),
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  const brief = buildBrief(sitout, loadSiblings(SIBLINGS));
+  assert.equal(brief.takeInstead, "dronehive-unicode-ci");
+  assert.deepEqual(brief.applyNext, apply);
+  assert.equal(brief.proveAfterApplyCommand, proveAfterApplyForJob(sitout));
+  assert.doesNotMatch(brief.destination, /Apply the catalog patch/);
+  assert.equal(catalogPatchFor(other), null);
+  assert.equal(takeInsteadCatalogId(other), undefined);
+  assert.equal(applyNextForJob(other), undefined);
+  assert.equal(proveAfterApplyForJob(other), undefined);
+});
+
+test("cli siblings --job lists catalog-first related PRs", async () => {
+  const chunks = [];
+  const code = await runCli(["siblings", "--job", "dronehive-unicode-ci"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.contract, SIBLINGS_CONTRACT);
+  assert.equal(parsed.job, "dronehive-unicode-ci");
+  assert.deepEqual(
+    parsed.related.map((pr) => pr.number),
+    [9, 5, 6],
+  );
+  assert.equal(parsed.related[0].role, "patch-catalog");
+  assert.match(parsed.related[0].meaning, /patches\//);
+  assert.equal(parsed.prefer, "node src/cli.js brief --job dronehive-unicode-ci");
+
+  const dual = [];
+  const dualCode = await runCli(["siblings", "--job", "bloom-readme-honest-export"], {
+    write: (value) => {
+      dual.push(value);
+    },
+  });
+  assert.equal(dualCode, 0);
+  assert.deepEqual(
+    JSON.parse(dual.join("")).related.map((pr) => pr.number),
+    [9, 4],
+  );
 });
 
 test("cli brief defaults to next and siblings lists PRs", async () => {
@@ -70,6 +375,7 @@ test("cli brief defaults to next and siblings lists PRs", async () => {
   });
   assert.equal(code, 0);
   assert.match(chunks.join(""), /gub-route-intent/);
+  assert.match(chunks.join(""), /sibling cards stay blocked/);
   const listed = [];
   const siblingsCode = await runCli(["siblings"], {
     write: (value) => {
@@ -77,7 +383,53 @@ test("cli brief defaults to next and siblings lists PRs", async () => {
     },
   });
   assert.equal(siblingsCode, 0);
+  const board = JSON.parse(listed.join(""));
+  assert.equal(board.contract, SIBLINGS_CONTRACT);
+  assert.equal(board.nextApply, FIRST_PARKED_APPLY);
+  assert.equal(board.prefer, "node src/cli.js siblings --job dronehive-unicode-ci");
+  assert.equal(board.lead.number, 9);
+  assert.equal(board.lead.role, "patch-catalog");
+  assert.deepEqual(
+    board.prs.map((pr) => pr.number),
+    [2, 3, 4, 5, 6, 7, 8, 9, 10],
+  );
   assert.match(listed.join(""), /keep-busy-queue/);
+  assert.match(listed.join(""), /patch-catalog/);
+});
+
+test("cli siblings unknown id errors", async () => {
+  await assert.rejects(
+    () =>
+      runCli(["siblings", "--job", "missing"], {
+        write: () => {},
+      }),
+    /unknown job/,
+  );
+});
+
+test("buildSiblingsBoard leads with catalog #9 and keeps file PR order", () => {
+  const siblings = loadSiblings(SIBLINGS);
+  const board = buildSiblingsBoard(siblings);
+  assert.equal(board.lead.number, 9);
+  assert.match(board.lead.meaning, /patches\//);
+  assert.equal(board.prs[0].number, 2);
+  assert.equal(board.prs[3].number, 5);
+});
+
+test("cli brief --job selects the named card, not leftover next", async () => {
+  const chunks = [];
+  const code = await runCli(["brief", "--job", "review-main-pr10"], {
+    nowMs: NOW,
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.job.id, "review-main-pr10");
+  assert.ok(parsed.related.some((pr) => pr.number === 10));
+  assert.doesNotMatch(chunks.join(""), /gub-superbrain-probe/);
+  assert.doesNotMatch(chunks.join(""), /gub-route-intent/);
 });
 
 test("cli brief unknown id errors", async () => {

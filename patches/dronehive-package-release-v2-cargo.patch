@@ -1,0 +1,17 @@
+diff --git a/scripts/package_release_v2.ps1 b/scripts/package_release_v2.ps1
+index c82ffe1..7c6462e 100644
+--- a/scripts/package_release_v2.ps1
++++ b/scripts/package_release_v2.ps1
+@@ -16,9 +16,9 @@ Write-Host "=== wheel ==="
+ 
+ $Exe = Join-Path $Root "apps\dronehive-tui\target\release\dronehive-tui.exe"
+ if (-not (Test-Path -LiteralPath $Exe)) {
+-  $env:PATH = "G:\AI-Home\tools\cargo\bin;G:\AI-Home\tools\rustup\toolchains\stable-x86_64-pc-windows-msvc\bin;" + $env:PATH
+-  $env:CARGO_HOME = "G:\AI-Home\tools\cargo"
+-  $env:RUSTUP_HOME = "G:\AI-Home\tools\rustup"
++  $env:PATH = (Join-Path $Root "host\ai-home\tools\cargo\bin") + ";" + (Join-Path $Root "host\ai-home\tools\rustup\toolchains\stable-x86_64-pc-windows-msvc\bin") + ";" + $env:PATH
++  $env:CARGO_HOME = Join-Path $Root "host\ai-home\tools\cargo"
++  $env:RUSTUP_HOME = Join-Path $Root "host\ai-home\tools\rustup"
+   Push-Location (Join-Path $Root "apps\dronehive-tui")
+   cargo build --release
+   Pop-Location

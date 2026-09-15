@@ -1,0 +1,31 @@
+diff --git a/README.md b/README.md
+index 8643ceb..7a6ebe3 100644
+--- a/README.md
++++ b/README.md
+@@ -1,10 +1,12 @@
+ # Ollama Voice Access Bridge
+ 
+-**Version:** 1.1.0 · **License:** MIT · **Platform:** Windows 11  
++**Version:** 1.1.0 · **License:** MIT · **Platform:** Windows 11 Voice Access
+ 
+ Production-grade bridge between **Windows Voice Access** and **local Ollama**.  
+ Speak to open chat, start the local serve process, check status, or run a self-test with real reliability math.
+ 
++Linux/macOS: Voice Access, Start Menu shortcuts, and **Win+Ctrl+S** are not available. `pwsh` can parse the scripts and run QA math (see `.github` syntax / math-unit workflows). That is **not** a Voice Access install.
++
+ Repository: https://github.com/yuro1991-afk/ollama-voice-access
+ 
+ ---
+@@ -26,9 +28,9 @@ Also works: *Show Ollama*, *Go to Ollama Chat*, etc. (Voice Access app open/star
+ 
+ ## Requirements
+ 
+-- Windows 11 (Voice Access)
+-- [Ollama](https://ollama.com) installed (`ollama.exe` on PATH or under `%LOCALAPPDATA%\Programs\Ollama\`)
+-- PowerShell 5.1+
++- Windows 11 for Voice Access / Start Menu / Win+Ctrl+S
++- [Ollama](https://ollama.com) installed (`ollama.exe` on PATH or under `%LOCALAPPDATA%\Programs\Ollama\`). On Linux, a loopback `ollama` serve is enough for script QA — not Voice Access.
++- PowerShell 5.1+ on Windows; `pwsh` on Linux for syntax/math CI only
+ - Optional: NVIDIA GPU + `nvidia-smi` for GPU status / layout checks
+ 
+ ---

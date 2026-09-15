@@ -5,7 +5,7 @@
 - scope: relaunch
 - repo: github.com/yuro1991-afk/dronehive
 - relaunch: https://github.com/yuro1991-afk/dronehive
-- why: This token cannot push dronehive. Apply PR #6: npm run autofix -- apply <checkout>.
+- why: This token cannot push dronehive. Apply `patches/dronehive-ubuntu-smoke.patch` from [main#9](https://github.com/yuro1991-afk/main/pull/9). Do not copy PR #6 autofix.
 
 ## Notes
 
@@ -17,10 +17,12 @@ After unicode-ci; do not fight PR #2 packaging.
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-ubuntu-smoke
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-ubuntu-smoke-from-ops
-- edit: .github/workflows/ci.yml
-- Same four python-smoke commands on ubuntu-latest.
+- git apply --check /path/to/main/patches/dronehive-ubuntu-smoke.patch
+- git apply /path/to/main/patches/dronehive-ubuntu-smoke.patch
+- python3 -c "from pathlib import Path; t=Path('.github/workflows/ci.yml').read_text(); assert 'python-smoke-ubuntu:' in t; assert 'Pro agent (no ollama)' in t; assert 'ci pro write ci_ok.txt' in t; assert 'Work order show' in t"
 
 ## Verify
 

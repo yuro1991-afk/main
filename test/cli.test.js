@@ -87,8 +87,27 @@ test("cli route and probe", async () => {
     fetchImpl: async () => ({ ok: false, status: 504 }),
     root: mkdtempSync(join(tmpdir(), "agent-ops-probe-cli-")),
   });
-  assert.equal(probed.code, 0);
-  assert.match(probed.out, /unreachable/);
+  assert.equal(probed.code, 1);
+  assert.match(probed.out, /no more Superbrain/);
+  assert.match(probed.out, /"refused": true/);
+  assert.doesNotMatch(probed.out, /169\.254\.124\.8:45001/);
+});
+
+test("cli live leftover Superbrain keep-busy attaches take-instead apply pair", async () => {
+  const result = await capture(["route", "keep", "agents", "busy"], {
+    nowMs: Date.parse("2026-09-14T19:00:00.000Z"),
+  });
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.jobId, "gub-superbrain-probe");
+  assert.match(parsed.destination, /gub-superbrain-probe/);
+  assert.doesNotMatch(parsed.destination, /dronehive-unicode-ci/);
+  assert.equal(parsed.takeInstead, "dronehive-unicode-ci");
+  assert.ok(parsed.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    parsed.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
 });
 
 test("cli next --here stays on this repo", async () => {
@@ -104,6 +123,89 @@ test("cli next defaults to the first Genesis card", async () => {
   assert.match(result.out, /handoff-gub-route-intent/);
   assert.match(result.out, /yuri-afk\/genesis/);
   assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.takeInstead, undefined);
+  assert.equal(parsed.applyNext, undefined);
+});
+
+test("cli next --job Superbrain attaches take-instead apply pair", async () => {
+  const result = await capture(["next", "--job", "gub-superbrain-probe"]);
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.id, "gub-superbrain-probe");
+  assert.equal(parsed.takeInstead, "dronehive-unicode-ci");
+  assert.ok(parsed.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    parsed.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  assert.doesNotMatch(parsed.applyNext.join("\n"), /prove-after-apply/);
+});
+
+test("live leftover next Superbrain attaches take-instead apply pair", async () => {
+  const result = await capture(["next"], {
+    nowMs: Date.parse("2026-09-14T19:00:00.000Z"),
+  });
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.id, "gub-superbrain-probe");
+  assert.equal(parsed.takeInstead, "dronehive-unicode-ci");
+  assert.ok(parsed.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    parsed.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+});
+
+test("cli next --job peeks the named catalog card", async () => {
+  const result = await capture(["next", "--job", "dronehive-unicode-ci"]);
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.id, "dronehive-unicode-ci");
+  assert.ok(parsed.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    parsed.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  assert.notEqual(parsed.id, "gub-route-intent");
+});
+
+test("cli status --job attaches the named catalog card without replacing leftover next", async () => {
+  const result = await capture(["status", "--job", "dronehive-unicode-ci"]);
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.job.id, "dronehive-unicode-ci");
+  assert.ok(parsed.job.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    parsed.job.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  assert.notEqual(parsed.next.id, "dronehive-unicode-ci");
+  assert.match(parsed.next.id, /^gub-/);
+});
+
+test("cli status without --job leaves leftover next and omits job", async () => {
+  const result = await capture(["status"]);
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.job, undefined);
+  assert.ok(parsed.next);
+  assert.match(parsed.next.id, /^gub-/);
+});
+
+test("live leftover status Superbrain attaches take-instead apply pair", async () => {
+  const result = await capture(["status"], {
+    nowMs: Date.parse("2026-09-14T19:00:00.000Z"),
+  });
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.next.id, "gub-superbrain-probe");
+  assert.equal(parsed.next.takeInstead, "dronehive-unicode-ci");
+  assert.ok(parsed.next.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    parsed.next.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
 });
 
 test("cli next --world is empty when every world card is rostered", async () => {
@@ -129,7 +231,104 @@ test("cli busy without agent peeks the next Genesis card", async () => {
   assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
 });
 
+test("cli busy --job peeks the named catalog card", async () => {
+  const out = join(mkdtempSync(join(tmpdir(), "agent-ops-busy-job-")), "last-dispatch.json");
+  const result = await capture(["busy", "--job", "dronehive-unicode-ci", "--out", out]);
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.jobId, "dronehive-unicode-ci");
+  assert.equal(parsed.reserved, false);
+  assert.ok(parsed.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    parsed.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  assert.notEqual(parsed.jobId, "gub-route-intent");
+});
+
+test("cli busy --job with --agent does not claim a blocked catalog card", async () => {
+  const out = join(mkdtempSync(join(tmpdir(), "agent-ops-busy-job-agent-")), "last-dispatch.json");
+  const before = JSON.parse(
+    readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"),
+  );
+  const result = await capture([
+    "busy",
+    "--job",
+    "dronehive-unicode-ci",
+    "--agent",
+    "bc-test-busy-job",
+    "--out",
+    out,
+  ]);
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.jobId, "dronehive-unicode-ci");
+  assert.equal(parsed.reserved, false);
+  const after = JSON.parse(
+    readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"),
+  );
+  const job = after.jobs.find((item) => item.id === "dronehive-unicode-ci");
+  const prior = before.jobs.find((item) => item.id === "dronehive-unicode-ci");
+  assert.equal(job.status, prior.status);
+  assert.deepEqual(job.claim, prior.claim);
+});
+
+test("cli list --job peeks the named catalog card", async () => {
+  const result = await capture(["list", "--job", "dronehive-unicode-ci"]);
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.length, 1);
+  assert.equal(parsed[0].id, "dronehive-unicode-ci");
+  assert.ok(parsed[0].applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    parsed[0].proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  assert.doesNotMatch(parsed[0].notes, /Blocked: Yuri scoped this landing pad to Genesis only/);
+});
+
+test("cli list --all drops the Genesis-only blocked line on catalog cards", async () => {
+  const result = await capture(["list", "--all"]);
+  assert.equal(result.code, 0);
+  const jobs = JSON.parse(result.out);
+  const drone = jobs.find((job) => job.id === "dronehive-unicode-ci");
+  assert.ok(drone);
+  assert.match(drone.notes, /cp1252|UnicodeEncodeError|python-smoke/);
+  assert.doesNotMatch(drone.notes, /Blocked: Yuri scoped this landing pad to Genesis only/);
+  const ledger = JSON.parse(
+    readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"),
+  );
+  const raw = ledger.jobs.find((job) => job.id === "dronehive-unicode-ci");
+  assert.match(raw.notes, /Blocked: Yuri scoped this landing pad to Genesis only/);
+});
+
 test("unknown command is a usage error", async () => {
   const result = await capture(["explode"]);
   assert.equal(result.code, 2);
+});
+
+test("help says playbooks defaults to check and refuses in-repo write", async () => {
+  const result = await capture(["help"]);
+  assert.equal(result.code, 0);
+  assert.match(result.out, /playbooks defaults to --check/);
+  assert.match(result.out, /missingRequires/);
+  assert.match(result.out, /nextApply dronehive-unicode-ci/);
+  assert.match(result.out, /No --job is compact/);
+  assert.match(result.out, /Prefer brief --job/);
+  assert.match(result.out, /refuses the in-repo playbooks\/ directory/);
+  assert.match(result.out, /catalog --write updates the ledger only/);
+  assert.match(result.out, /patches lists applyable GitHub diffs/);
+  assert.match(result.out, /No --job is compact \(nextApply dronehive-unicode-ci \+ id\/file\)/);
+  assert.match(result.out, /--prove clones --no-hardlinks throwaways/);
+  assert.match(result.out, /never writes or resets siblings/);
+});
+
+test("ci uses Node 24 action runtimes and keeps project Node 20", () => {
+  const yml = readFileSync(new URL("../.github/workflows/ci.yml", import.meta.url), "utf8");
+  assert.match(yml, /actions\/checkout@v5/);
+  assert.match(yml, /actions\/setup-node@v5/);
+  assert.match(yml, /node-version: "20"/);
+  assert.match(yml, /package-manager-cache: false/);
+  assert.doesNotMatch(yml, /actions\/checkout@v4/);
+  assert.doesNotMatch(yml, /actions\/setup-node@v4/);
 });

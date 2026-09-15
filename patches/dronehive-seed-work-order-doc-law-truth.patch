@@ -1,0 +1,9 @@
+diff --git a/drone/app/seed/docs/WORK_ORDER.md b/drone/app/seed/docs/WORK_ORDER.md
+index 3789067..657f709 100644
+--- a/drone/app/seed/docs/WORK_ORDER.md
++++ b/drone/app/seed/docs/WORK_ORDER.md
+@@ -77,3 +77,3 @@ status: GREEN|PARTIAL|RED
+ Host law file: `C:\Users\yuro1\.grok\rules\00-00-absolute-truth.md`  
+-Library law: `F:\GrokSelfLibrary\LAW_TRUTH.md`
++Library law: `host/library/LAW_TRUTH.md`
+ 

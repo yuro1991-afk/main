@@ -1,8 +1,10 @@
-import { mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { describeKind, jobScope } from "./kinds.js";
-import { firstCommands } from "./brief.js";
+import { TAKE_INSTEAD_CATALOG_ID, catalogPatchFor, catalogRequires, displayCollision, displayNotes, displayVerify, firstCommands } from "./brief.js";
 import { relaunchFor } from "./handoff.js";
+
+export const PLAYBOOK_CHECK_CONTRACT = "agent-ops.playbooks.check.v1";
 
 /**
  * @param {import("./ledger.js").Job} job
@@ -30,11 +32,11 @@ export function renderPlaybook(job) {
 
 ## Notes
 
-${job.notes}
+${displayNotes(job)}
 
 ## Collision
 
-${job.collision}
+${displayCollision(job)}
 
 ## First commands
 
@@ -42,7 +44,7 @@ ${commands}
 
 ## Verify
 
-${job.verify}
+${displayVerify(job)}
 
 Do not reopen https://github.com/yuro1991-afk/main/pull/1.
 Do not open another landing-pad queue.
@@ -60,4 +62,112 @@ export function writePlaybooks(jobs, dir) {
     writeFileSync(dest, renderPlaybook(job));
     return dest;
   });
+}
+
+/**
+ * First-command bullets under ## First commands.
+ * @param {string} markdown
+ * @returns {string[]}
+ */
+export function playbookFirstCommands(markdown) {
+  const start = markdown.indexOf("## First commands");
+  if (start < 0) return [];
+  const rest = markdown.slice(start);
+  const end = rest.indexOf("\n## ", 1);
+  const section = end === -1 ? rest : rest.slice(0, end);
+  return section
+    .split("\n")
+    .filter((line) => line.startsWith("- "))
+    .map((line) => line.slice(2));
+}
+
+/**
+ * Compare on-disk First commands to live firstCommands. Does not write.
+ * @param {import("./ledger.js").Job} job
+ * @param {string} markdown
+ */
+/**
+ * Catalog priors the on-disk playbook must name. Empty when the card
+ * has no requires or the markdown already lists every prior file.
+ * @param {import("./ledger.js").Job} job
+ * @param {string} [markdown]
+ */
+function playbookRequireFields(job, markdown = "") {
+  const requires = catalogRequires(catalogPatchFor(job));
+  return {
+    requires,
+    missingRequires: requires.filter((file) => !markdown.includes(file)),
+  };
+}
+
+export function checkPlaybook(job, markdown) {
+  const expected = firstCommands(job);
+  const actual = playbookFirstCommands(markdown);
+  const missing = expected.filter((line) => !actual.includes(line));
+  const req = playbookRequireFields(job, markdown);
+  return {
+    id: job.id,
+    stale: missing.length > 0 || req.missingRequires.length > 0,
+    missing,
+    ...req,
+    prefer: `node src/cli.js brief --job ${job.id}`,
+  };
+}
+
+/**
+ * Bare playbooks dumps 162 stale First-command lists. Compact keeps
+ * nextApply + counts so a waking agent can see the next card.
+ * @param {{ id: string, stale: boolean, missing: string[], missingRequires: string[], status?: string, prefer?: string, requires?: string[] }} row
+ */
+function compactPlaybookRow(row) {
+  const out = {
+    id: row.id,
+    stale: row.stale,
+    missingCount: row.missing.length,
+  };
+  if (row.status) out.status = row.status;
+  if (row.missingRequires.length > 0) out.missingRequires = row.missingRequires;
+  return out;
+}
+
+/**
+ * Read-only drift report. Never writes playbooks/.
+ * Bare lists are compact (counts only). `--job` keeps full missing lines.
+ * @param {import("./ledger.js").Job[]} jobs
+ * @param {string} dir
+ * @param {{ compact?: boolean }} [options]
+ */
+export function checkPlaybooks(jobs, dir, options = {}) {
+  const results = jobs.map((job) => {
+    const dest = playbookPath(job, dir);
+    if (!existsSync(dest)) {
+      return {
+        id: job.id,
+        stale: true,
+        status: "missing-playbook",
+        missing: firstCommands(job),
+        ...playbookRequireFields(job),
+        prefer: `node src/cli.js brief --job ${job.id}`,
+      };
+    }
+    return checkPlaybook(job, readFileSync(dest, "utf8"));
+  });
+  const stale = results.filter((row) => row.stale).length;
+  const nextApply = jobs.length === 1 ? jobs[0].id : TAKE_INSTEAD_CATALOG_ID;
+  const compact = options.compact === true;
+  return {
+    contract: PLAYBOOK_CHECK_CONTRACT,
+    command: "playbooks",
+    check: true,
+    wrote: false,
+    compact,
+    doNot: "Do not run writePlaybooks over playbooks/. Prefer brief / proveAfterApplyCommand.",
+    prefer: `node src/cli.js brief --job ${nextApply}`,
+    nextApply,
+    count: results.length,
+    ok: results.length - stale,
+    stale,
+    missingRequiresJobs: results.filter((row) => row.missingRequires.length > 0).map((row) => row.id),
+    results: compact ? results.map(compactPlaybookRow) : results,
+  };
 }

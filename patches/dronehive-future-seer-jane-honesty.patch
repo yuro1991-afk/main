@@ -1,0 +1,25 @@
+diff --git a/configs/future_seer.json b/configs/future_seer.json
+index 5a161fb..a54f0ef 100644
+--- a/configs/future_seer.json
++++ b/configs/future_seer.json
+@@ -42,13 +42,13 @@
+     "modes": ["preview", "handoff_fast", "handoff_hive", "helper_probe", "helper_draft"]
+   },
+   "jane": {
+-    "super_cell": "G:\\AI-Center\\agents\\super-cell-4",
+-    "muscle_dispatch": "G:\\AI-Center\\agents\\super-cell-4\\bridges\\muscle_dispatch.py",
+-    "cell_parallel": "G:\\AI-Center\\agents\\super-cell-4\\bridges\\cell_parallel.py",
+-    "live_registry": "G:\\AI-Center\\agents\\super-cell-4\\registry\\events.jsonl",
+-    "everest_cli": "G:\\AI-Center\\bridge\\everest\\cli.py",
+-    "highway": "G:\\AI-Center\\fabric\\HIGHWAY",
+-    "pythonpath_ai_center": "G:\\AI-Center"
++    "super_cell": "host/ai-center/agents/super-cell-4",
++    "muscle_dispatch": "host/ai-center/agents/super-cell-4/bridges/muscle_dispatch.py",
++    "cell_parallel": "host/ai-center/agents/super-cell-4/bridges/cell_parallel.py",
++    "live_registry": "host/ai-center/agents/super-cell-4/registry/events.jsonl",
++    "everest_cli": "host/ai-center/bridge/everest/cli.py",
++    "highway": "host/ai-center/fabric/HIGHWAY",
++    "pythonpath_ai_center": "host/ai-center"
+   },
+   "safety_law": [
+     "false_green: 0 — drafts are speculative until commit seal",

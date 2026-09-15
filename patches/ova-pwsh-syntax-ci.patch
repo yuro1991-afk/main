@@ -1,0 +1,36 @@
+diff --git a/.github/workflows/pwsh-syntax.yml b/.github/workflows/pwsh-syntax.yml
+new file mode 100644
+index 0000000..3c1b27f
+--- /dev/null
++++ b/.github/workflows/pwsh-syntax.yml
+@@ -0,0 +1,30 @@
++name: pwsh-syntax
++
++on:
++  push:
++    branches: ["**"]
++  pull_request:
++
++jobs:
++  syntax:
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v5
++      - name: Parse PowerShell without talking to Ollama
++        shell: pwsh
++        run: |
++          $err = $false
++          $files = Get-ChildItem -Recurse -File -Include *.ps1,*.psm1 |
++            Where-Object { $_.FullName -notmatch '[\\/](dist|reports|logs)[\\/]' }
++          foreach ($f in $files) {
++            $tokens = $null
++            $errors = $null
++            [void][System.Management.Automation.Language.Parser]::ParseFile($f.FullName, [ref]$tokens, [ref]$errors)
++            if ($errors -and $errors.Count -gt 0) {
++              $err = $true
++              foreach ($e in $errors) { Write-Host "$($f.FullName): $($e.Message)" }
++            } else {
++              Write-Host "OK $($f.FullName)"
++            }
++          }
++          if ($err) { exit 1 }

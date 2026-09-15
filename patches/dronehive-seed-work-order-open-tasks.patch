@@ -1,0 +1,9 @@
+diff --git a/drone/app/seed/configs/work_order.json b/drone/app/seed/configs/work_order.json
+index ecac0ca..ff142f4 100644
+--- a/drone/app/seed/configs/work_order.json
++++ b/drone/app/seed/configs/work_order.json
+@@ -78,3 +78,3 @@
+       "id": "continuous_work",
+-      "open_tasks": "D:\\GrokCoreMemory\\continuous\\OPEN_TASKS.json",
++      "open_tasks": "host/continuous/OPEN_TASKS.json",
+       "note": "Fabric seal does not complete engine domain tasks"

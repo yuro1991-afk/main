@@ -1,0 +1,15 @@
+diff --git a/drone/app/seed/docs/WORK_ORDER.md b/drone/app/seed/docs/WORK_ORDER.md
+index 3789067..13ac011 100644
+--- a/drone/app/seed/docs/WORK_ORDER.md
++++ b/drone/app/seed/docs/WORK_ORDER.md
+@@ -201,8 +201,8 @@ Ollama endpoint: `http://127.0.0.1:11434` only.
+ ### 2.6 Related knowledge packs (optional after codex)
+ 
+ ```powershell
+-& $py F:\GrokSelfLibrary\bin\recall.py get knowledge_pack
+-& $py G:\AI-Home\docs\ai-smarts\runtime\ai_smarts_router.py route --goal "<your goal>"
++& $py host/library/bin/recall.py get knowledge_pack
++& $py host/ai-home/docs/ai-smarts/runtime/ai_smarts_router.py route --goal "<your goal>"
+ ```
+ 
+ ---

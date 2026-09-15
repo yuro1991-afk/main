@@ -1,0 +1,13 @@
+diff --git a/apps/drone-ollama-mount/src/main.rs b/apps/drone-ollama-mount/src/main.rs
+index b82fb47..0b764af 100644
+--- a/apps/drone-ollama-mount/src/main.rs
++++ b/apps/drone-ollama-mount/src/main.rs
+@@ -165,7 +165,7 @@ fn main() -> ExitCode {
+             match engine.run_swarm(&goals, 3) {
+                 Ok(v) => {
+                     let path = PathBuf::from(
+-                        r"G:\AI-Home\projects\drone-ollama-mount\out\SWARM_SMOKE_SEAL.json",
++                        r"apps\drone-ollama-mount\out\SWARM_SMOKE_SEAL.json",
+                     );
+                     let _ = std::fs::write(
+                         &path,

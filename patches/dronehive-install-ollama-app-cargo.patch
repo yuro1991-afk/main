@@ -1,0 +1,17 @@
+diff --git a/apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1 b/apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1
+index 8e76cd2..fc7a4e7 100644
+--- a/apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1
++++ b/apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1
+@@ -4,9 +4,9 @@
+   Install Drone Ollama as a top-tier app on BOSS (Start Menu + Desktop + Ollama wire).
+ #>
+ $ErrorActionPreference = 'Stop'
+-$env:CARGO_HOME = 'G:\AI-Home\tools\cargo'
+-$env:RUSTUP_HOME = 'G:\AI-Home\tools\rustup'
+-$env:Path = "G:\AI-Home\tools\cargo\bin;$env:Path"
++$env:CARGO_HOME = 'host\ai-home\tools\cargo'
++$env:RUSTUP_HOME = 'host\ai-home\tools\rustup'
++$env:Path = "host\ai-home\tools\cargo\bin;$env:Path"
+ 
+ $Project = Split-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) -Parent
+ $InstallRoot = 'G:\AI-Home\apps\DroneOllama'

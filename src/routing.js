@@ -1,9 +1,13 @@
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { assertNeverKind } from "./kinds.js";
 import { jobIdForEntry } from "./catalog.js";
 import { unusedGenesisCards } from "./sync.js";
 import { peekBusyJob } from "./dispatch.js";
+import { applyNextFor, defaultPatchesIndexPath, loadPatchIndex, patchForJob, proveAfterApplyCommand } from "./patches.js";
+
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
 export const ROUTE_CONTRACT = "agent-ops.route.v1";
 
@@ -39,35 +43,39 @@ export const ROUTES = Object.freeze([
   },
   {
     intent: "auto review / coderabbit",
-    destination: "an existing open PR, not empty main",
+    destination: "an existing open PR: #8, #9, or #10 — never empty main",
     kind: "review",
-    notes: "main has no mergeable Genesis tree. Review dronehive #1/#2 or an Origin PR.",
-    jobId: null,
-    packet: null,
+    notes:
+      "Review #8, #9, or #10. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8. Do not steal eyes / vision / bridge on #10.",
+    jobId: "review-landing-pad-prs",
+    packet: "playbooks/review-landing-pad-prs.md",
   },
   {
     intent: "items for attention",
-    destination: "ledger next() then the named repo",
+    destination: "github.com/yuro1991-afk/dronehive#dronehive-unicode-ci",
     kind: "fix",
-    notes: "Highest-priority open job. Expired claims are fair game.",
-    jobId: null,
-    packet: null,
+    notes:
+      "First parked apply is dronehive-unicode-ci: apply patches/dronehive-pro-chat-cp1252.patch from main#9. Do not copy PR #5 / PR #6 autofix. Do not sit on leftover Superbrain.",
+    jobId: "dronehive-unicode-ci",
+    packet: "playbooks/dronehive-unicode-ci.md",
   },
   {
     intent: "dronehive ci / packaging",
     destination: "github.com/yuro1991-afk/dronehive",
     kind: "fix",
-    notes: "Unstick #1 UnicodeEncodeError first, then rebase #2.",
-    jobId: null,
-    packet: null,
+    notes:
+      "First parked apply is dronehive-unicode-ci: apply patches/dronehive-pro-chat-cp1252.patch from main#9. Do not copy PR #6 autofix. Unstick dronehive#1 python-smoke, then rebase #2.",
+    jobId: "dronehive-unicode-ci",
+    packet: "playbooks/dronehive-unicode-ci.md",
   },
   {
     intent: "superbrain / lanes",
-    destination: "probe known lanes via agent-ops",
-    kind: "probe",
-    notes: "Failed probes are unreachable, never live. LANE-ETH-PEER ≠ :8791.",
-    jobId: null,
-    packet: null,
+    destination: "https://github.com/yuro1991-afk/main/pull/10",
+    kind: "review",
+    notes:
+      "Yuri: no more Superbrain. Do not probe :45001 / :8791. Do not run node src/cli.js probe. Take review-main-pr10.",
+    jobId: "review-main-pr10",
+    packet: "playbooks/review-main-pr10.md",
   },
   {
     intent: "catalog / notion inventory",
@@ -129,7 +137,11 @@ export function scorePlaybooks(text, entries) {
       const hits = tokens.filter((token) => hay.includes(token)).length;
       return { entry, score: hits + 2 };
     })
-    .filter((row) => row.score >= 3 && tokenizeIntent(text).some((token) => `${row.entry.entryId} ${row.entry.name ?? ""}`.toLowerCase().includes(token)))
+    .filter((row) => {
+      const idName = `${row.entry.entryId} ${row.entry.name ?? ""}`.toLowerCase();
+      const nameHits = tokens.filter((token) => idName.includes(token)).length;
+      return row.score >= 3 && nameHits >= 2;
+    })
     .sort((a, b) => b.score - a.score || a.entry.entryId.localeCompare(b.entry.entryId));
 }
 
@@ -147,7 +159,9 @@ export function leftoverForRoute(context = {}) {
  * @param {object} job
  * @param {string} notes
  */
-export function routeFromJob(text, job, notes) {
+export function routeFromJob(text, job, notes, extras = {}) {
+  const take = takeInsteadRouteFields(job);
+  const takeInstead = extras.takeInstead ?? take.takeInstead;
   return {
     contract: ROUTE_CONTRACT,
     intent: text,
@@ -156,6 +170,25 @@ export function routeFromJob(text, job, notes) {
     notes,
     jobId: job.id,
     packet: `reviews/handoff-${job.id}.md`,
+    applyNext: extras.applyNext ?? take.applyNext,
+    proveAfterApplyCommand: extras.proveAfterApplyCommand ?? take.proveAfterApplyCommand,
+    ...(takeInstead ? { takeInstead } : {}),
+  };
+}
+
+/**
+ * Leftover Superbrain sit-out keeps jobId / destination. Attach first
+ * parked catalog apply so keep-busy does not retarget (#8).
+ * @param {{ id?: string } | null | undefined} job
+ */
+function takeInsteadRouteFields(job) {
+  if (job?.id !== "gub-superbrain-probe") return {};
+  const patch = catalogPatchRow("dronehive-unicode-ci");
+  if (!patch) return {};
+  return {
+    takeInstead: "dronehive-unicode-ci",
+    applyNext: applyNextFor(patch),
+    proveAfterApplyCommand: proveAfterApplyCommand(patch.id),
   };
 }
 
@@ -172,15 +205,37 @@ export function routeFromJob(text, job, notes) {
  */
 export function routeIntent(text, context = {}) {
   const q = (text ?? "").toLowerCase();
-  if (includesAny(q, ["review", "coderabbit", "code rabbit"])) {
+  if (includesAny(q, ["review", "coderabbit", "code rabbit", "merge", "landing-pad", "landing pad"])) {
+    const review = context.ledger?.jobs?.find((job) => job.id === "review-landing-pad-prs");
+    if (review) {
+      return routeFromJob(
+        text,
+        review,
+        "Review open PRs #8, #9, or #10. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8. Do not steal eyes / vision / bridge on #10.",
+      );
+    }
     return withContract(ROUTES[2], text);
-  }
-  if (includesAny(q, ["dronehive", "drone", "unicode", "wheel"])) {
-    return withContract(ROUTES[4], text);
   }
   if (includesAny(q, ["superbrain", "lane", "probe", "boss"])) {
     return withContract(ROUTES[5], text);
   }
+  const named = namedJobForIntent(text, context.ledger);
+  if (named) {
+    const patch = catalogPatchRow(named.id);
+    return routeFromJob(
+      text,
+      named,
+      patch
+        ? catalogRouteNotes(patch)
+        : `Take ${named.id}. Do not invent a leftover.`,
+      {
+        applyNext: patch ? applyNextFor(patch) : undefined,
+        proveAfterApplyCommand: patch ? proveAfterApplyCommand(patch.id) : undefined,
+      },
+    );
+  }
+  const sibling = routeSiblingPark(text, q, context);
+  if (sibling) return sibling;
 
   const leftover = leftoverForRoute(context);
   const agentJob = jobForAgent(context);
@@ -329,4 +384,132 @@ function jobForScored(scored, leftover, ledger) {
  */
 function includesAny(q, needles) {
   return needles.some((needle) => q.includes(needle));
+}
+
+/**
+ * Longest ledger id mentioned in the intent wins (seed vs live leftovers).
+ * @param {string} text
+ * @param {{ jobs?: Array<{ id?: string }> } | undefined} ledger
+ */
+function namedJobForIntent(text, ledger) {
+  if (!text || !Array.isArray(ledger?.jobs)) return null;
+  const q = String(text).toLowerCase();
+  let best = null;
+  for (const job of ledger.jobs) {
+    if (!job?.id) continue;
+    if (!q.includes(job.id.toLowerCase())) continue;
+    if (!best || job.id.length > best.id.length) best = job;
+  }
+  return best;
+}
+
+/**
+ * @param {string} jobId
+ */
+/** First parked catalog apply for a sibling intent. Named job ids win first. */
+const SIBLING_PARKS = Object.freeze([
+  {
+    needles: ["ubuntu-smoke", "ubuntu smoke", "python-smoke-ubuntu"],
+    jobId: "dronehive-ubuntu-smoke",
+  },
+  {
+    needles: ["runtime-host", "runtime host", "runtime-host-paths"],
+    jobId: "dronehive-runtime-host-paths",
+  },
+  {
+    needles: ["config-load", "config load", "config-overlay", "config overlay", "config-load-overlay"],
+    jobId: "dronehive-config-load-overlay",
+  },
+  {
+    needles: ["app-links", "app links"],
+    jobId: "dronehive-app-links-host-paths",
+  },
+  {
+    needles: ["script-host", "script host", "script-host-roots"],
+    jobId: "dronehive-script-host-roots",
+  },
+  {
+    needles: ["portable-paths", "portable paths"],
+    jobId: "dronehive-portable-paths",
+  },
+  {
+    needles: [
+      "dronehive",
+      "drone",
+      "unicode",
+      "wheel",
+      "attention",
+      "needs attention",
+      "cp1252",
+      "python-smoke",
+      "python smoke",
+    ],
+    jobId: "dronehive-unicode-ci",
+    fallback: 4,
+  },
+  { needles: ["bloom", "grok-pwa", "grok pwa"], jobId: "bloom-grok-pwa-test-sync" },
+  {
+    needles: ["start-sh", "start.sh", "faceswap-start", "face-swap start"],
+    jobId: "faceswap-start-sh",
+  },
+  { needles: ["face-swap", "faceswap", "face swap"], jobId: "faceswap-design-honesty" },
+  { needles: ["opensussy", "agama"], jobId: "opensussy-sec-review-target" },
+  {
+    needles: ["ollama-voice", "ollama voice", "voice-access", "voice access"],
+    jobId: "ova-readme-linux-honesty",
+  },
+]);
+
+/**
+ * Generic sibling intents must not fall through to leftover Superbrain.
+ * @param {string} text
+ * @param {string} q
+ * @param {{ ledger?: { jobs?: Array<{ id: string, repo: string, kind: string }> } }} context
+ */
+function routeSiblingPark(text, q, context) {
+  const park = SIBLING_PARKS.find((row) => includesAny(q, row.needles));
+  if (!park) return null;
+  const job = context.ledger?.jobs?.find((item) => item.id === park.jobId);
+  const patch = catalogPatchRow(park.jobId);
+  if (job && patch) {
+    return routeFromJob(text, job, catalogRouteNotes(patch), {
+      applyNext: applyNextFor(patch),
+      proveAfterApplyCommand: proveAfterApplyCommand(patch.id),
+    });
+  }
+  if (patch) {
+    return {
+      contract: ROUTE_CONTRACT,
+      intent: text,
+      destination: `${patch.repo}#${patch.id}`,
+      kind: job?.kind ?? "fix",
+      notes: catalogRouteNotes(patch),
+      jobId: patch.id,
+      packet: `reviews/handoff-${patch.id}.md`,
+      applyNext: applyNextFor(patch),
+      proveAfterApplyCommand: proveAfterApplyCommand(patch.id),
+    };
+  }
+  if (park.fallback !== undefined) return withContract(ROUTES[park.fallback], text);
+  return null;
+}
+
+function catalogPatchRow(jobId) {
+  try {
+    return patchForJob(loadPatchIndex(defaultPatchesIndexPath(ROOT)), jobId);
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Named catalog route notes must list requires priors before the leftover.
+ * @param {{ file: string, requires?: string[] }} patch
+ */
+function catalogRouteNotes(patch) {
+  const priors = Array.isArray(patch.requires)
+    ? patch.requires.filter((file) => typeof file === "string" && file.startsWith("patches/"))
+    : [];
+  const files = [...priors, patch.file].join(" then ");
+  return `Yuri: forget Origin for this card. Apply ${files}. Do not invent a leftover. Do not copy PR #6 autofix.`;
 }

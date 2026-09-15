@@ -1,0 +1,13 @@
+diff --git a/drone/app/seed/docs/WORK_ORDER.md b/drone/app/seed/docs/WORK_ORDER.md
+index 3789067..babefca 100644
+--- a/drone/app/seed/docs/WORK_ORDER.md
++++ b/drone/app/seed/docs/WORK_ORDER.md
+@@ -1,7 +1,7 @@
+ # DRONE WORK ORDER — IMPRINT LAW
+ 
+ **Schema:** `ai.worker.drone.work_order.v1`  
+-**Host:** BOSS (Windows) · fabric `G:\AI-Home\projects\ai-worker-drone-0.5b`  
++**Host:** BOSS (Windows) · fabric `.`  
+ **Boss:** user  
+ **false_green:** 0 always  
+ 

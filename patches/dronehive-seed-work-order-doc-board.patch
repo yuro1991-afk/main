@@ -1,0 +1,13 @@
+diff --git a/drone/app/seed/docs/WORK_ORDER.md b/drone/app/seed/docs/WORK_ORDER.md
+index 3789067..e5acffb 100644
+--- a/drone/app/seed/docs/WORK_ORDER.md
++++ b/drone/app/seed/docs/WORK_ORDER.md
+@@ -101,7 +101,7 @@ Paths, scripts, and evidence are **Windows-native** on BOSS. Prefer PowerShell /
+ 
+ OPEN / IN_PROGRESS tasks on the continuous board are the job queue.
+ 
+-- Board: `D:\GrokCoreMemory\continuous\OPEN_TASKS.json`
++- Board: `host/continuous/OPEN_TASKS.json`
+ - Fabric seal ≠ domain completion (e.g. Blender hand-sculpt stays OPEN until real engine work).
+ 
+ ### LAW 6 — Safety

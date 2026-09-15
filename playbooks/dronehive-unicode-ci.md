@@ -5,21 +5,24 @@
 - scope: relaunch
 - repo: github.com/yuro1991-afk/dronehive
 - relaunch: https://github.com/yuro1991-afk/dronehive
-- why: This token cannot push dronehive. Apply PR #6: npm run autofix -- apply <checkout>.
+- why: This token cannot push dronehive. Apply `patches/dronehive-pro-chat-cp1252.patch` from [main#9](https://github.com/yuro1991-afk/main/pull/9). Do not copy PR #6 autofix.
 
 ## Notes
 
-windows-latest CI dies printing ✓ via _chat in drone/pro/tool_agent.py (~367, 424, 464–506) under cp1252. Blocks dronehive PR #1 and stacked #2. Patch is on landing-pad PR #5; verified apply runner is PR #6 (`npm run autofix -- apply <checkout>`). This token cannot push dronehive — relaunch there.
+windows-latest CI dies printing ✓ via _chat in drone/pro/tool_agent.py (~367, 424, 464–506) under cp1252. Blocks dronehive PR #1 and stacked #2. Applyable catalog patch is patches/dronehive-pro-chat-cp1252.patch on main#9. Do not copy PR #6 autofix.
 
 ## Collision
 
-Do not rewrite the patch on this repo. Checkout dronehive, apply github.com/yuro1991-afk/main/pull/5 patch, push on cursor/setup-dev-environment-2e0b.
+Avoid rewriting drone/pro/tool_agent.py while this card is claimed. Stack ubuntu-smoke after this leftover.
 
 ## First commands
 
+- node src/cli.js patches --prove --job dronehive-unicode-ci
 - git clone https://github.com/yuro1991-afk/dronehive.git work && cd work
 - git checkout -b cursor/dronehive-unicode-ci-from-ops
-- edit: drone/pro/tool_agent.py, .github/workflows/ci.yml
+- git apply --check /path/to/main/patches/dronehive-pro-chat-cp1252.patch
+- git apply /path/to/main/patches/dronehive-pro-chat-cp1252.patch
+- PYTHONPATH=. python3 -c "import io,sys; from drone.pro.tool_agent import _chat; sys.stdout=type('S',(),{'encoding':'cp1252','buffer':io.BytesIO(),'write':lambda self,s:s.encode('cp1252'),'flush':lambda self:None})(); _chat('sys','ok ✓')"
 - python -m drone app pro --goal "ci pro write ci_ok.txt" --rounds 3 --no-ollama
 
 ## Verify

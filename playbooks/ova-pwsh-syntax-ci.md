@@ -5,7 +5,7 @@
 - scope: relaunch
 - repo: github.com/yuro1991-afk/ollama-voice-access
 - relaunch: https://github.com/yuro1991-afk/ollama-voice-access
-- why: Relaunch against the named repo. This landing-pad token cannot push it.
+- why: This token cannot push ollama-voice-access. Apply `patches/ova-pwsh-syntax-ci.patch` from [main#9](https://github.com/yuro1991-afk/main/pull/9). Do not copy PR #6 autofix.
 
 ## Notes
 
@@ -17,10 +17,12 @@ Do not change Start Menu Bypass installers in the same PR as stop-guard unless o
 
 ## First commands
 
+- node src/cli.js patches --prove --job ova-pwsh-syntax-ci
 - git clone https://github.com/yuro1991-afk/ollama-voice-access.git work && cd work
 - git checkout -b cursor/ova-pwsh-syntax-ci-from-ops
-- edit: .github/workflows/pwsh-syntax.yml, lib/OllamaVoice.Common.ps1, Invoke-OllamaVoiceQA.ps1, Stop-Ollama.ps1
-- Syntax job passes on ubuntu-latest pwsh without a local ollama.exe.
+- git apply --check /path/to/main/patches/ova-pwsh-syntax-ci.patch
+- git apply /path/to/main/patches/ova-pwsh-syntax-ci.patch
+- python3 -c "from pathlib import Path; t=Path('.github/workflows/pwsh-syntax.yml').read_text(); assert 'name: pwsh-syntax' in t; assert 'Parse PowerShell without talking to Ollama' in t; assert 'Parser]::ParseFile' in t; assert 'ubuntu-latest' in t"
 
 ## Verify
 

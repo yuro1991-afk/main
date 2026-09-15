@@ -1,0 +1,13 @@
+diff --git a/drone/app/seed/docs/APP.md b/drone/app/seed/docs/APP.md
+index 4e767d9..629c444 100644
+--- a/drone/app/seed/docs/APP.md
++++ b/drone/app/seed/docs/APP.md
+@@ -26,7 +26,7 @@
+ | **REST** | `http://127.0.0.1:8765/api/v1/task` |
+ | **OpenAI-compat** | `POST /v1/chat/completions` |
+ | **File inbox** | Drop `{"goal":"…","lane":"fast"}` into `data/app/inbox/` |
+-| **Library** | `F:\GrokSelfLibrary` via LibraryBridge |
++| **Library** | `host/library` via LibraryBridge |
+ | **Continuous** | `OPEN_TASKS.json` pull |
+ | **Ollama** | Shared top model `127.0.0.1:11434` |
+ | **Webhook out** | `DRONE_HIVE_WEBHOOK` env |

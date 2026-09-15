@@ -1,0 +1,9 @@
+diff --git a/apps/drone-ollama-app/src/main.rs b/apps/drone-ollama-app/src/main.rs
+index c4dda69..4b61351 100644
+--- a/apps/drone-ollama-app/src/main.rs
++++ b/apps/drone-ollama-app/src/main.rs
+@@ -526,3 +526,3 @@ impl eframe::App for App {
+                     drone_bridge::open_path(
+-                        r"G:\AI-Home\projects\ai-worker-drone-0.5b\out",
++                        r"out",
+                     );

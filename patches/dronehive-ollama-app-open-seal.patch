@@ -1,0 +1,9 @@
+diff --git a/apps/drone-ollama-app/src/main.rs b/apps/drone-ollama-app/src/main.rs
+index c4dda69..b0a020b 100644
+--- a/apps/drone-ollama-app/src/main.rs
++++ b/apps/drone-ollama-app/src/main.rs
+@@ -749,3 +749,3 @@ impl App {
+             drone_bridge::open_path(
+-                r"G:\AI-Home\projects\ai-worker-drone-0.5b\out\OPERATIONAL_SEAL.json",
++                r"out\OPERATIONAL_SEAL.json",
+             );

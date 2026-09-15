@@ -5,7 +5,7 @@
 - scope: relaunch
 - repo: github.com/yuro1991-afk/face-swap-ios
 - relaunch: https://github.com/yuro1991-afk/face-swap-ios
-- why: Relaunch against the named repo. This landing-pad token cannot push it.
+- why: This token cannot push face-swap-ios. Apply `patches/faceswap-mock-engine-ci.patch` from [main#9](https://github.com/yuro1991-afk/main/pull/9). Do not copy PR #6 autofix.
 
 ## Notes
 
@@ -17,10 +17,12 @@ Do not bind or rewrite MultoModa on :8855. Do not commit G:\AI-Home host paths. 
 
 ## First commands
 
+- node src/cli.js patches --prove --job faceswap-mock-engine-ci
 - git clone https://github.com/yuro1991-afk/face-swap-ios.git work && cd work
 - git checkout -b cursor/faceswap-mock-engine-ci-from-ops
-- edit: gateway.py, prove_swap.py, fixtures/portrait-a.jpg, fixtures/portrait-b.jpg, .github/workflows/gateway-smoke.yml
-- Workflow GREEN without MultoModa. prove_swap.py --gateway http://127.0.0.1:8860 against the mock writes out/PROVE.json with false_green 0.
+- git apply --check /path/to/main/patches/faceswap-mock-engine-ci.patch
+- git apply /path/to/main/patches/faceswap-mock-engine-ci.patch
+- python3 -c "from pathlib import Path; w=Path('.github/workflows/gateway-smoke.yml').read_text(); assert 'name: gateway-smoke' in w; assert 'Mock engine + gateway health (no InsightFace)' in w; assert 'false_green' in w; m=Path('mock_engine.py').read_text(); assert 'No InsightFace, CUDA, or Jane' in m; assert 'local_only' in m"
 
 ## Verify
 
