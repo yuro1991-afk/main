@@ -1726,8 +1726,10 @@
       "file": "patches/dronehive-seed-work-order-core-lessons.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "seed knowledge_imprint.core_lessons uses host/core-memory. -U1 trailing cache_rel. Independent of configs leftover (different file). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; k=json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['knowledge_imprint']; assert k['core_lessons']=='host/core-memory/lessons'\""
+      ],
+      "notes": "seed knowledge_imprint.core_lessons uses host/core-memory. After apply: assert that key only. Live leftover still pins D:. -U1 trailing cache_rel. Independent of configs leftover (different file). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-work-order-ai-smarts-packs",

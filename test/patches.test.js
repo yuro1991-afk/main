@@ -1046,6 +1046,19 @@ test("cli patches --job dronehive-work-order-core-lessons includes the core_less
   assert.ok(parsed.applyNext.some((line) => line.includes("configs/work_order.json") && line.includes("knowledge_imprint") && line.includes("host/core-memory/lessons")));
 });
 
+test("cli patches --job dronehive-seed-work-order-core-lessons includes the seed core_lessons afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-seed-work-order-core-lessons"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-seed-work-order-core-lessons");
+  assert.ok(parsed.applyNext.some((line) => line.includes("drone/app/seed/configs/work_order.json") && line.includes("knowledge_imprint") && line.includes("host/core-memory/lessons")));
+});
+
 test("cli patches --job dronehive-ollama-app-bridge-paths includes the bridge consts afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-ollama-app-bridge-paths"], {

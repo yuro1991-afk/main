@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T04:06Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T04:08Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`9fa92fe`. Shipped this interval: `dronehive-work-order-core-lessons`
-core_lessons afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`ccd333a`. Shipped this interval: `dronehive-seed-work-order-core-lessons`
+seed core_lessons afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -157,7 +157,8 @@ core_lessons afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused work-order-live-mirror apply | `dronehive-work-order-live-mirror` (work_order.json live_registry.mirror afterApply wired) |
 | next unused seed-work-order-live-mirror apply | `dronehive-seed-work-order-live-mirror` (seed live_registry.mirror afterApply wired) |
 | next unused work-order-core-lessons apply | `dronehive-work-order-core-lessons` (work_order.json core_lessons afterApply wired) |
-| next afterApply to wire | `dronehive-seed-work-order-core-lessons` (seed core_lessons only) |
+| next unused seed-work-order-core-lessons apply | `dronehive-seed-work-order-core-lessons` (seed core_lessons afterApply wired) |
+| next afterApply to wire | `dronehive-work-order-ai-smarts-packs` (work_order.json ai_smarts_packs only; -U1) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -465,7 +466,9 @@ live_registry.mirror is host/library/registry (cli leftover stays).
 seed live_registry.mirror is host/library/registry (live leftover stays).
 `dronehive-work-order-core-lessons` afterApply asserts
 knowledge_imprint.core_lessons is host/core-memory/lessons (expand leftover stays).
-Next afterApply to wire is `dronehive-seed-work-order-core-lessons`.
+`dronehive-seed-work-order-core-lessons` afterApply asserts
+seed knowledge_imprint.core_lessons is host/core-memory/lessons (live leftover stays).
+Next afterApply to wire is `dronehive-work-order-ai-smarts-packs`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -627,7 +630,7 @@ then unused `dronehive-ai-bus-packs-root` (ai_bus.py packs_root only; afterApply
 then unused `dronehive-work-order-live-mirror` (work_order.json live_registry.mirror only; -U1; afterApply wired),
 then unused `dronehive-seed-work-order-live-mirror` (seed live_registry.mirror only; afterApply wired),
 then unused `dronehive-work-order-core-lessons` (work_order.json core_lessons only; -U1; afterApply wired),
-then unused `dronehive-seed-work-order-core-lessons` (seed core_lessons only),
+then unused `dronehive-seed-work-order-core-lessons` (seed core_lessons only; afterApply wired),
 then unused `dronehive-work-order-ai-smarts-packs` (work_order.json ai_smarts_packs only; -U1),
 then unused `dronehive-seed-work-order-ai-smarts-packs` (seed ai_smarts_packs only),
 then unused `bloom-grok-pwa-test-sync` (grok-pwa-plugin.test.mjs only).

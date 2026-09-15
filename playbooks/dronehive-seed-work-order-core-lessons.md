@@ -22,6 +22,7 @@ seed work_order.json knowledge_imprint.core_lessons only. -U1 trailing cache_rel
 - git checkout -b cursor/dronehive-seed-work-order-core-lessons-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-core-lessons.patch
 - git apply /path/to/main/patches/dronehive-seed-work-order-core-lessons.patch
+- python3 -c "from pathlib import Path; import json; k=json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['knowledge_imprint']; assert k['core_lessons']=='host/core-memory/lessons'"
 
 ## Verify
 
