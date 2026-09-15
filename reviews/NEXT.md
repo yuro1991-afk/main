@@ -24,7 +24,7 @@ Do not copy PR #6 autofix. Do not retarget keep-busy (that is #8).
 | `bc-710c5477` | `bloom-grok-pwa-test-sync` |
 | fork `bc-84d93b47` | **eyes → vision → bridge** (already theirs) |
 | next unused apply | `faceswap-start-sh` |
-| prove a leftover gate | `patches --prove-after-apply --job <id>` (also on `--job` JSON) |
+| prove a leftover gate | `patches --prove --job <id>` (throwaway; never writes siblings) then `patches --prove-after-apply --job <id>` |
 | check stale playbook | `playbooks` names `nextApply: dronehive-unicode-ci`. `playbooks --job <id>` then `brief --job`. `--write` and `catalog --write` refuse in-repo `playbooks/` |
 | next stacked apply | `dronehive-runtime-host-paths` (`requires` portable-paths) |
 | next unused stacked apply | `dronehive-config-load-overlay` (`requires` portable-paths) |
