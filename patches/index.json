@@ -1704,8 +1704,10 @@
       "file": "patches/dronehive-seed-work-order-live-mirror.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "seed live_registry.mirror uses host/library. -U1 trailing kind. Independent of configs leftover (different file). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; r=json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['live_registry']; assert r['mirror']=='host/library/registry'\""
+      ],
+      "notes": "seed live_registry.mirror uses host/library. After apply: assert that key only. Live configs leftover still pins F:. -U1 trailing kind. Independent of configs leftover (different file). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-work-order-core-lessons",
