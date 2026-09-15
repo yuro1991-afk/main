@@ -52,11 +52,12 @@ export const ROUTES = Object.freeze([
   },
   {
     intent: "items for attention",
-    destination: "ledger next() then the named repo",
+    destination: "github.com/yuro1991-afk/dronehive#dronehive-unicode-ci",
     kind: "fix",
-    notes: "Highest-priority open job. Expired claims are fair game.",
-    jobId: null,
-    packet: null,
+    notes:
+      "First parked apply is dronehive-unicode-ci: apply patches/dronehive-pro-chat-cp1252.patch from main#9. Do not copy PR #5 / PR #6 autofix. Do not sit on leftover Superbrain.",
+    jobId: "dronehive-unicode-ci",
+    packet: "playbooks/dronehive-unicode-ci.md",
   },
   {
     intent: "dronehive ci / packaging",
@@ -385,7 +386,7 @@ function namedJobForIntent(text, ledger) {
 /** First parked catalog apply for a sibling intent. Named job ids win first. */
 const SIBLING_PARKS = Object.freeze([
   {
-    needles: ["dronehive", "drone", "unicode", "wheel"],
+    needles: ["dronehive", "drone", "unicode", "wheel", "attention", "needs attention"],
     jobId: "dronehive-unicode-ci",
     fallback: 4,
   },
