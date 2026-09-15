@@ -16,6 +16,9 @@ import {
   claimBusyJob,
   leftoverLaunchRows,
   MISSING_LAUNCH_PREVIEW,
+  SITOUT_JOB_IDS,
+  isSitOutJob,
+  sitOutAssignError,
   withRelatedSection,
   loadRoster,
   peekBusyJob,
@@ -380,6 +383,33 @@ test("cli assign --job unknown id fails closed", async () => {
     () => capture(["assign", "--job", "missing-leftover", "--out", out]),
     /unknown job/,
   );
+});
+
+test("sit-out jobs have no launch on purpose", () => {
+  assert.deepEqual([...SITOUT_JOB_IDS], [
+    "gub-superbrain-probe",
+    "do-not-reopen-main-pr1",
+    "agent-ops-board",
+    "do-not-open-fourth-queue",
+  ]);
+  for (const id of SITOUT_JOB_IDS) {
+    assert.equal(isSitOutJob(id), true);
+    assert.match(sitOutAssignError(id), /no launch on purpose/);
+    assert.match(sitOutAssignError(id), /dronehive-unicode-ci/);
+    assert.match(sitOutAssignError(id), /163\+/);
+  }
+  assert.equal(isSitOutJob("dronehive-unicode-ci"), false);
+});
+
+test("cli assign --job refuses sit-out launches", async () => {
+  for (const id of SITOUT_JOB_IDS) {
+    const out = mkdtempSync(join(tmpdir(), "agent-ops-assign-sitout-"));
+    await assert.rejects(
+      () => capture(["assign", "--job", id, "--out", out]),
+      /no launch on purpose/,
+    );
+    assert.equal(existsSync(join(out, `${id}.md`)), false);
+  }
 });
 
 test("peekBusyJob --world is opt-in Origin leftover, not a GitHub steal", () => {
