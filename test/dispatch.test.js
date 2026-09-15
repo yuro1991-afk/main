@@ -414,6 +414,24 @@ test("cli assign --job refuses sit-out launches", async () => {
   }
 });
 
+test("peekBusyJob leftover unused skips dest and repo launches", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
+  const withoutLaunch = peekBusyJob(ledger, "bc-brand-new", { github: true }, NOW, roster);
+  assert.equal(withoutLaunch.id, "review-landing-pad-prs");
+  const dest = mkdtempSync(join(tmpdir(), "agent-ops-peek-launched-"));
+  writeFileSync(join(dest, "review-landing-pad-prs.md"), "# already launched\n");
+  const skippedDest = peekBusyJob(ledger, "bc-brand-new", { github: true }, NOW, roster, dest);
+  assert.notEqual(skippedDest?.id, "review-landing-pad-prs");
+  const onDisk = defaultLaunchPath(fileURLToPath(new URL("..", import.meta.url)));
+  const skippedRepo = peekBusyJob(ledger, "bc-brand-new", { github: true }, NOW, roster, dest, onDisk);
+  assert.equal(skippedRepo, null);
+  const live = peekBusyJob(ledger, "bc-brand-new", { github: true }, NOW, roster, onDisk, onDisk);
+  assert.equal(live, null);
+  const world = peekBusyJob(ledger, "bc-brand-new", { world: true }, NOW, roster, onDisk, onDisk);
+  assert.equal(world.id, "genesis-world-layer-102");
+});
+
 test("peekBusyJob --world is opt-in Origin leftover, not a GitHub steal", () => {
   const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
   const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));

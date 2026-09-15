@@ -163,7 +163,7 @@ test("empty prompt refuses a fifth queue", () => {
   assert.match(packet.text, /Do not invent Origin work/);
 });
 
-test("cli prompt defaults to leftover GitHub card as markdown", async () => {
+test("cli prompt defaults to leftover unused exhausted", async () => {
   const chunks = [];
   const code = await runCli(["prompt"], {
     nowMs: NOW,
@@ -171,10 +171,10 @@ test("cli prompt defaults to leftover GitHub card as markdown", async () => {
       chunks.push(value);
     },
   });
-  assert.equal(code, 0);
+  assert.equal(code, 1);
   const text = chunks.join("");
-  assert.match(text, /review-landing-pad-prs/);
-  assert.match(text, /GitHub launch/);
+  assert.match(text, /No open GitHub card/);
+  assert.doesNotMatch(text, /review-landing-pad-prs/);
   assert.doesNotMatch(text, /gub-route-intent/);
 });
 
@@ -194,7 +194,7 @@ test("cli prompt --agent prints the roster GitHub card, not leftover next", asyn
   assert.doesNotMatch(text, /review-landing-pad-prs/);
 });
 
-test("cli prompt --json wraps the text", async () => {
+test("cli prompt --json wraps leftover unused exhausted", async () => {
   const chunks = [];
   const code = await runCli(["prompt", "--json"], {
     nowMs: NOW,
@@ -202,9 +202,9 @@ test("cli prompt --json wraps the text", async () => {
       chunks.push(value);
     },
   });
-  assert.equal(code, 0);
+  assert.equal(code, 1);
   const packet = JSON.parse(chunks.join(""));
   assert.equal(packet.contract, PROMPT_CONTRACT);
-  assert.equal(packet.jobId, "review-landing-pad-prs");
-  assert.match(packet.text, /GitHub launch/);
+  assert.equal(packet.jobId, null);
+  assert.match(packet.text, /No open GitHub card/);
 });

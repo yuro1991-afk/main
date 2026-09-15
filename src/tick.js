@@ -23,7 +23,15 @@ export function writeInventoryTick(ledger, destPath, nowMs, extras = {}) {
   const counts = summarize(ledger, nowMs);
   const roster = extras.roster?.assignments?.length ? extras.roster : null;
   const leftover = roster
-    ? peekBusyJob(ledger, extras.agentId, { github: true }, nowMs, roster)
+    ? peekBusyJob(
+        ledger,
+        extras.agentId,
+        { github: true },
+        nowMs,
+        roster,
+        extras.launchDir,
+        extras.repoLaunchDir,
+      )
     : nextJob(ledger, { github: true }, nowMs);
   const next = leftover;
   const worldNext = roster

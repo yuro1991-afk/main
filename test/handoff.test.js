@@ -525,7 +525,7 @@ test("relaunch packet points at Origin and the handoff file", () => {
   assert.equal(packet.proveAfterApplyCommand, undefined);
 });
 
-test("cli handoff defaults to next", async () => {
+test("cli handoff defaults to leftover unused exhausted", async () => {
   const chunks = [];
   const code = await runCli(["handoff"], {
     nowMs: NOW,
@@ -533,9 +533,9 @@ test("cli handoff defaults to next", async () => {
       chunks.push(value);
     },
   });
-  assert.equal(code, 0);
-  assert.match(chunks.join(""), /review-landing-pad-prs/);
-  assert.match(chunks.join(""), /yuro1991-afk\/main/);
+  assert.equal(code, 1);
+  assert.match(chunks.join(""), /No open job/);
+  assert.doesNotMatch(chunks.join(""), /review-landing-pad-prs/);
 });
 
 test("cli relaunch --agent peeks the roster Origin card", async () => {
@@ -554,7 +554,7 @@ test("cli relaunch --agent peeks the roster Origin card", async () => {
   assert.doesNotMatch(text, /gub-inventory-tick/);
 });
 
-test("cli relaunch defaults to leftover GitHub card", async () => {
+test("cli relaunch defaults to leftover unused exhausted", async () => {
   const chunks = [];
   const code = await runCli(["relaunch"], {
     nowMs: NOW,
@@ -562,10 +562,9 @@ test("cli relaunch defaults to leftover GitHub card", async () => {
       chunks.push(value);
     },
   });
-  assert.equal(code, 0);
+  assert.equal(code, 1);
   const text = chunks.join("");
-  assert.match(text, /review-landing-pad-prs/);
-  assert.match(text, /handoff-review-landing-pad-prs/);
-  assert.match(text, /yuro1991-afk\/main/);
+  assert.match(text, /No open job/);
+  assert.doesNotMatch(text, /review-landing-pad-prs/);
   assert.doesNotMatch(text, /gub-route-intent/);
 });
