@@ -23,7 +23,7 @@ Apply after dronehive-portable-paths. Do not edit drone/pro/tool_agent.py.
 - git apply /path/to/main/patches/dronehive-portable-paths.patch
 - git apply --check /path/to/main/patches/dronehive-runtime-host-paths.patch
 - git apply /path/to/main/patches/dronehive-runtime-host-paths.patch
-- python3 -c "from drone.grok_handoff import DEFAULT_ROOT"
+- python3 -c "from pathlib import Path; t=Path('drone/grok_handoff.py').read_text(); line=next(x for x in t.splitlines() if x.startswith('DEFAULT_ROOT =')); assert 'resolve_host_path' in line"
 
 ## Verify
 

@@ -252,9 +252,9 @@
         "patches/dronehive-portable-paths.patch"
       ],
       "afterApply": [
-        "python3 -c \"from drone.grok_handoff import DEFAULT_ROOT\""
+        "python3 -c \"from pathlib import Path; t=Path('drone/grok_handoff.py').read_text(); line=next(x for x in t.splitlines() if x.startswith('DEFAULT_ROOT =')); assert 'resolve_host_path' in line\""
       ],
-      "notes": "Wraps leftover Path() in grok_handoff / future_seer / tools / operational. requires portable-paths so drone/host_paths.py exists. After apply: import DEFAULT_ROOT. Does not touch tool_agent.py."
+      "notes": "Wraps leftover Path() in grok_handoff / future_seer / tools / operational. requires portable-paths so drone/host_paths.py exists. After apply: assert DEFAULT_ROOT uses resolve_host_path. Unpatched uses Path(). Do not assert G: gone. Do not import DEFAULT_ROOT as afterApply (passes unpatched). Do not put dollar signs in afterApply. Do not put backticks in afterApply. Does not touch tool_agent.py."
     },
     {
       "id": "faceswap-design-honesty",

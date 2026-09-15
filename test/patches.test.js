@@ -378,7 +378,7 @@ test("cli patches --job dronehive-runtime-host-paths applies portable-paths firs
   const portable = lines.findIndex((line) => line.includes("dronehive-portable-paths.patch") && line.startsWith("git apply /"));
   const runtime = lines.findIndex((line) => line.includes("dronehive-runtime-host-paths.patch") && line.startsWith("git apply /"));
   assert.ok(portable >= 0 && runtime > portable);
-  assert.ok(lines.some((line) => line.includes("from drone.grok_handoff import DEFAULT_ROOT")));
+  assert.ok(lines.some((line) => line.includes("drone/grok_handoff.py") && line.includes("DEFAULT_ROOT =") && line.includes("resolve_host_path")));
 });
 
 test("cli patches --job dronehive-work-order-doc-codex-cli includes the docs query_llm_codex afterApply", async () => {
@@ -2492,7 +2492,9 @@ test("applyNextFor applies required patches before the leftover", () => {
     repo: "github.com/yuro1991-afk/dronehive",
     file: "patches/dronehive-runtime-host-paths.patch",
     requires: ["patches/dronehive-portable-paths.patch"],
-    afterApply: ["python3 -c \"from drone.grok_handoff import DEFAULT_ROOT\""],
+    afterApply: [
+      "python3 -c \"from pathlib import Path; t=Path('drone/grok_handoff.py').read_text(); line=next(x for x in t.splitlines() if x.startswith('DEFAULT_ROOT =')); assert 'resolve_host_path' in line\"",
+    ],
   });
   const portable = lines.indexOf("git apply /path/to/main/patches/dronehive-portable-paths.patch");
   const runtime = lines.indexOf("git apply /path/to/main/patches/dronehive-runtime-host-paths.patch");

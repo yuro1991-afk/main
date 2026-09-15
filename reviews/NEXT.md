@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T04:08Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T04:11Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`e766727`. Shipped this interval: bloom-gitignore-vercel afterApply
-is a .gitignore file assert (not `git rm`).
+`3d8ff16`. Shipped this interval: dronehive-runtime-host-paths
+afterApply is a DEFAULT_ROOT line assert (import passed unpatched).
 Early empty afterApply catalog is done. Leftover `next` stays alone.
 Do not invent leftovers.
 
@@ -218,7 +218,7 @@ assert that `ROOT` uses `__file__` and drops `G:\AI-Home`.
 `faceswap-design-honesty` afterApply asserts DESIGN.md names
 `FACESWAP_ENGINE` as the contract (unpatched has none of those phrases).
 `dronehive-runtime-host-paths` `applyNext` applies portable-paths first
-(`requires`), then `from drone.grok_handoff import DEFAULT_ROOT`.
+(`requires`), then asserts DEFAULT_ROOT uses resolve_host_path.
 `dronehive-config-load-overlay` `applyNext` applies portable-paths first
 (`requires`), then `from drone.config_overlay import remap_host_strings`.
 `dronehive-app-links-host-paths` `applyNext` applies portable-paths first
