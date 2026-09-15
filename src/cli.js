@@ -36,6 +36,7 @@ import { checkPlaybooks, writePlaybooks } from "./playbook.js";
 import { buildHelperPacket } from "./helpers.js";
 import { SIBLINGS_CONTRACT, buildSiblingsBoard, defaultSiblingsPath, loadSiblings, relatedForJob } from "./siblings.js";
 import {
+  ASSIGN_CONTRACT,
   buildAssign,
   buildBusy,
   buildSlots,
@@ -48,6 +49,8 @@ import {
   listSlots,
   loadRoster,
   saveRoster,
+  renderAssignedLaunch,
+  renderLeftoverLaunch,
   writeDispatch,
   writeLaunchPrompts,
 } from "./dispatch.js";
@@ -334,10 +337,37 @@ export async function runCli(argv, options = {}) {
       const roster = loadRoster(
         flags.roster ? resolve(flags.roster) : defaultRosterPath(options.root ?? ROOT),
       );
-      const packet = buildAssign(ledger, roster, nowMs);
       const dest = flags.out
         ? resolve(flags.out)
         : defaultLaunchPath(options.root ?? ROOT);
+      const jobId = positionals[0] || (flags.job && flags.job !== "true" ? flags.job : "");
+      if (jobId) {
+        const job = ledger.jobs.find((item) => item.id === jobId);
+        if (!job) {
+          throw new Error(`unknown job: ${jobId}`);
+        }
+        const assigned = roster.assignments.find((row) => row.jobId === jobId);
+        const prompt = assigned
+          ? renderAssignedLaunch(assigned, job)
+          : renderLeftoverLaunch(job);
+        const launches = writeLaunchPrompts([{ jobId, prompt }], dest);
+        write(
+          JSON.stringify(
+            {
+              contract: ASSIGN_CONTRACT,
+              job: jobId,
+              launch: launches[0],
+              applyNext: applyNextForJob(job),
+              proveAfterApplyCommand: proveAfterApplyForJob(job),
+              ...takeInsteadFields(job),
+            },
+            null,
+            2,
+          ),
+        );
+        return 0;
+      }
+      const packet = buildAssign(ledger, roster, nowMs);
       const launches = writeLaunchPrompts(
         [...packet.assignments, ...packet.leftoverLaunches],
         dest,
@@ -647,7 +677,7 @@ Commands:
   list [--job id] [--kind kind] [--repo repo] [--here] [--all] [--origin] [--world]  # --job is that card + applyNext
   next [id] [--job id] [--kind kind] [--repo repo] [--here] [--all] [--origin] [--world] [--agent <bcId>]
   slots [--job id] [--here] [--all] [--origin] [--world]  # --job peeks that card + applyNext
-  assign [--out dir]
+  assign [--job id] [--out dir]  # --job writes one leftover Apply launch; else roster + leftover next
   sync --agents path.json [--write] [--out dir]
   catalog [--entries path.json] [--write] [--out path]
   busy [id] [--job id] [--agent <bcId>] [--here] [--all] [--origin] [--world]   # --job peeks; else roster then leftover next

@@ -280,6 +280,35 @@ test("cli assign writes paste-ready GitHub launch files", async () => {
   assert.doesNotMatch(result.out, /leftoverTakeInstead/);
 });
 
+test("cli assign --job writes one leftover Apply launch", async () => {
+  const out = mkdtempSync(join(tmpdir(), "agent-ops-assign-job-"));
+  const result = await capture(["assign", "--job", "bloom-grok-pwa-test-sync", "--out", out]);
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.contract, ASSIGN_CONTRACT);
+  assert.equal(parsed.job, "bloom-grok-pwa-test-sync");
+  assert.ok(parsed.applyNext.some((line) => line.includes("bloom-grok-pwa-test-sync.patch")));
+  assert.equal(
+    parsed.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job bloom-grok-pwa-test-sync",
+  );
+  assert.equal(existsSync(join(out, "dronehive-unicode-ci.md")), false);
+  const dest = join(out, "bloom-grok-pwa-test-sync.md");
+  assert.equal(existsSync(dest), true);
+  const text = readFileSync(dest, "utf8");
+  assert.match(text, /# Leftover unused — bloom-grok-pwa-test-sync/);
+  assert.match(text, /# Apply bloom-grok-pwa-test-sync/);
+  assert.doesNotMatch(text, /npm run autofix/);
+});
+
+test("cli assign --job unknown id fails closed", async () => {
+  const out = mkdtempSync(join(tmpdir(), "agent-ops-assign-missing-"));
+  await assert.rejects(
+    () => capture(["assign", "--job", "missing-leftover", "--out", out]),
+    /unknown job/,
+  );
+});
+
 test("peekBusyJob --world is opt-in Origin leftover, not a GitHub steal", () => {
   const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
   const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
