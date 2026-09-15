@@ -197,6 +197,16 @@ test("cli busy --job with --agent does not claim a blocked catalog card", async 
   assert.deepEqual(job.claim, prior.claim);
 });
 
+test("cli list --job peeks the named catalog card", async () => {
+  const result = await capture(["list", "--job", "dronehive-unicode-ci"]);
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.length, 1);
+  assert.equal(parsed[0].id, "dronehive-unicode-ci");
+  assert.ok(parsed[0].applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.doesNotMatch(parsed[0].notes, /Blocked: Yuri scoped this landing pad to Genesis only/);
+});
+
 test("cli list --all drops the Genesis-only blocked line on catalog cards", async () => {
   const result = await capture(["list", "--all"]);
   assert.equal(result.code, 0);

@@ -11,9 +11,9 @@ No new agents. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Do not inventory the pad again.
 Sibling `main` SHAs unchanged (`288a484` / `d4b2949` / `bba7188` /
 `074bad0` / `d538a89`). Catalog still 162. Hunt closed. PR #10 still
-`82161d8`. Shipped this interval: `status --job` peeks the named
-catalog card + `applyNext` and leaves leftover `next` alone. Do not
-invent leftovers.
+`82161d8`. Shipped this interval: `status --job` and `list --job`
+peek the named catalog card + `applyNext`. Leftover `next` stays
+alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -46,6 +46,8 @@ write-checkout steps. Catalog `brief` / `helpers` / `handoff` /
 (do not claim leftover next). `next --job` JSON includes `applyNext`.
 `status --job <catalog-id>` attaches that card + `applyNext` as
 `summary.job` and leaves leftover `next` as the expired Origin claim.
+`list --job <catalog-id>` returns that one card + `applyNext` and
+bypasses the Genesis-only filter (bare `list` stays Genesis-only).
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.

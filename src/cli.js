@@ -102,6 +102,13 @@ export async function runCli(argv, options = {}) {
   switch (command) {
     case "list": {
       const ledger = loadLedger(ledgerPath);
+      const explicitId =
+        positionals[0] || (flags.job && flags.job !== "true" ? flags.job : "");
+      if (explicitId) {
+        const job = resolveJob(ledger, positionals, flags, nowMs, options);
+        write(JSON.stringify(job ? [withRelaunch(job)] : [], null, 2));
+        return job ? 0 : 1;
+      }
       const jobs = listJobs(ledger, jobFilters(flags), nowMs).map((job) =>
         jobForDisplay(job),
       );
@@ -539,7 +546,7 @@ function helpText() {
   return `agent-ops — claim work so agents stay busy
 
 Commands:
-  list
+  list [--job id] [--kind kind] [--repo repo] [--here] [--all] [--world]  # --job is that card + applyNext
   next [id] [--job id] [--kind kind] [--repo repo] [--here] [--all] [--world] [--agent <bcId>]
   slots [--here] [--all] [--world]
   assign [--out dir]
