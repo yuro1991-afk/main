@@ -22,6 +22,7 @@ TRUTH_BIND.json remappable keys only. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-truth-bind-paths-from-ops
 - git apply --check /path/to/main/patches/dronehive-truth-bind-paths.patch
 - git apply /path/to/main/patches/dronehive-truth-bind-paths.patch
+- python3 -c "import json; d=json.load(open('TRUTH_BIND.json')); assert d['root']=='.'; assert d['universal']=='host/library/truth/UNIVERSAL_TRUTH.md'; assert d['oath_gate']=='host/library/bin/truth_oath_gate.py'; assert d['agreement']=='host/library/oath/CURRENT_AGREEMENT.json'"
 
 ## Verify
 

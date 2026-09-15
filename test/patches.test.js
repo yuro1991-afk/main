@@ -435,6 +435,19 @@ test("cli patches --job dronehive-work-order-doc-cd includes the docs swarm entr
   assert.ok(parsed.applyNext.some((line) => line.includes("docs/WORK_ORDER.md") && line.includes("cd .") && line.includes("ai-worker-drone-0.5b")));
 });
 
+test("cli patches --job dronehive-truth-bind-paths includes the TRUTH_BIND.json afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-truth-bind-paths"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-truth-bind-paths");
+  assert.ok(parsed.applyNext.some((line) => line.includes("TRUTH_BIND.json") && line.includes("host/library") && line.includes("UNIVERSAL_TRUTH.md")));
+});
+
 test("cli patches --job dronehive-enable-bridge-fallback includes the Enable-Bridge1080 afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-enable-bridge-fallback"], {
