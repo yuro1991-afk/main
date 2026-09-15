@@ -22,6 +22,7 @@ apps/drone-ollama-app/src/main.rs Open benchmarks only. Do not edit drone/pro/to
 - git checkout -b cursor/dronehive-ollama-app-open-benchmarks-from-ops
 - git apply --check /path/to/main/patches/dronehive-ollama-app-open-benchmarks.patch
 - git apply /path/to/main/patches/dronehive-ollama-app-open-benchmarks.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-app/src/main.rs').read_text(); assert any(x.strip() == 'r'+chr(34)+'out'+chr(92)+'benchmarks'+chr(34)+',' for x in t.splitlines()); assert '0.5b'+chr(92)+'out'+chr(92)+'benchmarks' not in t"
 
 ## Verify
 

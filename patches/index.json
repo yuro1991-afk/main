@@ -1473,8 +1473,10 @@
       "file": "patches/dronehive-ollama-app-open-benchmarks.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "main.rs Open benchmarks uses out\\\\benchmarks. Independent of out leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/src/main.rs').read_text(); assert any(x.strip() == 'r'+chr(34)+'out'+chr(92)+'benchmarks'+chr(34)+',' for x in t.splitlines()); assert '0.5b'+chr(92)+'out'+chr(92)+'benchmarks' not in t\""
+      ],
+      "notes": "main.rs Open benchmarks argument is out\\\\benchmarks. After apply: assert a stripped r+quote+out+backslash+benchmarks line and that 0.5b\\\\out\\\\benchmarks is gone. Seal leftover still pins 0.5b\\\\out\\\\OPERATIONAL_SEAL. Independent of out leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-ollama-app-open-workspace",
