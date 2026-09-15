@@ -978,8 +978,10 @@
       "file": "patches/dronehive-start-tui-cargo-honesty.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "START_TUI_OLLAMA.bat Build echo uses %ROOT%\\\\host\\\\ai-home\\\\tools\\\\cargo\\\\bin. Independent of START_SUPER_MESH leftover (different file). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('START_TUI_OLLAMA.bat').read_text(); assert r'%ROOT%\\\\host\\\\ai-home\\\\tools\\\\cargo\\\\bin' in t; assert r'G:\\\\AI-Home\\\\tools\\\\cargo\\\\bin' not in t\""
+      ],
+      "notes": "START_TUI_OLLAMA.bat Build echo uses %ROOT%\\\\host\\\\ai-home\\\\tools\\\\cargo\\\\bin. After apply: assert that PATH and that G:\\\\AI-Home\\\\tools\\\\cargo\\\\bin is gone. Independent of START_SUPER_MESH leftover (different file). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-ollama-tui-readme-cargo",

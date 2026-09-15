@@ -22,6 +22,7 @@ START_TUI_OLLAMA.bat Build echo line only. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-start-tui-cargo-honesty-from-ops
 - git apply --check /path/to/main/patches/dronehive-start-tui-cargo-honesty.patch
 - git apply /path/to/main/patches/dronehive-start-tui-cargo-honesty.patch
+- python3 -c "from pathlib import Path; t=Path('START_TUI_OLLAMA.bat').read_text(); assert r'%ROOT%\\host\\ai-home\\tools\\cargo\\bin' in t; assert r'G:\\AI-Home\\tools\\cargo\\bin' not in t"
 
 ## Verify
 
