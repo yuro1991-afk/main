@@ -102,6 +102,8 @@ export {
   defaultRosterPath,
   launchPathFor,
   leftoverLaunchRows,
+  leftoverUnusedExhaustedRule,
+  LEFTOVER_UNUSED_RULE,
   launchedJobIds,
   presentLaunchIds,
   missingLaunchRows,
