@@ -903,6 +903,32 @@
         "dronehive-work-order-ai-smarts-packs",
         "dronehive-seed-work-order-ai-smarts-packs"
       ]
+    },
+    {
+      "number": 66,
+      "url": "https://github.com/yuro1991-afk/main/pull/66",
+      "branch": "cursor/siblings-prs-63-65-108b",
+      "title": "Record landing-pad PRs 63–65 on the siblings board",
+      "role": "siblings-board",
+      "owns": [
+        "review-landing-pad-prs"
+      ]
+    },
+    {
+      "number": 67,
+      "url": "https://github.com/yuro1991-afk/main/pull/67",
+      "branch": "cursor/missing-empty-prefer-unicode-108b",
+      "title": "Point exhausted leftover-launch prefer at the first parked apply",
+      "role": "assign-missing",
+      "owns": []
+    },
+    {
+      "number": 68,
+      "url": "https://github.com/yuro1991-afk/main/pull/68",
+      "branch": "cursor/agents-leftover-exhausted-honesty-108b",
+      "title": "Tell idle agents leftover launches are exhausted",
+      "role": "pointers",
+      "owns": []
     }
   ]
 }
