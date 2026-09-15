@@ -1,4 +1,4 @@
-# Landing-pad PR review (2026-09-15T08:54Z)
+# Landing-pad PR review (2026-09-15T09:02Z)
 
 Written on this pad for `review-landing-pad-prs`. Merge stays with Yuri.
 Do not comment on GitHub unless Yuri asked. Do not open another queue.
@@ -7,7 +7,7 @@ Do not comment on GitHub unless Yuri asked. Do not open another queue.
 `node src/cli.js probe`.
 
 #8 already has a stale `reviews/LANDING-PAD-PRS.md` (19:05Z) that stops
-at #8. This file is the current board, including #9–#62.
+at #8. This file is the current board, including #9–#65.
 
 | PR | state | take? |
 | --- | --- | --- |
@@ -71,6 +71,9 @@ at #8. This file is the current board, including #9–#62.
 | [#60](https://github.com/yuro1991-afk/main/pull/60) | draft MERGEABLE + CI green | swarm-seal, bridge, and doc-board leftover launches. Stacked on #59. |
 | [#61](https://github.com/yuro1991-afk/main/pull/61) | draft MERGEABLE + CI green | seed-board, lab, and honesty leftover launches. Stacked on #60. |
 | [#62](https://github.com/yuro1991-afk/main/pull/62) | draft MERGEABLE + CI green | registry-cli, clone-dest, and pythonpath leftover launches. Stacked on #61. |
+| [#63](https://github.com/yuro1991-afk/main/pull/63) | draft MERGEABLE + CI green | siblings board 59–62. Stacked on #62. |
+| [#64](https://github.com/yuro1991-afk/main/pull/64) | draft MERGEABLE + CI green | ai-bus packs, live-mirror, and core-lessons leftover launches. Stacked on #63. |
+| [#65](https://github.com/yuro1991-afk/main/pull/65) | draft MERGEABLE + CI green | last three catalog leftover launches. Stacked on #64. |
 
 ## Merge order
 
@@ -125,11 +128,14 @@ at #8. This file is the current board, including #9–#62.
 49. Merge **#60** (swarm-seal, bridge, and doc-board leftover launches).
 50. Merge **#61** (seed-board, lab, and honesty leftover launches).
 51. Merge **#62** (registry-cli, clone-dest, and pythonpath leftover launches).
-52. Review **#13**; do not steal. Independent of the #11 stack.
-53. Review **#10**; do not merge onto `main` until Yuri retargets the base.
-54. Skip #4/#5/#6.
-55. Do not merge #7 after #8/#11 unless rewritten.
-56. #8 and #9 can close after #11 lands.
+52. Merge **#63** (siblings board 59–62).
+53. Merge **#64** (ai-bus packs, live-mirror, and core-lessons leftover launches).
+54. Merge **#65** (last three catalog leftover launches).
+55. Review **#13**; do not steal. Independent of the #11 stack.
+56. Review **#10**; do not merge onto `main` until Yuri retargets the base.
+57. Skip #4/#5/#6.
+58. Do not merge #7 after #8/#11 unless rewritten.
+59. #8 and #9 can close after #11 lands.
 
 ## DroneHive (cannot push from this token)
 
