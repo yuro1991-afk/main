@@ -574,6 +574,55 @@
         "dronehive-seed-work-order-doc-cd",
         "dronehive-spec-relative"
       ]
+    },
+    {
+      "number": 39,
+      "url": "https://github.com/yuro1991-afk/main/pull/39",
+      "branch": "cursor/siblings-prs-35-38-108b",
+      "title": "Record landing-pad PRs 35–38 on the siblings board",
+      "role": "siblings-board",
+      "owns": [
+        "review-landing-pad-prs"
+      ]
+    },
+    {
+      "number": 40,
+      "url": "https://github.com/yuro1991-afk/main/pull/40",
+      "branch": "cursor/super-mesh-cd-launches-108b",
+      "title": "Add Apply launches for super-mesh-cd leftover cards",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-start-super-mesh-cd",
+        "dronehive-start-multi-model-pythonpath",
+        "dronehive-start-seer-pythonpath",
+        "dronehive-enable-bridge-fallback"
+      ]
+    },
+    {
+      "number": 41,
+      "url": "https://github.com/yuro1991-afk/main/pull/41",
+      "branch": "cursor/truth-bind-paths-launches-108b",
+      "title": "Add Apply launches for truth-bind-paths leftover cards",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-truth-bind-paths",
+        "dronehive-package-release-v2-cargo",
+        "dronehive-mount-launch-cargo",
+        "dronehive-install-ollama-app-cargo"
+      ]
+    },
+    {
+      "number": 42,
+      "url": "https://github.com/yuro1991-afk/main/pull/42",
+      "branch": "cursor/tui-cargo-honesty-launches-108b",
+      "title": "Add Apply launches for tui-cargo-honesty leftover cards",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-start-tui-cargo-honesty",
+        "dronehive-ollama-tui-readme-cargo",
+        "dronehive-mount-readme-cargo",
+        "dronehive-tui-readme-cargo"
+      ]
     }
   ]
 }
