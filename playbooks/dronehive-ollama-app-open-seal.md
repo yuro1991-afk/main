@@ -22,6 +22,7 @@ apps/drone-ollama-app/src/main.rs Open OPERATIONAL_SEAL only. Do not edit drone/
 - git checkout -b cursor/dronehive-ollama-app-open-seal-from-ops
 - git apply --check /path/to/main/patches/dronehive-ollama-app-open-seal.patch
 - git apply /path/to/main/patches/dronehive-ollama-app-open-seal.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-app/src/main.rs').read_text(); assert any(x.strip() == 'r'+chr(34)+'out'+chr(92)+'OPERATIONAL_SEAL.json'+chr(34)+',' for x in t.splitlines()); assert '0.5b'+chr(92)+'out'+chr(92)+'OPERATIONAL_SEAL.json' not in t"
 
 ## Verify
 

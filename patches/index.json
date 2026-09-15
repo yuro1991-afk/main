@@ -1506,8 +1506,10 @@
       "file": "patches/dronehive-ollama-app-open-seal.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "main.rs Open OPERATIONAL_SEAL uses out\\\\OPERATIONAL_SEAL.json. Independent of out leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/src/main.rs').read_text(); assert any(x.strip() == 'r'+chr(34)+'out'+chr(92)+'OPERATIONAL_SEAL.json'+chr(34)+',' for x in t.splitlines()); assert '0.5b'+chr(92)+'out'+chr(92)+'OPERATIONAL_SEAL.json' not in t\""
+      ],
+      "notes": "main.rs Open OPERATIONAL_SEAL argument is out\\\\OPERATIONAL_SEAL.json. After apply: assert that stripped line and that 0.5b\\\\out\\\\OPERATIONAL_SEAL.json is gone. Out and benchmarks leftovers stay. Independent of out leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-mount-engine-out",
