@@ -769,8 +769,10 @@
       "file": "patches/dronehive-work-order-doc-codex-cli.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "docs/WORK_ORDER.md & $py query_llm_codex.py examples use host/library/bin. Independent of the table leftover (does not touch Query CLI row). Leaves recall.py / build_llm_codex.py leftovers. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert 'host/library/bin/query_llm_codex.py stats' in t; assert 'host/library/bin/query_llm_codex.py use coding' in t; assert 'host/library/bin/query_llm_codex.py vram' in t\""
+      ],
+      "notes": "docs/WORK_ORDER.md query_llm_codex.py examples use host/library/bin, not F:\\\\GrokSelfLibrary. After apply: assert stats, use coding, and vram examples. Independent of the table leftover (does not touch Query CLI row). Leaves recall.py leftovers. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-seed-work-order-doc-codex-cli",

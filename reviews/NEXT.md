@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T01:27Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T01:28Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`34bf58e`. Shipped this interval: `dronehive-seed-work-order-doc-codex-paths`
-seed docs codex table afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`8ad4f37`. Shipped this interval: `dronehive-work-order-doc-codex-cli`
+docs query_llm_codex afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -70,7 +70,8 @@ seed docs codex table afterApply. Leftover `next` stays alone. Do not invent lef
 | next unused seed doc-live-registry apply | `dronehive-seed-work-order-doc-live-registry` (seed live-registry afterApply wired) |
 | next unused doc-codex-paths apply | `dronehive-work-order-doc-codex-paths` (docs codex table afterApply wired) |
 | next unused seed doc-codex-paths apply | `dronehive-seed-work-order-doc-codex-paths` (seed docs codex table afterApply wired) |
-| next afterApply to wire | `dronehive-work-order-doc-codex-cli` (docs & $py query_llm_codex examples only) |
+| next unused doc-codex-cli apply | `dronehive-work-order-doc-codex-cli` (docs query_llm_codex afterApply wired) |
+| next afterApply to wire | `dronehive-seed-work-order-doc-codex-cli` (seed docs query_llm_codex examples only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -204,7 +205,9 @@ Face-swap README honesty leftovers are exhausted.
 (codex table uses `host/library` for CODEX.md, models catalog, query CLI, rebuild).
 `dronehive-seed-work-order-doc-codex-paths` afterApply asserts seed WORK_ORDER.md
 (codex table uses `host/library` for CODEX.md, models catalog, query CLI, rebuild).
-Next afterApply to wire is `dronehive-work-order-doc-codex-cli`.
+`dronehive-work-order-doc-codex-cli` afterApply asserts docs/WORK_ORDER.md
+(query_llm_codex examples use `host/library/bin` for stats, use coding, vram).
+Next afterApply to wire is `dronehive-seed-work-order-doc-codex-cli`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -279,7 +282,7 @@ then unused `dronehive-work-order-doc-live-registry` (docs live-registry table +
 then unused `dronehive-seed-work-order-doc-live-registry` (seed docs live-registry table + $reg only; afterApply wired; independent of live docs),
 then unused `dronehive-work-order-doc-codex-paths` (docs codex table only; afterApply wired; independent of CLI examples),
 then unused `dronehive-seed-work-order-doc-codex-paths` (seed docs codex table only; afterApply wired; independent of live docs),
-then unused `dronehive-work-order-doc-codex-cli` (docs & $py query_llm_codex examples only; independent of table leftover),
+then unused `dronehive-work-order-doc-codex-cli` (docs query_llm_codex examples only; afterApply wired; independent of table leftover),
 then unused `dronehive-seed-work-order-doc-codex-cli` (seed docs & $py query_llm_codex examples only; independent of live docs),
 then unused `dronehive-work-order-doc-recall-router` (docs recall.py + ai_smarts_router.py only),
 then unused `dronehive-seed-work-order-doc-recall-router` (seed recall/router only),
