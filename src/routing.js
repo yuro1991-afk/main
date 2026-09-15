@@ -27,9 +27,9 @@ export const ROUTE_CONTRACT = "agent-ops.route.v1";
 export const ROUTES = Object.freeze([
   {
     intent: "keep agents busy",
-    destination: "the next unused GitHub sibling (dronehive / opensussy / bloom / face-swap / ollama-voice)",
+    destination: "leftover unused review is review-landing-pad-prs",
     kind: "fix",
-    notes: "Forget Origin. Take a unique GitHub card. This pad token cannot push siblings.",
+    notes: "Leftover unused empty keep-busy is leftover unused review. Do not invent leftover unused next. Forget Origin.",
     jobId: null,
     packet: null,
   },
