@@ -1,4 +1,4 @@
-import { applyNextForJob, catalogPatchFor, catalogPatchSummary, displayCollision, displayNotes, firstCommands, proveAfterApplyForJob } from "./brief.js";
+import { applyNextForJob, catalogPatchFor, catalogPatchSummary, displayCollision, displayNotes, firstCommands, proveAfterApplyForJob, takeInsteadFields } from "./brief.js";
 import { packetPathFor, relaunchFor } from "./handoff.js";
 
 export const PROMPT_CONTRACT = "agent-ops.prompt.v1";
@@ -138,6 +138,7 @@ export function buildPrompt(job) {
     packet: packetPathFor(job),
     applyNext: applyNextForJob(job),
     proveAfterApplyCommand: proveAfterApplyForJob(job),
+    ...takeInsteadFields(job),
     text: renderLaunchPrompt(job),
   };
 }

@@ -57,6 +57,12 @@ test("gub-superbrain-probe helpers refuse the probe", () => {
   assert.match(text, /prove-after-apply/);
   assert.doesNotMatch(text, /origin auth status/);
   assert.doesNotMatch(text, /Implement the slice there/);
+  assert.equal(packet.takeInstead, "dronehive-unicode-ci");
+  assert.ok(packet.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    packet.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
 });
 
 test("review helpers name open PRs #8/#9/#10", () => {

@@ -375,6 +375,13 @@ test("gub-superbrain-probe relaunch refuses the probe", () => {
   });
   assert.match(text, /patches --prove --job dronehive-unicode-ci/);
   assert.match(text, /patches --prove-after-apply --job dronehive-unicode-ci/);
+  assert.equal(packet.takeInstead, "dronehive-unicode-ci");
+  assert.ok(packet.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    packet.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  assert.match(target.reason, /prove-after-apply --job dronehive-unicode-ci/);
 });
 
 test("every sibling role has a description", () => {

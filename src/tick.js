@@ -1,5 +1,6 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { proveAfterApplyForJob, takeInsteadCatalogId } from "./brief.js";
 import { peekBusyJob } from "./dispatch.js";
 import { assertNeverStatus } from "./kinds.js";
 import { effectiveStatus, nextJob, summarize } from "./ledger.js";
@@ -39,6 +40,8 @@ export function writeInventoryTick(ledger, destPath, nowMs, extras = {}) {
     done: counts.done,
     blocked: counts.blocked,
     nextId: next ? next.id : null,
+    takeInsteadId: takeInsteadCatalogId(next) ?? null,
+    proveAfterApplyCommand: proveAfterApplyForJob(next) ?? null,
     worldNextId: worldNext ? worldNext.id : null,
     originLoggedIn: origin ? Boolean(origin.loggedIn) : null,
     originStatus: origin ? origin.status ?? null : null,

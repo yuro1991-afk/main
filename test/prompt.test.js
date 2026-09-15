@@ -52,6 +52,25 @@ test("gub-superbrain-probe prompt refuses the probe", () => {
   assert.doesNotMatch(text, /This pad token cannot push Origin — implement there/);
   assert.match(text, /patches --prove/);
   assert.match(text, /prove-after-apply/);
+  const packet = buildPrompt({
+    id: "gub-superbrain-probe",
+    title: "Probe Superbrain",
+    repo: "origin.cursor.com/git/yuri-afk/genesis",
+    kind: "origin-slice",
+    priority: 3,
+    status: "claimed",
+    claim: null,
+    notes: "Expired leftover next",
+    verify: "Do not probe. Leave a review on main#10 or apply one catalog patch.",
+    files: [],
+    collision: "Do not reopen main#1",
+  });
+  assert.equal(packet.takeInstead, "dronehive-unicode-ci");
+  assert.ok(packet.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    packet.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
 });
 
 test("cataloged sibling prompt is apply, not Origin launch", () => {

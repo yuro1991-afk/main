@@ -4,7 +4,7 @@ import { mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { JOB_KINDS } from "../src/kinds.js";
-import { applyNextForJob, buildBrief, catalogPatchFor, catalogPatchSummary, catalogRequires, displayCollision, displayNotes, firstCommands, proveAfterApplyForJob } from "../src/brief.js";
+import { TAKE_INSTEAD_CATALOG_ID, applyNextForJob, buildBrief, catalogPatchFor, catalogPatchSummary, catalogRequires, displayCollision, displayNotes, firstCommands, proveAfterApplyForJob, takeInsteadCatalogId, takeInsteadCatalogPatch, takeInsteadFields } from "../src/brief.js";
 import { describeRole, loadSiblings, siblingsForJob } from "../src/siblings.js";
 import { saveLedger } from "../src/ledger.js";
 import { runCli } from "../src/cli.js";
@@ -198,6 +198,54 @@ test("catalog-kind sibling brief destination is apply, not Notion", () => {
 
 test("unknown sibling role fails closed", () => {
   assert.throws(() => describeRole("spawn-extra-board"));
+});
+
+function superbrainJob() {
+  return {
+    id: "gub-superbrain-probe",
+    title: "probe",
+    repo: "origin.cursor.com/git/yuri-afk/genesis",
+    kind: "origin-slice",
+    priority: 3,
+    status: "claimed",
+    claim: null,
+    notes: "",
+    verify: "Failed probe stays unreachable.",
+    files: [],
+    collision: "",
+  };
+}
+
+test("Superbrain leftover attaches take-instead unicode-ci apply pair", () => {
+  const sitout = superbrainJob();
+  const other = {
+    ...sitout,
+    id: "gub-inventory-tick",
+    title: "inventory",
+  };
+  assert.equal(catalogPatchFor(sitout), null);
+  assert.equal(takeInsteadCatalogId(sitout), TAKE_INSTEAD_CATALOG_ID);
+  assert.deepEqual(takeInsteadFields(sitout), { takeInstead: "dronehive-unicode-ci" });
+  const patch = takeInsteadCatalogPatch(sitout);
+  assert.equal(patch.id, "dronehive-unicode-ci");
+  assert.match(patch.file, /dronehive-pro-chat-cp1252\.patch/);
+  const apply = applyNextForJob(sitout);
+  assert.ok(apply.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.ok(apply.some((line) => line.startsWith("git clone https://github.com/yuro1991-afk/dronehive.git")));
+  assert.doesNotMatch(apply.join("\n"), /prove-after-apply/);
+  assert.equal(
+    proveAfterApplyForJob(sitout),
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  const brief = buildBrief(sitout, loadSiblings(SIBLINGS));
+  assert.equal(brief.takeInstead, "dronehive-unicode-ci");
+  assert.deepEqual(brief.applyNext, apply);
+  assert.equal(brief.proveAfterApplyCommand, proveAfterApplyForJob(sitout));
+  assert.doesNotMatch(brief.destination, /Apply the catalog patch/);
+  assert.equal(catalogPatchFor(other), null);
+  assert.equal(takeInsteadCatalogId(other), undefined);
+  assert.equal(applyNextForJob(other), undefined);
+  assert.equal(proveAfterApplyForJob(other), undefined);
 });
 
 test("cli brief defaults to next and siblings lists PRs", async () => {

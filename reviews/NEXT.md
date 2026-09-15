@@ -208,7 +208,11 @@ write-checkout steps plus `proveAfterApplyCommand` (throwaway
 and `proveAfterApplyCommand`.
 `status --job <catalog-id>` attaches that card + `applyNext` /
 `proveAfterApplyCommand` as `summary.job` and leaves leftover `next`
-as the expired Origin claim.
+as the expired Origin claim. Leftover Superbrain `next` / `status` /
+`tick` keep id `gub-superbrain-probe` and attach take-instead
+`dronehive-unicode-ci` `applyNext` / `proveAfterApplyCommand` (`tick`
+exposes `takeInsteadId` + the prove command only). Do not retarget
+keep-busy (that is #8).
 `list --job <catalog-id>` returns that one card + `applyNext` /
 `proveAfterApplyCommand` and bypasses the Genesis-only filter (bare
 `list` stays Genesis-only).
@@ -560,8 +564,10 @@ retarget onto #9. Merge #8 then #9 via `reviews/MERGE-8-9.md`.
 Value leftover is applying queued diffs on write checkouts, not mining
 new ones.
 This Genesis-only tree still blocks GitHub cards — leftover `next` is the
-expired Origin claim `gub-superbrain-probe`. After #8, leftover unused
-review is `review-main-pr10`, then `review-landing-pad-prs`. First parked
+expired Origin claim `gub-superbrain-probe` with take-instead apply
+`dronehive-unicode-ci` (`applyNext` / `proveAfterApplyCommand`; `tick`
+has `takeInsteadId`). After #8, leftover unused review is
+`review-main-pr10`, then `review-landing-pad-prs`. First parked
 apply: `dronehive-unicode-ci`.
 Cataloged apply leftovers on [main#9](https://github.com/yuro1991-afk/main/pull/9):
 first parked `dronehive-unicode-ci`, unused `dronehive-script-host-roots`

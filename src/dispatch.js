@@ -8,7 +8,7 @@ import {
   listJobs,
   nextJob,
 } from "./ledger.js";
-import { applyNextForJob, jobForDisplay, proveAfterApplyForJob } from "./brief.js";
+import { applyNextForJob, jobForDisplay, proveAfterApplyForJob, takeInsteadFields } from "./brief.js";
 import { unusedGenesisCards } from "./sync.js";
 import { buildHelperPacket } from "./helpers.js";
 import { buildRelaunch, packetPathFor, relaunchFor } from "./handoff.js";
@@ -42,6 +42,7 @@ export function slotFor(job, rank) {
     relaunch: relaunchFor(job),
     ...(applyNext ? { applyNext } : {}),
     ...(proveAfterApplyCommand ? { proveAfterApplyCommand } : {}),
+    ...takeInsteadFields(job),
   };
 }
 
@@ -77,6 +78,7 @@ export function buildSlotsForJob(job) {
     slots: [slotFor(shown, 1)],
     applyNext: applyNextForJob(shown),
     proveAfterApplyCommand: proveAfterApplyForJob(shown),
+    ...takeInsteadFields(shown),
     rule: "Peek the named card. Do not claim a blocked catalog leftover. Apply on a sibling write checkout.",
   };
 }
@@ -148,6 +150,7 @@ export function buildBusy(job, siblings, slots, options = {}) {
     helpers: buildHelperPacket(job).helpers,
     applyNext: applyNextForJob(job),
     proveAfterApplyCommand: proveAfterApplyForJob(job),
+    ...takeInsteadFields(job),
     remaining: slots.filter((slot) => slot.id !== job.id),
     action: relaunch.action,
     doNot: relaunch.doNot,

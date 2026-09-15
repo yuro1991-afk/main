@@ -83,6 +83,21 @@ test("slots lists open Genesis cards in priority order", () => {
   assert.ok(packet.claimed.some((job) => job.id === "gub-superbrain-probe"));
 });
 
+test("busy JSON for Superbrain leftover attaches take-instead apply pair", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const job = ledger.jobs.find((item) => item.id === "gub-superbrain-probe");
+  const siblings = loadSiblings(new URL("../ledger/siblings.json", import.meta.url));
+  const packet = buildBusy(job, siblings, []);
+  assert.ok(job);
+  assert.equal(packet.jobId, "gub-superbrain-probe");
+  assert.equal(packet.takeInstead, "dronehive-unicode-ci");
+  assert.ok(packet.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    packet.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+});
+
 test("busy JSON for a cataloged job includes applyNext", () => {
   const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
   const job = ledger.jobs.find((item) => item.id === "dronehive-unicode-ci");

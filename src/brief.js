@@ -10,6 +10,10 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
 export const BRIEF_CONTRACT = "agent-ops.brief.v1";
 
+/** First parked catalog apply when leftover next is the Superbrain sit-out. */
+export const TAKE_INSTEAD_CATALOG_ID = "dronehive-unicode-ci";
+export const SUPERBRAIN_SITOUT_ID = "gub-superbrain-probe";
+
 /**
  * @param {import("./ledger.js").Job} job
  * @param {{ prs: Array<{ owns?: string[], number: number, url: string, role: string, title: string, branch: string }> }} siblings
@@ -42,6 +46,7 @@ export function buildBrief(job, siblings, options = {}) {
     firstCommands: firstCommands(job, { root: options.root }),
     applyNext: applyNextForJob(job, { root: options.root }),
     proveAfterApplyCommand: proveAfterApplyForJob(job, { root: options.root }),
+    ...takeInsteadFields(job),
     hardRules: hardRules(job),
   };
 }
@@ -97,15 +102,46 @@ export function jobForDisplay(job, options = {}) {
 }
 
 /**
- * Write-checkout apply after a successful --prove. Undefined when the
- * card is not in the patch catalog (review / Origin leftovers).
+ * Leftover Superbrain sit-out parks first parked apply. Other Origin
+ * leftovers stay Origin (keep-busy retarget is #8).
+ * @param {import("./ledger.js").Job | null | undefined} job
+ * @returns {string | undefined}
+ */
+export function takeInsteadCatalogId(job) {
+  return job?.id === SUPERBRAIN_SITOUT_ID ? TAKE_INSTEAD_CATALOG_ID : undefined;
+}
+
+/**
+ * @param {import("./ledger.js").Job | null | undefined} job
+ */
+export function takeInsteadFields(job) {
+  const takeInstead = takeInsteadCatalogId(job);
+  return takeInstead ? { takeInstead } : {};
+}
+
+/**
+ * Catalog row for take-instead. Superbrain itself stays uncataloged so
+ * refuse templates do not become apply templates.
+ * @param {import("./ledger.js").Job | null} job
+ * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { file: string, afterApply?: string[] } | null }} [options]
+ */
+export function takeInsteadCatalogPatch(job, options = {}) {
+  const id = takeInsteadCatalogId(job);
+  if (!id) return null;
+  return catalogPatchFor({ id }, options);
+}
+
+/**
+ * Write-checkout apply after a successful --prove. Catalog cards use
+ * their own row. Superbrain leftover uses take-instead unicode-ci.
+ * Undefined for review / other Origin leftovers.
  * @param {import("./ledger.js").Job | null} job
  * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { id?: string, repo?: string, file: string, afterApply?: string[], requires?: string[] } | null }} [options]
  * @returns {string[] | undefined}
  */
 export function applyNextForJob(job, options = {}) {
   if (!job) return undefined;
-  const patch = catalogPatchFor(job, options);
+  const patch = catalogPatchFor(job, options) ?? takeInsteadCatalogPatch(job, options);
   if (!patch) return undefined;
   return applyNextFor({
     id: patch.id ?? job.id,
@@ -117,15 +153,15 @@ export function applyNextForJob(job, options = {}) {
 }
 
 /**
- * Throwaway afterApply prove for a cataloged card. Undefined when the
- * card is not in the patch catalog. Not a write-checkout step.
+ * Throwaway afterApply prove. Catalog cards use their id. Superbrain
+ * leftover uses take-instead unicode-ci. Not a write-checkout step.
  * @param {import("./ledger.js").Job | null} job
  * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { id?: string } | null }} [options]
  * @returns {string | undefined}
  */
 export function proveAfterApplyForJob(job, options = {}) {
   if (!job) return undefined;
-  const patch = catalogPatchFor(job, options);
+  const patch = catalogPatchFor(job, options) ?? takeInsteadCatalogPatch(job, options);
   if (!patch) return undefined;
   return proveAfterApplyCommand(patch.id ?? job.id);
 }
@@ -238,7 +274,7 @@ export function firstCommands(job, options = {}) {
         return [
           "Yuri: no more Superbrain. Do not probe :45001 / :8791.",
           "Do not run node src/cli.js probe.",
-          "Take review-main-pr10, or run node src/cli.js patches --prove then --prove-after-apply then apply a catalog patch on a sibling write checkout.",
+          "Take review-main-pr10, or run node src/cli.js patches --prove --job dronehive-unicode-ci then node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci. Apply on a sibling write checkout.",
           job.verify,
         ];
       }

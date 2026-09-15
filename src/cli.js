@@ -23,7 +23,7 @@ import {
 } from "./origin.js";
 import { defaultRoutePath, routeIntent, writeRoute } from "./routing.js";
 import { defaultInventoryPath, writeInventoryTick } from "./tick.js";
-import { applyNextForJob, buildBrief, jobForDisplay, proveAfterApplyForJob } from "./brief.js";
+import { applyNextForJob, buildBrief, jobForDisplay, proveAfterApplyForJob, takeInsteadFields } from "./brief.js";
 import { buildPrompt } from "./prompt.js";
 import {
   buildHandoff,
@@ -493,6 +493,7 @@ function withRelaunch(job) {
     relaunch: relaunchFor(shown),
     applyNext: applyNextForJob(shown),
     proveAfterApplyCommand: proveAfterApplyForJob(shown),
+    ...takeInsteadFields(shown),
   };
 }
 
@@ -602,7 +603,7 @@ Commands:
   complete <id> --agent <bcId>
   block <id> --agent <bcId> --reason <text>
   release <id> --agent <bcId>
-  status [--job id]   # leftover next stays; --job attaches that card + applyNext / proveAfterApplyCommand
+  status [--job id]   # leftover next stays; Superbrain leftover attaches take-instead applyNext / proveAfterApplyCommand; --job attaches that card + applyNext / proveAfterApplyCommand
   probe                  Refuses Superbrain / GOOSE probes (Yuri: no more Superbrain)
   origin [--login] [--out path]
   route <intent> [--agent <bcId>]   # roster card if --agent, else leftover next

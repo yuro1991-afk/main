@@ -106,6 +106,38 @@ test("cli next defaults to the first Genesis card", async () => {
   assert.match(result.out, /handoff-gub-route-intent/);
   assert.match(result.out, /yuri-afk\/genesis/);
   assert.doesNotMatch(result.out, /dronehive-unicode-ci/);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.takeInstead, undefined);
+  assert.equal(parsed.applyNext, undefined);
+});
+
+test("cli next --job Superbrain attaches take-instead apply pair", async () => {
+  const result = await capture(["next", "--job", "gub-superbrain-probe"]);
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.id, "gub-superbrain-probe");
+  assert.equal(parsed.takeInstead, "dronehive-unicode-ci");
+  assert.ok(parsed.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    parsed.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  assert.doesNotMatch(parsed.applyNext.join("\n"), /prove-after-apply/);
+});
+
+test("live leftover next Superbrain attaches take-instead apply pair", async () => {
+  const result = await capture(["next"], {
+    nowMs: Date.parse("2026-09-14T19:00:00.000Z"),
+  });
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.id, "gub-superbrain-probe");
+  assert.equal(parsed.takeInstead, "dronehive-unicode-ci");
+  assert.ok(parsed.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    parsed.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
 });
 
 test("cli next --job peeks the named catalog card", async () => {
@@ -142,6 +174,21 @@ test("cli status without --job leaves leftover next and omits job", async () => 
   assert.equal(parsed.job, undefined);
   assert.ok(parsed.next);
   assert.match(parsed.next.id, /^gub-/);
+});
+
+test("live leftover status Superbrain attaches take-instead apply pair", async () => {
+  const result = await capture(["status"], {
+    nowMs: Date.parse("2026-09-14T19:00:00.000Z"),
+  });
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.next.id, "gub-superbrain-probe");
+  assert.equal(parsed.next.takeInstead, "dronehive-unicode-ci");
+  assert.ok(parsed.next.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    parsed.next.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
 });
 
 test("cli next --world is empty when every world card is rostered", async () => {
