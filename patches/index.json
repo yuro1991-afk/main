@@ -1066,8 +1066,10 @@
       "file": "patches/dronehive-install-ollama-uninstall-root.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "Install-DroneOllamaApp.ps1 uninstall here-string $InstallRoot uses host\\\\ai-home\\\\apps\\\\DroneOllama. Independent of live $InstallRoot leftover (different string). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1').read_text(); assert r'InstallRoot = \\\"host\\\\ai-home\\\\apps\\\\DroneOllama\\\"' in t\""
+      ],
+      "notes": "Install-DroneOllamaApp.ps1 uninstall here-string uses double-quoted host\\\\ai-home\\\\apps\\\\DroneOllama. After apply: assert InstallRoot = \\\"host\\\\ai-home\\\\apps\\\\DroneOllama\\\". Leaves live single-quoted G: InstallRoot (do not assert G:\\\\AI-Home\\\\apps\\\\DroneOllama gone). Independent of live InstallRoot leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-tui-readme-root",

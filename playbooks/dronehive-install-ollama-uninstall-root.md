@@ -22,6 +22,7 @@ Install-DroneOllamaApp.ps1 uninstall here-string $InstallRoot only. Do not edit 
 - git checkout -b cursor/dronehive-install-ollama-uninstall-root-from-ops
 - git apply --check /path/to/main/patches/dronehive-install-ollama-uninstall-root.patch
 - git apply /path/to/main/patches/dronehive-install-ollama-uninstall-root.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1').read_text(); assert r'InstallRoot = \"host\\ai-home\\apps\\DroneOllama\"' in t"
 
 ## Verify
 
