@@ -494,8 +494,10 @@
       "file": "patches/dronehive-work-order-school-root.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "configs/work_order.json school_root / school_lessons_md use host/ai-center/helper-school. Independent of portable-paths (codex_extra hunk) and live-registry. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; k=json.loads(Path('configs/work_order.json').read_text())['knowledge_imprint']; assert k['school_root']=='host/ai-center/helper-school' and k['school_lessons_md']=='host/ai-center/helper-school/library/lessons'\""
+      ],
+      "notes": "configs/work_order.json knowledge_imprint school_root / school_lessons_md use host/ai-center/helper-school, not G:\\\\AI-Center. After apply: assert those keys. Independent of portable-paths (codex_extra hunk) and live-registry. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-seed-work-order-school-root",

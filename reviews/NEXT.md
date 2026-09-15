@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T00:49Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T00:50Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`0fcabfb`. Shipped this interval: `dronehive-seed-work-order-live-registry`
-seed live_registry afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`a518719`. Shipped this interval: `dronehive-work-order-school-root`
+school_root afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -45,7 +45,8 @@ seed live_registry afterApply. Leftover `next` stays alone. Do not invent leftov
 | next unused multi-hosts exe apply | `dronehive-multi-hosts-exe-honesty` (multi_hosts.json exe afterApply wired) |
 | next unused live-registry apply | `dronehive-work-order-live-registry` (live_registry afterApply wired) |
 | next unused seed live-registry apply | `dronehive-seed-work-order-live-registry` (seed live_registry afterApply wired) |
-| next afterApply to wire | `dronehive-work-order-school-root` (school_root / school_lessons_md only) |
+| next unused school-root apply | `dronehive-work-order-school-root` (school_root afterApply wired) |
+| next afterApply to wire | `dronehive-seed-work-order-school-root` (seed helper-school keys only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -129,7 +130,9 @@ Face-swap README honesty leftovers are exhausted.
 (live_registry cli/primary/events under `host/ai-center`).
 `dronehive-seed-work-order-live-registry` afterApply asserts seed work_order.json
 (live_registry cli/primary/events under `host/ai-center`).
-Next afterApply to wire is `dronehive-work-order-school-root`.
+`dronehive-work-order-school-root` afterApply asserts work_order.json
+(knowledge_imprint school_root / school_lessons_md under `host/ai-center/helper-school`).
+Next afterApply to wire is `dronehive-seed-work-order-school-root`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -179,7 +182,7 @@ then unused `dronehive-future-seer-jane-honesty` (future_seer.json jane keys onl
 then unused `dronehive-multi-hosts-exe-honesty` (multi_hosts.json G: exe keys only; afterApply wired; independent of future-seer-jane and overlay),
 then unused `dronehive-work-order-live-registry` (live_registry G: keys only; afterApply wired; independent of portable-paths and fabric-root),
 then unused `dronehive-seed-work-order-live-registry` (seed live_registry G: keys only; afterApply wired; independent of live config),
-then unused `dronehive-work-order-school-root` (school_root / school_lessons_md only; independent of portable-paths and live-registry),
+then unused `dronehive-work-order-school-root` (school_root / school_lessons_md only; afterApply wired; independent of portable-paths and live-registry),
 then unused `dronehive-seed-work-order-school-root` (seed helper-school keys only; independent of live config),
 then unused `dronehive-work-order-reference-db` (reference_db key only; -U1 skips school leftover),
 then unused `dronehive-seed-work-order-reference-db` (seed reference_db only; independent of live config),
