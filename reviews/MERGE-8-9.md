@@ -51,8 +51,8 @@ contain dollar signs or backticks (they expand in the shell). First
 parked apply: `dronehive-unicode-ci` on a dronehive write checkout.
 Next stacked dronehive CI: `dronehive-ubuntu-smoke` (`requires` unicode-ci;
 do not run the smoke). Prefer `brief --job` over stale playbooks.
-Bare `playbooks` is `--check` (reports `missingRequires`, names
-`nextApply: dronehive-unicode-ci`) and never writes. `playbooks --write`
+Bare `playbooks` is compact `--check` (names
+`nextApply: dronehive-unicode-ci` + counts) and never writes. `playbooks --write`
 and `catalog --write` refuse the in-repo `playbooks/` directory.
 `patches --prove` clones throwaways and never writes or resets `/tmp/siblings`.
 Repeat the catalog proof with

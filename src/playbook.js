@@ -115,11 +115,29 @@ export function checkPlaybook(job, markdown) {
 }
 
 /**
+ * Bare playbooks dumps 162 stale First-command lists. Compact keeps
+ * nextApply + counts so a waking agent can see the next card.
+ * @param {{ id: string, stale: boolean, missing: string[], missingRequires: string[], status?: string, prefer?: string, requires?: string[] }} row
+ */
+function compactPlaybookRow(row) {
+  const out = {
+    id: row.id,
+    stale: row.stale,
+    missingCount: row.missing.length,
+  };
+  if (row.status) out.status = row.status;
+  if (row.missingRequires.length > 0) out.missingRequires = row.missingRequires;
+  return out;
+}
+
+/**
  * Read-only drift report. Never writes playbooks/.
+ * Bare lists are compact (counts only). `--job` keeps full missing lines.
  * @param {import("./ledger.js").Job[]} jobs
  * @param {string} dir
+ * @param {{ compact?: boolean }} [options]
  */
-export function checkPlaybooks(jobs, dir) {
+export function checkPlaybooks(jobs, dir, options = {}) {
   const results = jobs.map((job) => {
     const dest = playbookPath(job, dir);
     if (!existsSync(dest)) {
@@ -136,11 +154,13 @@ export function checkPlaybooks(jobs, dir) {
   });
   const stale = results.filter((row) => row.stale).length;
   const nextApply = jobs.length === 1 ? jobs[0].id : TAKE_INSTEAD_CATALOG_ID;
+  const compact = options.compact === true;
   return {
     contract: PLAYBOOK_CHECK_CONTRACT,
     command: "playbooks",
     check: true,
     wrote: false,
+    compact,
     doNot: "Do not run writePlaybooks over playbooks/. Prefer brief / proveAfterApplyCommand.",
     prefer: `node src/cli.js brief --job ${nextApply}`,
     nextApply,
@@ -148,6 +168,6 @@ export function checkPlaybooks(jobs, dir) {
     ok: results.length - stale,
     stale,
     missingRequiresJobs: results.filter((row) => row.missingRequires.length > 0).map((row) => row.id),
-    results,
+    results: compact ? results.map(compactPlaybookRow) : results,
   };
 }

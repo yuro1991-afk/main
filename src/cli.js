@@ -481,7 +481,7 @@ export async function runCli(argv, options = {}) {
       const jobs = explicitId
         ? [resolveJob(ledger, positionals, flags, nowMs, options)].filter(Boolean)
         : catalogCheckJobs(ledger, options);
-      const report = checkPlaybooks(jobs, dest);
+      const report = checkPlaybooks(jobs, dest, { compact: !explicitId });
       write(JSON.stringify(report, null, 2));
       return 0;
     }
@@ -644,7 +644,7 @@ Commands:
 Yuri: forget Origin for sibling work. patches lists applyable GitHub diffs.
 --prove clones --no-hardlinks throwaways, runs vanilla+stacked git apply --check, and never writes or resets siblings.
 --prove-after-apply clones --no-hardlinks throwaways and never writes or resets siblings.
-playbooks defaults to --check: compares First commands, reports missingRequires, never writes. No --job names nextApply dronehive-unicode-ci. Prefer brief --job.
+playbooks defaults to --check: compares First commands, reports missingRequires, never writes. No --job is compact (nextApply dronehive-unicode-ci + counts). Prefer brief --job.
 playbooks --write requires --out and refuses the in-repo playbooks/ directory.
 catalog --write updates the ledger only; it refuses the in-repo playbooks/ and reviews/ directories.
 This token cannot push those repos. Do not copy PR #6 autofix.

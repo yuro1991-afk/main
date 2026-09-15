@@ -6,7 +6,7 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T06:00Z**: 40 IDLE + this catalog run +
+Keep-busy tick **2026-09-15T06:04Z**: 40 IDLE + this catalog run +
 `bc-01a0a0ce` RUNNING on #7 (`cursor/stub-wake-roster-108b`). Do not
 steal #7. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Catalog still 162. Hunt closed. `--prove`
@@ -24,7 +24,7 @@ Do not copy PR #6 autofix. Do not retarget keep-busy (that is #8).
 | fork `bc-84d93b47` | **eyes → vision → bridge** (already theirs) |
 | next unused apply | `faceswap-start-sh` |
 | prove a leftover gate | `patches --prove --job <id>` (throwaway; never writes siblings) then `patches --prove-after-apply --job <id>` |
-| check stale playbook | `playbooks` names `nextApply: dronehive-unicode-ci`. `playbooks --job <id>` then `brief --job`. `--write` and `catalog --write` refuse in-repo `playbooks/` |
+| check stale playbook | `playbooks` is compact (`nextApply: dronehive-unicode-ci` + counts). `playbooks --job <id>` then `brief --job`. `--write` and `catalog --write` refuse in-repo `playbooks/` |
 | next stacked apply | `dronehive-runtime-host-paths` (`requires` portable-paths) |
 | next unused stacked apply | `dronehive-config-load-overlay` (`requires` portable-paths) |
 | last host_paths stacked apply | `dronehive-app-links-host-paths` (`requires` portable-paths) |
@@ -255,7 +255,7 @@ the leftover file (ubuntu-smoke names unicode-ci first).
 `Requires (apply first)` when notes already mention the leftover file).
 `playbooks --job dronehive-ubuntu-smoke` (defaults to `--check`) reports
 that prior as `missingRequires`. Prefer `brief --job`. Bare `playbooks`
-never writes. `--write` refuses in-repo `playbooks/`.
+is compact (`nextApply` + counts) and never writes. `--write` refuses in-repo `playbooks/`.
 `dronehive-ubuntu-smoke` verify / firstCommands last line is a ci.yml
 phrase gate. Do not run the smoke.
 `dronehive-portable-paths` / `dronehive-script-host-roots` /

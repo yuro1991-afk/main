@@ -40,7 +40,7 @@ Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another que
    (no `--agent`). Read `reviews/WORLD-PHASES.md` and your
    `reviews/launch/<jobId>.md`. Do not sit in inventory.
    Optionally `node src/cli.js tick` to write `.genesis/last-inventory.json`.
-   `node src/cli.js playbooks` checks on-disk catalog playbooks (reports `missingRequires`; never writes). Prefer `brief --job`. `--write` refuses the in-repo `playbooks/` directory.
+   `node src/cli.js playbooks` checks on-disk catalog playbooks (compact: `nextApply` + counts; never writes). Prefer `brief --job`. `--write` refuses the in-repo `playbooks/` directory.
 3. If you skipped `busy`, `node src/cli.js claim <id> --agent <your-bcId>` before you start.
 4. Work on **Origin**. This pad has `/exec-daemon/tools/origin` but is
    **not logged in**. `node src/cli.js origin` records that
