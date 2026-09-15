@@ -22,6 +22,7 @@ configs/work_order.json reference_db key only. Do not edit drone/pro/tool_agent.
 - git checkout -b cursor/dronehive-work-order-reference-db-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-reference-db.patch
 - git apply /path/to/main/patches/dronehive-work-order-reference-db.patch
+- python3 -c "from pathlib import Path; import json; k=json.loads(Path('configs/work_order.json').read_text())['knowledge_imprint']; assert k['reference_db']=='host/ai-center/databases/ai_center_reference.db'"
 
 ## Verify
 
