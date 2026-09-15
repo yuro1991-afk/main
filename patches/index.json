@@ -214,8 +214,13 @@
       "file": "patches/dronehive-runtime-host-paths.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "Wraps leftover Path() in grok_handoff / future_seer / tools / operational. Apply after dronehive-portable-paths so drone/host_paths.py exists. Does not touch tool_agent.py."
+      "requires": [
+        "patches/dronehive-portable-paths.patch"
+      ],
+      "afterApply": [
+        "python3 -c \"from drone.grok_handoff import DEFAULT_ROOT\""
+      ],
+      "notes": "Wraps leftover Path() in grok_handoff / future_seer / tools / operational. requires portable-paths so drone/host_paths.py exists. After apply: import DEFAULT_ROOT. Does not touch tool_agent.py."
     },
     {
       "id": "faceswap-design-honesty",

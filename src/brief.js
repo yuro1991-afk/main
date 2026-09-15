@@ -76,7 +76,7 @@ export function jobForDisplay(job, options = {}) {
  * Write-checkout apply after a successful --prove. Undefined when the
  * card is not in the patch catalog (review / Origin leftovers).
  * @param {import("./ledger.js").Job | null} job
- * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { id?: string, repo?: string, file: string, afterApply?: string[] } | null }} [options]
+ * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { id?: string, repo?: string, file: string, afterApply?: string[], requires?: string[] } | null }} [options]
  * @returns {string[] | undefined}
  */
 export function applyNextForJob(job, options = {}) {
@@ -88,6 +88,7 @@ export function applyNextForJob(job, options = {}) {
     repo: patch.repo ?? job.repo,
     file: patch.file,
     afterApply: patch.afterApply,
+    requires: patch.requires,
   });
 }
 
@@ -118,11 +119,13 @@ export function firstCommands(job, options = {}) {
       if (patch) {
         return [
           `node src/cli.js patches --prove --job ${job.id}`,
-          `git clone https://${job.repo}.git work && cd work`,
-          `git checkout -b cursor/${job.id}-from-ops`,
-          `git apply --check /path/to/main/${patch.file}`,
-          `git apply /path/to/main/${patch.file}`,
-          ...(patch.afterApply ?? []),
+          ...applyNextFor({
+            id: patch.id ?? job.id,
+            repo: patch.repo ?? job.repo,
+            file: patch.file,
+            afterApply: patch.afterApply,
+            requires: patch.requires,
+          }),
           job.verify,
         ];
       }

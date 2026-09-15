@@ -87,9 +87,14 @@ function gitOutput(result) {
  * @returns {string[]}
  */
 export function applyNextFor(row) {
+  const priors = Array.isArray(row.requires) ? row.requires : [];
   return [
     `git clone https://${row.repo}.git work && cd work`,
     `git checkout -b cursor/${row.id}-from-ops`,
+    ...priors.flatMap((file) => [
+      `git apply --check /path/to/main/${file}`,
+      `git apply /path/to/main/${file}`,
+    ]),
     `git apply --check /path/to/main/${row.file}`,
     `git apply /path/to/main/${row.file}`,
     ...(Array.isArray(row.afterApply) ? row.afterApply : []),
@@ -248,6 +253,11 @@ export function validatePatchEntry(entry) {
   if (row.applyCheck !== "ok" && row.applyCheck !== "pending") {
     throw new Error(`unknown applyCheck: ${row.applyCheck}`);
   }
+  if (row.requires !== undefined) {
+    if (!Array.isArray(row.requires) || row.requires.some((item) => typeof item !== "string" || !item.startsWith("patches/"))) {
+      throw new Error("patch requires must be patches/ file paths");
+    }
+  }
   return /** @type {PatchEntry} */ (row);
 }
 
@@ -259,6 +269,7 @@ export function validatePatchEntry(entry) {
  *   base: string,
  *   applyCheck: "ok" | "pending",
  *   afterApply?: string[],
+ *   requires?: string[],
  *   assets?: string[],
  *   notes?: string,
  * }} PatchEntry

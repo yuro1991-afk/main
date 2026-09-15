@@ -322,6 +322,22 @@ test("cli patches --job filters one card", async () => {
   );
 });
 
+test("cli patches --job dronehive-runtime-host-paths applies portable-paths first", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-runtime-host-paths"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  const lines = parsed.applyNext;
+  const portable = lines.findIndex((line) => line.includes("dronehive-portable-paths.patch") && line.startsWith("git apply /"));
+  const runtime = lines.findIndex((line) => line.includes("dronehive-runtime-host-paths.patch") && line.startsWith("git apply /"));
+  assert.ok(portable >= 0 && runtime > portable);
+  assert.ok(lines.some((line) => line.includes("from drone.grok_handoff import DEFAULT_ROOT")));
+});
+
 test("cli patches --job faceswap-design-honesty includes the DESIGN.md afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "faceswap-design-honesty"], {
@@ -427,6 +443,19 @@ test("resolveSiblingCheckout prefers bloom alias", () => {
 test("defaultSiblingsRoot reads SIBLINGS_ROOT", () => {
   assert.equal(defaultSiblingsRoot({}), DEFAULT_SIBLINGS_ROOT);
   assert.equal(defaultSiblingsRoot({ SIBLINGS_ROOT: "/custom/siblings" }), "/custom/siblings");
+});
+
+test("applyNextFor applies required patches before the leftover", () => {
+  const lines = applyNextFor({
+    id: "dronehive-runtime-host-paths",
+    repo: "github.com/yuro1991-afk/dronehive",
+    file: "patches/dronehive-runtime-host-paths.patch",
+    requires: ["patches/dronehive-portable-paths.patch"],
+    afterApply: ["python3 -c \"from drone.grok_handoff import DEFAULT_ROOT\""],
+  });
+  const portable = lines.indexOf("git apply /path/to/main/patches/dronehive-portable-paths.patch");
+  const runtime = lines.indexOf("git apply /path/to/main/patches/dronehive-runtime-host-paths.patch");
+  assert.ok(portable >= 0 && runtime > portable);
 });
 
 test("applyNextFor is the write-checkout apply, not a leftover hunt", () => {
