@@ -6,17 +6,17 @@ Applyable diffs: `node src/cli.js patches` · `reviews/SIBLING-PATCHES.md`.
 This merge keeps #8 GitHub-first defaults and #9's patch catalog.
 Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T12:10Z**: 41 IDLE + `bc-01a0a0ce` RUNNING
+Keep-busy tick **2026-09-15T21:56Z**: 46 IDLE + `bc-01a0a0ce` RUNNING
 on #7 (`cursor/stub-wake-roster-108b`). Do not steal #7. Newest idle is
 still `bc-710c5477` — assign `bloom-grok-pwa-test-sync`. Catalog still
 162. Leftover launches exhausted (`nextMissing` null). `--prove` does
 not reset siblings. `brief`/`handoff` `related[0]` is #9 for catalog
 cards (not conflicting #4/#5/#6). Do not invent leftover 163+.
-Do not copy PR #6 autofix. Sibling board tip is **#97**.
+Do not copy PR #6 autofix. Sibling board tip is **#101**.
 
 | who | take this |
 | --- | --- |
-| leftover unused | merge **#11** through **#97**. Review leftover is `review-landing-pad-prs`. First parked apply is `dronehive-unicode-ci` |
+| leftover unused | merge **#11** through **#101**. Review leftover is `review-landing-pad-prs`. First parked apply is `dronehive-unicode-ci` |
 | first parked apply | `dronehive-unicode-ci` on a dronehive write checkout |
 | `bc-e2df7f92` | `dronehive-script-host-roots` (independent) |
 | `bc-5fe241dd` | `faceswap-design-honesty` — do not steal `genesis-world-arena` |
