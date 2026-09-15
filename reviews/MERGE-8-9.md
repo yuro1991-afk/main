@@ -32,8 +32,9 @@ the union **2–10**. Prefer #9’s array (keep #9’s catalog `owns` on #9).
 | 10 | `python-arena` | `review-main-pr10` |
 
 Keep #9’s `describeRole` cases, `siblingsForJob` / `relatedForJob`
-catalog-first sort, and `siblings --job` (so brief/handoff/siblings
-`related[0]` is applyable #9, not conflicting #4/#5/#6).
+catalog-first sort, `buildSiblingsBoard` (`nextApply` + `lead` #9),
+and `siblings --job` (so brief/handoff/siblings `related[0]` is
+applyable #9, not conflicting #4/#5/#6).
 After merge, `ops-board` is the landing-pad CLI (#3 merged, #8 GitHub-first).
 Patch catalog is #9 — not “this PR”.
 

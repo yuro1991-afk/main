@@ -100,3 +100,23 @@ export function relatedForJob(siblings, jobId) {
     meaning: describeRole(pr.role),
   }));
 }
+
+export const SIBLINGS_CONTRACT = "agent-ops.siblings.v1";
+export const FIRST_PARKED_APPLY = "dronehive-unicode-ci";
+
+/**
+ * Bare `siblings` dump. Keeps file order on `prs` (merge union 2–10).
+ * `lead` / `nextApply` name the catalog so agents do not take #5 first.
+ *
+ * @param {{ prs: Array<{ owns?: string[], number: number, url: string, role: string, title: string, branch: string }> }} siblings
+ */
+export function buildSiblingsBoard(siblings) {
+  const related = relatedForJob(siblings, FIRST_PARKED_APPLY);
+  return {
+    contract: SIBLINGS_CONTRACT,
+    nextApply: FIRST_PARKED_APPLY,
+    prefer: `node src/cli.js siblings --job ${FIRST_PARKED_APPLY}`,
+    lead: related[0] ?? null,
+    prs: siblings.prs,
+  };
+}

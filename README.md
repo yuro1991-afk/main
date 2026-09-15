@@ -30,7 +30,7 @@ node src/cli.js helpers
 node src/cli.js brief
 node src/cli.js handoff
 node src/cli.js playbooks                 # check; never writes playbooks/
-node src/cli.js siblings [--job id]       # --job: catalog-first related PRs
+node src/cli.js siblings [--job id]       # bare: nextApply + lead #9; --job: catalog-first related
 node src/cli.js patches
 node src/cli.js claim <id> --agent "$CURSOR_AGENT_ID"
 node src/cli.js origin [--login]

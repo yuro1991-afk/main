@@ -6,7 +6,7 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T06:20Z**: 40 IDLE + this catalog run +
+Keep-busy tick **2026-09-15T06:25Z**: 40 IDLE + this catalog run +
 `bc-01a0a0ce` RUNNING on #7 (`cursor/stub-wake-roster-108b`). Do not
 steal #7. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Catalog still 162. Hunt closed. `--prove`
@@ -25,7 +25,7 @@ Do not copy PR #6 autofix. Do not retarget keep-busy (that is #8).
 | fork `bc-84d93b47` | **eyes → vision → bridge** (already theirs) |
 | next unused apply | `faceswap-start-sh` |
 | list catalog leftovers | `patches` is compact (`nextApply: dronehive-unicode-ci`). `patches --job <id>` then `brief --job` |
-| list related PRs for a card | `siblings --job <id>` (`related[0]` is #9 for catalog cards). Then `brief --job` |
+| list related PRs for a card | `siblings` names `nextApply` + `lead` #9. `siblings --job <id>` is catalog-first related. Then `brief --job` |
 | check stale playbook | `playbooks` is compact (`nextApply: dronehive-unicode-ci` + counts). `playbooks --job <id>` then `brief --job`. `--write` and `catalog --write` refuse in-repo `playbooks/` |
 | prove a leftover gate | `patches --prove --job <id>` then `patches --prove-after-apply --job <id>` (throwaways; does not reset siblings) |
 | next stacked apply | `dronehive-runtime-host-paths` (`requires` portable-paths) |

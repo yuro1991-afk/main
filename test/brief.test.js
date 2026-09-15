@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { JOB_KINDS } from "../src/kinds.js";
 import { TAKE_INSTEAD_CATALOG_ID, applyNextForJob, buildBrief, catalogPatchFor, catalogPatchSummary, catalogRequires, displayCollision, displayNotes, displayVerify, firstCommands, proveAfterApplyForJob, takeInsteadCatalogId, takeInsteadCatalogPatch, takeInsteadFields } from "../src/brief.js";
-import { describeRole, loadSiblings, siblingsForJob } from "../src/siblings.js";
+import { FIRST_PARKED_APPLY, SIBLINGS_CONTRACT, buildSiblingsBoard, describeRole, loadSiblings, siblingsForJob } from "../src/siblings.js";
 import { saveLedger } from "../src/ledger.js";
 import { runCli } from "../src/cli.js";
 
@@ -342,7 +342,7 @@ test("cli siblings --job lists catalog-first related PRs", async () => {
   });
   assert.equal(code, 0);
   const parsed = JSON.parse(chunks.join(""));
-  assert.equal(parsed.contract, "agent-ops.siblings.v1");
+  assert.equal(parsed.contract, SIBLINGS_CONTRACT);
   assert.equal(parsed.job, "dronehive-unicode-ci");
   assert.deepEqual(
     parsed.related.map((pr) => pr.number),
@@ -383,8 +383,37 @@ test("cli brief defaults to next and siblings lists PRs", async () => {
     },
   });
   assert.equal(siblingsCode, 0);
+  const board = JSON.parse(listed.join(""));
+  assert.equal(board.contract, SIBLINGS_CONTRACT);
+  assert.equal(board.nextApply, FIRST_PARKED_APPLY);
+  assert.equal(board.prefer, "node src/cli.js siblings --job dronehive-unicode-ci");
+  assert.equal(board.lead.number, 9);
+  assert.equal(board.lead.role, "patch-catalog");
+  assert.deepEqual(
+    board.prs.map((pr) => pr.number),
+    [2, 3, 4, 5, 6, 7, 8, 9, 10],
+  );
   assert.match(listed.join(""), /keep-busy-queue/);
   assert.match(listed.join(""), /patch-catalog/);
+});
+
+test("cli siblings unknown id errors", async () => {
+  await assert.rejects(
+    () =>
+      runCli(["siblings", "--job", "missing"], {
+        write: () => {},
+      }),
+    /unknown job/,
+  );
+});
+
+test("buildSiblingsBoard leads with catalog #9 and keeps file PR order", () => {
+  const siblings = loadSiblings(SIBLINGS);
+  const board = buildSiblingsBoard(siblings);
+  assert.equal(board.lead.number, 9);
+  assert.match(board.lead.meaning, /patches\//);
+  assert.equal(board.prs[0].number, 2);
+  assert.equal(board.prs[3].number, 5);
 });
 
 test("cli brief --job selects the named card, not leftover next", async () => {

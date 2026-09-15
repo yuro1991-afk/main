@@ -140,8 +140,11 @@ export {
   writeAgents,
 } from "./sync.js";
 export {
+  FIRST_PARKED_APPLY,
   SIBLING_ROLES,
+  SIBLINGS_CONTRACT,
   assertNeverRole,
+  buildSiblingsBoard,
   defaultSiblingsPath,
   describeRole,
   loadSiblings,
