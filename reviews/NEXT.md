@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T01:22Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T01:24Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`733d7bf`. Shipped this interval: `dronehive-work-order-doc-live-registry`
-docs live-registry afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`2f1fd61`. Shipped this interval: `dronehive-seed-work-order-doc-live-registry`
+seed live-registry afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -67,7 +67,8 @@ docs live-registry afterApply. Leftover `next` stays alone. Do not invent leftov
 | next unused seed doc-fabric-root apply | `dronehive-seed-work-order-doc-fabric-root` (seed docs header fabric afterApply wired) |
 | next unused doc-imprints apply | `dronehive-work-order-doc-imprints` (imprint table afterApply wired) |
 | next unused doc-live-registry apply | `dronehive-work-order-doc-live-registry` (docs live-registry afterApply wired) |
-| next afterApply to wire | `dronehive-seed-work-order-doc-live-registry` (seed docs live-registry table + $reg only) |
+| next unused seed doc-live-registry apply | `dronehive-seed-work-order-doc-live-registry` (seed live-registry afterApply wired) |
+| next afterApply to wire | `dronehive-work-order-doc-codex-paths` (docs codex table only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -195,7 +196,9 @@ Face-swap README honesty leftovers are exhausted.
 (imprint table uses `host/library/knowledge/indexes/drone_imprints.jsonl`).
 `dronehive-work-order-doc-live-registry` afterApply asserts docs/WORK_ORDER.md
 (Primary/Mirror/CLI use `host/ai-center` and `host/library`).
-Next afterApply to wire is `dronehive-seed-work-order-doc-live-registry`.
+`dronehive-seed-work-order-doc-live-registry` afterApply asserts seed WORK_ORDER.md
+(Primary/Mirror/CLI use `host/ai-center` and `host/library`).
+Next afterApply to wire is `dronehive-work-order-doc-codex-paths`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -267,7 +270,7 @@ then unused `dronehive-work-order-doc-fabric-root` (docs header fabric only; aft
 then unused `dronehive-seed-work-order-doc-fabric-root` (seed docs header fabric only; afterApply wired; independent of live docs),
 then unused `dronehive-work-order-doc-imprints` (docs imprint table row only; afterApply wired; no seed copy),
 then unused `dronehive-work-order-doc-live-registry` (docs live-registry table + $reg only; afterApply wired; independent of JSON leftover),
-then unused `dronehive-seed-work-order-doc-live-registry` (seed docs live-registry table + $reg only; independent of live docs),
+then unused `dronehive-seed-work-order-doc-live-registry` (seed docs live-registry table + $reg only; afterApply wired; independent of live docs),
 then unused `dronehive-work-order-doc-codex-paths` (docs codex table only; independent of CLI examples),
 then unused `dronehive-seed-work-order-doc-codex-paths` (seed docs codex table only; independent of live docs),
 then unused `dronehive-work-order-doc-codex-cli` (docs & $py query_llm_codex examples only; independent of table leftover),

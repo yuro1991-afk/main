@@ -370,6 +370,19 @@ test("cli patches --job dronehive-runtime-host-paths applies portable-paths firs
   assert.ok(lines.some((line) => line.includes("from drone.grok_handoff import DEFAULT_ROOT")));
 });
 
+test("cli patches --job dronehive-seed-work-order-doc-live-registry includes the seed live-registry afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-seed-work-order-doc-live-registry"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-seed-work-order-doc-live-registry");
+  assert.ok(parsed.applyNext.some((line) => line.includes("drone/app/seed/docs/WORK_ORDER.md") && line.includes("host/ai-center") && line.includes("host/library/registry")));
+});
+
 test("cli patches --job dronehive-work-order-doc-live-registry includes the live-registry afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-work-order-doc-live-registry"], {
