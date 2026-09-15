@@ -735,10 +735,10 @@ Commands:
   list [--job id] [--kind kind] [--repo repo] [--here] [--all] [--origin] [--world]  # --job is that card + applyNext
   next [id] [--job id] [--kind kind] [--repo repo] [--here] [--all] [--origin] [--world] [--agent <bcId>]
   slots [--job id] [--here] [--all] [--origin] [--world]  # --job peeks that card + applyNext
-  assign [--job id] [--missing] [--out dir]  # --missing lists catalog leftovers with no launch (never writes). Leftover launches are exhausted (nextMissing null). Prefer brief --job dronehive-unicode-ci. Do not invent leftover 163+. --job writes one leftover Apply launch with catalog-first related; sit-out jobs have no launch on purpose. Else roster + leftover next
+  assign [--job id] [--missing] [--out dir]  # --missing lists catalog leftovers with no launch (never writes). Leftover launches are exhausted (nextMissing null). Prefer brief --job dronehive-unicode-ci. Do not invent leftover 163+. --job writes one leftover Apply launch with catalog-first related; sit-out jobs have no launch on purpose. Else roster + leftover unused write (leftoverNext null when leftover unused is exhausted)
   sync --agents path.json [--write] [--out dir]
   catalog [--entries path.json] [--write] [--out path]
-  busy [id] [--job id] [--agent <bcId>] [--here] [--all] [--origin] [--world]   # --job peeks; else roster then leftover next
+  busy [id] [--job id] [--agent <bcId>] [--here] [--all] [--origin] [--world]   # --job peeks; else roster then leftover unused peek (exhausted without --agent)
   helpers [id] [--job id] [--agent <bcId>]
   prompt [id] [--job id] [--agent <bcId>] [--json]
   brief [id] [--job id] [--agent <bcId>]
@@ -748,10 +748,10 @@ Commands:
   complete <id> --agent <bcId>
   block <id> --agent <bcId> --reason <text>
   release <id> --agent <bcId>
-  status [--job id]   # leftover next stays; Superbrain leftover attaches take-instead applyNext / proveAfterApplyCommand; --job attaches that card + applyNext / proveAfterApplyCommand
+  status [--job id]   # leftover unused peek is exhausted; Superbrain leftover attaches take-instead applyNext / proveAfterApplyCommand; --job attaches that card + applyNext / proveAfterApplyCommand
   probe                  Refuses Superbrain / GOOSE probes (Yuri: no more Superbrain)
   origin [--login] [--out path]
-  route <intent> [--agent <bcId>]   # roster card if --agent, else leftover next
+  route <intent> [--agent <bcId>]   # roster card if --agent, else leftover unused review (do not invent leftover unused next)
   tick [--out path]
   siblings [--job id]  # bare names nextApply + lead #9; --job is catalog-first related; prefer brief --job
   patches [jobId] [--job id] [--repo github.com/yuro1991-afk/...] [--prove] [--prove-after-apply] [--siblings-root dir]

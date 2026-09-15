@@ -305,6 +305,10 @@ test("help says playbooks defaults to check and refuses in-repo write", async ()
   assert.match(result.out, /Do not invent leftover 163\+/);
   assert.match(result.out, /--prove clones --no-hardlinks throwaways/);
   assert.match(result.out, /never writes or resets siblings/);
+  assert.match(result.out, /leftover unused peek \(exhausted without --agent\)/);
+  assert.match(result.out, /leftover unused peek is exhausted/);
+  assert.doesNotMatch(result.out, /else roster then leftover next/);
+  assert.doesNotMatch(result.out, /leftover next stays/);
 });
 
 test("NEXT leftover unused merges the stack through the siblings-board tip", () => {
