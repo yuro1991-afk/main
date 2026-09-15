@@ -22,6 +22,7 @@ apps/drone-ollama-mount/src/main.rs SMOKE_SEAL only. Do not edit drone/pro/tool_
 - git checkout -b cursor/dronehive-mount-smoke-seal-from-ops
 - git apply --check /path/to/main/patches/dronehive-mount-smoke-seal.patch
 - git apply /path/to/main/patches/dronehive-mount-smoke-seal.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-mount/src/main.rs').read_text(); assert 'apps'+chr(92)+'drone-ollama-mount'+chr(92)+'out'+chr(92)+'SMOKE_SEAL.json' in t; assert 'G:'+chr(92)+'AI-Home'+chr(92)+'projects'+chr(92)+'drone-ollama-mount'+chr(92)+'out'+chr(92)+'SMOKE_SEAL.json' not in t"
 
 ## Verify
 
