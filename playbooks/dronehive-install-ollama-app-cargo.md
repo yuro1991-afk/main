@@ -22,6 +22,7 @@ Install-DroneOllamaApp.ps1 cargo env only. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-install-ollama-app-cargo-from-ops
 - git apply --check /path/to/main/patches/dronehive-install-ollama-app-cargo.patch
 - git apply /path/to/main/patches/dronehive-install-ollama-app-cargo.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1').read_text(); assert r'host\\ai-home\\tools\\cargo' in t; assert r'G:\\AI-Home\\tools\\cargo' not in t"
 
 ## Verify
 

@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T01:50Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T01:52Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`32d83c1`. Shipped this interval: `dronehive-mount-launch-cargo`
-Launch.ps1 cargo afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`8a12352`. Shipped this interval: `dronehive-install-ollama-app-cargo`
+installer cargo afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -88,7 +88,8 @@ Launch.ps1 cargo afterApply. Leftover `next` stays alone. Do not invent leftover
 | next unused truth-bind-paths apply | `dronehive-truth-bind-paths` (TRUTH_BIND.json afterApply wired) |
 | next unused package-release-v2-cargo apply | `dronehive-package-release-v2-cargo` (package_release_v2 afterApply wired) |
 | next unused mount-launch-cargo apply | `dronehive-mount-launch-cargo` (Launch.ps1 afterApply wired) |
-| next afterApply to wire | `dronehive-install-ollama-app-cargo` (installer cargo env only) |
+| next unused install-ollama-app-cargo apply | `dronehive-install-ollama-app-cargo` (installer cargo afterApply wired) |
+| next afterApply to wire | `dronehive-start-tui-cargo-honesty` (START_TUI_OLLAMA Build echo only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -258,7 +259,9 @@ Face-swap README honesty leftovers are exhausted.
 (cargo env uses `host\\ai-home\\tools\\cargo`; G:\\AI-Home\\tools\\cargo is gone).
 `dronehive-mount-launch-cargo` afterApply asserts Launch.ps1
 (cargo env uses `host\\ai-home\\tools\\cargo`; G:\\AI-Home\\tools\\cargo is gone).
-Next afterApply to wire is `dronehive-install-ollama-app-cargo`.
+`dronehive-install-ollama-app-cargo` afterApply asserts Install-DroneOllamaApp.ps1
+(cargo env uses `host\\ai-home\\tools\\cargo`; G:\\AI-Home\\tools\\cargo is gone).
+Next afterApply to wire is `dronehive-start-tui-cargo-honesty`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -351,7 +354,7 @@ then unused `dronehive-enable-bridge-fallback` (Enable-Bridge1080 fallback only;
 then unused `dronehive-truth-bind-paths` (TRUTH_BIND.json remappable keys only; afterApply wired; independent of work_order JSON leftovers),
 then unused `dronehive-package-release-v2-cargo` (package_release_v2 cargo env only; afterApply wired; independent of start-script leftovers),
 then unused `dronehive-mount-launch-cargo` (Launch.ps1 cargo env only; afterApply wired; independent of mount README leftover),
-then unused `dronehive-install-ollama-app-cargo` (installer cargo env only),
+then unused `dronehive-install-ollama-app-cargo` (installer cargo env only; afterApply wired; independent of Launch leftover),
 then unused `dronehive-start-tui-cargo-honesty` (START_TUI_OLLAMA Build echo only),
 then unused `dronehive-ollama-tui-readme-cargo` (drone-ollama-tui README build only),
 then unused `dronehive-mount-readme-cargo` (mount README build only),
