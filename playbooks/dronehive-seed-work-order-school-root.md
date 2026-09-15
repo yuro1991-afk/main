@@ -22,6 +22,7 @@ Seed school_root / school_lessons_md only. Different file from configs/work_orde
 - git checkout -b cursor/dronehive-seed-work-order-school-root-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-school-root.patch
 - git apply /path/to/main/patches/dronehive-seed-work-order-school-root.patch
+- python3 -c "from pathlib import Path; import json; k=json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['knowledge_imprint']; assert k['school_root']=='host/ai-center/helper-school' and k['school_lessons_md']=='host/ai-center/helper-school/library/lessons'"
 
 ## Verify
 
