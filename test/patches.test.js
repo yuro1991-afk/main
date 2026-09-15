@@ -435,6 +435,19 @@ test("cli patches --job dronehive-work-order-doc-cd includes the docs swarm entr
   assert.ok(parsed.applyNext.some((line) => line.includes("docs/WORK_ORDER.md") && line.includes("cd .") && line.includes("ai-worker-drone-0.5b")));
 });
 
+test("cli patches --job dronehive-enable-bridge-fallback includes the Enable-Bridge1080 afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-enable-bridge-fallback"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-enable-bridge-fallback");
+  assert.ok(parsed.applyNext.some((line) => line.includes("Enable-Bridge1080-Admin.ps1") && line.includes("Split-Path") && line.includes("ai-worker-drone-0.5b")));
+});
+
 test("cli patches --job dronehive-start-seer-pythonpath includes the START_SEER.bat afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-start-seer-pythonpath"], {

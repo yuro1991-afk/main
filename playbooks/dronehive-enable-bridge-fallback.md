@@ -22,6 +22,7 @@ scripts/Enable-Bridge1080-Admin.ps1 fallback line only. Do not edit drone/pro/to
 - git checkout -b cursor/dronehive-enable-bridge-fallback-from-ops
 - git apply --check /path/to/main/patches/dronehive-enable-bridge-fallback.patch
 - git apply /path/to/main/patches/dronehive-enable-bridge-fallback.patch
+- python3 -c "from pathlib import Path; t=Path('scripts/Enable-Bridge1080-Admin.ps1').read_text(); assert t.count('Split-Path')>=3; assert r'G:\\AI-Home\\projects\\ai-worker-drone-0.5b' not in t"
 
 ## Verify
 

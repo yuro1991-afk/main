@@ -923,8 +923,10 @@
       "file": "patches/dronehive-enable-bridge-fallback.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "scripts/Enable-Bridge1080-Admin.ps1 fallback root is Split-Path $PSScriptRoot -Parent, not G:\\\\AI-Home. Independent of start-script leftovers (different file). Leaves the double-parent probe line. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('scripts/Enable-Bridge1080-Admin.ps1').read_text(); assert t.count('Split-Path')>=3; assert r'G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "scripts/Enable-Bridge1080-Admin.ps1 fallback root is Split-Path PSScriptRoot -Parent, not G:\\\\AI-Home. After apply: assert Split-Path count >= 3 and G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b is gone (no dollar signs in the gate). Independent of start-script leftovers (different file). Leaves the double-parent probe line. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-truth-bind-paths",

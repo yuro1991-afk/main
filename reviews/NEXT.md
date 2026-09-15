@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T01:46Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T01:47Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`b1cece5`. Shipped this interval: `dronehive-start-seer-pythonpath`
-START_SEER.bat afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`dbf8513`. Shipped this interval: `dronehive-enable-bridge-fallback`
+Enable-Bridge1080 afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -84,7 +84,8 @@ START_SEER.bat afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused start-super-mesh-cd apply | `dronehive-start-super-mesh-cd` (START_SUPER_MESH.bat afterApply wired) |
 | next unused start-multi-model-pythonpath apply | `dronehive-start-multi-model-pythonpath` (START_MULTI_MODEL.bat afterApply wired) |
 | next unused start-seer-pythonpath apply | `dronehive-start-seer-pythonpath` (START_SEER.bat afterApply wired) |
-| next afterApply to wire | `dronehive-enable-bridge-fallback` (Enable-Bridge1080 fallback only) |
+| next unused enable-bridge-fallback apply | `dronehive-enable-bridge-fallback` (Enable-Bridge1080 afterApply wired) |
+| next afterApply to wire | `dronehive-truth-bind-paths` (TRUTH_BIND.json remappable keys only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -246,7 +247,9 @@ Face-swap README honesty leftovers are exhausted.
 (PYTHONPATH uses `%ROOT%\\host\\ai-center`; G:\\AI-Center is gone from that line).
 `dronehive-start-seer-pythonpath` afterApply asserts START_SEER.bat
 (PYTHONPATH uses `%ROOT%\\host\\ai-center`; G:\\AI-Center is gone from that line).
-Next afterApply to wire is `dronehive-enable-bridge-fallback`.
+`dronehive-enable-bridge-fallback` afterApply asserts Enable-Bridge1080-Admin.ps1
+(Split-Path count >= 3; G: project path is gone; no `$` in the gate).
+Next afterApply to wire is `dronehive-truth-bind-paths`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -335,7 +338,7 @@ then unused `dronehive-spec-relative` (DroneHive.spec Analysis only; afterApply 
 then unused `dronehive-start-super-mesh-cd` (START_SUPER_MESH.bat cd only; afterApply wired; independent of spec leftover),
 then unused `dronehive-start-multi-model-pythonpath` (START_MULTI_MODEL.bat PYTHONPATH only; afterApply wired; independent of super-mesh leftover),
 then unused `dronehive-start-seer-pythonpath` (START_SEER.bat PYTHONPATH only; afterApply wired; independent of start-multi-model leftover),
-then unused `dronehive-enable-bridge-fallback` (Enable-Bridge1080 fallback only),
+then unused `dronehive-enable-bridge-fallback` (Enable-Bridge1080 fallback only; afterApply wired; independent of start-script leftovers),
 then unused `dronehive-truth-bind-paths` (TRUTH_BIND.json remappable keys only),
 then unused `dronehive-package-release-v2-cargo` (package_release_v2 cargo env only),
 then unused `dronehive-mount-launch-cargo` (Launch.ps1 cargo env only),
