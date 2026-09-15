@@ -22,6 +22,7 @@ configs/work_order.json open_tasks key only. Do not edit drone/pro/tool_agent.py
 - git checkout -b cursor/dronehive-work-order-open-tasks-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-open-tasks.patch
 - git apply /path/to/main/patches/dronehive-work-order-open-tasks.patch
+- python3 -c "from pathlib import Path; import json; assert json.loads(Path('configs/work_order.json').read_text())['ai_laws']['rank_5']['open_tasks']=='host/continuous/OPEN_TASKS.json'"
 
 ## Verify
 
