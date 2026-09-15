@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { isGithubJob, isWorldPhaseJob } from "./kinds.js";
 import { effectiveStatus, listJobs } from "./ledger.js";
 import { applyNextFor, defaultPatchesIndexPath, loadPatchIndex, patchForJob, proveAfterApplyCommand } from "./patches.js";
+import { isSitOutJob } from "./sitout.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -101,7 +102,7 @@ export function unusedGenesisCards(ledger, usedJobIds, nowMs) {
  */
 export function unusedGithubCards(ledger, usedJobIds, nowMs) {
   return listJobs(ledger, { github: true, status: "open" }, nowMs)
-    .filter((job) => !usedJobIds.has(job.id) && isGithubJob(job) && effectiveStatus(job, nowMs) === "open")
+    .filter((job) => !usedJobIds.has(job.id) && isGithubJob(job) && !isSitOutJob(job.id) && effectiveStatus(job, nowMs) === "open")
     .sort((a, b) => a.priority - b.priority);
 }
 

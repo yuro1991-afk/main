@@ -10,6 +10,7 @@ import {
   normalizeAgents,
   syncRoster,
   unusedGenesisCards,
+  unusedGithubCards,
   writeAgents,
 } from "../src/sync.js";
 import { runCli } from "../src/cli.js";
@@ -97,6 +98,24 @@ test("syncRoster does not lease or steal a claimed card", () => {
   );
   assert.equal(packet.added[0].jobId, "dronehive-unicode-ci");
   assert.ok(!packet.leftover.includes("gub-superbrain-probe"));
+});
+
+test("unusedGithubCards skips sit-out leftover cards", () => {
+  const ledger = {
+    jobs: [
+      {
+        ...job("do-not-open-fourth-queue", { priority: 1, kind: "review" }),
+        repo: "github.com/yuro1991-afk/main",
+      },
+      {
+        ...job("review-landing-pad-prs", { priority: 22, kind: "review" }),
+        repo: "github.com/yuro1991-afk/main",
+      },
+    ],
+  };
+  const leftover = unusedGithubCards(ledger, new Set(), NOW);
+  assert.equal(leftover.map((row) => row.id).includes("do-not-open-fourth-queue"), false);
+  assert.equal(leftover[0].id, "review-landing-pad-prs");
 });
 
 test("unusedGenesisCards prefers world planes over GUB inventory", () => {

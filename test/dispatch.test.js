@@ -433,7 +433,20 @@ test("leftover launch rows skip rostered cards", () => {
   assert.equal(rows[0].applyNext, undefined);
   assert.ok(!rows.some((row) => row.jobId === "dronehive-unicode-ci"));
   assert.ok(!rows.some((row) => row.jobId === "gub-route-intent"));
+  assert.ok(!rows.some((row) => SITOUT_JOB_IDS.includes(row.jobId)));
   assert.match(renderLeftoverLaunch(null), /No leftover unused GitHub card/);
+});
+
+test("leftover launch rows skip open GitHub sit-out cards", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
+  const sitout = ledger.jobs.find((item) => item.id === "do-not-open-fourth-queue");
+  assert.ok(sitout);
+  sitout.status = "open";
+  sitout.claim = null;
+  const rows = leftoverLaunchRows(ledger, roster, NOW);
+  assert.ok(!rows.some((row) => row.jobId === "do-not-open-fourth-queue"));
+  assert.equal(rows[0].jobId, "review-landing-pad-prs");
 });
 
 test("assigned Superbrain launch refuses Origin paste", () => {
