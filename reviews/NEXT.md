@@ -10,8 +10,8 @@ Keep-busy tick **2026-09-15T00:15Z** still holds: 40 IDLE + this run
 RUNNING. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`3c12e2a`. Shipped this interval: `ova-readme-linux-honesty`
-README afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`3c12e2a`. Shipped this interval: `ova-voice-card-linux-honesty`
+VOICE-ACCESS.md afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -27,7 +27,8 @@ README afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused stacked apply | `dronehive-config-load-overlay` (`requires` portable-paths) |
 | last host_paths stacked apply | `dronehive-app-links-host-paths` (`requires` portable-paths) |
 | next unused honesty apply | `ova-readme-linux-honesty` (README afterApply wired) |
-| next afterApply to wire | `ova-voice-card-linux-honesty` (VOICE-ACCESS.md only) |
+| next unused voice-card apply | `ova-voice-card-linux-honesty` (VOICE-ACCESS.md afterApply wired) |
+| next afterApply to wire | `faceswap-ios-readme-honesty` (ios/README.md only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -72,8 +73,11 @@ assert that `ROOT` uses `__file__` and drops `G:\AI-Home`.
 Host-path import leftovers are exhausted.
 `ova-readme-linux-honesty` afterApply asserts README names Windows-only
 Voice Access (`Windows 11 Voice Access` / `syntax/math CI only` /
+`not** a Voice Access install`).
+`ova-voice-card-linux-honesty` afterApply asserts VOICE-ACCESS.md
+(`Windows Voice Access / Start Menu only` / `install/QA scripts` /
 `not** a Voice Access install`). Next afterApply to wire is
-`ova-voice-card-linux-honesty`.
+`faceswap-ios-readme-honesty`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -105,7 +109,7 @@ then unused `ova-readme-linux-honesty` (README only; afterApply wired; independe
 then unused `dronehive-icons-manifest-relative` (ICONS_MANIFEST icon_root only; independent of portable-paths),
 then unused stacked `dronehive-app-links-host-paths` (links.py catalog URIs after portable-paths; `requires` now wired),
 then unused `bloom-ci-lint` (new-file lint.yml; independent of typecheck),
-then unused `ova-voice-card-linux-honesty` (VOICE-ACCESS.md only; independent of README honesty),
+then unused `ova-voice-card-linux-honesty` (VOICE-ACCESS.md only; afterApply wired; independent of README honesty),
 then unused `faceswap-ios-readme-honesty` (ios/README.md only; independent of DESIGN.md and START.sh),
 then unused `dronehive-hive-docstring-honesty` (hive.py docstring only; independent of config-load-overlay),
 then unused `dronehive-work-order-doc-honesty` (docs/WORK_ORDER.md only; independent of hive.py),

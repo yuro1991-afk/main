@@ -296,8 +296,10 @@
       "file": "patches/ova-voice-card-linux-honesty.patch",
       "base": "074bad0",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "VOICE-ACCESS.md: Voice Access / Start Menu phrases are Windows-only. Linux pwsh is not a Voice Access install. Independent of ova-readme-linux-honesty (README) and ova-api-host-override (License appendix)."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('VOICE-ACCESS.md').read_text(); assert 'Windows Voice Access / Start Menu only' in t and 'install/QA scripts' in t and 'not** a Voice Access install' in t\""
+      ],
+      "notes": "VOICE-ACCESS.md: Voice Access / Start Menu are Windows-only. After apply: assert those phrases. Independent of ova-readme-linux-honesty (README) and ova-api-host-override."
     },
     {
       "id": "faceswap-ios-readme-honesty",

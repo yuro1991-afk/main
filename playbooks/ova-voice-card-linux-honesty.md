@@ -22,6 +22,7 @@ Docs only. Different file from ova-readme-linux-honesty (README). Independent of
 - git checkout -b cursor/ova-voice-card-linux-honesty-from-ops
 - git apply --check /path/to/main/patches/ova-voice-card-linux-honesty.patch
 - git apply /path/to/main/patches/ova-voice-card-linux-honesty.patch
+- python3 -c "from pathlib import Path; t=Path('VOICE-ACCESS.md').read_text(); assert 'Windows Voice Access / Start Menu only' in t and 'install/QA scripts' in t and 'not** a Voice Access install' in t"
 
 ## Verify
 
