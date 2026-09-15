@@ -512,6 +512,8 @@ test("on-disk unicode launch is an Apply brief, not PR #5 autofix", () => {
   assert.match(leftover, /#26/);
   assert.match(leftover, /#27/);
   assert.match(leftover, /#30/);
+  assert.match(leftover, /#31/);
+  assert.match(leftover, /#34/);
 });
 
 test("unused leftover launch packets exist for parked next cards", () => {
