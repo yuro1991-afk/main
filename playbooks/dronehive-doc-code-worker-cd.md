@@ -22,10 +22,11 @@ docs/CODE_WORKER_8B.md cd line only. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-doc-code-worker-cd-from-ops
 - git apply --check /path/to/main/patches/dronehive-doc-code-worker-cd.patch
 - git apply /path/to/main/patches/dronehive-doc-code-worker-cd.patch
+- python3 -c "from pathlib import Path; t=Path('docs/CODE_WORKER_8B.md').read_text(); assert '\ncd .\n' in t; assert r'cd G:\\AI-Home\\projects\\ai-worker-drone-0.5b' not in t"
 
 ## Verify
 
-docs/CODE_WORKER_8B.md cd is .
+docs/CODE_WORKER_8B.md Smoke cd is a standalone cd . line
 
 Do not reopen https://github.com/yuro1991-afk/main/pull/1.
 Do not open another landing-pad queue.

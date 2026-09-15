@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T02:28Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T02:30Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`a88e266`. Shipped this interval: `dronehive-doc-bridge-1080-cd`
-Commands cd afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`b152d5c`. Shipped this interval: `dronehive-doc-code-worker-cd`
+Smoke cd afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -108,7 +108,8 @@ Commands cd afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused readme-cd apply | `dronehive-readme-cd` (README.md quick-start cd afterApply wired) |
 | next unused doc-agent-loop-cd apply | `dronehive-doc-agent-loop-cd` (AGENT_LOOP.md CLI cd afterApply wired) |
 | next unused doc-bridge-1080-cd apply | `dronehive-doc-bridge-1080-cd` (BRIDGE_1080.md Commands cd afterApply wired) |
-| next afterApply to wire | `dronehive-doc-code-worker-cd` (docs/CODE_WORKER_8B.md cd only) |
+| next unused doc-code-worker-cd apply | `dronehive-doc-code-worker-cd` (CODE_WORKER_8B.md Smoke cd afterApply wired) |
+| next afterApply to wire | `dronehive-doc-future-seer-cd` (docs/FUTURE_SEER.md cd only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -318,7 +319,9 @@ Face-swap README honesty leftovers are exhausted.
 (standalone `cd .` line; G: project cd is gone).
 `dronehive-doc-bridge-1080-cd` afterApply asserts docs/BRIDGE_1080.md
 (standalone `cd .` line; G: project cd is gone).
-Next afterApply to wire is `dronehive-doc-code-worker-cd`.
+`dronehive-doc-code-worker-cd` afterApply asserts docs/CODE_WORKER_8B.md
+(standalone `cd .` line; G: project cd is gone).
+Next afterApply to wire is `dronehive-doc-future-seer-cd`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -431,7 +434,7 @@ then unused `opensussy-install-sec-review-target` (install/docs/SEC_REVIEW.md Ta
 then unused `dronehive-readme-cd` (README.md only; afterApply wired),
 then unused `dronehive-doc-agent-loop-cd` (docs/AGENT_LOOP.md only; afterApply wired),
 then unused `dronehive-doc-bridge-1080-cd` (docs/BRIDGE_1080.md only; afterApply wired),
-then unused `dronehive-doc-code-worker-cd` (docs/CODE_WORKER_8B.md only),
+then unused `dronehive-doc-code-worker-cd` (docs/CODE_WORKER_8B.md only; afterApply wired),
 then unused `dronehive-doc-future-seer-cd` (docs/FUTURE_SEER.md only),
 then unused `dronehive-doc-measured-diagnostics-cd` (docs/MEASURED_DIAGNOSTICS.md only),
 then unused `dronehive-doc-multi-face-cd` (docs/MULTI_FACE.md only),

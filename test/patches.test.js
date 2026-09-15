@@ -630,6 +630,19 @@ test("cli patches --job dronehive-doc-bridge-1080-cd includes the BRIDGE_1080 cd
   assert.ok(parsed.applyNext.some((line) => line.includes("docs/BRIDGE_1080.md") && line.includes("cd .") && line.includes("ai-worker-drone-0.5b")));
 });
 
+test("cli patches --job dronehive-doc-code-worker-cd includes the CODE_WORKER_8B cd afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-doc-code-worker-cd"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-doc-code-worker-cd");
+  assert.ok(parsed.applyNext.some((line) => line.includes("docs/CODE_WORKER_8B.md") && line.includes("cd .") && line.includes("ai-worker-drone-0.5b")));
+});
+
 test("cli patches --job dronehive-tui-readme-cargo includes the dronehive-tui README afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-tui-readme-cargo"], {
