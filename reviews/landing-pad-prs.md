@@ -7,7 +7,7 @@ Do not comment on GitHub unless Yuri asked. Do not open another queue.
 `node src/cli.js probe`.
 
 #8 already has a stale `reviews/LANDING-PAD-PRS.md` (19:05Z) that stops
-at #8. This file is the current board, including #9–#88.
+at #8. This file is the current board, including #9–#92.
 
 | PR | state | take? |
 | --- | --- | --- |
@@ -97,6 +97,10 @@ at #8. This file is the current board, including #9–#88.
 | [#86](https://github.com/yuro1991-afk/main/pull/86) | draft MERGEABLE + CI green | leftover unused merge through #85. Stacked on #85. |
 | [#87](https://github.com/yuro1991-afk/main/pull/87) | draft MERGEABLE + CI green | leftover unused peek docs honesty. Stacked on #86. |
 | [#88](https://github.com/yuro1991-afk/main/pull/88) | draft MERGEABLE + CI green | leftover unused help peek honesty. Stacked on #87. |
+| [#89](https://github.com/yuro1991-afk/main/pull/89) | draft MERGEABLE + CI green | siblings board 85–88. Stacked on #88. |
+| [#90](https://github.com/yuro1991-afk/main/pull/90) | draft MERGEABLE + CI green | leftover unused merge through #89. Stacked on #89. |
+| [#91](https://github.com/yuro1991-afk/main/pull/91) | draft MERGEABLE + CI green | leftover unused empty peek honesty. Stacked on #90. |
+| [#92](https://github.com/yuro1991-afk/main/pull/92) | draft MERGEABLE + CI green | leftover unused empty peek docs honesty. Stacked on #91. |
 
 ## Merge order
 
@@ -177,11 +181,15 @@ at #8. This file is the current board, including #9–#88.
 75. Merge **#86** (leftover unused merge through #85).
 76. Merge **#87** (leftover unused peek docs honesty).
 77. Merge **#88** (leftover unused help peek honesty).
-78. Review **#13**; do not steal. Independent of the #11 stack.
-79. Review **#10**; do not merge onto `main` until Yuri retargets the base.
-80. Skip #4/#5/#6.
-81. Do not merge #7 after #8/#11 unless rewritten.
-82. #8 and #9 can close after #11 lands.
+78. Merge **#89** (siblings board 85–88).
+79. Merge **#90** (leftover unused merge through #89).
+80. Merge **#91** (leftover unused empty peek honesty).
+81. Merge **#92** (leftover unused empty peek docs honesty).
+82. Review **#13**; do not steal. Independent of the #11 stack.
+83. Review **#10**; do not merge onto `main` until Yuri retargets the base.
+84. Skip #4/#5/#6.
+85. Do not merge #7 after #8/#11 unless rewritten.
+86. #8 and #9 can close after #11 lands.
 
 ## DroneHive (cannot push from this token)
 
