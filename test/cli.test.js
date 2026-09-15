@@ -322,3 +322,13 @@ test("help says playbooks defaults to check and refuses in-repo write", async ()
   assert.match(result.out, /--prove clones --no-hardlinks throwaways/);
   assert.match(result.out, /never writes or resets siblings/);
 });
+
+test("ci uses Node 24 action runtimes and keeps project Node 20", () => {
+  const yml = readFileSync(new URL("../.github/workflows/ci.yml", import.meta.url), "utf8");
+  assert.match(yml, /actions\/checkout@v5/);
+  assert.match(yml, /actions\/setup-node@v5/);
+  assert.match(yml, /node-version: "20"/);
+  assert.match(yml, /package-manager-cache: false/);
+  assert.doesNotMatch(yml, /actions\/checkout@v4/);
+  assert.doesNotMatch(yml, /actions\/setup-node@v4/);
+});
