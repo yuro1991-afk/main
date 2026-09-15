@@ -22,6 +22,7 @@ apps/drone-ollama-mount/src/engine.rs out_dir only. Do not edit drone/pro/tool_a
 - git checkout -b cursor/dronehive-mount-engine-out-from-ops
 - git apply --check /path/to/main/patches/dronehive-mount-engine-out.patch
 - git apply /path/to/main/patches/dronehive-mount-engine-out.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-mount/src/engine.rs').read_text(); assert 'apps'+chr(92)+'drone-ollama-mount'+chr(92)+'out' in t; assert 'G:'+chr(92)+'AI-Home'+chr(92)+'projects'+chr(92)+'drone-ollama-mount'+chr(92)+'out' not in t"
 
 ## Verify
 

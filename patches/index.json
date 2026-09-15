@@ -1517,8 +1517,10 @@
       "file": "patches/dronehive-mount-engine-out.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "engine.rs out_dir uses apps\\\\drone-ollama-mount\\\\out. Independent of fabric leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-mount/src/engine.rs').read_text(); assert 'apps'+chr(92)+'drone-ollama-mount'+chr(92)+'out' in t; assert 'G:'+chr(92)+'AI-Home'+chr(92)+'projects'+chr(92)+'drone-ollama-mount'+chr(92)+'out' not in t\""
+      ],
+      "notes": "engine.rs out_dir uses apps\\\\drone-ollama-mount\\\\out. After apply: assert that phrase and G:\\\\AI-Home\\\\projects\\\\drone-ollama-mount\\\\out gone. Do not assert the folder substring alone (unpatched G: contains it). Independent of fabric leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-mount-fabric-root",
