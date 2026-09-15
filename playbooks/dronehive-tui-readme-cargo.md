@@ -22,6 +22,7 @@ apps/dronehive-tui/README.md PATH line only. Do not edit drone/pro/tool_agent.py
 - git checkout -b cursor/dronehive-tui-readme-cargo-from-ops
 - git apply --check /path/to/main/patches/dronehive-tui-readme-cargo.patch
 - git apply /path/to/main/patches/dronehive-tui-readme-cargo.patch
+- python3 -c "from pathlib import Path; t=Path('apps/dronehive-tui/README.md').read_text(); assert r'host\\ai-home\\tools\\cargo\\bin' in t; assert r'G:\\AI-Home\\tools\\cargo\\bin' not in t"
 
 ## Verify
 

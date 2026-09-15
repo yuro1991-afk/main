@@ -1011,8 +1011,10 @@
       "file": "patches/dronehive-tui-readme-cargo.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "apps/dronehive-tui/README.md build PATH uses host\\\\ai-home\\\\tools\\\\cargo\\\\bin. Leaves cd apps\\\\dronehive-tui (already relative). Independent of ollama-tui README leftover (different file). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/dronehive-tui/README.md').read_text(); assert r'host\\\\ai-home\\\\tools\\\\cargo\\\\bin' in t; assert r'G:\\\\AI-Home\\\\tools\\\\cargo\\\\bin' not in t\""
+      ],
+      "notes": "apps/dronehive-tui/README.md build PATH uses host\\\\ai-home\\\\tools\\\\cargo\\\\bin. After apply: assert that PATH and that G:\\\\AI-Home\\\\tools\\\\cargo\\\\bin is gone. Leaves cd apps\\\\dronehive-tui (already relative). Independent of ollama-tui README leftover (different file). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-apps-readme-cargo",
