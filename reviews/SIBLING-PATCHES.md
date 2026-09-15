@@ -194,7 +194,7 @@ applying these diffs on a sibling write checkout.
 - bloom lint: new-file `.github/workflows/lint.yml`. Independent of `bloom-ci-typecheck` (`ci.yml`). `eslint .` is 0 errors / 2 warnings on `288a484`. Do not fold lint into typecheck.
 - bloom grok-pwa tests: `scripts/grok-pwa-plugin.test.mjs` only. Call `GrokHeadContext`. Independent of `bloom-ci-typecheck`. Apply before relying on `npm test` in that CI. After apply (2026-09-15T00:06Z): `node --test scripts/grok-pwa-plugin.test.mjs scripts/brand-check.test.mjs` is 43/43; unpatched is 7 fail.
 - OVA voice card (2026-09-15T00:23Z): Voice Access / Start Menu stay Windows-only. After apply: assert `Windows Voice Access / Start Menu only`, `install/QA scripts`, and `not** a Voice Access install`. Unpatched VOICE-ACCESS.md has none of those. Independent of `ova-readme-linux-honesty`.
-- face-swap `ios/README.md`: gateway URL comes from `START.cmd` or `START.sh` (`FACESWAP_ENGINE`). Independent of `faceswap-design-honesty`.
+- face-swap `ios/README.md` (2026-09-15T00:24Z): gateway URL comes from `START.cmd` or `START.sh` (`FACESWAP_ENGINE`). After apply: assert `FACESWAP_ENGINE`, `START.sh`, and `one example, not the contract`. Unpatched ios/README.md has none of those. Independent of `faceswap-design-honesty`.
 - face-swap README Requirements: engine is `FACESWAP_ENGINE`. Independent of `faceswap-honesty-env-paths` (footer) and `faceswap-ios-readme-honesty`.
 - face-swap README install: documents `bash START.sh`. Independent of `faceswap-start-sh` (new file) and `faceswap-readme-requirements-honesty`.
 - face-swap README Swift: IPA is Mac/Xcode only. Independent of Requirements, install, and honesty-env-paths footer.

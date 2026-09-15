@@ -10,8 +10,8 @@ Keep-busy tick **2026-09-15T00:15Z** still holds: 40 IDLE + this run
 RUNNING. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`3c12e2a`. Shipped this interval: `ova-voice-card-linux-honesty`
-VOICE-ACCESS.md afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`3c12e2a`. Shipped this interval: `faceswap-ios-readme-honesty`
+ios/README.md afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -28,7 +28,8 @@ VOICE-ACCESS.md afterApply. Leftover `next` stays alone. Do not invent leftovers
 | last host_paths stacked apply | `dronehive-app-links-host-paths` (`requires` portable-paths) |
 | next unused honesty apply | `ova-readme-linux-honesty` (README afterApply wired) |
 | next unused voice-card apply | `ova-voice-card-linux-honesty` (VOICE-ACCESS.md afterApply wired) |
-| next afterApply to wire | `faceswap-ios-readme-honesty` (ios/README.md only) |
+| next unused ios-readme apply | `faceswap-ios-readme-honesty` (ios/README.md afterApply wired) |
+| next afterApply to wire | `faceswap-readme-requirements-honesty` (README Requirements only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -76,8 +77,10 @@ Voice Access (`Windows 11 Voice Access` / `syntax/math CI only` /
 `not** a Voice Access install`).
 `ova-voice-card-linux-honesty` afterApply asserts VOICE-ACCESS.md
 (`Windows Voice Access / Start Menu only` / `install/QA scripts` /
-`not** a Voice Access install`). Next afterApply to wire is
-`faceswap-ios-readme-honesty`.
+`not** a Voice Access install`).
+`faceswap-ios-readme-honesty` afterApply asserts ios/README.md
+(`FACESWAP_ENGINE` / `START.sh` / `one example, not the contract`).
+Next afterApply to wire is `faceswap-readme-requirements-honesty`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -110,7 +113,7 @@ then unused `dronehive-icons-manifest-relative` (ICONS_MANIFEST icon_root only; 
 then unused stacked `dronehive-app-links-host-paths` (links.py catalog URIs after portable-paths; `requires` now wired),
 then unused `bloom-ci-lint` (new-file lint.yml; independent of typecheck),
 then unused `ova-voice-card-linux-honesty` (VOICE-ACCESS.md only; afterApply wired; independent of README honesty),
-then unused `faceswap-ios-readme-honesty` (ios/README.md only; independent of DESIGN.md and START.sh),
+then unused `faceswap-ios-readme-honesty` (ios/README.md only; afterApply wired; independent of DESIGN.md and START.sh),
 then unused `dronehive-hive-docstring-honesty` (hive.py docstring only; independent of config-load-overlay),
 then unused `dronehive-work-order-doc-honesty` (docs/WORK_ORDER.md only; independent of hive.py),
 then unused `dronehive-seed-work-order-doc-honesty` (seed WORK_ORDER.md only; independent of docs/WORK_ORDER.md),

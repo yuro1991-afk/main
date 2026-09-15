@@ -22,6 +22,7 @@ Docs only. Different file from DESIGN.md and START.sh. Do not vendor InsightFace
 - git checkout -b cursor/faceswap-ios-readme-honesty-from-ops
 - git apply --check /path/to/main/patches/faceswap-ios-readme-honesty.patch
 - git apply /path/to/main/patches/faceswap-ios-readme-honesty.patch
+- python3 -c "from pathlib import Path; t=Path('ios/README.md').read_text(); assert 'FACESWAP_ENGINE' in t and 'START.sh' in t and 'one example, not the contract' in t"
 
 ## Verify
 

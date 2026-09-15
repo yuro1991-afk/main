@@ -307,8 +307,10 @@
       "file": "patches/faceswap-ios-readme-honesty.patch",
       "base": "bba7188",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "ios/README.md: gateway URL comes from START.cmd or START.sh (FACESWAP_ENGINE). Windows LAN / G: is one host example. Independent of design-honesty (DESIGN.md) and start-sh (new file)."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('ios/README.md').read_text(); assert 'FACESWAP_ENGINE' in t and 'START.sh' in t and 'one example, not the contract' in t\""
+      ],
+      "notes": "ios/README.md: gateway URL from START.cmd or START.sh (FACESWAP_ENGINE). After apply: assert those phrases. Independent of design-honesty (DESIGN.md) and start-sh (new file)."
     },
     {
       "id": "dronehive-hive-docstring-honesty",
