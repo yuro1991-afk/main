@@ -255,6 +255,8 @@ the leftover file (ubuntu-smoke names unicode-ci first).
 `Requires (apply first)` when notes already mention the leftover file).
 `playbooks --check --job dronehive-ubuntu-smoke` reports that prior as
 `missingRequires`. Prefer `brief --job`. Do not run writePlaybooks.
+`dronehive-ubuntu-smoke` verify / firstCommands last line is a ci.yml
+phrase gate. Do not run the smoke.
 Host-path import leftovers are exhausted.
 `ova-readme-linux-honesty` afterApply asserts README names Windows-only
 Voice Access (`Windows 11 Voice Access` / `syntax/math CI only` /

@@ -49,6 +49,8 @@ catalog, Superbrain refuse, prove/`applyNext` / `proveAfterApplyCommand` / `--pr
 Leftover unused review is done locally. Catalog afterApply must not
 contain dollar signs or backticks (they expand in the shell). First
 parked apply: `dronehive-unicode-ci` on a dronehive write checkout.
+Next stacked dronehive CI: `dronehive-ubuntu-smoke` (`requires` unicode-ci;
+do not run the smoke). Prefer `brief --job` over stale playbooks.
 Repeat the catalog proof with
 `node src/cli.js patches --prove --siblings-root /tmp/siblings`.
 Fork leftover organs: eyes → vision → bridge.

@@ -58,7 +58,7 @@
       "status": "blocked",
       "claim": null,
       "notes": "Keep windows-latest. Do not add packaging steps that overlap scripts/package_release.sh on PR #2.\nBlocked: Yuri scoped this landing pad to Genesis only.",
-      "verify": "Same four python-smoke commands on ubuntu-latest.",
+      "verify": "ci.yml has python-smoke-ubuntu:. Do not run the smoke.",
       "files": [
         ".github/workflows/ci.yml"
       ],

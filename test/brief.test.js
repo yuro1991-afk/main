@@ -199,6 +199,16 @@ test("cataloged sibling firstCommands use git apply, not edit", () => {
   assert.ok(gitignoreLines.some((line) => line.includes(".gitignore") && line.includes(".vercel/") && line.includes("dist/")));
 });
 
+test("ubuntu-smoke firstCommands do not run the smoke", () => {
+  const queue = JSON.parse(readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"));
+  const job = queue.jobs.find((item) => item.id === "dronehive-ubuntu-smoke");
+  assert.match(job.verify, /Do not run the smoke/);
+  assert.doesNotMatch(job.verify, /Same four python-smoke/);
+  const lines = firstCommands(job);
+  assert.equal(lines.at(-1), "ci.yml has python-smoke-ubuntu:. Do not run the smoke.");
+  assert.ok(!lines.some((line) => /Same four python-smoke/.test(line)));
+});
+
 test("catalog-kind sibling brief destination is apply, not Notion", () => {
   const siblings = loadSiblings(SIBLINGS);
   const queue = JSON.parse(readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"));
