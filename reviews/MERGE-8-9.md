@@ -24,15 +24,17 @@ the union **2–10**. Prefer #9’s array (keep #9’s catalog `owns` on #9).
 | 2 | `pointers` | `do-not-reopen-main-pr1` |
 | 3 | `ops-board` | `agent-ops-board` |
 | 4 | `keep-busy-queue` | keep-busy cards (CONFLICTING PR) |
-| 5 | `attention-and-dronehive-patch` | `dronehive-unicode-ci` |
-| 6 | `autofix-runner` | `dronehive-unicode-ci` (do not copy) |
+| 5 | `attention-and-dronehive-patch` | `dronehive-unicode-ci` (after #9) |
+| 6 | `autofix-runner` | `dronehive-unicode-ci` (do not copy; after #9) |
 | 7 | `pointers` | (wake table; stale after #8) |
 | 8 | `ops-board` | `review-main-pr8`, `review-landing-pad-prs` |
-| 9 | `patch-catalog` | catalog apply cards |
+| 9 | `patch-catalog` | catalog apply cards (includes `dronehive-unicode-ci` first) |
 | 10 | `python-arena` | `review-main-pr10` |
 
-Keep #9’s `describeRole` cases. After merge, `ops-board` is the landing-pad
-CLI (#3 merged, #8 GitHub-first). Patch catalog is #9 — not “this PR”.
+Keep #9’s `describeRole` cases and `siblingsForJob` catalog-first sort
+(so brief/handoff `related[0]` is applyable #9, not conflicting #4/#5/#6).
+After merge, `ops-board` is the landing-pad CLI (#3 merged, #8 GitHub-first).
+Patch catalog is #9 — not “this PR”.
 
 `src/brief.js`, `src/cli.js`, `src/dispatch.js`, `src/handoff.js`,
 `src/helpers.js`, `src/patches.js`, `src/playbook.js`, `src/prompt.js`,

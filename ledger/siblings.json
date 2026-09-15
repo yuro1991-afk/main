@@ -84,6 +84,7 @@
       "title": "Add applyable sibling patches (catalog only, not autofix)",
       "role": "patch-catalog",
       "owns": [
+        "dronehive-unicode-ci",
         "bloom-gitignore-vercel",
         "bloom-readme-honest-export",
         "bloom-ci-typecheck",

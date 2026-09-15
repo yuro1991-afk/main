@@ -39,7 +39,7 @@ test("siblings.json loads and maps dronehive to PR 5", () => {
   const related = siblingsForJob(siblings, "dronehive-unicode-ci");
   assert.deepEqual(
     related.map((pr) => pr.number),
-    [5, 6],
+    [9, 5, 6],
   );
   assert.match(describeRole("attention-and-dronehive-patch"), /dronehive/);
   assert.match(describeRole("ops-board"), /GitHub-first defaults live on #8/);
@@ -55,7 +55,8 @@ test("brief attaches sibling PR 5 to the unicode card", () => {
   const drone = queue.jobs.find((item) => item.id === "dronehive-unicode-ci");
   const brief = buildBrief(drone, siblings);
   assert.equal(brief.contract, "agent-ops.brief.v1");
-  assert.equal(brief.related[0].number, 5);
+  assert.equal(brief.related[0].number, 9);
+  assert.match(brief.related[0].meaning, /patches\//);
   assert.ok(brief.hardRules.some((rule) => rule.includes("no more Superbrain")));
   assert.ok(brief.hardRules.some((rule) => rule.includes("#8/#9/#10")));
   assert.ok(brief.hardRules.some((rule) => rule.includes("forget Origin for this card")));
@@ -85,6 +86,23 @@ test("brief attaches sibling PR 5 to the unicode card", () => {
       .filter((pr) => pr.number === 6)
       .every((pr) => !/npm run autofix -- apply/.test(pr.meaning)),
   );
+});
+
+test("siblingsForJob lists the catalog before conflicting keep-busy owners", () => {
+  const siblings = loadSiblings(SIBLINGS);
+  for (const id of [
+    "bloom-readme-honest-export",
+    "faceswap-mock-engine-ci",
+    "opensussy-linux-syntax-ci",
+  ]) {
+    const related = siblingsForJob(siblings, id);
+    assert.deepEqual(
+      related.map((pr) => pr.number),
+      [9, 4],
+      id,
+    );
+    assert.equal(related[0].role, "patch-catalog");
+  }
 });
 
 test("catalog displayNotes drop PR #5 / autofix apply runner", () => {

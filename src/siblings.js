@@ -67,9 +67,19 @@ export function loadSiblings(siblingsPath) {
 }
 
 /**
+ * Related PRs for a job. The patch catalog leads so brief/handoff
+ * `related[0]` is applyable #9, not conflicting #4/#5/#6.
+ *
  * @param {{ prs: Array<{ owns?: string[], number: number, url: string, role: string, title: string, branch: string }> }} siblings
  * @param {string} jobId
  */
 export function siblingsForJob(siblings, jobId) {
-  return siblings.prs.filter((pr) => Array.isArray(pr.owns) && pr.owns.includes(jobId));
+  return siblings.prs
+    .filter((pr) => Array.isArray(pr.owns) && pr.owns.includes(jobId))
+    .sort((left, right) => {
+      const leftCatalog = left.role === "patch-catalog" ? 0 : 1;
+      const rightCatalog = right.role === "patch-catalog" ? 0 : 1;
+      if (leftCatalog !== rightCatalog) return leftCatalog - rightCatalog;
+      return left.number - right.number;
+    });
 }

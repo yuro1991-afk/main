@@ -30,6 +30,8 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
   const catalogRelaunch = buildRelaunch(job, siblings);
   assert.equal(handoff.relaunch.kind, "github");
   assert.match(handoff.relaunch.url, /dronehive/);
+  assert.equal(handoff.related[0].number, 9);
+  assert.match(handoff.related[0].meaning, /patches\//);
   assert.ok(handoff.related.some((pr) => pr.number === 6));
   assert.ok(handoff.doNot.some((line) => line.includes("fifth")));
   assert.ok(handoff.doNot.some((line) => line.includes("forget Origin")));
