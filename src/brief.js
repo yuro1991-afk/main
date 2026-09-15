@@ -98,11 +98,27 @@ export function displayCollision(job, options = {}) {
  * @param {import("./ledger.js").Job} job
  * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { file: string, afterApply?: string[] } | null }} [options]
  */
+/**
+ * Verify text that firstCommands / helpers may run. Dollar idents expand
+ * empty in bash (same class as afterApply).
+ * @param {import("./ledger.js").Job | null | undefined} job
+ */
+export function displayVerify(job) {
+  return String(job?.verify ?? "").replace(/\$([A-Za-z_][A-Za-z0-9_]*)/g, "$1");
+}
+
 export function jobForDisplay(job, options = {}) {
   const notes = displayNotes(job, options);
   const collision = displayCollision(job, options);
-  if (notes === (job.notes ?? "") && collision === (job.collision ?? "")) return job;
-  return { ...job, notes, collision };
+  const verify = displayVerify(job);
+  if (
+    notes === (job.notes ?? "") &&
+    collision === (job.collision ?? "") &&
+    verify === (job.verify ?? "")
+  ) {
+    return job;
+  }
+  return { ...job, notes, collision, verify };
 }
 
 /**
@@ -229,26 +245,26 @@ export function firstCommands(job, options = {}) {
             afterApply: patch.afterApply,
             requires: patch.requires,
           }),
-          job.verify,
+          displayVerify(job),
         ];
       }
       if (job.kind === "catalog") {
         return [
           "Work Notion + Origin catalog. Do not invent URLs.",
-          job.verify,
+          displayVerify(job),
         ];
       }
       if (job.kind === "probe") {
         return [
           "Do not run node src/cli.js probe (that hits Superbrain :45001 / :8791).",
-          job.verify,
+          displayVerify(job),
         ];
       }
       return [
         `git clone https://${job.repo}.git work && cd work`,
         `git checkout -b cursor/${job.id}-from-ops`,
         `edit: ${(job.files ?? []).join(", ") || "(see notes)"}`,
-        job.verify,
+        displayVerify(job),
       ];
     case "review":
       if (job.id === "review-main-pr10") {
@@ -257,7 +273,7 @@ export function firstCommands(job, options = {}) {
           "Read reviews/main-pr10.md. Head and ears already landed. Leftover: eyes → vision → bridge.",
           "Do not invent a new tree on empty main.",
           "Do not implement eyes / vision / bridge here",
-          job.verify,
+          displayVerify(job),
         ];
       }
       if (job.id === "review-landing-pad-prs") {
@@ -265,13 +281,13 @@ export function firstCommands(job, options = {}) {
           "Read reviews/landing-pad-prs.md.",
           "Review an existing open PR: #8, #9, or #10. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8.",
           "Do not invent a new tree on empty main.",
-          job.verify,
+          displayVerify(job),
         ];
       }
       return [
         "Do not invent a new tree on empty main.",
         "Review an existing open PR: #8, #9, or #10. Skip conflicting #4/#5/#6. #3 is merged.",
-        job.verify,
+        displayVerify(job),
       ];
     case "origin-slice":
       if (job.id === "gub-superbrain-probe") {
@@ -279,7 +295,7 @@ export function firstCommands(job, options = {}) {
           "Yuri: no more Superbrain. Do not probe :45001 / :8791.",
           "Do not run node src/cli.js probe.",
           "Take review-main-pr10, or run node src/cli.js patches --prove --job dronehive-unicode-ci then node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci. Apply on a sibling write checkout.",
-          job.verify,
+          displayVerify(job),
         ];
       }
       return [
@@ -287,7 +303,7 @@ export function firstCommands(job, options = {}) {
         "If logged out: origin auth login --api-key \"$CURSOR_API_KEY\" (browser login is not available on this pad)",
         "origin repo clone yuri-afk/genesis genesis && cd genesis",
         "Do not reopen yuro1991-afk/main#1.",
-        job.verify,
+        displayVerify(job),
       ];
     default:
       return assertNeverKind(job.kind);

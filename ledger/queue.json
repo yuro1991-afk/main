@@ -657,7 +657,7 @@
       "status": "blocked",
       "claim": null,
       "notes": "docs/WORK_ORDER.md live-registry table and $reg still pin G:\\\\AI-Center and F:\\\\GrokSelfLibrary. Applyable catalog patch is patches/dronehive-work-order-doc-live-registry.patch on main#9. Independent of JSON live-registry leftover and other docs leftovers. Leave Events/HOT relative. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
-      "verify": "docs/WORK_ORDER.md live-registry Primary/Mirror/CLI and $reg use host/ai-center and host/library.",
+      "verify": "docs/WORK_ORDER.md live-registry Primary/Mirror/CLI and registry CLI paths use host/ai-center and host/library.",
       "files": [
         "docs/WORK_ORDER.md"
       ],
@@ -672,7 +672,7 @@
       "status": "blocked",
       "claim": null,
       "notes": "drone/app/seed/docs/WORK_ORDER.md live-registry table and $reg still pin G:\\\\AI-Center and F:\\\\GrokSelfLibrary. Applyable catalog patch is patches/dronehive-seed-work-order-doc-live-registry.patch on main#9. Independent of live leftover (different file). Leave Events/HOT relative. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
-      "verify": "drone/app/seed/docs/WORK_ORDER.md live-registry Primary/Mirror/CLI and $reg use host/ai-center and host/library.",
+      "verify": "drone/app/seed/docs/WORK_ORDER.md live-registry Primary/Mirror/CLI and registry CLI paths use host/ai-center and host/library.",
       "files": [
         "drone/app/seed/docs/WORK_ORDER.md"
       ],
@@ -717,7 +717,7 @@
       "status": "blocked",
       "claim": null,
       "notes": "docs/WORK_ORDER.md & $py query_llm_codex.py examples still pin F:\\\\GrokSelfLibrary\\\\bin. Applyable catalog patch is patches/dronehive-work-order-doc-codex-cli.patch on main#9. Independent of the table leftover (does not touch Query CLI row). Leave recall.py leftovers. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
-      "verify": "docs/WORK_ORDER.md & $py query_llm_codex.py examples use host/library/bin.",
+      "verify": "docs/WORK_ORDER.md python query_llm_codex.py examples use host/library/bin.",
       "files": [
         "docs/WORK_ORDER.md"
       ],
@@ -732,7 +732,7 @@
       "status": "blocked",
       "claim": null,
       "notes": "drone/app/seed/docs/WORK_ORDER.md & $py query_llm_codex.py examples still pin F:\\\\GrokSelfLibrary\\\\bin. Applyable catalog patch is patches/dronehive-seed-work-order-doc-codex-cli.patch on main#9. Independent of live leftover (different file) and seed table leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
-      "verify": "drone/app/seed/docs/WORK_ORDER.md & $py query_llm_codex.py examples use host/library/bin.",
+      "verify": "drone/app/seed/docs/WORK_ORDER.md python query_llm_codex.py examples use host/library/bin.",
       "files": [
         "drone/app/seed/docs/WORK_ORDER.md"
       ],
@@ -927,7 +927,7 @@
       "status": "blocked",
       "claim": null,
       "notes": "scripts/Enable-Bridge1080-Admin.ps1 fallback still pins G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b. Applyable catalog patch is patches/dronehive-enable-bridge-fallback.patch on main#9. Independent of start-script leftovers. Leaves the double-parent probe. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
-      "verify": "Enable-Bridge1080-Admin.ps1 fallback is Split-Path $PSScriptRoot -Parent",
+      "verify": "Enable-Bridge1080-Admin.ps1 fallback is Split-Path of PSScriptRoot parent.",
       "files": [
         "scripts/Enable-Bridge1080-Admin.ps1"
       ],
@@ -957,7 +957,7 @@
       "status": "blocked",
       "claim": null,
       "notes": "scripts/package_release_v2.ps1 still pins G:\\\\AI-Home\\\\tools cargo/rustup. Applyable catalog patch is patches/dronehive-package-release-v2-cargo.patch on main#9. Independent of start-script leftovers. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
-      "verify": "package_release_v2.ps1 cargo/rustup env uses Join-Path $Root host/ai-home/tools",
+      "verify": "package_release_v2.ps1 cargo/rustup env uses Join-Path Root host/ai-home/tools",
       "files": [
         "scripts/package_release_v2.ps1"
       ],
@@ -1077,7 +1077,7 @@
       "status": "blocked",
       "claim": null,
       "notes": "Install-DroneOllamaApp.ps1 $InstallRoot still pins G:\\\\AI-Home\\\\apps\\\\DroneOllama. Applyable catalog patch is patches/dronehive-install-ollama-app-root.patch on main#9. -U1 skips the cargo leftover. Leaves uninstall here-string. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
-      "verify": "Install-DroneOllamaApp.ps1 $InstallRoot uses host\\\\ai-home\\\\apps\\\\DroneOllama",
+      "verify": "Install-DroneOllamaApp.ps1 InstallRoot uses host\\\\ai-home\\\\apps\\\\DroneOllama",
       "files": [
         "apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1"
       ],
@@ -1092,7 +1092,7 @@
       "status": "blocked",
       "claim": null,
       "notes": "Install-DroneOllamaApp.ps1 $mountSrc still pins G:\\\\AI-Home\\\\projects\\\\drone-ollama-mount. Applyable catalog patch is patches/dronehive-install-ollama-app-mount.patch on main#9. Independent of cargo leftover and InstallRoot leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
-      "verify": "Install-DroneOllamaApp.ps1 $mountSrc uses apps\\\\drone-ollama-mount",
+      "verify": "Install-DroneOllamaApp.ps1 mountSrc uses apps\\\\drone-ollama-mount",
       "files": [
         "apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1"
       ],
@@ -1122,7 +1122,7 @@
       "status": "blocked",
       "claim": null,
       "notes": "Install-DroneOllamaApp.ps1 uninstall here-string still pins G:\\\\AI-Home\\\\apps\\\\DroneOllama. Applyable catalog patch is patches/dronehive-install-ollama-uninstall-root.patch on main#9. Independent of live $InstallRoot leftover. Do not copy PR #6 autofix. This token cannot push dronehive.\nBlocked: Yuri scoped this landing pad to Genesis only.",
-      "verify": "uninstall here-string $InstallRoot uses host\\\\ai-home\\\\apps\\\\DroneOllama",
+      "verify": "uninstall here-string InstallRoot uses host\\\\ai-home\\\\apps\\\\DroneOllama",
       "files": [
         "apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1"
       ],

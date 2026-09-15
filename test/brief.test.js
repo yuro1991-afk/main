@@ -4,7 +4,7 @@ import { mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { JOB_KINDS } from "../src/kinds.js";
-import { TAKE_INSTEAD_CATALOG_ID, applyNextForJob, buildBrief, catalogPatchFor, catalogPatchSummary, catalogRequires, displayCollision, displayNotes, firstCommands, proveAfterApplyForJob, takeInsteadCatalogId, takeInsteadCatalogPatch, takeInsteadFields } from "../src/brief.js";
+import { TAKE_INSTEAD_CATALOG_ID, applyNextForJob, buildBrief, catalogPatchFor, catalogPatchSummary, catalogRequires, displayCollision, displayNotes, displayVerify, firstCommands, proveAfterApplyForJob, takeInsteadCatalogId, takeInsteadCatalogPatch, takeInsteadFields } from "../src/brief.js";
 import { describeRole, loadSiblings, siblingsForJob } from "../src/siblings.js";
 import { saveLedger } from "../src/ledger.js";
 import { runCli } from "../src/cli.js";
@@ -207,6 +207,22 @@ test("ubuntu-smoke firstCommands do not run the smoke", () => {
   const lines = firstCommands(job);
   assert.equal(lines.at(-1), "ci.yml has python-smoke-ubuntu:. Do not run the smoke.");
   assert.ok(!lines.some((line) => /Same four python-smoke/.test(line)));
+});
+
+test("displayVerify strips dollar idents so firstCommands are bash-safe", () => {
+  assert.equal(displayVerify({ verify: "Split-Path $PSScriptRoot -Parent" }), "Split-Path PSScriptRoot -Parent");
+  assert.equal(displayVerify({ verify: "& $py query_llm_codex.py" }), "& py query_llm_codex.py");
+  assert.equal(displayVerify({ verify: "ci.yml has python-smoke-ubuntu:. Do not run the smoke." }), "ci.yml has python-smoke-ubuntu:. Do not run the smoke.");
+  const queue = JSON.parse(readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"));
+  for (const job of queue.jobs) {
+    assert.doesNotMatch(displayVerify(job), /\$[A-Za-z_]/, job.id);
+    if (job.id.startsWith("gub-") || job.kind === "origin-slice") continue;
+    const lines = firstCommands(job);
+    assert.ok(
+      !lines.some((line) => /\$[A-Za-z_]/.test(line) && !line.includes("CURSOR_API_KEY")),
+      job.id,
+    );
+  }
 });
 
 test("catalog leftover firstCommands do not run forbidden afterApply commands", () => {

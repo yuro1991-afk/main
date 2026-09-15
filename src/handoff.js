@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { applyNextForJob, catalogPatchFor, catalogPatchSummary, catalogRequires, displayCollision, displayNotes, proveAfterApplyForJob, takeInsteadFields } from "./brief.js";
+import { applyNextForJob, catalogPatchFor, catalogPatchSummary, catalogRequires, displayCollision, displayNotes, displayVerify, proveAfterApplyForJob, takeInsteadFields } from "./brief.js";
 import { assertNeverScope, jobScope } from "./kinds.js";
 import { siblingsForJob, describeRole } from "./siblings.js";
 import { defaultPatchesIndexPath, loadPatchIndex, patchForJob } from "./patches.js";
@@ -91,7 +91,7 @@ ${displayCollision(job)}
 
 ## Verify
 
-${job.verify}
+${displayVerify(job)}
 
 ## Do not
 
@@ -133,7 +133,7 @@ ${displayCollision(job)}
 
 ## Verify
 
-${job.verify}
+${displayVerify(job)}
 
 ## Do not
 

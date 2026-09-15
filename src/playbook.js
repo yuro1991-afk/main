@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { describeKind, jobScope } from "./kinds.js";
-import { catalogPatchFor, catalogRequires, displayCollision, displayNotes, firstCommands } from "./brief.js";
+import { catalogPatchFor, catalogRequires, displayCollision, displayNotes, displayVerify, firstCommands } from "./brief.js";
 import { relaunchFor } from "./handoff.js";
 
 export const PLAYBOOK_CHECK_CONTRACT = "agent-ops.playbooks.check.v1";
@@ -44,7 +44,7 @@ ${commands}
 
 ## Verify
 
-${job.verify}
+${displayVerify(job)}
 
 Do not reopen https://github.com/yuro1991-afk/main/pull/1.
 Do not open another landing-pad queue.

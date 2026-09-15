@@ -1,4 +1,4 @@
-import { applyNextForJob, catalogPatchFor, catalogPatchSummary, displayCollision, displayNotes, firstCommands, proveAfterApplyForJob, takeInsteadFields } from "./brief.js";
+import { applyNextForJob, catalogPatchFor, catalogPatchSummary, displayCollision, displayNotes, displayVerify, firstCommands, proveAfterApplyForJob, takeInsteadFields } from "./brief.js";
 import { packetPathFor, relaunchFor } from "./handoff.js";
 
 export const PROMPT_CONTRACT = "agent-ops.prompt.v1";
@@ -69,7 +69,7 @@ Yuri: no more Superbrain. Pad probes stop.
 - Packet: \`${packetPathFor(job)}\`
 - Playbook: \`playbooks/${job.id}.md\`
 - Priority: ${job.priority}
-- Verify: ${job.verify}
+- Verify: ${displayVerify(job)}
 
 ## Notes
 
@@ -103,7 +103,7 @@ Work on Cursor Origin. This GitHub repo is the ops pad only.
 - Packet: \`${packetPathFor(job)}\`
 - Playbook: \`playbooks/${job.id}.md\`
 - Priority: ${job.priority}
-- Verify: ${job.verify}
+- Verify: ${displayVerify(job)}
 
 ## Notes
 

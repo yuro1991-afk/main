@@ -1,4 +1,4 @@
-import { applyNextForJob, catalogPatchFor, proveAfterApplyForJob, takeInsteadFields } from "./brief.js";
+import { applyNextForJob, catalogPatchFor, displayVerify, proveAfterApplyForJob, takeInsteadFields } from "./brief.js";
 import { assertNeverKind, jobScope } from "./kinds.js";
 
 export const HELPER_CONTRACT = "agent-ops.helpers.v1";
@@ -41,7 +41,7 @@ function catalogApplyPrompt(job, patch) {
   const apply = steps?.length
     ? steps.join("; ")
     : `git apply --check /path/to/main/${patch.file} && git apply /path/to/main/${patch.file}`;
-  return `Write-checkout apply for ${job.id} (not --prove-after-apply; never write /tmp/siblings): ${apply}. Gate: ${job.verify}. If this token cannot push, relaunch there. Do not inventory the pad again. Do not copy PR #6 autofix.`;
+  return `Write-checkout apply for ${job.id} (not --prove-after-apply; never write /tmp/siblings): ${apply}. Gate: ${displayVerify(job)}. If this token cannot push, relaunch there. Do not inventory the pad again. Do not copy PR #6 autofix.`;
 }
 
 export function planHelpers(job) {
@@ -51,7 +51,7 @@ export function planHelpers(job) {
     {
       role: "verify",
       title: `Verify ${job.id}`,
-      prompt: `Read-only. Clone or fetch ${job.repo} into /tmp if needed. Confirm these files exist: ${(job.files ?? []).join(", ") || "(see notes)"}. Confirm verify command is still the right gate: ${job.verify}. Do not open a new landing-pad queue. Do not reopen main#1. Write findings only.`,
+      prompt: `Read-only. Clone or fetch ${job.repo} into /tmp if needed. Confirm these files exist: ${(job.files ?? []).join(", ") || "(see notes)"}. Confirm verify command is still the right gate: ${displayVerify(job)}. Do not open a new landing-pad queue. Do not reopen main#1. Write findings only.`,
     },
   ];
   const patch = catalogPatchFor(job);
@@ -87,7 +87,7 @@ export function planHelpers(job) {
         {
           role: "test",
           title: `Test ${job.id}`,
-          prompt: `Design the smallest test or command that would fail today and pass after ${job.id}. Gate: ${job.verify}. Do not invent Superbrain LIVE.`,
+          prompt: `Design the smallest test or command that would fail today and pass after ${job.id}. Gate: ${displayVerify(job)}. Do not invent Superbrain LIVE.`,
         },
       ];
     case "review":
@@ -122,7 +122,7 @@ export function planHelpers(job) {
         {
           role: "probe",
           title: `Probe ${job.id}`,
-          prompt: `Do not run node src/cli.js probe (that hits Superbrain :45001 / :8791). For ${job.id} follow the job verify only: ${job.verify}. Timeouts and non-2xx stay unreachable. Never write live.`,
+          prompt: `Do not run node src/cli.js probe (that hits Superbrain :45001 / :8791). For ${job.id} follow the job verify only: ${displayVerify(job)}. Timeouts and non-2xx stay unreachable. Never write live.`,
         },
       ];
     case "catalog":
