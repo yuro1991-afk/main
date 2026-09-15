@@ -997,6 +997,40 @@
       "title": "Keep leftover unused off sit-out GitHub cards",
       "role": "leftover-launches",
       "owns": []
+    },
+    {
+      "number": 77,
+      "url": "https://github.com/yuro1991-afk/main/pull/77",
+      "branch": "cursor/siblings-prs-73-76-108b",
+      "title": "Record landing-pad PRs 73–76 on the siblings board",
+      "role": "siblings-board",
+      "owns": [
+        "review-landing-pad-prs"
+      ]
+    },
+    {
+      "number": 78,
+      "url": "https://github.com/yuro1991-afk/main/pull/78",
+      "branch": "cursor/next-merge-through-77-108b",
+      "title": "Point leftover unused at the #11 through #77 merge stack",
+      "role": "pointers",
+      "owns": []
+    },
+    {
+      "number": 79,
+      "url": "https://github.com/yuro1991-afk/main/pull/79",
+      "branch": "cursor/leftover-unused-skip-launched-108b",
+      "title": "Skip leftover unused cards that already have dest launches",
+      "role": "leftover-launches",
+      "owns": []
+    },
+    {
+      "number": 80,
+      "url": "https://github.com/yuro1991-afk/main/pull/80",
+      "branch": "cursor/leftover-unused-skip-repo-launches-108b",
+      "title": "Skip leftover unused cards that already have repo launches",
+      "role": "leftover-launches",
+      "owns": []
     }
   ]
 }
