@@ -143,6 +143,33 @@ test("dronehive intent with ledger parks on unicode-ci applyNext", () => {
   assert.doesNotMatch(route.notes, /npm run autofix -- apply/);
 });
 
+test("generic sibling intents park on first catalog apply, not leftover Superbrain", () => {
+  const ledger = loadLedger(join(ROOT, "ledger", "queue.json"));
+  const roster = loadRoster(join(ROOT, "ledger", "roster.json"));
+  const entries = loadEntries(defaultEntriesPath(ROOT));
+  const bloom = routeIntent("fix bloom", { ledger, roster, entries, nowMs: NOW });
+  assert.equal(bloom.jobId, "bloom-grok-pwa-test-sync");
+  assert.match(bloom.notes, /forget Origin/);
+  assert.ok(bloom.applyNext.some((line) => line.includes("bloom-grok-pwa")));
+  assert.doesNotMatch(bloom.destination, /gub-superbrain-probe/);
+
+  const faceswap = routeIntent("fix face-swap honesty", { ledger, roster, entries, nowMs: NOW });
+  assert.equal(faceswap.jobId, "faceswap-design-honesty");
+  assert.doesNotMatch(faceswap.jobId, /catalog-hf-model-explore/);
+  assert.match(faceswap.notes, /faceswap-design-honesty\.patch/);
+
+  const opensussy = routeIntent("fix opensussy", { ledger, roster, entries, nowMs: NOW });
+  assert.equal(opensussy.jobId, "opensussy-sec-review-target");
+  assert.match(opensussy.notes, /opensussy-sec-review-target\.patch/);
+
+  const voice = routeIntent("fix ollama voice", { ledger, roster, entries, nowMs: NOW });
+  assert.equal(voice.jobId, "ova-readme-linux-honesty");
+  assert.match(voice.notes, /ova-readme-linux-honesty\.patch/);
+
+  const keep = routeIntent("keep agents busy", { ledger, roster, entries, nowMs: NOW });
+  assert.equal(keep.jobId, "gub-route-intent");
+});
+
 test("named stacked catalog route notes name requires priors first", () => {
   const ledger = loadLedger(join(ROOT, "ledger", "queue.json"));
   const roster = loadRoster(join(ROOT, "ledger", "roster.json"));

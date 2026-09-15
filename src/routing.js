@@ -201,22 +201,8 @@ export function routeIntent(text, context = {}) {
       },
     );
   }
-  if (includesAny(q, ["dronehive", "drone", "unicode", "wheel"])) {
-    const parked = context.ledger?.jobs?.find((job) => job.id === "dronehive-unicode-ci");
-    if (parked) {
-      const patch = catalogPatchRow(parked.id);
-      return routeFromJob(
-        text,
-        parked,
-        patch ? catalogRouteNotes(patch) : ROUTES[4].notes,
-        {
-          applyNext: patch ? applyNextFor(patch) : undefined,
-          proveAfterApplyCommand: patch ? proveAfterApplyCommand(patch.id) : undefined,
-        },
-      );
-    }
-    return withContract(ROUTES[4], text);
-  }
+  const sibling = routeSiblingPark(text, q, context);
+  if (sibling) return sibling;
 
   const leftover = leftoverForRoute(context);
   const agentJob = jobForAgent(context);
@@ -387,6 +373,56 @@ function namedJobForIntent(text, ledger) {
 /**
  * @param {string} jobId
  */
+/** First parked catalog apply for a sibling intent. Named job ids win first. */
+const SIBLING_PARKS = Object.freeze([
+  {
+    needles: ["dronehive", "drone", "unicode", "wheel"],
+    jobId: "dronehive-unicode-ci",
+    fallback: 4,
+  },
+  { needles: ["bloom"], jobId: "bloom-grok-pwa-test-sync" },
+  { needles: ["face-swap", "faceswap", "face swap"], jobId: "faceswap-design-honesty" },
+  { needles: ["opensussy", "agama"], jobId: "opensussy-sec-review-target" },
+  {
+    needles: ["ollama-voice", "ollama voice", "voice-access", "voice access"],
+    jobId: "ova-readme-linux-honesty",
+  },
+]);
+
+/**
+ * Generic sibling intents must not fall through to leftover Superbrain.
+ * @param {string} text
+ * @param {string} q
+ * @param {{ ledger?: { jobs?: Array<{ id: string, repo: string, kind: string }> } }} context
+ */
+function routeSiblingPark(text, q, context) {
+  const park = SIBLING_PARKS.find((row) => includesAny(q, row.needles));
+  if (!park) return null;
+  const job = context.ledger?.jobs?.find((item) => item.id === park.jobId);
+  const patch = catalogPatchRow(park.jobId);
+  if (job && patch) {
+    return routeFromJob(text, job, catalogRouteNotes(patch), {
+      applyNext: applyNextFor(patch),
+      proveAfterApplyCommand: proveAfterApplyCommand(patch.id),
+    });
+  }
+  if (patch) {
+    return {
+      contract: ROUTE_CONTRACT,
+      intent: text,
+      destination: `${patch.repo}#${patch.id}`,
+      kind: job?.kind ?? "fix",
+      notes: catalogRouteNotes(patch),
+      jobId: patch.id,
+      packet: `reviews/handoff-${patch.id}.md`,
+      applyNext: applyNextFor(patch),
+      proveAfterApplyCommand: proveAfterApplyCommand(patch.id),
+    };
+  }
+  if (park.fallback !== undefined) return withContract(ROUTES[park.fallback], text);
+  return null;
+}
+
 function catalogPatchRow(jobId) {
   try {
     return patchForJob(loadPatchIndex(defaultPatchesIndexPath(ROOT)), jobId);
