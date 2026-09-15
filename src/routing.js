@@ -43,11 +43,12 @@ export const ROUTES = Object.freeze([
   },
   {
     intent: "auto review / coderabbit",
-    destination: "an existing open PR, not empty main",
+    destination: "an existing open PR: #8, #9, or #10 — never empty main",
     kind: "review",
-    notes: "main has no mergeable Genesis tree. Review dronehive #1/#2 or an Origin PR.",
-    jobId: null,
-    packet: null,
+    notes:
+      "Review #8, #9, or #10. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8. Do not steal eyes / vision / bridge on #10.",
+    jobId: "review-landing-pad-prs",
+    packet: "playbooks/review-landing-pad-prs.md",
   },
   {
     intent: "items for attention",
@@ -181,6 +182,14 @@ export function routeFromJob(text, job, notes, extras = {}) {
 export function routeIntent(text, context = {}) {
   const q = (text ?? "").toLowerCase();
   if (includesAny(q, ["review", "coderabbit", "code rabbit"])) {
+    const review = context.ledger?.jobs?.find((job) => job.id === "review-landing-pad-prs");
+    if (review) {
+      return routeFromJob(
+        text,
+        review,
+        "Review open PRs #8, #9, or #10. Skip conflicting #4/#5/#6. #3 is merged. Do not merge #7 after #8. Do not steal eyes / vision / bridge on #10.",
+      );
+    }
     return withContract(ROUTES[2], text);
   }
   if (includesAny(q, ["superbrain", "lane", "probe", "boss"])) {

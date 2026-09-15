@@ -108,6 +108,24 @@ test("review does not target empty main", () => {
   const route = routeIntent("Have code rabbit auto review genesis");
   assert.equal(route.kind, "review");
   assert.match(route.destination, /existing open PR/);
+  assert.match(route.notes, /#8, #9, or #10/);
+  assert.doesNotMatch(route.notes, /Origin PR/);
+  assert.doesNotMatch(route.notes, /dronehive #1/);
+});
+
+test("review intent with ledger parks on landing-pad PRs, not Origin", () => {
+  const ledger = loadLedger(join(ROOT, "ledger", "queue.json"));
+  const roster = loadRoster(join(ROOT, "ledger", "roster.json"));
+  const route = routeIntent("Have code rabbit auto review genesis", {
+    ledger,
+    roster,
+    nowMs: NOW,
+  });
+  assert.equal(route.jobId, "review-landing-pad-prs");
+  assert.match(route.destination, /main#review-landing-pad-prs/);
+  assert.match(route.notes, /#8, #9, or #10/);
+  assert.doesNotMatch(route.notes, /Relaunch Origin/);
+  assert.doesNotMatch(route.notes, /dronehive #1/);
 });
 
 test("dronehive and probe intents", () => {

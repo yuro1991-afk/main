@@ -6,13 +6,13 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T04:54Z**: 40 IDLE + this catalog run +
+Keep-busy tick **2026-09-15T04:56Z**: 40 IDLE + this catalog run +
 `bc-01a0a0ce` RUNNING on #7 (`cursor/stub-wake-roster-108b`). Do not
 steal #7. Newest idle is still `bc-710c5477` — assign
-`bloom-grok-pwa-test-sync`. Catalog still 162. Hunt closed. Generic
-bloom / face-swap / opensussy / ollama-voice `route` now parks on the
-first catalog apply (not leftover Superbrain). Do not invent leftovers.
-Do not copy PR #6 autofix. Do not retarget keep-busy (that is #8).
+`bloom-grok-pwa-test-sync`. Catalog still 162. Hunt closed. Review
+`route` now parks on `review-landing-pad-prs` (#8/#9/#10), not
+dronehive #1/#2 or Origin. Do not invent leftovers. Do not copy PR #6
+autofix. Do not retarget keep-busy (that is #8).
 
 | who | take this |
 | --- | --- |
