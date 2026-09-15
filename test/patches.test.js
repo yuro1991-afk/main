@@ -539,6 +539,19 @@ test("cli patches --job dronehive-mount-readme-layout includes the layout afterA
   assert.ok(parsed.applyNext.some((line) => line.includes("drone-ollama-mount/README.md") && line.includes("this engine") && line.includes("24 drones") && line.includes("G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b")));
 });
 
+test("cli patches --job dronehive-mount-readme-launch includes the Launch.ps1 afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-mount-readme-launch"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-mount-readme-launch");
+  assert.ok(parsed.applyNext.some((line) => line.includes("drone-ollama-mount/README.md") && line.includes("File apps\\\\drone-ollama-mount\\\\Launch.ps1") && line.includes("File G:\\\\AI-Home\\\\projects\\\\drone-ollama-mount\\\\Launch.ps1")));
+});
+
 test("cli patches --job dronehive-tui-readme-cargo includes the dronehive-tui README afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-tui-readme-cargo"], {

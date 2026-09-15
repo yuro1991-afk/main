@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T02:14Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T02:16Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`290c091`. Shipped this interval: `dronehive-mount-readme-layout`
-layout afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`7b5e0a1`. Shipped this interval: `dronehive-mount-readme-launch`
+Launch afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -101,7 +101,8 @@ layout afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused tui-readme-root apply | `dronehive-tui-readme-root` (dronehive-tui README --root afterApply wired) |
 | next unused ollama-tui-readme-install apply | `dronehive-ollama-tui-readme-install` (ollama-tui README START_TUI afterApply wired) |
 | next unused mount-readme-layout apply | `dronehive-mount-readme-layout` (mount README layout afterApply wired) |
-| next afterApply to wire | `dronehive-mount-readme-launch` (mount README Launch.ps1 only) |
+| next unused mount-readme-launch apply | `dronehive-mount-readme-launch` (mount README Launch afterApply wired) |
+| next afterApply to wire | `dronehive-mount-readme-related` (mount README related only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -297,7 +298,9 @@ Face-swap README honesty leftovers are exhausted.
 (installed path is `host\\ai-home\\apps\\DroneOllama\\START_TUI.cmd`; G: START_TUI.cmd is gone).
 `dronehive-mount-readme-layout` afterApply asserts mount README.md
 (layout uses `apps\\drone-ollama-mount\\` this engine and `.\\` 24 drones; G: worker path is gone).
-Next afterApply to wire is `dronehive-mount-readme-launch`.
+`dronehive-mount-readme-launch` afterApply asserts mount README.md
+(Launch line is `File apps\\drone-ollama-mount\\Launch.ps1`; G: Launch File path is gone).
+Next afterApply to wire is `dronehive-mount-readme-related`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -403,7 +406,7 @@ then unused `dronehive-install-ollama-uninstall-root` (uninstall here-string onl
 then unused `dronehive-tui-readme-root` (dronehive-tui README --root only; afterApply wired),
 then unused `dronehive-ollama-tui-readme-install` (installed START_TUI.cmd only; afterApply wired),
 then unused `dronehive-mount-readme-layout` (mount README layout only; afterApply wired),
-then unused `dronehive-mount-readme-launch` (mount README Launch.ps1 only),
+then unused `dronehive-mount-readme-launch` (mount README Launch.ps1 only; afterApply wired),
 then unused `dronehive-mount-readme-related` (mount README related only),
 then unused `opensussy-sec-review-target` (reviews/SEC_REVIEW.md Target only),
 then unused `opensussy-install-sec-review-target` (install/docs/SEC_REVIEW.md Target only),

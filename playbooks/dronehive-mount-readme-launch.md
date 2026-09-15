@@ -22,6 +22,7 @@ apps/drone-ollama-mount/README.md Launch.ps1 line only. Do not edit drone/pro/to
 - git checkout -b cursor/dronehive-mount-readme-launch-from-ops
 - git apply --check /path/to/main/patches/dronehive-mount-readme-launch.patch
 - git apply /path/to/main/patches/dronehive-mount-readme-launch.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-mount/README.md').read_text(); assert r'File apps\\drone-ollama-mount\\Launch.ps1' in t; assert r'File G:\\AI-Home\\projects\\drone-ollama-mount\\Launch.ps1' not in t"
 
 ## Verify
 
