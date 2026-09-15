@@ -813,8 +813,10 @@
       "file": "patches/dronehive-work-order-doc-memory-recycle.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "docs/WORK_ORDER.md memory_recycle path uses repo-relative data/hive/memory_recycle/. Independent of header fabric leftover and live-registry leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert 'data/hive/memory_recycle/' in t; assert r'G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b\\\\data\\\\hive\\\\memory_recycle' not in t\""
+      ],
+      "notes": "docs/WORK_ORDER.md memory_recycle path uses repo-relative data/hive/memory_recycle/, not G:\\\\AI-Home. After apply: assert the repo-relative path and that the G: project path is gone. Independent of header fabric leftover and live-registry leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-seed-work-order-doc-memory-recycle",
