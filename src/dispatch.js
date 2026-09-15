@@ -251,18 +251,32 @@ export function buildMissingLaunches(ledger, launchDir) {
 }
 
 /**
+ * Job ids that already have a launch in dest or the repo launch dir.
+ * @param {string | undefined} launchDir
+ * @param {string | undefined} repoLaunchDir
+ */
+export function launchedJobIds(launchDir, repoLaunchDir) {
+  const launched = presentLaunchIds(launchDir);
+  for (const id of presentLaunchIds(repoLaunchDir)) launched.add(id);
+  return launched;
+}
+
+/**
  * Unused leftover cards as writeLaunchPrompts rows.
- * GitHub leftover skips sit-outs and dest launches already on disk.
- * Genesis leftover still includes Superbrain take-instead.
+ * GitHub leftover skips sit-outs and launches already on dest or in
+ * reviews/launch. Empty --out must not dump leftover unused for cards
+ * that already have a repo launch. Genesis leftover still includes
+ * Superbrain take-instead.
  * @param {import("./ledger.js").Ledger} ledger
  * @param {{ assignments?: Array<{ jobId: string }> } | null} roster
  * @param {number} [nowMs]
  * @param {{ genesis?: boolean, github?: boolean, world?: boolean }} [filters]
  * @param {string} [launchDir]
+ * @param {string} [repoLaunchDir]
  */
-export function leftoverLaunchRows(ledger, roster, nowMs = Date.now(), filters = { github: true }, launchDir) {
+export function leftoverLaunchRows(ledger, roster, nowMs = Date.now(), filters = { github: true }, launchDir, repoLaunchDir) {
   const used = new Set((roster?.assignments ?? []).map((row) => row.jobId));
-  const launched = presentLaunchIds(launchDir);
+  const launched = launchedJobIds(launchDir, repoLaunchDir);
   return unusedCardsForFilters(ledger, used, filters, nowMs)
     .filter((job) => !isSitOutJob(job.id) || filters.genesis)
     .filter((job) => filters.genesis || !launched.has(job.id))
@@ -487,8 +501,9 @@ function unusedCardsForFilters(ledger, used, filters, nowMs) {
  * @param {{ assignments: Array<{ bcId: string, name: string, jobId: string }> }} roster
  * @param {number} [nowMs]
  * @param {string} [launchDir]
+ * @param {string} [repoLaunchDir]
  */
-export function buildAssign(ledger, roster, nowMs = Date.now(), launchDir) {
+export function buildAssign(ledger, roster, nowMs = Date.now(), launchDir, repoLaunchDir) {
   const assignments = roster.assignments.map((row) => {
     const job = ledger.jobs.find((item) => item.id === row.jobId) ?? null;
     return {
@@ -502,7 +517,7 @@ export function buildAssign(ledger, roster, nowMs = Date.now(), launchDir) {
       prompt: renderAssignedLaunch(row, job),
     };
   });
-  const leftover = leftoverLaunchRows(ledger, roster, nowMs, { github: true }, launchDir);
+  const leftover = leftoverLaunchRows(ledger, roster, nowMs, { github: true }, launchDir, repoLaunchDir);
   const first = leftover[0];
   return {
     contract: ASSIGN_CONTRACT,

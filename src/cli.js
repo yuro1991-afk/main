@@ -408,7 +408,13 @@ export async function runCli(argv, options = {}) {
         );
         return 0;
       }
-      const packet = buildAssign(ledger, roster, nowMs, dest);
+      const packet = buildAssign(
+        ledger,
+        roster,
+        nowMs,
+        dest,
+        defaultLaunchPath(options.root ?? ROOT),
+      );
       const launches = writeLaunchPrompts(
         [...packet.assignments, ...packet.leftoverLaunches],
         dest,
@@ -477,7 +483,13 @@ export async function runCli(argv, options = {}) {
         const dest = flags.out
           ? resolve(flags.out)
           : defaultLaunchPath(options.root ?? ROOT);
-        const assigned = buildAssign(ledger, roster, nowMs, dest);
+        const assigned = buildAssign(
+          ledger,
+          roster,
+          nowMs,
+          dest,
+          defaultLaunchPath(options.root ?? ROOT),
+        );
         writeLaunchPrompts([...assigned.assignments, ...assigned.leftoverLaunches], dest);
       }
       write(JSON.stringify(packet, null, 2));
