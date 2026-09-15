@@ -356,11 +356,11 @@ test("cli patches lists the catalog", async () => {
   assert.equal(parsed.compact, true);
   assert.equal(parsed.nextApply, "dronehive-unicode-ci");
   assert.equal(parsed.prefer, "node src/cli.js brief --job dronehive-unicode-ci");
-  assert.equal(parsed.nextMissing, "dronehive-work-order-registry-cli");
+  assert.equal(parsed.nextMissing, "dronehive-ai-bus-packs-root");
   assert.ok(parsed.missingLaunches > 0);
   assert.equal(
     parsed.preferMissing,
-    "node src/cli.js assign --job dronehive-work-order-registry-cli --out /tmp/launches",
+    "node src/cli.js assign --job dronehive-ai-bus-packs-root --out /tmp/launches",
   );
   assert.equal(parsed.applyNext, undefined);
   assert.equal(parsed.patches[0].id, "dronehive-unicode-ci");
