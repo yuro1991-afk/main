@@ -323,8 +323,10 @@
       "file": "patches/bloom-ci-lint.patch",
       "base": "288a484",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "New-file .github/workflows/lint.yml runs npm ci && npm run lint. Independent of bloom-ci-typecheck (ci.yml). eslint . is 0 errors / 2 warnings on 288a484. Do not fold lint into typecheck."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('.github/workflows/lint.yml').read_text(); assert 'name: lint' in t; assert 'npm ci' in t; assert 'npm run lint' in t\""
+      ],
+      "notes": "New-file .github/workflows/lint.yml runs npm ci && npm run lint. Independent of bloom-ci-typecheck (ci.yml). eslint . is 0 errors / 2 warnings on 288a484. After apply: assert lint.yml has those runs. Unpatched has no lint.yml. ci.yml leftover stays absent. Do not fold lint into typecheck. Do not run npm. Do not put backticks in afterApply."
     },
     {
       "id": "ova-voice-card-linux-honesty",

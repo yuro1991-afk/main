@@ -1150,6 +1150,19 @@ test("cli patches --job opensussy-agama-honesty includes the HOW_TO afterApply",
   assert.ok(parsed.applyNext.some((line) => line.includes("install/linux/HOW_TO_RUN.txt") && line.includes("AGAMA / Leap 16 HONESTY") && line.includes("Agama JSON is unsupported")));
 });
 
+test("cli patches --job bloom-ci-lint includes the lint-workflow afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "bloom-ci-lint"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "bloom-ci-lint");
+  assert.ok(parsed.applyNext.some((line) => line.includes(".github/workflows/lint.yml") && line.includes("name: lint") && line.includes("npm ci") && line.includes("npm run lint")));
+});
+
 test("cli patches --job dronehive-icons-manifest-relative includes the icon-root afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-icons-manifest-relative"], {

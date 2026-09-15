@@ -22,7 +22,7 @@ New file. Independent of bloom-ci-typecheck (`ci.yml`) and bloom-health-probe (`
 - git checkout -b cursor/bloom-ci-lint-from-ops
 - git apply --check /path/to/main/patches/bloom-ci-lint.patch
 - git apply /path/to/main/patches/bloom-ci-lint.patch
-- npm ci && npm run lint
+- python3 -c "from pathlib import Path; t=Path('.github/workflows/lint.yml').read_text(); assert 'name: lint' in t; assert 'npm ci' in t; assert 'npm run lint' in t"
 
 ## Verify
 
