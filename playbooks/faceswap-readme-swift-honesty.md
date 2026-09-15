@@ -22,6 +22,7 @@ README Swift paragraph only. Different hunk from Requirements, install, and hone
 - git checkout -b cursor/faceswap-readme-swift-honesty-from-ops
 - git apply --check /path/to/main/patches/faceswap-readme-swift-honesty.patch
 - git apply /path/to/main/patches/faceswap-readme-swift-honesty.patch
+- python3 -c "from pathlib import Path; t=Path('README.md').read_text(); assert 'Windows, Linux, or this pad' in t and 'only on a Mac with Xcode' in t"
 
 ## Verify
 
