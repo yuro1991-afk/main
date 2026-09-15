@@ -1638,8 +1638,10 @@
       "file": "patches/dronehive-work-order-registry-cli.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "work_order.py live_registry CLI fallback uses host/ai-center. Independent of portable-paths query_codex wraps and JSON live-registry leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/work_order.py').read_text(); line=next(x for x in t.splitlines() if 'or r' in x and 'live_registry.py' in x); assert 'host/ai-center' in line; assert r'G:\\\\AI-Center' not in line\""
+      ],
+      "notes": "work_order.py live_registry CLI fallback uses host/ai-center. After apply: assert that fallback line only. Do not put backticks in afterApply. Independent of portable-paths query_codex wraps and JSON live-registry leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-grok-handoff-clone-dest",

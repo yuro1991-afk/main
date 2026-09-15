@@ -942,6 +942,19 @@ test("cli patches --job faceswap-honesty-located-paths includes the Located Path
   assert.ok(parsed.applyNext.some((line) => line.includes("HONESTY.md") && line.includes("- Path:") && line.includes("- Models:") && line.includes("FACESWAP_ENGINE") && line.includes("weights stay off git")));
 });
 
+test("cli patches --job dronehive-work-order-registry-cli includes the CLI fallback afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-work-order-registry-cli"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-work-order-registry-cli");
+  assert.ok(parsed.applyNext.some((line) => line.includes("drone/work_order.py") && line.includes("live_registry.py") && line.includes("host/ai-center")));
+});
+
 test("cli patches --job dronehive-ollama-app-bridge-paths includes the bridge consts afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-ollama-app-bridge-paths"], {

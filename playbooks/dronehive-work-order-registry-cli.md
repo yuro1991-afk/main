@@ -22,6 +22,7 @@ drone/work_order.py write_live_registry CLI fallback only. Do not edit drone/pro
 - git checkout -b cursor/dronehive-work-order-registry-cli-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-registry-cli.patch
 - git apply /path/to/main/patches/dronehive-work-order-registry-cli.patch
+- python3 -c "from pathlib import Path; t=Path('drone/work_order.py').read_text(); line=next(x for x in t.splitlines() if 'or r' in x and 'live_registry.py' in x); assert 'host/ai-center' in line; assert r'G:\\AI-Center' not in line"
 
 ## Verify
 
