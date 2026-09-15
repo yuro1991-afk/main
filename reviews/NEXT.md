@@ -6,14 +6,13 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T04:20Z**: 40 IDLE + this catalog run +
+Keep-busy tick **2026-09-15T04:25Z**: 40 IDLE + this catalog run +
 `bc-01a0a0ce` RUNNING on #7 (`cursor/stub-wake-roster-108b`). Do not
 steal #7. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`f30dc1b`. Queue has no `next` pointer. All 162 afterApply gates fail
-unpatched and pass patched on throwaways. `patches --prove-after-apply`
-repeats that proof without writing siblings. Do not invent leftovers.
+`fc2b5d6`. Catalog firstCommands now run `--prove-after-apply` after
+`--prove` so briefs prove gates on throwaways. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |

@@ -119,6 +119,7 @@ export function firstCommands(job, options = {}) {
       if (patch) {
         return [
           `node src/cli.js patches --prove --job ${job.id}`,
+          `node src/cli.js patches --prove-after-apply --job ${job.id}`,
           ...applyNextFor({
             id: patch.id ?? job.id,
             repo: patch.repo ?? job.repo,
