@@ -370,6 +370,19 @@ test("cli patches --job dronehive-runtime-host-paths applies portable-paths firs
   assert.ok(lines.some((line) => line.includes("from drone.grok_handoff import DEFAULT_ROOT")));
 });
 
+test("cli patches --job dronehive-seed-work-order-curriculum-root includes the seed curriculum_root afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-seed-work-order-curriculum-root"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-seed-work-order-curriculum-root");
+  assert.ok(parsed.applyNext.some((line) => line.includes("drone/app/seed/configs/work_order.json") && line.includes("learning-curriculum")));
+});
+
 test("cli patches --job dronehive-work-order-curriculum-root includes the curriculum_root afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-work-order-curriculum-root"], {

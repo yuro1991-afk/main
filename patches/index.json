@@ -571,8 +571,10 @@
       "file": "patches/dronehive-seed-work-order-curriculum-root.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "drone/app/seed/configs/work_order.json curriculum_root / curriculum_json use host/ai-center. -U1 so context is codex_root / curriculum_fts. Independent of live leftover (different file). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; k=json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['knowledge_imprint']; assert k['curriculum_root']=='host/ai-center/learning-curriculum' and k['curriculum_json']=='host/ai-center/learning-curriculum/CURRICULUM.json'\""
+      ],
+      "notes": "drone/app/seed/configs/work_order.json knowledge_imprint curriculum_root / curriculum_json use host/ai-center/learning-curriculum, not G:\\\\AI-Center. After apply: assert those seed keys. -U1 so context is codex_root / curriculum_fts. Independent of live leftover (different file). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-multi-hosts-hardwire",
