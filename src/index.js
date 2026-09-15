@@ -160,6 +160,7 @@ export {
   listPatches,
   loadPatchIndex,
   patchForJob,
+  proveAfterApply,
   provePatches,
   resolveSiblingCheckout,
   validatePatchEntry,

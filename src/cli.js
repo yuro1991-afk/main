@@ -70,6 +70,7 @@ import {
   defaultPatchesIndexPath,
   defaultSiblingsRoot,
   loadPatchIndex,
+  proveAfterApply,
   provePatches,
 } from "./patches.js";
 
@@ -247,6 +248,19 @@ export async function runCli(argv, options = {}) {
           ? resolve(flags.index)
           : defaultPatchesIndexPath(options.root ?? ROOT),
       );
+      if (flags["prove-after-apply"] === "true") {
+        const proof = proveAfterApply(index, {
+          repoRoot: options.root ?? ROOT,
+          siblingsRoot: flags["siblings-root"]
+            ? resolve(flags["siblings-root"])
+            : defaultSiblingsRoot(),
+          id: positionals[0] || flags.job,
+          repo: flags.repo,
+          runGit: options.runGit,
+        });
+        write(JSON.stringify(proof, null, 2));
+        return proof.failed === 0 && proof.skipped === 0 ? 0 : 1;
+      }
       if (flags.prove === "true") {
         const proof = provePatches(index, {
           repoRoot: options.root ?? ROOT,
@@ -576,11 +590,12 @@ Commands:
   route <intent> [--agent <bcId>]   # roster card if --agent, else leftover next
   tick [--out path]
   siblings
-  patches [jobId] [--job id] [--repo github.com/yuro1991-afk/...] [--prove] [--siblings-root dir]
+  patches [jobId] [--job id] [--repo github.com/yuro1991-afk/...] [--prove] [--prove-after-apply] [--siblings-root dir]
   playbooks [--here] [--out dir]
 
 Yuri: forget Origin for sibling work. patches lists applyable GitHub diffs.
 --prove runs vanilla+stacked git apply --check and resets the checkout.
+--prove-after-apply clones --no-hardlinks throwaways and never writes siblings.
 This token cannot push those repos. Do not copy PR #6 autofix.
 Genesis only unless you pass --all / merge the GitHub-first board.
 Do not reopen GitHub PR #1. Origin: origin.cursor.com/git/yuri-afk/genesis.`;

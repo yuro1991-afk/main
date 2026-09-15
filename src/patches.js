@@ -1,5 +1,6 @@
 import { spawnSync } from "node:child_process";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 export const PATCH_CONTRACT = Object.freeze({
@@ -58,6 +59,23 @@ export function resolveSiblingCheckout(repo, siblingsRoot) {
  */
 export function defaultGitRunner(cwd, args) {
   return spawnSync("git", args, { cwd, encoding: "utf8" });
+}
+
+/**
+ * @param {string} cwd
+ * @param {string} command
+ */
+export function defaultShellRunner(cwd, command) {
+  return spawnSync("bash", ["-lc", command], { cwd, encoding: "utf8" });
+}
+
+/**
+ * Clone a sibling checkout to a throwaway. Never write the source.
+ * @param {string} source
+ * @param {string} dest
+ */
+export function defaultCloneThrowaway(source, dest) {
+  return spawnSync("git", ["clone", "--no-hardlinks", source, dest], { encoding: "utf8" });
 }
 
 /**
@@ -220,6 +238,160 @@ export function provePatches(index, options) {
     cannotPush: index.cannotPush,
     doNot:
       "Do not copy PR #6 npm run autofix. --prove runs git apply --check only and resets the checkout. applyNext is the write-checkout apply, not a leftover hunt.",
+    siblingsRoot,
+    applyNext: results.length === 1 ? results[0].applyNext : undefined,
+    count: results.length,
+    ok,
+    failed,
+    skipped,
+    results,
+  };
+}
+
+/**
+ * afterApply must fail on an unpatched throwaway and pass after apply.
+ * Clones --no-hardlinks. Never writes the sibling source checkout.
+ *
+ * @param {PatchIndex} index
+ * @param {{
+ *   repoRoot: string,
+ *   siblingsRoot?: string,
+ *   throwawayRoot?: string,
+ *   id?: string,
+ *   repo?: string,
+ *   runGit?: (cwd: string, args: string[]) => { status?: number | null, stdout?: string, stderr?: string },
+ *   runShell?: (cwd: string, command: string) => { status?: number | null, stdout?: string, stderr?: string },
+ *   cloneRepo?: (source: string, dest: string) => { status?: number | null, stdout?: string, stderr?: string },
+ * }} options
+ */
+export function proveAfterApply(index, options) {
+  if (!options?.repoRoot) {
+    throw new Error("proveAfterApply requires repoRoot");
+  }
+  const repoRoot = options.repoRoot;
+  const siblingsRoot = options.siblingsRoot ?? defaultSiblingsRoot();
+  const runner = options.runGit ?? defaultGitRunner;
+  const runShell = options.runShell ?? defaultShellRunner;
+  const cloneRepo = options.cloneRepo ?? defaultCloneThrowaway;
+  const selected = listPatches(index, { id: options.id, repo: options.repo });
+  const ownThrowaway = options.throwawayRoot === undefined;
+  const throwawayParent = options.throwawayRoot ?? mkdtempSync(join(tmpdir(), "after-apply-"));
+
+  /** @type {Map<string, Record<string, unknown>>} */
+  const recorded = new Map();
+  const record = (row, extra) => {
+    recorded.set(row.id, {
+      id: row.id,
+      repo: row.repo,
+      file: row.file,
+      applyNext: applyNextFor(row),
+      throwaway: true,
+      ...extra,
+    });
+  };
+
+  /** @type {Map<string, PatchEntry[]>} */
+  const byRepo = new Map();
+  for (const row of selected) {
+    const list = byRepo.get(row.repo) ?? [];
+    list.push(row);
+    byRepo.set(row.repo, list);
+  }
+
+  try {
+    for (const [repo, rows] of byRepo) {
+      const source = resolveSiblingCheckout(repo, siblingsRoot);
+      if (!source) {
+        for (const row of rows) {
+          record(row, { status: "missing-checkout", checkout: null });
+        }
+        continue;
+      }
+      const dest = join(throwawayParent, repo.split("/").pop() ?? "sibling");
+      const cloned = cloneRepo(source, dest);
+      if ((cloned.status ?? 1) !== 0) {
+        for (const row of rows) {
+          record(row, {
+            status: "fail",
+            checkout: source,
+            error: `${String(cloned.stderr ?? "")}\n${String(cloned.stdout ?? "")}`.trim(),
+          });
+        }
+        continue;
+      }
+      try {
+        for (const row of rows) {
+          const cmds = Array.isArray(row.afterApply) ? row.afterApply : [];
+          if (cmds.length === 0) {
+            record(row, { status: "missing-afterApply", checkout: source });
+            continue;
+          }
+          runGit(runner, dest, ["reset", "--hard", "HEAD"]);
+          runGit(runner, dest, ["clean", "-fd"]);
+          const unpatchedPass = cmds.every((cmd) => (runShell(dest, cmd).status ?? 1) === 0);
+          if (unpatchedPass) {
+            record(row, { status: "unpatched-pass", checkout: source });
+            continue;
+          }
+          let applyOk = true;
+          for (const rel of [...(row.requires ?? []), row.file]) {
+            const applied = runGit(runner, dest, ["apply", join(repoRoot, rel)]);
+            if (!applied.ok) {
+              record(row, { status: "apply-fail", checkout: source, error: gitOutput(applied) });
+              applyOk = false;
+              break;
+            }
+          }
+          if (!applyOk) {
+            continue;
+          }
+          const patchedFail = cmds.some((cmd) => (runShell(dest, cmd).status ?? 1) !== 0);
+          if (patchedFail) {
+            record(row, { status: "patched-fail", checkout: source });
+            continue;
+          }
+          record(row, { status: "ok", checkout: source });
+        }
+      } finally {
+        rmSync(dest, { recursive: true, force: true });
+      }
+    }
+  } finally {
+    if (ownThrowaway) {
+      rmSync(throwawayParent, { recursive: true, force: true });
+    }
+  }
+
+  const results = selected.map((row) => {
+    return (
+      recorded.get(row.id) ?? {
+        id: row.id,
+        repo: row.repo,
+        file: row.file,
+        applyNext: applyNextFor(row),
+        throwaway: true,
+        status: "missing-checkout",
+        checkout: null,
+      }
+    );
+  });
+  const failed = results.filter((row) =>
+    row.status === "fail" ||
+    row.status === "unpatched-pass" ||
+    row.status === "apply-fail" ||
+    row.status === "patched-fail",
+  ).length;
+  const skipped = results.filter((row) =>
+    row.status === "missing-checkout" || row.status === "missing-afterApply",
+  ).length;
+  const ok = results.filter((row) => row.status === "ok").length;
+  return {
+    contract: PATCH_CONTRACT.id,
+    command: PATCH_CONTRACT.command,
+    proveAfterApply: true,
+    cannotPush: index.cannotPush,
+    doNot:
+      "Do not copy PR #6 npm run autofix. --prove-after-apply clones --no-hardlinks throwaways and never writes /tmp/siblings. afterApply must fail unpatched and pass patched.",
     siblingsRoot,
     applyNext: results.length === 1 ? results[0].applyNext : undefined,
     count: results.length,

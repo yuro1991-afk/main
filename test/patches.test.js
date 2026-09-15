@@ -16,6 +16,7 @@ import {
   loadPatchIndex,
   patchForJob,
   applyNextFor,
+  proveAfterApply,
   provePatches,
   resolveSiblingCheckout,
   validatePatchEntry,
@@ -2744,4 +2745,166 @@ test("cli patches --prove missing checkout exits 1", async () => {
   );
   assert.equal(code, 1);
   assert.equal(JSON.parse(chunks.join("")).skipped, 1);
+});
+
+test("proveAfterApply fails unpatched, passes patched, and leaves the sibling source clean", () => {
+  const pad = mkdtempSync(join(tmpdir(), "agent-ops-aa-ok-"));
+  const siblings = join(pad, "siblings");
+  const checkout = join(siblings, "dronehive");
+  const patchesDir = join(pad, "patches");
+  mkdirSync(patchesDir, { recursive: true });
+  initProveRepo(checkout);
+  writeFileSync(join(checkout, "note.txt"), "line1\n");
+  gitOk(checkout, ["add", "note.txt"]);
+  gitOk(checkout, ["commit", "-m", "init"]);
+  writeFileSync(join(checkout, "note.txt"), "line1\nAFTER\n");
+  gitOk(checkout, ["add", "note.txt"]);
+  gitOk(checkout, ["commit", "-m", "patched"]);
+  const patch = spawnSync("git", ["format-patch", "-1", "--stdout"], {
+    cwd: checkout,
+    encoding: "utf8",
+  });
+  assert.equal(patch.status, 0, patch.stderr);
+  writeFileSync(join(patchesDir, "one.patch"), patch.stdout);
+  gitOk(checkout, ["reset", "--hard", "HEAD~1"]);
+  writeFileSync(
+    join(patchesDir, "index.json"),
+    JSON.stringify({
+      cannotPush: true,
+      patches: [
+        {
+          id: "one",
+          repo: "github.com/yuro1991-afk/dronehive",
+          file: "patches/one.patch",
+          base: "init",
+          applyCheck: "ok",
+          afterApply: [
+            "python3 -c \"from pathlib import Path; t=Path('note.txt').read_text(); assert 'AFTER' in t\"",
+          ],
+        },
+      ],
+    }),
+  );
+  const index = loadPatchIndex(join(patchesDir, "index.json"));
+  const proof = proveAfterApply(index, { repoRoot: pad, siblingsRoot: siblings });
+  assert.equal(proof.proveAfterApply, true);
+  assert.equal(proof.ok, 1, JSON.stringify(proof.results, null, 2));
+  assert.equal(proof.failed, 0);
+  assert.equal(proof.results[0].status, "ok");
+  assert.equal(proof.results[0].throwaway, true);
+  assert.equal(readFileSync(join(checkout, "note.txt"), "utf8"), "line1\n");
+  const status = spawnSync("git", ["status", "--porcelain"], {
+    cwd: checkout,
+    encoding: "utf8",
+  });
+  assert.equal(status.stdout, "");
+  assert.match(proof.doNot, /throwaways/);
+  assert.match(proof.doNot, /never writes/);
+});
+
+test("proveAfterApply reports unpatched-pass when the gate already succeeds", () => {
+  const pad = mkdtempSync(join(tmpdir(), "agent-ops-aa-weak-"));
+  const siblings = join(pad, "siblings");
+  const checkout = join(siblings, "dronehive");
+  const patchesDir = join(pad, "patches");
+  mkdirSync(patchesDir, { recursive: true });
+  initProveRepo(checkout);
+  writeFileSync(join(checkout, "note.txt"), "line1\n");
+  gitOk(checkout, ["add", "note.txt"]);
+  gitOk(checkout, ["commit", "-m", "init"]);
+  writeFileSync(join(checkout, "note.txt"), "line1\nAFTER\n");
+  gitOk(checkout, ["add", "note.txt"]);
+  gitOk(checkout, ["commit", "-m", "patched"]);
+  const patch = spawnSync("git", ["format-patch", "-1", "--stdout"], {
+    cwd: checkout,
+    encoding: "utf8",
+  });
+  assert.equal(patch.status, 0, patch.stderr);
+  writeFileSync(join(patchesDir, "one.patch"), patch.stdout);
+  gitOk(checkout, ["reset", "--hard", "HEAD~1"]);
+  writeFileSync(
+    join(patchesDir, "index.json"),
+    JSON.stringify({
+      cannotPush: true,
+      patches: [
+        {
+          id: "one",
+          repo: "github.com/yuro1991-afk/dronehive",
+          file: "patches/one.patch",
+          base: "init",
+          applyCheck: "ok",
+          afterApply: [
+            "python3 -c \"from pathlib import Path; t=Path('note.txt').read_text(); assert 'line1' in t\"",
+          ],
+        },
+      ],
+    }),
+  );
+  const index = loadPatchIndex(join(patchesDir, "index.json"));
+  const proof = proveAfterApply(index, { repoRoot: pad, siblingsRoot: siblings });
+  assert.equal(proof.failed, 1);
+  assert.equal(proof.results[0].status, "unpatched-pass");
+  assert.equal(readFileSync(join(checkout, "note.txt"), "utf8"), "line1\n");
+});
+
+test("cli patches --prove-after-apply uses throwaways", async () => {
+  const pad = mkdtempSync(join(tmpdir(), "agent-ops-aa-cli-"));
+  const siblings = join(pad, "siblings");
+  const checkout = join(siblings, "dronehive");
+  const patchesDir = join(pad, "patches");
+  mkdirSync(patchesDir, { recursive: true });
+  initProveRepo(checkout);
+  writeFileSync(join(checkout, "note.txt"), "line1\n");
+  gitOk(checkout, ["add", "note.txt"]);
+  gitOk(checkout, ["commit", "-m", "init"]);
+  writeFileSync(join(checkout, "note.txt"), "line1\nAFTER\n");
+  gitOk(checkout, ["add", "note.txt"]);
+  gitOk(checkout, ["commit", "-m", "patched"]);
+  const patch = spawnSync("git", ["format-patch", "-1", "--stdout"], {
+    cwd: checkout,
+    encoding: "utf8",
+  });
+  assert.equal(patch.status, 0, patch.stderr);
+  writeFileSync(join(patchesDir, "one.patch"), patch.stdout);
+  gitOk(checkout, ["reset", "--hard", "HEAD~1"]);
+  writeFileSync(
+    join(patchesDir, "index.json"),
+    JSON.stringify({
+      cannotPush: true,
+      patches: [
+        {
+          id: "one",
+          repo: "github.com/yuro1991-afk/dronehive",
+          file: "patches/one.patch",
+          base: "init",
+          applyCheck: "ok",
+          afterApply: [
+            "python3 -c \"from pathlib import Path; t=Path('note.txt').read_text(); assert 'AFTER' in t\"",
+          ],
+        },
+      ],
+    }),
+  );
+  const chunks = [];
+  const code = await runCli(
+    [
+      "patches",
+      "--prove-after-apply",
+      "--index",
+      join(patchesDir, "index.json"),
+      "--siblings-root",
+      siblings,
+    ],
+    {
+      root: pad,
+      write: (value) => {
+        chunks.push(value);
+      },
+    },
+  );
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.proveAfterApply, true);
+  assert.equal(parsed.ok, 1);
+  assert.equal(readFileSync(join(checkout, "note.txt"), "utf8"), "line1\n");
 });

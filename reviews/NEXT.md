@@ -6,14 +6,14 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T04:16Z**: 40 IDLE + this catalog run +
+Keep-busy tick **2026-09-15T04:20Z**: 40 IDLE + this catalog run +
 `bc-01a0a0ce` RUNNING on #7 (`cursor/stub-wake-roster-108b`). Do not
 steal #7. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`f9be5f4`. Queue has no `next` pointer. Unpatched afterApply scan is
-clean. Playbook first-commands now share the no-$, no-backtick,
-no-`git rm` invariant. Do not invent leftovers.
+`f30dc1b`. Queue has no `next` pointer. All 162 afterApply gates fail
+unpatched and pass patched on throwaways. `patches --prove-after-apply`
+repeats that proof without writing siblings. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -195,6 +195,7 @@ PR #9 catalog still 162 diffs (newest `bloom-grok-pwa-test-sync`).
 Re-proof 2026-09-14T23:16Z: 162/162 vanilla + stacked `git apply --check`
 on sibling `main` (no `-U0`). Repeat with
 `node src/cli.js patches --prove --siblings-root /tmp/siblings`.
+`node src/cli.js patches --prove-after-apply --job <id>` clones throwaways.
 Catalog leftover firstCommands now start with `--prove --job`.
 `patches --prove --job` and `patches --job` JSON include `applyNext`
 write-checkout steps. Catalog `brief` / `helpers` / `handoff` /
