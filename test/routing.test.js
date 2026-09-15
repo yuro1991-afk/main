@@ -198,6 +198,35 @@ test("generic sibling intents park on first catalog apply, not leftover Superbra
   assert.equal(keep.jobId, "gub-route-intent");
 });
 
+test("cp1252 and python-smoke intents park on unicode-ci, not leftover Superbrain", () => {
+  const ledger = loadLedger(join(ROOT, "ledger", "queue.json"));
+  const roster = loadRoster(join(ROOT, "ledger", "roster.json"));
+  const afterLease = Date.parse("2026-09-14T19:00:00.000Z");
+  for (const intent of ["fix cp1252", "unstick python-smoke", "fix python smoke"]) {
+    const route = routeIntent(intent, { ledger, roster, nowMs: afterLease });
+    assert.equal(route.jobId, "dronehive-unicode-ci", intent);
+    assert.match(route.destination, /dronehive#dronehive-unicode-ci/);
+    assert.ok(route.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+    assert.doesNotMatch(route.destination, /gub-superbrain-probe/);
+  }
+  const keep = routeIntent("keep agents busy", { ledger, roster, nowMs: NOW });
+  assert.equal(keep.jobId, "gub-route-intent");
+});
+
+test("merge / landing-pad intents park on review PRs, not leftover Superbrain", () => {
+  const ledger = loadLedger(join(ROOT, "ledger", "queue.json"));
+  const roster = loadRoster(join(ROOT, "ledger", "roster.json"));
+  const afterLease = Date.parse("2026-09-14T19:00:00.000Z");
+  for (const intent of ["merge #8 then #9", "review the landing pad", "landing-pad merge order"]) {
+    const route = routeIntent(intent, { ledger, roster, nowMs: afterLease });
+    assert.equal(route.jobId, "review-landing-pad-prs", intent);
+    assert.match(route.notes, /#8, #9, or #10/);
+    assert.doesNotMatch(route.destination, /gub-superbrain-probe/);
+  }
+  const keep = routeIntent("keep agents busy", { ledger, roster, nowMs: NOW });
+  assert.equal(keep.jobId, "gub-route-intent");
+});
+
 test("attention intent parks on first catalog apply, not leftover Superbrain", () => {
   const ledger = loadLedger(join(ROOT, "ledger", "queue.json"));
   const roster = loadRoster(join(ROOT, "ledger", "roster.json"));

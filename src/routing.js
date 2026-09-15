@@ -205,7 +205,7 @@ function takeInsteadRouteFields(job) {
  */
 export function routeIntent(text, context = {}) {
   const q = (text ?? "").toLowerCase();
-  if (includesAny(q, ["review", "coderabbit", "code rabbit"])) {
+  if (includesAny(q, ["review", "coderabbit", "code rabbit", "merge", "landing-pad", "landing pad"])) {
     const review = context.ledger?.jobs?.find((job) => job.id === "review-landing-pad-prs");
     if (review) {
       return routeFromJob(
@@ -409,7 +409,17 @@ function namedJobForIntent(text, ledger) {
 /** First parked catalog apply for a sibling intent. Named job ids win first. */
 const SIBLING_PARKS = Object.freeze([
   {
-    needles: ["dronehive", "drone", "unicode", "wheel", "attention", "needs attention"],
+    needles: [
+      "dronehive",
+      "drone",
+      "unicode",
+      "wheel",
+      "attention",
+      "needs attention",
+      "cp1252",
+      "python-smoke",
+      "python smoke",
+    ],
     jobId: "dronehive-unicode-ci",
     fallback: 4,
   },
