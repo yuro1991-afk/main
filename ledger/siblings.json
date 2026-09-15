@@ -525,6 +525,55 @@
         "dronehive-seed-work-order-doc-live-registry",
         "dronehive-work-order-doc-codex-paths"
       ]
+    },
+    {
+      "number": 35,
+      "url": "https://github.com/yuro1991-afk/main/pull/35",
+      "branch": "cursor/siblings-prs-31-34-108b",
+      "title": "Record landing-pad PRs 31–34 on the siblings board",
+      "role": "siblings-board",
+      "owns": [
+        "review-landing-pad-prs"
+      ]
+    },
+    {
+      "number": 36,
+      "url": "https://github.com/yuro1991-afk/main/pull/36",
+      "branch": "cursor/seed-codex-paths-launches-108b",
+      "title": "Add Apply launches for seed-codex-paths leftover cards",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-seed-work-order-doc-codex-paths",
+        "dronehive-work-order-doc-codex-cli",
+        "dronehive-seed-work-order-doc-codex-cli",
+        "dronehive-work-order-doc-recall-router"
+      ]
+    },
+    {
+      "number": 37,
+      "url": "https://github.com/yuro1991-afk/main/pull/37",
+      "branch": "cursor/seed-recall-router-launches-108b",
+      "title": "Add Apply launches for seed-recall-router leftover cards",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-seed-work-order-doc-recall-router",
+        "dronehive-work-order-doc-memory-recycle",
+        "dronehive-seed-work-order-doc-memory-recycle",
+        "dronehive-work-order-doc-models"
+      ]
+    },
+    {
+      "number": 38,
+      "url": "https://github.com/yuro1991-afk/main/pull/38",
+      "branch": "cursor/seed-doc-models-launches-108b",
+      "title": "Add Apply launches for seed-doc-models leftover cards",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-seed-work-order-doc-models",
+        "dronehive-work-order-doc-cd",
+        "dronehive-seed-work-order-doc-cd",
+        "dronehive-spec-relative"
+      ]
     }
   ]
 }
