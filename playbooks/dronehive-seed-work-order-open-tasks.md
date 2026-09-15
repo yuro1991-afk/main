@@ -22,6 +22,7 @@ Seed open_tasks key only. Different file from configs/work_order.json. Do not ed
 - git checkout -b cursor/dronehive-seed-work-order-open-tasks-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-open-tasks.patch
 - git apply /path/to/main/patches/dronehive-seed-work-order-open-tasks.patch
+- python3 -c "from pathlib import Path; import json; assert json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['ai_laws']['rank_5']['open_tasks']=='host/continuous/OPEN_TASKS.json'"
 
 ## Verify
 

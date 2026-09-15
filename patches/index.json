@@ -615,8 +615,10 @@
       "file": "patches/dronehive-seed-work-order-open-tasks.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "drone/app/seed/configs/work_order.json rank_5.open_tasks uses host/continuous. Independent of live leftover (different file). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; assert json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['ai_laws']['rank_5']['open_tasks']=='host/continuous/OPEN_TASKS.json'\""
+      ],
+      "notes": "drone/app/seed/configs/work_order.json ai_laws.rank_5.open_tasks uses host/continuous/OPEN_TASKS.json, not D:\\\\GrokCoreMemory. After apply: assert that seed key. Independent of live leftover (different file). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-work-order-codex-paths",
