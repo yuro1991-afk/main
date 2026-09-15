@@ -370,6 +370,19 @@ test("cli patches --job dronehive-runtime-host-paths applies portable-paths firs
   assert.ok(lines.some((line) => line.includes("from drone.grok_handoff import DEFAULT_ROOT")));
 });
 
+test("cli patches --job dronehive-hive-docstring-honesty includes the hive.py afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-hive-docstring-honesty"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-hive-docstring-honesty");
+  assert.ok(parsed.applyNext.some((line) => line.includes("drone/hive.py") && line.includes("one host example")));
+});
+
 test("cli patches --job faceswap-readme-firewall-honesty includes the README firewall afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "faceswap-readme-firewall-honesty"], {

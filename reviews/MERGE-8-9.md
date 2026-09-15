@@ -40,7 +40,7 @@ CLI (#3 merged, #8 GitHub-first) — not “this PR”.
 also conflict. Prefer **#8’s GitHub-first defaults**, then keep #9’s
 catalog, Superbrain refuse, prove/`applyNext` apply path (including
 `applyNext` on `brief` / `helpers` / `handoff` / `relaunch` / `busy` /
-`status --job` / `list --job` / `slots --job`, `busy --job` / `next --job` peek, named-id `route` apply, `dronehive-unicode-ci` / `bloom-grok-pwa-test-sync` / `faceswap-start-sh` / `dronehive-script-host-roots` / `faceswap-design-honesty` / `dronehive-runtime-host-paths` / `dronehive-config-load-overlay` / `dronehive-app-links-host-paths` / `ova-readme-linux-honesty` / `ova-voice-card-linux-honesty` / `faceswap-ios-readme-honesty` / `faceswap-readme-requirements-honesty` / `faceswap-readme-install-sh` / `faceswap-readme-swift-honesty` / `faceswap-readme-firewall-honesty` afterApply, stacked `requires`),
+`status --job` / `list --job` / `slots --job`, `busy --job` / `next --job` peek, named-id `route` apply, `dronehive-unicode-ci` / `bloom-grok-pwa-test-sync` / `faceswap-start-sh` / `dronehive-script-host-roots` / `faceswap-design-honesty` / `dronehive-runtime-host-paths` / `dronehive-config-load-overlay` / `dronehive-app-links-host-paths` / `ova-readme-linux-honesty` / `ova-voice-card-linux-honesty` / `faceswap-ios-readme-honesty` / `faceswap-readme-requirements-honesty` / `faceswap-readme-install-sh` / `faceswap-readme-swift-honesty` / `faceswap-readme-firewall-honesty` / `dronehive-hive-docstring-honesty` afterApply, stacked `requires`),
 `displayNotes` / `jobForDisplay`, and review files (`reviews/main-pr10.md`,
 `reviews/landing-pad-prs.md`).
 

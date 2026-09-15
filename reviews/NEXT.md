@@ -10,9 +10,8 @@ Keep-busy tick **2026-09-15T00:15Z** still holds: 40 IDLE + this run
 RUNNING. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`3c12e2a`. Shipped this interval: `faceswap-readme-firewall-honesty`
-README firewall afterApply. Face-swap README honesty leftovers
-are exhausted. Leftover `next` stays alone. Do not invent leftovers.
+`3c12e2a`. Shipped this interval: `dronehive-hive-docstring-honesty`
+hive.py docstring afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -34,7 +33,8 @@ are exhausted. Leftover `next` stays alone. Do not invent leftovers.
 | next unused install apply | `faceswap-readme-install-sh` (README install afterApply wired) |
 | next unused swift apply | `faceswap-readme-swift-honesty` (README Swift afterApply wired) |
 | last faceswap README apply | `faceswap-readme-firewall-honesty` (README firewall afterApply wired) |
-| next afterApply to wire | `dronehive-hive-docstring-honesty` (hive.py docstring only) |
+| next unused hive docstring apply | `dronehive-hive-docstring-honesty` (hive.py afterApply wired) |
+| next afterApply to wire | `dronehive-work-order-doc-honesty` (docs/WORK_ORDER.md only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -93,8 +93,10 @@ Voice Access (`Windows 11 Voice Access` / `syntax/math CI only` /
 (`Windows, Linux, or this pad` / `only on a Mac with Xcode`).
 `faceswap-readme-firewall-honesty` afterApply asserts README
 (`inbound TCP` / `Windows Firewall is one host example`).
-Face-swap README honesty leftovers are exhausted. Next afterApply
-to wire is `dronehive-hive-docstring-honesty`.
+Face-swap README honesty leftovers are exhausted.
+`dronehive-hive-docstring-honesty` afterApply asserts hive.py
+(`one host example` / `the library + continuous OPEN_TASKS overlay`).
+Next afterApply to wire is `dronehive-work-order-doc-honesty`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -128,7 +130,7 @@ then unused stacked `dronehive-app-links-host-paths` (links.py catalog URIs afte
 then unused `bloom-ci-lint` (new-file lint.yml; independent of typecheck),
 then unused `ova-voice-card-linux-honesty` (VOICE-ACCESS.md only; afterApply wired; independent of README honesty),
 then unused `faceswap-ios-readme-honesty` (ios/README.md only; afterApply wired; independent of DESIGN.md and START.sh),
-then unused `dronehive-hive-docstring-honesty` (hive.py docstring only; independent of config-load-overlay),
+then unused `dronehive-hive-docstring-honesty` (hive.py docstring only; afterApply wired; independent of config-load-overlay),
 then unused `dronehive-work-order-doc-honesty` (docs/WORK_ORDER.md only; independent of hive.py),
 then unused `dronehive-seed-work-order-doc-honesty` (seed WORK_ORDER.md only; independent of docs/WORK_ORDER.md),
 then unused `dronehive-bench-goal-honesty` (GOAL string only; independent of script-host-roots ROOT hunks),

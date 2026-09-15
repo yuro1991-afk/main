@@ -22,7 +22,7 @@ Docstring only. Independent of portable-paths and config-load-overlay. Do not ed
 - git checkout -b cursor/dronehive-hive-docstring-honesty-from-ops
 - git apply --check /path/to/main/patches/dronehive-hive-docstring-honesty.patch
 - git apply /path/to/main/patches/dronehive-hive-docstring-honesty.patch
-- python3 -m py_compile drone/hive.py
+- python3 -c "from pathlib import Path; t=Path('drone/hive.py').read_text(); assert 'one host example' in t and 'the library + continuous OPEN_TASKS overlay' in t"
 
 ## Verify
 

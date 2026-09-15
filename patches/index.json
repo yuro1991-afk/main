@@ -318,8 +318,10 @@
       "file": "patches/dronehive-hive-docstring-honesty.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "drone/hive.py module docstring: F:\\\\GrokSelfLibrary is one host example. Independent of config-load-overlay (import/_load_cfg hunks only). Does not need portable-paths. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/hive.py').read_text(); assert 'one host example' in t and 'the library + continuous OPEN_TASKS overlay' in t\""
+      ],
+      "notes": "drone/hive.py module docstring: F:\\\\GrokSelfLibrary is one host example. After apply: assert those phrases. Independent of config-load-overlay. Does not need portable-paths. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-work-order-doc-honesty",
