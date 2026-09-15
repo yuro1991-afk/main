@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T03:30Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T03:32Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`e2c4f70`. Shipped this interval: `dronehive-mount-engine-out`
-engine out_dir afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`0734e87`. Shipped this interval: `dronehive-mount-fabric-root`
+default_drone_root afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -139,7 +139,8 @@ engine out_dir afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused ollama-app-open-install apply | `dronehive-ollama-app-open-install` (main.rs Open install afterApply wired) |
 | next unused ollama-app-open-seal apply | `dronehive-ollama-app-open-seal` (main.rs Open OPERATIONAL_SEAL afterApply wired) |
 | next unused mount-engine-out apply | `dronehive-mount-engine-out` (engine.rs out_dir afterApply wired) |
-| next afterApply to wire | `dronehive-mount-fabric-root` (apps/drone-ollama-mount/src/fabric.rs default_drone_root only) |
+| next unused mount-fabric-root apply | `dronehive-mount-fabric-root` (fabric.rs default_drone_root afterApply wired) |
+| next afterApply to wire | `dronehive-mount-smoke-seal` (apps/drone-ollama-mount/src/main.rs SMOKE_SEAL only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -411,7 +412,9 @@ main.rs open_path uses host\\ai-home (UI leftover stays).
 main.rs open_path argument is out\\OPERATIONAL_SEAL.json (out leftovers stay).
 `dronehive-mount-engine-out` afterApply asserts
 engine.rs out_dir uses apps\\drone-ollama-mount\\out (fabric leftover stays).
-Next afterApply to wire is `dronehive-mount-fabric-root`.
+`dronehive-mount-fabric-root` afterApply asserts
+fabric.rs default_drone_root has no G: path and no 0.5b (C:\\Python stays).
+Next afterApply to wire is `dronehive-mount-smoke-seal`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -555,7 +558,7 @@ then unused `dronehive-ollama-app-open-workspace` (apps/drone-ollama-app/src/mai
 then unused `dronehive-ollama-app-open-install` (apps/drone-ollama-app/src/main.rs only; afterApply wired),
 then unused `dronehive-ollama-app-open-seal` (apps/drone-ollama-app/src/main.rs only; afterApply wired),
 then unused `dronehive-mount-engine-out` (apps/drone-ollama-mount/src/engine.rs only; afterApply wired),
-then unused `dronehive-mount-fabric-root` (apps/drone-ollama-mount/src/fabric.rs only),
+then unused `dronehive-mount-fabric-root` (apps/drone-ollama-mount/src/fabric.rs only; afterApply wired),
 then unused `dronehive-mount-smoke-seal` (apps/drone-ollama-mount/src/main.rs only),
 then unused `dronehive-mount-swarm-seal` (apps/drone-ollama-mount/src/main.rs only),
 then unused `dronehive-truth-honesty-library-list` (TRUTH_AND_HONESTY.md only),

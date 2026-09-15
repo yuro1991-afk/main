@@ -22,6 +22,7 @@ apps/drone-ollama-mount/src/fabric.rs default_drone_root only. Leave C:\\Python 
 - git checkout -b cursor/dronehive-mount-fabric-root-from-ops
 - git apply --check /path/to/main/patches/dronehive-mount-fabric-root.patch
 - git apply /path/to/main/patches/dronehive-mount-fabric-root.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-mount/src/fabric.rs').read_text(); fn=t.split('fn default_drone_root',1)[1].split('}',1)[0]; assert r'G:\\AI-Home' not in fn; assert '0.5b' not in fn"
 
 ## Verify
 

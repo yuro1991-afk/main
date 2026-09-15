@@ -1528,8 +1528,10 @@
       "file": "patches/dronehive-mount-fabric-root.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "fabric.rs default_drone_root uses '.'. Independent of engine-out leftover. Leaves C:\\\\Python. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-mount/src/fabric.rs').read_text(); fn=t.split('fn default_drone_root',1)[1].split('}',1)[0]; assert r'G:\\\\AI-Home' not in fn; assert '0.5b' not in fn\""
+      ],
+      "notes": "fabric.rs default_drone_root no longer pins G: or 0.5b. After apply: assert those phrases in that function only. Leaves C:\\\\Python. Do not put backticks in afterApply. Independent of engine-out leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-mount-smoke-seal",

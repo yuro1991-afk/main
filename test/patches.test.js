@@ -877,6 +877,19 @@ test("cli patches --job dronehive-truth-honesty-root includes the System root af
   assert.ok(parsed.applyNext.some((line) => line.includes("TRUTH_AND_HONESTY.md") && line.includes("**System root:**") && line.includes("0.5b")));
 });
 
+test("cli patches --job dronehive-mount-fabric-root includes the default_drone_root afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-mount-fabric-root"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-mount-fabric-root");
+  assert.ok(parsed.applyNext.some((line) => line.includes("apps/drone-ollama-mount/src/fabric.rs") && line.includes("default_drone_root") && line.includes("0.5b")));
+});
+
 test("cli patches --job dronehive-mount-engine-out includes the engine out_dir afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-mount-engine-out"], {
