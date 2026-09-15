@@ -86,6 +86,34 @@ test("on-disk catalog playbooks are stale vs live firstCommands", () => {
   assert.deepEqual(fresh.missing, []);
 });
 
+test("playbooks --check names missing stacked requires without rewriting", async () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const job = ledger.jobs.find((item) => item.id === "dronehive-ubuntu-smoke");
+  const onDisk = readFileSync(join(ROOT, "playbooks", "dronehive-ubuntu-smoke.md"), "utf8");
+  const stale = checkPlaybook(job, onDisk);
+  assert.equal(stale.stale, true);
+  assert.deepEqual(stale.requires, ["patches/dronehive-pro-chat-cp1252.patch"]);
+  assert.deepEqual(stale.missingRequires, ["patches/dronehive-pro-chat-cp1252.patch"]);
+  assert.doesNotMatch(onDisk, /dronehive-pro-chat-cp1252\.patch/);
+  const fresh = checkPlaybook(job, renderPlaybook(job));
+  assert.equal(fresh.stale, false);
+  assert.deepEqual(fresh.missingRequires, []);
+  assert.match(renderPlaybook(job), /dronehive-pro-chat-cp1252\.patch then patches\/dronehive-ubuntu-smoke\.patch/);
+
+  const chunks = [];
+  const code = await runCli(["playbooks", "--check", "--job", "dronehive-ubuntu-smoke"], {
+    nowMs: NOW,
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.wrote, false);
+  assert.deepEqual(parsed.results[0].missingRequires, ["patches/dronehive-pro-chat-cp1252.patch"]);
+  assert.match(parsed.doNot, /writePlaybooks/);
+});
+
 test("cli playbooks --check does not write", async () => {
   const chunks = [];
   const code = await runCli(["playbooks", "--check", "--job", "dronehive-unicode-ci"], {

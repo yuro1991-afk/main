@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { describeKind, jobScope } from "./kinds.js";
-import { displayCollision, displayNotes, firstCommands } from "./brief.js";
+import { catalogPatchFor, catalogRequires, displayCollision, displayNotes, firstCommands } from "./brief.js";
 import { relaunchFor } from "./handoff.js";
 
 export const PLAYBOOK_CHECK_CONTRACT = "agent-ops.playbooks.check.v1";
@@ -86,14 +86,30 @@ export function playbookFirstCommands(markdown) {
  * @param {import("./ledger.js").Job} job
  * @param {string} markdown
  */
+/**
+ * Catalog priors the on-disk playbook must name. Empty when the card
+ * has no requires or the markdown already lists every prior file.
+ * @param {import("./ledger.js").Job} job
+ * @param {string} [markdown]
+ */
+function playbookRequireFields(job, markdown = "") {
+  const requires = catalogRequires(catalogPatchFor(job));
+  return {
+    requires,
+    missingRequires: requires.filter((file) => !markdown.includes(file)),
+  };
+}
+
 export function checkPlaybook(job, markdown) {
   const expected = firstCommands(job);
   const actual = playbookFirstCommands(markdown);
   const missing = expected.filter((line) => !actual.includes(line));
+  const req = playbookRequireFields(job, markdown);
   return {
     id: job.id,
-    stale: missing.length > 0,
+    stale: missing.length > 0 || req.missingRequires.length > 0,
     missing,
+    ...req,
     prefer: `node src/cli.js brief --job ${job.id}`,
   };
 }
@@ -112,6 +128,7 @@ export function checkPlaybooks(jobs, dir) {
         stale: true,
         status: "missing-playbook",
         missing: firstCommands(job),
+        ...playbookRequireFields(job),
         prefer: `node src/cli.js brief --job ${job.id}`,
       };
     }

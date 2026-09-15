@@ -253,6 +253,8 @@ then asserts ci.yml has python-smoke-ubuntu. Do not run the smoke.
 the leftover file (ubuntu-smoke names unicode-ci first).
 `displayNotes` for those cards names the same apply chain (or
 `Requires (apply first)` when notes already mention the leftover file).
+`playbooks --check --job dronehive-ubuntu-smoke` reports that prior as
+`missingRequires`. Prefer `brief --job`. Do not run writePlaybooks.
 Host-path import leftovers are exhausted.
 `ova-readme-linux-honesty` afterApply asserts README names Windows-only
 Voice Access (`Windows 11 Voice Access` / `syntax/math CI only` /
