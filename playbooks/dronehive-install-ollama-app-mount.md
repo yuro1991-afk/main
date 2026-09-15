@@ -22,6 +22,7 @@ Install-DroneOllamaApp.ps1 $mountSrc line only. Do not edit drone/pro/tool_agent
 - git checkout -b cursor/dronehive-install-ollama-app-mount-from-ops
 - git apply --check /path/to/main/patches/dronehive-install-ollama-app-mount.patch
 - git apply /path/to/main/patches/dronehive-install-ollama-app-mount.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1').read_text(); assert r\"mountSrc = 'apps\\drone-ollama-mount\\target\\release\\drone-ollama-mount.exe'\" in t"
 
 ## Verify
 

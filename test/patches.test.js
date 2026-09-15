@@ -461,6 +461,19 @@ test("cli patches --job dronehive-install-ollama-app-root includes the InstallRo
   assert.ok(parsed.applyNext.some((line) => line.includes("Install-DroneOllamaApp.ps1") && line.includes("InstallRoot = 'host\\\\ai-home\\\\apps\\\\DroneOllama'")));
 });
 
+test("cli patches --job dronehive-install-ollama-app-mount includes the mountSrc afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-install-ollama-app-mount"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-install-ollama-app-mount");
+  assert.ok(parsed.applyNext.some((line) => line.includes("Install-DroneOllamaApp.ps1") && line.includes("mountSrc = 'apps\\\\drone-ollama-mount\\\\target\\\\release\\\\drone-ollama-mount.exe'")));
+});
+
 test("cli patches --job dronehive-tui-readme-cargo includes the dronehive-tui README afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-tui-readme-cargo"], {
