@@ -1330,8 +1330,10 @@
       "file": "patches/dronehive-doc-app-library.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "docs/APP.md Library row uses host/library. Independent of APP.md cd leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/APP.md').read_text(); assert 'host/library' in t; assert r'F:\\\\GrokSelfLibrary' not in t\""
+      ],
+      "notes": "docs/APP.md Library row uses host/library. After apply: assert that phrase and that F: GrokSelfLibrary is gone. Independent of APP.md cd leftover and seed APP leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-seed-doc-app-library",
