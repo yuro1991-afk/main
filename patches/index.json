@@ -298,8 +298,10 @@
       "file": "patches/dronehive-icons-manifest-relative.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "ICONS_MANIFEST icon_root is assets/icons, not G:\\AI-Home\\projects\\ai-worker-drone-0.5b\\assets\\icons. Desktop C: paths left as one host example. Independent of portable-paths. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; k=json.loads(Path('assets/icons/ICONS_MANIFEST.json').read_text())['icon_root']; assert k=='assets/icons'; assert r'G:\\\\AI-Home' not in k\""
+      ],
+      "notes": "ICONS_MANIFEST icon_root is assets/icons, not G:\\AI-Home\\projects\\ai-worker-drone-0.5b\\assets\\icons. Desktop C: paths left as one host example. After apply: assert icon_root is assets/icons. Do not assert C: gone. Do not put backticks in afterApply. Independent of portable-paths. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-app-links-host-paths",

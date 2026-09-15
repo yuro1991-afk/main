@@ -22,6 +22,7 @@ Manifest only. Independent of portable-paths and config-load-overlay. Do not edi
 - git checkout -b cursor/dronehive-icons-manifest-relative-from-ops
 - git apply --check /path/to/main/patches/dronehive-icons-manifest-relative.patch
 - git apply /path/to/main/patches/dronehive-icons-manifest-relative.patch
+- python3 -c "from pathlib import Path; import json; k=json.loads(Path('assets/icons/ICONS_MANIFEST.json').read_text())['icon_root']; assert k=='assets/icons'; assert r'G:\\AI-Home' not in k"
 
 ## Verify
 
