@@ -22,6 +22,7 @@ Seed WORK_ORDER.md codex table only. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-seed-work-order-doc-codex-paths-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-doc-codex-paths.patch
 - git apply /path/to/main/patches/dronehive-seed-work-order-doc-codex-paths.patch
+- python3 -c "from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); assert 'host/library/knowledge/codex/CODEX.md' in t; assert 'host/library/knowledge/codex/models/catalog.min.json' in t; assert 'host/library/bin/query_llm_codex.py' in t; assert 'host/library/bin/build_llm_codex.py' in t"
 
 ## Verify
 

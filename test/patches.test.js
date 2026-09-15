@@ -370,6 +370,19 @@ test("cli patches --job dronehive-runtime-host-paths applies portable-paths firs
   assert.ok(lines.some((line) => line.includes("from drone.grok_handoff import DEFAULT_ROOT")));
 });
 
+test("cli patches --job dronehive-seed-work-order-doc-codex-paths includes the seed docs codex table afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-seed-work-order-doc-codex-paths"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-seed-work-order-doc-codex-paths");
+  assert.ok(parsed.applyNext.some((line) => line.includes("drone/app/seed/docs/WORK_ORDER.md") && line.includes("host/library/knowledge/codex/CODEX.md") && line.includes("query_llm_codex.py")));
+});
+
 test("cli patches --job dronehive-work-order-doc-codex-paths includes the docs codex table afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-work-order-doc-codex-paths"], {
