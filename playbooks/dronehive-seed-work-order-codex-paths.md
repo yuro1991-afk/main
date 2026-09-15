@@ -22,6 +22,7 @@ Seed codex path keys only. Different file from configs/work_order.json. Do not e
 - git checkout -b cursor/dronehive-seed-work-order-codex-paths-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-codex-paths.patch
 - git apply /path/to/main/patches/dronehive-seed-work-order-codex-paths.patch
+- python3 -c "from pathlib import Path; import json; c=json.loads(Path('drone/app/seed/configs/work_order.json').read_text())['codex']; assert c['root']=='host/library/knowledge/codex' and c['master_min']=='host/library/knowledge/codex/CODEX.min.json' and c['master_md']=='host/library/knowledge/codex/CODEX.md' and c['query_cli']=='host/library/bin/query_llm_codex.py'"
 
 ## Verify
 

@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T01:08Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T01:09Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`5eb383d`. Shipped this interval: `dronehive-work-order-codex-paths`
-codex afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`f5989d6`. Shipped this interval: `dronehive-seed-work-order-codex-paths`
+seed codex afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -58,7 +58,8 @@ codex afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused open-tasks apply | `dronehive-work-order-open-tasks` (open_tasks afterApply wired) |
 | next unused seed open-tasks apply | `dronehive-seed-work-order-open-tasks` (seed open_tasks afterApply wired) |
 | next unused codex-paths apply | `dronehive-work-order-codex-paths` (codex afterApply wired) |
-| next afterApply to wire | `dronehive-seed-work-order-codex-paths` (seed codex path keys only) |
+| next unused seed codex-paths apply | `dronehive-seed-work-order-codex-paths` (seed codex afterApply wired) |
+| next afterApply to wire | `dronehive-work-order-law-truth` (LAW_TRUTH.md path only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -168,7 +169,9 @@ Face-swap README honesty leftovers are exhausted.
 (ai_laws.rank_5.open_tasks is `host/continuous/OPEN_TASKS.json`).
 `dronehive-work-order-codex-paths` afterApply asserts work_order.json
 (codex.root / master_min / master_md / query_cli under `host/library`).
-Next afterApply to wire is `dronehive-seed-work-order-codex-paths`.
+`dronehive-seed-work-order-codex-paths` afterApply asserts seed work_order.json
+(codex.root / master_min / master_md / query_cli under `host/library`).
+Next afterApply to wire is `dronehive-work-order-law-truth`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -231,7 +234,7 @@ then unused `dronehive-super-llms-hardwire` (super_llms.json hardwire only; afte
 then unused `dronehive-work-order-open-tasks` (open_tasks key only; afterApply wired; independent of portable-paths and buzzer leftover),
 then unused `dronehive-seed-work-order-open-tasks` (seed open_tasks only; afterApply wired; independent of live config),
 then unused `dronehive-work-order-codex-paths` (codex path keys only; afterApply wired; independent of portable-paths and curriculum leftover),
-then unused `dronehive-seed-work-order-codex-paths` (seed codex paths only; independent of live config),
+then unused `dronehive-seed-work-order-codex-paths` (seed codex paths only; afterApply wired; independent of live config),
 then unused `dronehive-work-order-law-truth` (LAW_TRUTH.md path only; applies on vanilla; stack after portable-paths),
 then unused `dronehive-seed-work-order-law-truth` (seed LAW_TRUTH.md only; independent of live config),
 then unused `dronehive-work-order-doc-law-truth` (docs Library law line only; independent of NEXT.json leftover),
