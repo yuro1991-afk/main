@@ -1231,8 +1231,10 @@
       "file": "patches/dronehive-doc-operational-cd.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "docs/OPERATIONAL.md cd uses '.'. Independent of seed OPERATIONAL leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/OPERATIONAL.md').read_text(); assert '\\ncd .\\n' in t; assert r'cd G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "docs/OPERATIONAL.md One command cd uses a standalone cd . line. After apply: assert that line and that the G: project cd is gone. Independent of seed OPERATIONAL leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-seed-doc-operational-cd",
