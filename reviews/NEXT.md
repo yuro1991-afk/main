@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T02:58Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T03:00Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`ca7bfd8`. Shipped this interval: `dronehive-seed-doc-app-library`
-Library afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`6f8bec9`. Shipped this interval: `dronehive-doc-app-cd`
+cd afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -123,7 +123,8 @@ Library afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused seed-doc-honesty-library apply | `dronehive-seed-doc-honesty-library` (seed HONESTY.md library afterApply wired) |
 | next unused doc-app-library apply | `dronehive-doc-app-library` (APP.md Library afterApply wired) |
 | next unused seed-doc-app-library apply | `dronehive-seed-doc-app-library` (seed APP.md Library afterApply wired) |
-| next afterApply to wire | `dronehive-doc-app-cd` (docs/APP.md cd only) |
+| next unused doc-app-cd apply | `dronehive-doc-app-cd` (APP.md cd afterApply wired) |
+| next afterApply to wire | `dronehive-seed-doc-app-cd` (seed APP.md cd only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -363,7 +364,9 @@ Face-swap README honesty leftovers are exhausted.
 (`host/library`; F: GrokSelfLibrary is gone).
 `dronehive-seed-doc-app-library` afterApply asserts seed APP.md
 (`host/library`; F: GrokSelfLibrary is gone).
-Next afterApply to wire is `dronehive-doc-app-cd`.
+`dronehive-doc-app-cd` afterApply asserts docs/APP.md
+(standalone `cd .` line; G: project cd is gone).
+Next afterApply to wire is `dronehive-seed-doc-app-cd`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -491,7 +494,7 @@ then unused `dronehive-doc-honesty-library` (docs/HONESTY.md only; afterApply wi
 then unused `dronehive-seed-doc-honesty-library` (drone/app/seed/docs/HONESTY.md only; afterApply wired),
 then unused `dronehive-doc-app-library` (docs/APP.md only; afterApply wired),
 then unused `dronehive-seed-doc-app-library` (drone/app/seed/docs/APP.md only; afterApply wired),
-then unused `dronehive-doc-app-cd` (docs/APP.md only),
+then unused `dronehive-doc-app-cd` (docs/APP.md only; afterApply wired),
 then unused `dronehive-seed-doc-app-cd` (drone/app/seed/docs/APP.md only),
 then unused `dronehive-doc-grok-handoff-root` (docs/GROK_HANDOFF.md only),
 then unused `dronehive-doc-grok-handoff-cd` (docs/GROK_HANDOFF.md only),
