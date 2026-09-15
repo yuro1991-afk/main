@@ -61,9 +61,10 @@ export const ROUTES = Object.freeze([
     intent: "dronehive ci / packaging",
     destination: "github.com/yuro1991-afk/dronehive",
     kind: "fix",
-    notes: "Unstick #1 UnicodeEncodeError first, then rebase #2.",
-    jobId: null,
-    packet: null,
+    notes:
+      "First parked apply is dronehive-unicode-ci: apply patches/dronehive-pro-chat-cp1252.patch from main#9. Do not copy PR #6 autofix. Unstick dronehive#1 python-smoke, then rebase #2.",
+    jobId: "dronehive-unicode-ci",
+    packet: "playbooks/dronehive-unicode-ci.md",
   },
   {
     intent: "superbrain / lanes",
@@ -201,6 +202,19 @@ export function routeIntent(text, context = {}) {
     );
   }
   if (includesAny(q, ["dronehive", "drone", "unicode", "wheel"])) {
+    const parked = context.ledger?.jobs?.find((job) => job.id === "dronehive-unicode-ci");
+    if (parked) {
+      const patch = catalogPatchRow(parked.id);
+      return routeFromJob(
+        text,
+        parked,
+        patch ? catalogRouteNotes(patch) : ROUTES[4].notes,
+        {
+          applyNext: patch ? applyNextFor(patch) : undefined,
+          proveAfterApplyCommand: patch ? proveAfterApplyCommand(patch.id) : undefined,
+        },
+      );
+    }
     return withContract(ROUTES[4], text);
   }
 
@@ -390,5 +404,5 @@ function catalogRouteNotes(patch) {
     ? patch.requires.filter((file) => typeof file === "string" && file.startsWith("patches/"))
     : [];
   const files = [...priors, patch.file].join(" then ");
-  return `Yuri: forget Origin for this card. Apply ${files}. Do not invent a leftover.`;
+  return `Yuri: forget Origin for this card. Apply ${files}. Do not invent a leftover. Do not copy PR #6 autofix.`;
 }

@@ -111,11 +111,36 @@ test("review does not target empty main", () => {
 });
 
 test("dronehive and probe intents", () => {
-  assert.equal(routeIntent("fix dronehive unicode").kind, "fix");
+  const drone = routeIntent("fix dronehive unicode");
+  assert.equal(drone.kind, "fix");
+  assert.equal(drone.jobId, "dronehive-unicode-ci");
+  assert.match(drone.notes, /dronehive-pro-chat-cp1252\.patch/);
+  assert.match(drone.notes, /Do not copy PR #6 autofix/);
+  assert.doesNotMatch(drone.notes, /npm run autofix -- apply/);
   const superbrain = routeIntent("probe superbrain lanes");
   assert.equal(superbrain.kind, "review");
   assert.equal(superbrain.jobId, "review-main-pr10");
   assert.match(superbrain.notes, /no more Superbrain/);
+});
+
+test("dronehive intent with ledger parks on unicode-ci applyNext", () => {
+  const ledger = loadLedger(join(ROOT, "ledger", "queue.json"));
+  const roster = loadRoster(join(ROOT, "ledger", "roster.json"));
+  const route = routeIntent("fix dronehive unicode", {
+    ledger,
+    roster,
+    nowMs: NOW,
+  });
+  assert.equal(route.jobId, "dronehive-unicode-ci");
+  assert.match(route.destination, /dronehive#dronehive-unicode-ci/);
+  assert.match(route.notes, /forget Origin/);
+  assert.match(route.notes, /dronehive-pro-chat-cp1252\.patch/);
+  assert.ok(route.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    route.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  assert.doesNotMatch(route.notes, /npm run autofix -- apply/);
 });
 
 test("named stacked catalog route notes name requires priors first", () => {
