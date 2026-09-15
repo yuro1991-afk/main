@@ -53,6 +53,7 @@ import {
   renderLeftoverLaunch,
   writeDispatch,
   writeLaunchPrompts,
+  buildMissingLaunches,
 } from "./dispatch.js";
 import {
   defaultAgentsPath,
@@ -341,6 +342,13 @@ export async function runCli(argv, options = {}) {
         ? resolve(flags.out)
         : defaultLaunchPath(options.root ?? ROOT);
       const jobId = positionals[0] || (flags.job && flags.job !== "true" ? flags.job : "");
+      if (flags.missing === "true") {
+        if (jobId) {
+          throw new Error("assign --missing does not take --job");
+        }
+        write(JSON.stringify(buildMissingLaunches(ledger, dest), null, 2));
+        return 0;
+      }
       if (jobId) {
         const job = ledger.jobs.find((item) => item.id === jobId);
         if (!job) {
@@ -683,7 +691,7 @@ Commands:
   list [--job id] [--kind kind] [--repo repo] [--here] [--all] [--origin] [--world]  # --job is that card + applyNext
   next [id] [--job id] [--kind kind] [--repo repo] [--here] [--all] [--origin] [--world] [--agent <bcId>]
   slots [--job id] [--here] [--all] [--origin] [--world]  # --job peeks that card + applyNext
-  assign [--job id] [--out dir]  # --job writes one leftover Apply launch + catalog-first related; else roster + leftover next
+  assign [--job id] [--missing] [--out dir]  # --missing lists catalog leftovers with no launch (never writes); --job writes one leftover Apply launch + related; else roster + leftover next
   sync --agents path.json [--write] [--out dir]
   catalog [--entries path.json] [--write] [--out path]
   busy [id] [--job id] [--agent <bcId>] [--here] [--all] [--origin] [--world]   # --job peeks; else roster then leftover next
