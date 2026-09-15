@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T01:42Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T01:43Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`d378d84`. Shipped this interval: `dronehive-spec-relative`
-DroneHive.spec afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`9a55b3d`. Shipped this interval: `dronehive-start-super-mesh-cd`
+START_SUPER_MESH.bat afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -81,7 +81,8 @@ DroneHive.spec afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused doc-cd apply | `dronehive-work-order-doc-cd` (docs swarm-entry cd afterApply wired) |
 | next unused seed doc-cd apply | `dronehive-seed-work-order-doc-cd` (seed swarm-entry cd afterApply wired) |
 | next unused spec-relative apply | `dronehive-spec-relative` (DroneHive.spec afterApply wired) |
-| next afterApply to wire | `dronehive-start-super-mesh-cd` (START_SUPER_MESH.bat cd only) |
+| next unused start-super-mesh-cd apply | `dronehive-start-super-mesh-cd` (START_SUPER_MESH.bat afterApply wired) |
+| next afterApply to wire | `dronehive-start-multi-model-pythonpath` (START_MULTI_MODEL.bat PYTHONPATH only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -237,7 +238,9 @@ Face-swap README honesty leftovers are exhausted.
 (standalone `cd .` line; G: project cd is gone).
 `dronehive-spec-relative` afterApply asserts DroneHive.spec
 (Analysis uses `['drone/app/desktop.py']` and `pathex=['.']`).
-Next afterApply to wire is `dronehive-start-super-mesh-cd`.
+`dronehive-start-super-mesh-cd` afterApply asserts START_SUPER_MESH.bat
+(cds to `%~dp0`; G: project cd is gone).
+Next afterApply to wire is `dronehive-start-multi-model-pythonpath`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -323,7 +326,7 @@ then unused `dronehive-seed-work-order-doc-models` (seed install-proof models pa
 then unused `dronehive-work-order-doc-cd` (docs swarm entry cd only; afterApply wired; independent of header fabric leftover),
 then unused `dronehive-seed-work-order-doc-cd` (seed swarm entry cd only; afterApply wired; independent of live docs),
 then unused `dronehive-spec-relative` (DroneHive.spec Analysis only; afterApply wired; independent of portable-paths),
-then unused `dronehive-start-super-mesh-cd` (START_SUPER_MESH.bat cd only),
+then unused `dronehive-start-super-mesh-cd` (START_SUPER_MESH.bat cd only; afterApply wired; independent of spec leftover),
 then unused `dronehive-start-multi-model-pythonpath` (START_MULTI_MODEL.bat PYTHONPATH only),
 then unused `dronehive-start-seer-pythonpath` (START_SEER.bat PYTHONPATH only),
 then unused `dronehive-enable-bridge-fallback` (Enable-Bridge1080 fallback only),

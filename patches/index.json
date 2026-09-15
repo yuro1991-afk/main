@@ -890,8 +890,10 @@
       "file": "patches/dronehive-start-super-mesh-cd.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "START_SUPER_MESH.bat cds to %~dp0 like the other start scripts, not G:\\\\AI-Home. Independent of spec leftover and PYTHONPATH leftovers (different files). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('START_SUPER_MESH.bat').read_text(); assert 'cd /d \\\"%~dp0\\\"' in t; assert r'cd /d G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "START_SUPER_MESH.bat cds to %~dp0 like the other start scripts, not G:\\\\AI-Home. After apply: assert cd /d \"%~dp0\" and that the G: project cd is gone. Independent of spec leftover and PYTHONPATH leftovers (different files). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-start-multi-model-pythonpath",

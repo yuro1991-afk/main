@@ -22,6 +22,7 @@ START_SUPER_MESH.bat cd line only. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-start-super-mesh-cd-from-ops
 - git apply --check /path/to/main/patches/dronehive-start-super-mesh-cd.patch
 - git apply /path/to/main/patches/dronehive-start-super-mesh-cd.patch
+- python3 -c "from pathlib import Path; t=Path('START_SUPER_MESH.bat').read_text(); assert 'cd /d \"%~dp0\"' in t; assert r'cd /d G:\\AI-Home\\projects\\ai-worker-drone-0.5b' not in t"
 
 ## Verify
 
