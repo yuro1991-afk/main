@@ -59,7 +59,7 @@ never writes. Prefer `assign --job <id> --out /tmp/launches`.
 ## Sibling patches
 
 **Yuri: forget Origin** for public GitHub siblings. `node src/cli.js patches`
-lists applyable diffs (compact: `nextApply` + id/file; `--job` for applyNext). Catalog includes DroneHive unicode, bloom ignore/README/CI, OpenSussy
+lists applyable diffs (compact: `nextApply` + id/file + `nextMissing`; `--job` for applyNext). Catalog includes DroneHive unicode, bloom ignore/README/CI, OpenSussy
 2.0.0 leftovers, face-swap icons/env, Ollama Voice syntax + loopback API).
 `node src/cli.js patches --prove --siblings-root /tmp/siblings` re-checks
 vanilla+stacked `git apply --check` on a `--no-hardlinks` throwaway and
