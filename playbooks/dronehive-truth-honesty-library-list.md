@@ -22,6 +22,7 @@ TRUTH_AND_HONESTY.md Universal/Oath/Coder list only. Leave C:\\Users hardwire. D
 - git checkout -b cursor/dronehive-truth-honesty-library-list-from-ops
 - git apply --check /path/to/main/patches/dronehive-truth-honesty-library-list.patch
 - git apply /path/to/main/patches/dronehive-truth-honesty-library-list.patch
+- python3 -c "from pathlib import Path; t=Path('TRUTH_AND_HONESTY.md').read_text(); law=t.split('## Full law',1)[1].split('##',1)[0]; assert 'host/library' in law; assert r'F:\\GrokSelfLibrary' not in law"
 
 ## Verify
 

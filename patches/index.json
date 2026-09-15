@@ -1561,8 +1561,10 @@
       "file": "patches/dronehive-truth-honesty-library-list.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "TRUTH_AND_HONESTY.md list Universal/Oath/Coder use host/library. Adjacent lines kept as one leftover. Independent of system-root leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('TRUTH_AND_HONESTY.md').read_text(); law=t.split('## Full law',1)[1].split('##',1)[0]; assert 'host/library' in law; assert r'F:\\\\GrokSelfLibrary' not in law\""
+      ],
+      "notes": "TRUTH_AND_HONESTY.md Full law list Universal/Oath/Coder use host/library. After apply: assert those phrases in that section only. Inline oath leftover still pins F:. Leaves C:\\\\Users hardwire. Do not put backticks in afterApply. Adjacent lines kept as one leftover. Independent of system-root leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-ollama-app-bridge-paths",
