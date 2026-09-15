@@ -450,8 +450,10 @@
       "file": "patches/dronehive-future-seer-jane-honesty.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "configs/future_seer.json jane.* uses host/ai-center, not G:\\\\AI-Center. Independent of config-load-overlay (Python remap only) and runtime-host-paths (future_seer.py Path wraps). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; d=json.loads(Path('configs/future_seer.json').read_text()); assert d['jane']['super_cell'] == 'host/ai-center/agents/super-cell-4' and d['jane']['pythonpath_ai_center'] == 'host/ai-center'\""
+      ],
+      "notes": "configs/future_seer.json jane.* uses host/ai-center, not G:\\\\AI-Center. After apply: assert jane.super_cell and pythonpath_ai_center. Independent of config-load-overlay (Python remap only) and runtime-host-paths (future_seer.py Path wraps). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-multi-hosts-exe-honesty",

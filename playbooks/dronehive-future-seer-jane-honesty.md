@@ -22,6 +22,7 @@ configs/future_seer.json jane keys only. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-future-seer-jane-honesty-from-ops
 - git apply --check /path/to/main/patches/dronehive-future-seer-jane-honesty.patch
 - git apply /path/to/main/patches/dronehive-future-seer-jane-honesty.patch
+- python3 -c "from pathlib import Path; import json; d=json.loads(Path('configs/future_seer.json').read_text()); assert d['jane']['super_cell'] == 'host/ai-center/agents/super-cell-4' and d['jane']['pythonpath_ai_center'] == 'host/ai-center'"
 
 ## Verify
 
