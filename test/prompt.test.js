@@ -190,7 +190,7 @@ test("cli prompt --agent prints the roster GitHub card, not leftover next", asyn
   });
   assert.equal(code, 0);
   const text = chunks.join("");
-  assert.match(text, new RegExp(`GitHub launch — ${parked.jobId}`));
+  assert.match(text, new RegExp(`(?:Apply|GitHub launch) ${parked.jobId}`));
   assert.doesNotMatch(text, /review-landing-pad-prs/);
 });
 

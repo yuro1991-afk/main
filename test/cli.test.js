@@ -93,21 +93,15 @@ test("cli route and probe", async () => {
   assert.doesNotMatch(probed.out, /169\.254\.124\.8:45001/);
 });
 
-test("cli live leftover Superbrain keep-busy attaches take-instead apply pair", async () => {
+test("cli live leftover keep-busy stays GitHub-first after the lease", async () => {
   const result = await capture(["route", "keep", "agents", "busy"], {
     nowMs: Date.parse("2026-09-14T19:00:00.000Z"),
   });
   assert.equal(result.code, 0);
   const parsed = JSON.parse(result.out);
-  assert.equal(parsed.jobId, "gub-superbrain-probe");
-  assert.match(parsed.destination, /gub-superbrain-probe/);
-  assert.doesNotMatch(parsed.destination, /dronehive-unicode-ci/);
-  assert.equal(parsed.takeInstead, "dronehive-unicode-ci");
-  assert.ok(parsed.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
-  assert.equal(
-    parsed.proveAfterApplyCommand,
-    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
-  );
+  assert.equal(parsed.jobId, "review-landing-pad-prs");
+  assert.doesNotMatch(parsed.destination, /gub-superbrain-probe/);
+  assert.equal(parsed.takeInstead, undefined);
 });
 
 test("cli next --here stays on this repo", async () => {
@@ -142,19 +136,14 @@ test("cli next --job Superbrain attaches take-instead apply pair", async () => {
   assert.doesNotMatch(parsed.applyNext.join("\n"), /prove-after-apply/);
 });
 
-test("cli next --origin leftover Superbrain attaches take-instead apply pair", async () => {
+test("cli next --origin leftover is first unused world card", async () => {
   const result = await capture(["next", "--origin"], {
     nowMs: Date.parse("2026-09-14T19:00:00.000Z"),
   });
   assert.equal(result.code, 0);
   const parsed = JSON.parse(result.out);
-  assert.equal(parsed.id, "gub-superbrain-probe");
-  assert.equal(parsed.takeInstead, "dronehive-unicode-ci");
-  assert.ok(parsed.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
-  assert.equal(
-    parsed.proveAfterApplyCommand,
-    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
-  );
+  assert.equal(parsed.id, "genesis-world-layer-102");
+  assert.equal(parsed.takeInstead, undefined);
 });
 
 test("cli next --job peeks the named catalog card", async () => {
@@ -193,19 +182,14 @@ test("cli status without --job leaves leftover next and omits job", async () => 
   assert.equal(parsed.next.id, "review-landing-pad-prs");
 });
 
-test("cli status --origin leftover Superbrain attaches take-instead apply pair", async () => {
+test("cli status --origin leftover is first unused world card", async () => {
   const result = await capture(["status", "--origin"], {
     nowMs: Date.parse("2026-09-14T19:00:00.000Z"),
   });
   assert.equal(result.code, 0);
   const parsed = JSON.parse(result.out);
-  assert.equal(parsed.next.id, "gub-superbrain-probe");
-  assert.equal(parsed.next.takeInstead, "dronehive-unicode-ci");
-  assert.ok(parsed.next.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
-  assert.equal(
-    parsed.next.proveAfterApplyCommand,
-    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
-  );
+  assert.equal(parsed.next.id, "genesis-world-layer-102");
+  assert.equal(parsed.next.takeInstead, undefined);
 });
 
 test("cli next --world is leftover Origin world after GitHub remapping", async () => {

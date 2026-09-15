@@ -330,11 +330,12 @@ test("live leftover Superbrain assign attaches take-instead apply pair", () => {
   assert.match(text, /Do not paste this into an Origin cloud agent/);
   assert.doesNotMatch(text, /Paste the brief below into a new Origin cloud agent/);
   const rows = leftoverLaunchRows(ledger, roster, afterLease, { genesis: true });
-  assert.equal(rows[0].jobId, "gub-superbrain-probe");
-  assert.equal(rows[0].takeInstead, "dronehive-unicode-ci");
-  assert.ok(rows[0].applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(rows[0].jobId, "genesis-world-layer-102");
+  const sitoutRow = rows.find((row) => row.jobId === "gub-superbrain-probe");
+  assert.equal(sitoutRow.takeInstead, "dronehive-unicode-ci");
+  assert.ok(sitoutRow.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
   assert.equal(
-    rows[0].proveAfterApplyCommand,
+    sitoutRow.proveAfterApplyCommand,
     "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
   );
   const packet = buildAssign(ledger, roster, afterLease);
