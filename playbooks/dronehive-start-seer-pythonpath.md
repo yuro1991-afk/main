@@ -22,6 +22,7 @@ START_SEER.bat PYTHONPATH line only. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-start-seer-pythonpath-from-ops
 - git apply --check /path/to/main/patches/dronehive-start-seer-pythonpath.patch
 - git apply /path/to/main/patches/dronehive-start-seer-pythonpath.patch
+- python3 -c "from pathlib import Path; t=Path('START_SEER.bat').read_text(); assert r'%ROOT%\\host\\ai-center' in t; assert r'PYTHONPATH=%ROOT%;G:\\AI-Center' not in t"
 
 ## Verify
 

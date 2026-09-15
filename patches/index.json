@@ -912,8 +912,10 @@
       "file": "patches/dronehive-start-seer-pythonpath.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "START_SEER.bat PYTHONPATH uses %ROOT%\\\\host\\\\ai-center, not G:\\\\AI-Center. Independent of START_MULTI_MODEL leftover (different file). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('START_SEER.bat').read_text(); assert r'%ROOT%\\\\host\\\\ai-center' in t; assert r'PYTHONPATH=%ROOT%;G:\\\\AI-Center' not in t\""
+      ],
+      "notes": "START_SEER.bat PYTHONPATH uses %ROOT%\\\\host\\\\ai-center, not G:\\\\AI-Center. After apply: assert host/ai-center PYTHONPATH and that G:\\\\AI-Center is gone from that line. Independent of START_MULTI_MODEL leftover (different file). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-enable-bridge-fallback",
