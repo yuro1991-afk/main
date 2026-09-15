@@ -22,6 +22,7 @@ drone/grok_handoff.py clone dest defaults only. Leave the G: goal regex. Do not 
 - git checkout -b cursor/dronehive-grok-handoff-clone-dest-from-ops
 - git apply --check /path/to/main/patches/dronehive-grok-handoff-clone-dest.patch
 - git apply /path/to/main/patches/dronehive-grok-handoff-clone-dest.patch
+- python3 -c "from pathlib import Path; t=Path('drone/grok_handoff.py').read_text(); dests=[x for x in t.splitlines() if 'dest = r' in x]; assert len(dests)==2; assert all('host/ai-home/projects/dronehive-clone-test' in x for x in dests); assert all(r'G:\\AI-Home' not in x for x in dests)"
 
 ## Verify
 

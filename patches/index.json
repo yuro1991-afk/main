@@ -1649,8 +1649,10 @@
       "file": "patches/dronehive-grok-handoff-clone-dest.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "grok_handoff.py clone dest defaults use host/ai-home. Two dest assignments are one leftover. Independent of runtime-host-paths DEFAULT_ROOT wrap. Leave the G: goal regex. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/grok_handoff.py').read_text(); dests=[x for x in t.splitlines() if 'dest = r' in x]; assert len(dests)==2; assert all('host/ai-home/projects/dronehive-clone-test' in x for x in dests); assert all(r'G:\\\\AI-Home' not in x for x in dests)\""
+      ],
+      "notes": "grok_handoff.py clone dest defaults use host/ai-home. After apply: assert both dest = r lines. Two dest assignments are one leftover. DEFAULT_ROOT leftover and G: goal regex stay. Do not put backticks in afterApply. Independent of runtime-host-paths DEFAULT_ROOT wrap. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-multi-face-pythonpath",
