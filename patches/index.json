@@ -395,8 +395,10 @@
       "file": "patches/dronehive-seed-buzzer-hive-library-honesty.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "drone/app/seed/configs/buzzer_hive.json library.root / continuous_tasks use host/. Independent of live configs/buzzer_hive.json leftover (different file). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/configs/buzzer_hive.json').read_text(); assert 'host/library' in t and 'host/continuous/OPEN_TASKS.json' in t\""
+      ],
+      "notes": "drone/app/seed/configs/buzzer_hive.json library.root / continuous_tasks use host/. After apply: assert those phrases. Independent of live configs/buzzer_hive.json leftover (different file). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-work-order-fabric-root",

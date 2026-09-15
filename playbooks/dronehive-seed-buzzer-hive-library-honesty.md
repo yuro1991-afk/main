@@ -22,6 +22,7 @@ Seed JSON only. Different file from configs/buzzer_hive.json. Do not edit drone/
 - git checkout -b cursor/dronehive-seed-buzzer-hive-library-honesty-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-buzzer-hive-library-honesty.patch
 - git apply /path/to/main/patches/dronehive-seed-buzzer-hive-library-honesty.patch
+- python3 -c "from pathlib import Path; t=Path('drone/app/seed/configs/buzzer_hive.json').read_text(); assert 'host/library' in t and 'host/continuous/OPEN_TASKS.json' in t"
 
 ## Verify
 

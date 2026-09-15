@@ -10,8 +10,8 @@ Keep-busy tick **2026-09-15T00:34Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`9ee27f6`. Shipped this interval: `dronehive-buzzer-hive-library-honesty`
-buzzer_hive.json afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`9ee27f6`. Shipped this interval: `dronehive-seed-buzzer-hive-library-honesty`
+seed buzzer_hive.json afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -38,7 +38,8 @@ buzzer_hive.json afterApply. Leftover `next` stays alone. Do not invent leftover
 | next unused seed work-order apply | `dronehive-seed-work-order-doc-honesty` (seed WORK_ORDER.md afterApply wired) |
 | next unused bench-goal apply | `dronehive-bench-goal-honesty` (GOAL string afterApply wired) |
 | next unused buzzer-hive apply | `dronehive-buzzer-hive-library-honesty` (buzzer_hive.json afterApply wired) |
-| next afterApply to wire | `dronehive-seed-buzzer-hive-library-honesty` (seed buzzer_hive.json only) |
+| next unused seed buzzer-hive apply | `dronehive-seed-buzzer-hive-library-honesty` (seed buzzer_hive.json afterApply wired) |
+| next afterApply to wire | `dronehive-work-order-fabric-root` (fabric_root key only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -108,7 +109,9 @@ Face-swap README honesty leftovers are exhausted.
 (`under host/` / `one host example`).
 `dronehive-buzzer-hive-library-honesty` afterApply asserts buzzer_hive.json
 (`host/library` / `host/continuous/OPEN_TASKS.json`).
-Next afterApply to wire is `dronehive-seed-buzzer-hive-library-honesty`.
+`dronehive-seed-buzzer-hive-library-honesty` afterApply asserts seed buzzer_hive.json
+(`host/library` / `host/continuous/OPEN_TASKS.json`).
+Next afterApply to wire is `dronehive-work-order-fabric-root`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -149,7 +152,7 @@ then unused `dronehive-bench-goal-honesty` (GOAL string only; afterApply wired; 
 then unused `faceswap-readme-requirements-honesty` (README Requirements bullet only; afterApply wired; independent of honesty-env-paths footer),
 then unused `faceswap-readme-install-sh` (README install block only; afterApply wired; independent of start-sh new file),
 then unused `dronehive-buzzer-hive-library-honesty` (buzzer_hive.json library keys only; afterApply wired; independent of config-load-overlay),
-then unused `dronehive-seed-buzzer-hive-library-honesty` (seed buzzer_hive.json only; independent of live config),
+then unused `dronehive-seed-buzzer-hive-library-honesty` (seed buzzer_hive.json only; afterApply wired; independent of live config),
 then unused `dronehive-work-order-fabric-root` (fabric_root key only; independent of portable-paths later hunks),
 then unused `dronehive-seed-work-order-fabric-root` (seed fabric_root only; independent of live config),
 then unused `faceswap-readme-swift-honesty` (README Swift paragraph only; afterApply wired; independent of Requirements and install),
