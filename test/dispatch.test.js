@@ -1,4 +1,4 @@
-import { existsSync, mkdtempSync, readFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readdirSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -15,6 +15,7 @@ import {
   buildSlotsForJob,
   claimBusyJob,
   leftoverLaunchRows,
+  MISSING_LAUNCH_PREVIEW,
   loadRoster,
   peekBusyJob,
   renderAssignedLaunch,
@@ -318,6 +319,40 @@ test("cli assign --job names catalog-first related for unicode-ci", async () => 
   );
   assert.equal(parsed.related[0].role, "patch-catalog");
   assert.equal(parsed.prefer, "node src/cli.js brief --job dronehive-unicode-ci");
+});
+
+test("cli assign --missing lists catalog leftovers with no launch and never writes", async () => {
+  const empty = mkdtempSync(join(tmpdir(), "agent-ops-assign-missing-empty-"));
+  const emptyResult = await capture(["assign", "--missing", "--out", empty]);
+  assert.equal(emptyResult.code, 0);
+  const emptyParsed = JSON.parse(emptyResult.out);
+  assert.equal(emptyParsed.contract, ASSIGN_CONTRACT);
+  assert.equal(emptyParsed.wrote, false);
+  assert.equal(emptyParsed.nextMissing, "dronehive-unicode-ci");
+  assert.equal(emptyParsed.next.length, MISSING_LAUNCH_PREVIEW);
+  assert.equal(emptyParsed.next[0], "dronehive-unicode-ci");
+  assert.equal(emptyParsed.prefer, "node src/cli.js assign --job dronehive-unicode-ci --out /tmp/launches");
+  assert.equal(readdirSync(empty).length, 0);
+
+  const onDisk = fileURLToPath(new URL("../reviews/launch", import.meta.url));
+  const before = readdirSync(onDisk).length;
+  const result = await capture(["assign", "--missing", "--out", onDisk]);
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.wrote, false);
+  assert.equal(parsed.nextMissing, "dronehive-icons-manifest-relative");
+  assert.ok(parsed.next.includes("bloom-ci-lint"));
+  assert.ok(parsed.missing > parsed.next.length);
+  assert.equal(readdirSync(onDisk).length, before);
+});
+
+test("cli assign --missing rejects --job", async () => {
+  const out = mkdtempSync(join(tmpdir(), "agent-ops-assign-missing-job-"));
+  await assert.rejects(
+    () => capture(["assign", "--missing", "--job", "bloom-ci-lint", "--out", out]),
+    /assign --missing does not take --job/,
+  );
+  assert.equal(readdirSync(out).length, 0);
 });
 
 test("cli assign --job unknown id fails closed", async () => {

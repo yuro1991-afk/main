@@ -1,4 +1,4 @@
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { isGenesisJob, isGithubJob, isWorldPhaseJob, jobScope } from "./kinds.js";
 import {
@@ -8,7 +8,7 @@ import {
   listJobs,
   nextJob,
 } from "./ledger.js";
-import { applyNextForJob, jobForDisplay, proveAfterApplyForJob, takeInsteadFields } from "./brief.js";
+import { applyNextForJob, catalogPatchFor, jobForDisplay, proveAfterApplyForJob, takeInsteadFields } from "./brief.js";
 import { unusedGenesisCards, unusedGithubCards } from "./sync.js";
 import { buildHelperPacket } from "./helpers.js";
 import { buildRelaunch, packetPathFor, relaunchFor } from "./handoff.js";
@@ -176,6 +176,53 @@ export function defaultLaunchPath(repoRoot) {
  */
 export function launchPathFor(jobId) {
   return `reviews/launch/${jobId}.md`;
+}
+
+export const MISSING_LAUNCH_PREVIEW = 8;
+
+/**
+ * Catalog leftover ids that have no launch file in dest.
+ * Never writes. Priority order. Blocked leftovers stay listed.
+ * @param {import("./ledger.js").Ledger} ledger
+ * @param {string} launchDir
+ */
+export function missingLaunchRows(ledger, launchDir) {
+  const present = new Set(
+    existsSync(launchDir)
+      ? readdirSync(launchDir)
+          .filter((name) => name.endsWith(".md"))
+          .map((name) => name.slice(0, -3))
+      : [],
+  );
+  return ledger.jobs
+    .filter((job) => catalogPatchFor(job) && !present.has(job.id))
+    .slice()
+    .sort((a, b) => a.priority - b.priority)
+    .map((job) => ({
+      jobId: job.id,
+      priority: job.priority,
+      launch: launchPathFor(job.id),
+    }));
+}
+
+/**
+ * Compact assign --missing packet. Does not write launch files.
+ * @param {import("./ledger.js").Ledger} ledger
+ * @param {string} launchDir
+ */
+export function buildMissingLaunches(ledger, launchDir) {
+  const missing = missingLaunchRows(ledger, launchDir);
+  const nextMissing = missing[0]?.jobId ?? null;
+  return {
+    contract: ASSIGN_CONTRACT,
+    missing: missing.length,
+    nextMissing,
+    next: missing.slice(0, MISSING_LAUNCH_PREVIEW).map((row) => row.jobId),
+    prefer: nextMissing
+      ? `node src/cli.js assign --job ${nextMissing} --out /tmp/launches`
+      : "node src/cli.js assign --job <id> --out /tmp/launches",
+    wrote: false,
+  };
 }
 
 /**
