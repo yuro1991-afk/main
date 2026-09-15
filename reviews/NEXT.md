@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T03:54Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T03:56Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`58ea0c3`. Shipped this interval: `dronehive-grok-handoff-clone-dest`
-clone dest afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`9191c17`. Shipped this interval: `dronehive-multi-face-pythonpath`
+PYTHONPATH afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -151,7 +151,8 @@ clone dest afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused honesty-located-paths apply | `faceswap-honesty-located-paths` (HONESTY.md Located Path/Models afterApply wired) |
 | next unused work-order-registry-cli apply | `dronehive-work-order-registry-cli` (work_order.py CLI fallback afterApply wired) |
 | next unused grok-handoff-clone-dest apply | `dronehive-grok-handoff-clone-dest` (grok_handoff.py clone dest afterApply wired) |
-| next afterApply to wire | `dronehive-multi-face-pythonpath` (multi_face.py PYTHONPATH only) |
+| next unused multi-face-pythonpath apply | `dronehive-multi-face-pythonpath` (multi_face.py PYTHONPATH afterApply wired) |
+| next afterApply to wire | `dronehive-future-seer-pythonpath` (future_seer.py PYTHONPATH jane fallbacks only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -447,7 +448,9 @@ HONESTY.md Path/Models lines have one host example (G: stays).
 work_order.py CLI fallback uses host/ai-center.
 `dronehive-grok-handoff-clone-dest` afterApply asserts
 both dest = r lines use host/ai-home (DEFAULT_ROOT leftover stays).
-Next afterApply to wire is `dronehive-multi-face-pythonpath`.
+`dronehive-multi-face-pythonpath` afterApply asserts
+both env PYTHONPATH lines use host/ai-center.
+Next afterApply to wire is `dronehive-future-seer-pythonpath`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -603,7 +606,7 @@ then unused `opensussy-superpowers-lab-design` (historical lab design base codeb
 then unused `faceswap-honesty-located-paths` (HONESTY.md Located Path/Models only; afterApply wired),
 then unused `dronehive-work-order-registry-cli` (work_order.py CLI fallback only; afterApply wired),
 then unused `dronehive-grok-handoff-clone-dest` (grok_handoff.py clone dest only; afterApply wired),
-then unused `dronehive-multi-face-pythonpath` (multi_face.py PYTHONPATH only),
+then unused `dronehive-multi-face-pythonpath` (multi_face.py PYTHONPATH only; afterApply wired),
 then unused `dronehive-future-seer-pythonpath` (future_seer.py PYTHONPATH jane fallbacks only),
 then unused `dronehive-ai-bus-packs-root` (ai_bus.py packs_root only),
 then unused `dronehive-work-order-live-mirror` (work_order.json live_registry.mirror only; -U1),

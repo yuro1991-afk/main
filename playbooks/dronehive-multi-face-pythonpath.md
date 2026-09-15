@@ -22,6 +22,7 @@ drone/multi_face.py PYTHONPATH assignments only. Do not edit drone/pro/tool_agen
 - git checkout -b cursor/dronehive-multi-face-pythonpath-from-ops
 - git apply --check /path/to/main/patches/dronehive-multi-face-pythonpath.patch
 - git apply /path/to/main/patches/dronehive-multi-face-pythonpath.patch
+- python3 -c "from pathlib import Path; t=Path('drone/multi_face.py').read_text(); paths=[x for x in t.splitlines() if 'PYTHONPATH' in x and 'env[' in x]; assert len(paths)==2; assert all('host/ai-center' in x for x in paths); assert all(r'G:\\AI-Center' not in x for x in paths)"
 
 ## Verify
 

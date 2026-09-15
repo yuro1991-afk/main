@@ -1660,8 +1660,10 @@
       "file": "patches/dronehive-multi-face-pythonpath.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "multi_face.py PYTHONPATH fallbacks use host/ai-center. Two sites are one leftover. Independent of config-load-overlay JSON remap. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/multi_face.py').read_text(); paths=[x for x in t.splitlines() if 'PYTHONPATH' in x and 'env[' in x]; assert len(paths)==2; assert all('host/ai-center' in x for x in paths); assert all(r'G:\\\\AI-Center' not in x for x in paths)\""
+      ],
+      "notes": "multi_face.py PYTHONPATH fallbacks use host/ai-center. After apply: assert both env PYTHONPATH lines. Two sites are one leftover. Do not put backticks in afterApply. Independent of config-load-overlay JSON remap. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-future-seer-pythonpath",

@@ -968,6 +968,19 @@ test("cli patches --job dronehive-grok-handoff-clone-dest includes the clone des
   assert.ok(parsed.applyNext.some((line) => line.includes("drone/grok_handoff.py") && line.includes("dest = r") && line.includes("host/ai-home/projects/dronehive-clone-test")));
 });
 
+test("cli patches --job dronehive-multi-face-pythonpath includes the PYTHONPATH afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-multi-face-pythonpath"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-multi-face-pythonpath");
+  assert.ok(parsed.applyNext.some((line) => line.includes("drone/multi_face.py") && line.includes("PYTHONPATH") && line.includes("host/ai-center")));
+});
+
 test("cli patches --job dronehive-ollama-app-bridge-paths includes the bridge consts afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-ollama-app-bridge-paths"], {
