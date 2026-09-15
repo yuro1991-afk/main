@@ -13,6 +13,8 @@ export const SIBLING_ROLES = Object.freeze([
   "leftover-launches",
   "genesis-arena-paths",
   "assign-job",
+  "siblings-board",
+  "assign-missing",
 ]);
 
 /**
@@ -49,7 +51,11 @@ export function describeRole(role) {
     case "genesis-arena-paths":
       return "Live Genesis pointer at D:\\\\Wilderness\\\\Genesis. Review only. Do not steal. Do not invent a second arena.";
     case "assign-job":
-      return "assign --job writes one leftover Apply launch. Stacked on leftover-launches #12.";
+      return "assign --job writes one leftover Apply launch with catalog-first related. Stacked on leftover-launches #12.";
+    case "siblings-board":
+      return "Records open landing-pad PRs on ledger/siblings.json. Lead stays catalog #9.";
+    case "assign-missing":
+      return "assign --missing lists catalog leftovers with no launch file and never writes.";
     default:
       return assertNeverRole(role);
   }
@@ -117,7 +123,7 @@ export const SIBLINGS_CONTRACT = "agent-ops.siblings.v1";
 export const FIRST_PARKED_APPLY = "dronehive-unicode-ci";
 
 /**
- * Bare `siblings` dump. Keeps file order on `prs` (union 2–14).
+ * Bare `siblings` dump. Keeps file order on `prs` (union 2–19).
  * `lead` / `nextApply` name the catalog so agents do not take #5 first.
  *
  * @param {{ prs: Array<{ owns?: string[], number: number, url: string, role: string, title: string, branch: string }> }} siblings
