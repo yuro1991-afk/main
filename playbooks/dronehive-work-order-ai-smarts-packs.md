@@ -22,6 +22,7 @@ configs/work_order.json knowledge_imprint.ai_smarts_packs only. -U1 trailing kno
 - git checkout -b cursor/dronehive-work-order-ai-smarts-packs-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-ai-smarts-packs.patch
 - git apply /path/to/main/patches/dronehive-work-order-ai-smarts-packs.patch
+- python3 -c "from pathlib import Path; import json; k=json.loads(Path('configs/work_order.json').read_text())['knowledge_imprint']; assert k['ai_smarts_packs']=='host/ai-home/docs/ai-smarts/packs'"
 
 ## Verify
 
