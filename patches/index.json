@@ -88,8 +88,10 @@
       "file": "patches/faceswap-honesty-env-paths.patch",
       "base": "bba7188",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "Document FACESWAP_ENGINE / HOST / PORT. G: paths are one host example. START.cmd honors the env var."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; h=Path('HONESTY.md').read_text(); r=Path('README.md').read_text(); s=Path('START.cmd').read_text(); env=h.split('## Env contract',1)[1]; assert 'one host example' in env; assert 'FACESWAP_ENGINE' in env; assert 'FACESWAP_IOS_PORT' in env; assert 'FACESWAP_IOS_HOST' in env; assert '## Engine contract (env, not G: paths)' in r; assert 'if not defined FACESWAP_ENGINE' in s\""
+      ],
+      "notes": "Document FACESWAP_ENGINE / HOST / PORT. G: paths are one host example. START.cmd honors the env var. After apply: assert HONESTY Env contract lists the three vars, README Engine contract heading, and START.cmd honors FACESWAP_ENGINE. Do not assert G: gone. Do not vendor InsightFace weights. Do not put backticks in afterApply. Independent of located-paths leftover."
     },
     {
       "id": "faceswap-commit-pwa-icons",

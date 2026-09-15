@@ -1150,6 +1150,19 @@ test("cli patches --job opensussy-agama-honesty includes the HOW_TO afterApply",
   assert.ok(parsed.applyNext.some((line) => line.includes("install/linux/HOW_TO_RUN.txt") && line.includes("AGAMA / Leap 16 HONESTY") && line.includes("Agama JSON is unsupported")));
 });
 
+test("cli patches --job faceswap-honesty-env-paths includes the env-footer afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "faceswap-honesty-env-paths"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "faceswap-honesty-env-paths");
+  assert.ok(parsed.applyNext.some((line) => line.includes("## Env contract") && line.includes("FACESWAP_IOS_HOST") && line.includes("## Engine contract (env, not G: paths)") && line.includes("if not defined FACESWAP_ENGINE")));
+});
+
 test("cli patches --job dronehive-ollama-app-bridge-paths includes the bridge consts afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-ollama-app-bridge-paths"], {

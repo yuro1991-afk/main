@@ -22,7 +22,7 @@ Docs/env only. Do not vendor InsightFace weights. Same path-leak theme as droneh
 - git checkout -b cursor/faceswap-honesty-env-paths-from-ops
 - git apply --check /path/to/main/patches/faceswap-honesty-env-paths.patch
 - git apply /path/to/main/patches/faceswap-honesty-env-paths.patch
-- README lists the three env vars; HONESTY marks G: as one host example, not the contract.
+- python3 -c "from pathlib import Path; h=Path('HONESTY.md').read_text(); r=Path('README.md').read_text(); s=Path('START.cmd').read_text(); env=h.split('## Env contract',1)[1]; assert 'one host example' in env; assert 'FACESWAP_ENGINE' in env; assert 'FACESWAP_IOS_PORT' in env; assert 'FACESWAP_IOS_HOST' in env; assert '## Engine contract (env, not G: paths)' in r; assert 'if not defined FACESWAP_ENGINE' in s"
 
 ## Verify
 
