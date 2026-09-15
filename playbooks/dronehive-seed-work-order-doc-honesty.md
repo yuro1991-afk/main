@@ -22,6 +22,7 @@ Seed docs only. Different file from docs/WORK_ORDER.md. Do not edit drone/pro/to
 - git checkout -b cursor/dronehive-seed-work-order-doc-honesty-from-ops
 - git apply --check /path/to/main/patches/dronehive-seed-work-order-doc-honesty.patch
 - git apply /path/to/main/patches/dronehive-seed-work-order-doc-honesty.patch
+- python3 -c "from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); assert 'host/library/knowledge/codex/CODEX.min.json' in t and 'host/library' in t"
 
 ## Verify
 

@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T00:15Z** still holds: 40 IDLE + this run
-RUNNING. Newest idle is still `bc-710c5477` — assign
+Keep-busy tick **2026-09-15T00:34Z**: 40 IDLE + this run RUNNING.
+Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`3c12e2a`. Shipped this interval: `dronehive-work-order-doc-honesty`
-docs/WORK_ORDER.md afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`9ee27f6`. Shipped this interval: `dronehive-seed-work-order-doc-honesty`
+seed WORK_ORDER.md afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -35,7 +35,8 @@ docs/WORK_ORDER.md afterApply. Leftover `next` stays alone. Do not invent leftov
 | last faceswap README apply | `faceswap-readme-firewall-honesty` (README firewall afterApply wired) |
 | next unused hive docstring apply | `dronehive-hive-docstring-honesty` (hive.py afterApply wired) |
 | next unused work-order-doc apply | `dronehive-work-order-doc-honesty` (docs/WORK_ORDER.md afterApply wired) |
-| next afterApply to wire | `dronehive-seed-work-order-doc-honesty` (seed WORK_ORDER.md only) |
+| next unused seed work-order apply | `dronehive-seed-work-order-doc-honesty` (seed WORK_ORDER.md afterApply wired) |
+| next afterApply to wire | `dronehive-bench-goal-honesty` (GOAL string only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -99,7 +100,9 @@ Face-swap README honesty leftovers are exhausted.
 (`one host example` / `the library + continuous OPEN_TASKS overlay`).
 `dronehive-work-order-doc-honesty` afterApply asserts docs/WORK_ORDER.md
 (`host/library/knowledge/codex/CODEX.min.json` / `host/library`).
-Next afterApply to wire is `dronehive-seed-work-order-doc-honesty`.
+`dronehive-seed-work-order-doc-honesty` afterApply asserts seed WORK_ORDER.md
+(`host/library/knowledge/codex/CODEX.min.json` / `host/library`).
+Next afterApply to wire is `dronehive-bench-goal-honesty`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -135,7 +138,7 @@ then unused `ova-voice-card-linux-honesty` (VOICE-ACCESS.md only; afterApply wir
 then unused `faceswap-ios-readme-honesty` (ios/README.md only; afterApply wired; independent of DESIGN.md and START.sh),
 then unused `dronehive-hive-docstring-honesty` (hive.py docstring only; afterApply wired; independent of config-load-overlay),
 then unused `dronehive-work-order-doc-honesty` (docs/WORK_ORDER.md only; afterApply wired; independent of hive.py),
-then unused `dronehive-seed-work-order-doc-honesty` (seed WORK_ORDER.md only; independent of docs/WORK_ORDER.md),
+then unused `dronehive-seed-work-order-doc-honesty` (seed WORK_ORDER.md only; afterApply wired; independent of docs/WORK_ORDER.md),
 then unused `dronehive-bench-goal-honesty` (GOAL string only; independent of script-host-roots ROOT hunks),
 then unused `faceswap-readme-requirements-honesty` (README Requirements bullet only; afterApply wired; independent of honesty-env-paths footer),
 then unused `faceswap-readme-install-sh` (README install block only; afterApply wired; independent of start-sh new file),
