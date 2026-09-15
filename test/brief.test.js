@@ -119,7 +119,7 @@ test("cataloged sibling firstCommands use git apply, not edit", () => {
   assert.ok(!honestyLines.some((line) => line.includes("Notion")));
   const gitignore = queue.jobs.find((item) => item.id === "bloom-gitignore-vercel");
   const gitignoreLines = firstCommands(gitignore);
-  assert.ok(gitignoreLines.includes("git rm -r --cached .vercel/output"));
+  assert.ok(gitignoreLines.some((line) => line.includes(".gitignore") && line.includes(".vercel/") && line.includes("dist/")));
 });
 
 test("catalog-kind sibling brief destination is apply, not Notion", () => {

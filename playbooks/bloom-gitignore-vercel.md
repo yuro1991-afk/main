@@ -22,8 +22,7 @@ Same as keep-busy gitignore-vercel-build-output. Keep package-lock.json tracked.
 - git checkout -b cursor/bloom-gitignore-vercel-from-ops
 - git apply --check /path/to/main/patches/bloom-gitignore-vercel.patch
 - git apply /path/to/main/patches/bloom-gitignore-vercel.patch
-- git rm -r --cached .vercel/output
-- .gitignore includes .vercel/ and dist/; committed output is removed; npm run build still works.
+- python3 -c "from pathlib import Path; t=Path('.gitignore').read_text(); assert '.vercel/' in t; assert 'dist/' in t; assert '.output/' in t; assert '.nitro/' in t"
 
 ## Verify
 

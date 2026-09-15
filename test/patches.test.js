@@ -211,6 +211,7 @@ test("catalog afterApply commands have no dollar signs or backticks", () => {
     for (const cmd of row.afterApply ?? []) {
       assert.equal(cmd.includes("$"), false, `${row.id} afterApply has $`);
       assert.equal(cmd.includes("`"), false, `${row.id} afterApply has backtick`);
+      assert.equal(cmd.includes("git rm"), false, `${row.id} afterApply mutates with git rm`);
     }
   }
 });
@@ -294,7 +295,7 @@ test("buildPatchCatalog is list-only", () => {
   assert.equal(catalog.count, 1);
   assert.match(catalog.doNot, /autofix/);
   assert.equal(catalog.patches[0].id, "bloom-gitignore-vercel");
-  assert.ok(catalog.patches[0].applyNext.includes("git rm -r --cached .vercel/output"));
+  assert.ok(catalog.patches[0].applyNext.some((line) => line.includes(".gitignore") && line.includes(".vercel/") && line.includes("dist/")));
   assert.deepEqual(catalog.applyNext, catalog.patches[0].applyNext);
 });
 
@@ -1158,6 +1159,19 @@ test("cli patches --job opensussy-agama-honesty includes the HOW_TO afterApply",
   const parsed = JSON.parse(chunks.join(""));
   assert.equal(parsed.patches[0].id, "opensussy-agama-honesty");
   assert.ok(parsed.applyNext.some((line) => line.includes("install/linux/HOW_TO_RUN.txt") && line.includes("AGAMA / Leap 16 HONESTY") && line.includes("Agama JSON is unsupported")));
+});
+
+test("cli patches --job bloom-gitignore-vercel includes the gitignore afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "bloom-gitignore-vercel"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "bloom-gitignore-vercel");
+  assert.ok(parsed.applyNext.some((line) => line.includes(".gitignore") && line.includes(".vercel/") && line.includes("dist/") && line.includes(".output/") && line.includes(".nitro/")));
 });
 
 test("cli patches --job bloom-ci-lint includes the lint-workflow afterApply", async () => {
@@ -2490,11 +2504,13 @@ test("applyNextFor is the write-checkout apply, not a leftover hunt", () => {
     id: "bloom-gitignore-vercel",
     repo: "github.com/yuro1991-afk/bloom-fair-yellow-charm",
     file: "patches/bloom-gitignore-vercel.patch",
-    afterApply: ["git rm -r --cached .vercel/output"],
+    afterApply: [
+      "python3 -c \"from pathlib import Path; t=Path('.gitignore').read_text(); assert '.vercel/' in t; assert 'dist/' in t; assert '.output/' in t; assert '.nitro/' in t\"",
+    ],
   });
   assert.equal(lines[0], "git clone https://github.com/yuro1991-afk/bloom-fair-yellow-charm.git work && cd work");
   assert.ok(lines.includes("git apply /path/to/main/patches/bloom-gitignore-vercel.patch"));
-  assert.ok(lines.includes("git rm -r --cached .vercel/output"));
+  assert.ok(lines.some((line) => line.includes(".gitignore") && line.includes(".vercel/") && line.includes("dist/")));
   assert.doesNotMatch(lines.join("\n"), /Origin/);
   assert.doesNotMatch(lines.join("\n"), /autofix/);
 });

@@ -23,9 +23,9 @@
       "base": "288a484",
       "applyCheck": "ok",
       "afterApply": [
-        "git rm -r --cached .vercel/output"
+        "python3 -c \"from pathlib import Path; t=Path('.gitignore').read_text(); assert '.vercel/' in t; assert 'dist/' in t; assert '.output/' in t; assert '.nitro/' in t\""
       ],
-      "notes": "Ignore rule only. 58 tracked .vercel/output files still need git rm --cached. Keep package-lock.json."
+      "notes": "Ignore rule only. After apply: assert .gitignore has .vercel/ dist/ .output/ .nitro/. Unpatched has none of those. Do not git rm as afterApply (mutates the checkout; 58 tracked .vercel/output files are a later write-checkout step). Do not put dollar signs in afterApply. Do not put backticks in afterApply. Keep package-lock.json."
     },
     {
       "id": "bloom-readme-honest-export",
