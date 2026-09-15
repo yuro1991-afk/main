@@ -22,7 +22,7 @@ After unicode-ci; do not fight PR #2 packaging.
 - git checkout -b cursor/dronehive-ubuntu-smoke-from-ops
 - git apply --check /path/to/main/patches/dronehive-ubuntu-smoke.patch
 - git apply /path/to/main/patches/dronehive-ubuntu-smoke.patch
-- Same four python-smoke commands on ubuntu-latest.
+- python3 -c "from pathlib import Path; t=Path('.github/workflows/ci.yml').read_text(); assert 'python-smoke-ubuntu:' in t; assert 'Pro agent (no ollama)' in t; assert 'ci pro write ci_ok.txt' in t; assert 'Work order show' in t"
 
 ## Verify
 

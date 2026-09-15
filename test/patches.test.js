@@ -1150,6 +1150,19 @@ test("cli patches --job opensussy-agama-honesty includes the HOW_TO afterApply",
   assert.ok(parsed.applyNext.some((line) => line.includes("install/linux/HOW_TO_RUN.txt") && line.includes("AGAMA / Leap 16 HONESTY") && line.includes("Agama JSON is unsupported")));
 });
 
+test("cli patches --job dronehive-ubuntu-smoke includes the ubuntu-smoke afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-ubuntu-smoke"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-ubuntu-smoke");
+  assert.ok(parsed.applyNext.some((line) => line.includes(".github/workflows/ci.yml") && line.includes("python-smoke-ubuntu:") && line.includes("Pro agent (no ollama)") && line.includes("ci pro write ci_ok.txt")));
+});
+
 test("cli patches --job ova-pester-qa-math includes the math-unit afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "ova-pester-qa-math"], {
