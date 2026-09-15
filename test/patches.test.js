@@ -2664,6 +2664,9 @@ test("provePatches stacked apply-check then resets", () => {
   assert.equal(proof.results[1].stacked, true);
   assert.equal(proof.results[0].throwaway, true);
   assert.equal(proof.results[1].throwaway, true);
+  assert.equal(proof.results[0].wrote, false);
+  assert.equal(proof.results[0].checkout, null);
+  assert.equal(proof.results[0].source, checkout);
   assert.equal(readFileSync(join(checkout, "SENTINEL"), "utf8"), "do-not-clean\n");
 
   const onlyTwo = provePatches(index, {
@@ -2737,6 +2740,9 @@ test("cli patches --prove stacked then resets", async () => {
   assert.equal(parsed.ok, 1);
   assert.equal(parsed.failed, 0);
   assert.equal(parsed.results[0].throwaway, true);
+  assert.equal(parsed.results[0].wrote, false);
+  assert.equal(parsed.results[0].checkout, null);
+  assert.equal(parsed.results[0].source, checkout);
   assert.match(parsed.doNot, /never writes \/tmp\/siblings/);
   assert.equal(readFileSync(join(checkout, "note.txt"), "utf8"), "line1\n");
 });
@@ -2820,6 +2826,9 @@ test("proveAfterApply fails unpatched, passes patched, and leaves the sibling so
   assert.equal(proof.failed, 0);
   assert.equal(proof.results[0].status, "ok");
   assert.equal(proof.results[0].throwaway, true);
+  assert.equal(proof.results[0].wrote, false);
+  assert.equal(proof.results[0].checkout, null);
+  assert.equal(proof.results[0].source, checkout);
   assert.equal(readFileSync(join(checkout, "note.txt"), "utf8"), "line1\n");
   const status = spawnSync("git", ["status", "--porcelain"], {
     cwd: checkout,

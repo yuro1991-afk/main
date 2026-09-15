@@ -100,6 +100,19 @@ function gitOutput(result) {
 }
 
 /**
+ * Sibling path is the clone source only. Throwaway is deleted.
+ * Never advertise /tmp/siblings as a write checkout.
+ * @param {string | null} source
+ */
+function siblingSourceFields(source) {
+  return {
+    source: source ?? null,
+    checkout: null,
+    wrote: false,
+  };
+}
+
+/**
  * Write-checkout steps after a successful --prove. Prove uses throwaways
  * and does not reset siblings. Not a leftover hunt. Does not run
  * --prove-after-apply (throwaways only).
@@ -198,7 +211,7 @@ export function provePatches(index, options) {
       const source = resolveSiblingCheckout(repo, siblingsRoot);
       if (!source) {
         for (const row of wanted) {
-          record(row, { status: "missing-checkout", checkout: null, throwaway: false });
+          record(row, { status: "missing-checkout", ...siblingSourceFields(null), throwaway: false });
         }
         continue;
       }
@@ -208,7 +221,7 @@ export function provePatches(index, options) {
         for (const row of wanted) {
           record(row, {
             status: "fail",
-            checkout: source,
+            ...siblingSourceFields(source),
             error: `${String(cloned.stderr ?? "")}\n${String(cloned.stdout ?? "")}`.trim(),
           });
         }
@@ -221,7 +234,7 @@ export function provePatches(index, options) {
           const patchPath = join(repoRoot, row.file);
           if (blocked) {
             if (selectedIds.has(row.id)) {
-              record(row, { status: "fail", checkout: source, error: blocked });
+              record(row, { status: "fail", ...siblingSourceFields(source), error: blocked });
             }
             continue;
           }
@@ -229,18 +242,18 @@ export function provePatches(index, options) {
           if (!check.ok) {
             blocked = `git apply --check failed for ${row.id}: ${gitOutput(check)}`;
             if (selectedIds.has(row.id)) {
-              record(row, { status: "fail", checkout: source, error: blocked });
+              record(row, { status: "fail", ...siblingSourceFields(source), error: blocked });
             }
             continue;
           }
           if (selectedIds.has(row.id)) {
-            record(row, { status: "ok", checkout: source, stacked: i > 0 });
+            record(row, { status: "ok", ...siblingSourceFields(source), stacked: i > 0 });
           }
           const apply = runGit(runner, dest, ["apply", patchPath]);
           if (!apply.ok) {
             blocked = `git apply failed after --check for ${row.id}: ${gitOutput(apply)}`;
             if (selectedIds.has(row.id)) {
-              record(row, { status: "fail", checkout: source, error: blocked });
+              record(row, { status: "fail", ...siblingSourceFields(source), error: blocked });
             }
           }
         }
@@ -342,7 +355,7 @@ export function proveAfterApply(index, options) {
       const source = resolveSiblingCheckout(repo, siblingsRoot);
       if (!source) {
         for (const row of rows) {
-          record(row, { status: "missing-checkout", checkout: null });
+          record(row, { status: "missing-checkout", ...siblingSourceFields(null), throwaway: false });
         }
         continue;
       }
@@ -352,7 +365,7 @@ export function proveAfterApply(index, options) {
         for (const row of rows) {
           record(row, {
             status: "fail",
-            checkout: source,
+            ...siblingSourceFields(source),
             error: `${String(cloned.stderr ?? "")}\n${String(cloned.stdout ?? "")}`.trim(),
           });
         }
@@ -362,21 +375,21 @@ export function proveAfterApply(index, options) {
         for (const row of rows) {
           const cmds = Array.isArray(row.afterApply) ? row.afterApply : [];
           if (cmds.length === 0) {
-            record(row, { status: "missing-afterApply", checkout: source });
+            record(row, { status: "missing-afterApply", ...siblingSourceFields(source) });
             continue;
           }
           runGit(runner, dest, ["reset", "--hard", "HEAD"]);
           runGit(runner, dest, ["clean", "-fd"]);
           const unpatchedPass = cmds.every((cmd) => (runShell(dest, cmd).status ?? 1) === 0);
           if (unpatchedPass) {
-            record(row, { status: "unpatched-pass", checkout: source });
+            record(row, { status: "unpatched-pass", ...siblingSourceFields(source) });
             continue;
           }
           let applyOk = true;
           for (const rel of [...(row.requires ?? []), row.file]) {
             const applied = runGit(runner, dest, ["apply", join(repoRoot, rel)]);
             if (!applied.ok) {
-              record(row, { status: "apply-fail", checkout: source, error: gitOutput(applied) });
+              record(row, { status: "apply-fail", ...siblingSourceFields(source), error: gitOutput(applied) });
               applyOk = false;
               break;
             }
@@ -386,10 +399,10 @@ export function proveAfterApply(index, options) {
           }
           const patchedFail = cmds.some((cmd) => (runShell(dest, cmd).status ?? 1) !== 0);
           if (patchedFail) {
-            record(row, { status: "patched-fail", checkout: source });
+            record(row, { status: "patched-fail", ...siblingSourceFields(source) });
             continue;
           }
-          record(row, { status: "ok", checkout: source });
+          record(row, { status: "ok", ...siblingSourceFields(source) });
         }
       } finally {
         rmSync(dest, { recursive: true, force: true });
