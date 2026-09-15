@@ -19,6 +19,7 @@ Do not implement a probe here or on Origin.
 - first parked apply: `dronehive-unicode-ci` on a dronehive write checkout
 - `node src/cli.js brief --job review-main-pr10`
 - `node src/cli.js patches --prove --job dronehive-unicode-ci`
+- `node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci`
 
 ## Do not
 

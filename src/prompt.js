@@ -89,7 +89,7 @@ ${commands}
 - Do not probe :45001 / :8791
 - Do not run node src/cli.js probe
 - Do not mark Superbrain LIVE
-- Take review-main-pr10, or run node src/cli.js patches --prove then apply a catalog patch on a sibling write checkout
+- Take review-main-pr10, or run node src/cli.js patches --prove then --prove-after-apply then apply a catalog patch on a sibling write checkout
 `;
   }
   const target = relaunchFor(job);

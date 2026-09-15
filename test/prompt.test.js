@@ -51,6 +51,7 @@ test("gub-superbrain-probe prompt refuses the probe", () => {
   assert.doesNotMatch(text, /Do not mark Superbrain LIVE without a successful probe/);
   assert.doesNotMatch(text, /This pad token cannot push Origin — implement there/);
   assert.match(text, /patches --prove/);
+  assert.match(text, /prove-after-apply/);
 });
 
 test("cataloged sibling prompt is apply, not Origin launch", () => {
