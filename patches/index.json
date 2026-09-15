@@ -1088,8 +1088,10 @@
       "file": "patches/dronehive-ollama-tui-readme-install.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "apps/drone-ollama-tui/README.md installed START_TUI.cmd uses host\\\\ai-home\\\\apps\\\\DroneOllama. Independent of ollama-tui-readme-cargo (Build block). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-tui/README.md').read_text(); assert r'host\\\\ai-home\\\\apps\\\\DroneOllama\\\\START_TUI.cmd' in t; assert r'G:\\\\AI-Home\\\\apps\\\\DroneOllama\\\\START_TUI.cmd' not in t\""
+      ],
+      "notes": "apps/drone-ollama-tui/README.md installed START_TUI.cmd uses host\\\\ai-home\\\\apps\\\\DroneOllama. After apply: assert host\\\\ai-home\\\\apps\\\\DroneOllama\\\\START_TUI.cmd and G:\\\\AI-Home\\\\apps\\\\DroneOllama\\\\START_TUI.cmd gone. Leaves cargo PATH and G: cd leftovers. Independent of ollama-tui-readme-cargo (Build block). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-mount-readme-layout",

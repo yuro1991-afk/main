@@ -22,6 +22,7 @@ apps/drone-ollama-tui/README.md installed START_TUI.cmd only. Do not edit drone/
 - git checkout -b cursor/dronehive-ollama-tui-readme-install-from-ops
 - git apply --check /path/to/main/patches/dronehive-ollama-tui-readme-install.patch
 - git apply /path/to/main/patches/dronehive-ollama-tui-readme-install.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-tui/README.md').read_text(); assert r'host\\ai-home\\apps\\DroneOllama\\START_TUI.cmd' in t; assert r'G:\\AI-Home\\apps\\DroneOllama\\START_TUI.cmd' not in t"
 
 ## Verify
 
