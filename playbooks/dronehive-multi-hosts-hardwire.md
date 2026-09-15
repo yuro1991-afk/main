@@ -22,6 +22,7 @@ configs/multi_hosts.json super_mesh.hardwire key only. Do not edit C:\ AppData e
 - git checkout -b cursor/dronehive-multi-hosts-hardwire-from-ops
 - git apply --check /path/to/main/patches/dronehive-multi-hosts-hardwire.patch
 - git apply /path/to/main/patches/dronehive-multi-hosts-hardwire.patch
+- python3 -c "from pathlib import Path; import json; d=json.loads(Path('configs/multi_hosts.json').read_text()); assert d['super_mesh']['hardwire']=='data/super_mesh/HARDWIRE.json'"
 
 ## Verify
 

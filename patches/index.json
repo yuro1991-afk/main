@@ -582,8 +582,10 @@
       "file": "patches/dronehive-multi-hosts-hardwire.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "configs/multi_hosts.json super_mesh.hardwire uses data/super_mesh/HARDWIRE.json (repo-relative; same G:\\\\AI-Home project as fabric_root). Independent of multi-hosts-exe-honesty (exe keys) and super-llms-hardwire (different file). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; d=json.loads(Path('configs/multi_hosts.json').read_text()); assert d['super_mesh']['hardwire']=='data/super_mesh/HARDWIRE.json'\""
+      ],
+      "notes": "configs/multi_hosts.json super_mesh.hardwire uses data/super_mesh/HARDWIRE.json (repo-relative; same G:\\\\AI-Home project as fabric_root). After apply: assert that key. Independent of multi-hosts-exe-honesty (exe keys) and super-llms-hardwire (different file). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-super-llms-hardwire",

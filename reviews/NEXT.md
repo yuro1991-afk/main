@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T01:00Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T01:03Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`baa0032`. Shipped this interval: `dronehive-seed-work-order-curriculum-root`
-seed curriculum_root afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`463ea28`. Shipped this interval: `dronehive-multi-hosts-hardwire`
+super_mesh.hardwire afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -53,7 +53,8 @@ seed curriculum_root afterApply. Leftover `next` stays alone. Do not invent left
 | next unused seed knowledge-expand apply | `dronehive-seed-work-order-knowledge-expand` (seed knowledge_expand afterApply wired) |
 | next unused curriculum-root apply | `dronehive-work-order-curriculum-root` (curriculum_root afterApply wired) |
 | next unused seed curriculum-root apply | `dronehive-seed-work-order-curriculum-root` (seed curriculum_root afterApply wired) |
-| next afterApply to wire | `dronehive-multi-hosts-hardwire` (super_mesh.hardwire only) |
+| next unused multi-hosts-hardwire apply | `dronehive-multi-hosts-hardwire` (super_mesh.hardwire afterApply wired) |
+| next afterApply to wire | `dronehive-super-llms-hardwire` (super_llms.json hardwire only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -153,7 +154,9 @@ Face-swap README honesty leftovers are exhausted.
 (knowledge_imprint curriculum_root / curriculum_json under `host/ai-center/learning-curriculum`).
 `dronehive-seed-work-order-curriculum-root` afterApply asserts seed work_order.json
 (knowledge_imprint curriculum_root / curriculum_json under `host/ai-center/learning-curriculum`).
-Next afterApply to wire is `dronehive-multi-hosts-hardwire`.
+`dronehive-multi-hosts-hardwire` afterApply asserts multi_hosts.json
+(super_mesh.hardwire is `data/super_mesh/HARDWIRE.json`).
+Next afterApply to wire is `dronehive-super-llms-hardwire`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -211,7 +214,7 @@ then unused `dronehive-work-order-knowledge-expand` (knowledge_expand key only; 
 then unused `dronehive-seed-work-order-knowledge-expand` (seed knowledge_expand only; afterApply wired; independent of live config),
 then unused `dronehive-work-order-curriculum-root` (curriculum_root / curriculum_json only; afterApply wired; -U1 skips school leftover),
 then unused `dronehive-seed-work-order-curriculum-root` (seed curriculum keys only; afterApply wired; independent of live config),
-then unused `dronehive-multi-hosts-hardwire` (super_mesh.hardwire only; independent of exe leftover),
+then unused `dronehive-multi-hosts-hardwire` (super_mesh.hardwire only; afterApply wired; independent of exe leftover),
 then unused `dronehive-super-llms-hardwire` (super_llms.json hardwire only; independent of multi-hosts-hardwire),
 then unused `dronehive-work-order-open-tasks` (open_tasks key only; independent of portable-paths and buzzer leftover),
 then unused `dronehive-seed-work-order-open-tasks` (seed open_tasks only; independent of live config),
