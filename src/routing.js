@@ -409,6 +409,10 @@ function namedJobForIntent(text, ledger) {
 /** First parked catalog apply for a sibling intent. Named job ids win first. */
 const SIBLING_PARKS = Object.freeze([
   {
+    needles: ["ubuntu-smoke", "ubuntu smoke", "python-smoke-ubuntu"],
+    jobId: "dronehive-ubuntu-smoke",
+  },
+  {
     needles: [
       "dronehive",
       "drone",
