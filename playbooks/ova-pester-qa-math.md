@@ -22,7 +22,7 @@ Same as keep-busy pester-qa-math-unit-tests. Leave Invoke-OllamaVoiceQA.ps1 as t
 - git checkout -b cursor/ova-pester-qa-math-from-ops
 - git apply --check /path/to/main/patches/ova-pester-qa-math.patch
 - git apply /path/to/main/patches/ova-pester-qa-math.patch
-- Pester covers empty stats, n=1 stdev 0, n=5 p50/p95, tokens/s with no network.
+- python3 -c "from pathlib import Path; w=Path('.github/workflows/math-unit.yml').read_text(); assert 'name: math-unit' in w; assert 'Percentile / stdev / tok-s without Ollama' in w; t=Path('tests/OllamaVoice.Math.Tests.ps1').read_text(); assert 'No network. Unit-test percentile / stdev / empty stats.' in t; assert 'OK math unit tests (no network)' in t; assert 'tokens/s 50' in t"
 
 ## Verify
 

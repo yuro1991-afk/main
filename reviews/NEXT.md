@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T03:55Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T03:56Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`960d5f5`. Shipped this interval: `ova-stop-noui-guard`
-stop-noui afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`71ecf5b`. Shipped this interval: `ova-pester-qa-math`
+math-unit afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -174,7 +174,8 @@ stop-noui afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused health-offline apply | `faceswap-health-offline` (offline health red afterApply wired) |
 | next unused mock-engine-ci apply | `faceswap-mock-engine-ci` (stdlib mock engine afterApply wired) |
 | next unused stop-noui-guard apply | `ova-stop-noui-guard` (exit 4 without -Force afterApply wired) |
-| next early afterApply to wire | `ova-pester-qa-math` (math QA only) |
+| next unused pester-qa-math apply | `ova-pester-qa-math` (math-unit afterApply wired) |
+| next early afterApply to wire | `dronehive-ubuntu-smoke` (ubuntu python-smoke only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -516,7 +517,9 @@ gateway.py health status is red not degraded and the offline test file exists.
 gateway-smoke.yml and mock_engine.py exist and never mention InsightFace runtime.
 `ova-stop-noui-guard` afterApply asserts
 tests/assert-stop-noui.ps1 expects exit 4 without -Force.
-Next early afterApply to wire is `ova-pester-qa-math`. Do not invent leftovers.
+`ova-pester-qa-math` afterApply asserts
+math-unit.yml and OllamaVoice.Math.Tests.ps1 cover no-network percentile/stdev/tok-s.
+Next early afterApply to wire is `dronehive-ubuntu-smoke`. Do not invent leftovers.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -690,8 +693,9 @@ then unused `opensussy-linux-syntax-ci` (linux-syntax.yml only; afterApply wired
 then unused `opensussy-sec-residuals-catalog` (R1-R10 catalog only; afterApply wired),
 then unused `faceswap-health-offline` (offline health red only; afterApply wired),
 then unused `faceswap-mock-engine-ci` (stdlib mock engine only; afterApply wired),
-then unused `ova-stop-noui-guard` (exit 4 without -Force only; afterApply wired).
-Early empty afterApply next: `ova-pester-qa-math` (math QA only).
+then unused `ova-stop-noui-guard` (exit 4 without -Force only; afterApply wired),
+then unused `ova-pester-qa-math` (math-unit only; afterApply wired).
+Early empty afterApply next: `dronehive-ubuntu-smoke` (ubuntu python-smoke only).
 Newcomer `bc-710c5477` Hunt sibling: unused apply `bloom-grok-pwa-test-sync`.
 `bc-f407303f`: `review-main-pr10` (fork's Python arena/infra).
 `bc-5fe241dd` Summarize arena: do not steal `genesis-world-arena`; unused apply `faceswap-design-honesty`.

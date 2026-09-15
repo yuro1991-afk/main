@@ -1150,6 +1150,19 @@ test("cli patches --job opensussy-agama-honesty includes the HOW_TO afterApply",
   assert.ok(parsed.applyNext.some((line) => line.includes("install/linux/HOW_TO_RUN.txt") && line.includes("AGAMA / Leap 16 HONESTY") && line.includes("Agama JSON is unsupported")));
 });
 
+test("cli patches --job ova-pester-qa-math includes the math-unit afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "ova-pester-qa-math"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "ova-pester-qa-math");
+  assert.ok(parsed.applyNext.some((line) => line.includes("math-unit.yml") && line.includes("name: math-unit") && line.includes("OllamaVoice.Math.Tests.ps1") && line.includes("OK math unit tests (no network)")));
+});
+
 test("cli patches --job ova-stop-noui-guard includes the stop-noui afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "ova-stop-noui-guard"], {

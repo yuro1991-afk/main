@@ -192,8 +192,10 @@
       "file": "patches/ova-pester-qa-math.patch",
       "base": "074bad0",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "No-network math script + math-unit workflow. Empty / n=1 / n=5 / tok-s."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; w=Path('.github/workflows/math-unit.yml').read_text(); assert 'name: math-unit' in w; assert 'Percentile / stdev / tok-s without Ollama' in w; t=Path('tests/OllamaVoice.Math.Tests.ps1').read_text(); assert 'No network. Unit-test percentile / stdev / empty stats.' in t; assert 'OK math unit tests (no network)' in t; assert 'tokens/s 50' in t\""
+      ],
+      "notes": "No-network math script + math-unit workflow. Empty / n=1 / n=5 / tok-s. After apply: assert math-unit.yml and OllamaVoice.Math.Tests.ps1 have those phrases. Unpatched has neither. Do not run pwsh. Do not hit :11434. Do not put dollar signs in afterApply. Do not put backticks in afterApply. Independent of ova-stop-noui-guard and ova-pwsh-syntax-ci."
     },
     {
       "id": "dronehive-ubuntu-smoke",
