@@ -41,7 +41,8 @@ node src/cli.js tick
 `assign` maps parked pad agents onto unique GitHub cards.
 `assign --job <id>` writes one leftover Apply launch and names
 catalog-first related PRs in both JSON and the launch file
-(same order as `siblings --job`).
+(same order as `siblings --job`). Leftover launches are exhausted.
+Prefer `brief --job dronehive-unicode-ci`. Do not invent leftover 163+.
 `assign --missing` lists catalog leftovers with no launch file and
 never writes. Leftover launches are exhausted (`nextMissing` null).
 Prefer `brief --job dronehive-unicode-ci`. Do not invent leftover 163+.
