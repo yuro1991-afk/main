@@ -413,6 +413,26 @@ const SIBLING_PARKS = Object.freeze([
     jobId: "dronehive-ubuntu-smoke",
   },
   {
+    needles: ["runtime-host", "runtime host", "runtime-host-paths"],
+    jobId: "dronehive-runtime-host-paths",
+  },
+  {
+    needles: ["config-load", "config load", "config-overlay", "config overlay", "config-load-overlay"],
+    jobId: "dronehive-config-load-overlay",
+  },
+  {
+    needles: ["app-links", "app links"],
+    jobId: "dronehive-app-links-host-paths",
+  },
+  {
+    needles: ["script-host", "script host", "script-host-roots"],
+    jobId: "dronehive-script-host-roots",
+  },
+  {
+    needles: ["portable-paths", "portable paths"],
+    jobId: "dronehive-portable-paths",
+  },
+  {
     needles: [
       "dronehive",
       "drone",
@@ -427,7 +447,11 @@ const SIBLING_PARKS = Object.freeze([
     jobId: "dronehive-unicode-ci",
     fallback: 4,
   },
-  { needles: ["bloom"], jobId: "bloom-grok-pwa-test-sync" },
+  { needles: ["bloom", "grok-pwa", "grok pwa"], jobId: "bloom-grok-pwa-test-sync" },
+  {
+    needles: ["start-sh", "start.sh", "faceswap-start", "face-swap start"],
+    jobId: "faceswap-start-sh",
+  },
   { needles: ["face-swap", "faceswap", "face swap"], jobId: "faceswap-design-honesty" },
   { needles: ["opensussy", "agama"], jobId: "opensussy-sec-review-target" },
   {

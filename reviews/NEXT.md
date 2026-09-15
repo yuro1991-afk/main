@@ -220,7 +220,10 @@ and attaches the same take-instead apply pair. `sync` leftover Superbrain
 and a newcomer assigned Superbrain get the same pair; assigned Superbrain
 launch text refuses Origin paste. `cli route "fix cp1252"` /
 `"unstick python-smoke"` park first parked apply. `cli route "merge #8
-then #9"` parks `review-landing-pad-prs`. Do not retarget keep-busy
+then #9"` parks `review-landing-pad-prs`. `cli route "apply runtime-host
+on dronehive"` / config-load / app-links / script-host / portable-paths
+park those leftovers, not unicode-ci. `grok-pwa` parks bloom;
+`start.sh` parks `faceswap-start-sh`. Do not retarget keep-busy
 destination to GitHub (that is #8).
 `list --job <catalog-id>` returns that one card + `applyNext` /
 `proveAfterApplyCommand` and bypasses the Genesis-only filter (bare

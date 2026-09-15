@@ -228,6 +228,50 @@ test("ubuntu-smoke intent parks on ubuntu-smoke with unicode-ci requires first",
   assert.equal(keep.jobId, "gub-route-intent");
 });
 
+test("stacked leftover short intents park before generic dronehive unicode-ci", () => {
+  const ledger = loadLedger(join(ROOT, "ledger", "queue.json"));
+  const roster = loadRoster(join(ROOT, "ledger", "roster.json"));
+  const afterLease = Date.parse("2026-09-14T19:00:00.000Z");
+  const runtime = routeIntent("apply runtime-host on dronehive", { ledger, roster, nowMs: afterLease });
+  assert.equal(runtime.jobId, "dronehive-runtime-host-paths");
+  assert.match(runtime.notes, /dronehive-portable-paths\.patch then patches\/dronehive-runtime-host-paths\.patch/);
+  const portable = runtime.applyNext.findIndex((line) => line.includes("dronehive-portable-paths.patch") && line.startsWith("git apply /"));
+  const runtimeApply = runtime.applyNext.findIndex((line) => line.includes("dronehive-runtime-host-paths.patch") && line.startsWith("git apply /"));
+  assert.ok(portable >= 0 && runtimeApply > portable);
+  assert.doesNotMatch(runtime.destination, /gub-superbrain-probe/);
+
+  const overlay = routeIntent("apply config-load on dronehive", { ledger, roster, nowMs: afterLease });
+  assert.equal(overlay.jobId, "dronehive-config-load-overlay");
+  const overlayPortable = overlay.applyNext.findIndex((line) => line.includes("dronehive-portable-paths.patch") && line.startsWith("git apply /"));
+  const overlayApply = overlay.applyNext.findIndex((line) => line.includes("dronehive-config-load-overlay.patch") && line.startsWith("git apply /"));
+  assert.ok(overlayPortable >= 0 && overlayApply > overlayPortable);
+
+  const links = routeIntent("apply app-links on dronehive", { ledger, roster, nowMs: afterLease });
+  assert.equal(links.jobId, "dronehive-app-links-host-paths");
+
+  const scripts = routeIntent("apply script-host on dronehive", { ledger, roster, nowMs: afterLease });
+  assert.equal(scripts.jobId, "dronehive-script-host-roots");
+  assert.ok(scripts.applyNext.some((line) => line.includes("dronehive-script-host-roots.patch")));
+
+  const portableOnly = routeIntent("apply portable-paths on dronehive", { ledger, roster, nowMs: afterLease });
+  assert.equal(portableOnly.jobId, "dronehive-portable-paths");
+
+  const grok = routeIntent("apply grok-pwa", { ledger, roster, nowMs: afterLease });
+  assert.equal(grok.jobId, "bloom-grok-pwa-test-sync");
+
+  const start = routeIntent("add start.sh on face-swap", { ledger, roster, nowMs: afterLease });
+  assert.equal(start.jobId, "faceswap-start-sh");
+
+  const honesty = routeIntent("fix face-swap honesty", { ledger, roster, nowMs: afterLease });
+  assert.equal(honesty.jobId, "faceswap-design-honesty");
+
+  const unicode = routeIntent("unstick python-smoke", { ledger, roster, nowMs: afterLease });
+  assert.equal(unicode.jobId, "dronehive-unicode-ci");
+
+  const keep = routeIntent("keep agents busy", { ledger, roster, nowMs: NOW });
+  assert.equal(keep.jobId, "gub-route-intent");
+});
+
 test("merge / landing-pad intents park on review PRs, not leftover Superbrain", () => {
   const ledger = loadLedger(join(ROOT, "ledger", "queue.json"));
   const roster = loadRoster(join(ROOT, "ledger", "roster.json"));
