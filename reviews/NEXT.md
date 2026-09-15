@@ -779,7 +779,10 @@ node src/cli.js prompt --agent "$CURSOR_AGENT_ID"
 21 parked agents have unique GitHub cards (see `AGENTS.md`).
 Newcomer `bc-f407303f` takes `review-main-pr8`.
 
-**Peek leftover unused (no `--agent`):** `review-landing-pad-prs`  
+**Peek leftover unused (no `--agent`):** leftover unused exhausted
+(`next` / `busy` exit 1). Prefer `brief --job dronehive-unicode-ci`.
+Do not invent leftover unused next. Review leftover is still
+`review-landing-pad-prs` (`brief --job review-landing-pad-prs`).
 Written: `reviews/LANDING-PAD-PRS.md`. Skip conflicting #4/#5/#6. Review
 #8/#9/#10. Do not steal the fork's eyes → vision → bridge.
 DroneHive unicode patch from #6 **applies clean** on `d538a89` and stops the
