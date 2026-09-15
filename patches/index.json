@@ -472,8 +472,10 @@
       "file": "patches/dronehive-work-order-live-registry.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "configs/work_order.json live_registry cli/primary/events use host/ai-center. Independent of portable-paths (later hunks) and fabric-root. F:\\\\ mirror leftover stays later. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; r=json.loads(Path('configs/work_order.json').read_text())['live_registry']; assert r['cli']=='host/ai-center/agents/super-cell-4/bridges/live_registry.py' and r['primary']=='host/ai-center/agents/super-cell-4/registry' and r['events']=='host/ai-center/agents/super-cell-4/registry/events.jsonl'\""
+      ],
+      "notes": "configs/work_order.json live_registry cli/primary/events use host/ai-center, not G:\\\\AI-Center. After apply: assert those live_registry keys. Independent of portable-paths (later hunks) and fabric-root. F:\\\\ mirror leftover stays later. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-seed-work-order-live-registry",
