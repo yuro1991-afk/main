@@ -322,6 +322,23 @@ test("cli patches --job filters one card", async () => {
   );
 });
 
+test("cli patches --job faceswap-start-sh includes the fail-closed afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "faceswap-start-sh"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "faceswap-start-sh");
+  assert.ok(
+    parsed.applyNext.some((line) =>
+      line.includes("FACESWAP_ENGINE=http://127.0.0.1:9 ./START.sh"),
+    ),
+  );
+});
+
 test("cli patches --job bloom-grok-pwa-test-sync includes the node --test afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "bloom-grok-pwa-test-sync"], {

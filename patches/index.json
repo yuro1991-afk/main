@@ -200,8 +200,10 @@
       "file": "patches/faceswap-start-sh.patch",
       "base": "bba7188",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "Linux START.sh fail-closed on FACESWAP_ENGINE like START.cmd. New file; stacks with honesty-env-paths and health-offline."
+      "afterApply": [
+        "FACESWAP_ENGINE=http://127.0.0.1:9 ./START.sh; test $? -eq 1"
+      ],
+      "notes": "Linux START.sh fail-closed on FACESWAP_ENGINE like START.cmd. After apply: dead engine URL exits 1 and prints RED. New file; stacks with honesty-env-paths and health-offline."
     },
     {
       "id": "dronehive-runtime-host-paths",

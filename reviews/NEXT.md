@@ -11,9 +11,9 @@ No new agents. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Do not inventory the pad again.
 Sibling `main` SHAs unchanged (`288a484` / `d4b2949` / `bba7188` /
 `074bad0` / `d538a89`). Catalog still 162. Hunt closed. PR #10 still
-`82161d8`. Shipped this interval: `slots --job` plus
-`bloom-grok-pwa-test-sync` afterApply (`node --test` 43/43; unpatched
-7 fail). Leftover `next` stays alone. Do not invent leftovers.
+`82161d8`. Shipped this interval: `faceswap-start-sh` afterApply
+(dead engine URL exits 1 + RED). Leftover `next` stays alone. Do not
+invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -53,6 +53,9 @@ the leftover is blocked. Catalog slot rows carry `applyNext`.
 `bloom-grok-pwa-test-sync` afterApply is
 `node --test scripts/grok-pwa-plugin.test.mjs scripts/brand-check.test.mjs`
 (43/43 after apply; 7 fail unpatched).
+`faceswap-start-sh` afterApply is
+`FACESWAP_ENGINE=http://127.0.0.1:9 ./START.sh; test $? -eq 1`
+(exit 1 + RED; unpatched has no START.sh).
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
