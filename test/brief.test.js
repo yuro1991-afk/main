@@ -41,6 +41,8 @@ test("siblings.json loads and maps dronehive to PR 5", () => {
   assert.match(describeRole("attention-and-dronehive-patch"), /dronehive/);
   assert.match(describeRole("ops-board"), /GitHub-first defaults live on #8/);
   assert.doesNotMatch(describeRole("ops-board"), /^This PR\./);
+  assert.doesNotMatch(describeRole("autofix-runner"), /npm run autofix -- apply/);
+  assert.match(describeRole("autofix-runner"), /Do not copy/);
 });
 
 test("brief attaches sibling PR 5 to the unicode card", () => {
@@ -73,6 +75,12 @@ test("brief attaches sibling PR 5 to the unicode card", () => {
   assert.doesNotMatch(brief.job.collision, /pull\/5/);
   assert.doesNotMatch(brief.job.collision, /npm run autofix -- apply/);
   assert.match(brief.job.notes, /dronehive-pro-chat-cp1252\.patch/);
+  assert.ok(brief.related.some((pr) => pr.number === 6));
+  assert.ok(
+    brief.related
+      .filter((pr) => pr.number === 6)
+      .every((pr) => !/npm run autofix -- apply/.test(pr.meaning)),
+  );
 });
 
 test("catalog displayNotes drop PR #5 / autofix apply runner", () => {

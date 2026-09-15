@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T05:00Z**: 40 IDLE + this catalog run +
+Keep-busy tick **2026-09-15T05:05Z**: 40 IDLE + this catalog run +
 `bc-01a0a0ce` RUNNING on #7 (`cursor/stub-wake-roster-108b`). Do not
 steal #7. Newest idle is still `bc-710c5477` — assign
-`bloom-grok-pwa-test-sync`. Catalog still 162. Hunt closed. Catalog
-display notes no longer send the first parked apply to PR #5 / `npm run
-autofix`. Do not invent leftovers. Do not copy PR #6 autofix.
+`bloom-grok-pwa-test-sync`. Catalog still 162. Hunt closed. Sibling
+role text for PR #6 no longer advertises `npm run autofix -- apply`.
+Do not invent leftovers. Do not copy PR #6 autofix.
 
 | who | take this |
 | --- | --- |

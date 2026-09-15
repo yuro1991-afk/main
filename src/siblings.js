@@ -33,7 +33,7 @@ export function describeRole(role) {
     case "attention-and-dronehive-patch":
       return "Holds patches/dronehive-pro-chat-cp1252.patch. Apply it on dronehive, not here.";
     case "autofix-runner":
-      return "PR #6: npm run autofix -- apply <dronehive-checkout>. Do not copy that runner onto this board.";
+      return "CONFLICTING PR #6 is an autofix runner. Do not copy it. Apply the catalog patch from main#9 instead.";
     case "patch-catalog":
       return "Applyable sibling diffs under patches/. node src/cli.js patches lists them. Not an autofix runner.";
     case "python-arena":
