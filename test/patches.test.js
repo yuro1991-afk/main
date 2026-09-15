@@ -565,6 +565,19 @@ test("cli patches --job dronehive-mount-readme-related includes the related afte
   assert.ok(parsed.applyNext.some((line) => line.includes("drone-ollama-mount/README.md") && line.includes("host/ai-home/projects/ollama-rust-ui") && line.includes("one host example") && line.includes("G:\\\\AI-Home\\\\projects\\\\ollama-rust-ui")));
 });
 
+test("cli patches --job opensussy-sec-review-target includes the Target afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "opensussy-sec-review-target"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "opensussy-sec-review-target");
+  assert.ok(parsed.applyNext.some((line) => line.includes("reviews/SEC_REVIEW.md") && line.includes("one host example") && line.includes("G:\\\\AI-Home\\\\projects\\\\opensussy")));
+});
+
 test("cli patches --job dronehive-tui-readme-cargo includes the dronehive-tui README afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-tui-readme-cargo"], {

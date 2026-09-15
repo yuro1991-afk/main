@@ -22,6 +22,7 @@ reviews/SEC_REVIEW.md Target line only.
 - git checkout -b cursor/opensussy-sec-review-target-from-ops
 - git apply --check /path/to/main/patches/opensussy-sec-review-target.patch
 - git apply /path/to/main/patches/opensussy-sec-review-target.patch
+- python3 -c "from pathlib import Path; t=Path('reviews/SEC_REVIEW.md').read_text(); assert 'one host example' in t; assert r'G:\\AI-Home\\projects\\opensussy' in t"
 
 ## Verify
 

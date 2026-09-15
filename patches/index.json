@@ -1132,8 +1132,10 @@
       "file": "patches/opensussy-sec-review-target.patch",
       "base": "d4b2949",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "reviews/SEC_REVIEW.md Target uses '.' ; G:\\\\AI-Home is one host example. Independent of ship-json-2-0-0 and sec-residuals-catalog (new file). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('reviews/SEC_REVIEW.md').read_text(); assert 'one host example' in t; assert r'G:\\\\AI-Home\\\\projects\\\\opensussy' in t\""
+      ],
+      "notes": "reviews/SEC_REVIEW.md Target uses '.' ; G:\\\\AI-Home\\\\projects\\\\opensussy is one host example. After apply: assert one host example and G:\\\\AI-Home\\\\projects\\\\opensussy (stays). Do not assert G: gone. Avoid backticks (Target is `.`). Independent of ship-json-2-0-0 and sec-residuals-catalog (new file). Does not touch tool_agent.py."
     },
     {
       "id": "opensussy-install-sec-review-target",
