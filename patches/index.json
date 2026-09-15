@@ -1451,8 +1451,10 @@
       "file": "patches/dronehive-ollama-app-ui-install-root.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "main.rs UI install root uses host\\\\ai-home. Independent of crash-log leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/src/main.rs').read_text(); line=next(x for x in t.splitlines() if x.strip().startswith('ui.small') and 'DroneOllama' in x); assert r'host\\\\ai-home' in line; assert r'G:\\\\AI-Home' not in line\""
+      ],
+      "notes": "main.rs UI install-root ui.small line uses host\\\\ai-home. After apply: assert that line only. open_path and crash.log leftovers still pin G:. Independent of crash-log leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-ollama-app-open-out",

@@ -22,6 +22,7 @@ apps/drone-ollama-app/src/main.rs UI install-root small() only. Do not edit dron
 - git checkout -b cursor/dronehive-ollama-app-ui-install-root-from-ops
 - git apply --check /path/to/main/patches/dronehive-ollama-app-ui-install-root.patch
 - git apply /path/to/main/patches/dronehive-ollama-app-ui-install-root.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-app/src/main.rs').read_text(); line=next(x for x in t.splitlines() if x.strip().startswith('ui.small') and 'DroneOllama' in x); assert r'host\\ai-home' in line; assert r'G:\\AI-Home' not in line"
 
 ## Verify
 

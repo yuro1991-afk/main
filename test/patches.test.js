@@ -877,6 +877,19 @@ test("cli patches --job dronehive-truth-honesty-root includes the System root af
   assert.ok(parsed.applyNext.some((line) => line.includes("TRUTH_AND_HONESTY.md") && line.includes("**System root:**") && line.includes("0.5b")));
 });
 
+test("cli patches --job dronehive-ollama-app-ui-install-root includes the UI install-root afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-ollama-app-ui-install-root"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-ollama-app-ui-install-root");
+  assert.ok(parsed.applyNext.some((line) => line.includes("apps/drone-ollama-app/src/main.rs") && line.includes("ui.small") && line.includes("DroneOllama") && line.includes("host\\\\ai-home")));
+});
+
 test("cli patches --job dronehive-ollama-app-crash-log includes the crash.log afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-ollama-app-crash-log"], {

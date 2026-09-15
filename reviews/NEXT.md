@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T03:16Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T03:18Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`7870542`. Shipped this interval: `dronehive-ollama-app-crash-log`
-crash.log afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`42a9283`. Shipped this interval: `dronehive-ollama-app-ui-install-root`
+UI install-root afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -132,7 +132,8 @@ crash.log afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused ollama-app-readme-install apply | `dronehive-ollama-app-readme-install` (README installer afterApply wired) |
 | next unused ollama-app-readme-dest apply | `dronehive-ollama-app-readme-dest` (README dest afterApply wired) |
 | next unused ollama-app-crash-log apply | `dronehive-ollama-app-crash-log` (main.rs crash.log afterApply wired) |
-| next afterApply to wire | `dronehive-ollama-app-ui-install-root` (apps/drone-ollama-app/src/main.rs UI install root only) |
+| next unused ollama-app-ui-install-root apply | `dronehive-ollama-app-ui-install-root` (main.rs UI install-root afterApply wired) |
+| next afterApply to wire | `dronehive-ollama-app-open-out` (apps/drone-ollama-app/src/main.rs Open drone out only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -390,7 +391,9 @@ apps/drone-ollama-app/README.md installer File apps\\ path (dest leftover stays)
 apps/drone-ollama-app/README.md dest host\\ai-home path (installer leftover stays).
 `dronehive-ollama-app-crash-log` afterApply asserts
 main.rs crash.log host\\ai-home path (UI leftover stays).
-Next afterApply to wire is `dronehive-ollama-app-ui-install-root`.
+`dronehive-ollama-app-ui-install-root` afterApply asserts
+main.rs ui.small DroneOllama line uses host\\ai-home (open leftovers stay).
+Next afterApply to wire is `dronehive-ollama-app-open-out`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -527,7 +530,7 @@ then unused `dronehive-truth-honesty-oath-inline` (TRUTH_AND_HONESTY.md only; af
 then unused `dronehive-ollama-app-readme-install` (apps/drone-ollama-app/README.md only; afterApply wired),
 then unused `dronehive-ollama-app-readme-dest` (apps/drone-ollama-app/README.md only; afterApply wired),
 then unused `dronehive-ollama-app-crash-log` (apps/drone-ollama-app/src/main.rs only; afterApply wired),
-then unused `dronehive-ollama-app-ui-install-root` (apps/drone-ollama-app/src/main.rs only),
+then unused `dronehive-ollama-app-ui-install-root` (apps/drone-ollama-app/src/main.rs only; afterApply wired),
 then unused `dronehive-ollama-app-open-out` (apps/drone-ollama-app/src/main.rs only),
 then unused `dronehive-ollama-app-open-benchmarks` (apps/drone-ollama-app/src/main.rs only),
 then unused `dronehive-ollama-app-open-workspace` (apps/drone-ollama-app/src/main.rs only),
