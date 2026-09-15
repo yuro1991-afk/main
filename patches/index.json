@@ -271,8 +271,13 @@
       "file": "patches/dronehive-app-links-host-paths.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "drone/app/links.py catalog URIs for library/continuous use resolve_host_path. Apply after portable-paths so host_paths.py exists. Independent of runtime-host-paths and config-load-overlay. Does not touch tool_agent.py."
+      "requires": [
+        "patches/dronehive-portable-paths.patch"
+      ],
+      "afterApply": [
+        "python3 -c \"from drone.app.links import LinkRegistry\""
+      ],
+      "notes": "drone/app/links.py catalog URIs use resolve_host_path. requires portable-paths so drone/host_paths.py exists. After apply: import LinkRegistry. Independent of runtime-host-paths and config-load-overlay. Does not touch tool_agent.py."
     },
     {
       "id": "bloom-ci-lint",
