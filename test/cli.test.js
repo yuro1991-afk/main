@@ -332,12 +332,18 @@ test("README assign --job names exhausted leftover launches", () => {
 test("leftover unused peek docs name leftover unused exhausted", () => {
   const readme = readFileSync(new URL("../README.md", import.meta.url), "utf8");
   assert.match(readme, /Leftover unused peek\nis exhausted/);
+  assert.match(readme, /Empty leftover\nunused peek/);
+  assert.match(readme, /Do not add a card to\n`ledger\/queue\.json`/);
   assert.doesNotMatch(readme, /Leftover unused is\n`review-landing-pad-prs`/);
   const agents = readFileSync(new URL("../AGENTS.md", import.meta.url), "utf8");
   assert.match(agents, /Leftover unused peek is exhausted/);
+  assert.match(agents, /Empty leftover unused peek/);
+  assert.match(agents, /Do not add a card to `ledger\/queue\.json`/);
   assert.doesNotMatch(agents, /A 22nd unassigned agent takes leftover `review-landing-pad-prs`/);
   const next = readFileSync(new URL("../reviews/NEXT.md", import.meta.url), "utf8");
   assert.match(next, /Peek leftover unused \(no `--agent`\):\*\* leftover unused exhausted/);
+  assert.match(next, /Empty leftover unused peek/);
+  assert.match(next, /Do not add a card to `ledger\/queue\.json`/);
   assert.doesNotMatch(next, /Peek leftover unused \(no `--agent`\):\*\* `review-landing-pad-prs`/);
 });
 

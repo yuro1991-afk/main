@@ -21,7 +21,10 @@ prints local Task fan-out.
 1. `npm test` if you touch this repo.
 2. `node src/cli.js busy --agent <your-bcId>` — claims **your roster
    GitHub card**. Leftover unused peek is exhausted (`next` / `busy`
-   without `--agent` exit 1). Leftover catalog launches are exhausted
+   without `--agent` exit 1). Empty leftover unused peek (`brief` /
+   `handoff` / `helpers` / `prompt` / `relaunch` without `--job`) names
+   leftover unused exhausted. Do not add a card to `ledger/queue.json`.
+   Leftover catalog launches are exhausted
    (`assign --missing` / compact `patches` `nextMissing` is null).
    Prefer `brief --job dronehive-unicode-ci`. Do not invent leftover
    163+. `node src/cli.js slots` lists the rest so a second agent does

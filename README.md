@@ -47,7 +47,10 @@ Prefer `brief --job dronehive-unicode-ci`. Do not invent leftover 163+.
 never writes. Leftover launches are exhausted (`nextMissing` null).
 Prefer `brief --job dronehive-unicode-ci`. Do not invent leftover 163+.
 `busy --agent` claims **your roster card** first. Leftover unused peek
-is exhausted (`next` / `busy` without `--agent` exit 1). Prefer
+is exhausted (`next` / `busy` without `--agent` exit 1). Empty leftover
+unused peek (`brief` / `handoff` / `helpers` / `prompt` / `relaunch`
+without `--job`) names leftover unused exhausted. Do not add a card to
+`ledger/queue.json`. Prefer
 `brief --job dronehive-unicode-ci`. `next --world` / `--origin` are opt-in.
 
 ## Lanes
