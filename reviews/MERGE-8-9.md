@@ -32,7 +32,7 @@ the union **2–10**. Prefer #9’s array (keep #9’s catalog `owns` on #9).
 | 10 | `python-arena` | `review-main-pr10` |
 
 Keep #9’s `describeRole` cases. After merge, `ops-board` is the landing-pad
-CLI (#3 merged, #8 GitHub-first) — not “this PR”.
+CLI (#3 merged, #8 GitHub-first). Patch catalog is #9 — not “this PR”.
 
 `src/brief.js`, `src/cli.js`, `src/dispatch.js`, `src/handoff.js`,
 `src/helpers.js`, `src/patches.js`, `src/playbook.js`, `src/prompt.js`,

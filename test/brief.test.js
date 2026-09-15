@@ -43,7 +43,8 @@ test("siblings.json loads and maps dronehive to PR 5", () => {
   );
   assert.match(describeRole("attention-and-dronehive-patch"), /dronehive/);
   assert.match(describeRole("ops-board"), /GitHub-first defaults live on #8/);
-  assert.doesNotMatch(describeRole("ops-board"), /^This PR\./);
+  assert.match(describeRole("ops-board"), /Patch catalog is #9/);
+  assert.doesNotMatch(describeRole("ops-board"), /This PR is the patch catalog/);
   assert.doesNotMatch(describeRole("autofix-runner"), /npm run autofix -- apply/);
   assert.match(describeRole("autofix-runner"), /Do not copy/);
 });
