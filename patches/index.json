@@ -1308,8 +1308,10 @@
       "file": "patches/dronehive-doc-honesty-library.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "docs/HONESTY.md library row uses host/library. Independent of hive-docstring-honesty. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/HONESTY.md').read_text(); assert 'host/library' in t; assert r'F:\\\\GrokSelfLibrary' not in t\""
+      ],
+      "notes": "docs/HONESTY.md library row uses host/library. After apply: assert that phrase and that F: GrokSelfLibrary is gone. Independent of hive-docstring-honesty and seed HONESTY leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-seed-doc-honesty-library",

@@ -773,6 +773,19 @@ test("cli patches --job dronehive-doc-super-kernel-cd includes the SUPER_KERNEL 
   assert.ok(parsed.applyNext.some((line) => line.includes("docs/SUPER_KERNEL.md") && line.includes("Set-Location .") && line.includes("ai-worker-drone-0.5b")));
 });
 
+test("cli patches --job dronehive-doc-honesty-library includes the HONESTY library afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-doc-honesty-library"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-doc-honesty-library");
+  assert.ok(parsed.applyNext.some((line) => line.includes("docs/HONESTY.md") && line.includes("host/library") && line.includes("GrokSelfLibrary")));
+});
+
 test("cli patches --job dronehive-tui-readme-cargo includes the dronehive-tui README afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-tui-readme-cargo"], {
