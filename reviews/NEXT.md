@@ -6,12 +6,13 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T04:10Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T04:12Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`fe51ec4`. Shipped this interval: `dronehive-work-order-ai-smarts-packs`
-ai_smarts_packs afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`354314e`. Shipped this interval: `dronehive-seed-work-order-ai-smarts-packs`
+seed ai_smarts_packs afterApply. Unused afterApply tail is done.
+Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -159,7 +160,8 @@ ai_smarts_packs afterApply. Leftover `next` stays alone. Do not invent leftovers
 | next unused work-order-core-lessons apply | `dronehive-work-order-core-lessons` (work_order.json core_lessons afterApply wired) |
 | next unused seed-work-order-core-lessons apply | `dronehive-seed-work-order-core-lessons` (seed core_lessons afterApply wired) |
 | next unused work-order-ai-smarts-packs apply | `dronehive-work-order-ai-smarts-packs` (work_order.json ai_smarts_packs afterApply wired) |
-| next afterApply to wire | `dronehive-seed-work-order-ai-smarts-packs` (seed ai_smarts_packs only) |
+| next unused seed-work-order-ai-smarts-packs apply | `dronehive-seed-work-order-ai-smarts-packs` (seed ai_smarts_packs afterApply wired) |
+| next unused apply (afterApply already wired) | `bloom-grok-pwa-test-sync` |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -471,7 +473,9 @@ knowledge_imprint.core_lessons is host/core-memory/lessons (expand leftover stay
 seed knowledge_imprint.core_lessons is host/core-memory/lessons (live leftover stays).
 `dronehive-work-order-ai-smarts-packs` afterApply asserts
 knowledge_imprint.ai_smarts_packs is host/ai-home/docs/ai-smarts/packs (pack_min leftover stays).
-Next afterApply to wire is `dronehive-seed-work-order-ai-smarts-packs`.
+`dronehive-seed-work-order-ai-smarts-packs` afterApply asserts
+seed knowledge_imprint.ai_smarts_packs is host/ai-home/docs/ai-smarts/packs (live leftover stays).
+Unused afterApply tail is done. Next unused apply is `bloom-grok-pwa-test-sync` (afterApply already wired). Do not invent leftovers.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -635,8 +639,8 @@ then unused `dronehive-seed-work-order-live-mirror` (seed live_registry.mirror o
 then unused `dronehive-work-order-core-lessons` (work_order.json core_lessons only; -U1; afterApply wired),
 then unused `dronehive-seed-work-order-core-lessons` (seed core_lessons only; afterApply wired),
 then unused `dronehive-work-order-ai-smarts-packs` (work_order.json ai_smarts_packs only; -U1; afterApply wired),
-then unused `dronehive-seed-work-order-ai-smarts-packs` (seed ai_smarts_packs only),
-then unused `bloom-grok-pwa-test-sync` (grok-pwa-plugin.test.mjs only).
+then unused `dronehive-seed-work-order-ai-smarts-packs` (seed ai_smarts_packs only; afterApply wired),
+then unused `bloom-grok-pwa-test-sync` (grok-pwa-plugin.test.mjs only; afterApply wired).
 Newcomer `bc-710c5477` Hunt sibling: unused apply `bloom-grok-pwa-test-sync`.
 `bc-f407303f`: `review-main-pr10` (fork's Python arena/infra).
 `bc-5fe241dd` Summarize arena: do not steal `genesis-world-arena`; unused apply `faceswap-design-honesty`.
