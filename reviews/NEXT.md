@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T01:59Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T02:02Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`65aead8`. Shipped this interval: `dronehive-apps-readme-cargo`
-apps/README.md afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`4ea6261`. Shipped this interval: `dronehive-install-ollama-app-root`
+InstallRoot afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -94,7 +94,8 @@ apps/README.md afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused mount-readme-cargo apply | `dronehive-mount-readme-cargo` (mount README afterApply wired) |
 | next unused tui-readme-cargo apply | `dronehive-tui-readme-cargo` (dronehive-tui README afterApply wired) |
 | next unused apps-readme-cargo apply | `dronehive-apps-readme-cargo` (apps/README.md afterApply wired) |
-| next afterApply to wire | `dronehive-install-ollama-app-root` (installer InstallRoot only) |
+| next unused install-ollama-app-root apply | `dronehive-install-ollama-app-root` (installer InstallRoot afterApply wired) |
+| next afterApply to wire | `dronehive-install-ollama-app-mount` (installer mountSrc only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -276,7 +277,9 @@ Face-swap README honesty leftovers are exhausted.
 (build PATH uses `host\\ai-home\\tools\\cargo\\bin`; G:\\AI-Home\\tools\\cargo\\bin is gone).
 `dronehive-apps-readme-cargo` afterApply asserts apps/README.md
 (Rust path is `host/ai-home/tools/cargo`; G:\\AI-Home is one host example).
-Next afterApply to wire is `dronehive-install-ollama-app-root`.
+`dronehive-install-ollama-app-root` afterApply asserts Install-DroneOllamaApp.ps1
+(InstallRoot uses `host\\ai-home\\apps\\DroneOllama`; leaves uninstall here-string).
+Next afterApply to wire is `dronehive-install-ollama-app-mount`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -375,7 +378,7 @@ then unused `dronehive-ollama-tui-readme-cargo` (drone-ollama-tui README build o
 then unused `dronehive-mount-readme-cargo` (mount README build only; afterApply wired; independent of Launch leftover),
 then unused `dronehive-tui-readme-cargo` (dronehive-tui README PATH only; afterApply wired; independent of ollama-tui README leftover),
 then unused `dronehive-apps-readme-cargo` (apps/README.md Rust path only; afterApply wired; independent of per-app README leftovers),
-then unused `dronehive-install-ollama-app-root` (installer $InstallRoot only; -U1 skips cargo leftover),
+then unused `dronehive-install-ollama-app-root` (installer InstallRoot only; afterApply wired; -U1 skips cargo leftover),
 then unused `dronehive-install-ollama-app-mount` ($mountSrc only),
 then unused `dronehive-install-ollama-app-manifest` (manifest drone_root / mount_exe only),
 then unused `dronehive-install-ollama-uninstall-root` (uninstall here-string only),

@@ -1033,8 +1033,10 @@
       "file": "patches/dronehive-install-ollama-app-root.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "Install-DroneOllamaApp.ps1 $InstallRoot uses host\\\\ai-home\\\\apps\\\\DroneOllama. -U1 so context skips the cargo leftover. Leaves uninstall here-string. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1').read_text(); assert r\\\"InstallRoot = 'host\\\\ai-home\\\\apps\\\\DroneOllama'\\\" in t\""
+      ],
+      "notes": "Install-DroneOllamaApp.ps1 InstallRoot uses host\\\\ai-home\\\\apps\\\\DroneOllama. After apply: assert InstallRoot = 'host\\\\ai-home\\\\apps\\\\DroneOllama'. Leaves uninstall here-string (do not assert G:\\\\AI-Home\\\\apps\\\\DroneOllama gone). -U1 so context skips the cargo leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-install-ollama-app-mount",

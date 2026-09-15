@@ -22,6 +22,7 @@ Install-DroneOllamaApp.ps1 $InstallRoot line only. Do not edit drone/pro/tool_ag
 - git checkout -b cursor/dronehive-install-ollama-app-root-from-ops
 - git apply --check /path/to/main/patches/dronehive-install-ollama-app-root.patch
 - git apply /path/to/main/patches/dronehive-install-ollama-app-root.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1').read_text(); assert r\"InstallRoot = 'host\\ai-home\\apps\\DroneOllama'\" in t"
 
 ## Verify
 
