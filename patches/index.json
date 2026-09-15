@@ -313,9 +313,9 @@
         "patches/dronehive-portable-paths.patch"
       ],
       "afterApply": [
-        "python3 -c \"from drone.app.links import LinkRegistry\""
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/links.py').read_text(); line=next(x for x in t.splitlines() if 'uri' in x and 'GrokSelfLibrary' in x); assert 'resolve_host_path' in line\""
       ],
-      "notes": "drone/app/links.py catalog URIs use resolve_host_path. requires portable-paths so drone/host_paths.py exists. After apply: import LinkRegistry. Independent of runtime-host-paths and config-load-overlay. Does not touch tool_agent.py."
+      "notes": "drone/app/links.py catalog URIs use resolve_host_path. requires portable-paths so drone/host_paths.py exists. After apply: assert the library uri line uses resolve_host_path. Unpatched uses a raw F: string. Do not assert F:/D: gone. Do not import LinkRegistry as afterApply (passes unpatched). Do not put dollar signs in afterApply. Do not put backticks in afterApply. Independent of runtime-host-paths and config-load-overlay. Does not touch tool_agent.py."
     },
     {
       "id": "bloom-ci-lint",

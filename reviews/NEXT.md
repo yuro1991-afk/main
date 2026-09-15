@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T04:11Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T04:13Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`3d8ff16`. Shipped this interval: dronehive-runtime-host-paths
-afterApply is a DEFAULT_ROOT line assert (import passed unpatched).
+`d1baeaa`. Shipped this interval: dronehive-app-links-host-paths
+afterApply is a library-uri line assert (import passed unpatched).
 Early empty afterApply catalog is done. Leftover `next` stays alone.
 Do not invent leftovers.
 
@@ -222,7 +222,7 @@ assert that `ROOT` uses `__file__` and drops `G:\AI-Home`.
 `dronehive-config-load-overlay` `applyNext` applies portable-paths first
 (`requires`), then `from drone.config_overlay import remap_host_strings`.
 `dronehive-app-links-host-paths` `applyNext` applies portable-paths first
-(`requires`), then `from drone.app.links import LinkRegistry`.
+(`requires`), then asserts the library uri uses resolve_host_path.
 Host-path import leftovers are exhausted.
 `ova-readme-linux-honesty` afterApply asserts README names Windows-only
 Voice Access (`Windows 11 Voice Access` / `syntax/math CI only` /

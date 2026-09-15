@@ -346,7 +346,7 @@ test("cli patches --job dronehive-app-links-host-paths applies portable-paths fi
   const portable = lines.findIndex((line) => line.includes("dronehive-portable-paths.patch") && line.startsWith("git apply /"));
   const links = lines.findIndex((line) => line.includes("dronehive-app-links-host-paths.patch") && line.startsWith("git apply /"));
   assert.ok(portable >= 0 && links > portable);
-  assert.ok(lines.some((line) => line.includes("from drone.app.links import LinkRegistry")));
+  assert.ok(lines.some((line) => line.includes("drone/app/links.py") && line.includes("GrokSelfLibrary") && line.includes("resolve_host_path")));
 });
 
 test("cli patches --job dronehive-config-load-overlay applies portable-paths first", async () => {

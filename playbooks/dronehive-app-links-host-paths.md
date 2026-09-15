@@ -23,7 +23,7 @@ Apply after dronehive-portable-paths. Different file from runtime-host-paths. Do
 - git apply /path/to/main/patches/dronehive-portable-paths.patch
 - git apply --check /path/to/main/patches/dronehive-app-links-host-paths.patch
 - git apply /path/to/main/patches/dronehive-app-links-host-paths.patch
-- python3 -c "from drone.app.links import LinkRegistry"
+- python3 -c "from pathlib import Path; t=Path('drone/app/links.py').read_text(); line=next(x for x in t.splitlines() if 'uri' in x and 'GrokSelfLibrary' in x); assert 'resolve_host_path' in line"
 
 ## Verify
 
