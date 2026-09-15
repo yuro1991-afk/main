@@ -203,10 +203,13 @@
       "file": "patches/dronehive-ubuntu-smoke.patch",
       "base": "d538a89",
       "applyCheck": "ok",
+      "requires": [
+        "patches/dronehive-pro-chat-cp1252.patch"
+      ],
       "afterApply": [
         "python3 -c \"from pathlib import Path; t=Path('.github/workflows/ci.yml').read_text(); assert 'python-smoke-ubuntu:' in t; assert 'Pro agent (no ollama)' in t; assert 'ci pro write ci_ok.txt' in t; assert 'Work order show' in t\""
       ],
-      "notes": "Adds ubuntu-latest python-smoke alongside windows-latest. Stacks with the unicode patch. After apply: assert ci.yml has python-smoke-ubuntu and those steps. Unpatched windows-latest python-smoke stays. Do not run the smoke. Do not put backticks in afterApply. Independent of dronehive-portable-paths. Do not edit drone/pro/tool_agent.py."
+      "notes": "Adds ubuntu-latest python-smoke alongside windows-latest. requires unicode-ci so applyNext applies patches/dronehive-pro-chat-cp1252.patch first. After apply: assert ci.yml has python-smoke-ubuntu and those steps. Unpatched windows-latest python-smoke stays. Do not run the smoke. Do not put backticks in afterApply. Independent of dronehive-portable-paths. Do not edit drone/pro/tool_agent.py."
     },
     {
       "id": "dronehive-portable-paths",

@@ -244,6 +244,8 @@ and drops `G:\AI-Home`. Do not py_compile as afterApply.
 (`requires`), then `from drone.config_overlay import remap_host_strings`.
 `dronehive-app-links-host-paths` `applyNext` applies portable-paths first
 (`requires`), then asserts the library uri uses resolve_host_path.
+`dronehive-ubuntu-smoke` `applyNext` applies unicode-ci first (`requires`),
+then asserts ci.yml has python-smoke-ubuntu. Do not run the smoke.
 Host-path import leftovers are exhausted.
 `ova-readme-linux-honesty` afterApply asserts README names Windows-only
 Voice Access (`Windows 11 Voice Access` / `syntax/math CI only` /
@@ -732,7 +734,7 @@ then unused `faceswap-health-offline` (offline health red only; afterApply wired
 then unused `faceswap-mock-engine-ci` (stdlib mock engine only; afterApply wired),
 then unused `ova-stop-noui-guard` (exit 4 without -Force only; afterApply wired),
 then unused `ova-pester-qa-math` (math-unit only; afterApply wired),
-then unused `dronehive-ubuntu-smoke` (ubuntu python-smoke only; afterApply wired),
+then unused stacked `dronehive-ubuntu-smoke` (ubuntu python-smoke after unicode-ci; `requires` now wired),
 then unused `dronehive-portable-paths` (host/ overlay only; afterApply wired),
 then unused `dronehive-icons-manifest-relative` (relative icon_root only; afterApply wired),
 then unused `bloom-ci-lint` (lint.yml only; afterApply wired).

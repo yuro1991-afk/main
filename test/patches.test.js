@@ -1257,7 +1257,11 @@ test("cli patches --job dronehive-ubuntu-smoke includes the ubuntu-smoke afterAp
   assert.equal(code, 0);
   const parsed = JSON.parse(chunks.join(""));
   assert.equal(parsed.patches[0].id, "dronehive-ubuntu-smoke");
-  assert.ok(parsed.applyNext.some((line) => line.includes(".github/workflows/ci.yml") && line.includes("python-smoke-ubuntu:") && line.includes("Pro agent (no ollama)") && line.includes("ci pro write ci_ok.txt")));
+  const lines = parsed.applyNext;
+  const unicode = lines.findIndex((line) => line.includes("dronehive-pro-chat-cp1252.patch") && line.startsWith("git apply /"));
+  const ubuntu = lines.findIndex((line) => line.includes("dronehive-ubuntu-smoke.patch") && line.startsWith("git apply /"));
+  assert.ok(unicode >= 0 && ubuntu > unicode);
+  assert.ok(lines.some((line) => line.includes(".github/workflows/ci.yml") && line.includes("python-smoke-ubuntu:") && line.includes("Pro agent (no ollama)") && line.includes("ci pro write ci_ok.txt")));
 });
 
 test("cli patches --job ova-pester-qa-math includes the math-unit afterApply", async () => {

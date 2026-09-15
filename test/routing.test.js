@@ -213,6 +213,21 @@ test("cp1252 and python-smoke intents park on unicode-ci, not leftover Superbrai
   assert.equal(keep.jobId, "gub-route-intent");
 });
 
+test("ubuntu-smoke intent parks on ubuntu-smoke with unicode-ci requires first", () => {
+  const ledger = loadLedger(join(ROOT, "ledger", "queue.json"));
+  const roster = loadRoster(join(ROOT, "ledger", "roster.json"));
+  const afterLease = Date.parse("2026-09-14T19:00:00.000Z");
+  const route = routeIntent("add ubuntu-smoke", { ledger, roster, nowMs: afterLease });
+  assert.equal(route.jobId, "dronehive-ubuntu-smoke");
+  assert.match(route.notes, /dronehive-pro-chat-cp1252\.patch then patches\/dronehive-ubuntu-smoke\.patch/);
+  const unicode = route.applyNext.findIndex((line) => line.includes("dronehive-pro-chat-cp1252.patch") && line.startsWith("git apply /"));
+  const ubuntu = route.applyNext.findIndex((line) => line.includes("dronehive-ubuntu-smoke.patch") && line.startsWith("git apply /"));
+  assert.ok(unicode >= 0 && ubuntu > unicode);
+  assert.doesNotMatch(route.destination, /gub-superbrain-probe/);
+  const keep = routeIntent("keep agents busy", { ledger, roster, nowMs: NOW });
+  assert.equal(keep.jobId, "gub-route-intent");
+});
+
 test("merge / landing-pad intents park on review PRs, not leftover Superbrain", () => {
   const ledger = loadLedger(join(ROOT, "ledger", "queue.json"));
   const roster = loadRoster(join(ROOT, "ledger", "roster.json"));
