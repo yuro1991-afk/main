@@ -868,6 +868,41 @@
         "dronehive-multi-face-pythonpath",
         "dronehive-future-seer-pythonpath"
       ]
+    },
+    {
+      "number": 63,
+      "url": "https://github.com/yuro1991-afk/main/pull/63",
+      "branch": "cursor/siblings-prs-59-62-108b",
+      "title": "Record landing-pad PRs 59–62 on the siblings board",
+      "role": "siblings-board",
+      "owns": [
+        "review-landing-pad-prs"
+      ]
+    },
+    {
+      "number": 64,
+      "url": "https://github.com/yuro1991-afk/main/pull/64",
+      "branch": "cursor/ai-bus-live-mirror-lessons-launches-108b",
+      "title": "Add Apply launches for ai-bus packs, live-mirror, and core-lessons leftovers",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-ai-bus-packs-root",
+        "dronehive-work-order-live-mirror",
+        "dronehive-seed-work-order-live-mirror",
+        "dronehive-work-order-core-lessons"
+      ]
+    },
+    {
+      "number": 65,
+      "url": "https://github.com/yuro1991-afk/main/pull/65",
+      "branch": "cursor/seed-lessons-smarts-packs-launches-108b",
+      "title": "Add Apply launches for the last three catalog leftovers",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-seed-work-order-core-lessons",
+        "dronehive-work-order-ai-smarts-packs",
+        "dronehive-seed-work-order-ai-smarts-packs"
+      ]
     }
   ]
 }
