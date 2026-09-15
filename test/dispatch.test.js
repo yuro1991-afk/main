@@ -16,6 +16,7 @@ import {
   claimBusyJob,
   leftoverLaunchRows,
   MISSING_LAUNCH_PREVIEW,
+  withRelatedSection,
   loadRoster,
   peekBusyJob,
   renderAssignedLaunch,
@@ -305,6 +306,10 @@ test("cli assign --job writes one leftover Apply launch", async () => {
   const text = readFileSync(dest, "utf8");
   assert.match(text, /# Leftover unused — bloom-grok-pwa-test-sync/);
   assert.match(text, /# Apply bloom-grok-pwa-test-sync/);
+  assert.match(text, /## Related/);
+  assert.match(text, /#9 patch-catalog/);
+  assert.match(text, /#12 leftover-launches/);
+  assert.ok(text.indexOf("#9 patch-catalog") < text.indexOf("#12 leftover-launches"));
   assert.doesNotMatch(text, /npm run autofix/);
 });
 
@@ -319,6 +324,16 @@ test("cli assign --job names catalog-first related for unicode-ci", async () => 
   );
   assert.equal(parsed.related[0].role, "patch-catalog");
   assert.equal(parsed.prefer, "node src/cli.js brief --job dronehive-unicode-ci");
+  const text = readFileSync(join(out, "dronehive-unicode-ci.md"), "utf8");
+  assert.match(text, /## Related/);
+  assert.match(text, /#9 patch-catalog/);
+  assert.match(text, /#5 attention-and-dronehive-patch/);
+  assert.ok(text.indexOf("#9 patch-catalog") < text.indexOf("#5 attention-and-dronehive-patch"));
+});
+
+test("withRelatedSection is a no-op without related rows", () => {
+  assert.equal(withRelatedSection("# Apply x\n", []), "# Apply x\n");
+  assert.equal(withRelatedSection("# Apply x\n", null), "# Apply x\n");
 });
 
 test("cli assign --missing lists catalog leftovers with no launch and never writes", async () => {
