@@ -1572,8 +1572,10 @@
       "file": "patches/dronehive-ollama-app-bridge-paths.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "drone_bridge.rs DRONE_ROOT and MOUNT_EXE use '.' and apps\\\\drone-ollama-mount. Adjacent consts kept as one leftover. Leaves C:\\\\Python. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/src/drone_bridge.rs').read_text(); root=next(x for x in t.splitlines() if 'DRONE_ROOT' in x and 'const' in x); assert r'G:\\\\AI-Home' not in root; assert '0.5b' not in root; assert 'apps'+chr(92)+'drone-ollama-mount'+chr(92)+'target'+chr(92)+'release'+chr(92)+'drone-ollama-mount.exe' in t; assert 'G:'+chr(92)+'AI-Home'+chr(92)+'projects'+chr(92)+'drone-ollama-mount'+chr(92)+'target' not in t\""
+      ],
+      "notes": "drone_bridge.rs DRONE_ROOT no longer pins G: or 0.5b; MOUNT_EXE uses apps\\\\drone-ollama-mount\\\\target\\\\release. After apply: assert the const DRONE_ROOT line and the apps\\\\ exe path. Leaves C:\\\\Python. Do not put backticks in afterApply. Adjacent consts kept as one leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-work-order-doc-board",

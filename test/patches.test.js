@@ -877,6 +877,19 @@ test("cli patches --job dronehive-truth-honesty-root includes the System root af
   assert.ok(parsed.applyNext.some((line) => line.includes("TRUTH_AND_HONESTY.md") && line.includes("**System root:**") && line.includes("0.5b")));
 });
 
+test("cli patches --job dronehive-ollama-app-bridge-paths includes the bridge consts afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-ollama-app-bridge-paths"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-ollama-app-bridge-paths");
+  assert.ok(parsed.applyNext.some((line) => line.includes("apps/drone-ollama-app/src/drone_bridge.rs") && line.includes("DRONE_ROOT") && line.includes("drone-ollama-mount.exe") && line.includes("0.5b")));
+});
+
 test("cli patches --job dronehive-truth-honesty-library-list includes the Full law list afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-truth-honesty-library-list"], {

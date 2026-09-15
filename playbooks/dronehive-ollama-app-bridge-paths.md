@@ -22,6 +22,7 @@ apps/drone-ollama-app/src/drone_bridge.rs DRONE_ROOT + MOUNT_EXE only. Leave C:\
 - git checkout -b cursor/dronehive-ollama-app-bridge-paths-from-ops
 - git apply --check /path/to/main/patches/dronehive-ollama-app-bridge-paths.patch
 - git apply /path/to/main/patches/dronehive-ollama-app-bridge-paths.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-app/src/drone_bridge.rs').read_text(); root=next(x for x in t.splitlines() if 'DRONE_ROOT' in x and 'const' in x); assert r'G:\\AI-Home' not in root; assert '0.5b' not in root; assert 'apps'+chr(92)+'drone-ollama-mount'+chr(92)+'target'+chr(92)+'release'+chr(92)+'drone-ollama-mount.exe' in t; assert 'G:'+chr(92)+'AI-Home'+chr(92)+'projects'+chr(92)+'drone-ollama-mount'+chr(92)+'target' not in t"
 
 ## Verify
 

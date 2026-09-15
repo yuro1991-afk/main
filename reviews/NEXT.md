@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T03:38Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T03:40Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`a293c7f`. Shipped this interval: `dronehive-truth-honesty-library-list`
-Full law list afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`10ae19d`. Shipped this interval: `dronehive-ollama-app-bridge-paths`
+bridge consts afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -143,7 +143,8 @@ Full law list afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused mount-smoke-seal apply | `dronehive-mount-smoke-seal` (mount main.rs SMOKE_SEAL afterApply wired) |
 | next unused mount-swarm-seal apply | `dronehive-mount-swarm-seal` (mount main.rs SWARM_SMOKE_SEAL afterApply wired) |
 | next unused truth-honesty-library-list apply | `dronehive-truth-honesty-library-list` (TRUTH_AND_HONESTY.md Full law list afterApply wired) |
-| next afterApply to wire | `dronehive-ollama-app-bridge-paths` (apps/drone-ollama-app/src/drone_bridge.rs only) |
+| next unused ollama-app-bridge-paths apply | `dronehive-ollama-app-bridge-paths` (drone_bridge.rs consts afterApply wired) |
+| next afterApply to wire | `dronehive-work-order-doc-board` (docs/WORK_ORDER.md Board only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -423,7 +424,9 @@ mount main.rs SMOKE_SEAL uses apps\\ path (swarm leftover stays).
 mount main.rs SWARM_SMOKE_SEAL uses apps\\ path (smoke leftover stays).
 `dronehive-truth-honesty-library-list` afterApply asserts
 TRUTH_AND_HONESTY.md Full law list uses host/library (inline oath leftover stays).
-Next afterApply to wire is `dronehive-ollama-app-bridge-paths`.
+`dronehive-ollama-app-bridge-paths` afterApply asserts
+drone_bridge.rs DRONE_ROOT has no G: path and MOUNT_EXE uses apps\\ (C:\\Python stays).
+Next afterApply to wire is `dronehive-work-order-doc-board`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -571,7 +574,7 @@ then unused `dronehive-mount-fabric-root` (apps/drone-ollama-mount/src/fabric.rs
 then unused `dronehive-mount-smoke-seal` (apps/drone-ollama-mount/src/main.rs only; afterApply wired),
 then unused `dronehive-mount-swarm-seal` (apps/drone-ollama-mount/src/main.rs only; afterApply wired),
 then unused `dronehive-truth-honesty-library-list` (TRUTH_AND_HONESTY.md only; afterApply wired),
-then unused `dronehive-ollama-app-bridge-paths` (apps/drone-ollama-app/src/drone_bridge.rs only),
+then unused `dronehive-ollama-app-bridge-paths` (apps/drone-ollama-app/src/drone_bridge.rs only; afterApply wired),
 then unused `dronehive-work-order-doc-board` (docs/WORK_ORDER.md Board only),
 then unused `dronehive-seed-work-order-doc-board` (seed WORK_ORDER.md Board only),
 then unused `opensussy-superpowers-lab-plan` (historical lab plan save-path only),
