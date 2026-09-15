@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T04:00Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T04:02Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`79278d2`. Shipped this interval: `dronehive-ai-bus-packs-root`
-packs_root afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`5fd22a4`. Shipped this interval: `dronehive-work-order-live-mirror`
+mirror afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -154,7 +154,8 @@ packs_root afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused multi-face-pythonpath apply | `dronehive-multi-face-pythonpath` (multi_face.py PYTHONPATH afterApply wired) |
 | next unused future-seer-pythonpath apply | `dronehive-future-seer-pythonpath` (future_seer.py PYTHONPATH jane fallbacks afterApply wired) |
 | next unused ai-bus-packs-root apply | `dronehive-ai-bus-packs-root` (ai_bus.py packs_root afterApply wired) |
-| next afterApply to wire | `dronehive-work-order-live-mirror` (work_order.json live_registry.mirror only; -U1) |
+| next unused work-order-live-mirror apply | `dronehive-work-order-live-mirror` (work_order.json live_registry.mirror afterApply wired) |
+| next afterApply to wire | `dronehive-seed-work-order-live-mirror` (seed live_registry.mirror only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -456,7 +457,9 @@ both env PYTHONPATH lines use host/ai-center.
 the three jane PYTHONPATH fallbacks use host/ai-center (outbox leftover stays).
 `dronehive-ai-bus-packs-root` afterApply asserts
 the packs_root line uses host/ai-home (g_mirror leftover stays).
-Next afterApply to wire is `dronehive-work-order-live-mirror`.
+`dronehive-work-order-live-mirror` afterApply asserts
+live_registry.mirror is host/library/registry (cli leftover stays).
+Next afterApply to wire is `dronehive-seed-work-order-live-mirror`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -615,7 +618,7 @@ then unused `dronehive-grok-handoff-clone-dest` (grok_handoff.py clone dest only
 then unused `dronehive-multi-face-pythonpath` (multi_face.py PYTHONPATH only; afterApply wired),
 then unused `dronehive-future-seer-pythonpath` (future_seer.py PYTHONPATH jane fallbacks only; afterApply wired),
 then unused `dronehive-ai-bus-packs-root` (ai_bus.py packs_root only; afterApply wired),
-then unused `dronehive-work-order-live-mirror` (work_order.json live_registry.mirror only; -U1),
+then unused `dronehive-work-order-live-mirror` (work_order.json live_registry.mirror only; -U1; afterApply wired),
 then unused `dronehive-seed-work-order-live-mirror` (seed live_registry.mirror only),
 then unused `dronehive-work-order-core-lessons` (work_order.json core_lessons only; -U1),
 then unused `dronehive-seed-work-order-core-lessons` (seed core_lessons only),

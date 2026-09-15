@@ -1007,6 +1007,19 @@ test("cli patches --job dronehive-ai-bus-packs-root includes the packs_root afte
   assert.ok(parsed.applyNext.some((line) => line.includes("drone/ai_bus.py") && line.includes("packs_root") && line.includes("host/ai-home/docs/ai-smarts/packs")));
 });
 
+test("cli patches --job dronehive-work-order-live-mirror includes the mirror afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-work-order-live-mirror"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-work-order-live-mirror");
+  assert.ok(parsed.applyNext.some((line) => line.includes("configs/work_order.json") && line.includes("live_registry") && line.includes("host/library/registry")));
+});
+
 test("cli patches --job dronehive-ollama-app-bridge-paths includes the bridge consts afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-ollama-app-bridge-paths"], {

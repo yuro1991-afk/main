@@ -22,6 +22,7 @@ configs/work_order.json live_registry.mirror only. -U1 trailing kind. Do not edi
 - git checkout -b cursor/dronehive-work-order-live-mirror-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-live-mirror.patch
 - git apply /path/to/main/patches/dronehive-work-order-live-mirror.patch
+- python3 -c "from pathlib import Path; import json; r=json.loads(Path('configs/work_order.json').read_text())['live_registry']; assert r['mirror']=='host/library/registry'"
 
 ## Verify
 

@@ -1693,8 +1693,10 @@
       "file": "patches/dronehive-work-order-live-mirror.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "live_registry.mirror uses host/library. -U1 trailing kind so it stacks after live-registry leftover. Independent of that leftover (mirror was context). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; r=json.loads(Path('configs/work_order.json').read_text())['live_registry']; assert r['mirror']=='host/library/registry'\""
+      ],
+      "notes": "live_registry.mirror uses host/library. After apply: assert that key only. cli/primary/events leftovers still pin G:. -U1 trailing kind so it stacks after live-registry leftover. Independent of that leftover (mirror was context). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-seed-work-order-live-mirror",
