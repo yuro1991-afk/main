@@ -404,3 +404,29 @@ test("on-disk unicode launch is an Apply brief, not PR #5 autofix", () => {
   );
   assert.match(leftover, /#11/);
 });
+
+test("unused leftover launch packets exist for parked next cards", () => {
+  const ids = [
+    "bloom-grok-pwa-test-sync",
+    "dronehive-script-host-roots",
+    "faceswap-design-honesty",
+    "faceswap-start-sh",
+    "ova-readme-linux-honesty",
+    "dronehive-runtime-host-paths",
+    "dronehive-config-load-overlay",
+    "dronehive-app-links-host-paths",
+  ];
+  for (const id of ids) {
+    const text = readFileSync(new URL(`../reviews/launch/${id}.md`, import.meta.url), "utf8");
+    assert.match(text, new RegExp(`# Leftover unused — ${id}`), id);
+    assert.match(text, new RegExp(`# Apply ${id}`), id);
+    assert.match(text, new RegExp(`patches --prove --job ${id}`), id);
+    assert.doesNotMatch(text, /npm run autofix/);
+    assert.doesNotMatch(text, /pull\/5/);
+  }
+  const pr10 = readFileSync(new URL("../reviews/launch/review-main-pr10.md", import.meta.url), "utf8");
+  assert.match(pr10, /# Leftover unused — review-main-pr10/);
+  assert.match(pr10, /eyes/);
+  assert.match(pr10, /bridge/);
+  assert.doesNotMatch(pr10, /npm run autofix/);
+});
