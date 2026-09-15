@@ -39,6 +39,8 @@ node src/cli.js tick
 ```
 
 `assign` maps parked pad agents onto unique GitHub cards.
+`assign --job <id>` writes one leftover Apply launch and names
+catalog-first related PRs (same order as `siblings --job`).
 `busy --agent` claims **your roster card** first. Leftover unused is
 `review-landing-pad-prs`. `next --world` / `--origin` are opt-in.
 

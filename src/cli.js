@@ -351,12 +351,18 @@ export async function runCli(argv, options = {}) {
           ? renderAssignedLaunch(assigned, job)
           : renderLeftoverLaunch(job);
         const launches = writeLaunchPrompts([{ jobId, prompt }], dest);
+        const siblings = loadSiblings(
+          flags.siblings ? resolve(flags.siblings) : defaultSiblingsPath(options.root ?? ROOT),
+        );
+        const related = relatedForJob(siblings, jobId);
         write(
           JSON.stringify(
             {
               contract: ASSIGN_CONTRACT,
               job: jobId,
               launch: launches[0],
+              related,
+              prefer: `node src/cli.js brief --job ${jobId}`,
               applyNext: applyNextForJob(job),
               proveAfterApplyCommand: proveAfterApplyForJob(job),
               ...takeInsteadFields(job),
@@ -677,7 +683,7 @@ Commands:
   list [--job id] [--kind kind] [--repo repo] [--here] [--all] [--origin] [--world]  # --job is that card + applyNext
   next [id] [--job id] [--kind kind] [--repo repo] [--here] [--all] [--origin] [--world] [--agent <bcId>]
   slots [--job id] [--here] [--all] [--origin] [--world]  # --job peeks that card + applyNext
-  assign [--job id] [--out dir]  # --job writes one leftover Apply launch; else roster + leftover next
+  assign [--job id] [--out dir]  # --job writes one leftover Apply launch + catalog-first related; else roster + leftover next
   sync --agents path.json [--write] [--out dir]
   catalog [--entries path.json] [--write] [--out path]
   busy [id] [--job id] [--agent <bcId>] [--here] [--all] [--origin] [--world]   # --job peeks; else roster then leftover next
