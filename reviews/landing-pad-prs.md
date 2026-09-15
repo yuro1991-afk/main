@@ -1,4 +1,4 @@
-# Landing-pad PR review (2026-09-15T08:37Z)
+# Landing-pad PR review (2026-09-15T08:45Z)
 
 Written on this pad for `review-landing-pad-prs`. Merge stays with Yuri.
 Do not comment on GitHub unless Yuri asked. Do not open another queue.
@@ -7,7 +7,7 @@ Do not comment on GitHub unless Yuri asked. Do not open another queue.
 `node src/cli.js probe`.
 
 #8 already has a stale `reviews/LANDING-PAD-PRS.md` (19:05Z) that stops
-at #8. This file is the current board, including #9–#54.
+at #8. This file is the current board, including #9–#58.
 
 | PR | state | take? |
 | --- | --- | --- |
@@ -63,6 +63,10 @@ at #8. This file is the current board, including #9–#54.
 | [#52](https://github.com/yuro1991-afk/main/pull/52) | draft MERGEABLE + CI green | synaptic-loop and honesty-library leftover launches. Stacked on #51. |
 | [#53](https://github.com/yuro1991-afk/main/pull/53) | draft MERGEABLE + CI green | app-library and app-cd leftover launches. Stacked on #52. |
 | [#54](https://github.com/yuro1991-afk/main/pull/54) | draft MERGEABLE + CI green | grok-handoff and truth-honesty leftover launches. Stacked on #53. |
+| [#55](https://github.com/yuro1991-afk/main/pull/55) | draft MERGEABLE + CI green | siblings board 51–54. Stacked on #54. |
+| [#56](https://github.com/yuro1991-afk/main/pull/56) | draft MERGEABLE + CI green | ollama-app-readme leftover launches. Stacked on #55. |
+| [#57](https://github.com/yuro1991-afk/main/pull/57) | draft MERGEABLE + CI green | ollama-app-open leftover launches. Stacked on #56. |
+| [#58](https://github.com/yuro1991-afk/main/pull/58) | draft MERGEABLE + CI green | open-seal and mount leftover launches. Stacked on #57. |
 
 ## Merge order
 
@@ -109,11 +113,15 @@ at #8. This file is the current board, including #9–#54.
 41. Merge **#52** (synaptic-loop and honesty-library leftover launches).
 42. Merge **#53** (app-library and app-cd leftover launches).
 43. Merge **#54** (grok-handoff and truth-honesty leftover launches).
-44. Review **#13**; do not steal. Independent of the #11 stack.
-45. Review **#10**; do not merge onto `main` until Yuri retargets the base.
-46. Skip #4/#5/#6.
-47. Do not merge #7 after #8/#11 unless rewritten.
-48. #8 and #9 can close after #11 lands.
+44. Merge **#55** (siblings board 51–54).
+45. Merge **#56** (ollama-app-readme leftover launches).
+46. Merge **#57** (ollama-app-open leftover launches).
+47. Merge **#58** (open-seal and mount leftover launches).
+48. Review **#13**; do not steal. Independent of the #11 stack.
+49. Review **#10**; do not merge onto `main` until Yuri retargets the base.
+50. Skip #4/#5/#6.
+51. Do not merge #7 after #8/#11 unless rewritten.
+52. #8 and #9 can close after #11 lands.
 
 ## DroneHive (cannot push from this token)
 

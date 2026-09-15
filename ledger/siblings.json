@@ -770,6 +770,55 @@
         "dronehive-truth-honesty-root",
         "dronehive-truth-honesty-oath-inline"
       ]
+    },
+    {
+      "number": 55,
+      "url": "https://github.com/yuro1991-afk/main/pull/55",
+      "branch": "cursor/siblings-prs-51-54-108b",
+      "title": "Record landing-pad PRs 51–54 on the siblings board",
+      "role": "siblings-board",
+      "owns": [
+        "review-landing-pad-prs"
+      ]
+    },
+    {
+      "number": 56,
+      "url": "https://github.com/yuro1991-afk/main/pull/56",
+      "branch": "cursor/ollama-app-readme-launches-108b",
+      "title": "Add Apply launches for ollama-app-readme leftover cards",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-ollama-app-readme-install",
+        "dronehive-ollama-app-readme-dest",
+        "dronehive-ollama-app-crash-log",
+        "dronehive-ollama-app-ui-install-root"
+      ]
+    },
+    {
+      "number": 57,
+      "url": "https://github.com/yuro1991-afk/main/pull/57",
+      "branch": "cursor/ollama-app-open-launches-108b",
+      "title": "Add Apply launches for ollama-app-open leftover cards",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-ollama-app-open-out",
+        "dronehive-ollama-app-open-benchmarks",
+        "dronehive-ollama-app-open-workspace",
+        "dronehive-ollama-app-open-install"
+      ]
+    },
+    {
+      "number": 58,
+      "url": "https://github.com/yuro1991-afk/main/pull/58",
+      "branch": "cursor/open-seal-mount-launches-108b",
+      "title": "Add Apply launches for open-seal and mount leftover cards",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-ollama-app-open-seal",
+        "dronehive-mount-engine-out",
+        "dronehive-mount-fabric-root",
+        "dronehive-mount-smoke-seal"
+      ]
     }
   ]
 }
