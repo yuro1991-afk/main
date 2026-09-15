@@ -721,6 +721,55 @@
         "dronehive-doc-super-llms-cd",
         "dronehive-doc-super-mesh-cd"
       ]
+    },
+    {
+      "number": 51,
+      "url": "https://github.com/yuro1991-afk/main/pull/51",
+      "branch": "cursor/siblings-prs-47-50-108b",
+      "title": "Record landing-pad PRs 47–50 on the siblings board",
+      "role": "siblings-board",
+      "owns": [
+        "review-landing-pad-prs"
+      ]
+    },
+    {
+      "number": 52,
+      "url": "https://github.com/yuro1991-afk/main/pull/52",
+      "branch": "cursor/synaptic-honesty-library-launches-108b",
+      "title": "Add Apply launches for synaptic-loop and honesty-library leftovers",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-doc-synaptic-loop-cd",
+        "dronehive-doc-super-kernel-cd",
+        "dronehive-doc-honesty-library",
+        "dronehive-seed-doc-honesty-library"
+      ]
+    },
+    {
+      "number": 53,
+      "url": "https://github.com/yuro1991-afk/main/pull/53",
+      "branch": "cursor/app-library-cd-launches-108b",
+      "title": "Add Apply launches for app-library and app-cd leftovers",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-doc-app-library",
+        "dronehive-seed-doc-app-library",
+        "dronehive-doc-app-cd",
+        "dronehive-seed-doc-app-cd"
+      ]
+    },
+    {
+      "number": 54,
+      "url": "https://github.com/yuro1991-afk/main/pull/54",
+      "branch": "cursor/grok-handoff-honesty-launches-108b",
+      "title": "Add Apply launches for grok-handoff and truth-honesty leftovers",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-doc-grok-handoff-root",
+        "dronehive-doc-grok-handoff-cd",
+        "dronehive-truth-honesty-root",
+        "dronehive-truth-honesty-oath-inline"
+      ]
     }
   ]
 }
