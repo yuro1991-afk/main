@@ -1,4 +1,4 @@
-# Landing-pad PR review (2026-09-15T08:15Z)
+# Landing-pad PR review (2026-09-15T08:20Z)
 
 Written on this pad for `review-landing-pad-prs`. Merge stays with Yuri.
 Do not comment on GitHub unless Yuri asked. Do not open another queue.
@@ -7,7 +7,7 @@ Do not comment on GitHub unless Yuri asked. Do not open another queue.
 `node src/cli.js probe`.
 
 #8 already has a stale `reviews/LANDING-PAD-PRS.md` (19:05Z) that stops
-at #8. This file is the current board, including #9–#42.
+at #8. This file is the current board, including #9–#46.
 
 | PR | state | take? |
 | --- | --- | --- |
@@ -51,6 +51,10 @@ at #8. This file is the current board, including #9–#42.
 | [#40](https://github.com/yuro1991-afk/main/pull/40) | draft MERGEABLE + CI green | super-mesh-cd leftover launches. Stacked on #39. |
 | [#41](https://github.com/yuro1991-afk/main/pull/41) | draft MERGEABLE + CI green | truth-bind-paths leftover launches. Stacked on #40. |
 | [#42](https://github.com/yuro1991-afk/main/pull/42) | draft MERGEABLE + CI green | tui-cargo-honesty leftover launches. Stacked on #41. |
+| [#43](https://github.com/yuro1991-afk/main/pull/43) | draft MERGEABLE + CI green | siblings board 39–42. Stacked on #42. |
+| [#44](https://github.com/yuro1991-afk/main/pull/44) | draft MERGEABLE + CI green | apps-readme-cargo leftover launches. Stacked on #43. |
+| [#45](https://github.com/yuro1991-afk/main/pull/45) | draft MERGEABLE + CI green | uninstall-tui-readme leftover launches. Stacked on #44. |
+| [#46](https://github.com/yuro1991-afk/main/pull/46) | draft MERGEABLE + CI green | mount-readme and opensussy-sec leftover launches. Stacked on #45. |
 
 ## Merge order
 
@@ -85,11 +89,15 @@ at #8. This file is the current board, including #9–#42.
 29. Merge **#40** (super-mesh-cd leftover launches).
 30. Merge **#41** (truth-bind-paths leftover launches).
 31. Merge **#42** (tui-cargo-honesty leftover launches).
-32. Review **#13**; do not steal. Independent of the #11 stack.
-33. Review **#10**; do not merge onto `main` until Yuri retargets the base.
-34. Skip #4/#5/#6.
-35. Do not merge #7 after #8/#11 unless rewritten.
-36. #8 and #9 can close after #11 lands.
+32. Merge **#43** (siblings board 39–42).
+33. Merge **#44** (apps-readme-cargo leftover launches).
+34. Merge **#45** (uninstall-tui-readme leftover launches).
+35. Merge **#46** (mount-readme and opensussy-sec leftover launches).
+36. Review **#13**; do not steal. Independent of the #11 stack.
+37. Review **#10**; do not merge onto `main` until Yuri retargets the base.
+38. Skip #4/#5/#6.
+39. Do not merge #7 after #8/#11 unless rewritten.
+40. #8 and #9 can close after #11 lands.
 
 ## DroneHive (cannot push from this token)
 
