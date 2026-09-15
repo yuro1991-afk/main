@@ -118,6 +118,30 @@ test("dronehive and probe intents", () => {
   assert.match(superbrain.notes, /no more Superbrain/);
 });
 
+test("named stacked catalog route notes name requires priors first", () => {
+  const ledger = loadLedger(join(ROOT, "ledger", "queue.json"));
+  const roster = loadRoster(join(ROOT, "ledger", "roster.json"));
+  const route = routeIntent("apply dronehive-runtime-host-paths", {
+    ledger,
+    roster,
+    nowMs: NOW,
+  });
+  assert.equal(route.jobId, "dronehive-runtime-host-paths");
+  assert.match(route.notes, /forget Origin/);
+  assert.match(route.notes, /patches\/dronehive-portable-paths\.patch then patches\/dronehive-runtime-host-paths\.patch/);
+  const portable = route.notes.indexOf("dronehive-portable-paths.patch");
+  const runtime = route.notes.indexOf("dronehive-runtime-host-paths.patch");
+  assert.ok(portable >= 0 && runtime > portable);
+  assert.ok(route.applyNext.some((line) => line.includes("dronehive-portable-paths.patch")));
+  const applyPortable = route.applyNext.findIndex((line) =>
+    line.startsWith("git apply /path/to/main/patches/dronehive-portable-paths.patch"),
+  );
+  const applyRuntime = route.applyNext.findIndex((line) =>
+    line.startsWith("git apply /path/to/main/patches/dronehive-runtime-host-paths.patch"),
+  );
+  assert.ok(applyPortable >= 0 && applyRuntime > applyPortable);
+});
+
 test("named catalog job id routes to apply, not leftover Origin", () => {
   const ledger = loadLedger(join(ROOT, "ledger", "queue.json"));
   const roster = loadRoster(join(ROOT, "ledger", "roster.json"));

@@ -192,7 +192,7 @@ export function routeIntent(text, context = {}) {
       text,
       named,
       patch
-        ? `Yuri: forget Origin for this card. Apply ${patch.file}. Do not invent a leftover.`
+        ? catalogRouteNotes(patch)
         : `Take ${named.id}. Do not invent a leftover.`,
       {
         applyNext: patch ? applyNextFor(patch) : undefined,
@@ -379,4 +379,16 @@ function catalogPatchRow(jobId) {
   } catch {
     return null;
   }
+}
+
+/**
+ * Named catalog route notes must list requires priors before the leftover.
+ * @param {{ file: string, requires?: string[] }} patch
+ */
+function catalogRouteNotes(patch) {
+  const priors = Array.isArray(patch.requires)
+    ? patch.requires.filter((file) => typeof file === "string" && file.startsWith("patches/"))
+    : [];
+  const files = [...priors, patch.file].join(" then ");
+  return `Yuri: forget Origin for this card. Apply ${files}. Do not invent a leftover.`;
 }

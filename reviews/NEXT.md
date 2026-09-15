@@ -9,10 +9,9 @@ patch catalog. Do not steal a rostered card.
 Keep-busy tick **2026-09-15T04:50Z**: 40 IDLE + this catalog run +
 `bc-01a0a0ce` RUNNING on #7 (`cursor/stub-wake-roster-108b`). Do not
 steal #7. Newest idle is still `bc-710c5477` — assign
-`bloom-grok-pwa-test-sync`. Catalog still 162. Hunt closed. Helpers
-apply / prompt / handoff now name stacked `requires` priors (portable-paths
-before runtime / overlay / app-links). Do not invent leftovers. Do not
-copy PR #6 autofix.
+`bloom-grok-pwa-test-sync`. Catalog still 162. Hunt closed. Named
+`route` notes now list stacked `requires` priors (portable-paths then
+the leftover). Do not invent leftovers. Do not copy PR #6 autofix.
 
 | who | take this |
 | --- | --- |
