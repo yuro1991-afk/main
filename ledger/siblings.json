@@ -819,6 +819,55 @@
         "dronehive-mount-fabric-root",
         "dronehive-mount-smoke-seal"
       ]
+    },
+    {
+      "number": 59,
+      "url": "https://github.com/yuro1991-afk/main/pull/59",
+      "branch": "cursor/siblings-prs-55-58-108b",
+      "title": "Record landing-pad PRs 55–58 on the siblings board",
+      "role": "siblings-board",
+      "owns": [
+        "review-landing-pad-prs"
+      ]
+    },
+    {
+      "number": 60,
+      "url": "https://github.com/yuro1991-afk/main/pull/60",
+      "branch": "cursor/swarm-seal-bridge-board-launches-108b",
+      "title": "Add Apply launches for swarm-seal, bridge, and doc-board leftovers",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-mount-swarm-seal",
+        "dronehive-truth-honesty-library-list",
+        "dronehive-ollama-app-bridge-paths",
+        "dronehive-work-order-doc-board"
+      ]
+    },
+    {
+      "number": 61,
+      "url": "https://github.com/yuro1991-afk/main/pull/61",
+      "branch": "cursor/seed-board-lab-honesty-launches-108b",
+      "title": "Add Apply launches for seed-board, lab, and honesty leftovers",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-seed-work-order-doc-board",
+        "opensussy-superpowers-lab-plan",
+        "opensussy-superpowers-lab-design",
+        "faceswap-honesty-located-paths"
+      ]
+    },
+    {
+      "number": 62,
+      "url": "https://github.com/yuro1991-afk/main/pull/62",
+      "branch": "cursor/registry-clone-pythonpath-launches-108b",
+      "title": "Add Apply launches for registry-cli, clone-dest, and pythonpath leftovers",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-work-order-registry-cli",
+        "dronehive-grok-handoff-clone-dest",
+        "dronehive-multi-face-pythonpath",
+        "dronehive-future-seer-pythonpath"
+      ]
     }
   ]
 }

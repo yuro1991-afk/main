@@ -63,6 +63,10 @@ This playbook id is leftover. Take `review-landing-pad-prs` or
 | [#56](https://github.com/yuro1991-afk/main/pull/56) | ollama-app-readme leftover launches |
 | [#57](https://github.com/yuro1991-afk/main/pull/57) | ollama-app-open leftover launches |
 | [#58](https://github.com/yuro1991-afk/main/pull/58) | open-seal and mount leftover launches |
+| [#59](https://github.com/yuro1991-afk/main/pull/59) | siblings board 55–58 |
+| [#60](https://github.com/yuro1991-afk/main/pull/60) | swarm-seal, bridge, and doc-board leftover launches |
+| [#61](https://github.com/yuro1991-afk/main/pull/61) | seed-board, lab, and honesty leftover launches |
+| [#62](https://github.com/yuro1991-afk/main/pull/62) | registry-cli, clone-dest, and pythonpath leftover launches |
 
 Skip conflicting #4 / #5 / #6. Do not merge #7 after #8 without a rewrite.
 Do not steal the fork’s next slices: head → ears → eyes → vision → bridge.
@@ -70,7 +74,7 @@ Do not copy `packages/keep-busy` or `bin/autofix.js` onto this board.
 
 ## Review rules
 
-- Leave a review on at least one of #8 / #9 / #10 / #11 / #12 / #13 / #14 / #15 / #16 / #17 / #18 / #19 / #20 / #21 / #22 / #23 / #24 / #25 / #26 / #27 / #28 / #29 / #30 / #31 / #32 / #33 / #34 / #35 / #36 / #37 / #38 / #39 / #40 / #41 / #42 / #43 / #44 / #45 / #46 / #47 / #48 / #49 / #50 / #51 / #52 / #53 / #54 / #55 / #56 / #57 / #58.
+- Leave a review on at least one of #8 / #9 / #10 / #11 / #12 / #13 / #14 / #15 / #16 / #17 / #18 / #19 / #20 / #21 / #22 / #23 / #24 / #25 / #26 / #27 / #28 / #29 / #30 / #31 / #32 / #33 / #34 / #35 / #36 / #37 / #38 / #39 / #40 / #41 / #42 / #43 / #44 / #45 / #46 / #47 / #48 / #49 / #50 / #51 / #52 / #53 / #54 / #55 / #56 / #57 / #58 / #59 / #60 / #61 / #62.
 - Merge decisions stay with Yuri.
 - Empty `main` is not a review target.
 - Do not reopen #1.
