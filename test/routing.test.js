@@ -74,6 +74,8 @@ test("keep-busy with roster leftover picks the unused GitHub card", () => {
   assert.equal(route.jobId, "bloom-readme-honest-export");
   assert.match(route.destination, /bloom-readme-honest-export/);
   assert.equal(route.packet, "reviews/handoff-bloom-readme-honest-export.md");
+  assert.match(route.notes, /next unused GitHub sibling card/);
+  assert.doesNotMatch(route.notes, /leftover unused review/);
 });
 
 test("generic ship intent does not score a Compound Engineering playbook", () => {
@@ -122,6 +124,8 @@ test("keep-busy with --agent routes to the roster card, not leftover next", () =
   assert.notEqual(route.jobId, "review-landing-pad-prs");
   const leftover = routeIntent("keep agents busy", { ledger, roster, nowMs: NOW });
   assert.equal(leftover.jobId, "review-landing-pad-prs");
+  assert.match(leftover.notes, /leftover unused review is review-landing-pad-prs/);
+  assert.doesNotMatch(leftover.notes, /next unused GitHub sibling card/);
 });
 
 test("seeded queue leftover after the real roster is review-landing-pad-prs", () => {
@@ -130,6 +134,8 @@ test("seeded queue leftover after the real roster is review-landing-pad-prs", ()
   const entries = loadEntries(defaultEntriesPath(ROOT));
   const route = routeIntent("Keep my agents busy", { ledger, roster, entries, nowMs: NOW });
   assert.equal(route.jobId, "review-landing-pad-prs");
+  assert.match(route.notes, /leftover unused review is review-landing-pad-prs/);
+  assert.doesNotMatch(route.notes, /next unused GitHub sibling card/);
 });
 
 test("genesis routes to Origin, not GitHub PR 1", () => {
