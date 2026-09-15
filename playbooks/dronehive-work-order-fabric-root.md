@@ -22,6 +22,7 @@ fabric_root key only. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-work-order-fabric-root-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-fabric-root.patch
 - git apply /path/to/main/patches/dronehive-work-order-fabric-root.patch
+- python3 -c "from pathlib import Path; import json; d=json.loads(Path('configs/work_order.json').read_text()); assert d['fabric_root'] == '.'"
 
 ## Verify
 

@@ -10,8 +10,8 @@ Keep-busy tick **2026-09-15T00:34Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`9ee27f6`. Shipped this interval: `dronehive-seed-buzzer-hive-library-honesty`
-seed buzzer_hive.json afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`9ee27f6`. Shipped this interval: `dronehive-work-order-fabric-root`
+fabric_root afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -39,7 +39,8 @@ seed buzzer_hive.json afterApply. Leftover `next` stays alone. Do not invent lef
 | next unused bench-goal apply | `dronehive-bench-goal-honesty` (GOAL string afterApply wired) |
 | next unused buzzer-hive apply | `dronehive-buzzer-hive-library-honesty` (buzzer_hive.json afterApply wired) |
 | next unused seed buzzer-hive apply | `dronehive-seed-buzzer-hive-library-honesty` (seed buzzer_hive.json afterApply wired) |
-| next afterApply to wire | `dronehive-work-order-fabric-root` (fabric_root key only) |
+| next unused fabric-root apply | `dronehive-work-order-fabric-root` (fabric_root afterApply wired) |
+| next afterApply to wire | `dronehive-seed-work-order-fabric-root` (seed fabric_root only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -111,7 +112,9 @@ Face-swap README honesty leftovers are exhausted.
 (`host/library` / `host/continuous/OPEN_TASKS.json`).
 `dronehive-seed-buzzer-hive-library-honesty` afterApply asserts seed buzzer_hive.json
 (`host/library` / `host/continuous/OPEN_TASKS.json`).
-Next afterApply to wire is `dronehive-work-order-fabric-root`.
+`dronehive-work-order-fabric-root` afterApply asserts work_order.json
+(`fabric_root` is `.`).
+Next afterApply to wire is `dronehive-seed-work-order-fabric-root`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -153,7 +156,7 @@ then unused `faceswap-readme-requirements-honesty` (README Requirements bullet o
 then unused `faceswap-readme-install-sh` (README install block only; afterApply wired; independent of start-sh new file),
 then unused `dronehive-buzzer-hive-library-honesty` (buzzer_hive.json library keys only; afterApply wired; independent of config-load-overlay),
 then unused `dronehive-seed-buzzer-hive-library-honesty` (seed buzzer_hive.json only; afterApply wired; independent of live config),
-then unused `dronehive-work-order-fabric-root` (fabric_root key only; independent of portable-paths later hunks),
+then unused `dronehive-work-order-fabric-root` (fabric_root key only; afterApply wired; independent of portable-paths later hunks),
 then unused `dronehive-seed-work-order-fabric-root` (seed fabric_root only; independent of live config),
 then unused `faceswap-readme-swift-honesty` (README Swift paragraph only; afterApply wired; independent of Requirements and install),
 then unused `faceswap-readme-firewall-honesty` (README firewall sentence only; afterApply wired; independent of install/Requirements/Swift),

@@ -370,6 +370,19 @@ test("cli patches --job dronehive-runtime-host-paths applies portable-paths firs
   assert.ok(lines.some((line) => line.includes("from drone.grok_handoff import DEFAULT_ROOT")));
 });
 
+test("cli patches --job dronehive-work-order-fabric-root includes the fabric_root afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-work-order-fabric-root"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-work-order-fabric-root");
+  assert.ok(parsed.applyNext.some((line) => line.includes("configs/work_order.json") && line.includes("fabric_root")));
+});
+
 test("cli patches --job dronehive-seed-buzzer-hive-library-honesty includes the seed buzzer_hive.json afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-seed-buzzer-hive-library-honesty"], {
