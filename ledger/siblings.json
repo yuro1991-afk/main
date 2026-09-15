@@ -929,6 +929,40 @@
       "title": "Tell idle agents leftover launches are exhausted",
       "role": "pointers",
       "owns": []
+    },
+    {
+      "number": 69,
+      "url": "https://github.com/yuro1991-afk/main/pull/69",
+      "branch": "cursor/siblings-prs-66-68-108b",
+      "title": "Record landing-pad PRs 66–68 on the siblings board",
+      "role": "siblings-board",
+      "owns": [
+        "review-landing-pad-prs"
+      ]
+    },
+    {
+      "number": 70,
+      "url": "https://github.com/yuro1991-afk/main/pull/70",
+      "branch": "cursor/assign-missing-exhausted-role-108b",
+      "title": "Name exhausted leftover launches on the assign-missing role",
+      "role": "assign-missing",
+      "owns": []
+    },
+    {
+      "number": 71,
+      "url": "https://github.com/yuro1991-afk/main/pull/71",
+      "branch": "cursor/leftover-launches-exhausted-role-108b",
+      "title": "Name exhausted leftover launches on leftover-launches and assign-job roles",
+      "role": "leftover-launches",
+      "owns": []
+    },
+    {
+      "number": 72,
+      "url": "https://github.com/yuro1991-afk/main/pull/72",
+      "branch": "cursor/assign-job-exhausted-readme-108b",
+      "title": "Tell README assign --job leftover launches are exhausted",
+      "role": "pointers",
+      "owns": []
     }
   ]
 }
