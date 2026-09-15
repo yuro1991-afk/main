@@ -733,17 +733,17 @@ function helpText() {
 
 Commands:
   list [--job id] [--kind kind] [--repo repo] [--here] [--all] [--origin] [--world]  # --job is that card + applyNext
-  next [id] [--job id] [--kind kind] [--repo repo] [--here] [--all] [--origin] [--world] [--agent <bcId>]
+  next [id] [--job id] [--kind kind] [--repo repo] [--here] [--all] [--origin] [--world] [--agent <bcId>]  # leftover unused peek (exhausted without --agent)
   slots [--job id] [--here] [--all] [--origin] [--world]  # --job peeks that card + applyNext
   assign [--job id] [--missing] [--out dir]  # --missing lists catalog leftovers with no launch (never writes). Leftover launches are exhausted (nextMissing null). Prefer brief --job dronehive-unicode-ci. Do not invent leftover 163+. --job writes one leftover Apply launch with catalog-first related; sit-out jobs have no launch on purpose. Else roster + leftover unused write (leftoverNext null when leftover unused is exhausted)
   sync --agents path.json [--write] [--out dir]
   catalog [--entries path.json] [--write] [--out path]
   busy [id] [--job id] [--agent <bcId>] [--here] [--all] [--origin] [--world]   # --job peeks; else roster then leftover unused peek (exhausted without --agent)
-  helpers [id] [--job id] [--agent <bcId>]
-  prompt [id] [--job id] [--agent <bcId>] [--json]
-  brief [id] [--job id] [--agent <bcId>]
-  handoff [id] [--job id] [--agent <bcId>]
-  relaunch [id] [--job id] [--agent <bcId>]
+  helpers [id] [--job id] [--agent <bcId>]  # leftover unused peek exhausted without --job
+  prompt [id] [--job id] [--agent <bcId>] [--json]  # leftover unused peek exhausted without --job
+  brief [id] [--job id] [--agent <bcId>]  # leftover unused peek exhausted without --job
+  handoff [id] [--job id] [--agent <bcId>]  # leftover unused peek exhausted without --job
+  relaunch [id] [--job id] [--agent <bcId>]  # leftover unused peek exhausted without --job
   claim <id> --agent <bcId>
   complete <id> --agent <bcId>
   block <id> --agent <bcId> --reason <text>
