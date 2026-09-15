@@ -713,7 +713,7 @@ Commands:
   list [--job id] [--kind kind] [--repo repo] [--here] [--all] [--origin] [--world]  # --job is that card + applyNext
   next [id] [--job id] [--kind kind] [--repo repo] [--here] [--all] [--origin] [--world] [--agent <bcId>]
   slots [--job id] [--here] [--all] [--origin] [--world]  # --job peeks that card + applyNext
-  assign [--job id] [--missing] [--out dir]  # --missing lists catalog leftovers with no launch (never writes); --job writes one leftover Apply launch with catalog-first related; else roster + leftover next
+  assign [--job id] [--missing] [--out dir]  # --missing lists catalog leftovers with no launch (never writes). Leftover launches are exhausted (nextMissing null). Prefer brief --job dronehive-unicode-ci. Do not invent leftover 163+. --job writes one leftover Apply launch with catalog-first related; else roster + leftover next
   sync --agents path.json [--write] [--out dir]
   catalog [--entries path.json] [--write] [--out path]
   busy [id] [--job id] [--agent <bcId>] [--here] [--all] [--origin] [--world]   # --job peeks; else roster then leftover next

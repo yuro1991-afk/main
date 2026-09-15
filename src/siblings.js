@@ -55,7 +55,7 @@ export function describeRole(role) {
     case "siblings-board":
       return "Records open landing-pad PRs on ledger/siblings.json. Lead stays catalog #9.";
     case "assign-missing":
-      return "assign --missing lists catalog leftovers with no launch file and never writes.";
+      return "assign --missing lists catalog leftovers with no launch file and never writes. Leftover launches are exhausted (nextMissing null). Prefer brief --job dronehive-unicode-ci. Do not invent leftover 163+.";
     default:
       return assertNeverRole(role);
   }

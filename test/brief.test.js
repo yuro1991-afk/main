@@ -69,6 +69,9 @@ test("siblings.json loads and maps dronehive to PR 5", () => {
   assert.match(describeRole("assign-job"), /assign --job/);
   assert.match(describeRole("siblings-board"), /siblings\.json/);
   assert.match(describeRole("assign-missing"), /never writes/);
+  assert.match(describeRole("assign-missing"), /Leftover launches are exhausted/);
+  assert.match(describeRole("assign-missing"), /brief --job dronehive-unicode-ci/);
+  assert.match(describeRole("assign-missing"), /Do not invent leftover 163\+/);
   assert.deepEqual(
     siblingsForJob(siblings, "bloom-grok-pwa-test-sync").map((pr) => pr.number),
     [9, 12],
