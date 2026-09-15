@@ -22,6 +22,7 @@ docs/WORK_ORDER.md section 2.4 item 6 only. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-work-order-doc-models-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-doc-models.patch
 - git apply /path/to/main/patches/dronehive-work-order-doc-models.patch
+- python3 -c "from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert 'host/ai-home/models' in t"
 
 ## Verify
 

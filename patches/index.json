@@ -835,8 +835,10 @@
       "file": "patches/dronehive-work-order-doc-models.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "docs/WORK_ORDER.md install-proof models path uses host/ai-home/models. Independent of CLI leftover and recall leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert 'host/ai-home/models' in t\""
+      ],
+      "notes": "docs/WORK_ORDER.md install-proof models path uses host/ai-home/models, not G:\\\\AI-Home\\\\models. After apply: assert host/ai-home/models. Independent of CLI leftover and recall leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-seed-work-order-doc-models",
