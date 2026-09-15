@@ -261,7 +261,9 @@ export function routeIntent(text, context = {}) {
       return routeFromJob(
         text,
         leftover[0],
-        "Keep-busy goes to the next unused GitHub sibling card. Forget Origin.",
+        leftover[0].id === "review-landing-pad-prs"
+          ? "Keep-busy leftover unused review is review-landing-pad-prs. Do not invent leftover unused next. Forget Origin."
+          : "Keep-busy goes to the next unused GitHub sibling card. Forget Origin.",
       );
     }
     return withContract(ROUTES[0], text);
