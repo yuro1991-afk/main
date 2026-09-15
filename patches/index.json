@@ -223,8 +223,10 @@
       "file": "patches/faceswap-design-honesty.patch",
       "base": "bba7188",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "DESIGN.md: FACESWAP_ENGINE is the contract; G: MultoModa path is one host example. Independent of honesty-env-paths (README/HONESTY/START.cmd)."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('DESIGN.md').read_text(); assert 'FACESWAP_ENGINE' in t and 'one host example' in t and 'not the contract' in t\""
+      ],
+      "notes": "DESIGN.md: FACESWAP_ENGINE is the contract; G: MultoModa path is one host example. After apply: assert those phrases. Independent of honesty-env-paths (README/HONESTY/START.cmd)."
     },
     {
       "id": "dronehive-config-load-overlay",

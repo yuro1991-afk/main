@@ -22,6 +22,7 @@ Docs only. Do not vendor InsightFace weights. Different file from honesty-env-pa
 - git checkout -b cursor/faceswap-design-honesty-from-ops
 - git apply --check /path/to/main/patches/faceswap-design-honesty.patch
 - git apply /path/to/main/patches/faceswap-design-honesty.patch
+- python3 -c "from pathlib import Path; t=Path('DESIGN.md').read_text(); assert 'FACESWAP_ENGINE' in t and 'one host example' in t and 'not the contract' in t"
 
 ## Verify
 

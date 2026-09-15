@@ -11,8 +11,8 @@ No new agents. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Do not inventory the pad again.
 Sibling `main` SHAs unchanged (`288a484` / `d4b2949` / `bba7188` /
 `074bad0` / `d538a89`). Catalog still 162. Hunt closed. PR #10 still
-`82161d8`. Shipped this interval: `dronehive-script-host-roots`
-afterApply (`py_compile` + no `G:\AI-Home`). Leftover `next` stays
+`82161d8`. Shipped this interval: `faceswap-design-honesty`
+afterApply (DESIGN.md contract phrases). Leftover `next` stays
 alone. Do not invent leftovers.
 
 | who | take this |
@@ -58,6 +58,8 @@ the leftover is blocked. Catalog slot rows carry `applyNext`.
 (exit 1 + RED; unpatched has no START.sh).
 `dronehive-script-host-roots` afterApply is `py_compile` plus an
 assert that `ROOT` uses `__file__` and drops `G:\AI-Home`.
+`faceswap-design-honesty` afterApply asserts DESIGN.md names
+`FACESWAP_ENGINE` as the contract (unpatched has none of those phrases).
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.

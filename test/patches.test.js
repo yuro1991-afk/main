@@ -322,6 +322,19 @@ test("cli patches --job filters one card", async () => {
   );
 });
 
+test("cli patches --job faceswap-design-honesty includes the DESIGN.md afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "faceswap-design-honesty"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "faceswap-design-honesty");
+  assert.ok(parsed.applyNext.some((line) => line.includes("DESIGN.md") && line.includes("FACESWAP_ENGINE")));
+});
+
 test("cli patches --job dronehive-script-host-roots includes the ROOT afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-script-host-roots"], {
