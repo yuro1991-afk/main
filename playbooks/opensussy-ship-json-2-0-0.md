@@ -22,7 +22,7 @@ Same card as keep-busy sync-2-0-0-docs-and-ship-json. Claim one board, not both.
 - git checkout -b cursor/opensussy-ship-json-2-0-0-from-ops
 - git apply --check /path/to/main/patches/opensussy-ship-json-2-0-0.patch
 - git apply /path/to/main/patches/opensussy-ship-json-2-0-0.patch
-- SHIP.json and generated docs say 2.0.0; leftover 1.3.0 only in CHANGELOG.
+- python3 -c "from pathlib import Path; import json; s=json.loads(Path('SHIP.json').read_text()); assert s['version']=='2.0.0'; assert s['usb_zip_bytes']==1113129; i=json.loads(Path('install/SHIP.json').read_text()); assert i['version']=='2.0.0'; assert '## 1.3.0' in Path('CHANGELOG.md').read_text()"
 
 ## Verify
 

@@ -1124,6 +1124,19 @@ test("cli patches --job bloom-health-probe includes the probe afterApply", async
   assert.ok(parsed.applyNext.some((line) => line.includes("scripts/probe-health.mjs") && line.includes("unreachable") && line.includes("live: false")));
 });
 
+test("cli patches --job opensussy-ship-json-2-0-0 includes the 2.0.0 afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "opensussy-ship-json-2-0-0"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "opensussy-ship-json-2-0-0");
+  assert.ok(parsed.applyNext.some((line) => line.includes("SHIP.json") && line.includes("2.0.0") && line.includes("usb_zip_bytes") && line.includes("## 1.3.0")));
+});
+
 test("cli patches --job dronehive-ollama-app-bridge-paths includes the bridge consts afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-ollama-app-bridge-paths"], {
