@@ -214,8 +214,10 @@
       "file": "patches/dronehive-portable-paths.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "Env overlay or app_root/host/. Wraps leftover knowledge_imprint F: mirror. Does not touch drone/pro/tool_agent.py. Stacks with unicode + ubuntu-smoke. This token cannot push dronehive."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; h=Path('drone/host_paths.py').read_text(); assert 'Resolve BOSS Windows host paths via env / app_root.' in h; assert 'not the Linux contract' in h; assert 'def resolve_host_path' in h; e=Path('.env.example').read_text(); assert 'Host path overlay (Linux / this pad)' in e; assert 'DRONEHIVE_LIBRARY_ROOT' in e; w=Path('configs/work_order.json').read_text(); assert 'path_overlay' in w; assert 'Linux uses env or app_root()/host.' in w\""
+      ],
+      "notes": "Env overlay or app_root/host/. Wraps leftover knowledge_imprint F: mirror. Does not touch drone/pro/tool_agent.py. Stacks with unicode + ubuntu-smoke. After apply: assert host_paths.py, .env.example overlay, and work_order path_overlay. Do not assert G: gone. Do not recatalog CHANNEL_META. Do not run work-order-show. Do not put backticks in afterApply. Independent of ubuntu-smoke and per-key JSON remaps."
     },
     {
       "id": "dronehive-script-host-roots",

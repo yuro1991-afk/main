@@ -1150,6 +1150,19 @@ test("cli patches --job opensussy-agama-honesty includes the HOW_TO afterApply",
   assert.ok(parsed.applyNext.some((line) => line.includes("install/linux/HOW_TO_RUN.txt") && line.includes("AGAMA / Leap 16 HONESTY") && line.includes("Agama JSON is unsupported")));
 });
 
+test("cli patches --job dronehive-portable-paths includes the host-paths afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-portable-paths"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-portable-paths");
+  assert.ok(parsed.applyNext.some((line) => line.includes("drone/host_paths.py") && line.includes("def resolve_host_path") && line.includes("path_overlay") && line.includes("DRONEHIVE_LIBRARY_ROOT")));
+});
+
 test("cli patches --job dronehive-ubuntu-smoke includes the ubuntu-smoke afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-ubuntu-smoke"], {

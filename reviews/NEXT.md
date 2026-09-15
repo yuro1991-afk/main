@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T03:58Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T03:59Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`c749ab6`. Shipped this interval: `dronehive-ubuntu-smoke`
-ubuntu-smoke afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`5af77cf`. Shipped this interval: `dronehive-portable-paths`
+host-paths afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -176,7 +176,8 @@ ubuntu-smoke afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused stop-noui-guard apply | `ova-stop-noui-guard` (exit 4 without -Force afterApply wired) |
 | next unused pester-qa-math apply | `ova-pester-qa-math` (math-unit afterApply wired) |
 | next unused ubuntu-smoke apply | `dronehive-ubuntu-smoke` (ubuntu python-smoke afterApply wired) |
-| next early afterApply to wire | `dronehive-portable-paths` (host/ overlay only) |
+| next unused portable-paths apply | `dronehive-portable-paths` (host/ overlay afterApply wired) |
+| next early afterApply to wire | `dronehive-icons-manifest-relative` (relative icon paths only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -522,7 +523,9 @@ tests/assert-stop-noui.ps1 expects exit 4 without -Force.
 math-unit.yml and OllamaVoice.Math.Tests.ps1 cover no-network percentile/stdev/tok-s.
 `dronehive-ubuntu-smoke` afterApply asserts
 ci.yml has python-smoke-ubuntu alongside the windows-latest job.
-Next early afterApply to wire is `dronehive-portable-paths`. Do not invent leftovers.
+`dronehive-portable-paths` afterApply asserts
+host_paths.py, .env.example overlay, and work_order path_overlay (G: stays as one host example).
+Next early afterApply to wire is `dronehive-icons-manifest-relative`. Do not invent leftovers.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -698,8 +701,9 @@ then unused `faceswap-health-offline` (offline health red only; afterApply wired
 then unused `faceswap-mock-engine-ci` (stdlib mock engine only; afterApply wired),
 then unused `ova-stop-noui-guard` (exit 4 without -Force only; afterApply wired),
 then unused `ova-pester-qa-math` (math-unit only; afterApply wired),
-then unused `dronehive-ubuntu-smoke` (ubuntu python-smoke only; afterApply wired).
-Early empty afterApply next: `dronehive-portable-paths` (host/ overlay only).
+then unused `dronehive-ubuntu-smoke` (ubuntu python-smoke only; afterApply wired),
+then unused `dronehive-portable-paths` (host/ overlay only; afterApply wired).
+Early empty afterApply next: `dronehive-icons-manifest-relative` (relative icon paths only).
 Newcomer `bc-710c5477` Hunt sibling: unused apply `bloom-grok-pwa-test-sync`.
 `bc-f407303f`: `review-main-pr10` (fork's Python arena/infra).
 `bc-5fe241dd` Summarize arena: do not steal `genesis-world-arena`; unused apply `faceswap-design-honesty`.

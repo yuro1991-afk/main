@@ -22,7 +22,7 @@ Avoid drone/pro/tool_agent.py while unicode-ci is claimed.
 - git checkout -b cursor/dronehive-portable-paths-from-ops
 - git apply --check /path/to/main/patches/dronehive-portable-paths.patch
 - git apply /path/to/main/patches/dronehive-portable-paths.patch
-- python -m drone work-order-show
+- python3 -c "from pathlib import Path; h=Path('drone/host_paths.py').read_text(); assert 'Resolve BOSS Windows host paths via env / app_root.' in h; assert 'not the Linux contract' in h; assert 'def resolve_host_path' in h; e=Path('.env.example').read_text(); assert 'Host path overlay (Linux / this pad)' in e; assert 'DRONEHIVE_LIBRARY_ROOT' in e; w=Path('configs/work_order.json').read_text(); assert 'path_overlay' in w; assert 'Linux uses env or app_root()/host.' in w"
 
 ## Verify
 
