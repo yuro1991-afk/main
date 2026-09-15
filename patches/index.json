@@ -626,8 +626,10 @@
       "file": "patches/dronehive-work-order-codex-paths.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "configs/work_order.json codex.root / master_min / master_md / query_cli use host/library. Independent of portable-paths, curriculum leftover (codex_root is a different key), and doc-honesty. Leaves python_default. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; c=json.loads(Path('configs/work_order.json').read_text())['codex']; assert c['root']=='host/library/knowledge/codex' and c['master_min']=='host/library/knowledge/codex/CODEX.min.json' and c['master_md']=='host/library/knowledge/codex/CODEX.md' and c['query_cli']=='host/library/bin/query_llm_codex.py'\""
+      ],
+      "notes": "configs/work_order.json codex.root / master_min / master_md / query_cli use host/library, not F:\\\\GrokSelfLibrary. After apply: assert those keys. Independent of portable-paths, curriculum leftover (codex_root is a different key), and doc-honesty. Leaves python_default. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-seed-work-order-codex-paths",
