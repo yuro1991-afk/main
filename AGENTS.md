@@ -20,9 +20,12 @@ prints local Task fan-out.
 
 1. `npm test` if you touch this repo.
 2. `node src/cli.js busy --agent <your-bcId>` — claims **your roster
-   GitHub card**. A new unassigned agent gets leftover next (none —
-   all 21 GitHub cards are assigned). `node src/cli.js slots` lists
-   the rest so a second agent does not pile on.
+   GitHub card**. A new unassigned agent gets leftover
+   `review-landing-pad-prs`. Leftover catalog launches are exhausted
+   (`assign --missing` / compact `patches` `nextMissing` is null).
+   Prefer `brief --job dronehive-unicode-ci`. Do not invent leftover
+   163+. `node src/cli.js slots` lists the rest so a second agent does
+   not pile on.
    `node src/cli.js catalog --write` diffs
    `ledger/catalog-entries.json` and appends uncarded ledger jobs. It
    refuses the in-repo `playbooks/` and `reviews/` directories. Prefer
@@ -62,12 +65,17 @@ prints local Task fan-out.
 | Extract arena assignment | `review-main-pr8` |
 
 A 22nd unassigned agent takes leftover `review-landing-pad-prs`.
-Do not invent Origin work.
+Newest idle `bc-710c5477` takes `bloom-grok-pwa-test-sync`, then
+`bloom-ci-lint`. First parked apply is `dronehive-unicode-ci` on a
+dronehive write checkout. Do not invent leftover 163+. Do not invent
+Origin work.
 
 ## Sibling patches (GitHub)
 
 **Yuri: forget Origin** for these cards. `node src/cli.js patches` lists
-applyable diffs under `patches/` (compact: `nextApply` + id/file; `--job` for applyNext). `patches --prove` re-checks them on a `--no-hardlinks` throwaway
+applyable diffs under `patches/` (compact: `nextApply` + id/file +
+`nextMissing`; `--job` for applyNext). Leftover launches are exhausted.
+`patches --prove` re-checks them on a `--no-hardlinks` throwaway
 and never writes or resets `/tmp/siblings`. This token **cannot push**
 those repos — clone and relaunch there. Do not copy PR #6’s autofix runner.
 Evidence: `reviews/SIBLING-PATCHES.md`.
