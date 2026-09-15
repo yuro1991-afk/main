@@ -22,6 +22,7 @@ docs/WORK_ORDER.md imprint table row only. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-work-order-doc-imprints-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-doc-imprints.patch
 - git apply /path/to/main/patches/dronehive-work-order-doc-imprints.patch
+- python3 -c "from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert 'host/library/knowledge/indexes/drone_imprints.jsonl' in t"
 
 ## Verify
 
