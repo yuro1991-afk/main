@@ -1407,8 +1407,10 @@
       "file": "patches/dronehive-truth-honesty-oath-inline.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "TRUTH_AND_HONESTY.md inline oath uses host/library. Independent of system-root leftover. Leaves C:\\\\Users hardwire. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('TRUTH_AND_HONESTY.md').read_text(); line=next(x for x in t.splitlines() if x.startswith('Oath: python')); assert 'host/library' in line; assert r'F:\\\\GrokSelfLibrary' not in line\""
+      ],
+      "notes": "TRUTH_AND_HONESTY.md inline Oath: python line uses host/library. After apply: assert that line only. Full-law list leftover still pins F:. Leaves C:\\\\Users hardwire. Independent of system-root leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-ollama-app-readme-install",

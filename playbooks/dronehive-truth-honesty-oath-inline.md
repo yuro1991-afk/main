@@ -22,6 +22,7 @@ TRUTH_AND_HONESTY.md inline Oath line only. Leave C:\\Users hardwire. Do not edi
 - git checkout -b cursor/dronehive-truth-honesty-oath-inline-from-ops
 - git apply --check /path/to/main/patches/dronehive-truth-honesty-oath-inline.patch
 - git apply /path/to/main/patches/dronehive-truth-honesty-oath-inline.patch
+- python3 -c "from pathlib import Path; t=Path('TRUTH_AND_HONESTY.md').read_text(); line=next(x for x in t.splitlines() if x.startswith('Oath: python')); assert 'host/library' in line; assert r'F:\\GrokSelfLibrary' not in line"
 
 ## Verify
 

@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T03:08Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T03:10Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`feb0be6`. Shipped this interval: `dronehive-truth-honesty-root`
-System root afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`5a23670`. Shipped this interval: `dronehive-truth-honesty-oath-inline`
+inline oath afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -128,7 +128,8 @@ System root afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused doc-grok-handoff-root apply | `dronehive-doc-grok-handoff-root` (GROK_HANDOFF.md Project root afterApply wired) |
 | next unused doc-grok-handoff-cd apply | `dronehive-doc-grok-handoff-cd` (GROK_HANDOFF.md CLI cd afterApply wired) |
 | next unused truth-honesty-root apply | `dronehive-truth-honesty-root` (TRUTH_AND_HONESTY.md System root afterApply wired) |
-| next afterApply to wire | `dronehive-truth-honesty-oath-inline` (TRUTH_AND_HONESTY.md inline oath only) |
+| next unused truth-honesty-oath-inline apply | `dronehive-truth-honesty-oath-inline` (TRUTH_AND_HONESTY.md inline oath afterApply wired) |
+| next afterApply to wire | `dronehive-ollama-app-readme-install` (apps/drone-ollama-app/README.md installer only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -378,7 +379,9 @@ Project root section has no G: path and no 0.5b (CLI cd leftover stays).
 (standalone `cd .` line; G: project cd is gone).
 `dronehive-truth-honesty-root` afterApply asserts TRUTH_AND_HONESTY.md
 System root line has no G: path and no 0.5b (oath leftover stays).
-Next afterApply to wire is `dronehive-truth-honesty-oath-inline`.
+`dronehive-truth-honesty-oath-inline` afterApply asserts TRUTH_AND_HONESTY.md
+inline Oath: python line uses host/library (Full-law list leftover stays).
+Next afterApply to wire is `dronehive-ollama-app-readme-install`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -511,7 +514,7 @@ then unused `dronehive-seed-doc-app-cd` (drone/app/seed/docs/APP.md only; afterA
 then unused `dronehive-doc-grok-handoff-root` (docs/GROK_HANDOFF.md only; afterApply wired),
 then unused `dronehive-doc-grok-handoff-cd` (docs/GROK_HANDOFF.md only; afterApply wired),
 then unused `dronehive-truth-honesty-root` (TRUTH_AND_HONESTY.md only; afterApply wired),
-then unused `dronehive-truth-honesty-oath-inline` (TRUTH_AND_HONESTY.md only),
+then unused `dronehive-truth-honesty-oath-inline` (TRUTH_AND_HONESTY.md only; afterApply wired),
 then unused `dronehive-ollama-app-readme-install` (apps/drone-ollama-app/README.md only),
 then unused `dronehive-ollama-app-readme-dest` (apps/drone-ollama-app/README.md only),
 then unused `dronehive-ollama-app-crash-log` (apps/drone-ollama-app/src/main.rs only),
