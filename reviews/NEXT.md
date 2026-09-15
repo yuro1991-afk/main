@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T02:20Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T02:22Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`0346457`. Shipped this interval: `opensussy-sec-review-target`
-Target afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`6412072`. Shipped this interval: `opensussy-install-sec-review-target`
+install Target afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -104,7 +104,8 @@ Target afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused mount-readme-launch apply | `dronehive-mount-readme-launch` (mount README Launch afterApply wired) |
 | next unused mount-readme-related apply | `dronehive-mount-readme-related` (mount README related afterApply wired) |
 | next unused opensussy-sec-review-target apply | `opensussy-sec-review-target` (SEC_REVIEW.md Target afterApply wired) |
-| next afterApply to wire | `opensussy-install-sec-review-target` (install/docs/SEC_REVIEW.md Target only) |
+| next unused opensussy-install-sec-review-target apply | `opensussy-install-sec-review-target` (install SEC_REVIEW Target afterApply wired) |
+| next afterApply to wire | `dronehive-readme-cd` (README.md quick-start cd only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -306,7 +307,9 @@ Face-swap README honesty leftovers are exhausted.
 (related is `host/ai-home/projects/ollama-rust-ui`; G:\\AI-Home is one host example).
 `opensussy-sec-review-target` afterApply asserts reviews/SEC_REVIEW.md
 (`one host example`; G:\\AI-Home\\projects\\opensussy stays).
-Next afterApply to wire is `opensussy-install-sec-review-target`.
+`opensussy-install-sec-review-target` afterApply asserts install/docs/SEC_REVIEW.md
+(`one host example`; G:\\AI-Home\\projects\\opensussy stays).
+Next afterApply to wire is `dronehive-readme-cd`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -415,7 +418,7 @@ then unused `dronehive-mount-readme-layout` (mount README layout only; afterAppl
 then unused `dronehive-mount-readme-launch` (mount README Launch.ps1 only; afterApply wired),
 then unused `dronehive-mount-readme-related` (mount README related only; afterApply wired),
 then unused `opensussy-sec-review-target` (reviews/SEC_REVIEW.md Target only; afterApply wired),
-then unused `opensussy-install-sec-review-target` (install/docs/SEC_REVIEW.md Target only),
+then unused `opensussy-install-sec-review-target` (install/docs/SEC_REVIEW.md Target only; afterApply wired),
 then unused `dronehive-readme-cd` (README.md only),
 then unused `dronehive-doc-agent-loop-cd` (docs/AGENT_LOOP.md only),
 then unused `dronehive-doc-bridge-1080-cd` (docs/BRIDGE_1080.md only),
