@@ -22,6 +22,7 @@ Historical lab design Base codebase line only. Leave CHANGELOG 1.3.0.
 - git checkout -b cursor/opensussy-superpowers-lab-design-from-ops
 - git apply --check /path/to/main/patches/opensussy-superpowers-lab-design.patch
 - git apply /path/to/main/patches/opensussy-superpowers-lab-design.patch
+- python3 -c "from pathlib import Path; t=Path('docs/superpowers/specs/2026-08-16-opensussy-lab-design.md').read_text(); line=next(x for x in t.splitlines() if x.startswith('**Base codebase:**')); assert 'one host example' in line; assert 'OpenSussy 1.3.0' in line"
 
 ## Verify
 

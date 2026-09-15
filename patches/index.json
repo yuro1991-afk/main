@@ -1616,8 +1616,10 @@
       "file": "patches/opensussy-superpowers-lab-design.patch",
       "base": "d4b2949",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "Historical lab design base codebase uses '.' ; G:\\\\AI-Home is one host example. Independent of the plan leftover (different file) and SEC_REVIEW leftovers."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('docs/superpowers/specs/2026-08-16-opensussy-lab-design.md').read_text(); line=next(x for x in t.splitlines() if x.startswith('**Base codebase:**')); assert 'one host example' in line; assert 'OpenSussy 1.3.0' in line\""
+      ],
+      "notes": "Historical lab design Base codebase uses '.' ; G:\\\\AI-Home is one host example. After apply: assert that line has one host example. Do not assert G: gone. Do not put backticks in afterApply. Independent of the plan leftover (different file) and SEC_REVIEW leftovers."
     },
     {
       "id": "faceswap-honesty-located-paths",
