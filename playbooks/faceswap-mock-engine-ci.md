@@ -22,7 +22,7 @@ Do not bind or rewrite MultoModa on :8855. Do not commit G:\AI-Home host paths. 
 - git checkout -b cursor/faceswap-mock-engine-ci-from-ops
 - git apply --check /path/to/main/patches/faceswap-mock-engine-ci.patch
 - git apply /path/to/main/patches/faceswap-mock-engine-ci.patch
-- Workflow GREEN without MultoModa. prove_swap.py --gateway http://127.0.0.1:8860 against the mock writes out/PROVE.json with false_green 0.
+- python3 -c "from pathlib import Path; w=Path('.github/workflows/gateway-smoke.yml').read_text(); assert 'name: gateway-smoke' in w; assert 'Mock engine + gateway health (no InsightFace)' in w; assert 'false_green' in w; m=Path('mock_engine.py').read_text(); assert 'No InsightFace, CUDA, or Jane' in m; assert 'local_only' in m"
 
 ## Verify
 

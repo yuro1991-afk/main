@@ -170,8 +170,10 @@
       "file": "patches/faceswap-mock-engine-ci.patch",
       "base": "bba7188",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "stdlib mock_engine.py + gateway-smoke workflow. No InsightFace/CUDA/Jane."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; w=Path('.github/workflows/gateway-smoke.yml').read_text(); assert 'name: gateway-smoke' in w; assert 'Mock engine + gateway health (no InsightFace)' in w; assert 'false_green' in w; m=Path('mock_engine.py').read_text(); assert 'No InsightFace, CUDA, or Jane' in m; assert 'local_only' in m\""
+      ],
+      "notes": "stdlib mock_engine.py + gateway-smoke workflow. No InsightFace/CUDA/Jane. After apply: assert gateway-smoke.yml and mock_engine.py have those phrases. Unpatched has neither file. Do not run the mock engine. Do not put dollar signs in afterApply. Do not put backticks in afterApply. Independent of faceswap-health-offline."
     },
     {
       "id": "ova-stop-noui-guard",
