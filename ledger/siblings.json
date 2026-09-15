@@ -963,6 +963,40 @@
       "title": "Tell README assign --job leftover launches are exhausted",
       "role": "pointers",
       "owns": []
+    },
+    {
+      "number": 73,
+      "url": "https://github.com/yuro1991-afk/main/pull/73",
+      "branch": "cursor/siblings-prs-69-72-108b",
+      "title": "Record landing-pad PRs 69–72 on the siblings board",
+      "role": "siblings-board",
+      "owns": [
+        "review-landing-pad-prs"
+      ]
+    },
+    {
+      "number": 74,
+      "url": "https://github.com/yuro1991-afk/main/pull/74",
+      "branch": "cursor/next-merge-through-73-108b",
+      "title": "Point leftover unused at the #11 through #73 merge stack",
+      "role": "pointers",
+      "owns": []
+    },
+    {
+      "number": 75,
+      "url": "https://github.com/yuro1991-afk/main/pull/75",
+      "branch": "cursor/assign-job-sitout-no-launch-108b",
+      "title": "Refuse assign --job launches for sit-out leftover cards",
+      "role": "assign-job",
+      "owns": []
+    },
+    {
+      "number": 76,
+      "url": "https://github.com/yuro1991-afk/main/pull/76",
+      "branch": "cursor/leftover-unused-sitout-skip-108b",
+      "title": "Keep leftover unused off sit-out GitHub cards",
+      "role": "leftover-launches",
+      "owns": []
     }
   ]
 }

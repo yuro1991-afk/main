@@ -1,4 +1,4 @@
-# Landing-pad PR review (2026-09-15T09:24Z)
+# Landing-pad PR review (2026-09-15T09:38Z)
 
 Written on this pad for `review-landing-pad-prs`. Merge stays with Yuri.
 Do not comment on GitHub unless Yuri asked. Do not open another queue.
@@ -7,7 +7,7 @@ Do not comment on GitHub unless Yuri asked. Do not open another queue.
 `node src/cli.js probe`.
 
 #8 already has a stale `reviews/LANDING-PAD-PRS.md` (19:05Z) that stops
-at #8. This file is the current board, including #9–#72.
+at #8. This file is the current board, including #9–#76.
 
 | PR | state | take? |
 | --- | --- | --- |
@@ -81,6 +81,10 @@ at #8. This file is the current board, including #9–#72.
 | [#70](https://github.com/yuro1991-afk/main/pull/70) | draft MERGEABLE + CI green | assign-missing exhausted role. Stacked on #69. |
 | [#71](https://github.com/yuro1991-afk/main/pull/71) | draft MERGEABLE + CI green | leftover-launches exhausted role. Stacked on #70. |
 | [#72](https://github.com/yuro1991-afk/main/pull/72) | draft MERGEABLE + CI green | assign --job README honesty. Stacked on #71. |
+| [#73](https://github.com/yuro1991-afk/main/pull/73) | draft MERGEABLE + CI green | siblings board 69–72. Stacked on #72. |
+| [#74](https://github.com/yuro1991-afk/main/pull/74) | draft MERGEABLE + CI green | leftover unused merge through #73. Stacked on #73. |
+| [#75](https://github.com/yuro1991-afk/main/pull/75) | draft MERGEABLE + CI green | assign --job sit-out refuse. Stacked on #74. |
+| [#76](https://github.com/yuro1991-afk/main/pull/76) | draft MERGEABLE + CI green | leftover unused sit-out skip. Stacked on #75. |
 
 ## Merge order
 
@@ -145,11 +149,15 @@ at #8. This file is the current board, including #9–#72.
 59. Merge **#70** (assign-missing exhausted role).
 60. Merge **#71** (leftover-launches exhausted role).
 61. Merge **#72** (assign --job README honesty).
-62. Review **#13**; do not steal. Independent of the #11 stack.
-63. Review **#10**; do not merge onto `main` until Yuri retargets the base.
-64. Skip #4/#5/#6.
-65. Do not merge #7 after #8/#11 unless rewritten.
-66. #8 and #9 can close after #11 lands.
+62. Merge **#73** (siblings board 69–72).
+63. Merge **#74** (leftover unused merge through #73).
+64. Merge **#75** (assign --job sit-out refuse).
+65. Merge **#76** (leftover unused sit-out skip).
+66. Review **#13**; do not steal. Independent of the #11 stack.
+67. Review **#10**; do not merge onto `main` until Yuri retargets the base.
+68. Skip #4/#5/#6.
+69. Do not merge #7 after #8/#11 unless rewritten.
+70. #8 and #9 can close after #11 lands.
 
 ## DroneHive (cannot push from this token)
 
