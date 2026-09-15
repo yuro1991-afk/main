@@ -22,6 +22,7 @@ configs/work_order.json LAW_TRUTH.md path only. Do not edit the C:\ Users grok r
 - git checkout -b cursor/dronehive-work-order-law-truth-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-law-truth.patch
 - git apply /path/to/main/patches/dronehive-work-order-law-truth.patch
+- python3 -c "from pathlib import Path; import json; assert 'host/library/LAW_TRUTH.md' in json.loads(Path('configs/work_order.json').read_text())['ai_laws']['rank_0']['paths']"
 
 ## Verify
 

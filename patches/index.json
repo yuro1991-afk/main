@@ -648,8 +648,10 @@
       "file": "patches/dronehive-work-order-law-truth.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "configs/work_order.json rank_0.paths LAW_TRUTH.md uses host/library. Applies on vanilla. If stacking with portable-paths, apply portable-paths first (it uses this line as context). Leaves the C:\\\\ grok rules path. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; assert 'host/library/LAW_TRUTH.md' in json.loads(Path('configs/work_order.json').read_text())['ai_laws']['rank_0']['paths']\""
+      ],
+      "notes": "configs/work_order.json ai_laws.rank_0.paths LAW_TRUTH.md uses host/library, not F:\\\\GrokSelfLibrary. After apply: assert that path. Applies on vanilla. If stacking with portable-paths, apply portable-paths first (it uses this line as context). Leaves the C:\\\\ grok rules path. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-seed-work-order-law-truth",
