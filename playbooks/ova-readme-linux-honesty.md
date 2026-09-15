@@ -22,6 +22,7 @@ Docs only. Independent of api-host-override (that patch appends after License).
 - git checkout -b cursor/ova-readme-linux-honesty-from-ops
 - git apply --check /path/to/main/patches/ova-readme-linux-honesty.patch
 - git apply /path/to/main/patches/ova-readme-linux-honesty.patch
+- python3 -c "from pathlib import Path; t=Path('README.md').read_text(); assert 'Windows 11 Voice Access' in t and 'syntax/math CI only' in t and 'not** a Voice Access install' in t"
 
 ## Verify
 

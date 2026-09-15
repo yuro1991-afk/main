@@ -253,8 +253,10 @@
       "file": "patches/ova-readme-linux-honesty.patch",
       "base": "074bad0",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "README: Voice Access / Start Menu / Win+Ctrl+S are Windows-only. pwsh on Linux is syntax/math CI, not a Voice Access install. Independent of api-host-override (License appendix)."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('README.md').read_text(); assert 'Windows 11 Voice Access' in t and 'syntax/math CI only' in t and 'not** a Voice Access install' in t\""
+      ],
+      "notes": "README: Voice Access is Windows-only; Linux pwsh is syntax/math CI. After apply: assert those phrases. Independent of api-host-override (License appendix)."
     },
     {
       "id": "dronehive-icons-manifest-relative",

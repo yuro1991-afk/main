@@ -10,10 +10,8 @@ Keep-busy tick **2026-09-15T00:15Z** still holds: 40 IDLE + this run
 RUNNING. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`2935b46`. Shipped this interval: `dronehive-app-links-host-paths`
-`requires` portable-paths + import afterApply. That is the last
-leftover that imports `host_paths`. Leftover `next` stays alone.
-Do not invent leftovers.
+`3c12e2a`. Shipped this interval: `ova-readme-linux-honesty`
+README afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -28,7 +26,8 @@ Do not invent leftovers.
 | next stacked apply | `dronehive-runtime-host-paths` (`requires` portable-paths) |
 | next unused stacked apply | `dronehive-config-load-overlay` (`requires` portable-paths) |
 | last host_paths stacked apply | `dronehive-app-links-host-paths` (`requires` portable-paths) |
-| next afterApply to wire | `ova-readme-linux-honesty` (README only) |
+| next unused honesty apply | `ova-readme-linux-honesty` (README afterApply wired) |
+| next afterApply to wire | `ova-voice-card-linux-honesty` (VOICE-ACCESS.md only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -70,8 +69,11 @@ assert that `ROOT` uses `__file__` and drops `G:\AI-Home`.
 (`requires`), then `from drone.config_overlay import remap_host_strings`.
 `dronehive-app-links-host-paths` `applyNext` applies portable-paths first
 (`requires`), then `from drone.app.links import LinkRegistry`.
-Host-path import leftovers are exhausted. Next afterApply to wire is
-an unused independent, starting with `ova-readme-linux-honesty`.
+Host-path import leftovers are exhausted.
+`ova-readme-linux-honesty` afterApply asserts README names Windows-only
+Voice Access (`Windows 11 Voice Access` / `syntax/math CI only` /
+`not** a Voice Access install`). Next afterApply to wire is
+`ova-voice-card-linux-honesty`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -99,7 +101,7 @@ first parked `dronehive-unicode-ci`, unused `dronehive-script-host-roots`
 `dronehive-runtime-host-paths` (after portable-paths), then unused
 `faceswap-design-honesty` (DESIGN.md only; independent of honesty-env-paths),
 then unused stacked `dronehive-config-load-overlay` (JSON remap after portable-paths; `requires` now wired; independent of runtime-host-paths),
-then unused `ova-readme-linux-honesty` (README only; independent of api-host-override),
+then unused `ova-readme-linux-honesty` (README only; afterApply wired; independent of api-host-override),
 then unused `dronehive-icons-manifest-relative` (ICONS_MANIFEST icon_root only; independent of portable-paths),
 then unused stacked `dronehive-app-links-host-paths` (links.py catalog URIs after portable-paths; `requires` now wired),
 then unused `bloom-ci-lint` (new-file lint.yml; independent of typecheck),

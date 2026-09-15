@@ -370,6 +370,19 @@ test("cli patches --job dronehive-runtime-host-paths applies portable-paths firs
   assert.ok(lines.some((line) => line.includes("from drone.grok_handoff import DEFAULT_ROOT")));
 });
 
+test("cli patches --job ova-readme-linux-honesty includes the README afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "ova-readme-linux-honesty"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "ova-readme-linux-honesty");
+  assert.ok(parsed.applyNext.some((line) => line.includes("README.md") && line.includes("Windows 11 Voice Access")));
+});
+
 test("cli patches --job faceswap-design-honesty includes the DESIGN.md afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "faceswap-design-honesty"], {
