@@ -22,6 +22,7 @@ apps/drone-ollama-mount/Launch.ps1 cargo env only. Do not edit drone/pro/tool_ag
 - git checkout -b cursor/dronehive-mount-launch-cargo-from-ops
 - git apply --check /path/to/main/patches/dronehive-mount-launch-cargo.patch
 - git apply /path/to/main/patches/dronehive-mount-launch-cargo.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-mount/Launch.ps1').read_text(); assert r'host\\ai-home\\tools\\cargo' in t; assert r'G:\\AI-Home\\tools\\cargo' not in t"
 
 ## Verify
 

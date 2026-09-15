@@ -956,8 +956,10 @@
       "file": "patches/dronehive-mount-launch-cargo.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "apps/drone-ollama-mount/Launch.ps1 cargo/rustup env uses host\\\\ai-home\\\\tools. Independent of mount README leftover (different file). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-mount/Launch.ps1').read_text(); assert r'host\\\\ai-home\\\\tools\\\\cargo' in t; assert r'G:\\\\AI-Home\\\\tools\\\\cargo' not in t\""
+      ],
+      "notes": "apps/drone-ollama-mount/Launch.ps1 cargo/rustup env uses host\\\\ai-home\\\\tools. After apply: assert host/ai-home/tools/cargo and that G:\\\\AI-Home\\\\tools\\\\cargo is gone. Independent of mount README leftover (different file). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-install-ollama-app-cargo",
