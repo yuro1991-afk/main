@@ -46,7 +46,9 @@ catalog, Superbrain refuse, prove/`applyNext` apply path (including
 
 ## After merge
 
-Leftover unused review is done locally. First parked apply:
-`dronehive-unicode-ci` on a dronehive write checkout. Repeat the catalog
-proof with `node src/cli.js patches --prove --siblings-root /tmp/siblings`.
+Leftover unused review is done locally. Catalog afterApply must not
+contain dollar signs or backticks (they expand in the shell). First
+parked apply: `dronehive-unicode-ci` on a dronehive write checkout.
+Repeat the catalog proof with
+`node src/cli.js patches --prove --siblings-root /tmp/siblings`.
 Fork leftover organs: eyes → vision → bridge.

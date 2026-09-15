@@ -22,7 +22,7 @@ New file only. Do not vendor InsightFace weights. Do not change POST /api/ios/sw
 - git checkout -b cursor/faceswap-start-sh-from-ops
 - git apply --check /path/to/main/patches/faceswap-start-sh.patch
 - git apply /path/to/main/patches/faceswap-start-sh.patch
-- FACESWAP_ENGINE=http://127.0.0.1:9 ./START.sh; test $? -eq 1
+- python3 -c "from pathlib import Path; t=Path('START.sh').read_text(); assert 'Face Swap iOS gateway' in t; assert 'RED: engine is not reachable at' in t; assert 'set FACESWAP_ENGINE to its health base URL' in t; assert 'exec python3 ./gateway.py' in t"
 
 ## Verify
 

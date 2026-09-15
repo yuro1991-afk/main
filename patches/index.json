@@ -238,9 +238,9 @@
       "base": "bba7188",
       "applyCheck": "ok",
       "afterApply": [
-        "FACESWAP_ENGINE=http://127.0.0.1:9 ./START.sh; test $? -eq 1"
+        "python3 -c \"from pathlib import Path; t=Path('START.sh').read_text(); assert 'Face Swap iOS gateway' in t; assert 'RED: engine is not reachable at' in t; assert 'set FACESWAP_ENGINE to its health base URL' in t; assert 'exec python3 ./gateway.py' in t\""
       ],
-      "notes": "Linux START.sh fail-closed on FACESWAP_ENGINE like START.cmd. After apply: dead engine URL exits 1 and prints RED. New file; stacks with honesty-env-paths and health-offline."
+      "notes": "Linux START.sh fail-closed on FACESWAP_ENGINE like START.cmd. After apply: assert START.sh has those phrases. Unpatched has no START.sh. Do not run START.sh. Do not put dollar signs in afterApply. Do not put backticks in afterApply. New file; stacks with honesty-env-paths and health-offline."
     },
     {
       "id": "dronehive-runtime-host-paths",
@@ -709,9 +709,9 @@
       "base": "d538a89",
       "applyCheck": "ok",
       "afterApply": [
-        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert 'Library law: `host/library/LAW_TRUTH.md`' in t\""
+        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); line=next(x for x in t.splitlines() if x.startswith('Library law:')); assert 'host/library/LAW_TRUTH.md' in line; assert 'GrokSelfLibrary' not in line\""
       ],
-      "notes": "docs/WORK_ORDER.md Library law uses host/library/LAW_TRUTH.md, not F:\\\\GrokSelfLibrary. After apply: assert that line. Independent of work-order-doc-honesty (NEXT.json) and the JSON law-truth leftover. Leaves the C:\\\\ host-law line. Does not touch tool_agent.py."
+      "notes": "docs/WORK_ORDER.md Library law uses host/library/LAW_TRUTH.md, not F:\\\\GrokSelfLibrary. After apply: assert that line. Independent of work-order-doc-honesty (NEXT.json) and the JSON law-truth leftover. Leaves the C:\\\\ host-law line. Do not put backticks in afterApply. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-seed-work-order-doc-law-truth",
@@ -720,9 +720,9 @@
       "base": "d538a89",
       "applyCheck": "ok",
       "afterApply": [
-        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); assert 'Library law: `host/library/LAW_TRUTH.md`' in t\""
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); line=next(x for x in t.splitlines() if x.startswith('Library law:')); assert 'host/library/LAW_TRUTH.md' in line; assert 'GrokSelfLibrary' not in line\""
       ],
-      "notes": "drone/app/seed/docs/WORK_ORDER.md Library law uses host/library/LAW_TRUTH.md, not F:\\\\GrokSelfLibrary. After apply: assert that line. Independent of live leftover (different file) and seed-work-order-doc-honesty (NEXT.json). Does not touch tool_agent.py."
+      "notes": "drone/app/seed/docs/WORK_ORDER.md Library law uses host/library/LAW_TRUTH.md, not F:\\\\GrokSelfLibrary. After apply: assert that line. Independent of live leftover (different file) and seed-work-order-doc-honesty (NEXT.json). Do not put backticks in afterApply. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-work-order-doc-fabric-root",
@@ -731,9 +731,9 @@
       "base": "d538a89",
       "applyCheck": "ok",
       "afterApply": [
-        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert '**Host:** BOSS (Windows) · fabric `.`' in t\""
+        "python3 -c \"from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); line=next(x for x in t.splitlines() if x.startswith('**Host:**')); assert 'fabric' in line; assert 'AI-Home' not in line\""
       ],
-      "notes": "docs/WORK_ORDER.md header fabric uses repo-relative '.', not G:\\\\AI-Home. After apply: assert that line. Independent of work-order-doc-honesty (NEXT.json), work-order-doc-law-truth (Library law), and the JSON fabric-root leftover. Does not touch tool_agent.py."
+      "notes": "docs/WORK_ORDER.md header fabric uses repo-relative '.', not G:\\\\AI-Home. After apply: assert that Host line. Independent of work-order-doc-honesty (NEXT.json), work-order-doc-law-truth (Library law), and the JSON fabric-root leftover. Do not put backticks in afterApply. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-seed-work-order-doc-fabric-root",
@@ -742,9 +742,9 @@
       "base": "d538a89",
       "applyCheck": "ok",
       "afterApply": [
-        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); assert '**Host:** BOSS (Windows) · fabric `.`' in t\""
+        "python3 -c \"from pathlib import Path; t=Path('drone/app/seed/docs/WORK_ORDER.md').read_text(); line=next(x for x in t.splitlines() if x.startswith('**Host:**')); assert 'fabric' in line; assert 'AI-Home' not in line\""
       ],
-      "notes": "drone/app/seed/docs/WORK_ORDER.md header fabric uses repo-relative '.', not G:\\\\AI-Home. After apply: assert that line. Independent of live leftover (different file) and seed-work-order-doc-honesty (NEXT.json). Does not touch tool_agent.py."
+      "notes": "drone/app/seed/docs/WORK_ORDER.md header fabric uses repo-relative '.', not G:\\\\AI-Home. After apply: assert that Host line. Independent of live leftover (different file) and seed-work-order-doc-honesty (NEXT.json). Do not put backticks in afterApply. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-work-order-doc-imprints",

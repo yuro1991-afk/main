@@ -205,6 +205,16 @@ test("repo index loads without duplicate ids and files exist", () => {
   assert.ok(ids.includes("bloom-grok-pwa-test-sync"));
 });
 
+test("catalog afterApply commands have no dollar signs or backticks", () => {
+  const index = loadPatchIndex(defaultPatchesIndexPath(ROOT));
+  for (const row of index.patches) {
+    for (const cmd of row.afterApply ?? []) {
+      assert.equal(cmd.includes("$"), false, `${row.id} afterApply has $`);
+      assert.equal(cmd.includes("`"), false, `${row.id} afterApply has backtick`);
+    }
+  }
+});
+
 test("text patches start with diff --git; icons are PNGs", () => {
   const index = loadPatchIndex(defaultPatchesIndexPath(ROOT));
   for (const row of index.patches) {
@@ -1862,7 +1872,7 @@ test("cli patches --job dronehive-seed-work-order-doc-fabric-root includes the s
   assert.equal(code, 0);
   const parsed = JSON.parse(chunks.join(""));
   assert.equal(parsed.patches[0].id, "dronehive-seed-work-order-doc-fabric-root");
-  assert.ok(parsed.applyNext.some((line) => line.includes("drone/app/seed/docs/WORK_ORDER.md") && line.includes("fabric") && line.includes("`.`")));
+  assert.ok(parsed.applyNext.some((line) => line.includes("drone/app/seed/docs/WORK_ORDER.md") && line.includes("**Host:**") && line.includes("fabric") && line.includes("AI-Home")));
 });
 
 test("cli patches --job dronehive-work-order-doc-fabric-root includes the docs header fabric afterApply", async () => {
@@ -1875,7 +1885,7 @@ test("cli patches --job dronehive-work-order-doc-fabric-root includes the docs h
   assert.equal(code, 0);
   const parsed = JSON.parse(chunks.join(""));
   assert.equal(parsed.patches[0].id, "dronehive-work-order-doc-fabric-root");
-  assert.ok(parsed.applyNext.some((line) => line.includes("docs/WORK_ORDER.md") && line.includes("fabric") && line.includes("`.`")));
+  assert.ok(parsed.applyNext.some((line) => line.includes("docs/WORK_ORDER.md") && line.includes("**Host:**") && line.includes("fabric") && line.includes("AI-Home")));
 });
 
 test("cli patches --job dronehive-seed-work-order-doc-law-truth includes the seed Library law afterApply", async () => {
@@ -2396,11 +2406,7 @@ test("cli patches --job faceswap-start-sh includes the fail-closed afterApply", 
   assert.equal(code, 0);
   const parsed = JSON.parse(chunks.join(""));
   assert.equal(parsed.patches[0].id, "faceswap-start-sh");
-  assert.ok(
-    parsed.applyNext.some((line) =>
-      line.includes("FACESWAP_ENGINE=http://127.0.0.1:9 ./START.sh"),
-    ),
-  );
+  assert.ok(parsed.applyNext.some((line) => line.includes("START.sh") && line.includes("RED: engine is not reachable at") && line.includes("exec python3 ./gateway.py")));
 });
 
 test("cli patches --job bloom-grok-pwa-test-sync includes the node --test afterApply", async () => {

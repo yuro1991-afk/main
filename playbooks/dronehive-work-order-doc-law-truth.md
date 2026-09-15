@@ -22,7 +22,7 @@ docs/WORK_ORDER.md Library law line only. Do not edit the C:\ host-law line. Do 
 - git checkout -b cursor/dronehive-work-order-doc-law-truth-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-doc-law-truth.patch
 - git apply /path/to/main/patches/dronehive-work-order-doc-law-truth.patch
-- python3 -c "from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); assert 'Library law: `host/library/LAW_TRUTH.md`' in t"
+- python3 -c "from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); line=next(x for x in t.splitlines() if x.startswith('Library law:')); assert 'host/library/LAW_TRUTH.md' in line; assert 'GrokSelfLibrary' not in line"
 
 ## Verify
 

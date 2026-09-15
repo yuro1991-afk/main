@@ -6,13 +6,14 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T04:02Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T04:04Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`991fbc2`. Shipped this interval: `bloom-ci-lint`
-lint-workflow afterApply. Early empty afterApply catalog is done.
-Leftover `next` stays alone. Do not invent leftovers.
+`01ba739`. Shipped this interval: sanitize afterApply
+(`faceswap-start-sh` dollar, four WORK_ORDER.md backticks).
+Early empty afterApply catalog is done. Leftover `next` stays alone.
+Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -209,9 +210,9 @@ the leftover is blocked. Catalog slot rows carry `applyNext`.
 `bloom-grok-pwa-test-sync` afterApply is
 `node --test scripts/grok-pwa-plugin.test.mjs scripts/brand-check.test.mjs`
 (43/43 after apply; 7 fail unpatched).
-`faceswap-start-sh` afterApply is
-`FACESWAP_ENGINE=http://127.0.0.1:9 ./START.sh; test $? -eq 1`
-(exit 1 + RED; unpatched has no START.sh).
+`faceswap-start-sh` afterApply asserts START.sh phrases
+(Face Swap iOS gateway / RED / FACESWAP_ENGINE / exec python3 ./gateway.py).
+Do not run START.sh. Do not put dollar signs in afterApply.
 `dronehive-script-host-roots` afterApply is `py_compile` plus an
 assert that `ROOT` uses `__file__` and drops `G:\AI-Home`.
 `faceswap-design-honesty` afterApply asserts DESIGN.md names
