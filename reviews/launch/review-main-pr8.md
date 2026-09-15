@@ -36,7 +36,7 @@ Do not open another dispatch board. Extend #8 or take leftover review-landing-pa
 ## First moves
 
 - Do not invent a new tree on empty main.
-- Review an existing open PR: #8, #9, #10, #11, #12, #13, or #14. Skip conflicting #4/#5/#6. #3 is merged.
+- Review an existing open PR: #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, or #19. Skip conflicting #4/#5/#6. #3 is merged.
 - Confirm #8 stays GitHub-first (default next is a sibling card). Merge stays with Yuri.
 
 ## Do not
@@ -46,4 +46,7 @@ Do not open another dispatch board. Extend #8 or take leftover review-landing-pa
 - Do not mark Superbrain LIVE without a successful probe
 - This pad token cannot push sibling GitHub repos — relaunch there or apply a verified patch
 
+## Related
+
+- #8 ops-board — Landing-pad ops CLI (merged #3). GitHub-first defaults live on #8. Patch catalog is #9.
 

@@ -1,4 +1,4 @@
-# Landing-pad PR review (2026-09-15T06:52Z)
+# Landing-pad PR review (2026-09-15T07:08Z)
 
 Written on this pad for `review-landing-pad-prs`. Merge stays with Yuri.
 Do not comment on GitHub unless Yuri asked. Do not open another queue.
@@ -7,7 +7,7 @@ Do not comment on GitHub unless Yuri asked. Do not open another queue.
 `node src/cli.js probe`.
 
 #8 already has a stale `reviews/LANDING-PAD-PRS.md` (19:05Z) that stops
-at #8. This file is the current board, including #9–#14.
+at #8. This file is the current board, including #9–#19.
 
 | PR | state | take? |
 | --- | --- | --- |
@@ -23,17 +23,27 @@ at #8. This file is the current board, including #9–#14.
 | [#12](https://github.com/yuro1991-afk/main/pull/12) | draft MERGEABLE + CI green | leftover Apply launches. Stacked on #11. See `reviews/main-pr12.md`. |
 | [#13](https://github.com/yuro1991-afk/main/pull/13) | MERGEABLE + CI green | Genesis arena pointers (`D:\Wilderness\Genesis`). Review only. **Do not steal.** See `reviews/main-pr13.md`. |
 | [#14](https://github.com/yuro1991-afk/main/pull/14) | draft MERGEABLE + CI green | `assign --job`. Stacked on #12. See `reviews/main-pr14.md`. |
+| [#15](https://github.com/yuro1991-afk/main/pull/15) | draft MERGEABLE + CI green | siblings board 11–14. Stacked on #14. |
+| [#16](https://github.com/yuro1991-afk/main/pull/16) | draft MERGEABLE + CI green | `assign --job` related JSON. Stacked on #15. |
+| [#17](https://github.com/yuro1991-afk/main/pull/17) | draft MERGEABLE + CI green | `assign --missing`. Stacked on #16. |
+| [#18](https://github.com/yuro1991-afk/main/pull/18) | draft MERGEABLE + CI green | next parked leftover launches. Stacked on #17. |
+| [#19](https://github.com/yuro1991-afk/main/pull/19) | draft MERGEABLE + CI green | related section in `assign --job` launches. Stacked on #18. |
 
 ## Merge order
 
 1. Merge **#11** (already resolved #8 then #9).
 2. Merge **#12** (leftover Apply launches).
 3. Merge **#14** (`assign --job`).
-4. Review **#13**; do not steal the arena pointer work. Independent of the #11 stack.
-5. Review **#10**; do not merge onto `main` until Yuri retargets the base.
-6. Skip #4/#5/#6.
-7. Do not merge #7 after #8/#11 unless rewritten.
-8. #8 and #9 can close after #11 lands.
+4. Merge **#15** (siblings board 11–14).
+5. Merge **#16** (`assign --job` related JSON).
+6. Merge **#17** (`assign --missing`).
+7. Merge **#18** (next parked leftover launches).
+8. Merge **#19** (related in launch files).
+9. Review **#13**; do not steal. Independent of the #11 stack.
+10. Review **#10**; do not merge onto `main` until Yuri retargets the base.
+11. Skip #4/#5/#6.
+12. Do not merge #7 after #8/#11 unless rewritten.
+13. #8 and #9 can close after #11 lands.
 
 ## DroneHive (cannot push from this token)
 

@@ -300,6 +300,53 @@
       "title": "Add assign --job to write one leftover Apply launch",
       "role": "assign-job",
       "owns": []
+    },
+    {
+      "number": 15,
+      "url": "https://github.com/yuro1991-afk/main/pull/15",
+      "branch": "cursor/siblings-prs-11-14-108b",
+      "title": "Record landing-pad PRs 11–14 on the siblings board",
+      "role": "siblings-board",
+      "owns": [
+        "review-landing-pad-prs"
+      ]
+    },
+    {
+      "number": 16,
+      "url": "https://github.com/yuro1991-afk/main/pull/16",
+      "branch": "cursor/assign-job-related-108b",
+      "title": "Attach catalog-first related PRs to assign --job",
+      "role": "assign-job",
+      "owns": []
+    },
+    {
+      "number": 17,
+      "url": "https://github.com/yuro1991-afk/main/pull/17",
+      "branch": "cursor/assign-missing-launches-108b",
+      "title": "Add assign --missing to list unlaunched catalog leftovers",
+      "role": "assign-missing",
+      "owns": []
+    },
+    {
+      "number": 18,
+      "url": "https://github.com/yuro1991-afk/main/pull/18",
+      "branch": "cursor/next-missing-launches-108b",
+      "title": "Add Apply launches for the next parked leftover cards",
+      "role": "leftover-launches",
+      "owns": [
+        "dronehive-icons-manifest-relative",
+        "bloom-ci-lint",
+        "ova-voice-card-linux-honesty",
+        "faceswap-ios-readme-honesty"
+      ]
+    },
+    {
+      "number": 19,
+      "url": "https://github.com/yuro1991-afk/main/pull/19",
+      "branch": "cursor/assign-job-related-launch-108b",
+      "title": "Write catalog-first related PRs into assign --job launches",
+      "role": "assign-job",
+      "owns": []
     }
   ]
 }

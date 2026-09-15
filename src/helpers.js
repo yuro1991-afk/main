@@ -109,12 +109,12 @@ export function planHelpers(job) {
         {
           role: "review",
           title: `Review ${job.id}`,
-          prompt: `Review the open PRs named on ${job.id}. Prefer #8, #9, #10, #11, #12, #13, or #14. #3 is merged. Skip conflicting #4/#5/#6. Do not steal head/ears/eyes/vision/bridge. Do not steal Genesis arena pointers on #13. Write findings locally. Do not comment on GitHub unless Yuri asked.`,
+          prompt: `Review the open PRs named on ${job.id}. Prefer #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, or #19. #3 is merged. Skip conflicting #4/#5/#6. Do not steal head/ears/eyes/vision/bridge. Do not steal Genesis arena pointers on #13. Write findings locally. Do not comment on GitHub unless Yuri asked.`,
         },
         {
           role: "verify",
           title: `CI ${job.id}`,
-          prompt: `gh pr view 8,9,10,11,12,13,14 --json mergeable,mergeStateStatus,statusCheckRollup. Skip conflicting #4/#5/#6. #3 is merged.`,
+          prompt: `gh pr view 8,9,10,11,12,13,14,15,16,17,18,19 --json mergeable,mergeStateStatus,statusCheckRollup. Skip conflicting #4/#5/#6. #3 is merged.`,
         },
       ];
     case "probe":
