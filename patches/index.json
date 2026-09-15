@@ -1550,8 +1550,10 @@
       "file": "patches/dronehive-mount-swarm-seal.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "mount main.rs SWARM_SMOKE_SEAL uses apps\\\\drone-ollama-mount\\\\out. Independent of smoke leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-mount/src/main.rs').read_text(); assert 'apps'+chr(92)+'drone-ollama-mount'+chr(92)+'out'+chr(92)+'SWARM_SMOKE_SEAL.json' in t; assert 'G:'+chr(92)+'AI-Home'+chr(92)+'projects'+chr(92)+'drone-ollama-mount'+chr(92)+'out'+chr(92)+'SWARM_SMOKE_SEAL.json' not in t\""
+      ],
+      "notes": "mount main.rs SWARM_SMOKE_SEAL uses apps\\\\drone-ollama-mount\\\\out\\\\SWARM_SMOKE_SEAL.json. After apply: assert that path and the G: SWARM path gone. Smoke leftover still pins G: SMOKE_SEAL. Independent of smoke leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-truth-honesty-library-list",

@@ -877,6 +877,19 @@ test("cli patches --job dronehive-truth-honesty-root includes the System root af
   assert.ok(parsed.applyNext.some((line) => line.includes("TRUTH_AND_HONESTY.md") && line.includes("**System root:**") && line.includes("0.5b")));
 });
 
+test("cli patches --job dronehive-mount-swarm-seal includes the SWARM_SMOKE_SEAL afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-mount-swarm-seal"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-mount-swarm-seal");
+  assert.ok(parsed.applyNext.some((line) => line.includes("apps/drone-ollama-mount/src/main.rs") && line.includes("SWARM_SMOKE_SEAL.json") && line.includes("chr(92)") && line.includes("AI-Home")));
+});
+
 test("cli patches --job dronehive-mount-smoke-seal includes the SMOKE_SEAL afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-mount-smoke-seal"], {
