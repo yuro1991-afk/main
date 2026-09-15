@@ -560,8 +560,10 @@
       "file": "patches/dronehive-work-order-curriculum-root.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "configs/work_order.json curriculum_root / curriculum_json use host/ai-center/learning-curriculum. -U1 so context is codex_root / curriculum_fts and skips school leftover. Independent of portable-paths, school-root, and knowledge-expand. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; k=json.loads(Path('configs/work_order.json').read_text())['knowledge_imprint']; assert k['curriculum_root']=='host/ai-center/learning-curriculum' and k['curriculum_json']=='host/ai-center/learning-curriculum/CURRICULUM.json'\""
+      ],
+      "notes": "configs/work_order.json knowledge_imprint curriculum_root / curriculum_json use host/ai-center/learning-curriculum, not G:\\\\AI-Center. After apply: assert those keys. -U1 so context is codex_root / curriculum_fts and skips school leftover. Independent of portable-paths, school-root, and knowledge-expand. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-seed-work-order-curriculum-root",

@@ -22,6 +22,7 @@ configs/work_order.json curriculum_root / curriculum_json only. Do not edit curr
 - git checkout -b cursor/dronehive-work-order-curriculum-root-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-curriculum-root.patch
 - git apply /path/to/main/patches/dronehive-work-order-curriculum-root.patch
+- python3 -c "from pathlib import Path; import json; k=json.loads(Path('configs/work_order.json').read_text())['knowledge_imprint']; assert k['curriculum_root']=='host/ai-center/learning-curriculum' and k['curriculum_json']=='host/ai-center/learning-curriculum/CURRICULUM.json'"
 
 ## Verify
 
