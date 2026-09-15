@@ -288,7 +288,9 @@ export function routeIntent(text, context = {}) {
     return routeFromJob(
       text,
       leftover[0],
-      "Unmatched intent still takes the next unused GitHub sibling card.",
+      leftover[0].id === "review-landing-pad-prs"
+        ? "Unmatched leftover unused review is review-landing-pad-prs. Do not invent leftover unused next. Forget Origin."
+        : "Unmatched intent still takes the next unused GitHub sibling card.",
     );
   }
   return withContract(ROUTES[0], text);
