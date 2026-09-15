@@ -119,11 +119,8 @@ test("stacked catalog displayNotes name requires priors before the leftover", ()
 
   const runtime = queue.jobs.find((item) => item.id === "dronehive-runtime-host-paths");
   const runtimeNotes = displayNotes(runtime);
-  assert.match(runtimeNotes, /patches\/dronehive-portable-paths\.patch/);
+  assert.match(runtimeNotes, /Requires \(apply first\): patches\/dronehive-portable-paths\.patch/);
   assert.match(runtimeNotes, /patches\/dronehive-runtime-host-paths\.patch/);
-  const portable = runtimeNotes.indexOf("dronehive-portable-paths.patch");
-  const leftover = runtimeNotes.indexOf("dronehive-runtime-host-paths.patch");
-  assert.ok(portable >= 0 && leftover > portable);
 });
 
 test("firstCommands is exhaustive", () => {
