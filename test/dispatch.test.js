@@ -276,13 +276,10 @@ test("cli assign writes paste-ready GitHub launch files", async () => {
   assert.match(text, /github\.com\/yuro1991-afk\/dronehive/);
   assert.doesNotMatch(text, /genesis-world-layer-102/);
   const leftover = join(out, "review-landing-pad-prs.md");
-  assert.equal(existsSync(leftover), true);
-  const leftoverText = readFileSync(leftover, "utf8");
-  assert.match(leftoverText, /Leftover unused — review-landing-pad-prs/);
-  assert.match(leftoverText, /No parked pad agent owns this card yet/);
-  assert.doesNotMatch(leftoverText, /Leftover unused — dronehive-unicode-ci/);
-  assert.doesNotMatch(leftoverText, /Leftover unused — gub-inventory-tick/);
-  assert.match(result.out, /"leftoverNext": "review-landing-pad-prs"/);
+  assert.equal(existsSync(leftover), false);
+  assert.doesNotMatch(result.out, /Leftover unused — dronehive-unicode-ci/);
+  assert.doesNotMatch(result.out, /Leftover unused — gub-inventory-tick/);
+  assert.match(result.out, /"leftoverNext": null/);
   assert.doesNotMatch(result.out, /leftoverTakeInstead/);
 });
 
@@ -450,6 +447,18 @@ test("leftover launch rows skip dest launches already on disk", () => {
   const live = leftoverLaunchRows(ledger, roster, NOW, { github: true }, onDisk);
   assert.deepEqual(live, []);
   const packet = buildAssign(ledger, roster, NOW, onDisk);
+  assert.equal(packet.leftoverNext, null);
+  assert.deepEqual(packet.leftover, []);
+});
+
+test("leftover unused skips repo launches when dest is empty", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
+  const dest = mkdtempSync(join(tmpdir(), "agent-ops-leftover-empty-dest-"));
+  const onDisk = defaultLaunchPath(fileURLToPath(new URL("..", import.meta.url)));
+  const rows = leftoverLaunchRows(ledger, roster, NOW, { github: true }, dest, onDisk);
+  assert.deepEqual(rows, []);
+  const packet = buildAssign(ledger, roster, NOW, dest, onDisk);
   assert.equal(packet.leftoverNext, null);
   assert.deepEqual(packet.leftover, []);
 });

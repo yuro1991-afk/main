@@ -102,6 +102,7 @@ export {
   defaultRosterPath,
   launchPathFor,
   leftoverLaunchRows,
+  launchedJobIds,
   presentLaunchIds,
   missingLaunchRows,
   buildMissingLaunches,
