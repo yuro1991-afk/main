@@ -307,6 +307,26 @@ export async function runCli(argv, options = {}) {
         repo: flags.repo,
         compact: !explicitId,
       });
+      if (!explicitId) {
+        const ledger = loadLedger(ledgerPath);
+        const missing = buildMissingLaunches(
+          ledger,
+          defaultLaunchPath(options.root ?? ROOT),
+        );
+        write(
+          JSON.stringify(
+            {
+              ...catalog,
+              nextMissing: missing.nextMissing,
+              missingLaunches: missing.missing,
+              preferMissing: missing.prefer,
+            },
+            null,
+            2,
+          ),
+        );
+        return catalog.count > 0 ? 0 : 1;
+      }
       write(JSON.stringify(catalog, null, 2));
       return catalog.count > 0 ? 0 : 1;
     }
@@ -716,7 +736,7 @@ Commands:
   playbooks [--check] [--write] [--job id] [--here] [--out dir]
 
 GitHub siblings first (Yuri: forget Origin). Pass --origin for Genesis cards. Pass --all for both.
-patches lists applyable GitHub diffs. No --job is compact (nextApply dronehive-unicode-ci + id/file). Prefer brief --job.
+patches lists applyable GitHub diffs. No --job is compact (nextApply dronehive-unicode-ci + id/file + nextMissing). Prefer brief --job or assign --job <nextMissing> --out /tmp/launches.
 --prove clones --no-hardlinks throwaways, runs vanilla+stacked git apply --check, and never writes or resets siblings.
 --prove-after-apply clones --no-hardlinks throwaways and never writes or resets siblings.
 playbooks defaults to --check: compares First commands, reports missingRequires, never writes. No --job is compact (nextApply dronehive-unicode-ci + counts). Prefer brief --job.
