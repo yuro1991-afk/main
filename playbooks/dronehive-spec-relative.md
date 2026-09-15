@@ -22,6 +22,7 @@ DroneHive.spec Analysis script/pathex only. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-spec-relative-from-ops
 - git apply --check /path/to/main/patches/dronehive-spec-relative.patch
 - git apply /path/to/main/patches/dronehive-spec-relative.patch
+- python3 -c "from pathlib import Path; t=Path('DroneHive.spec').read_text(); assert \"['drone/app/desktop.py']\" in t; assert \"pathex=['.']\" in t"
 
 ## Verify
 

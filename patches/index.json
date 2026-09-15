@@ -879,8 +879,10 @@
       "file": "patches/dronehive-spec-relative.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "DroneHive.spec Analysis script/pathex use drone/app/desktop.py and '.' instead of G:/AI-Home. Independent of portable-paths and start-script leftovers (different file). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('DroneHive.spec').read_text(); assert \\\"['drone/app/desktop.py']\\\" in t; assert \\\"pathex=['.']\\\" in t\""
+      ],
+      "notes": "DroneHive.spec Analysis script/pathex use drone/app/desktop.py and '.', not G:/AI-Home. After apply: assert ['drone/app/desktop.py'] and pathex=['.']. Independent of portable-paths and start-script leftovers (different file). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-start-super-mesh-cd",
