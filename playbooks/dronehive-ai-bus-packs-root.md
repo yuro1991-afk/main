@@ -22,6 +22,7 @@ drone/ai_bus.py `_write_ai_smarts` packs_root only. Do not edit drone/pro/tool_a
 - git checkout -b cursor/dronehive-ai-bus-packs-root-from-ops
 - git apply --check /path/to/main/patches/dronehive-ai-bus-packs-root.patch
 - git apply /path/to/main/patches/dronehive-ai-bus-packs-root.patch
+- python3 -c "from pathlib import Path; t=Path('drone/ai_bus.py').read_text(); line=next(x for x in t.splitlines() if 'packs_root' in x); assert 'host/ai-home/docs/ai-smarts/packs' in line; assert r'G:\\AI-Home' not in line"
 
 ## Verify
 

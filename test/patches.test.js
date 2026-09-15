@@ -994,6 +994,19 @@ test("cli patches --job dronehive-future-seer-pythonpath includes the jane PYTHO
   assert.ok(parsed.applyNext.some((line) => line.includes("drone/future_seer.py") && line.includes("pythonpath_ai_center") && line.includes("host/ai-center")));
 });
 
+test("cli patches --job dronehive-ai-bus-packs-root includes the packs_root afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-ai-bus-packs-root"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-ai-bus-packs-root");
+  assert.ok(parsed.applyNext.some((line) => line.includes("drone/ai_bus.py") && line.includes("packs_root") && line.includes("host/ai-home/docs/ai-smarts/packs")));
+});
+
 test("cli patches --job dronehive-ollama-app-bridge-paths includes the bridge consts afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-ollama-app-bridge-paths"], {

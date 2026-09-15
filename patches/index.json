@@ -1682,8 +1682,10 @@
       "file": "patches/dronehive-ai-bus-packs-root.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "ai_bus.py _write_ai_smarts packs_root uses host/ai-home. Independent of portable-paths g_mirror wrap (different line). Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('drone/ai_bus.py').read_text(); line=next(x for x in t.splitlines() if 'packs_root' in x); assert 'host/ai-home/docs/ai-smarts/packs' in line; assert r'G:\\\\AI-Home' not in line\""
+      ],
+      "notes": "ai_bus.py _write_ai_smarts packs_root uses host/ai-home. After apply: assert that packs_root line only. g_mirror leftover still pins G:. Do not put backticks in afterApply. Independent of portable-paths g_mirror wrap (different line). Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-work-order-live-mirror",
