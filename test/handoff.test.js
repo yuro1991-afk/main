@@ -53,9 +53,12 @@ test("handoff for dronehive points at github.com/yuro1991-afk/dronehive", () => 
   const scripts = relaunchFor({ ...job, id: "dronehive-script-host-roots" });
   assert.match(scripts.reason, /dronehive-script-host-roots\.patch/);
   const runtime = relaunchFor({ ...job, id: "dronehive-runtime-host-paths" });
-  assert.match(runtime.reason, /dronehive-runtime-host-paths\.patch/);
+  assert.match(runtime.reason, /dronehive-portable-paths\.patch then patches\/dronehive-runtime-host-paths\.patch/);
   const overlay = relaunchFor({ ...job, id: "dronehive-config-load-overlay" });
-  assert.match(overlay.reason, /dronehive-config-load-overlay\.patch/);
+  assert.match(overlay.reason, /dronehive-portable-paths\.patch then patches\/dronehive-config-load-overlay\.patch/);
+  const ubuntu = relaunchFor({ ...job, id: "dronehive-ubuntu-smoke" });
+  assert.match(ubuntu.reason, /dronehive-pro-chat-cp1252\.patch then patches\/dronehive-ubuntu-smoke\.patch/);
+  assert.doesNotMatch(ubuntu.reason, /git apply --check/);
   assert.doesNotMatch(overlay.reason, /npm run autofix/);
   const icons = relaunchFor({ ...job, id: "dronehive-icons-manifest-relative" });
   assert.match(icons.reason, /dronehive-icons-manifest-relative\.patch/);

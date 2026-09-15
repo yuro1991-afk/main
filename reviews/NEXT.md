@@ -249,6 +249,8 @@ and drops `G:\AI-Home`. Do not py_compile as afterApply.
 (`requires`), then asserts the library uri uses resolve_host_path.
 `dronehive-ubuntu-smoke` `applyNext` applies unicode-ci first (`requires`),
 then asserts ci.yml has python-smoke-ubuntu. Do not run the smoke.
+`relaunchFor` for stacked dronehive leftovers names those priors before
+the leftover file (ubuntu-smoke names unicode-ci first).
 Host-path import leftovers are exhausted.
 `ova-readme-linux-honesty` afterApply asserts README names Windows-only
 Voice Access (`Windows 11 Voice Access` / `syntax/math CI only` /
