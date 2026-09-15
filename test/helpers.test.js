@@ -138,6 +138,9 @@ test("cli helpers defaults to leftover unused exhausted", async () => {
   });
   assert.equal(code, 1);
   assert.match(chunks.join(""), /No open job/);
+  assert.match(chunks.join(""), /Leftover unused is exhausted/);
+  assert.match(chunks.join(""), /brief --job dronehive-unicode-ci/);
+  assert.doesNotMatch(chunks.join(""), /invent a fifth queue/);
   assert.doesNotMatch(chunks.join(""), /review-landing-pad-prs/);
   assert.doesNotMatch(chunks.join(""), /gub-route-intent/);
 });

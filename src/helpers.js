@@ -1,5 +1,6 @@
 import { applyNextForJob, catalogPatchFor, displayVerify, proveAfterApplyForJob, takeInsteadFields } from "./brief.js";
 import { assertNeverKind, jobScope } from "./kinds.js";
+import { leftoverUnusedExhaustedPeek } from "./sitout.js";
 
 export const HELPER_CONTRACT = "agent-ops.helpers.v1";
 
@@ -175,7 +176,7 @@ export function buildHelperPacket(job) {
       contract: HELPER_CONTRACT,
       job: null,
       helpers: [],
-      rule: "No open job. Do not invent a fifth queue.",
+      rule: `No open job. ${leftoverUnusedExhaustedPeek()}`,
     };
   }
   return {

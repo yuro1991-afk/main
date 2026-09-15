@@ -1,6 +1,7 @@
 import { applyNextForJob, catalogPatchFor, catalogPatchSummary, displayCollision, displayNotes, displayVerify, firstCommands, proveAfterApplyForJob, takeInsteadFields } from "./brief.js";
 import { isGenesisJob } from "./kinds.js";
 import { packetPathFor, relaunchFor } from "./handoff.js";
+import { leftoverUnusedExhaustedPeek } from "./sitout.js";
 
 export const PROMPT_CONTRACT = "agent-ops.prompt.v1";
 export const ORIGIN_UI = "https://cursor.com/codebase/yuri-afk/genesis";
@@ -13,7 +14,8 @@ export function renderLaunchPrompt(job) {
   if (!job) {
     return `# No open GitHub card
 
-Review an existing PR. Do not invent Origin work.
+${leftoverUnusedExhaustedPeek()}
+Do not invent Origin work.
 Do not reopen https://github.com/yuro1991-afk/main/pull/1.
 `;
   }

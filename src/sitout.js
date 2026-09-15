@@ -21,3 +21,11 @@ export function isSitOutJob(jobId) {
 export function sitOutAssignError(jobId) {
   return `sit-out job has no launch on purpose: ${jobId}. Prefer brief --job ${FIRST_PARKED_APPLY}. Do not invent leftover 163+.`;
 }
+
+/**
+ * Leftover unused peek with no leftover unused next.
+ * Do not tell idle agents to add a ledger card (that invents leftover 163+).
+ */
+export function leftoverUnusedExhaustedPeek() {
+  return `Leftover unused is exhausted. Prefer brief --job ${FIRST_PARKED_APPLY}. Do not invent leftover 163+.`;
+}
