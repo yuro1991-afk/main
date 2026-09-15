@@ -1418,8 +1418,10 @@
       "file": "patches/dronehive-ollama-app-readme-install.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "apps/drone-ollama-app/README.md installer uses apps\\\\drone-ollama-app. Independent of dest leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/README.md').read_text(); assert r'File apps\\\\drone-ollama-app\\\\installer\\\\Install-DroneOllamaApp.ps1' in t; assert r'File G:\\\\AI-Home\\\\projects\\\\drone-ollama-app\\\\installer\\\\Install-DroneOllamaApp.ps1' not in t\""
+      ],
+      "notes": "apps/drone-ollama-app/README.md installer uses apps\\\\drone-ollama-app. After apply: assert File apps\\\\drone-ollama-app\\\\installer and File G:\\\\AI-Home\\\\projects\\\\drone-ollama-app\\\\installer gone. Dest leftover still pins G:\\\\AI-Home\\\\apps\\\\DroneOllama. Independent of dest leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-ollama-app-readme-dest",

@@ -22,6 +22,7 @@ apps/drone-ollama-app/README.md installer line only. Do not edit drone/pro/tool_
 - git checkout -b cursor/dronehive-ollama-app-readme-install-from-ops
 - git apply --check /path/to/main/patches/dronehive-ollama-app-readme-install.patch
 - git apply /path/to/main/patches/dronehive-ollama-app-readme-install.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-app/README.md').read_text(); assert r'File apps\\drone-ollama-app\\installer\\Install-DroneOllamaApp.ps1' in t; assert r'File G:\\AI-Home\\projects\\drone-ollama-app\\installer\\Install-DroneOllamaApp.ps1' not in t"
 
 ## Verify
 
