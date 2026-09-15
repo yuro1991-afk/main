@@ -64,6 +64,13 @@ import {
   mineCatalog,
   writeCatalogMine,
 } from "./catalog.js";
+import {
+  classifyArenaPath,
+  defaultArenaPath,
+  describeArenaKind,
+  loadArena,
+  summarizeArena,
+} from "./arena.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -143,7 +150,29 @@ export async function runCli(argv, options = {}) {
       const summary = summarize(ledger, nowMs);
       summary.next = withRelaunch(peekDefaultJob(ledger, flags, nowMs, options));
       summary.origin = readOriginProbe(defaultOriginPath(options.root ?? ROOT));
+      summary.arena = readArenaSummary(options);
       write(JSON.stringify(summary, null, 2));
+      return 0;
+    }
+    case "arena": {
+      const report = readArenaSummary(options);
+      if (flags.classify) {
+        const kind = classifyArenaPath(flags.classify);
+        write(
+          JSON.stringify(
+            {
+              ...report,
+              path: flags.classify,
+              kind,
+              detail: describeArenaKind(kind),
+            },
+            null,
+            2,
+          ),
+        );
+        return 0;
+      }
+      write(JSON.stringify(report, null, 2));
       return 0;
     }
     case "probe": {
@@ -441,6 +470,13 @@ function requireId(id) {
   return id;
 }
 
+/**
+ * @param {{ root?: string }} options
+ */
+function readArenaSummary(options) {
+  return summarizeArena(loadArena(defaultArenaPath(options.root ?? ROOT)));
+}
+
 function loadOrReadAgents(flags, options) {
   const destPath = flags.agents
     ? resolve(flags.agents)
@@ -523,6 +559,7 @@ Commands:
   block <id> --agent <bcId> --reason <text>
   release <id> --agent <bcId>
   status
+  arena [--classify path]   Boss live root vs dead agentsroom / python-arena
   probe [--timeout ms]   Superbrain lanes + Origin CLI auth
   origin [--login] [--out path]
   route <intent> [--agent <bcId>]   # roster card if --agent, else leftover next

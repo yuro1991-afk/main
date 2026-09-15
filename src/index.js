@@ -145,3 +145,20 @@ export {
   loadSiblings,
   siblingsForJob,
 } from "./siblings.js";
+export {
+  ARENA_CONTRACT,
+  ARENA_KINDS,
+  DEAD_ARENA_ROOTS,
+  LIVE_ARENA_RELATIVE_ROOT,
+  LIVE_ARENA_ROOT,
+  assertNeverArenaKind,
+  classifyArenaPath,
+  defaultArenaLedger,
+  defaultArenaPath,
+  describeArenaKind,
+  isArenaKind,
+  loadArena,
+  normalizeArenaPath,
+  resolveArenaRoot,
+  summarizeArena,
+} from "./arena.js";

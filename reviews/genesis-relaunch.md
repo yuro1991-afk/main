@@ -45,7 +45,8 @@ is rostered to the fork — do not steal it. The pad holds
 ## 5. genesis-local-repo (priority 9)
 
 - Origin branch `cursor/genesis-local-repo-67b3`
-- Stand up a working Origin checkout. This GitHub tree stays the ops pad.
+- Live Boss-metal checkout: `D:\Wilderness\Genesis`. Dead: `C:\Workspace\.agentsroom\Genesis`, `C:\Workspace\python-arena`.
+- Stand up a working Origin checkout. This GitHub tree stays the ops pad. Do not invent a second arena.
 
 ## 6. genesis-hub-24 (priority 10)
 

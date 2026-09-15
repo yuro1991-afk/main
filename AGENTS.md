@@ -8,6 +8,8 @@ This GitHub checkout is a **landing pad**, not Genesis.
 
 Source of truth for Genesis is **Cursor Origin** (`origin.cursor.com/git/yuri-afk/genesis`). This tree is the claimable ops board (`node src/cli.js`).
 
+Live Boss-metal arena is `D:\Wilderness\Genesis` (relative root `.` when already there). `C:\Workspace\.agentsroom\Genesis` and `C:\Workspace\python-arena` are dead. Do not invent a second arena. `node src/cli.js arena` prints the pointers.
+
 Sibling landing-pad PRs: `node src/cli.js siblings`. Do **not** open another queue. `node src/cli.js relaunch` is the one-screen Origin packet. `node src/cli.js helpers` prints local Task fan-out.
 
 ## First moves

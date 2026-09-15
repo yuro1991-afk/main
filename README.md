@@ -11,6 +11,9 @@ Genesis lives on Cursor Origin:
 - Hub: [Genesis main agent hub](https://app.notion.com/p/3db735da33f381f491eff11e350a62c1)
 - Catalog: [Genesis Catalog](https://app.notion.com/p/3db735da33f38170bab8c22bf71d6347)
 
+**Live Boss-metal arena:** `D:\Wilderness\Genesis` (or `.` when already inside that checkout).  
+**Dead cutover leftovers:** `C:\Workspace\.agentsroom\Genesis` and `C:\Workspace\python-arena`. Do not invent a second arena on this pad. `node src/cli.js arena` prints the pointers.
+
 Do **not** reopen [PR #1](https://github.com/yuro1991-afk/main/pull/1). That draft was a closed duplicate of the Origin tree.
 
 ## Run
@@ -33,6 +36,7 @@ node src/cli.js playbooks
 node src/cli.js siblings
 node src/cli.js claim <id> --agent "$CURSOR_AGENT_ID"
 node src/cli.js probe
+node src/cli.js arena
 node src/cli.js origin [--login]
 node src/cli.js tick
 node src/cli.js route "keep my agents busy"                 # leftover Origin card
