@@ -239,8 +239,13 @@
       "file": "patches/dronehive-config-load-overlay.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "Adds drone/config_overlay.py remap_host_strings and wraps JSON loaders (hive, future_seer, multi_face, model_clones, super_mesh, super_llms, work_order, knowledge_imprint, __main__). Apply after portable-paths so host_paths.py exists. Independent of runtime-host-paths. Does not touch tool_agent.py."
+      "requires": [
+        "patches/dronehive-portable-paths.patch"
+      ],
+      "afterApply": [
+        "python3 -c \"from drone.config_overlay import remap_host_strings\""
+      ],
+      "notes": "Adds drone/config_overlay.py remap_host_strings and wraps JSON loaders. requires portable-paths so drone/host_paths.py exists. After apply: import remap_host_strings. Independent of runtime-host-paths. Does not touch tool_agent.py."
     },
     {
       "id": "ova-readme-linux-honesty",

@@ -23,7 +23,7 @@ Apply after dronehive-portable-paths. Independent of runtime-host-paths. Do not 
 - git apply /path/to/main/patches/dronehive-portable-paths.patch
 - git apply --check /path/to/main/patches/dronehive-config-load-overlay.patch
 - git apply /path/to/main/patches/dronehive-config-load-overlay.patch
-- python3 -m py_compile drone/config_overlay.py drone/hive.py drone/future_seer.py drone/multi_face.py drone/model_clones.py drone/super_mesh.py drone/super_llms.py drone/work_order.py drone/knowledge_imprint.py drone/__main__.py
+- python3 -c "from drone.config_overlay import remap_host_strings"
 
 ## Verify
 

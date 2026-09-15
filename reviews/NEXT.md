@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T00:00Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T00:15Z**: 40 IDLE + this run RUNNING.
 No new agents. Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Do not inventory the pad again.
 Sibling `main` SHAs unchanged (`288a484` / `d4b2949` / `bba7188` /
 `074bad0` / `d538a89`). Catalog still 162. Hunt closed. PR #10 still
-`82161d8`. Shipped this interval: `dronehive-runtime-host-paths`
+`82161d8`. Shipped this interval: `dronehive-config-load-overlay`
 `requires` portable-paths + import afterApply. Leftover `next` stays
 alone. Do not invent leftovers.
 
@@ -25,6 +25,9 @@ alone. Do not invent leftovers.
 | `bc-710c5477` | `bloom-grok-pwa-test-sync` |
 | fork `bc-84d93b47` | **eyes → vision → bridge** (already theirs) |
 | next unused apply | `faceswap-start-sh` |
+| next stacked apply | `dronehive-runtime-host-paths` (`requires` portable-paths) |
+| next unused stacked apply | `dronehive-config-load-overlay` (`requires` portable-paths) |
+| next stacked leftover to wire | `dronehive-app-links-host-paths` |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -62,6 +65,8 @@ assert that `ROOT` uses `__file__` and drops `G:\AI-Home`.
 `FACESWAP_ENGINE` as the contract (unpatched has none of those phrases).
 `dronehive-runtime-host-paths` `applyNext` applies portable-paths first
 (`requires`), then `from drone.grok_handoff import DEFAULT_ROOT`.
+`dronehive-config-load-overlay` `applyNext` applies portable-paths first
+(`requires`), then `from drone.config_overlay import remap_host_strings`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -88,10 +93,10 @@ first parked `dronehive-unicode-ci`, unused `dronehive-script-host-roots`
 (independent), then `faceswap-start-sh`, then stacked
 `dronehive-runtime-host-paths` (after portable-paths), then unused
 `faceswap-design-honesty` (DESIGN.md only; independent of honesty-env-paths),
-then unused stacked `dronehive-config-load-overlay` (JSON remap after portable-paths; independent of runtime-host-paths),
+then unused stacked `dronehive-config-load-overlay` (JSON remap after portable-paths; `requires` now wired; independent of runtime-host-paths),
 then unused `ova-readme-linux-honesty` (README only; independent of api-host-override),
 then unused `dronehive-icons-manifest-relative` (ICONS_MANIFEST icon_root only; independent of portable-paths),
-then unused stacked `dronehive-app-links-host-paths` (links.py catalog URIs after portable-paths),
+then unused stacked `dronehive-app-links-host-paths` (links.py catalog URIs after portable-paths; next leftover to wire `requires`),
 then unused `bloom-ci-lint` (new-file lint.yml; independent of typecheck),
 then unused `ova-voice-card-linux-honesty` (VOICE-ACCESS.md only; independent of README honesty),
 then unused `faceswap-ios-readme-honesty` (ios/README.md only; independent of DESIGN.md and START.sh),

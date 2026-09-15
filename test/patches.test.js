@@ -322,6 +322,22 @@ test("cli patches --job filters one card", async () => {
   );
 });
 
+test("cli patches --job dronehive-config-load-overlay applies portable-paths first", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-config-load-overlay"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  const lines = parsed.applyNext;
+  const portable = lines.findIndex((line) => line.includes("dronehive-portable-paths.patch") && line.startsWith("git apply /"));
+  const overlay = lines.findIndex((line) => line.includes("dronehive-config-load-overlay.patch") && line.startsWith("git apply /"));
+  assert.ok(portable >= 0 && overlay > portable);
+  assert.ok(lines.some((line) => line.includes("from drone.config_overlay import remap_host_strings")));
+});
+
 test("cli patches --job dronehive-runtime-host-paths applies portable-paths first", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-runtime-host-paths"], {
