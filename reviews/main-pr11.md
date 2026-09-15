@@ -23,8 +23,8 @@ catalog (#9). It does not copy #8 onto PR #9.
 
 ## Check
 
-- `ledger/siblings.json` lists PRs 2–10. #9 owns `dronehive-unicode-ci`
-  first.
+- `ledger/siblings.json` on this PR listed 2–10. Later stacked follow-ups
+  extend the union; #9 still owns `dronehive-unicode-ci` first.
 - On-disk `reviews/launch/dronehive-unicode-ci.md` is an **Apply** brief
   (not PR #5 / `npm run autofix`).
 - Local `node --test test/*.test.js` was 370/370 on the merge commit.

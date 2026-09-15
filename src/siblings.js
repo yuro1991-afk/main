@@ -9,6 +9,10 @@ export const SIBLING_ROLES = Object.freeze([
   "autofix-runner",
   "patch-catalog",
   "python-arena",
+  "merge-8-then-9",
+  "leftover-launches",
+  "genesis-arena-paths",
+  "assign-job",
 ]);
 
 /**
@@ -38,6 +42,14 @@ export function describeRole(role) {
       return "Applyable sibling diffs under patches/. node src/cli.js patches lists them. Not an autofix runner.";
     case "python-arena":
       return "Fork Python arena/infra on main#10. Review only. Head/ears landed. Do not steal eyes/vision/bridge.";
+    case "merge-8-then-9":
+      return "Resolved #8 then #9. Prefer this product over merging #8 and #9 separately. Catalog still leads as #9.";
+    case "leftover-launches":
+      return "Apply launch packets for parked leftover catalog cards. Not a second catalog. Catalog still leads as #9.";
+    case "genesis-arena-paths":
+      return "Live Genesis pointer at D:\\\\Wilderness\\\\Genesis. Review only. Do not steal. Do not invent a second arena.";
+    case "assign-job":
+      return "assign --job writes one leftover Apply launch. Stacked on leftover-launches #12.";
     default:
       return assertNeverRole(role);
   }
@@ -105,7 +117,7 @@ export const SIBLINGS_CONTRACT = "agent-ops.siblings.v1";
 export const FIRST_PARKED_APPLY = "dronehive-unicode-ci";
 
 /**
- * Bare `siblings` dump. Keeps file order on `prs` (merge union 2–10).
+ * Bare `siblings` dump. Keeps file order on `prs` (union 2–14).
  * `lead` / `nextApply` name the catalog so agents do not take #5 first.
  *
  * @param {{ prs: Array<{ owns?: string[], number: number, url: string, role: string, title: string, branch: string }> }} siblings
