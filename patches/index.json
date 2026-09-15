@@ -901,8 +901,10 @@
       "file": "patches/dronehive-start-multi-model-pythonpath.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "START_MULTI_MODEL.bat PYTHONPATH uses %ROOT%\\\\host\\\\ai-center, not G:\\\\AI-Center. Independent of START_SEER leftover (different file) and super-mesh cd leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('START_MULTI_MODEL.bat').read_text(); assert r'%ROOT%\\\\host\\\\ai-center' in t; assert r'PYTHONPATH=%ROOT%;G:\\\\AI-Center' not in t\""
+      ],
+      "notes": "START_MULTI_MODEL.bat PYTHONPATH uses %ROOT%\\\\host\\\\ai-center, not G:\\\\AI-Center. After apply: assert host/ai-center PYTHONPATH and that G:\\\\AI-Center is gone from that line. Independent of START_SEER leftover (different file) and super-mesh cd leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-start-seer-pythonpath",
