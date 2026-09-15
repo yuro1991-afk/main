@@ -1154,8 +1154,10 @@
       "file": "patches/dronehive-readme-cd.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "README.md quick-start cd uses '.'. Independent of existing leftovers. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('README.md').read_text(); assert 'cd .   # or your clone path' in t; assert r'cd G:\\\\AI-Home\\\\projects\\\\ai-worker-drone-0.5b' not in t\""
+      ],
+      "notes": "README.md quick-start cd uses 'cd .   # or your clone path'. After apply: assert that comment line and that the G: project cd is gone. Do not assert a standalone cd . line (False; the comment shares the line). Independent of work-order-doc-cd. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-doc-agent-loop-cd",

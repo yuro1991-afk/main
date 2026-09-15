@@ -22,10 +22,11 @@ README.md quick-start cd line only. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-readme-cd-from-ops
 - git apply --check /path/to/main/patches/dronehive-readme-cd.patch
 - git apply /path/to/main/patches/dronehive-readme-cd.patch
+- python3 -c "from pathlib import Path; t=Path('README.md').read_text(); assert 'cd .   # or your clone path' in t; assert r'cd G:\\AI-Home\\projects\\ai-worker-drone-0.5b' not in t"
 
 ## Verify
 
-README.md quick-start cd is .
+README.md quick-start cd is `cd .   # or your clone path`
 
 Do not reopen https://github.com/yuro1991-afk/main/pull/1.
 Do not open another landing-pad queue.
