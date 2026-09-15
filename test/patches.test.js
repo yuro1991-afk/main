@@ -370,6 +370,19 @@ test("cli patches --job dronehive-runtime-host-paths applies portable-paths firs
   assert.ok(lines.some((line) => line.includes("from drone.grok_handoff import DEFAULT_ROOT")));
 });
 
+test("cli patches --job faceswap-readme-install-sh includes the README install afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "faceswap-readme-install-sh"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "faceswap-readme-install-sh");
+  assert.ok(parsed.applyNext.some((line) => line.includes("README.md") && line.includes("bash START.sh")));
+});
+
 test("cli patches --job faceswap-readme-requirements-honesty includes the README afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "faceswap-readme-requirements-honesty"], {

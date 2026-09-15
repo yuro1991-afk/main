@@ -22,6 +22,7 @@ README install block only. Different hunk from Requirements and honesty-env-path
 - git checkout -b cursor/faceswap-readme-install-sh-from-ops
 - git apply --check /path/to/main/patches/faceswap-readme-install-sh.patch
 - git apply /path/to/main/patches/faceswap-readme-install-sh.patch
+- python3 -c "from pathlib import Path; t=Path('README.md').read_text(); assert 'bash START.sh' in t and 'Linux / this pad' in t and 'fail-closed contract' in t"
 
 ## Verify
 

@@ -365,8 +365,10 @@
       "file": "patches/faceswap-readme-install-sh.patch",
       "base": "bba7188",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "README install block documents bash START.sh. Independent of start-sh (new file), honesty-env-paths (footer), and readme-requirements-honesty (Requirements bullet)."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('README.md').read_text(); assert 'bash START.sh' in t and 'Linux / this pad' in t and 'fail-closed contract' in t\""
+      ],
+      "notes": "README install block documents bash START.sh. After apply: assert those phrases. Independent of start-sh (new file) and readme-requirements-honesty (Requirements bullet)."
     },
     {
       "id": "dronehive-buzzer-hive-library-honesty",
