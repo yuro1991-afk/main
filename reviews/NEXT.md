@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T04:13Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T04:15Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`d1baeaa`. Shipped this interval: dronehive-app-links-host-paths
-afterApply is a library-uri line assert (import passed unpatched).
+`14316f9`. Shipped this interval: drop py_compile from
+dronehive-script-host-roots afterApply (it passed unpatched).
 Early empty afterApply catalog is done. Leftover `next` stays alone.
 Do not invent leftovers.
 
@@ -213,8 +213,8 @@ the leftover is blocked. Catalog slot rows carry `applyNext`.
 `faceswap-start-sh` afterApply asserts START.sh phrases
 (Face Swap iOS gateway / RED / FACESWAP_ENGINE / exec python3 ./gateway.py).
 Do not run START.sh. Do not put dollar signs in afterApply.
-`dronehive-script-host-roots` afterApply is `py_compile` plus an
-assert that `ROOT` uses `__file__` and drops `G:\AI-Home`.
+`dronehive-script-host-roots` afterApply asserts ROOT uses `__file__`
+and drops `G:\AI-Home`. Do not py_compile as afterApply.
 `faceswap-design-honesty` afterApply asserts DESIGN.md names
 `FACESWAP_ENGINE` as the contract (unpatched has none of those phrases).
 `dronehive-runtime-host-paths` `applyNext` applies portable-paths first

@@ -22,7 +22,6 @@ Do not edit drone/pro/tool_agent.py. Independent of portable-paths.
 - git checkout -b cursor/dronehive-script-host-roots-from-ops
 - git apply --check /path/to/main/patches/dronehive-script-host-roots.patch
 - git apply /path/to/main/patches/dronehive-script-host-roots.patch
-- python3 -m py_compile scripts/bench_vs_helpers.py scripts/smoke_delegate_wire.py scripts/stress_ai_bus_hive.py
 - python3 -c "from pathlib import Path; fs=('scripts/bench_vs_helpers.py','scripts/smoke_delegate_wire.py','scripts/stress_ai_bus_hive.py'); assert all('Path(__file__).resolve().parents[1]' in Path(f).read_text() and r'G:\\AI-Home' not in Path(f).read_text() for f in fs)"
 
 ## Verify

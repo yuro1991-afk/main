@@ -2406,8 +2406,7 @@ test("cli patches --job dronehive-script-host-roots includes the ROOT afterApply
   assert.equal(code, 0);
   const parsed = JSON.parse(chunks.join(""));
   assert.equal(parsed.patches[0].id, "dronehive-script-host-roots");
-  assert.ok(parsed.applyNext.some((line) => line.includes("py_compile")));
-  assert.ok(parsed.applyNext.some((line) => line.includes("G:\\\\AI-Home") || line.includes("G:\\AI-Home")));
+  assert.ok(parsed.applyNext.some((line) => line.includes("Path(__file__).resolve().parents[1]") && (line.includes("G:\\\\AI-Home") || line.includes("G:\\AI-Home"))));
 });
 
 test("cli patches --job faceswap-start-sh includes the fail-closed afterApply", async () => {
