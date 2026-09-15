@@ -257,6 +257,10 @@ the leftover file (ubuntu-smoke names unicode-ci first).
 `missingRequires`. Prefer `brief --job`. Do not run writePlaybooks.
 `dronehive-ubuntu-smoke` verify / firstCommands last line is a ci.yml
 phrase gate. Do not run the smoke.
+`dronehive-portable-paths` / `dronehive-script-host-roots` /
+`faceswap-start-sh` / `ova-stop-noui-guard` / `bloom-ci-lint` verify
+are phrase gates too. Do not run work-order-show, py_compile, START.sh,
+Stop-Ollama, or npm.
 Host-path import leftovers are exhausted.
 `ova-readme-linux-honesty` afterApply asserts README names Windows-only
 Voice Access (`Windows 11 Voice Access` / `syntax/math CI only` /

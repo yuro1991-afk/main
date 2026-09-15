@@ -209,6 +209,24 @@ test("ubuntu-smoke firstCommands do not run the smoke", () => {
   assert.ok(!lines.some((line) => /Same four python-smoke/.test(line)));
 });
 
+test("catalog leftover firstCommands do not run forbidden afterApply commands", () => {
+  const queue = JSON.parse(readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"));
+  const cases = [
+    ["dronehive-portable-paths", /python -m drone work-order-show/, /Do not run work-order-show/],
+    ["dronehive-script-host-roots", /python3 -m py_compile/, /Do not py_compile/],
+    ["faceswap-start-sh", /\.\/START\.sh/, /Do not run START\.sh/],
+    ["ova-stop-noui-guard", /pwsh -File Stop-Ollama/, /Do not run Stop-Ollama/],
+    ["bloom-ci-lint", /npm run lint exits 0/, /Do not run npm/],
+  ];
+  for (const [id, forbidden, gate] of cases) {
+    const job = queue.jobs.find((item) => item.id === id);
+    assert.match(job.verify, gate, id);
+    const lines = firstCommands(job);
+    assert.match(lines.at(-1), gate, id);
+    assert.ok(!lines.some((line) => forbidden.test(line)), id);
+  }
+});
+
 test("catalog-kind sibling brief destination is apply, not Notion", () => {
   const siblings = loadSiblings(SIBLINGS);
   const queue = JSON.parse(readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"));
