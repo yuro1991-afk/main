@@ -422,14 +422,17 @@ export function saveRoster(rosterPath, roster) {
  * Which Origin card a waking pad agent should take.
  * Prefer an active claim, then the roster card for this bcId, then
  * leftover unused Genesis. Never a card already on the roster.
+ * GitHub leftover unused peek skips dest and repo launches.
  * Does not lease.
  * @param {import("./ledger.js").Ledger} ledger
  * @param {string | undefined} agentId
  * @param {{ kind?: string, repo?: string, scope?: string, genesis?: boolean, world?: boolean }} [filters]
  * @param {number} [nowMs]
  * @param {{ assignments?: Array<{ bcId: string, jobId: string }> } | null} [roster]
+ * @param {string} [launchDir]
+ * @param {string} [repoLaunchDir]
  */
-export function peekBusyJob(ledger, agentId, filters = {}, nowMs = Date.now(), roster = null) {
+export function peekBusyJob(ledger, agentId, filters = {}, nowMs = Date.now(), roster = null, launchDir, repoLaunchDir) {
   if (agentId) {
     const existing = claimedByAgent(ledger, agentId, filters, nowMs);
     if (existing) return existing;
@@ -446,12 +449,16 @@ export function peekBusyJob(ledger, agentId, filters = {}, nowMs = Date.now(), r
       .filter((row) => !agentId || row.bcId !== agentId)
       .map((row) => row.jobId),
   );
+  const launched = launchedJobIds(launchDir, repoLaunchDir);
   const leftover = unusedCardsForFilters(ledger, used, filters, nowMs).filter((job) =>
-    jobPassesBusyFilters(job, filters, nowMs),
+    jobPassesBusyFilters(job, filters, nowMs) &&
+    (filters.world === true || filters.genesis === true || !launched.has(job.id)),
   );
   if (leftover[0]) return leftover[0];
   const raw = nextJob(ledger, filters, nowMs);
-  if (raw && !used.has(raw.id)) return raw;
+  if (raw && !used.has(raw.id) && (filters.world === true || filters.genesis === true || !launched.has(raw.id))) {
+    return raw;
+  }
   return null;
 }
 
@@ -467,8 +474,8 @@ export function peekBusyJob(ledger, agentId, filters = {}, nowMs = Date.now(), r
  * @param {number} [nowMs]
  * @param {{ assignments?: Array<{ bcId: string, jobId: string }> } | null} [roster]
  */
-export function claimBusyJob(ledger, agentId, filters = {}, nowMs = Date.now(), roster = null) {
-  const job = peekBusyJob(ledger, agentId, filters, nowMs, roster);
+export function claimBusyJob(ledger, agentId, filters = {}, nowMs = Date.now(), roster = null, launchDir, repoLaunchDir) {
+  const job = peekBusyJob(ledger, agentId, filters, nowMs, roster, launchDir, repoLaunchDir);
   if (!job) return null;
   return claimJob(ledger, job.id, agentId, nowMs);
 }

@@ -106,20 +106,17 @@ test("cli live leftover keep-busy stays GitHub-first after the lease", async () 
 
 test("cli next --here stays on this repo", async () => {
   const result = await capture(["next", "--here"]);
-  assert.equal(result.code, 0);
-  assert.match(result.out, /review-landing-pad-prs/);
+  assert.equal(result.code, 1);
+  assert.doesNotMatch(result.out, /gub-route-intent/);
+  assert.equal(JSON.parse(result.out), null);
 });
 
-test("cli next defaults to leftover GitHub card", async () => {
+test("cli next defaults to leftover unused exhausted", async () => {
   const result = await capture(["next"]);
-  assert.equal(result.code, 0);
-  assert.match(result.out, /review-landing-pad-prs/);
-  assert.match(result.out, /handoff-review-landing-pad-prs/);
-  assert.match(result.out, /yuro1991-afk\/main/);
+  assert.equal(result.code, 1);
   assert.doesNotMatch(result.out, /gub-route-intent/);
   const parsed = JSON.parse(result.out);
-  assert.equal(parsed.takeInstead, undefined);
-  assert.equal(parsed.applyNext, undefined);
+  assert.equal(parsed, null);
 });
 
 test("cli next --job Superbrain attaches take-instead apply pair", async () => {
@@ -169,17 +166,15 @@ test("cli status --job attaches the named catalog card without replacing leftove
     parsed.job.proveAfterApplyCommand,
     "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
   );
-  assert.notEqual(parsed.next.id, "dronehive-unicode-ci");
-  assert.equal(parsed.next.id, "review-landing-pad-prs");
+  assert.equal(parsed.next, null);
 });
 
-test("cli status without --job leaves leftover next and omits job", async () => {
+test("cli status without --job leaves leftover unused exhausted", async () => {
   const result = await capture(["status"]);
   assert.equal(result.code, 0);
   const parsed = JSON.parse(result.out);
   assert.equal(parsed.job, undefined);
-  assert.ok(parsed.next);
-  assert.equal(parsed.next.id, "review-landing-pad-prs");
+  assert.equal(parsed.next, null);
 });
 
 test("cli status --origin leftover is first unused world card", async () => {
@@ -205,13 +200,14 @@ test("cli busy --world without agent peeks leftover Origin world", async () => {
   assert.match(result.out, /"jobId": "genesis-world-layer-102"/);
 });
 
-test("cli busy without agent peeks leftover GitHub card", async () => {
+test("cli busy without agent peeks leftover unused exhausted", async () => {
   const out = join(mkdtempSync(join(tmpdir(), "agent-ops-busy-cli-")), "last-dispatch.json");
   const result = await capture(["busy", "--out", out]);
-  assert.equal(result.code, 0);
-  assert.match(result.out, /review-landing-pad-prs/);
+  assert.equal(result.code, 1);
   assert.match(result.out, /"reserved": false/);
   assert.doesNotMatch(result.out, /"jobId": "dronehive-unicode-ci"/);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.jobId, undefined);
 });
 
 test("cli busy --job peeks the named catalog card", async () => {

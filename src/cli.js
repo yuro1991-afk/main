@@ -233,11 +233,14 @@ export async function runCli(argv, options = {}) {
       const roster = readRosterSafe(
         flags.roster ? resolve(flags.roster) : defaultRosterPath(options.root ?? ROOT),
       );
+      const repoLaunch = defaultLaunchPath(options.root ?? ROOT);
       const snapshot = writeInventoryTick(ledger, destPath, nowMs, {
         origin: readOriginProbe(defaultOriginPath(options.root ?? ROOT)),
         idleCount: agents ? agents.filter((agent) => agent.status === "IDLE").length : undefined,
         runningCount: agents ? agents.filter((agent) => agent.status === "RUNNING").length : undefined,
         roster,
+        launchDir: repoLaunch,
+        repoLaunchDir: repoLaunch,
       });
       write(JSON.stringify(snapshot, null, 2));
       return 0;
@@ -519,11 +522,12 @@ export async function runCli(argv, options = {}) {
       );
       const explicitId =
         positionals[0] || (flags.job && flags.job !== "true" ? flags.job : "");
+      const repoLaunch = defaultLaunchPath(options.root ?? ROOT);
       const job = explicitId
         ? resolveJob(ledger, positionals, flags, nowMs, options)
         : agentId
-          ? claimBusyJob(ledger, agentId, filters, nowMs, roster)
-          : peekBusyJob(ledger, undefined, filters, nowMs, roster);
+          ? claimBusyJob(ledger, agentId, filters, nowMs, roster, repoLaunch, repoLaunch)
+          : peekBusyJob(ledger, undefined, filters, nowMs, roster, repoLaunch, repoLaunch);
       if (agentId && !explicitId) {
         saveLedger(ledgerPath, ledger);
       }
@@ -702,7 +706,8 @@ function peekDefaultJob(ledger, flags, nowMs, options) {
   const roster = readRosterSafe(
     flags.roster ? resolve(flags.roster) : defaultRosterPath(options.root ?? ROOT),
   );
-  return peekBusyJob(ledger, agentId, jobFilters(flags), nowMs, roster);
+  const repoLaunch = defaultLaunchPath(options.root ?? ROOT);
+  return peekBusyJob(ledger, agentId, jobFilters(flags), nowMs, roster, repoLaunch, repoLaunch);
 }
 
 function readRosterSafe(destPath) {

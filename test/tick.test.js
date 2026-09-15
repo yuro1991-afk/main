@@ -4,7 +4,7 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { loadRoster } from "../src/dispatch.js";
+import { defaultLaunchPath, loadRoster } from "../src/dispatch.js";
 import { claimJob, loadLedger, saveLedger } from "../src/ledger.js";
 import { parseArgs, runCli } from "../src/cli.js";
 import {
@@ -201,7 +201,22 @@ test("live leftover tick Superbrain exposes take-instead prove", () => {
   assert.equal(snapshot.proveAfterApplyCommand, null);
 });
 
-test("cli tick nextId is leftover unused, not the fork's card", async () => {
+test("writeInventoryTick leftover unused nextId skips dest launches", () => {
+  const dir = mkdtempSync(join(tmpdir(), "agent-ops-tick-launched-"));
+  const dest = join(dir, "last-inventory.json");
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
+  const onDisk = defaultLaunchPath(fileURLToPath(new URL("..", import.meta.url)));
+  const snapshot = writeInventoryTick(ledger, dest, NOW, {
+    roster,
+    launchDir: onDisk,
+    repoLaunchDir: onDisk,
+  });
+  assert.equal(snapshot.nextId, null);
+  assert.equal(snapshot.worldNextId, "genesis-world-layer-102");
+});
+
+test("cli tick nextId is leftover unused exhausted, not the fork's card", async () => {
   const dest = join(mkdtempSync(join(tmpdir(), "agent-ops-tick-leftover-")), "inventory.json");
   const chunks = [];
   const code = await runCli(["tick", "--out", dest], {
@@ -212,6 +227,6 @@ test("cli tick nextId is leftover unused, not the fork's card", async () => {
   });
   assert.equal(code, 0);
   const printed = JSON.parse(chunks.join(""));
-  assert.equal(printed.nextId, "review-landing-pad-prs");
+  assert.equal(printed.nextId, null);
   assert.notEqual(printed.nextId, "dronehive-unicode-ci");
 });
