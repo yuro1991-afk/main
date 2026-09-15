@@ -314,7 +314,7 @@ applying these diffs on a sibling write checkout.
 - face-swap README install (2026-09-15T00:27Z): documents `bash START.sh`. After apply: assert `bash START.sh`, `Linux / this pad`, and `fail-closed contract`. Unpatched README has none of those. Independent of `faceswap-start-sh` (new file) and `faceswap-readme-requirements-honesty`.
 - face-swap README Swift (2026-09-15T00:28Z): IPA is Mac/Xcode only. After apply: assert `Windows, Linux, or this pad` and `only on a Mac with Xcode`. Unpatched README still says `this Windows host`. Independent of Requirements, install, and honesty-env-paths footer.
 - face-swap README firewall (2026-09-15T00:29Z): inbound TCP 8860. After apply: assert `inbound TCP` and `Windows Firewall is one host example`. Unpatched README still says `allow Windows Firewall`. Independent of install, Requirements, and Swift.
-- face-swap HONESTY Located Path/Models: G: is one host example; contract is `FACESWAP_ENGINE`. Independent of `faceswap-honesty-env-paths` (footer).
+- face-swap HONESTY Located Path/Models (2026-09-15T03:50Z): after apply, assert the Path line has one host example and FACESWAP_ENGINE, and the Models line has one host example and weights stay off git. Do not assert G: gone. Do not put backticks in afterApply. Adjacent Located lines are one leftover. Independent of `faceswap-honesty-env-paths` (footer).
 
 ## Relaunch
 

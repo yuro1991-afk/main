@@ -1627,8 +1627,10 @@
       "file": "patches/faceswap-honesty-located-paths.patch",
       "base": "bba7188",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "HONESTY.md Located Path/Models mark G: as one host example; contract is FACESWAP_ENGINE. Adjacent Located lines are one leftover. Independent of honesty-env-paths footer."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('HONESTY.md').read_text(); path=next(x for x in t.splitlines() if x.startswith('- Path:')); models=next(x for x in t.splitlines() if x.startswith('- Models:')); assert 'one host example' in path; assert 'FACESWAP_ENGINE' in path; assert 'one host example' in models; assert 'weights stay off git' in models\""
+      ],
+      "notes": "HONESTY.md Located Path/Models mark G: as one host example; contract is FACESWAP_ENGINE. After apply: assert Path and Models lines. Do not assert G: gone. Do not put backticks in afterApply. Adjacent Located lines are one leftover. Independent of honesty-env-paths footer."
     },
     {
       "id": "dronehive-work-order-registry-cli",

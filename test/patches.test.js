@@ -929,6 +929,19 @@ test("cli patches --job opensussy-superpowers-lab-design includes the Base codeb
   assert.ok(parsed.applyNext.some((line) => line.includes("docs/superpowers/specs/2026-08-16-opensussy-lab-design.md") && line.includes("**Base codebase:**") && line.includes("one host example")));
 });
 
+test("cli patches --job faceswap-honesty-located-paths includes the Located Path/Models afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "faceswap-honesty-located-paths"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "faceswap-honesty-located-paths");
+  assert.ok(parsed.applyNext.some((line) => line.includes("HONESTY.md") && line.includes("- Path:") && line.includes("- Models:") && line.includes("FACESWAP_ENGINE") && line.includes("weights stay off git")));
+});
+
 test("cli patches --job dronehive-ollama-app-bridge-paths includes the bridge consts afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-ollama-app-bridge-paths"], {

@@ -22,6 +22,7 @@ HONESTY.md Located Path/Models only. Different hunk from honesty-env-paths foote
 - git checkout -b cursor/faceswap-honesty-located-paths-from-ops
 - git apply --check /path/to/main/patches/faceswap-honesty-located-paths.patch
 - git apply /path/to/main/patches/faceswap-honesty-located-paths.patch
+- python3 -c "from pathlib import Path; t=Path('HONESTY.md').read_text(); path=next(x for x in t.splitlines() if x.startswith('- Path:')); models=next(x for x in t.splitlines() if x.startswith('- Models:')); assert 'one host example' in path; assert 'FACESWAP_ENGINE' in path; assert 'one host example' in models; assert 'weights stay off git' in models"
 
 ## Verify
 
