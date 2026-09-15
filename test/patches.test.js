@@ -890,6 +890,19 @@ test("cli patches --job dronehive-work-order-doc-board includes the Board afterA
   assert.ok(parsed.applyNext.some((line) => line.includes("docs/WORK_ORDER.md") && line.includes("- Board:") && line.includes("host/continuous")));
 });
 
+test("cli patches --job dronehive-seed-work-order-doc-board includes the seed Board afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "dronehive-seed-work-order-doc-board"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "dronehive-seed-work-order-doc-board");
+  assert.ok(parsed.applyNext.some((line) => line.includes("drone/app/seed/docs/WORK_ORDER.md") && line.includes("- Board:") && line.includes("host/continuous")));
+});
+
 test("cli patches --job dronehive-ollama-app-bridge-paths includes the bridge consts afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-ollama-app-bridge-paths"], {
