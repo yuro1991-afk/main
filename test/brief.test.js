@@ -110,6 +110,22 @@ test("catalog displayNotes drop PR #5 / autofix apply runner", () => {
   assert.match(collision, /Do not copy PR #6 autofix/);
 });
 
+test("stacked catalog displayNotes name requires priors before the leftover", () => {
+  const queue = JSON.parse(readFileSync(new URL("../ledger/queue.json", import.meta.url), "utf8"));
+  const ubuntu = queue.jobs.find((item) => item.id === "dronehive-ubuntu-smoke");
+  const ubuntuNotes = displayNotes(ubuntu);
+  assert.match(ubuntuNotes, /dronehive-pro-chat-cp1252\.patch then patches\/dronehive-ubuntu-smoke\.patch/);
+  assert.doesNotMatch(ubuntuNotes, /Blocked: Yuri scoped this landing pad to Genesis only/);
+
+  const runtime = queue.jobs.find((item) => item.id === "dronehive-runtime-host-paths");
+  const runtimeNotes = displayNotes(runtime);
+  assert.match(runtimeNotes, /patches\/dronehive-portable-paths\.patch/);
+  assert.match(runtimeNotes, /patches\/dronehive-runtime-host-paths\.patch/);
+  const portable = runtimeNotes.indexOf("dronehive-portable-paths.patch");
+  const leftover = runtimeNotes.indexOf("dronehive-runtime-host-paths.patch");
+  assert.ok(portable >= 0 && leftover > portable);
+});
+
 test("firstCommands is exhaustive", () => {
   for (const kind of JOB_KINDS) {
     const lines = firstCommands(job(kind));

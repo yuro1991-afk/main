@@ -62,15 +62,19 @@ const PULL5_APPLY =
  * Cataloged sibling cards stay status=blocked on this Genesis-only tree,
  * but --job apply text must not tell the agent to sit out or copy PR #6.
  * @param {import("./ledger.js").Job} job
- * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { file: string, afterApply?: string[] } | null }} [options]
+ * @param {{ root?: string, patchesIndex?: string, skipCatalog?: boolean, patch?: { file: string, afterApply?: string[], requires?: string[] } | null }} [options]
  */
 export function displayNotes(job, options = {}) {
   const notes = job.notes ?? "";
   const patch = catalogPatchFor(job, options);
   if (!patch) return notes;
   let shown = notes.replace(BLOCKED_GENESIS_ONLY, "").replace(AUTOFIX_RUNNER, "");
-  if (patch.file && !shown.includes(patch.file)) {
-    shown = `${shown.trim()} Applyable catalog patch is ${patch.file} on main#9. Do not copy PR #6 autofix.`;
+  const priors = catalogRequires(patch);
+  const files = [...priors, patch.file].filter(Boolean).join(" then ");
+  if (files && !shown.includes(patch.file)) {
+    shown = `${shown.trim()} Applyable catalog patch is ${files} on main#9. Do not copy PR #6 autofix.`;
+  } else if (priors.some((file) => !shown.includes(file))) {
+    shown = `${shown.trim()} Requires (apply first): ${priors.join(", ")}.`;
   }
   return shown.replace(/\n{3,}/g, "\n\n").trimEnd();
 }
