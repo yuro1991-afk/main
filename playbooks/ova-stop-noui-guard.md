@@ -22,7 +22,7 @@ Safety default stays refuse. Do not point api.baseUrl at untrusted hosts.
 - git checkout -b cursor/ova-stop-noui-guard-from-ops
 - git apply --check /path/to/main/patches/ova-stop-noui-guard.patch
 - git apply /path/to/main/patches/ova-stop-noui-guard.patch
-- pwsh -File Stop-Ollama.ps1 -NoUI exits 4; no ollama processes signaled.
+- python3 -c "from pathlib import Path; t=Path('tests/assert-stop-noui.ps1').read_text(); assert 'Prove -NoUI without -Force exits 4 and does not call Stop-Process.' in t; assert 'OK Stop-Ollama -NoUI exit 4 (no -Force)' in t; assert 'RED expected exit 4' in t"
 
 ## Verify
 

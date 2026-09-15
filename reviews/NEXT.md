@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T03:54Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T03:55Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`819742c`. Shipped this interval: `faceswap-mock-engine-ci`
-mock-engine afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`960d5f5`. Shipped this interval: `ova-stop-noui-guard`
+stop-noui afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -173,7 +173,8 @@ mock-engine afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused sec-residuals apply | `opensussy-sec-residuals-catalog` (R1-R10 catalog afterApply wired) |
 | next unused health-offline apply | `faceswap-health-offline` (offline health red afterApply wired) |
 | next unused mock-engine-ci apply | `faceswap-mock-engine-ci` (stdlib mock engine afterApply wired) |
-| next early afterApply to wire | `ova-stop-noui-guard` (exit 4 without -Force only) |
+| next unused stop-noui-guard apply | `ova-stop-noui-guard` (exit 4 without -Force afterApply wired) |
+| next early afterApply to wire | `ova-pester-qa-math` (math QA only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -513,7 +514,9 @@ reviews/SEC_REVIEW_2_0_0.md has false_green 0 and pins LinuxPayload.cs / Sanitiz
 gateway.py health status is red not degraded and the offline test file exists.
 `faceswap-mock-engine-ci` afterApply asserts
 gateway-smoke.yml and mock_engine.py exist and never mention InsightFace runtime.
-Next early afterApply to wire is `ova-stop-noui-guard`. Do not invent leftovers.
+`ova-stop-noui-guard` afterApply asserts
+tests/assert-stop-noui.ps1 expects exit 4 without -Force.
+Next early afterApply to wire is `ova-pester-qa-math`. Do not invent leftovers.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -686,8 +689,9 @@ then unused `ova-api-host-override` (loopback OV_API_BASE only; afterApply wired
 then unused `opensussy-linux-syntax-ci` (linux-syntax.yml only; afterApply wired),
 then unused `opensussy-sec-residuals-catalog` (R1-R10 catalog only; afterApply wired),
 then unused `faceswap-health-offline` (offline health red only; afterApply wired),
-then unused `faceswap-mock-engine-ci` (stdlib mock engine only; afterApply wired).
-Early empty afterApply next: `ova-stop-noui-guard` (exit 4 without -Force only).
+then unused `faceswap-mock-engine-ci` (stdlib mock engine only; afterApply wired),
+then unused `ova-stop-noui-guard` (exit 4 without -Force only; afterApply wired).
+Early empty afterApply next: `ova-pester-qa-math` (math QA only).
 Newcomer `bc-710c5477` Hunt sibling: unused apply `bloom-grok-pwa-test-sync`.
 `bc-f407303f`: `review-main-pr10` (fork's Python arena/infra).
 `bc-5fe241dd` Summarize arena: do not steal `genesis-world-arena`; unused apply `faceswap-design-honesty`.

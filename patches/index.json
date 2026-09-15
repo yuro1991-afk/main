@@ -181,8 +181,10 @@
       "file": "patches/ova-stop-noui-guard.patch",
       "base": "074bad0",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "tests/assert-stop-noui.ps1 expects exit 4 without -Force. Does not add default -Force."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('tests/assert-stop-noui.ps1').read_text(); assert 'Prove -NoUI without -Force exits 4 and does not call Stop-Process.' in t; assert 'OK Stop-Ollama -NoUI exit 4 (no -Force)' in t; assert 'RED expected exit 4' in t\""
+      ],
+      "notes": "tests/assert-stop-noui.ps1 expects exit 4 without -Force. Does not add default -Force. After apply: assert that file has those phrases. Unpatched has no tests/. Do not run the script. Do not stop Ollama. Do not put dollar signs in afterApply. Do not put backticks in afterApply. Independent of ova-pester-qa-math and ova-api-host-override."
     },
     {
       "id": "ova-pester-qa-math",
