@@ -68,7 +68,7 @@ test("gub-superbrain-probe helpers refuse the probe", () => {
 test("review helpers name open PRs #8/#9/#10", () => {
   const landing = planHelpers(job("review", { id: "review-landing-pad-prs" }));
   const landingText = landing.map((helper) => helper.prompt).join("\n");
-  assert.match(landingText, /#8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, or #30/);
+  assert.match(landingText, /#8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, or #34/);
   assert.match(landingText, /gh pr view 8,9,10/);
   assert.doesNotMatch(landingText, /gh pr view 3,4,5,6/);
 
