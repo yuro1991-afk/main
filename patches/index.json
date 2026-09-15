@@ -77,8 +77,10 @@
       "file": "patches/opensussy-agama-honesty.patch",
       "base": "d4b2949",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "One-screen Agama vs AutoYaST warning on linux HOW_TO files. No new Agama JSON. No wipe-flag edits."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; files=['install/linux/HOW_TO_RUN.txt','install/linux/leap/HOW_TO_RUN.txt','install/linux/tumbleweed/HOW_TO_RUN.txt']; assert all('AGAMA / Leap 16 HONESTY' in Path(p).read_text() and 'Agama JSON is unsupported' in Path(p).read_text() and 'export-only' in Path(p).read_text() for p in files)\""
+      ],
+      "notes": "One-screen Agama vs AutoYaST warning on linux HOW_TO files. After apply: assert all three HOW_TO files have the honesty block. Three files are one leftover. No new Agama JSON. No wipe-flag edits. Do not put backticks in afterApply."
     },
     {
       "id": "faceswap-honesty-env-paths",

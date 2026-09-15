@@ -22,7 +22,7 @@ Docs/honesty only. Do not change default --linux-disk or unattended wipe flags.
 - git checkout -b cursor/opensussy-agama-honesty-from-ops
 - git apply --check /path/to/main/patches/opensussy-agama-honesty.patch
 - git apply /path/to/main/patches/opensussy-agama-honesty.patch
-- HOW_TO files state Agama is unsupported; no new autoinst that claims Leap 16 GREEN.
+- python3 -c "from pathlib import Path; files=['install/linux/HOW_TO_RUN.txt','install/linux/leap/HOW_TO_RUN.txt','install/linux/tumbleweed/HOW_TO_RUN.txt']; assert all('AGAMA / Leap 16 HONESTY' in Path(p).read_text() and 'Agama JSON is unsupported' in Path(p).read_text() and 'export-only' in Path(p).read_text() for p in files)"
 
 ## Verify
 

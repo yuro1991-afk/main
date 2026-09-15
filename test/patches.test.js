@@ -1137,6 +1137,19 @@ test("cli patches --job opensussy-ship-json-2-0-0 includes the 2.0.0 afterApply"
   assert.ok(parsed.applyNext.some((line) => line.includes("SHIP.json") && line.includes("2.0.0") && line.includes("usb_zip_bytes") && line.includes("## 1.3.0")));
 });
 
+test("cli patches --job opensussy-agama-honesty includes the HOW_TO afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "opensussy-agama-honesty"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "opensussy-agama-honesty");
+  assert.ok(parsed.applyNext.some((line) => line.includes("install/linux/HOW_TO_RUN.txt") && line.includes("AGAMA / Leap 16 HONESTY") && line.includes("Agama JSON is unsupported")));
+});
+
 test("cli patches --job dronehive-ollama-app-bridge-paths includes the bridge consts afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-ollama-app-bridge-paths"], {
