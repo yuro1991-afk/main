@@ -93,6 +93,23 @@ test("cli route and probe", async () => {
   assert.doesNotMatch(probed.out, /169\.254\.124\.8:45001/);
 });
 
+test("cli live leftover Superbrain keep-busy attaches take-instead apply pair", async () => {
+  const result = await capture(["route", "keep", "agents", "busy"], {
+    nowMs: Date.parse("2026-09-14T19:00:00.000Z"),
+  });
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.jobId, "gub-superbrain-probe");
+  assert.match(parsed.destination, /gub-superbrain-probe/);
+  assert.doesNotMatch(parsed.destination, /dronehive-unicode-ci/);
+  assert.equal(parsed.takeInstead, "dronehive-unicode-ci");
+  assert.ok(parsed.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    parsed.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+});
+
 test("cli next --here stays on this repo", async () => {
   const result = await capture(["next", "--here"]);
   assert.equal(result.code, 1);

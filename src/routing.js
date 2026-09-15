@@ -160,6 +160,8 @@ export function leftoverForRoute(context = {}) {
  * @param {string} notes
  */
 export function routeFromJob(text, job, notes, extras = {}) {
+  const take = takeInsteadRouteFields(job);
+  const takeInstead = extras.takeInstead ?? take.takeInstead;
   return {
     contract: ROUTE_CONTRACT,
     intent: text,
@@ -168,8 +170,25 @@ export function routeFromJob(text, job, notes, extras = {}) {
     notes,
     jobId: job.id,
     packet: `reviews/handoff-${job.id}.md`,
-    applyNext: extras.applyNext,
-    proveAfterApplyCommand: extras.proveAfterApplyCommand,
+    applyNext: extras.applyNext ?? take.applyNext,
+    proveAfterApplyCommand: extras.proveAfterApplyCommand ?? take.proveAfterApplyCommand,
+    ...(takeInstead ? { takeInstead } : {}),
+  };
+}
+
+/**
+ * Leftover Superbrain sit-out keeps jobId / destination. Attach first
+ * parked catalog apply so keep-busy does not retarget (#8).
+ * @param {{ id?: string } | null | undefined} job
+ */
+function takeInsteadRouteFields(job) {
+  if (job?.id !== "gub-superbrain-probe") return {};
+  const patch = catalogPatchRow("dronehive-unicode-ci");
+  if (!patch) return {};
+  return {
+    takeInstead: "dronehive-unicode-ci",
+    applyNext: applyNextFor(patch),
+    proveAfterApplyCommand: proveAfterApplyCommand(patch.id),
   };
 }
 

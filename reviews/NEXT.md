@@ -215,7 +215,9 @@ exposes `takeInsteadId` + the prove command only; `assign` exposes
 `leftoverTakeInstead` / `leftoverApplyNext` /
 `leftoverProveAfterApplyCommand` because `leftoverLaunches` is stripped
 from CLI JSON). Leftover Superbrain launch text refuses Origin paste.
-Do not retarget keep-busy (that is #8).
+Live leftover `cli route "keep agents busy"` keeps destination Superbrain
+and attaches the same take-instead apply pair. Do not retarget keep-busy
+destination to GitHub (that is #8).
 `list --job <catalog-id>` returns that one card + `applyNext` /
 `proveAfterApplyCommand` and bypasses the Genesis-only filter (bare
 `list` stays Genesis-only).

@@ -257,6 +257,27 @@ test("named catalog job id routes to apply, not leftover Origin", () => {
   assert.notEqual(route.jobId, "gub-route-intent");
   const keep = routeIntent("keep agents busy", { ledger, roster, nowMs: NOW });
   assert.equal(keep.jobId, "gub-route-intent");
+  assert.equal(keep.takeInstead, undefined);
+});
+
+test("live leftover Superbrain keep-busy attaches take-instead apply pair", () => {
+  const ledger = loadLedger(join(ROOT, "ledger", "queue.json"));
+  const roster = loadRoster(join(ROOT, "ledger", "roster.json"));
+  const afterLease = Date.parse("2026-09-14T19:00:00.000Z");
+  const keep = routeIntent("keep agents busy", { ledger, roster, nowMs: afterLease });
+  assert.equal(keep.jobId, "gub-superbrain-probe");
+  assert.match(keep.destination, /gub-superbrain-probe/);
+  assert.doesNotMatch(keep.destination, /dronehive-unicode-ci/);
+  assert.equal(keep.takeInstead, "dronehive-unicode-ci");
+  assert.ok(keep.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    keep.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  const unmatched = routeIntent("do something leftover", { ledger, roster, nowMs: afterLease });
+  assert.equal(unmatched.jobId, "gub-superbrain-probe");
+  assert.equal(unmatched.takeInstead, "dronehive-unicode-ci");
+  assert.ok(unmatched.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
 });
 
 test("destinationForKind is exhaustive", () => {
