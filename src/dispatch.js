@@ -19,6 +19,28 @@ export const BUSY_CONTRACT = "agent-ops.busy.v1";
 export const SLOTS_CONTRACT = "agent-ops.slots.v1";
 export const ASSIGN_CONTRACT = "agent-ops.assign.v1";
 
+/** Sit-out jobs have no launch file on purpose. assign --job must not write one. */
+export const SITOUT_JOB_IDS = Object.freeze([
+  "gub-superbrain-probe",
+  "do-not-reopen-main-pr1",
+  "agent-ops-board",
+  "do-not-open-fourth-queue",
+]);
+
+/**
+ * @param {string} jobId
+ */
+export function isSitOutJob(jobId) {
+  return SITOUT_JOB_IDS.includes(jobId);
+}
+
+/**
+ * @param {string} jobId
+ */
+export function sitOutAssignError(jobId) {
+  return `sit-out job has no launch on purpose: ${jobId}. Prefer brief --job ${FIRST_PARKED_APPLY}. Do not invent leftover 163+.`;
+}
+
 /**
  * @param {string} repoRoot
  */

@@ -305,6 +305,7 @@ test("help says playbooks defaults to check and refuses in-repo write", async ()
   assert.match(result.out, /Prefer brief --job dronehive-unicode-ci when leftover launches are exhausted/);
   assert.match(result.out, /assign \[--job id\] \[--missing\]/);
   assert.match(result.out, /Leftover launches are exhausted \(nextMissing null\)/);
+  assert.match(result.out, /sit-out jobs have no launch on purpose/);
   assert.match(result.out, /Do not invent leftover 163\+/);
   assert.match(result.out, /--prove clones --no-hardlinks throwaways/);
   assert.match(result.out, /never writes or resets siblings/);
