@@ -1055,8 +1055,10 @@
       "file": "patches/dronehive-install-ollama-app-manifest.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "Install-DroneOllamaApp.ps1 manifest drone_root / mount_exe use '.' and apps\\\\drone-ollama-mount. Independent of $mountSrc leftover. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1').read_text(); assert \\\"drone_root       = '.'\\\" in t; assert r\\\"mount_exe        = 'apps\\\\drone-ollama-mount\\\\target\\\\release\\\\drone-ollama-mount.exe'\\\" in t\""
+      ],
+      "notes": "Install-DroneOllamaApp.ps1 manifest drone_root / mount_exe use '.' and apps\\\\drone-ollama-mount. After apply: assert drone_root       = '.' and mount_exe = 'apps\\\\drone-ollama-mount\\\\target\\\\release\\\\drone-ollama-mount.exe'. Do not assert G: project paths gone (other leftovers keep them). Independent of mountSrc leftover. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-install-ollama-uninstall-root",

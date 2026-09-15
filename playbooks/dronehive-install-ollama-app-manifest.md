@@ -22,6 +22,7 @@ Install-DroneOllamaApp.ps1 manifest drone_root / mount_exe only. Do not edit dro
 - git checkout -b cursor/dronehive-install-ollama-app-manifest-from-ops
 - git apply --check /path/to/main/patches/dronehive-install-ollama-app-manifest.patch
 - git apply /path/to/main/patches/dronehive-install-ollama-app-manifest.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1').read_text(); assert \"drone_root       = '.'\" in t; assert r\"mount_exe        = 'apps\\drone-ollama-mount\\target\\release\\drone-ollama-mount.exe'\" in t"
 
 ## Verify
 
