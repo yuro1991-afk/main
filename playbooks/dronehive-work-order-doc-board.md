@@ -22,6 +22,7 @@ docs/WORK_ORDER.md Board line only. Do not edit drone/pro/tool_agent.py.
 - git checkout -b cursor/dronehive-work-order-doc-board-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-doc-board.patch
 - git apply /path/to/main/patches/dronehive-work-order-doc-board.patch
+- python3 -c "from pathlib import Path; t=Path('docs/WORK_ORDER.md').read_text(); line=next(x for x in t.splitlines() if x.startswith('- Board:')); assert 'host/continuous' in line; assert r'D:\\GrokCoreMemory' not in line"
 
 ## Verify
 
