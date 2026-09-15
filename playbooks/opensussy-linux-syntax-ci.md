@@ -5,7 +5,7 @@
 - scope: relaunch
 - repo: github.com/yuro1991-afk/opensussy
 - relaunch: https://github.com/yuro1991-afk/opensussy
-- why: Relaunch against the named repo. This landing-pad token cannot push it.
+- why: This token cannot push opensussy. Apply `patches/opensussy-linux-syntax-ci.patch` from [main#9](https://github.com/yuro1991-afk/main/pull/9). Do not copy PR #6 autofix.
 
 ## Notes
 
@@ -17,10 +17,12 @@ Do not edit Windows WPF / LinuxPayload.cs wipe path. Do not collide dronehive CI
 
 ## First commands
 
+- node src/cli.js patches --prove --job opensussy-linux-syntax-ci
 - git clone https://github.com/yuro1991-afk/opensussy.git work && cd work
 - git checkout -b cursor/opensussy-linux-syntax-ci-from-ops
-- edit: .github/workflows/linux-syntax.yml, install/linux/OpenSussy-light.sh, install/linux/OpenSussy-deep.sh, install/linux/leap/OpenSussy-light.sh, install/linux/tumbleweed/OpenSussy-light.sh
-- Workflow parses the six shell wrappers; job must not execute autoinst-deep.xml or format disks.
+- git apply --check /path/to/main/patches/opensussy-linux-syntax-ci.patch
+- git apply /path/to/main/patches/opensussy-linux-syntax-ci.patch
+- python3 -c "from pathlib import Path; t=Path('.github/workflows/linux-syntax.yml').read_text(); assert 'name: linux-syntax' in t; assert 'Syntax-check OpenSussy shell wrappers only' in t; assert 'install/linux/tumbleweed/OpenSussy-deep.sh' in t; assert 'OK syntax. Did not execute AutoYaST' in t"
 
 ## Verify
 

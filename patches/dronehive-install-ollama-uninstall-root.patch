@@ -1,0 +1,9 @@
+diff --git a/apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1 b/apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1
+index 8e76cd2..4342560 100644
+--- a/apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1
++++ b/apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1
+@@ -147,3 +147,3 @@ $lnk3.Save()
+ #Requires -Version 5.1
+-$InstallRoot = "G:\AI-Home\apps\DroneOllama"
++$InstallRoot = "host\ai-home\apps\DroneOllama"
+ $startDir = Join-Path $env:APPDATA "Microsoft\Windows\Start Menu\Programs\Drone Ollama"

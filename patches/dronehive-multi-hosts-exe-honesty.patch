@@ -1,0 +1,22 @@
+diff --git a/configs/multi_hosts.json b/configs/multi_hosts.json
+index 7eaaae7..dca7a77 100644
+--- a/configs/multi_hosts.json
++++ b/configs/multi_hosts.json
+@@ -130,7 +130,7 @@
+     {
+       "id": "supercell_muscle",
+       "kind": "muscle",
+-      "exe": "G:\\AI-Center\\agents\\super-cell-4\\bridges\\muscle_dispatch.py",
++      "exe": "host/ai-center/agents/super-cell-4/bridges/muscle_dispatch.py",
+       "role": "jane_helper",
+       "internal_only": true,
+       "enabled": true,
+@@ -155,7 +155,7 @@
+     {
+       "id": "everest",
+       "kind": "everest",
+-      "exe": "G:\\AI-Center\\bridge\\everest\\cli.py",
++      "exe": "host/ai-center/bridge/everest/cli.py",
+       "role": "everest_status",
+       "internal_only": true,
+       "enabled": true,

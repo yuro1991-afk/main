@@ -1,0 +1,13 @@
+diff --git a/apps/drone-ollama-app/src/main.rs b/apps/drone-ollama-app/src/main.rs
+index c4dda69..165ed34 100644
+--- a/apps/drone-ollama-app/src/main.rs
++++ b/apps/drone-ollama-app/src/main.rs
+@@ -504,7 +504,7 @@ impl eframe::App for App {
+             ui.add_space(12.0);
+             ui.separator();
+             ui.small("Install root:");
+-            ui.small(r"G:\AI-Home\apps\DroneOllama");
++            ui.small(r"host\ai-home\apps\DroneOllama");
+             ui.small("Drone root:");
+             ui.small(drone_bridge::DRONE_ROOT);
+         });

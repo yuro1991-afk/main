@@ -1,0 +1,13 @@
+diff --git a/docs/MULTI_FACE.md b/docs/MULTI_FACE.md
+index 87fb746..8de1dd6 100644
+--- a/docs/MULTI_FACE.md
++++ b/docs/MULTI_FACE.md
+@@ -30,7 +30,7 @@ Workers: Ollama · Hermes · OpenClaw · OpenCode · Super Cell · Drones · Eve
+ ## CLI
+ 
+ ```powershell
+-cd G:\AI-Home\projects\ai-worker-drone-0.5b
++cd .
+ $py = "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe"
+ 
+ # who is up

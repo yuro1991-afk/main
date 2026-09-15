@@ -1,0 +1,13 @@
+diff --git a/drone/app/seed/docs/WORK_ORDER.md b/drone/app/seed/docs/WORK_ORDER.md
+index 3789067..a358935 100644
+--- a/drone/app/seed/docs/WORK_ORDER.md
++++ b/drone/app/seed/docs/WORK_ORDER.md
+@@ -351,7 +351,7 @@ Before death, dump **ephemeral working files** into the recycle store so:
+ ### 6.2 Path
+ 
+ ```
+-G:\AI-Home\projects\ai-worker-drone-0.5b\data\hive\memory_recycle\
++data/hive/memory_recycle/
+   <utc>_<buzzer_id>\
+     MANIFEST.json
+     scratch.json          # ephemeral scratch snapshot

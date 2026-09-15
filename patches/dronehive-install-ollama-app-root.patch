@@ -1,0 +1,9 @@
+diff --git a/apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1 b/apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1
+index 8e76cd2..c22583f 100644
+--- a/apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1
++++ b/apps/drone-ollama-app/installer/Install-DroneOllamaApp.ps1
+@@ -11,3 +11,3 @@ $env:Path = "G:\AI-Home\tools\cargo\bin;$env:Path"
+ $Project = Split-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) -Parent
+-$InstallRoot = 'G:\AI-Home\apps\DroneOllama'
++$InstallRoot = 'host\ai-home\apps\DroneOllama'
+ $BinDir = Join-Path $InstallRoot 'bin'

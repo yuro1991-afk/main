@@ -1,0 +1,13 @@
+diff --git a/docs/BRIDGE_1080.md b/docs/BRIDGE_1080.md
+index 9fbcd3d..dbe168e 100644
+--- a/docs/BRIDGE_1080.md
++++ b/docs/BRIDGE_1080.md
+@@ -47,7 +47,7 @@ Boss can only stop via Task Manager / reboot — not via bridge CLI.
+ ## Commands
+ 
+ ```powershell
+-cd G:\AI-Home\projects\ai-worker-drone-0.5b
++cd .
+ python -m drone bridge-1080 start
+ python -m drone bridge-1080 status
+ python -m drone bridge-1080 enable    # Enable-PnpDevice (often needs Admin)

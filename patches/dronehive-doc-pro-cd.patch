@@ -1,0 +1,13 @@
+diff --git a/docs/PRO.md b/docs/PRO.md
+index dc5ebc6..6c9ffb9 100644
+--- a/docs/PRO.md
++++ b/docs/PRO.md
+@@ -25,7 +25,7 @@ You → Pro command
+ ## Run (no UAC)
+ 
+ ```powershell
+-cd G:\AI-Home\projects\ai-worker-drone-0.5b
++cd .
+ 
+ # Primary: lean Rust TUI
+ .\START_TUI.bat

@@ -1,0 +1,17 @@
+diff --git a/configs/work_order.json b/configs/work_order.json
+index ecac0ca..6024ee9 100644
+--- a/configs/work_order.json
++++ b/configs/work_order.json
+@@ -145,9 +145,9 @@
+     "continuous_task_id": null
+   },
+   "live_registry": {
+-    "cli": "G:\\AI-Center\\agents\\super-cell-4\\bridges\\live_registry.py",
+-    "primary": "G:\\AI-Center\\agents\\super-cell-4\\registry",
+-    "events": "G:\\AI-Center\\agents\\super-cell-4\\registry\\events.jsonl",
++    "cli": "host/ai-center/agents/super-cell-4/bridges/live_registry.py",
++    "primary": "host/ai-center/agents/super-cell-4/registry",
++    "events": "host/ai-center/agents/super-cell-4/registry/events.jsonl",
+     "mirror": "F:\\GrokSelfLibrary\\registry",
+     "kind": "drone",
+     "expert": "hive",

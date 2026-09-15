@@ -21,9 +21,21 @@ node src/cli.js next
 node src/cli.js slots
 node src/cli.js assign
 node src/cli.js busy --agent "$CURSOR_AGENT_ID"
-node src/cli.js prompt --agent "$CURSOR_AGENT_ID"
+node src/cli.js prompt --agent "$CURSOR_AGENT_ID"   # roster card, not leftover next
 node src/cli.js route "keep my agents busy" --agent "$CURSOR_AGENT_ID"
 node src/cli.js next --origin          # Genesis cards only if asked
+node src/cli.js sync --agents .genesis/last-agents.json --write
+node src/cli.js catalog --write           # ledger only; refuses playbooks/ reviews/
+node src/cli.js relaunch
+node src/cli.js helpers
+node src/cli.js brief
+node src/cli.js handoff
+node src/cli.js playbooks                 # check; never writes playbooks/
+node src/cli.js siblings [--job id]       # bare: nextApply + lead #9; --job: catalog-first related
+node src/cli.js patches
+node src/cli.js claim <id> --agent "$CURSOR_AGENT_ID"
+node src/cli.js origin [--login]
+node src/cli.js tick
 ```
 
 `assign` maps parked pad agents onto unique GitHub cards.
@@ -32,8 +44,20 @@ node src/cli.js next --origin          # Genesis cards only if asked
 
 ## Lanes
 
-Probe before LIVE claims.
+**Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Do not run
+`node src/cli.js probe`. `cli probe` refuses and exits 1.
 
-- BOSS Superbrain `http://169.254.124.8:45001` (LANE-ETH-PEER)
 - GOOSE-PC Core `:8791` is **not** the BOSS peer
 - Failed probes are `unreachable`, never `live`
+- Origin CLI `/exec-daemon/tools/origin` is present; `node src/cli.js origin` stays **logged-out** until `origin --login` has `CURSOR_API_KEY`
+
+## Sibling patches
+
+**Yuri: forget Origin** for public GitHub siblings. `node src/cli.js patches`
+lists applyable diffs (compact: `nextApply` + id/file; `--job` for applyNext). Catalog includes DroneHive unicode, bloom ignore/README/CI, OpenSussy
+2.0.0 leftovers, face-swap icons/env, Ollama Voice syntax + loopback API).
+`node src/cli.js patches --prove --siblings-root /tmp/siblings` re-checks
+vanilla+stacked `git apply --check` on a `--no-hardlinks` throwaway and
+never writes or resets those checkouts. This pad token
+cannot push those repos. Do **not** copy PR #6’s autofix runner.
+See `reviews/SIBLING-PATCHES.md`.

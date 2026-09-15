@@ -1,0 +1,15 @@
+diff --git a/apps/drone-ollama-tui/README.md b/apps/drone-ollama-tui/README.md
+index fb9ebaf..33d982d 100644
+--- a/apps/drone-ollama-tui/README.md
++++ b/apps/drone-ollama-tui/README.md
+@@ -25,8 +25,8 @@ Not the heavy egui workbench. No swarm canvas.
+ ## Build
+ 
+ ```bat
+-set PATH=G:\AI-Home\tools\cargo\bin;%PATH%
+-cd G:\AI-Home\projects\ai-worker-drone-0.5b\apps\drone-ollama-tui
++set PATH=host\ai-home\tools\cargo\bin;%PATH%
++cd apps\drone-ollama-tui
+ cargo build --release
+ ```
+ 

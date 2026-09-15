@@ -1,0 +1,13 @@
+diff --git a/START_SEER.bat b/START_SEER.bat
+index 9efaffb..8f77676 100644
+--- a/START_SEER.bat
++++ b/START_SEER.bat
+@@ -6,7 +6,7 @@ set "ROOT=%~dp0"
+ if "%ROOT:~-1%"=="\" set "ROOT=%ROOT:~0,-1%"
+ 
+ set "DRONE_HIVE_ROOT=%ROOT%"
+-set "PYTHONPATH=%ROOT%;G:\AI-Center"
++set "PYTHONPATH=%ROOT%;%ROOT%\host\ai-center"
+ set "PYTHONUTF8=1"
+ set "OLLAMA_HOST=http://127.0.0.1:11434"
+ 

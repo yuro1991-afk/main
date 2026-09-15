@@ -1,0 +1,13 @@
+diff --git a/docs/FUTURE_SEER.md b/docs/FUTURE_SEER.md
+index bdde907..04a3cba 100644
+--- a/docs/FUTURE_SEER.md
++++ b/docs/FUTURE_SEER.md
+@@ -30,7 +30,7 @@ START_SEER.bat
+ ```
+ 
+ ```powershell
+-cd G:\AI-Home\projects\ai-worker-drone-0.5b
++cd .
+ $py = "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe"
+ & $py -m drone seer hot
+ & $py -m drone seer type "how do I fix python import"

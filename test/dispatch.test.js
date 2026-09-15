@@ -10,13 +10,17 @@ import {
   BUSY_CONTRACT,
   SLOTS_CONTRACT,
   buildAssign,
+  buildBusy,
   buildSlots,
+  buildSlotsForJob,
   claimBusyJob,
   leftoverLaunchRows,
   loadRoster,
   peekBusyJob,
+  renderAssignedLaunch,
   renderLeftoverLaunch,
 } from "../src/dispatch.js";
+import { loadSiblings } from "../src/siblings.js";
 import { runCli } from "../src/cli.js";
 
 const NOW = Date.parse("2026-09-14T16:00:00.000Z");
@@ -78,6 +82,36 @@ test("slots lists open Genesis cards in priority order", () => {
   assert.equal(packet.slots[0].id, "gub-inventory-tick");
   assert.ok(packet.slots.some((slot) => slot.id === "genesis-python-bridge-57"));
   assert.ok(packet.claimed.some((job) => job.id === "gub-superbrain-probe"));
+});
+
+test("busy JSON for Superbrain leftover attaches take-instead apply pair", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const job = ledger.jobs.find((item) => item.id === "gub-superbrain-probe");
+  const siblings = loadSiblings(new URL("../ledger/siblings.json", import.meta.url));
+  const packet = buildBusy(job, siblings, []);
+  assert.ok(job);
+  assert.equal(packet.jobId, "gub-superbrain-probe");
+  assert.equal(packet.takeInstead, "dronehive-unicode-ci");
+  assert.ok(packet.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    packet.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+});
+
+test("busy JSON for a cataloged job includes applyNext", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const job = ledger.jobs.find((item) => item.id === "dronehive-unicode-ci");
+  const siblings = loadSiblings(new URL("../ledger/siblings.json", import.meta.url));
+  const packet = buildBusy(job, siblings, []);
+  assert.ok(job);
+  assert.ok(packet.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.ok(packet.applyNext.some((line) => line.startsWith("git clone https://github.com/yuro1991-afk/dronehive.git")));
+  assert.equal(
+    packet.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  assert.doesNotMatch(packet.applyNext.join("\n"), /prove-after-apply/);
 });
 
 test("busy without agent peeks and does not claim", async () => {
@@ -213,6 +247,9 @@ test("assign maps parked agents to distinct GitHub sibling cards", () => {
   assert.ok(!ids.includes("genesis-world-layer-102"));
   assert.ok(!ids.includes("review-landing-pad-prs"));
   assert.equal(packet.leftoverNext, "review-landing-pad-prs");
+  assert.equal(packet.leftoverTakeInstead, undefined);
+  assert.equal(packet.leftoverApplyNext, undefined);
+  assert.equal(packet.leftoverProveAfterApplyCommand, undefined);
   assert.equal(packet.leftover[0], "review-landing-pad-prs");
   assert.ok(!packet.leftover.includes("dronehive-unicode-ci"));
   assert.ok(!packet.leftover.includes("gub-route-intent"));
@@ -238,7 +275,9 @@ test("cli assign writes paste-ready GitHub launch files", async () => {
   assert.match(leftoverText, /Leftover unused — review-landing-pad-prs/);
   assert.match(leftoverText, /No parked pad agent owns this card yet/);
   assert.doesNotMatch(leftoverText, /Leftover unused — dronehive-unicode-ci/);
+  assert.doesNotMatch(leftoverText, /Leftover unused — gub-inventory-tick/);
   assert.match(result.out, /"leftoverNext": "review-landing-pad-prs"/);
+  assert.doesNotMatch(result.out, /leftoverTakeInstead/);
 });
 
 test("peekBusyJob --world is opt-in Origin leftover, not a GitHub steal", () => {
@@ -258,9 +297,79 @@ test("leftover launch rows skip rostered cards", () => {
   const rows = leftoverLaunchRows(ledger, roster, NOW);
   assert.equal(rows[0].jobId, "review-landing-pad-prs");
   assert.match(rows[0].prompt, /Leftover unused — review-landing-pad-prs/);
+  assert.equal(rows[0].takeInstead, undefined);
+  assert.equal(rows[0].applyNext, undefined);
   assert.ok(!rows.some((row) => row.jobId === "dronehive-unicode-ci"));
   assert.ok(!rows.some((row) => row.jobId === "gub-route-intent"));
   assert.match(renderLeftoverLaunch(null), /No leftover unused GitHub card/);
+});
+
+test("assigned Superbrain launch refuses Origin paste", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const sitout = ledger.jobs.find((item) => item.id === "gub-superbrain-probe");
+  const text = renderAssignedLaunch(
+    { bcId: "bc-brand-new-sync", name: "New leftover", jobId: "gub-superbrain-probe" },
+    sitout,
+  );
+  assert.match(text, /no more Superbrain/);
+  assert.match(text, /take instead: `dronehive-unicode-ci`/);
+  assert.match(text, /Do not paste this into an Origin cloud agent/);
+  assert.doesNotMatch(text, /Paste the brief below into a new Origin cloud agent/);
+});
+
+test("live leftover Superbrain assign attaches take-instead apply pair", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
+  const afterLease = Date.parse("2026-09-14T19:00:00.000Z");
+  const sitout = ledger.jobs.find((item) => item.id === "gub-superbrain-probe");
+  const text = renderLeftoverLaunch(sitout);
+  assert.match(text, /no more Superbrain/);
+  assert.match(text, /take instead: `dronehive-unicode-ci`/);
+  assert.match(text, /patches --prove --job dronehive-unicode-ci/);
+  assert.match(text, /patches --prove-after-apply --job dronehive-unicode-ci/);
+  assert.match(text, /Do not paste this into an Origin cloud agent/);
+  assert.doesNotMatch(text, /Paste the brief below into a new Origin cloud agent/);
+  const rows = leftoverLaunchRows(ledger, roster, afterLease, { genesis: true });
+  assert.equal(rows[0].jobId, "gub-superbrain-probe");
+  assert.equal(rows[0].takeInstead, "dronehive-unicode-ci");
+  assert.ok(rows[0].applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    rows[0].proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  const packet = buildAssign(ledger, roster, afterLease);
+  assert.equal(packet.leftoverNext, "review-landing-pad-prs");
+  assert.equal(packet.leftoverTakeInstead, undefined);
+});
+
+test("slots --job peeks a blocked catalog card with applyNext", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const job = ledger.jobs.find((item) => item.id === "dronehive-unicode-ci");
+  assert.ok(job);
+  const packet = buildSlotsForJob(job);
+  assert.equal(packet.contract, SLOTS_CONTRACT);
+  assert.equal(packet.count, 1);
+  assert.equal(packet.slots[0].id, "dronehive-unicode-ci");
+  assert.ok(packet.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.deepEqual(packet.slots[0].applyNext, packet.applyNext);
+  assert.equal(
+    packet.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  assert.equal(packet.slots[0].proveAfterApplyCommand, packet.proveAfterApplyCommand);
+});
+
+test("cli slots --job peeks the named catalog card", async () => {
+  const result = await capture(["slots", "--job", "dronehive-unicode-ci"]);
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.equal(parsed.slots[0].id, "dronehive-unicode-ci");
+  assert.ok(parsed.applyNext.some((line) => line.includes("dronehive-pro-chat-cp1252.patch")));
+  assert.equal(
+    parsed.proveAfterApplyCommand,
+    "node src/cli.js patches --prove-after-apply --job dronehive-unicode-ci",
+  );
+  assert.doesNotMatch(result.out, /gub-inventory-tick/);
 });
 
 test("cli slots defaults to GitHub sibling cards", async () => {

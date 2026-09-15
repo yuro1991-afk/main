@@ -1,0 +1,22 @@
+diff --git a/drone/multi_face.py b/drone/multi_face.py
+index ae37fa6..5c0ce67 100644
+--- a/drone/multi_face.py
++++ b/drone/multi_face.py
+@@ -492,7 +492,7 @@ class MultiFace:
+         run_id = f"face-{time.strftime('%Y%m%d-%H%M%S')}"
+         try:
+             env = os.environ.copy()
+-            env["PYTHONPATH"] = r"G:\AI-Center"
++            env["PYTHONPATH"] = r"host/ai-center"
+             p = subprocess.run(
+                 [
+                     _py(),
+@@ -584,7 +584,7 @@ class MultiFace:
+         t0 = time.perf_counter()
+         try:
+             env = os.environ.copy()
+-            env["PYTHONPATH"] = r"G:\AI-Center"
++            env["PYTHONPATH"] = r"host/ai-center"
+             p = subprocess.run(
+                 [_py(), str(exe), "health"],
+                 capture_output=True,

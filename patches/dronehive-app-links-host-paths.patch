@@ -1,0 +1,40 @@
+diff --git a/drone/app/links.py b/drone/app/links.py
+index df033d3..0722598 100644
+--- a/drone/app/links.py
++++ b/drone/app/links.py
+@@ -5,8 +5,8 @@ Link kinds (honest scope):
+   rest          — this app's HTTP API
+   openai_compat — OpenAI-style /v1/chat/completions
+   file_inbox    — drop JSON into data/app/inbox
+-  library       — F:\\GrokSelfLibrary
+-  continuous    — D:\\GrokCoreMemory\\continuous\\OPEN_TASKS.json
++  library       — F:\\GrokSelfLibrary (env / app_root overlay)
++  continuous    — D:\\GrokCoreMemory\\continuous\\OPEN_TASKS.json (env / app_root overlay)
+   ollama        — local Ollama brain
+   webhook_out   — optional POST of seals to a URL (env DRONE_HIVE_WEBHOOK)
+ 
+@@ -23,6 +23,7 @@ import urllib.request
+ from pathlib import Path
+ from typing import Any, Callable
+ 
++from ..host_paths import resolve_host_path
+ from .config import app_root, ensure_app_dirs, load_app_config
+ from .service import DroneHiveService
+ 
+@@ -80,14 +81,14 @@ class LinkRegistry:
+             {
+                 "id": "library",
+                 "kind": "host_library",
+-                "uri": r"F:\GrokSelfLibrary",
++                "uri": str(resolve_host_path(r"F:\GrokSelfLibrary")),
+                 "enabled": bool(enabled.get("library", True)),
+                 "how": "LibraryBridge HOT + recall + outbox notes",
+             },
+             {
+                 "id": "continuous",
+                 "kind": "task_board",
+-                "uri": r"D:\GrokCoreMemory\continuous\OPEN_TASKS.json",
++                "uri": str(resolve_host_path(r"D:\GrokCoreMemory\continuous\OPEN_TASKS.json")),
+                 "enabled": bool(enabled.get("continuous", True)),
+                 "how": "Hive pull_library / pack_for_buzzer open tasks",
+             },

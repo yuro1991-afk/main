@@ -1,0 +1,13 @@
+diff --git a/apps/drone-ollama-app/README.md b/apps/drone-ollama-app/README.md
+index 2039c2e..3e48718 100644
+--- a/apps/drone-ollama-app/README.md
++++ b/apps/drone-ollama-app/README.md
+@@ -10,7 +10,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File G:\AI-Home\projects\drone-ol
+ 
+ Creates:
+ 
+-- `G:\AI-Home\apps\DroneOllama\`
++- `host\ai-home\apps\DroneOllama\`
+ - Desktop **Drone Ollama** shortcut
+ - Start Menu **Drone Ollama → Drone Ollama Workbench**
+ - HKCU uninstall entry

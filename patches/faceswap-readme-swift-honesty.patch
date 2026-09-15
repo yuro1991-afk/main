@@ -1,0 +1,13 @@
+diff --git a/README.md b/README.md
+index a1eee5d..a3e19ef 100644
+--- a/README.md
++++ b/README.md
+@@ -46,7 +46,7 @@ If the page does not load, allow Windows Firewall for TCP **8860**, and confirm
+ 
+ ## Swift (optional, Mac only)
+ 
+-`ios/FaceSwap` is a WKWebView shell. Open it in Xcode on a Mac, set the LAN URL, sign with your Apple ID. That is **not** produced on this Windows host.
++`ios/FaceSwap` is a WKWebView shell. Open it in Xcode on a Mac, set the LAN URL, sign with your Apple ID. That is **not** produced on Windows, Linux, or this pad — only on a Mac with Xcode.
+ 
+ ## License
+ 

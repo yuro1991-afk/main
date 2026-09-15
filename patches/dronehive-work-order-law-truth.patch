@@ -1,0 +1,9 @@
+diff --git a/configs/work_order.json b/configs/work_order.json
+index ecac0ca..9eb4277 100644
+--- a/configs/work_order.json
++++ b/configs/work_order.json
+@@ -45,3 +45,3 @@
+         "C:\\Users\\yuro1\\.grok\\rules\\00-00-absolute-truth.md",
+-        "F:\\GrokSelfLibrary\\LAW_TRUTH.md"
++        "host/library/LAW_TRUTH.md"
+       ],

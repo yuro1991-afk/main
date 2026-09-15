@@ -1,0 +1,17 @@
+diff --git a/TRUTH_AND_HONESTY.md b/TRUTH_AND_HONESTY.md
+index 20e286c..d052863 100644
+--- a/TRUTH_AND_HONESTY.md
++++ b/TRUTH_AND_HONESTY.md
+@@ -15,9 +15,9 @@ Rule: C:\Users\yuro1\.grok\rules\00-00-absolute-truth.md
+ ## Full law
+ 
+ - Hardwire: `C:\Users\yuro1\.grok\rules\00-00-absolute-truth.md`
+-- Universal: `F:\GrokSelfLibrary\truth\UNIVERSAL_TRUTH.md`
+-- Oath: `python F:\GrokSelfLibrary\bin\truth_oath_gate.py --check`
+-- Coder: `python F:\GrokSelfLibrary\bin\code_truth_all_systems.py`
++- Universal: `host/library/truth/UNIVERSAL_TRUTH.md`
++- Oath: `python host/library/bin/truth_oath_gate.py --check`
++- Coder: `python host/library/bin/code_truth_all_systems.py`
+ 
+ ## Status seal required for DONE
+ 

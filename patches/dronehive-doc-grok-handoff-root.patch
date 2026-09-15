@@ -1,0 +1,13 @@
+diff --git a/docs/GROK_HANDOFF.md b/docs/GROK_HANDOFF.md
+index 3d556dc..8fe444e 100644
+--- a/docs/GROK_HANDOFF.md
++++ b/docs/GROK_HANDOFF.md
+@@ -21,7 +21,7 @@ cowork inbox result packet  →  Grok collect / integrate
+ 
+ ## Project root
+ 
+-`G:\AI-Home\projects\ai-worker-drone-0.5b`
++`.`
+ 
+ ## CLI (primary — Grok uses this)
+ 

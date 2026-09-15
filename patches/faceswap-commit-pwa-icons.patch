@@ -1,0 +1,39 @@
+diff --git a/pwa/apple-touch-icon.png b/pwa/apple-touch-icon.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..14b85f7dc95ff2d832bcf1cc7cbbffdbce27641c
+GIT binary patch
+literal 385
+zcmeAS@N?(olHy`uVBq!ia0vp^TR@nD2}o{QKQWbofziX$#WAGf*4s;lybKH+EE~lc
+zxc?nZYM8p#Q#3~JD)VxW21^6>X9r|vFc&BAooNJe5G;r=K?MnXXeK;kfSCm|7+t{u
+z8K`A21!oxHERY+39CQVZmdK6-s|Gt4NgsxSVuEhRP=LejHIbY_&N;U2YU_YO%i!ti
+K=d#Wzp$P!r?S|0+
+
+literal 0
+HcmV?d00001
+
+diff --git a/pwa/icon-192.png b/pwa/icon-192.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..77f3bc3466d7d4b499e04ee101eb9a1274b5d058
+GIT binary patch
+literal 412
+zcmeAS@N?(olHy`uVBq!ia0vp^2SAvE2}s`E_d9@rfic<B#WAGf*4s;lybKH+EE~lc
+zxc?nZYBVrk*>rko)dO9j1O=X!Mgsu}4(3D!9u~Gk4nS5TPyon+O0hA4q*@vefTR)?
+zz)}(%U|k4Bw9pT;gk1aa>StcrfZ|JR9>8w^G?WUqa_JgoYHc_u$N&VMu6{1-oD!M<
+D{H<h2
+
+literal 0
+HcmV?d00001
+
+diff --git a/pwa/icon-512.png b/pwa/icon-512.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..da7a9c86bc0eb2652e7b67d3047b84f9c53a1599
+GIT binary patch
+literal 1495
+zcmeAS@N?(olHy`uVBq!ia0y~yU;;9k7&t&wwUqN(1_su7o-U3d6}R4AHRNSr;9%J(
+z&cOZe=%dD|YM}+EmsT-UXb3S#Ffgz&G%zwGFp$NhRC@y#Mb-mdO^NG4+7~d9?|X2d
+z4Xk#c|H+Ixm^K(qzCS2U1e8UhL<0-OiGYF}01UoCkcL(aa4Hz;i3k*n6ea>vwHIt&
+XD9$B1Wp0oP0}yz+`njxgN@xNAVfdN_
+
+literal 0
+HcmV?d00001
+

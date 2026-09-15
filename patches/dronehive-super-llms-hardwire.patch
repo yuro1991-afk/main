@@ -1,0 +1,9 @@
+diff --git a/configs/super_llms.json b/configs/super_llms.json
+index e001281..a522711 100644
+--- a/configs/super_llms.json
++++ b/configs/super_llms.json
+@@ -282,3 +282,3 @@
+     "enabled": true,
+-    "hardwire": "G:\\AI-Home\\projects\\ai-worker-drone-0.5b\\data\\super_mesh\\HARDWIRE.json",
++    "hardwire": "data/super_mesh/HARDWIRE.json",
+     "config": "configs/super_mesh.json",

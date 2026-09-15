@@ -1,0 +1,35 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..5abf86c
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,29 @@
++# OMNI-FORGE (Grok Build export)
++
++This repository is a **Grok Build** export of the OMNI-FORGE UI
++(`app-builder-workspace`). Single commit on `main`: `Export from Grok`.
++
++It is **not** Cursor Origin Genesis (`yuri-afk/genesis`) and **not**
++the landing pad (`yuro1991-afk/main`).
++
++## Scripts
++
++```bash
++npm install
++npm run dev          # Vite on :8080
++npm test             # node --test scripts/**/*.test.mjs
++npm run typecheck    # tsc --noEmit
++npm run lint
++```
++
++`GET /api/v1/health` is liveness for this app only. A timeout or
++connection error is `unreachable`. Never mark Superbrain or this
++service LIVE on a failed probe. This is not BOSS `:45001` and not
++GOOSE-PC `:8791`.
++
++`.vercel/output` is build residue. Ignore it (see `.gitignore`); do
++not treat committed Nitro output as source.
++
++## License
++
++See the files in this export. Weights and host paths are not in git.

@@ -5,7 +5,7 @@
 - scope: relaunch
 - repo: github.com/yuro1991-afk/bloom-fair-yellow-charm
 - relaunch: https://github.com/yuro1991-afk/bloom-fair-yellow-charm
-- why: Relaunch against the named repo. This landing-pad token cannot push it.
+- why: This token cannot push bloom-fair-yellow-charm. Apply `patches/bloom-ci-typecheck.patch` from [main#9](https://github.com/yuro1991-afk/main/pull/9). Do not copy PR #6 autofix.
 
 ## Notes
 
@@ -17,10 +17,12 @@ Do not edit dronehive .github. Coordinate with bloom-readme-honest-export if bot
 
 ## First commands
 
+- node src/cli.js patches --prove --job bloom-ci-typecheck
 - git clone https://github.com/yuro1991-afk/bloom-fair-yellow-charm.git work && cd work
 - git checkout -b cursor/bloom-ci-typecheck-from-ops
-- edit: .github/workflows/ci.yml, package.json, scripts/brand-check.test.mjs, scripts/grok-pwa-plugin.test.mjs
-- GitHub Actions green on those three commands. Do not mark LIVE on a failed typecheck.
+- git apply --check /path/to/main/patches/bloom-ci-typecheck.patch
+- git apply /path/to/main/patches/bloom-ci-typecheck.patch
+- python3 -c "from pathlib import Path; t=Path('.github/workflows/ci.yml').read_text(); assert 'name: ci' in t; assert 'npm test' in t; assert 'npm run typecheck' in t"
 
 ## Verify
 

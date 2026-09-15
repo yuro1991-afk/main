@@ -1,0 +1,13 @@
+diff --git a/assets/icons/ICONS_MANIFEST.json b/assets/icons/ICONS_MANIFEST.json
+index 84936e9..43a3159 100644
+--- a/assets/icons/ICONS_MANIFEST.json
++++ b/assets/icons/ICONS_MANIFEST.json
+@@ -2,7 +2,7 @@
+   "schema": "drone.swarm.icons.v1",
+   "status": "GREEN",
+   "false_green": 0,
+-  "icon_root": "G:\\AI-Home\\projects\\ai-worker-drone-0.5b\\assets\\icons",
++  "icon_root": "assets/icons",
+   "icons": [
+     {
+       "file": "drone-ollama-mount.ico",

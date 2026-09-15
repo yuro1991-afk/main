@@ -1,0 +1,13 @@
+diff --git a/docs/WORK_ORDER.md b/docs/WORK_ORDER.md
+index 55c4bce..9f4cbcc 100644
+--- a/docs/WORK_ORDER.md
++++ b/docs/WORK_ORDER.md
+@@ -241,7 +241,7 @@ $py = "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe"
+ 3. **Query codex** with matching `use` / `model` / `search` / `recipe`.
+ 4. **Fit host:** RTX 3060 12GB MAIN; prefer 3b–7b local helpers; avoid models that will not fit.
+ 5. **Record evidence:** CLI exit code + output tail path or quoted snippet in your result packet.
+-6. **Do not claim install** of weights unless paths under `G:\AI-Home\models` / Ollama tags prove it.
++6. **Do not claim install** of weights unless paths under `host/ai-home/models` / Ollama tags prove it.
+ 
+ ### 2.5 Host muscle defaults (when task is local helper work)
+ 

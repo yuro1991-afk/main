@@ -11,6 +11,11 @@ The claimable ops board (`node src/cli.js`). Implement on the named
 GitHub repo. This pad token **cannot push** dronehive / opensussy /
 bloom / face-swap / ollama-voice — clone and relaunch there.
 
+Sibling landing-pad PRs: `node src/cli.js siblings` (names `nextApply` +
+`lead` #9). `siblings --job <id>` lists catalog-first related PRs.
+Prefer `brief --job`. Do **not** open another queue. `node src/cli.js helpers`
+prints local Task fan-out.
+
 ## First moves
 
 1. `npm test` if you touch this repo.
@@ -18,6 +23,14 @@ bloom / face-swap / ollama-voice — clone and relaunch there.
    GitHub card**. A new unassigned agent gets leftover next (none —
    all 21 GitHub cards are assigned). `node src/cli.js slots` lists
    the rest so a second agent does not pile on.
+   `node src/cli.js catalog --write` diffs
+   `ledger/catalog-entries.json` and appends uncarded ledger jobs. It
+   refuses the in-repo `playbooks/` and `reviews/` directories. Prefer
+   `brief --job`.
+   `node src/cli.js playbooks` checks on-disk catalog playbooks
+   (compact: `nextApply` + counts; never writes). `--write` refuses the
+   in-repo `playbooks/` directory.
+   `slots --world` / `--origin` are opt-in Genesis views.
 3. Clone `https://<job.repo>.git`, implement the card, push from an
    environment that can write that repo.
 4. Pass `--origin` only if Yuri asks for Genesis again.
@@ -51,13 +64,27 @@ bloom / face-swap / ollama-voice — clone and relaunch there.
 A 22nd unassigned agent takes leftover `review-landing-pad-prs`.
 Do not invent Origin work.
 
+## Sibling patches (GitHub)
+
+**Yuri: forget Origin** for these cards. `node src/cli.js patches` lists
+applyable diffs under `patches/` (compact: `nextApply` + id/file; `--job` for applyNext). `patches --prove` re-checks them on a `--no-hardlinks` throwaway
+and never writes or resets `/tmp/siblings`. This token **cannot push**
+those repos — clone and relaunch there. Do not copy PR #6’s autofix runner.
+Evidence: `reviews/SIBLING-PATCHES.md`.
+
 ## Do not
 
-- Reopen closed PR #1.
+- Push dronehive / opensussy / face-swap / ollama-voice / bloom from this pad.
+- Reconstruct the 39 sibling slices here.
+- Reopen closed PR #1 (`Assemble all Genesis sibling slices in one repo`).
 - Copy `packages/keep-busy` from PR #4 onto this branch.
-- Copy PR #6 autofix onto a second runner.
-- Claim Superbrain LIVE without a successful probe. Timeouts stay `unreachable`.
+- Copy `bin/autofix.js` / `src/autofix.js` from PR #6.
+- **Yuri: no more Superbrain.** Do not probe `:45001` / `:8791`. Do not run `node src/cli.js probe`. Do not mark Superbrain LIVE.
 - Treat a CodeRabbit skip-on-draft comment as a completed review.
+
+## If the user asks for Genesis work
+
+Relaunch against https://cursor.com/codebase/yuri-afk/genesis with Origin login (`origin auth login` or `CURSOR_API_KEY`). This cloud environment cannot authenticate to Origin.
 
 ## Roster (hub)
 

@@ -1,0 +1,8 @@
+diff --git a/drone/app/seed/configs/work_order.json b/drone/app/seed/configs/work_order.json
+index ecac0ca..5bf5151 100644
+--- a/drone/app/seed/configs/work_order.json
++++ b/drone/app/seed/configs/work_order.json
+@@ -220,2 +220,2 @@
+-    "core_lessons": "D:\\GrokCoreMemory\\lessons",
++    "core_lessons": "host/core-memory/lessons",
+     "cache_rel": "data/hive/knowledge_cache",

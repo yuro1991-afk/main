@@ -1,0 +1,13 @@
+diff --git a/docs/HONESTY.md b/docs/HONESTY.md
+index f6d6615..4f98308 100644
+--- a/docs/HONESTY.md
++++ b/docs/HONESTY.md
+@@ -14,7 +14,7 @@
+ | Full LLM per buzzer | **No** — shared Ollama top model only |
+ | Tools on all roles | **Yes** — `DroneToolkit` sandbox (write/read/shell/python/package) |
+ | Top Ollama model | **Yes** — prefer `gemma4:12b` if installed (12GB fit) |
+-| Library connected | **Yes** — `F:\GrokSelfLibrary` + `OPEN_TASKS.json` |
++| Library connected | **Yes** — `host/library` + `OPEN_TASKS.json` |
+ | Fresh agent after each task | **Yes** — buzzer dies; free slot respawns next |
+ | **Clean Slate Agents v2** | **Yes** — passport + wipe audit + generation ledger + brain/tools bind |
+ | **Fast lane** | **Yes** — 5 nodes + lite tools/seal; **not** full 24-node production seal |

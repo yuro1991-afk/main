@@ -140,6 +140,34 @@ test("cli sync --write persists a new assignment and launch file", async () => {
   assert.match(body, /dronehive-unicode-ci/);
 });
 
+test("live leftover Superbrain sync attaches take-instead apply pair", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const roster = structuredClone(
+    loadRoster(new URL("../ledger/roster.json", import.meta.url)),
+  );
+  const afterLease = Date.parse("2026-09-14T19:00:00.000Z");
+  const parked = roster.assignments.map((row) => ({
+    bcId: row.bcId,
+    name: row.name,
+    status: "IDLE",
+  }));
+  const leftoverOnly = syncRoster(ledger, structuredClone(roster), parked, afterLease);
+  assert.equal(leftoverOnly.added.length, 0);
+  assert.equal(leftoverOnly.leftover[0], "review-landing-pad-prs");
+  assert.equal(leftoverOnly.leftoverTakeInstead, undefined);
+  assert.equal(leftoverOnly.leftoverApplyNext, undefined);
+  const withNewcomer = syncRoster(
+    ledger,
+    roster,
+    [...parked, { bcId: "bc-brand-new-sync", name: "New leftover", status: "IDLE" }],
+    afterLease,
+  );
+  assert.equal(withNewcomer.added[0].jobId, "review-landing-pad-prs");
+  assert.equal(withNewcomer.added[0].takeInstead, undefined);
+  assert.notEqual(withNewcomer.leftover[0], "review-landing-pad-prs");
+  assert.equal(withNewcomer.leftoverTakeInstead, undefined);
+});
+
 test("repo roster already covers the current idle set", () => {
   const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
   const roster = loadRoster(new URL("../ledger/roster.json", import.meta.url));

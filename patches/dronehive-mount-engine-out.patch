@@ -1,0 +1,13 @@
+diff --git a/apps/drone-ollama-mount/src/engine.rs b/apps/drone-ollama-mount/src/engine.rs
+index 6d35969..ce7e4fc 100644
+--- a/apps/drone-ollama-mount/src/engine.rs
++++ b/apps/drone-ollama-mount/src/engine.rs
+@@ -23,7 +23,7 @@ impl MountEngine {
+         let mut fabric = FabricMount::discover(root)?;
+         // default: not mounted until explicit mount (honest)
+         fabric.unmount_all();
+-        let out_dir = PathBuf::from(r"G:\AI-Home\projects\drone-ollama-mount\out");
++        let out_dir = PathBuf::from(r"apps\drone-ollama-mount\out");
+         fs::create_dir_all(&out_dir).ok();
+         let ollama = OllamaClient::new(ollama_host);
+         let cached_ollama = ollama.status();

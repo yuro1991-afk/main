@@ -1,0 +1,13 @@
+diff --git a/docs/CODE_WORKER_8B.md b/docs/CODE_WORKER_8B.md
+index 1b0966d..de6e9c0 100644
+--- a/docs/CODE_WORKER_8B.md
++++ b/docs/CODE_WORKER_8B.md
+@@ -19,7 +19,7 @@ Same `127.0.0.1:11434`, sequential lock (no dual VRAM thrash).
+ ## Smoke
+ 
+ ```powershell
+-cd G:\AI-Home\projects\ai-worker-drone-0.5b
++cd .
+ python -m drone brain
+ python -m drone run --goal "write a python function add(a,b) that returns a+b and smoke it" --controller ollama --lm-assist ollama
+ ```

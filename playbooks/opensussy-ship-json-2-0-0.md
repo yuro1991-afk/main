@@ -5,7 +5,7 @@
 - scope: relaunch
 - repo: github.com/yuro1991-afk/opensussy
 - relaunch: https://github.com/yuro1991-afk/opensussy
-- why: Relaunch against the named repo. This landing-pad token cannot push it.
+- why: This token cannot push opensussy. Apply `patches/opensussy-ship-json-2-0-0.patch` from [main#9](https://github.com/yuro1991-afk/main/pull/9). Do not copy PR #6 autofix.
 
 ## Notes
 
@@ -17,10 +17,12 @@ Same card as keep-busy sync-2-0-0-docs-and-ship-json. Claim one board, not both.
 
 ## First commands
 
+- node src/cli.js patches --prove --job opensussy-ship-json-2-0-0
 - git clone https://github.com/yuro1991-afk/opensussy.git work && cd work
 - git checkout -b cursor/opensussy-ship-json-2-0-0-from-ops
-- edit: SHIP.json, docs/USER_GUIDE.md, SETUP-DESKTOP.cmd, INSTALL.cmd
-- SHIP.json and generated docs say 2.0.0; leftover 1.3.0 only in CHANGELOG.
+- git apply --check /path/to/main/patches/opensussy-ship-json-2-0-0.patch
+- git apply /path/to/main/patches/opensussy-ship-json-2-0-0.patch
+- python3 -c "from pathlib import Path; import json; s=json.loads(Path('SHIP.json').read_text()); assert s['version']=='2.0.0'; assert s['usb_zip_bytes']==1113129; i=json.loads(Path('install/SHIP.json').read_text()); assert i['version']=='2.0.0'; assert '## 1.3.0' in Path('CHANGELOG.md').read_text()"
 
 ## Verify
 

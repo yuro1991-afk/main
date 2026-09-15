@@ -1,0 +1,13 @@
+diff --git a/apps/drone-ollama-app/src/main.rs b/apps/drone-ollama-app/src/main.rs
+index c4dda69..a405ca2 100644
+--- a/apps/drone-ollama-app/src/main.rs
++++ b/apps/drone-ollama-app/src/main.rs
+@@ -682,7 +682,7 @@ impl App {
+             }
+             if ui.button("Open workspace root").clicked() {
+                 drone_bridge::open_path(
+-                    r"G:\AI-Home\projects\ai-worker-drone-0.5b\data\workspace",
++                    r"data\workspace",
+                 );
+             }
+         });

@@ -1,0 +1,212 @@
+diff --git a/drone/config_overlay.py b/drone/config_overlay.py
+new file mode 100644
+index 0000000..a580069
+--- /dev/null
++++ b/drone/config_overlay.py
+@@ -0,0 +1,24 @@
++"""Remap F:/D:/G: strings in loaded JSON configs via host_paths.
++
++Apply after dronehive-portable-paths so drone/host_paths.py exists.
++Does not edit drone/pro/tool_agent.py.
++"""
++
++from __future__ import annotations
++
++from typing import Any
++
++from .host_paths import resolve_host_path
++
++
++def remap_host_strings(obj: Any) -> Any:
++    """Walk dict/list JSON and remap Windows drive strings."""
++    if isinstance(obj, str):
++        if len(obj) >= 2 and obj[1] == ":" and obj[0].isalpha():
++            return str(resolve_host_path(obj))
++        return obj
++    if isinstance(obj, list):
++        return [remap_host_strings(item) for item in obj]
++    if isinstance(obj, dict):
++        return {key: remap_host_strings(value) for key, value in obj.items()}
++    return obj
+diff --git a/drone/__main__.py b/drone/__main__.py
+index c0c1644..5dabf39 100644
+--- a/drone/__main__.py
++++ b/drone/__main__.py
+@@ -1106,10 +1106,12 @@ def main(argv: list[str] | None = None) -> int:
+         return 0 if seal.get("status") in {"GREEN", "PARTIAL"} else 1
+ 
+     if args.cmd == "info":
+-        cfg = json.loads((root / "configs" / "brain_fabric.json").read_text(encoding="utf-8"))
++        from drone.config_overlay import remap_host_strings
++
++        cfg = remap_host_strings(json.loads((root / "configs" / "brain_fabric.json").read_text(encoding="utf-8")))
+         hive_cfg_path = root / "configs" / "buzzer_hive.json"
+         hive_cfg = (
+-            json.loads(hive_cfg_path.read_text(encoding="utf-8"))
++            remap_host_strings(json.loads(hive_cfg_path.read_text(encoding="utf-8")))
+             if hive_cfg_path.is_file()
+             else {}
+         )
+diff --git a/drone/future_seer.py b/drone/future_seer.py
+index 5b804cd..c4e9b11 100644
+--- a/drone/future_seer.py
++++ b/drone/future_seer.py
+@@ -76,7 +76,8 @@ class FutureSeer:
+ 
+     def _load_cfg(self) -> dict[str, Any]:
+         if self.cfg_path.is_file():
+-            return json.loads(self.cfg_path.read_text(encoding="utf-8"))
++            from .config_overlay import remap_host_strings
++            return remap_host_strings(json.loads(self.cfg_path.read_text(encoding="utf-8")))
+         return {}
+ 
+     def _write(self, path: Path, data: Any) -> Path:
+diff --git a/drone/hive.py b/drone/hive.py
+index a019e16..a01568a 100644
+--- a/drone/hive.py
++++ b/drone/hive.py
+@@ -25,6 +25,7 @@ from typing import Any, Callable
+ from .buzzer import spawn_buzzer
+ from .controllers import make_lm_fn, validate_controller
+ from .hive_memory import HiveMemory
++from .config_overlay import remap_host_strings
+ from .library_bridge import LibraryBridge
+ 
+ 
+@@ -59,7 +60,7 @@ class BuzzerHive:
+     def _load_cfg(self) -> dict[str, Any]:
+         path = self.root / "configs" / "buzzer_hive.json"
+         if path.is_file():
+-            return json.loads(path.read_text(encoding="utf-8"))
++            return remap_host_strings(json.loads(path.read_text(encoding="utf-8")))
+         return {
+             "schema": "ai.worker.drone.buzzer_hive.v1",
+             "max_buzzers_default": 6,
+diff --git a/drone/knowledge_imprint.py b/drone/knowledge_imprint.py
+index 136b032..b7c2d01 100644
+--- a/drone/knowledge_imprint.py
++++ b/drone/knowledge_imprint.py
+@@ -139,7 +139,8 @@ def _cfg_merge(root: Path, cfg: dict[str, Any] | None) -> dict[str, Any]:
+     try:
+         wo = Path(root) / "configs" / "work_order.json"
+         if wo.is_file():
+-            data = json.loads(wo.read_text(encoding="utf-8"))
++            from .config_overlay import remap_host_strings
++            data = remap_host_strings(json.loads(wo.read_text(encoding="utf-8")))
+             ki = data.get("knowledge_imprint") or {}
+             out.update({k: v for k, v in ki.items() if v is not None})
+     except Exception:
+diff --git a/drone/model_clones.py b/drone/model_clones.py
+index e4a5d1c..66b01be 100644
+--- a/drone/model_clones.py
++++ b/drone/model_clones.py
+@@ -20,6 +20,8 @@ import urllib.request
+ from pathlib import Path
+ from typing import Any
+ 
++from .config_overlay import remap_host_strings
++
+ 
+ def _utc() -> str:
+     return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+@@ -86,7 +88,7 @@ class ModelClones:
+ 
+     def _load(self) -> dict[str, Any]:
+         if self.cfg_path.is_file():
+-            return json.loads(self.cfg_path.read_text(encoding="utf-8"))
++            return remap_host_strings(json.loads(self.cfg_path.read_text(encoding="utf-8")))
+         return {"clones": []}
+ 
+     def _write(self, path: Path, data: Any) -> Path:
+@@ -449,9 +451,9 @@ class ModelClones:
+         installed = set(self.list_installed())
+         multi_path = self.root / "configs" / "multi_hosts.json"
+         super_path = self.root / "configs" / "super_llms.json"
+-        multi = json.loads(multi_path.read_text(encoding="utf-8")) if multi_path.is_file() else {}
++        multi = remap_host_strings(json.loads(multi_path.read_text(encoding="utf-8"))) if multi_path.is_file() else {}
+         super_cfg = (
+-            json.loads(super_path.read_text(encoding="utf-8")) if super_path.is_file() else {}
++            remap_host_strings(json.loads(super_path.read_text(encoding="utf-8"))) if super_path.is_file() else {}
+         )
+ 
+         is_m2m = "m2m" in self.cfg_path.name.lower() or str(self.cfg.get("prefix", "")).startswith(
+diff --git a/drone/multi_face.py b/drone/multi_face.py
+index ae37fa6..ea50fac 100644
+--- a/drone/multi_face.py
++++ b/drone/multi_face.py
+@@ -25,6 +25,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
+ from pathlib import Path
+ from typing import Any
+ 
++from .config_overlay import remap_host_strings
++
+ 
+ def _utc() -> str:
+     return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+@@ -66,7 +68,7 @@ class MultiFace:
+ 
+     def _load(self) -> dict[str, Any]:
+         if self.cfg_path.is_file():
+-            return json.loads(self.cfg_path.read_text(encoding="utf-8"))
++            return remap_host_strings(json.loads(self.cfg_path.read_text(encoding="utf-8")))
+         return {"face": {}, "hosts": [], "fanout": {}}
+ 
+     def _write(self, path: Path, data: Any) -> Path:
+diff --git a/drone/super_llms.py b/drone/super_llms.py
+index 46d845e..f6800a7 100644
+--- a/drone/super_llms.py
++++ b/drone/super_llms.py
+@@ -21,6 +21,8 @@ import urllib.request
+ from pathlib import Path
+ from typing import Any
+ 
++from .config_overlay import remap_host_strings
++
+ 
+ def _utc() -> str:
+     return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+@@ -49,7 +51,7 @@ class SuperLLMs:
+ 
+     def _load_cfg(self) -> dict[str, Any]:
+         if self.cfg_path.is_file():
+-            return json.loads(self.cfg_path.read_text(encoding="utf-8"))
++            return remap_host_strings(json.loads(self.cfg_path.read_text(encoding="utf-8")))
+         return {"roster": [], "routing": {}, "keywords": {}, "gpu": {}}
+ 
+     def _write(self, path: Path, data: Any) -> Path:
+diff --git a/drone/super_mesh.py b/drone/super_mesh.py
+index ab80a2d..beb6439 100644
+--- a/drone/super_mesh.py
++++ b/drone/super_mesh.py
+@@ -28,6 +28,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
+ from pathlib import Path
+ from typing import Any
+ 
++from .config_overlay import remap_host_strings
++
+ from drone.mesh_packets import MeshPacket, PacketRecycleBus
+ from drone.tools import DroneToolkit
+ 
+@@ -79,7 +81,7 @@ class SuperMesh:
+ 
+     def _load(self, path: Path) -> dict[str, Any]:
+         if path.is_file():
+-            return json.loads(path.read_text(encoding="utf-8"))
++            return remap_host_strings(json.loads(path.read_text(encoding="utf-8")))
+         return {}
+ 
+     def _write(self, path: Path, data: Any) -> Path:
+diff --git a/drone/work_order.py b/drone/work_order.py
+index 8b3a2f9..9c1e4a2 100644
+--- a/drone/work_order.py
++++ b/drone/work_order.py
+@@ -50,7 +50,8 @@ def load_work_order_config(root: Path) -> dict[str, Any]:
+             "path": str(path),
+             "false_green": 0,
+         }
+-    data = json.loads(path.read_text(encoding="utf-8"))
++    from .config_overlay import remap_host_strings
++    data = remap_host_strings(json.loads(path.read_text(encoding="utf-8")))
+     data["path"] = str(path)
+     data["missing"] = False
+     return data

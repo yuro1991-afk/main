@@ -1,0 +1,13 @@
+diff --git a/README.md b/README.md
+index a1eee5d..8805761 100644
+--- a/README.md
++++ b/README.md
+@@ -29,7 +29,7 @@ START.cmd
+ 6. Pick **Your face** and **Target photo** → **Swap face**.
+ 7. Hold the result → **Save to Photos**, or use **Save**.
+ 
+-If the page does not load, allow Windows Firewall for TCP **8860**, and confirm the phone is on the same LAN (not cellular).
++If the page does not load, allow inbound TCP **8860** (Windows Firewall is one host example) and confirm the phone is on the same LAN (not cellular).
+ 
+ ## What runs where
+ 

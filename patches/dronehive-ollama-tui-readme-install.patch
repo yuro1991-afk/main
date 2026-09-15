@@ -1,0 +1,9 @@
+diff --git a/apps/drone-ollama-tui/README.md b/apps/drone-ollama-tui/README.md
+index fb9ebaf..793cb66 100644
+--- a/apps/drone-ollama-tui/README.md
++++ b/apps/drone-ollama-tui/README.md
+@@ -43,3 +43,3 @@ Or installed:
+ ```bat
+-G:\AI-Home\apps\DroneOllama\START_TUI.cmd
++host\ai-home\apps\DroneOllama\START_TUI.cmd
+ ```
