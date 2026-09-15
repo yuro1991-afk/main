@@ -178,6 +178,20 @@ export function launchPathFor(jobId) {
   return `reviews/launch/${jobId}.md`;
 }
 
+/**
+ * Append catalog-first related PRs to a paste-ready launch.
+ * JSON stdout is easy to ignore; idle agents paste the file.
+ * @param {string} prompt
+ * @param {Array<{ number: number, role: string, meaning: string }> | null | undefined} related
+ */
+export function withRelatedSection(prompt, related) {
+  if (!Array.isArray(related) || related.length === 0) {
+    return prompt;
+  }
+  const lines = related.map((pr) => `- #${pr.number} ${pr.role} — ${pr.meaning}`);
+  return `${prompt.trimEnd()}\n\n## Related\n\n${lines.join("\n")}\n`;
+}
+
 export const MISSING_LAUNCH_PREVIEW = 8;
 
 /**

@@ -40,7 +40,8 @@ node src/cli.js tick
 
 `assign` maps parked pad agents onto unique GitHub cards.
 `assign --job <id>` writes one leftover Apply launch and names
-catalog-first related PRs (same order as `siblings --job`).
+catalog-first related PRs in both JSON and the launch file
+(same order as `siblings --job`).
 `assign --missing` lists catalog leftovers with no launch file and
 never writes. Prefer `assign --job <id> --out /tmp/launches`.
 `busy --agent` claims **your roster card** first. Leftover unused is
