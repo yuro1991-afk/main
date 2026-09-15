@@ -1121,8 +1121,10 @@
       "file": "patches/dronehive-mount-readme-related.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "apps/drone-ollama-mount/README.md related ollama-rust-ui uses host/ai-home. Independent of layout and launch leftovers. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; t=Path('apps/drone-ollama-mount/README.md').read_text(); assert 'host/ai-home/projects/ollama-rust-ui' in t; assert 'one host example' in t; assert r'G:\\\\AI-Home\\\\projects\\\\ollama-rust-ui' not in t\""
+      ],
+      "notes": "apps/drone-ollama-mount/README.md related uses host/ai-home/projects/ollama-rust-ui; G:\\\\AI-Home is one host example. After apply: assert host/ai-home/projects/ollama-rust-ui, one host example, and G:\\\\AI-Home\\\\projects\\\\ollama-rust-ui gone. Do not assert G:\\\\AI-Home gone. Independent of layout and launch leftovers. Does not touch tool_agent.py."
     },
     {
       "id": "opensussy-sec-review-target",

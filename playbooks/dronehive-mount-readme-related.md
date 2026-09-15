@@ -22,6 +22,7 @@ apps/drone-ollama-mount/README.md related line only. Do not edit drone/pro/tool_
 - git checkout -b cursor/dronehive-mount-readme-related-from-ops
 - git apply --check /path/to/main/patches/dronehive-mount-readme-related.patch
 - git apply /path/to/main/patches/dronehive-mount-readme-related.patch
+- python3 -c "from pathlib import Path; t=Path('apps/drone-ollama-mount/README.md').read_text(); assert 'host/ai-home/projects/ollama-rust-ui' in t; assert 'one host example' in t; assert r'G:\\AI-Home\\projects\\ollama-rust-ui' not in t"
 
 ## Verify
 
