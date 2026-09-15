@@ -295,11 +295,19 @@ export function leftoverLaunchRows(ledger, roster, nowMs = Date.now(), filters =
  * Default leftover is a GitHub sibling card.
  * @param {import("./ledger.js").Job | null} job
  */
+export function leftoverUnusedExhaustedRule() {
+  return `Leftover unused is exhausted. Prefer brief --job ${FIRST_PARKED_APPLY}. Do not invent leftover 163+. Superbrain leftover attaches take-instead apply. Forget Origin. Do not all peek next without claiming. Do not lease cards to agents that stay idle.`;
+}
+
+export const LEFTOVER_UNUSED_RULE =
+  "Every idle pad agent takes a unique GitHub sibling card. A new unassigned agent takes leftoverNext. Superbrain leftover attaches take-instead apply. Forget Origin. Do not all peek next without claiming. Do not lease cards to agents that stay idle.";
+
 export function renderLeftoverLaunch(job) {
   if (!job) {
     return `# No leftover unused GitHub card
 
-Every GitHub sibling card is already assigned. Review an open PR.
+Leftover unused is exhausted. Dest and repo launches already cover leftover cards.
+Prefer brief --job ${FIRST_PARKED_APPLY}. Do not invent leftover 163+.
 Do not invent Origin work. Do not reopen https://github.com/yuro1991-afk/main/pull/1.
 `;
   }
@@ -530,7 +538,7 @@ export function buildAssign(ledger, roster, nowMs = Date.now(), launchDir, repoL
     leftoverProveAfterApplyCommand: first?.proveAfterApplyCommand,
     leftoverLaunches: leftover,
     next: assignments.find((row) => row.status === "open") ?? null,
-    rule: "Every idle pad agent takes a unique GitHub sibling card. A new unassigned agent takes leftoverNext. Superbrain leftover attaches take-instead apply. Forget Origin. Do not all peek next without claiming. Do not lease cards to agents that stay idle.",
+    rule: leftover.length ? LEFTOVER_UNUSED_RULE : leftoverUnusedExhaustedRule(),
   };
 }
 

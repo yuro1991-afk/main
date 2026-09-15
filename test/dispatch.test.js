@@ -16,6 +16,8 @@ import {
   claimBusyJob,
   defaultLaunchPath,
   leftoverLaunchRows,
+  leftoverUnusedExhaustedRule,
+  LEFTOVER_UNUSED_RULE,
   MISSING_LAUNCH_PREVIEW,
   SITOUT_JOB_IDS,
   isSitOutJob,
@@ -253,6 +255,7 @@ test("assign maps parked agents to distinct GitHub sibling cards", () => {
   assert.ok(!ids.includes("genesis-world-layer-102"));
   assert.ok(!ids.includes("review-landing-pad-prs"));
   assert.equal(packet.leftoverNext, "review-landing-pad-prs");
+  assert.equal(packet.rule, LEFTOVER_UNUSED_RULE);
   assert.equal(packet.leftoverTakeInstead, undefined);
   assert.equal(packet.leftoverApplyNext, undefined);
   assert.equal(packet.leftoverProveAfterApplyCommand, undefined);
@@ -280,6 +283,7 @@ test("cli assign writes paste-ready GitHub launch files", async () => {
   assert.doesNotMatch(result.out, /Leftover unused — dronehive-unicode-ci/);
   assert.doesNotMatch(result.out, /Leftover unused — gub-inventory-tick/);
   assert.match(result.out, /"leftoverNext": null/);
+  assert.match(result.out, /Leftover unused is exhausted/);
   assert.doesNotMatch(result.out, /leftoverTakeInstead/);
 });
 
@@ -433,6 +437,10 @@ test("leftover launch rows skip rostered cards", () => {
   assert.ok(!rows.some((row) => row.jobId === "gub-route-intent"));
   assert.ok(!rows.some((row) => SITOUT_JOB_IDS.includes(row.jobId)));
   assert.match(renderLeftoverLaunch(null), /No leftover unused GitHub card/);
+  assert.match(renderLeftoverLaunch(null), /Leftover unused is exhausted/);
+  assert.match(renderLeftoverLaunch(null), /brief --job dronehive-unicode-ci/);
+  assert.match(renderLeftoverLaunch(null), /163\+/);
+  assert.doesNotMatch(renderLeftoverLaunch(null), /already assigned/);
 });
 
 test("leftover launch rows skip dest launches already on disk", () => {
@@ -449,6 +457,7 @@ test("leftover launch rows skip dest launches already on disk", () => {
   const packet = buildAssign(ledger, roster, NOW, onDisk);
   assert.equal(packet.leftoverNext, null);
   assert.deepEqual(packet.leftover, []);
+  assert.equal(packet.rule, leftoverUnusedExhaustedRule());
 });
 
 test("leftover unused skips repo launches when dest is empty", () => {
@@ -461,6 +470,7 @@ test("leftover unused skips repo launches when dest is empty", () => {
   const packet = buildAssign(ledger, roster, NOW, dest, onDisk);
   assert.equal(packet.leftoverNext, null);
   assert.deepEqual(packet.leftover, []);
+  assert.equal(packet.rule, leftoverUnusedExhaustedRule());
 });
 
 test("cli assign leftover unused does not overwrite dest launches", async () => {
