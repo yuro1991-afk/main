@@ -903,6 +903,19 @@ test("cli patches --job dronehive-seed-work-order-doc-board includes the seed Bo
   assert.ok(parsed.applyNext.some((line) => line.includes("drone/app/seed/docs/WORK_ORDER.md") && line.includes("- Board:") && line.includes("host/continuous")));
 });
 
+test("cli patches --job opensussy-superpowers-lab-plan includes the save-path afterApply", async () => {
+  const chunks = [];
+  const code = await runCli(["patches", "--job", "opensussy-superpowers-lab-plan"], {
+    write: (value) => {
+      chunks.push(value);
+    },
+  });
+  assert.equal(code, 0);
+  const parsed = JSON.parse(chunks.join(""));
+  assert.equal(parsed.patches[0].id, "opensussy-superpowers-lab-plan");
+  assert.ok(parsed.applyNext.some((line) => line.includes("docs/superpowers/plans/2026-08-16-opensussy-lab.md") && line.includes("Plan complete and saved to:") && line.includes("one host example")));
+});
+
 test("cli patches --job dronehive-ollama-app-bridge-paths includes the bridge consts afterApply", async () => {
   const chunks = [];
   const code = await runCli(["patches", "--job", "dronehive-ollama-app-bridge-paths"], {

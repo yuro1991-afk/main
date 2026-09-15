@@ -6,12 +6,12 @@ Merge [main#8](https://github.com/yuro1991-afk/main/pull/8) for GitHub-first
 defaults, then [main#9](https://github.com/yuro1991-afk/main/pull/9) for the
 patch catalog. Do not steal a rostered card.
 
-Keep-busy tick **2026-09-15T03:44Z**: 40 IDLE + this run RUNNING.
+Keep-busy tick **2026-09-15T03:46Z**: 40 IDLE + this run RUNNING.
 Newest idle is still `bc-710c5477` — assign
 `bloom-grok-pwa-test-sync`. Sibling `main` SHAs unchanged. Catalog
 still 162. Hunt closed. PR #10 still `82161d8`. PR #9 CI green on
-`6910d53`. Shipped this interval: `dronehive-seed-work-order-doc-board`
-seed Board afterApply. Leftover `next` stays alone. Do not invent leftovers.
+`87c0d6e`. Shipped this interval: `opensussy-superpowers-lab-plan`
+save-path afterApply. Leftover `next` stays alone. Do not invent leftovers.
 
 | who | take this |
 | --- | --- |
@@ -146,7 +146,8 @@ seed Board afterApply. Leftover `next` stays alone. Do not invent leftovers.
 | next unused ollama-app-bridge-paths apply | `dronehive-ollama-app-bridge-paths` (drone_bridge.rs consts afterApply wired) |
 | next unused work-order-doc-board apply | `dronehive-work-order-doc-board` (docs/WORK_ORDER.md Board afterApply wired) |
 | next unused seed-work-order-doc-board apply | `dronehive-seed-work-order-doc-board` (seed WORK_ORDER.md Board afterApply wired) |
-| next afterApply to wire | `opensussy-superpowers-lab-plan` (historical lab plan save-path only) |
+| next unused superpowers-lab-plan apply | `opensussy-superpowers-lab-plan` (historical lab plan save-path afterApply wired) |
+| next afterApply to wire | `opensussy-superpowers-lab-design` (historical lab design base codebase only) |
 
 Fork `bc-84d93b47` still IDLE on
 [main#10](https://github.com/yuro1991-afk/main/pull/10)
@@ -432,7 +433,9 @@ drone_bridge.rs DRONE_ROOT has no G: path and MOUNT_EXE uses apps\\ (C:\\Python 
 docs/WORK_ORDER.md Board line uses host/continuous (seed leftover stays).
 `dronehive-seed-work-order-doc-board` afterApply asserts
 seed WORK_ORDER.md Board line uses host/continuous (live leftover stays).
-Next afterApply to wire is `opensussy-superpowers-lab-plan`.
+`opensussy-superpowers-lab-plan` afterApply asserts
+the plan save-to block has the repo-relative path and one host example (G: stays).
+Next afterApply to wire is `opensussy-superpowers-lab-design`.
 `cli route apply <catalog-id>` routes to that apply card, not leftover Origin.
 Helpers for cataloged cards prove then apply — they do not draft a new leftover.
 `cli prompt --job <catalog-id>` is Apply, not Origin launch.
@@ -583,7 +586,7 @@ then unused `dronehive-truth-honesty-library-list` (TRUTH_AND_HONESTY.md only; a
 then unused `dronehive-ollama-app-bridge-paths` (apps/drone-ollama-app/src/drone_bridge.rs only; afterApply wired),
 then unused `dronehive-work-order-doc-board` (docs/WORK_ORDER.md Board only; afterApply wired),
 then unused `dronehive-seed-work-order-doc-board` (seed WORK_ORDER.md Board only; afterApply wired),
-then unused `opensussy-superpowers-lab-plan` (historical lab plan save-path only),
+then unused `opensussy-superpowers-lab-plan` (historical lab plan save-path only; afterApply wired),
 then unused `opensussy-superpowers-lab-design` (historical lab design base codebase only),
 then unused `faceswap-honesty-located-paths` (HONESTY.md Located Path/Models only),
 then unused `dronehive-work-order-registry-cli` (work_order.py CLI fallback only),

@@ -22,6 +22,7 @@ Historical lab plan save-path line only. Leave CHANGELOG 1.3.0.
 - git checkout -b cursor/opensussy-superpowers-lab-plan-from-ops
 - git apply --check /path/to/main/patches/opensussy-superpowers-lab-plan.patch
 - git apply /path/to/main/patches/opensussy-superpowers-lab-plan.patch
+- python3 -c "from pathlib import Path; t=Path('docs/superpowers/plans/2026-08-16-opensussy-lab.md').read_text(); block=t.split('Plan complete and saved to:',1)[1].split('**Two execution options:**',1)[0]; assert 'docs/superpowers/plans/2026-08-16-opensussy-lab.md' in block; assert 'one host example' in block"
 
 ## Verify
 
