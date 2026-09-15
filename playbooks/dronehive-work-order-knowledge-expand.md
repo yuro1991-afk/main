@@ -22,6 +22,7 @@ configs/work_order.json knowledge_expand key only. Do not edit drone/pro/tool_ag
 - git checkout -b cursor/dronehive-work-order-knowledge-expand-from-ops
 - git apply --check /path/to/main/patches/dronehive-work-order-knowledge-expand.patch
 - git apply /path/to/main/patches/dronehive-work-order-knowledge-expand.patch
+- python3 -c "from pathlib import Path; import json; k=json.loads(Path('configs/work_order.json').read_text())['knowledge_imprint']; assert k['knowledge_expand']=='host/library/knowledge/expand'"
 
 ## Verify
 

@@ -538,8 +538,10 @@
       "file": "patches/dronehive-work-order-knowledge-expand.patch",
       "base": "d538a89",
       "applyCheck": "ok",
-      "afterApply": [],
-      "notes": "configs/work_order.json knowledge_expand uses host/library/knowledge/expand. -U1 so context skips reference_db leftover. Independent of portable-paths, school-root, and reference-db. Does not touch tool_agent.py."
+      "afterApply": [
+        "python3 -c \"from pathlib import Path; import json; k=json.loads(Path('configs/work_order.json').read_text())['knowledge_imprint']; assert k['knowledge_expand']=='host/library/knowledge/expand'\""
+      ],
+      "notes": "configs/work_order.json knowledge_imprint.knowledge_expand uses host/library, not F:\\\\GrokSelfLibrary. After apply: assert that key. -U1 so context skips reference_db leftover. Independent of portable-paths, school-root, and reference-db. Does not touch tool_agent.py."
     },
     {
       "id": "dronehive-seed-work-order-knowledge-expand",
