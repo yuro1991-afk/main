@@ -360,7 +360,7 @@ test("cli assign --missing lists catalog leftovers with no launch and never writ
   assert.deepEqual(parsed.next, []);
   assert.equal(
     parsed.prefer,
-    "node src/cli.js assign --job <id> --out /tmp/launches",
+    "node src/cli.js brief --job dronehive-unicode-ci",
   );
   assert.equal(readdirSync(onDisk).length, before);
 });

@@ -302,6 +302,8 @@ test("help says playbooks defaults to check and refuses in-repo write", async ()
   assert.match(result.out, /catalog --write updates the ledger only/);
   assert.match(result.out, /patches lists applyable GitHub diffs/);
   assert.match(result.out, /No --job is compact \(nextApply dronehive-unicode-ci \+ id\/file \+ nextMissing\)/);
+  assert.match(result.out, /Prefer brief --job dronehive-unicode-ci when leftover launches are exhausted/);
+  assert.match(result.out, /Do not invent leftover 163\+/);
   assert.match(result.out, /--prove clones --no-hardlinks throwaways/);
   assert.match(result.out, /never writes or resets siblings/);
 });
