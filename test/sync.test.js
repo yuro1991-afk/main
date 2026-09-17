@@ -173,6 +173,7 @@ test("live leftover Superbrain sync attaches take-instead apply pair", () => {
   const leftoverOnly = syncRoster(ledger, structuredClone(roster), parked, afterLease);
   assert.equal(leftoverOnly.added.length, 0);
   assert.equal(leftoverOnly.leftover[0], "review-landing-pad-prs");
+  assert.match(leftoverOnly.rule, /next unused GitHub sibling card/);
   assert.equal(leftoverOnly.leftoverTakeInstead, undefined);
   assert.equal(leftoverOnly.leftoverApplyNext, undefined);
   const withNewcomer = syncRoster(
@@ -185,6 +186,16 @@ test("live leftover Superbrain sync attaches take-instead apply pair", () => {
   assert.equal(withNewcomer.added[0].takeInstead, undefined);
   assert.notEqual(withNewcomer.leftover[0], "review-landing-pad-prs");
   assert.equal(withNewcomer.leftoverTakeInstead, undefined);
+});
+
+test("sync leftover unused exhausted names leftover unused exhausted", () => {
+  const ledger = { jobs: [] };
+  const roster = { assignments: [] };
+  const packet = syncRoster(ledger, roster, [{ bcId: "bc-new", name: "New", status: "IDLE" }], NOW);
+  assert.equal(packet.added.length, 0);
+  assert.equal(packet.leftover.length, 0);
+  assert.match(packet.rule, /Leftover unused is exhausted/);
+  assert.doesNotMatch(packet.rule, /next unused GitHub sibling card/);
 });
 
 test("repo roster already covers the current idle set", () => {

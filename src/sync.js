@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { isGithubJob, isWorldPhaseJob } from "./kinds.js";
 import { effectiveStatus, listJobs } from "./ledger.js";
 import { applyNextFor, defaultPatchesIndexPath, loadPatchIndex, patchForJob, proveAfterApplyCommand } from "./patches.js";
-import { isSitOutJob } from "./sitout.js";
+import { isSitOutJob, leftoverUnusedExhaustedPeek } from "./sitout.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -145,7 +145,9 @@ export function syncRoster(ledger, roster, agents, nowMs = Date.now()) {
     leftoverTakeInstead: leftoverTake.takeInstead,
     leftoverApplyNext: leftoverTake.applyNext,
     leftoverProveAfterApplyCommand: leftoverTake.proveAfterApplyCommand,
-    rule: "New idle pad agents get the next unused GitHub sibling card. Superbrain leftover attaches take-instead apply. Existing assignments stay. No 45-minute leases. Forget Origin.",
+    rule: leftover[0]
+      ? "New idle pad agents get the next unused GitHub sibling card. Superbrain leftover attaches take-instead apply. Existing assignments stay. No 45-minute leases. Forget Origin."
+      : `${leftoverUnusedExhaustedPeek()} Existing assignments stay. No 45-minute leases. Forget Origin.`,
   };
 }
 
