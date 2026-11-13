@@ -1,4 +1,4 @@
-import { existsSync, mkdtempSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -14,6 +14,7 @@ import {
   buildSlots,
   buildSlotsForJob,
   claimBusyJob,
+  defaultLaunchPath,
   leftoverLaunchRows,
   MISSING_LAUNCH_PREVIEW,
   SITOUT_JOB_IDS,
@@ -435,6 +436,33 @@ test("leftover launch rows skip rostered cards", () => {
   assert.ok(!rows.some((row) => row.jobId === "gub-route-intent"));
   assert.ok(!rows.some((row) => SITOUT_JOB_IDS.includes(row.jobId)));
   assert.match(renderLeftoverLaunch(null), /No leftover unused GitHub card/);
+});
+
+test("leftover launch rows skip dest launches already on disk", () => {
+  const ledger = loadLedger(new URL("../ledger/queue.json", import.meta.url));
+  const roster = loadRoster(fileURLToPath(new URL("../ledger/roster.json", import.meta.url)));
+  const launchDir = mkdtempSync(join(tmpdir(), "agent-ops-leftover-launched-"));
+  writeFileSync(join(launchDir, "review-landing-pad-prs.md"), "# already launched\n");
+  const rows = leftoverLaunchRows(ledger, roster, NOW, { github: true }, launchDir);
+  assert.ok(!rows.some((row) => row.jobId === "review-landing-pad-prs"));
+  assert.ok(!rows.some((row) => SITOUT_JOB_IDS.includes(row.jobId)));
+  const onDisk = defaultLaunchPath(fileURLToPath(new URL("..", import.meta.url)));
+  const live = leftoverLaunchRows(ledger, roster, NOW, { github: true }, onDisk);
+  assert.deepEqual(live, []);
+  const packet = buildAssign(ledger, roster, NOW, onDisk);
+  assert.equal(packet.leftoverNext, null);
+  assert.deepEqual(packet.leftover, []);
+});
+
+test("cli assign leftover unused does not overwrite dest launches", async () => {
+  const out = mkdtempSync(join(tmpdir(), "agent-ops-assign-launched-"));
+  writeFileSync(join(out, "review-landing-pad-prs.md"), "# already launched\n");
+  const result = await capture(["assign", "--out", out]);
+  assert.equal(result.code, 0);
+  const parsed = JSON.parse(result.out);
+  assert.notEqual(parsed.leftoverNext, "review-landing-pad-prs");
+  assert.ok(!parsed.leftover.includes("review-landing-pad-prs"));
+  assert.equal(readFileSync(join(out, "review-landing-pad-prs.md"), "utf8"), "# already launched\n");
 });
 
 test("leftover launch rows skip open GitHub sit-out cards", () => {
