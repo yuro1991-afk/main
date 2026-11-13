@@ -7,7 +7,7 @@ Do not comment on GitHub unless Yuri asked. Do not open another queue.
 `node src/cli.js probe`.
 
 #8 already has a stale `reviews/LANDING-PAD-PRS.md` (19:05Z) that stops
-at #8. This file is the current board, including #9–#92.
+at #8. This file is the current board, including #9–#96.
 
 | PR | state | take? |
 | --- | --- | --- |
@@ -101,6 +101,10 @@ at #8. This file is the current board, including #9–#92.
 | [#90](https://github.com/yuro1991-afk/main/pull/90) | draft MERGEABLE + CI green | leftover unused merge through #89. Stacked on #89. |
 | [#91](https://github.com/yuro1991-afk/main/pull/91) | draft MERGEABLE + CI green | leftover unused empty peek honesty. Stacked on #90. |
 | [#92](https://github.com/yuro1991-afk/main/pull/92) | draft MERGEABLE + CI green | leftover unused empty peek docs honesty. Stacked on #91. |
+| [#93](https://github.com/yuro1991-afk/main/pull/93) | draft MERGEABLE + CI green | siblings board 89–92. Stacked on #92. |
+| [#94](https://github.com/yuro1991-afk/main/pull/94) | draft MERGEABLE + CI green | leftover unused merge through #93. Stacked on #93. |
+| [#95](https://github.com/yuro1991-afk/main/pull/95) | draft MERGEABLE + CI green | leftover unused empty peek help honesty. Stacked on #94. |
+| [#96](https://github.com/yuro1991-afk/main/pull/96) | draft MERGEABLE + CI green | leftover unused keep-busy route review honesty. Stacked on #95. |
 
 ## Merge order
 
@@ -185,11 +189,15 @@ at #8. This file is the current board, including #9–#92.
 79. Merge **#90** (leftover unused merge through #89).
 80. Merge **#91** (leftover unused empty peek honesty).
 81. Merge **#92** (leftover unused empty peek docs honesty).
-82. Review **#13**; do not steal. Independent of the #11 stack.
-83. Review **#10**; do not merge onto `main` until Yuri retargets the base.
-84. Skip #4/#5/#6.
-85. Do not merge #7 after #8/#11 unless rewritten.
-86. #8 and #9 can close after #11 lands.
+82. Merge **#93** (siblings board 89–92).
+83. Merge **#94** (leftover unused merge through #93).
+84. Merge **#95** (leftover unused empty peek help honesty).
+85. Merge **#96** (leftover unused keep-busy route review honesty).
+86. Review **#13**; do not steal. Independent of the #11 stack.
+87. Review **#10**; do not merge onto `main` until Yuri retargets the base.
+88. Skip #4/#5/#6.
+89. Do not merge #7 after #8/#11 unless rewritten.
+90. #8 and #9 can close after #11 lands.
 
 ## DroneHive (cannot push from this token)
 

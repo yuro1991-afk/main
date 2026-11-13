@@ -97,6 +97,10 @@ This playbook id is leftover. Take `review-landing-pad-prs` or
 | [#90](https://github.com/yuro1991-afk/main/pull/90) | leftover unused merge through #89 |
 | [#91](https://github.com/yuro1991-afk/main/pull/91) | leftover unused empty peek honesty |
 | [#92](https://github.com/yuro1991-afk/main/pull/92) | leftover unused empty peek docs honesty |
+| [#93](https://github.com/yuro1991-afk/main/pull/93) | siblings board 89–92 |
+| [#94](https://github.com/yuro1991-afk/main/pull/94) | leftover unused merge through #93 |
+| [#95](https://github.com/yuro1991-afk/main/pull/95) | leftover unused empty peek help honesty |
+| [#96](https://github.com/yuro1991-afk/main/pull/96) | leftover unused keep-busy route review honesty |
 
 Skip conflicting #4 / #5 / #6. Do not merge #7 after #8 without a rewrite.
 Do not steal the fork’s next slices: head → ears → eyes → vision → bridge.
@@ -104,7 +108,7 @@ Do not copy `packages/keep-busy` or `bin/autofix.js` onto this board.
 
 ## Review rules
 
-- Leave a review on at least one of #8 / #9 / #10 / #11 / #12 / #13 / #14 / #15 / #16 / #17 / #18 / #19 / #20 / #21 / #22 / #23 / #24 / #25 / #26 / #27 / #28 / #29 / #30 / #31 / #32 / #33 / #34 / #35 / #36 / #37 / #38 / #39 / #40 / #41 / #42 / #43 / #44 / #45 / #46 / #47 / #48 / #49 / #50 / #51 / #52 / #53 / #54 / #55 / #56 / #57 / #58 / #59 / #60 / #61 / #62 / #63 / #64 / #65 / #66 / #67 / #68 / #69 / #70 / #71 / #72 / #73 / #74 / #75 / #77 / #78 / #79 / #80 / #81 / #82 / #83 / #84 / #85 / #86 / #87 / #88 / #89 / #90 / #91 / #92.
+- Leave a review on at least one of #8 / #9 / #10 / #11 / #12 / #13 / #14 / #15 / #16 / #17 / #18 / #19 / #20 / #21 / #22 / #23 / #24 / #25 / #26 / #27 / #28 / #29 / #30 / #31 / #32 / #33 / #34 / #35 / #36 / #37 / #38 / #39 / #40 / #41 / #42 / #43 / #44 / #45 / #46 / #47 / #48 / #49 / #50 / #51 / #52 / #53 / #54 / #55 / #56 / #57 / #58 / #59 / #60 / #61 / #62 / #63 / #64 / #65 / #66 / #67 / #68 / #69 / #70 / #71 / #72 / #73 / #74 / #75 / #77 / #78 / #79 / #80 / #81 / #82 / #83 / #84 / #85 / #86 / #87 / #88 / #89 / #90 / #91 / #92 / #93 / #94 / #95 / #96.
 - Merge decisions stay with Yuri.
 - Empty `main` is not a review target.
 - Do not reopen #1.
